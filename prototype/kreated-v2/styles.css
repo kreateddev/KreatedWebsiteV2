@@ -918,8 +918,17 @@ a{color:inherit}
   margin:0 0 14px;font-size:clamp(30px,3.2vw,46px);
   font-weight:600;letter-spacing:-.025em;line-height:1.05;
 }
+/* ⚠ text-wrap:balance + the &nbsp; before each separator in the markup.
+   Leak Locators' scope went from two items to four on 2026-09-01 and the line
+   started wrapping: it ran to the very edge of the column and broke after
+   "TECHNICAL SEO", leaving the middot orphaned at the end of a line where it
+   read as a full stop and the second line read as a separate statement.
+   The nbsp glues each separator to the item BEFORE it so it can never start a
+   line; balance splits the two lines evenly instead of filling the first.
+   🚫 If a fifth scope item is ever added, re-check this at 1024 and 390. */
 .case__scope{margin:0 0 6px;font:600 13px/1.5 'General Sans',system-ui;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);
+  text-wrap:balance}
 .case__meta{margin:0 0 18px;font-size:15px;color:var(--ink-3)}
 .case__obs{
   margin:0 0 22px;max-width:44ch;padding:13px 17px;

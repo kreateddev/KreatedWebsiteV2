@@ -326,10 +326,9 @@ constraint stands; only its status-language requirement is superseded by reality
 **WHAT IT REPLACES** DECISION 008's in-progress status-language constraint (its honesty constraints
 otherwise stand)
 **IMPLEMENTATION STATUS** Homepage prototype updated (client-trust lockup now links to the live
-site; Work case band presents it as live). ⚠ `PROOF.md` §4 and `PROJECTS.md` §3 still carry the
-old status and should be updated in a docs pass — do not "correct" the homepage back to the
-obsolete label. ❓ The exact delivered-scope string for the completed engagement is not yet
-documented; the homepage scope line is `COPY CANDIDATE` until Skyler confirms it.
+site; Work case band presents it as live). ✅ **Docs pass completed 2026-09-01** — `PROOF.md` §4 rewritten and `PROJECTS.md`
+§3 corrected, so neither still instructs a future pass to revert the homepage. 🚫 Do not
+"correct" the homepage back to the
 
 ---
 
@@ -367,3 +366,38 @@ Study`, `Explore the Kreated Method` and `Request Early Access` are untouched by
 **IMPLEMENTATION STATUS** Live button labels unchanged. `CONVERSION.md` §2 annotated to point here.
 ⚠️ `Request Early Access` still depends on the open question of whether the audit is deliverable
 today, which DECISION 020 does not settle.
+
+---
+
+## 022 — Delivered scope corrected for Leak Locators East Coast and Rare Raleigh Restoration
+
+**DATE** 2026-09-01
+**PHASE** Temporary portfolio launch
+**DECISION** Skyler confirmed the delivered scope for both engagements directly:
+
+- **Rare Raleigh Restoration** — website, Google Business Profile, ongoing monthly SEO.
+  The site had said **`Website`** only.
+- **Leak Locators East Coast** — website, Google Business Profile, ongoing monthly SEO, on a
+  substantially deeper technical SEO setup than the other engagements. The site had said
+  **`Website · Google Business Profile`**, marked "exact approved scope string — do not widen or
+  reduce". That string was incomplete, not wrong.
+
+Technical SEO is listed as its own scope item for Leak Locators and **not** for Rare Raleigh,
+because that is the difference Skyler drew between the two. Without it the two scope lines would
+be identical and the distinction would be lost. ⚠️ This is an interpretation of "a far more
+technical SEO setup" as a scope item rather than as prose; say so if it should read differently.
+
+**APPROVED BY SKYLER** yes — direct instruction, 2026-09-01
+**WHAT IT REPLACES** The two locked scope strings, and the three documents that recorded them:
+`PROJECTS.md` §2/§3, `PROOF.md` §2/§4 and the claim table. It also corrects a paragraph on
+`/services/local-seo/` which stated that LearnSmart was "the one engagement with Local SEO in its
+recorded scope" — false as of this entry.
+**UNCHANGED — AND THIS IS THE POINT** 🚫 **No performance claim follows from any of this.** Scope
+is a project fact. Ongoing monthly SEO being *in scope* must never be presented as a search
+outcome, and must never be used to imply that the one dated Leak Locators observation
+(#2, "Pool leak detection", Wilmington NC, 2026-08-02) was its result. That observation stands
+alone and bounded, exactly as `PROOF.md` §2 specifies. No ranking, traffic, lead or revenue figure
+exists for any Kreated client.
+**IMPLEMENTATION STATUS** Live in the build: homepage Work bands, `/work/`, both case pages
+(facts, lead sentence and "What Kreated delivered" lists) and `/services/local-seo/`.
+Documentation updated in the same pass so no file still contradicts the site.

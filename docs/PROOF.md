@@ -39,9 +39,15 @@ Facts that must survive into any copy, exactly:
   recorded first.
 - The result applies to **that query, that location, that date only.** Rankings change. It implies
   nothing for any other business.
-- Verified scope for LLEC: **Website · Google Business Profile.** That is the exact approved scope
-  string. Do not widen it. Do not reduce it.
-- **Local SEO, brand identity, and any lead / revenue / growth claim for LLEC remain unevidenced.**
+- Verified scope for LLEC: **Website · Google Business Profile · Technical SEO · Ongoing monthly
+  SEO** (widened by Skyler, 2026-09-01; was "Website · Google Business Profile"). Scope is a
+  project fact. 🚫 The ongoing SEO must never be used to imply the dated observation was its
+  result — the observation stands alone, bounded, exactly as specified above.
+  🚫 Do not widen or reduce this string without Skyler.
+- **Brand identity, and any lead / revenue / growth claim for LLEC, remain unevidenced.**
+  ⚠️ "Local SEO" was in this unevidenced list until 2026-09-01. Ongoing monthly SEO is now a
+  confirmed part of the engagement's **scope** — that is a project fact and may be stated. What
+  remains unevidenced is any **outcome** from it. The distinction is the whole point of this file.
 
 Approved V1 string (reusable verbatim):
 > `Dated observation, not a guarantee. Checked on August 2, 2026: …`
@@ -74,22 +80,29 @@ Approved V1 strings (reusable verbatim):
 
 ---
 
-## 4. Rare Raleigh Restoration — NO COMPLETED PROOF
+## 4. Rare Raleigh Restoration — DELIVERED, NO MEASURED RESULTS
 
-**Class:** Strategy delivered, implementation in progress.
+⚠️ **REWRITTEN 2026-09-01.** This section described an audit-and-plan engagement with no build and
+no "after", and forbade showing one. That stopped being true at DECISION 019 (2026-08-25), when the
+site was confirmed published and live, and the record was never updated — so this document was
+instructing future work to tear out a before/after that is correct and already public.
 
-- **Delivered:** diagnostic audit and scoped growth plan
-- **Not yet delivered:** redesign build, local SEO implementation
+**Class:** Project fact (scope and status). **No measured results.**
 
-### 🚫 Hard restrictions
-- **No completed-result claims of any kind.**
-- **No "after" exists.** Never show a redesign, mockup or reconstruction as if it were delivered.
-- Only the diagnosis is usable as proof.
+- **Scope delivered:** website · Google Business Profile · ongoing monthly SEO
+  *(confirmed directly by Skyler, 2026-09-01)*
+- **Status:** published and live
+- **Media on record:** `rr-before.jpg` (the previous site) and `rr-desktop.jpg` / `rr-mobile.jpg`
+  (the live site). The before/after is a real capture of two real states, not a reconstruction.
 
-Locked verbatim label:
-> `Strategy delivered · implementation in progress`
+### 🚫 Hard restrictions — what still stands
+- **No measured-result claims of any kind.** No ranking, no traffic, no lead figure. None exists.
+- Ongoing monthly SEO being **in scope** is a project fact. 🚫 It must never be presented as a
+  search-performance outcome.
+- Never show a mockup or reconstruction as if it were delivered. The current captures are neither.
 
-Also locked: `Redesign not yet built`
+🚫 **Retired labels — do not reuse:** `Strategy delivered · implementation in progress` and
+`Redesign not yet built`. Both describe a state this project left in August 2026.
 
 ### 🔴 Homepage-facing status language (DECISION 008)
 Rare Raleigh is now an approved **V2 homepage Work candidate**. Its status language must always
@@ -230,8 +243,10 @@ Locked verbatim labels for that demonstration: `Conceptual redesign demonstratio
 | Missy Boyd review | Testimonial | ✅ verbatim |
 | `1 review on Google` — or any review **count** | Review-count framing | 🚫 forbidden (DECISION 017) |
 | `Rated 5 Stars` / star glyphs | Testimonial metadata | ⚠️ available **subject to evidence + design approval** — never silently introduced |
-| Rare Raleigh audit + plan delivered | Project fact | ✅ |
-| Rare Raleigh launched / live / complete / measured | — | 🚫 false — never imply (DECISION 008) |
-| Rare Raleigh results | — | 🚫 none exist |
+| Rare Raleigh website · GBP · ongoing monthly SEO delivered | Project fact | ✅ (Skyler, 2026-09-01) |
+| Rare Raleigh published & live | Project fact | ✅ (DECISION 019, 2026-08-25) |
+| Rare Raleigh **measured results** | — | 🚫 none exist |
+| Leak Locators technical SEO + ongoing monthly SEO in scope | Project fact | ✅ (Skyler, 2026-09-01) |
+| Leak Locators **search-performance outcome** beyond the one dated observation | — | 🚫 none exist |
 | "Brands We've Scaled" | Unevidenced results claim | 🚫 **DROPPED** (DECISION 009) |
 | Any traffic, revenue, lead or ranking figure not listed above | — | 🚫 does not exist |

@@ -73,7 +73,8 @@ and carries the status-language constraint in §3.
 | Live site | `leaklocatorseastcoast.com` |
 | Vertical | Pool leak detection |
 | Market | Wilmington, NC and coastal North Carolina |
-| Scope delivered | **Website · Google Business Profile** (exact approved string — do not widen or reduce) |
+| Scope delivered | **Website · Google Business Profile · Technical SEO · Ongoing monthly SEO** |
+| | ⚠️ **Widened 2026-09-01 on Skyler's direct confirmation.** Was "Website · Google Business Profile", marked "do not widen or reduce". That string was incomplete. Technical SEO is listed as its own item because Skyler noted this build's technical SEO setup goes considerably further than the other engagements. 🚫 Scope is a project fact; no search-performance result is claimed or on record. |
 | Status | **Delivered & live** |
 | Evidence class | Project fact (scope) + Independently observed (bounded ranking observation) |
 
@@ -109,22 +110,27 @@ and carries the status-language constraint in §3.
 > **Homepage Work status: ✅ CANDIDATE** (Skyler, 2026-08-19 — DECISION 008). This **reverses** V1's
 > policy of excluding it from the homepage.
 >
-> 🔴 **Condition of inclusion — status language must always match reality.** Nothing about this
-> project may imply **launched**, **live in production**, **complete implementation**, or **measured
-> results**, unless and until that is subsequently verified and logged.
+> ⚠️ **SUPERSEDED IN PART, 2026-09-01.** The 🔴 condition below was written when this project was
+> an audit and a plan. Two things have since changed and were confirmed by Skyler directly:
+> the site is **published and live** (DECISION 019, 2026-08-25), and the delivered scope is
+> **website, Google Business Profile and ongoing monthly SEO** (2026-09-01). The rows below have
+> been corrected; this repo previously said "not yet delivered: redesign build, local SEO
+> implementation", which the live site had already contradicted.
 >
-> ⚠️ **Current project media is a priority** because it is now a homepage Work candidate
-> (DECISION 018) — and the only compliant media is of the **delivered work** (audit, plan) or a
-> clearly-labelled current-state reference. There is no "after" to capture.
+> 🔴 **The part that still stands: no measured results.** Nothing about this project may imply
+> **measured results**, a ranking, or a traffic figure. None is on record. Scope is a project
+> fact and is all that may be stated.
+>
+> ⚠️ **SUPERSEDED 2026-09-01.** This said "there is no 'after' to capture". There is: the site is
+> built and live, and `rr-before.jpg` / `rr-desktop.jpg` are captures of two real states.
 
 | Field | Value |
 |---|---|
 | Vertical | Restoration contracting · home services |
 | Market | Raleigh, NC |
-| Delivered | **Diagnostic audit and scoped growth plan** |
-| Not yet delivered | **Redesign build, local SEO implementation** |
-| Status | **Strategy delivered · implementation in progress** (locked verbatim label) |
-| Evidence class | Project fact (diagnosis only) |
+| Scope delivered | **Website · Google Business Profile · Ongoing monthly SEO** |
+| Status | **Published & live** — ⚠️ was "Strategy delivered · implementation in progress", locked verbatim. Retired 2026-09-01; superseded by DECISION 019 (2026-08-25) and Skyler's scope confirmation. |
+| Evidence class | Project fact (scope and status). 🚫 No measured result exists. |
 
 ### Evidence available
 - **The diagnosis itself** — what the audit examined: whether the existing site communicated
@@ -145,13 +151,18 @@ and carries the status-language constraint in §3.
   `/Users/skylerreyes/Documents/GitHub/rare-raleigh-restoration` (Next.js).
 
 ### Restrictions
-- 🚫 **No "after" exists. Never show a redesign, mockup or reconstruction as delivered work.**
+- 🚫 **Never show a mockup or reconstruction as delivered work.** ⚠️ This line read 'No "after"
+  exists' until 2026-09-01. One does. The live site is the after, and the captures on record
+  are of it. The prohibition on fabricated or reconstructed work is unchanged.
 - 🚫 No completed-result claims of any kind.
-- 🚫 No before/after comparison — V1 never captured the current Wix site. If it is ever captured, it
-  may be used **only** as a labelled "before / current state" reference.
-- 🔴 **Status language, restated because this is now homepage-facing:** never imply launched, live in
-  production, complete implementation, or measured results. The locked label
-  `Strategy delivered · implementation in progress` remains accurate; anything stronger is not.
+- ✅ Before/after is now permitted and in use: `rr-before.jpg` (the previous site) against
+  `rr-desktop.jpg` / `rr-mobile.jpg` (the live site). ⚠️ This line previously forbade it because no
+  capture of the old site existed. One does now. 🚫 Still never a mockup or a reconstruction.
+- 🔴 **Status language, restated because this is now homepage-facing:** never imply measured
+  results. Launched and live ARE now accurate and approved. The old locked label
+  ⚠️ RETIRED 2026-09-01. That label described the pre-build state. The project is published
+  and live with website, Google Business Profile and ongoing monthly SEO in scope.
+  🚫 What is still not claimable: any measured result. None exists.
 - ✅ The V1 policy change (exclusion → homepage candidate) is now approved and logged as
   [`DECISIONS.md`](DECISIONS.md) 008.
 
