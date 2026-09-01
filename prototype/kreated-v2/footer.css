@@ -1,0 +1,107 @@
+/* ==========================================================================
+   KREATED V2 — THE GLOBAL FOOTER
+   Loaded LAST on every one of the 17 routes, so this file is the single
+   definition of the footer regardless of which page system the route belongs
+   to. Before this existed the site had two different footers — four columns
+   plus a legal row on three pages, and a wordmark with "Raleigh, NC" on the
+   other fourteen — so a visitor who arrived on About, Method, Contact, Work or
+   any service page reached what felt like an incomplete mini-site with no way
+   to find pricing, the phone number or the privacy page.
+
+   The footer is a trust surface. It is the last thing a comparing buyer reads,
+   and it is where they check that a company is real. It carries the contact
+   details, every route, the five services and the two ways to start — and
+   nothing else. 🚫 No social icons, no newsletter, no badges, no awards.
+   ========================================================================== */
+/* ⚠ The ground used to be a flat fill plus a 1px border-top, and --ink was
+   undefined on the 14 routes that do not load styles.css — so they fell back to
+   #070707, a near-black outside this palette entirely, and the footer read as a
+   black rectangle stuck onto a navy page. --ink is now defined in both
+   stylesheets, and the fill ARRIVES: transparent at the top edge, so the page
+   ground above shows through, settling into the footer ground over ~130px. The
+   closing glow in .close::before runs down into that band, so the footer is
+   entered rather than butted against. 🚫 Do not put the border-top back. */
+.foot{
+  /* ⚠ ONE GROUND, 2026-08-31. The footer used to settle onto --ink, a step
+     darker than the page above it, so a visible horizontal colour split ran
+     across the full width where the two met — the footer read as a separate
+     black block bolted to the bottom of a navy page.
+
+     It now sits on the PAGE's own ground and paints nothing of its own. The
+     regions inside it are told apart by spacing, scale and label case, which
+     is what was already doing the work; the colour change was redundant and
+     it was the only thing producing a seam.
+
+     Transparent, not a repeated fill: whatever light the section above ends
+     with — the closing glow on the homepage, .close::before on every other
+     route — continues straight through into the footer instead of being
+     stopped at its top edge.
+     🚫 Do not put a background-color, a background-image or a border-top back
+     on .foot. Both were removed for the same reason. */
+  background:transparent;
+  padding:clamp(64px,7.4vw,104px) 0 40px}
+/* THE CLOSING LIGHT — one source, every route, anchored to the bottom.
+   It reaches UP out of the footer into the closing section above, which is why
+   the handoff between them has no edge: the light's box ends where the page
+   ends, so its falloff is never cut.
+
+   ⚠ The gradient reaches TRUE ZERO inside its own box in every direction —
+   centre at (0%, 108%) with the stops closing by 78% of the radius. That is the
+   property that was missing before, and its absence is what produced the hard
+   horizontal line across the footer that read as a second background colour.
+   🚫 If you retune this, re-check that the last stop lands inside the box. */
+.foot{position:relative;isolation:isolate}
+/* ⚠ .foot::before WAS REMOVED, 2026-09-01. It was a glow scoped to one section, so its
+   falloff was clipped at that section's edges — with the theme flip the ground
+   either side of it is a different colour, and the clip became a hard
+   horizontal line across the full width at the closing CTA / footer boundary. Section-scoped
+   light produced every seam fixed in August and it produced this one.
+   There is now exactly ONE light source on the site: the fixed .atmos layer
+   in theme.css, which is behind the whole document and has no edges to clip
+   against. 🚫 Do not add a section-scoped glow to any section, ever. */
+
+.foot__in{display:block;max-width:1440px;margin:0 auto;
+  padding-inline:var(--gutter);width:100%}
+
+.foot__brand{margin-bottom:clamp(36px,4.6vw,60px)}
+.foot__mark{display:block;margin:0 0 10px;
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:30px;
+  letter-spacing:.22em;margin-right:-.22em;color:var(--ink-1);text-decoration:none}
+.foot__mark .mk{display:none}
+.foot__line{margin:0;font-size:15px;line-height:1.5;color:var(--ink-3)}
+
+.foot__cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(24px,4vw,64px);max-width:1080px}
+.foot__cols h2{margin:0 0 14px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
+.foot__cols p{margin:0 0 9px;font-size:14.5px;line-height:1.5;
+  color:var(--ink-2)}
+/* inline-block, not inline: vertical padding on an inline box does not grow
+   the hit area, and these measured 20px — under the 24px minimum. As
+   inline-block the padding counts and every footer link clears it. */
+.foot__cols a{display:inline-block;color:inherit;text-decoration:none;
+  padding-block:4px;transition:color .2s}
+.foot__cols a:hover{color:var(--ink-1)}
+.foot__cols a:focus-visible{outline:2px solid var(--cobalt-lift,#5B86FF);
+  outline-offset:3px;border-radius:2px}
+
+.foot__legal{display:flex;gap:22px;align-items:center;flex-wrap:wrap;
+  margin:clamp(40px,5vw,64px) 0 0;padding-top:20px;
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent);
+  /* .38 measured 3.52:1 — under AA at this size. .48 clears it. */
+  font-size:12.5px;color:var(--ink-4)}
+.foot__legal a{display:inline-block;color:inherit;text-decoration:none;padding-block:6px}
+.foot__legal a:hover{color:var(--ink-1)}
+.foot__legal a:focus-visible{outline:2px solid var(--cobalt-lift,#5B86FF);
+  outline-offset:3px;border-radius:2px}
+.foot__mark:focus-visible{outline:2px solid var(--cobalt-lift,#5B86FF);
+  outline-offset:4px;border-radius:2px}
+/* the leaf pages' old one-line footer element, now unused */
+.foot__where{display:none}
+
+@media (max-width:900px){
+  .foot__cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 28px}
+}
+@media (max-width:520px){
+  .foot__cols{grid-template-columns:1fr;gap:26px}
+}

@@ -1,0 +1,1981 @@
+/* ==========================================================================
+   OMC-INSPIRED KREATED HOMEPAGE SHELL — NOT PRODUCTION
+   Reference: research/OMC_TEARDOWN.md
+   Decisions: concepts/OMC_KREATED_TRANSLATION.md
+
+   Numbers below are translated from measurements of the live OMC homepage at
+   1440x900 and 375x812, not invented. Where a value mirrors a measured OMC
+   value the comment says so.
+   ========================================================================== */
+
+/* --- TYPE ----------------------------------------------------------------
+   General Sans (Indian Type Foundry, via Fontshare, ITF Free Font Licence —
+   see assets/fonts/ITF-FreeFontLicense-GeneralSans.txt). Variable, 200-700,
+   38 KB. Carries hero scale, section headings, nav, buttons and body.
+   Still a TEST, not a ruling — but a legitimately licensed one.
+
+   Cormorant Garamond is deliberately RARE. It appears in exactly four places:
+     1. the KREATED wordmark          (settled, DECISION 011)
+     2. one accent word in the hero headline
+     3. one accent word in the footer
+     4. the capability labels and the Work lead — the two editorial moments
+        below the fold where the contrast materially helps
+   Every other lead paragraph is set in the sans. If Cormorant is ever ruled
+   out, those four places are the whole surface area.
+   ------------------------------------------------------------------------ */
+@font-face{
+  font-family:'General Sans';font-style:normal;font-weight:200 700;font-display:swap;
+  src:url(assets/fonts/general-sans-var.woff2) format('woff2');
+}
+@font-face{
+  font-family:'Cormorant Garamond';font-style:normal;font-weight:300 700;font-display:swap;
+  src:url(assets/fonts/cormorant-garamond-latin.woff2) format('woff2');
+}
+
+:root{
+  /* --- palette: inverted from OMC. Navy-dominant, light punctuation. ------
+     Inside the locked family (DECISION 012). No accent colour is invented —
+     the only chroma on the page is real client photography. */
+  --navy:#0B1220;
+  --navy-2:#101A2C;
+  --ink:#070C14;
+  --paper:#F4F5F7;
+  --white:#FFFFFF;
+  --silver:#A6B0BF;
+  --line:rgba(255,255,255,.16);
+
+  /* --- the identity blue ---------------------------------------------------
+     Cobalt. Chosen by rendering five candidates against the navy as rim, fill,
+     type and rule: #0047AB is rich but dull, #1B4DFF starts to read neon, and
+     #0A47F0 is the one that stays electric without either. It is the same blue
+     the Work mask is rendered in.
+
+     It is only 2.83:1 on --navy, so it is NEVER small text on a dark surface.
+     Where a label needs the blue on navy, --cobalt-lift is used instead
+     (5.62:1). On --paper the base cobalt is 6.07:1 and is fine for text. */
+  --cobalt:#0A47F0;
+  --cobalt-lift:#5B86FF;
+  --cobalt-hover:#2B5FF5;   /* primary CTA hover fill (hero) */
+  --cobalt-soft:rgba(10,71,240,.20);
+  --line-dark:rgba(11,18,32,.14);
+
+  /* --- type scale: OMC's two-number responsive system --------------------
+     Only the two display sizes change between breakpoints. Body, labels and
+     the serif lead are identical at every width, exactly as OMC does it. */
+  --h1:clamp(40px, 7.1vw, 104px);     /* sized so 2 lines reach OMC's measured 75vw */
+  --h2:clamp(30px, 2.65vw, 38px);     /* OMC measured 37.44 / 32            */
+  --h3:22px;
+  --lead:23px;                         /* OMC measured 23.2, unchanged       */
+  --body:16px;                         /* OMC measured 16, unchanged         */
+  --label:14px;                        /* OMC measured 14.4, unchanged       */
+
+  /* --- rhythm ------------------------------------------------------------ */
+  --gutter:clamp(20px, 8.4vw, 120px);
+  --gutter-hero:clamp(20px, 12.3vw, 177px);   /* OMC's measured 177px = 12.3vw */
+  --measure:min(410px, 100%);                 /* OMC never exceeds ~410px      */
+  --head-h:91px;                              /* OMC measured 91, both widths  */
+
+  /* the entire micro-interaction budget, measured off OMC */
+  --t-hover:.2s ease-in-out;
+  --t-pill:.4s cubic-bezier(.4,0,.2,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+/* overflow-x:CLIP, not hidden. `hidden` makes the body a scroll container, and
+   position:sticky inside a scroll container sticks to THAT container rather
+   than the viewport — which silently disabled every sticky on this page. The
+   Services stage and Process artifact both declared sticky and neither ever
+   engaged. `clip` prevents the same horizontal overflow without creating a
+   scrollport, so sticky works and nothing else changes. */
+html,body{margin:0;padding:0;overflow-x:clip}
+body{
+  background:var(--navy);color:var(--white);
+  font:400 var(--body)/1.55 'General Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+.wrap{max-width:1680px;margin:0 auto;padding-inline:var(--gutter)}
+.hero .wrap{padding-inline:var(--gutter-hero)}
+
+.proto-flag{
+  position:fixed;bottom:0;left:0;right:0;z-index:60;margin:0;padding:7px 16px;
+  font:500 11px/1.45 'General Sans',system-ui;letter-spacing:.08em;
+  color:rgba(255,255,255,.5);background:#05090F;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.proto-flag strong{color:rgba(255,255,255,.72);font-weight:600}
+
+/* ==========================================================================
+   SHARED PATTERNS — OMC's repeatable section unit:
+   pill label -> h2 -> serif lead -> pill CTA + arrow
+   ========================================================================== */
+.h2{
+  margin:0;
+  font-size:var(--h2);line-height:1.02;   /* OMC sets section headings solid */
+  font-weight:700;letter-spacing:-.024em;
+}
+.h2--big{font-size:clamp(38px,4.2vw,60px);line-height:1.04}
+.h2 em,.foot__h em,.hero__line em{
+  /* the serif accent, sized 1.27x the sans exactly as OMC does */
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:italic;font-weight:600;font-size:1.27em;
+  letter-spacing:-.012em;
+}
+/* leads are set in the SANS by default — Cormorant is reserved (see TYPE) */
+.lead{
+  margin:0;max-width:var(--measure);
+  font:400 17px/1.6 'General Sans',system-ui;color:rgba(255,255,255,.68);
+}
+.lead--dark{color:rgba(11,18,32,.66)}
+/* the one editorial lead below the fold, where the contrast earns its place */
+.lead--serif{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:var(--lead);line-height:1.22;font-weight:500;
+  color:rgba(255,255,255,.88);
+}
+
+.pill-label{
+  display:inline-flex;align-items:center;gap:9px;margin:0 0 22px;
+  font:600 var(--label)/1.4 'General Sans',system-ui;letter-spacing:.01em;
+  color:rgba(255,255,255,.78);
+}
+.pill-label::before{
+  /* a cropped cobalt pocket, not a dot — a fluid-derived detail at 9px */
+  content:'';width:9px;height:9px;background:var(--cobalt-lift);
+  border-radius:58% 42% 46% 54% / 44% 56% 44% 56%;
+}
+.pill-label--dark::before{background:var(--cobalt)}
+.pill-label--dark{color:rgba(11,18,32,.66)}
+
+.pill{
+  display:inline-flex;align-items:center;gap:14px;
+  margin-top:30px;padding:15px 22px;border-radius:999px;
+  background:var(--white);color:var(--navy);
+  font:600 15px/1 'General Sans',system-ui;text-decoration:none;
+  transition:background-color var(--t-hover),color var(--t-hover);
+}
+.pill__arrow{
+  display:grid;place-items:center;width:30px;height:30px;margin:-8px -10px -8px 0;
+  border-radius:50%;background:var(--navy);color:var(--white);
+  font-size:13px;transition:transform var(--t-pill),background-color var(--t-hover);
+}
+.pill:hover .pill__arrow{transform:translate(2px,-2px)}
+.pill--light{background:var(--white);color:var(--navy)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:52px;padding:0 26px;border-radius:999px;
+  font:600 15px/1 'General Sans',system-ui;text-decoration:none;
+  transition:background-color var(--t-hover),border-color var(--t-hover),color var(--t-hover);
+}
+.btn--solid{background:var(--white);color:var(--navy)}
+.btn--solid:hover{background:#DDE3EC}
+.btn--line{border:1px solid var(--line);color:var(--white)}
+.btn--line:hover{border-color:var(--cobalt-lift)}
+.btn--text{
+  height:auto;padding:0 0 4px;border-radius:0;
+  border-bottom:1px solid rgba(255,255,255,.34);
+}
+.btn--text:hover{border-bottom-color:var(--cobalt-lift)}
+:where(a,button):focus-visible{outline:2px solid var(--white);outline-offset:4px}
+
+/* ==========================================================================
+   HEADER — 91px, transparent, scrolls away (OMC). Returns on scroll-up with
+   the primary CTA (Kreated divergence 2).
+   ========================================================================== */
+/* STICKY, never fixed. This was `position:relative` switching to
+   `position:fixed` once past 0.9vh — which pulls 91px out of the document
+   flow, so every section below snapped up by exactly the header's height at
+   scrollY ~820. That is the jump between the hero and Services. Sticky pins
+   the header without ever leaving the flow, so the document height never
+   changes and there is nothing to jump. */
+/* SOLID from the first pixel, and sticky so it never leaves the flow.
+   It used to start transparent and switch to rgba(8,13,23,.86) + blur once
+   scrolled, which read as the header "turning opaque" partway down the page.
+   There is no background change now — only a hairline that appears once
+   content is actually passing underneath it, which is a border, not a
+   material change. */
+.head{
+  position:sticky;top:0;z-index:50;height:var(--head-h);
+  background:var(--navy);
+  border-bottom:1px solid transparent;
+  transition:border-color var(--t-hover);
+}
+.head.is-fixed{
+  left:0;right:0;
+  border-bottom-color:rgba(255,255,255,.07);
+  transform:translateY(-100%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1),border-color var(--t-hover);
+}
+.head.is-shown{transform:translateY(0)}
+.head__in{
+  max-width:1680px;margin:0 auto;height:100%;
+  padding-inline:var(--gutter);
+  display:flex;align-items:center;gap:34px;
+}
+.head__mark{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:21px;
+  letter-spacing:.22em;margin-right:-.22em;   /* cancel trailing tracking */
+  text-decoration:none;
+}
+.head__nav{display:flex;gap:34px;margin-left:auto}
+.head__nav a{
+  font:500 15px/1 'General Sans',system-ui;text-decoration:none;
+  color:rgba(255,255,255,.82);transition:color var(--t-hover);
+}
+.head__nav a:hover{color:var(--white)}
+.head__cta{
+  display:none;align-items:center;height:40px;padding:0 18px;border-radius:999px;
+  background:var(--white);color:var(--navy);
+  font:600 14px/1 'General Sans',system-ui;text-decoration:none;
+}
+.head.is-fixed .head__cta{display:inline-flex}
+.head__burger{
+  display:none;margin-left:auto;width:34px;height:34px;padding:0;
+  background:none;border:0;cursor:pointer;
+}
+.head__burger span{display:block;height:1.5px;background:var(--white);margin:6px 0;
+  transition:transform var(--t-hover),opacity var(--t-hover)}
+.head__burger[aria-expanded=true] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.head__burger[aria-expanded=true] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+
+.drawer{
+  position:fixed;inset:var(--head-h) 0 auto 0;z-index:49;
+  background:rgba(7,12,20,.97);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.drawer nav{display:flex;flex-direction:column;padding:8px var(--gutter) 28px}
+.drawer a{
+  padding:15px 0;font:600 20px/1 'General Sans',system-ui;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.drawer__cta{margin-top:20px;border:0!important;
+  background:var(--white);color:var(--navy);border-radius:999px;text-align:center;padding:17px 0!important}
+.drawer__alt{border:1px solid var(--line)!important;border-radius:999px;
+  text-align:center;margin-top:10px;padding:16px 0!important}
+
+/* ==========================================================================
+   1 · HERO
+   OMC: band exactly 1.0vh; headline 75.3vw wide leaving 12.4vw open right;
+   label column 184px, body column 380px starting 245px from the gutter.
+   ========================================================================== */
+/* accessible-only text — the stable sentence behind the typewriter.
+   Lives above the hero block because the hero is the only consumer today but
+   it is a general utility; it was previously defined inside the hero block
+   and was lost when that block was replaced. */
+.sr-only{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+/* ==========================================================================
+   1 · HERO — SIGNAL / "FOOTNOTE" (layout L9)
+
+   Replaces the WebGL glass mark and its canvas. Everything here is SVG + CSS:
+   no renderer, no library, no canvas in the hero.
+
+   Three instances of one mark, each doing a different job at a different
+   scale, which is what lets the joke land without shrinking the brand:
+     .hero__ghost     brand presence, large, in the right column
+     .aster           the LIVE footnote marker ending the rotating line
+     .hero__notemark  the tiny static reference in the footnote itself
+   ========================================================================== */
+.hero{
+  position:relative;overflow:clip;
+  min-height:calc(100svh - var(--head-h));
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(16px,2vw,26px) 0 clamp(4px,.8vh,10px);
+}
+.hero__in{position:relative;z-index:2;width:100%}
+
+/* --- the mark, shared by all three instances ----------------------------- */
+.sig{display:block;width:100%;height:100%;overflow:visible}
+.sig__base path{fill:var(--mark,#57637C)}
+.sig__base{
+  filter:drop-shadow(0 0 44px rgba(10,71,240,.22))
+         drop-shadow(0 30px 50px rgba(0,0,0,.45));
+}
+/* The beam is clipped to the glyph, so the light reads as the mark lighting
+   ITSELF rather than a shape passing over it. */
+.sig__spin{transform-origin:300px 262px;animation:sig-rot 12s linear infinite}
+@keyframes sig-rot{to{transform:rotate(360deg)}}
+/* two outward echoes, offset in time — the "signal" */
+.echo{transform-origin:300px 262px;opacity:0}
+.echo path{fill:none;stroke:var(--cobalt-lift);stroke-width:1.4;
+  vector-effect:non-scaling-stroke}
+.echo--a{animation:sig-echo 16s cubic-bezier(.2,.6,.4,1) infinite}
+.echo--b{animation:sig-echo 16s cubic-bezier(.2,.6,.4,1) 1.8s infinite}
+@keyframes sig-echo{
+  0%{transform:scale(1);opacity:0}
+  2%{opacity:.5}
+  19%{transform:scale(1.42);opacity:0}
+  100%{transform:scale(1.42);opacity:0}
+}
+
+/* --- 1 · the ghost ------------------------------------------------------- */
+.hero__ghost{
+  position:absolute;z-index:0;pointer-events:none;
+  right:clamp(24px,5.5vw,100px);top:41%;transform:translateY(-50%);
+  width:min(40vw,548px);aspect-ratio:1/1;
+  --mark:#141E35;opacity:.9;
+}
+.hero__ghost .sig__base{filter:none}
+.hero__ghost .echo path{stroke-opacity:.35}
+
+/* --- 2 · the headline ---------------------------------------------------- */
+.hero__h1{
+  position:relative;z-index:2;margin:0 0 30px;max-width:14ch;
+  font-size:clamp(42px,6.2vw,104px);line-height:1.0;font-weight:600;
+  letter-spacing:-.034em;color:rgba(255,255,255,.97);
+}
+.hero__h1 em{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:600;font-size:1.16em;letter-spacing:-.012em;
+}
+.hero__static{display:block}
+/* Width reservation is unchanged in principle: an invisible copy of the
+   LONGEST phrase — now including its asterisk — holds the box open, so typing
+   still cannot reflow the line. */
+.hero__rotate{position:relative;display:inline-block;vertical-align:top}
+.hero__reserve{visibility:hidden}
+.hero__live{position:absolute;left:0;top:0;white-space:nowrap;
+  color:var(--cobalt-lift)}
+.hero__caret{
+  display:inline-block;width:2px;height:.78em;margin-left:.08em;
+  vertical-align:-.06em;background:var(--cobalt-lift);opacity:0;
+}
+.js-type .hero__caret{opacity:1}
+.js-type.is-holding .hero__caret{animation:caret-blink 1.06s steps(1,end) infinite}
+@keyframes caret-blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+
+/* --- 3 · the asterisk ---------------------------------------------------- */
+.aster{
+  display:inline-block;width:.42em;height:.42em;margin-left:.07em;
+  vertical-align:.28em;position:relative;z-index:2;
+  --mark:#7E9CFF;
+}
+.aster .sig__base{filter:drop-shadow(0 0 14px rgba(91,134,255,.5))}
+
+/* --- 4 · support + CTAs -------------------------------------------------- */
+.hero__support{
+  position:relative;z-index:2;margin:0 0 clamp(34px,5vh,56px);max-width:45ch;
+  font-size:clamp(16.5px,1.34vw,19.5px);line-height:1.58;color:rgba(255,255,255,.70);
+}
+.hero__ctas{
+  position:relative;z-index:2;display:flex;align-items:center;
+  gap:22px;flex-wrap:wrap;margin:0;
+}
+.hero__ctas .btn{height:58px;padding:0 28px;gap:12px}
+/* Cobalt primary, per this layout. Scoped to the hero so .btn--solid keeps its
+   existing appearance in the header and the conversion section — this rule
+   lived in the previous hero block and was lost when it was replaced. */
+.hero__ctas .btn--solid{
+  background:var(--cobalt);color:#fff;position:relative;overflow:hidden;
+}
+.hero__ctas .btn--solid::before{
+  content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,
+    rgba(255,255,255,0),rgba(255,255,255,.55) 50%,rgba(255,255,255,0));
+  opacity:0;transition:opacity var(--t-hover);
+}
+.hero__ctas .btn--solid:hover,
+.hero__ctas .btn--solid:focus-visible{background:var(--cobalt-hover)}
+.hero__ctas .btn--solid:hover::before,
+.hero__ctas .btn--solid:focus-visible::before{opacity:1}
+.hero__ctas .btn--line{border-color:rgba(255,255,255,.25)}
+.hero__ctas .btn--line:hover,
+.hero__ctas .btn--line:focus-visible{
+  border-color:var(--cobalt-lift);background:rgba(255,255,255,.05);
+}
+.hero__ctas .btn:focus-visible,
+.hero__proof:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:3px}
+.btn__arrow{
+  display:grid;place-items:center;width:30px;height:30px;
+  margin:-6px -12px -6px 0;border-radius:50%;
+  background:rgba(255,255,255,.16);font-size:13px;
+  transition:transform var(--t-pill),background-color var(--t-hover);
+}
+.hero__ctas .btn--solid:hover .btn__arrow,
+.hero__ctas .btn--solid:focus-visible .btn__arrow{
+  transform:translate(2px,-2px);background:rgba(255,255,255,.24);
+}
+.hero__proof{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  min-height:44px;font:600 15px/1 'General Sans',system-ui;
+  color:rgba(255,255,255,.62);text-decoration:none;border-bottom:0;
+  padding-bottom:0;transition:color var(--t-hover);
+}
+.hero__proof::after{
+  content:'';position:absolute;left:0;right:0;bottom:8px;height:1px;
+  background:rgba(255,255,255,.25);transition:background-color var(--t-hover);
+}
+.hero__proof:hover,.hero__proof:focus-visible{color:#fff}
+.hero__proof:hover::after,.hero__proof:focus-visible::after{
+  background:var(--cobalt-lift);
+}
+
+/* --- 5 · the footnote: where the kicker now lives ------------------------ */
+.hero__note{
+  position:relative;z-index:2;display:flex;align-items:center;gap:12px;
+  margin-top:clamp(40px,7vh,80px);padding:18px 0 30px;
+  border-top:1px solid var(--line);
+}
+.hero__notemark{flex:none;width:15px;height:15px;--mark:var(--cobalt-lift)}
+.hero__notemark .sig__base{filter:none}
+.hero__note p{
+  margin:0;font:500 13.5px/1.5 'General Sans',system-ui;
+  letter-spacing:.04em;color:rgba(255,255,255,.5);
+}
+
+/* ---- responsive --------------------------------------------------------- */
+@media (max-width:900px){
+  .hero{padding-top:clamp(28px,6vw,44px)}
+  .hero__h1{font-size:clamp(38px,9.6vw,50px);max-width:none}
+  /* the rotator owns its own line so typing can never re-wrap the static text */
+  .hero__rotate{display:block}
+  /* the ghost centres behind the type — the right column does not exist here */
+  /* QA 390/360: at top:52% / .7 the mark crossed the support paragraph for
+     125px of its height. It is brand presence, not content — so on mobile it
+     lifts off the body copy and drops to a watermark. */
+  .hero__ghost{right:50%;transform:translate(50%,-50%);top:44%;
+    width:min(76vw,368px);opacity:.4}
+  .hero__ctas{width:100%;gap:14px}
+  .hero__ctas .btn{width:100%;justify-content:center}
+  .hero__note{margin-top:34px}
+}
+
+/* ---- reduced motion ----------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  /* the beam parks at a composed angle rather than spinning, and one echo is
+     held mid-expansion, so the "signal" idea still reads statically */
+  .sig__spin{animation:none;transform:rotate(35deg)}
+  .echo{animation:none!important}
+  .echo--a{opacity:.14;transform:scale(1.18)}
+  .echo--b{opacity:0}
+  .hero__caret{display:none}
+}
+
+/* ==========================================================================
+   BELOW THE HERO — visual-direction correction pass (Aug 2026).
+   Architecture unchanged: Client Trust · Services (Index + Stage) ·
+   How It Works · Work + Testimonial · Investment · FAQ · Final CTA · Footer.
+
+   ONE CONTINUOUS CANVAS, now with real PEAKS AND VALLEYS:
+     Trust QUIET · Services HIGH · Process MEDIUM · Proof PEAK ·
+     Investment STRUCTURED/STILL · FAQ QUIET · Final CTA HIGH.
+   Variation comes from scale, cropping, edge-bleed, imagery and whitespace —
+   never from alternating section backgrounds.
+
+   Motion grammar unchanged: the artwork moves, the layout never does. No
+   scroll-linked motion below the hero. Everything stops composed under
+   prefers-reduced-motion.
+   ========================================================================== */
+:root{
+  /* Cut hard. Measured at 1440 the old values put 271px of pure padding
+     between Services and Process (150 bottom + 121 top) and 404px around the
+     final CTA — you were scrolling through empty canvas to reach the next
+     idea. Roughly halved here. The peak/valley RATIO is preserved, so the
+     rhythm still reads; there is simply far less dead air carrying it. */
+  --sec:clamp(44px, 4.6vw, 74px);           /* medium sections                */
+  --sec-lg:clamp(56px, 5.8vw, 94px);        /* peaks                          */
+  --sec-sm:clamp(30px, 3.2vw, 48px);        /* valleys                        */
+  --panel:rgba(255,255,255,.03);
+  --panel-line:rgba(255,255,255,.10);
+  --r:14px;
+  /* the one shared surface treatment for every dimensional object below the
+     hero: top edge catches light, deep soft ground shadow */
+  --srf-edge:inset 0 1px 0 rgba(255,255,255,.16);
+  --srf-shadow:0 44px 90px rgba(0,0,0,.55);
+}
+
+/* --- shared section head ------------------------------------------------- */
+.sec-head{
+  display:grid;grid-template-columns:1fr minmax(0,var(--measure));
+  gap:clamp(24px,4vw,70px);align-items:end;
+  margin-bottom:clamp(30px,3.4vw,52px);
+}
+.sec-head--peak{margin-bottom:clamp(36px,4.2vw,66px)}
+/* peak display scale — Services, Proof. (Hero untouched; Final CTA has its own.) */
+.h2--peak{
+  font-size:clamp(42px,5.2vw,78px);line-height:1.0;
+  font-weight:700;letter-spacing:-.032em;
+}
+
+/* ==========================================================================
+   3 · CLIENT TRUST — a rotating rail of real client marks.
+
+   Still a valley: small, monotone, low-contrast at rest. The logos are real
+   captures of each client's own mark, flattened to one colour so three brand
+   palettes do not compete with the page or with each other.
+
+   The track holds the list TWICE and translates by exactly -50%, which is what
+   makes the loop seamless — at -50% the second copy sits precisely where the
+   first began, so the reset is invisible. The duplicate is aria-hidden and
+   untabbable (see the markup), so it exists for the eye only.
+   ========================================================================== */
+.clients{padding:var(--sec-sm) 0;overflow:clip}
+.clients__in{display:grid;gap:clamp(18px,2.4vw,30px)}
+.clients__label{
+  margin:0;font:600 11px/1 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.38);
+}
+/* the rail fades at both edges so items enter and leave rather than popping */
+.clients__rail{
+  position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+}
+.clients__track{
+  display:flex;align-items:center;gap:clamp(38px,5.4vw,86px);
+  list-style:none;margin:0;padding:0;width:max-content;
+  animation:clients-roll 42s linear infinite;
+}
+@keyframes clients-roll{to{transform:translateX(-50%)}}
+/* pause while the visitor is reading or tabbing through it */
+.clients__rail:hover .clients__track,
+.clients__track:focus-within{animation-play-state:paused}
+
+.clients__item{flex:none}
+.client{
+  display:flex;align-items:center;
+  text-decoration:none;padding:6px 0;
+  opacity:.52;transition:opacity var(--t-hover);
+}
+.client:hover,.client:focus-visible{opacity:1}
+.client:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:6px;border-radius:4px}
+/* one monotone: the source PNGs are already white-on-transparent, so nothing
+   here has to fight a baked-in brand colour */
+.client__logo{
+  display:block;width:auto;height:clamp(22px,2.1vw,30px);
+  filter:grayscale(1);
+}
+/* OPTICAL sizing, not mechanical. Each client's lockup sets its wordmark at a
+   different size relative to its mark, so a single CSS height makes some read
+   large and others tiny. These two are nudged until the WORDMARKS match each
+   other on screen — which is how a logo bar is actually balanced. */
+.client__logo--llec{height:clamp(30px,2.9vw,42px)}
+.client__logo--rr{height:clamp(19px,1.8vw,26px)}
+/* the meta line was removed: each client's lockup already carries its own
+   wordmark, so a name or category beside it repeated what the logo says. The
+   rail is logos only. */
+@media (max-width:900px){
+  .clients__track{gap:44px;animation-duration:32s}
+  .client__logo{height:24px}
+  .client__logo--llec{height:33px}
+  .client__logo--rr{height:21px}
+}
+/* reduced motion: the rail stops. It is still a complete, readable list —
+   nothing is hidden behind the animation. */
+@media (prefers-reduced-motion:reduce){
+  .clients__track{animation:none;flex-wrap:wrap;width:auto;gap:28px 44px}
+  .clients__rail{-webkit-mask-image:none;mask-image:none}
+}
+
+/* ==========================================================================
+   4 · SERVICES — INDEX + STAGE · "one world, five crops"
+   The Stage is no longer a card: the artwork sits on the open canvas, bleeds
+   to the right viewport edge, and every scene is one dominant surface.
+   ========================================================================== */
+.svc{padding:var(--sec-lg) 0;overflow:clip}
+.svc__grid{
+  /* 46/54, not 52/48: the diagrams carry small type (nav labels, chips,
+     document lines) and were unreadable at the old column width. The index
+     copy is short and loses nothing by giving the space up. */
+  display:grid;grid-template-columns:minmax(0,46fr) minmax(0,54fr);
+  gap:clamp(24px,3.2vw,56px);align-items:start;
+}
+
+/* --- the index (unchanged treatment) -------------------------------------- */
+.svc__index{list-style:none;margin:0;padding:0;border-top:1px solid var(--panel-line)}
+.svc__item{border-bottom:1px solid var(--panel-line)}
+.svc__row{
+  display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;
+  width:100%;padding:clamp(30px,3.6vw,54px) 14px;
+  background:none;border:0;text-align:left;cursor:pointer;color:inherit;
+  position:relative;
+  transition:background-color var(--t-hover);
+}
+.svc__row::before{
+  content:'';position:absolute;left:0;top:10px;bottom:10px;width:2px;
+  background:linear-gradient(180deg,
+    rgba(10,71,240,0) 0%, var(--cobalt) 14%,
+    var(--cobalt) 86%, rgba(10,71,240,0) 100%);
+  opacity:0;transition:opacity var(--t-hover);
+}
+.svc__n{
+  font:600 13px/1.9 'General Sans',system-ui;letter-spacing:.12em;
+  color:rgba(255,255,255,.35);transition:color var(--t-hover);
+}
+.svc__t{
+  display:block;
+  font:600 clamp(21px,1.9vw,27px)/1.15 'General Sans',system-ui;
+  letter-spacing:-.02em;color:rgba(255,255,255,.86);
+  transition:color var(--t-hover),transform var(--t-pill);
+}
+.svc__d{
+  display:block;margin-top:7px;max-width:44ch;
+  font-size:15px;line-height:1.5;color:rgba(255,255,255,.48);
+  transition:color var(--t-hover);
+}
+/* Hover/active are EDGELESS washes, not filled rectangles. A solid
+   background-color on a full-width grid row draws four hard edges, which is
+   exactly the "selected card" read we're removing. A radial wash anchored to
+   the left rule has no edge to see. */
+.svc__row:hover,.svc__row:focus-visible{
+  background-color:transparent;
+  background-image:radial-gradient(52% 42% at 0% 50%,
+    rgba(255,255,255,.055) 0%, rgba(255,255,255,.02) 34%,
+    rgba(255,255,255,0) 74%);
+}
+.svc__row:hover .svc__t,.svc__row:focus-visible .svc__t{color:#fff}
+.svc__item.is-active .svc__row{background-color:transparent}
+.svc__item.is-active .svc__row::before{opacity:1}
+.svc__item.is-active .svc__n{color:var(--cobalt-lift);text-shadow:0 0 14px rgba(91,134,255,.55)}
+.svc__item.is-active .svc__t{color:#fff;transform:translateX(6px)}
+.svc__item.is-active .svc__d{color:rgba(255,255,255,.62)}
+.svc__row:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:-2px}
+
+/* --- the stage: open canvas, bleeding right ------------------------------- */
+.svc__stage{
+  /* 18vh, not head-h+16px: the old 107px pinned the stage just under the
+     header where it read as stuck to the top edge. Judged at 1440x900. */
+  position:sticky;top:18vh;align-self:start;
+  margin-right:calc(var(--gutter) * -1);   /* bleed to the viewport edge */
+}
+.stage{
+  position:relative;
+  min-height:clamp(420px,36vw,560px);
+}
+/* The cobalt bloom the artwork lives in — light, not a container.
+
+   It used to read as a hard-edged blob for two reasons, both fixed here:
+     · it faded to `transparent`, which is transparent BLACK. Interpolating
+       cobalt → black-at-zero-alpha muddies the middle of the ramp and leaves
+       a visible boundary. Every stop below is the same hue at falling alpha.
+     · it was a single linear stop ending at 70%, so the falloff was a
+       straight ramp that terminates. The eased multi-stop tail below reaches
+       true zero at the very edge of the ellipse, so there is nothing to end.
+   Also enlarged, because a soft glow needs room to actually be soft. */
+.stage::before{
+  /* centred ON the artwork, because this is now the ONLY glow: the blooms
+     that used to live inside each scene SVG were removed. They could never
+     look right there — a circle bigger than its viewBox gets clipped to the
+     SVG's rectangle, which is exactly the straight edge that kept showing. */
+  content:'';position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);width:136%;height:160%;
+  background:radial-gradient(closest-side,
+    rgba(10,71,240,.38)  0%,
+    rgba(10,71,240,.305) 18%,
+    rgba(10,71,240,.20) 36%,
+    rgba(10,71,240,.115) 53%,
+    rgba(10,71,240,.057) 68%,
+    rgba(10,71,240,.022) 82%,
+    rgba(10,71,240,.006) 92%,
+    rgba(10,71,240,0)   100%);
+  pointer-events:none;
+}
+/* ==========================================================================
+   SERVICES CONTAINMENT — primary objects fit, one decorative layer bleeds.
+
+   The previous system anchored the safe region to the VIEWPORT, because the
+   stage carries `margin-right: -gutter` and so its right edge sits on the
+   viewport edge. That was the wrong foundation: it meant "contained" still
+   allowed a primary object to run all the way to the browser edge.
+
+   The frame is now the COLUMN. `.scene` is inset by a full gutter, which
+   undoes the stage's bleed exactly — so a scene's right edge lands where the
+   grid column actually ends, with page margin beyond it.
+
+     .scene      the primary frame. Dominant objects live here, at width
+                 <= 100%, with no negative right offset and no outward
+                 translate. Nothing primary is cropped.
+     .bleeds     ONE decorative layer per scene may opt out and run to the
+                 viewport edge — a map ground, a body panel continuation.
+                 Never the focal object.
+   ========================================================================== */
+:root{
+  --svc-frame:calc(var(--gutter) * .5);  /* half the bleed back: the scene
+                                            still ends inside the viewport but
+                                            gets ~130px more width to draw in */
+  --svc-gap:clamp(8px,1.2vw,22px);    /* breathing room inside the frame    */
+}
+.scene{
+  position:absolute;inset:0 calc(var(--svc-frame) + var(--svc-gap)) 0 0;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transform:translateY(12px);
+  transition:opacity .28s ease,transform .28s ease,visibility 0s linear .28s;
+}
+.svc__stage[data-active="0"] .scene[data-scene="0"],
+.svc__stage[data-active="1"] .scene[data-scene="1"],
+.svc__stage[data-active="2"] .scene[data-scene="2"],
+.svc__stage[data-active="3"] .scene[data-scene="3"],
+.svc__stage[data-active="4"] .scene[data-scene="4"]{
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity .3s ease .08s,transform .3s ease .08s,visibility 0s;
+}
+.stage__tag{
+  margin:14px 0 0;max-width:52ch;
+  font-size:11.5px;line-height:1.4;letter-spacing:.02em;
+  color:rgba(255,255,255,.38);
+}
+
+
+/* the ONE decorative escape. Focal objects never use this. */
+.bleeds{margin-right:calc((var(--svc-frame) + var(--svc-gap)) * -1)}
+
+/* 01 · WEB — one big surface, tilted, its right edge cropped */
+.scene--web{justify-content:flex-end}
+
+
+/* 04 · GBP — one tall phone-proportioned surface, cropped at the bottom */
+.scene--gbp{overflow:hidden;align-items:flex-start}
+
+
+/* ==========================================================================
+   5 · HOW IT WORKS — five artifacts, one job
+   ========================================================================== */
+.proc{padding:var(--sec) 0;overflow:clip}
+.proc__grid{
+  display:grid;grid-template-columns:minmax(0,44fr) minmax(0,56fr);
+  gap:clamp(24px,3.2vw,56px);align-items:start;
+}
+.proc__steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--panel-line)}
+.proc__item{position:relative;border-bottom:1px solid var(--panel-line)}
+.proc__row{
+  display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;
+  width:100%;padding:clamp(26px,3.1vw,46px) 12px;
+  background:none;border:0;text-align:left;cursor:pointer;color:inherit;
+  transition:background-color var(--t-hover);
+}
+/* Editorial numerals, not badges. The circled markers read as UI chrome —
+   a component library — against a page whose whole voice is typographic.
+   Cormorant at display size in a narrow column reads as a set numeral. */
+.proc__n{
+  display:block;width:100%;margin-top:-6px;
+  border:0;border-radius:0;background:none;
+  font:400 clamp(28px,2.3vw,38px)/1 'Cormorant Garamond',Georgia,serif;
+  font-variant-numeric:lining-nums tabular-nums;
+  letter-spacing:.005em;text-align:left;
+  color:rgba(255,255,255,.26);
+  transition:color var(--t-base) var(--e-ui);
+}
+.proc__t{display:block;font:600 18px/1.2 'General Sans',system-ui;
+  letter-spacing:-.01em;color:rgba(255,255,255,.80);transition:color var(--t-hover)}
+.proc__d{display:block;margin-top:5px;max-width:46ch;
+  font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.44);
+  transition:color var(--t-hover)}
+.proc__item.is-on .proc__n{color:rgba(255,255,255,.52)}
+.proc__item.is-active .proc__n{
+  color:var(--cobalt-lift);
+  text-shadow:0 0 18px rgba(91,134,255,.45);
+}
+.proc__item.is-on .proc__t{color:#fff}
+.proc__item.is-active .proc__d{color:rgba(255,255,255,.60)}
+.proc__row:hover .proc__t,.proc__row:focus-visible .proc__t{color:#fff}
+.proc__row:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:-2px}
+.proc__item.is-active::after{
+  content:'';position:absolute;left:0;bottom:-1px;height:1px;width:0;
+  background:var(--cobalt-lift);
+}
+.proc--auto .proc__item.is-active::after{animation:proc-meter 5s linear forwards}
+@keyframes proc-meter{from{width:0}to{width:100%}}
+
+/* --- the artifact stage: open canvas, like Services ----------------------- */
+.proc__viz{
+  position:sticky;top:20vh;align-self:start;
+  min-height:clamp(400px,34vw,520px);
+}
+/* same treatment as the services bloom — eased tail, one hue, no
+   `transparent` keyword, and enough size that the falloff has room */
+.proc__viz::before{
+  content:'';position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);width:138%;height:160%;
+  background:radial-gradient(closest-side,
+    rgba(10,71,240,.32)  0%,
+    rgba(10,71,240,.255) 18%,
+    rgba(10,71,240,.168) 36%,
+    rgba(10,71,240,.095) 53%,
+    rgba(10,71,240,.047) 68%,
+    rgba(10,71,240,.018) 82%,
+    rgba(10,71,240,.005) 92%,
+    rgba(10,71,240,0)   100%);
+  pointer-events:none;
+}
+.art{
+  position:absolute;inset:0 0 34px;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transform:translateY(12px);
+  transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s;
+}
+.proc__viz[data-step="1"] .art--1,
+.proc__viz[data-step="2"] .art--2,
+.proc__viz[data-step="3"] .art--3,
+.proc__viz[data-step="4"] .art--4,
+.proc__viz[data-step="5"] .art--5{
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity .32s ease .08s,transform .32s ease .08s,visibility 0s;
+}
+.proc__caption{
+  position:absolute;left:0;bottom:0;margin:0;
+  font-size:11.5px;letter-spacing:.02em;color:rgba(255,255,255,.38);
+}
+
+/* 1 · audit — the dated site, marked up */
+/* ==========================================================================
+   PROCESS ARTIFACTS — shared art direction
+   The five were reading as five different illustration styles. These tokens
+   are the common language: one paper stock, one shadow, one perspective, one
+   radius. Sizes, layout and interaction are unchanged — this is finish only.
+   ========================================================================== */
+:root{
+  --art-r:10px;
+  /* real paper is not a flat fill: a warm gradient, a lit top edge, and a
+     shadow with both a tight contact term and a wide soft term */
+  --art-paper:linear-gradient(158deg,#F5F3EE 0%,#E7E3D9 62%,#DCD7CA 100%);
+  --art-sheet:linear-gradient(158deg,#F4F5F7 0%,#E6E9EE 70%,#DCE0E6 100%);
+  --art-lift:
+    0 2px 0 rgba(255,255,255,.55) inset,
+    0 1px 2px rgba(0,0,0,.28),
+    0 34px 70px rgba(0,0,0,.55);
+  --art-tilt:perspective(1300px) rotateY(-7deg);
+}
+
+
+/* 4 · launch — site + local presence together */
+
+
+/* 5 · grow — the phone ringing */
+
+
+/* ==========================================================================
+   6 · WORK + TESTIMONIAL — the photographic PEAK
+   ========================================================================== */
+.proof{padding:var(--sec-lg) 0 var(--sec);overflow:clip}
+.case{padding:clamp(36px,4.6vw,72px) 0}
+.case + .case{border-top:1px solid rgba(255,255,255,.12)}
+.case__grid{
+  display:grid;align-items:center;
+  gap:clamp(28px,4.5vw,80px);
+}
+.case--right .case__grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.case--left  .case__grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+
+.case__kicker{
+  margin:0 0 14px;font:600 11.5px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt-lift);
+}
+.case__name{
+  margin:0 0 14px;font-size:clamp(30px,3.2vw,46px);
+  font-weight:600;letter-spacing:-.025em;line-height:1.05;
+}
+.case__scope{margin:0 0 6px;font:600 13px/1.5 'General Sans',system-ui;
+  letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.case__meta{margin:0 0 18px;font-size:15px;color:rgba(255,255,255,.55)}
+.case__obs{
+  margin:0 0 22px;max-width:44ch;padding:13px 17px;
+  border-left:2px solid rgba(91,134,255,.5);
+  font-size:14px;line-height:1.55;color:rgba(255,255,255,.66);
+  background:var(--panel);border-radius:0 8px 8px 0;
+}
+.case__link{
+  display:inline-block;font:600 15px/1 'General Sans',system-ui;
+  color:rgba(255,255,255,.72);text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.28);padding-bottom:5px;
+  transition:color var(--t-hover),border-color var(--t-hover);
+}
+.case__link:hover,.case__link:focus-visible{color:#fff;border-color:var(--cobalt-lift)}
+
+/* --- the screenshot surfaces --------------------------------------------- */
+.case__media{position:relative}
+/* bleed the imagery past the safe gutter to the viewport edge */
+.case--right .case__media{margin-right:calc(var(--gutter) * -1)}
+.case--left  .case__media{margin-left:calc(var(--gutter) * -1)}
+.shot{margin:0}
+.shot--desktop img{
+  display:block;width:100%;height:auto;
+  border-radius:10px;border:1px solid rgba(255,255,255,.15);
+  box-shadow:var(--srf-edge),var(--srf-shadow);
+}
+.case--right .shot--desktop{transform:perspective(1600px) rotateY(-3deg)}
+.case--left  .shot--desktop{transform:perspective(1600px) rotateY(3deg)}
+.shot--mobile{
+  position:absolute;bottom:-9%;
+  width:clamp(140px,13vw,185px);aspect-ratio:9/19;
+  border-radius:24px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.20);
+  background:#0D1526;
+  box-shadow:0 40px 80px rgba(0,0,0,.6);
+}
+.case--right .shot--mobile{left:-7%}
+.case--left  .shot--mobile{right:-4%}
+.shot--mobile img{width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* honest missing state — a marked slot, never a fake */
+.shot.is-missing img{display:none}
+.shot__await{display:none}
+.shot--desktop.is-missing{
+  aspect-ratio:16/10;
+  border:1.5px dashed rgba(255,255,255,.22);border-radius:10px;
+}
+.shot--mobile.is-missing{border-style:dashed;border-color:rgba(255,255,255,.25)}
+.shot.is-missing{display:grid;place-items:center}
+.shot.is-missing .shot__await{
+  display:block;text-align:center;padding:12px;
+  font:600 11px/1.6 'General Sans',system-ui;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.40);
+}
+
+/* --- the one testimonial, with the real LearnSmart site beside it --------- */
+.quote{
+  margin:clamp(56px,7vw,104px) 0 0;padding-top:clamp(30px,3.6vw,52px);
+  border-top:1px solid rgba(255,255,255,.16);
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);
+  gap:clamp(28px,5vw,90px);align-items:center;
+}
+.quote__label{
+  margin:0 0 6px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt-lift);
+}
+.quote__intro{margin:0 0 26px;font-size:14px;color:rgba(255,255,255,.44)}
+.quote__text{
+  position:relative;margin:0 0 26px;padding-left:clamp(44px,4.6vw,66px);
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:clamp(22px,2.2vw,31px);line-height:1.38;
+  color:rgba(255,255,255,.92);
+}
+.quote__mark{
+  position:absolute;left:0;top:-.12em;
+  font-size:2.6em;line-height:1;color:var(--cobalt-lift);opacity:.85;
+}
+.quote__by{
+  padding-left:clamp(44px,4.6vw,66px);
+  font:500 15px/1.5 'General Sans',system-ui;color:rgba(255,255,255,.72);
+}
+.quote__src{
+  display:block;margin-top:3px;font-size:12.5px;letter-spacing:.03em;
+  color:rgba(255,255,255,.40);
+}
+.shot--quote{
+  transform:rotate(1.4deg);
+}
+.shot--quote img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:var(--srf-edge),0 34px 70px rgba(0,0,0,.5);
+}
+.shot--quote.is-missing{aspect-ratio:16/10;border:1.5px dashed rgba(255,255,255,.22);border-radius:10px}
+.quote__asidenote{margin:12px 0 0;font-size:12.5px;color:rgba(255,255,255,.42)}
+
+
+/* scope as one calm run-in line — no checklist */
+
+
+/* ==========================================================================
+   8 · FAQ — a QUIET valley, tightened
+   ========================================================================== */
+.faq{padding:var(--sec-sm) 0}
+.faq__grid{
+  display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+  gap:clamp(28px,5vw,90px);align-items:start;
+}
+.faq__head{position:sticky;top:calc(var(--head-h) + 20px)}
+.faq__list{border-top:1px solid var(--panel-line)}
+.qa{border-bottom:1px solid var(--panel-line)}
+.qa summary{
+  list-style:none;cursor:pointer;position:relative;
+  padding:clamp(15px,1.7vw,20px) 44px clamp(15px,1.7vw,20px) 14px;
+  font:600 16.5px/1.35 'General Sans',system-ui;color:rgba(255,255,255,.84);
+  transition:color var(--t-hover);
+}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{
+  content:'+';position:absolute;right:14px;top:50%;
+  width:22px;height:22px;margin-top:-11px;
+  display:grid;place-items:center;border-radius:50%;
+  border:1px solid rgba(255,255,255,.28);
+  font:400 14px/1 'General Sans',system-ui;color:rgba(255,255,255,.6);
+  transition:transform var(--t-pill),border-color var(--t-hover),color var(--t-hover);
+}
+.qa summary:hover{color:#fff}
+.qa summary:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:-2px}
+.qa[open]{background:var(--panel);box-shadow:inset 2px 0 0 var(--cobalt)}
+.qa[open] summary{color:#fff}
+.qa[open] summary::after{
+  transform:rotate(45deg);border-color:var(--cobalt-lift);color:var(--cobalt-lift);
+}
+.qa p{
+  margin:0;padding:0 44px clamp(15px,1.7vw,20px) 14px;max-width:62ch;
+  font-size:15px;line-height:1.6;color:rgba(255,255,255,.62);
+}
+.faq__more{
+  display:inline-block;margin-top:20px;
+  font:600 15px/1 'General Sans',system-ui;color:rgba(255,255,255,.62);
+  text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:4px;
+  transition:color var(--t-hover),border-color var(--t-hover);
+}
+.faq__more:hover,.faq__more:focus-visible{color:#fff;border-color:var(--cobalt-lift)}
+
+/* ==========================================================================
+   9 · FINAL CTA — HIGH: the closing brand statement, scaled up
+   ========================================================================== */
+.final{
+  position:relative;overflow:hidden;
+  /* was clamp(110px,14vw,210px) — its own scale, ignoring the section
+     tokens, which made this the single largest block of empty space on the
+     page at 202px top AND bottom. It is a peak, so it uses the peak token. */
+  padding:var(--sec-lg) 0;
+  text-align:center;
+}
+.final__mark{
+  /* Anchored to the CTA block, not the section's midpoint. The section grew
+     from ~520px to ~1430px when the project-enquiry form was added, and a
+     top:50% mark drifted to a centre of 688px — straight across the form's
+     first two field rows, at up to .19 opacity mid-drift. This keeps the
+     watermark where it was designed to sit, behind the headline. */
+  position:absolute;top:clamp(200px,18.5vw,280px);left:50%;
+  width:min(560px,80vw);height:auto;
+  transform:translate(-50%,-50%);
+  filter:invert(1);opacity:.05;pointer-events:none;
+}
+.final__in{position:relative}
+.final__h{
+  margin:0 0 22px;
+  font-size:clamp(40px,5.6vw,86px);line-height:1.02;font-weight:600;
+  letter-spacing:-.03em;
+}
+.final__h em{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;
+  font-size:1.22em;letter-spacing:-.012em;
+}
+.final__sub{
+  margin:0 auto 40px;max-width:52ch;
+  font-size:clamp(16px,1.2vw,18px);line-height:1.55;color:rgba(255,255,255,.62);
+}
+.final__ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:16px}
+.btn--cobalt{
+  height:56px;background:var(--cobalt);color:#fff;position:relative;overflow:hidden;
+}
+.btn--cobalt::before{
+  content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 100%);
+  opacity:0;transition:opacity var(--t-hover);
+}
+.btn--cobalt:hover,.btn--cobalt:focus-visible{background:var(--cobalt-hover)}
+.btn--cobalt:hover::before,.btn--cobalt:focus-visible::before{opacity:1}
+.btn--ghost{height:56px;border:1px solid rgba(255,255,255,.25);color:#fff}
+.btn--ghost:hover,.btn--ghost:focus-visible{
+  border-color:var(--cobalt-lift);background:rgba(255,255,255,.05);
+}
+.btn--cobalt:focus-visible,.btn--ghost:focus-visible{
+  outline:2px solid var(--cobalt-lift);outline-offset:3px;
+}
+
+/* ==========================================================================
+   10 · FOOTER — utility, one step darker
+   ========================================================================== */
+.foot{background:var(--ink);padding:clamp(64px,7vw,100px) 0 42px}
+.foot__brand{margin-bottom:clamp(40px,5vw,64px)}
+.foot__mark{
+  margin:0 0 10px;
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:30px;
+  letter-spacing:.22em;margin-right:-.22em;color:#fff;
+}
+.foot__line{margin:0;font-size:15px;color:rgba(255,255,255,.55)}
+.foot__cols{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(24px,4vw,64px);max-width:1080px;
+}
+.foot__cols h3{margin:0 0 14px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.40)}
+.foot__cols p{margin:0 0 9px;font-size:14.5px;color:rgba(255,255,255,.72)}
+.foot__cols a{text-decoration:none;transition:color var(--t-hover)}
+.foot__cols a:hover,.foot__cols a:focus-visible{color:var(--cobalt-lift)}
+.foot__legal{
+  display:flex;gap:22px;align-items:center;
+  margin:clamp(40px,5vw,64px) 0 0;padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.10);
+  font-size:12.5px;color:rgba(255,255,255,.38);
+}
+.foot__legal a{color:rgba(255,255,255,.48);text-decoration:none;transition:color var(--t-hover)}
+.foot__legal a:hover{color:#fff}
+
+/* ==========================================================================
+   MOBILE — conversion first, aggressive cropping, no hover dependencies.
+   ========================================================================== */
+@media (max-width:900px){
+  .head__nav{display:none}
+  .head__burger{display:block}
+  .head__mark{display:none}
+  .head.is-fixed .head__mark{display:inline-block}
+  .head.is-fixed .head__cta{display:none}
+
+  .hero{
+    flex-direction:column;align-items:stretch;
+    min-height:0;padding:clamp(26px,7vw,44px) 0 clamp(48px,12vw,72px);
+  }
+  .hero__h1{max-width:none}
+
+  .sec-head,.sec-head--peak{grid-template-columns:1fr;align-items:start;gap:18px;
+    margin-bottom:clamp(36px,9vw,56px)}
+  .h2--peak{font-size:clamp(38px,10vw,52px)}
+
+  /* trust: single tight stack */
+  .clients__in{flex-direction:column;align-items:flex-start;gap:16px}
+  .clients__list{flex-direction:column;gap:12px;width:100%}
+  .clients__list li{padding-left:0;border-left:0;padding-bottom:12px;
+    border-bottom:1px solid rgba(255,255,255,.08)}
+  .clients__list li:last-child{border-bottom:0;padding-bottom:0}
+
+  /* services: index is the section; the stage re-seats under the active row */
+  .svc{padding:var(--sec) 0}
+  .svc__grid{grid-template-columns:1fr}
+  .svc__stage{position:static;margin-right:0}
+  .stage{min-height:0}
+  .stage::before{display:none}
+  .scene{position:relative;inset:auto;height:376px;display:none;overflow:hidden}
+  .svc__stage[data-active="0"] .scene[data-scene="0"],
+  .svc__stage[data-active="1"] .scene[data-scene="1"],
+  .svc__stage[data-active="2"] .scene[data-scene="2"],
+  .svc__stage[data-active="3"] .scene[data-scene="3"],
+  .svc__stage[data-active="4"] .scene[data-scene="4"]{display:flex}
+  .svc__item .svc__stage{margin:0 0 18px}
+  .stage__tag{padding:0 4px}
+  
+     
+  
+
+  /* process: steps stack; one static final artifact below */
+  .proc__grid{grid-template-columns:1fr}
+  .proc__viz{position:relative;top:auto;min-height:0;margin-top:8px;overflow:hidden;
+    /* Measured: the artifact fills the column, so its height is a constant
+       a constant fraction of the viewport width at every size. The box is
+       that plus the 30px .art bottom inset the caption sits in. A flat 380px
+       left 204px of dead column at 390 and clipped nothing at 768 — tracking
+       the artwork fixes the first without touching the second. The
+       coefficient follows the artifact viewBox aspect (~1.418), so the
+       artwork fills the column's width instead of being height-capped. */
+    height:calc(49vw + 32px)}
+  .proc__viz::before{display:none}
+  .art{inset:0 0 30px}
+  .proc--auto .proc__item.is-active::after{animation:none}
+
+  /* proof: one dominant surface; imagery full-bleed both sides */
+  .case__grid,.case--right .case__grid,.case--left .case__grid{grid-template-columns:1fr}
+  .case--left .case__media{order:-1}
+  .case--right .case__media{margin-right:calc(var(--gutter) * -1);margin-left:calc(var(--gutter) * -1)}
+  .case--left  .case__media{margin-left:calc(var(--gutter) * -1);margin-right:calc(var(--gutter) * -1)}
+  .case--right .shot--desktop,.case--left .shot--desktop{transform:none}
+  .shot--mobile{width:124px;bottom:-6%}
+  .case--right .shot--mobile{left:6%}
+  .case--left .shot--mobile{right:6%}
+  .case__obs{max-width:none}
+
+  .quote{grid-template-columns:1fr}
+  .quote__text,.quote__by{padding-left:0}
+  .quote__mark{position:static;display:block;margin-bottom:6px}
+  .shot--quote{transform:none}
+
+  
+
+  .faq__grid{grid-template-columns:1fr}
+  .faq__head{position:static}
+
+  .final{text-align:left;padding:clamp(84px,20vw,130px) 0}
+  .final__mark{left:auto;right:-20%;width:min(420px,110vw)}
+  .final__sub{margin-inline:0}
+  .final__ctas{flex-direction:column;justify-content:flex-start}
+  .final__ctas .btn{width:100%}
+
+  .foot__cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .foot__cols{grid-template-columns:1fr}
+}
+
+/* ==========================================================================
+   REDUCED MOTION — every animated element rests at a composed frame.
+   No content is gated behind motion: scenes and artifacts still swap
+   (instantly), the seam rests mid-surface, pings are simply still.
+   ========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .head.is-fixed{transform:none}
+}
+
+/* ==========================================================================
+   SITE-WIDE MOTION + COLOUR SYSTEM
+   Appended last on purpose: the reduced-motion gate at the bottom of this
+   block must win the cascade over everything introduced here.
+
+   The governing rule is unchanged — STABLE LAYOUT, ALIVE ARTWORK. Nothing
+   below moves a section, a heading, a paragraph or a grid. Motion lives in
+   artwork, active states and hover response only, and every animated
+   property is transform or opacity so it stays on the compositor.
+
+   Services fit is LOCKED. Nothing here changes a width, inset, or safe
+   region — only transforms that resolve to identity at rest.
+   ========================================================================== */
+:root{
+  /* ---- one easing family, two curves ---------------------------------- */
+  --e-ui:cubic-bezier(.22,.61,.36,1);      /* interaction: quick, no bounce */
+  --e-settle:cubic-bezier(.16,.84,.44,1);  /* artwork arriving into place   */
+
+  /* ---- four durations, used everywhere -------------------------------- */
+  --t-fast:190ms;      /* hover / focus response                           */
+  --t-base:420ms;      /* state + scene transitions                        */
+  --t-settle:620ms;    /* deliberate artwork settle                        */
+  --t-ambient:11s;     /* continuous background motion                     */
+
+  /* ---- COBALT HIERARCHY ------------------------------------------------
+     T1 full cobalt — primary CTA, active service, one process cue, the
+        final CTA moment, artwork illumination. Used sparingly.
+     T2 environmental — rim light, bloom, hover glow, edge catch.
+     T3 accessible text — #5B86FF only, for small text on dark.            */
+  --co-1:var(--cobalt);
+  --co-edge:rgba(10,71,240,.72);
+  --co-glow:rgba(10,71,240,.46);
+  --co-wash:rgba(10,71,240,.24);
+  --co-hair:rgba(91,134,255,.78);
+}
+
+/* ==========================================================================
+   TRUST — a valley. One hairline, one lift. No marquee, no fake volume.
+   ========================================================================== */
+.client{position:relative;display:block;transition:transform var(--t-fast) var(--e-ui)}
+.client__name{transition:color var(--t-fast) var(--e-ui)}
+.client__meta{transition:color var(--t-fast) var(--e-ui)}
+/* the hairline grows from the left rather than fading in — it reads as a
+   deliberate mark being drawn, not a hover shadow */
+.client::after{
+  content:'';position:absolute;left:0;right:0;bottom:-9px;height:1px;
+  background:linear-gradient(90deg,var(--co-hair),rgba(91,134,255,0));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t-base) var(--e-ui);
+}
+.client:hover,.client:focus-visible{transform:translateX(3px)}
+.client:hover::after,.client:focus-visible::after{transform:scaleX(1)}
+.client:hover .client__name,.client:focus-visible .client__name{color:#fff}
+.client:hover .client__meta,.client:focus-visible .client__meta{color:rgba(255,255,255,.72)}
+
+/* ==========================================================================
+   SERVICES — active state + scene transition. NO sizing changes.
+   ========================================================================== */
+.svc__row{transition:background-color var(--t-base) var(--e-ui)}
+.svc__n{transition:color var(--t-base) var(--e-ui)}
+.svc__t{transition:color var(--t-base) var(--e-ui),transform var(--t-base) var(--e-ui)}
+.svc__d{transition:color var(--t-base) var(--e-ui)}
+/* T2: a low cobalt spill into the active row, brightest at the marker edge */
+.svc__item.is-active .svc__row{
+  /* was a 90deg linear block: full-height, so it painted a visible rectangle
+     with hard top/bottom/right edges. A radial anchored at the left rule
+     dissolves in every direction — a tonal wash, not a component.
+     The radii matter: the vertical radius is deliberately SMALLER than half
+     the row height (44% of the box vs the 50% that would reach the edge), so
+     the wash returns to zero before it can meet the row's top or bottom
+     hairline. Same idea horizontally. Nothing is clipped, so nothing edges. */
+  background-image:radial-gradient(58% 44% at 0% 50%,
+    rgba(10,71,240,.20) 0%, rgba(10,71,240,.09) 30%,
+    rgba(10,71,240,.03) 55%, rgba(10,71,240,0) 78%);
+}
+.svc__item.is-active .svc__row::before{
+  box-shadow:0 0 26px var(--co-glow),0 0 3px var(--cobalt-lift);
+  transition:opacity var(--t-base) var(--e-ui),box-shadow var(--t-base) var(--e-ui);
+}
+
+/* the scene resolves into place: opacity + a short lift + a scale settle */
+.scene{
+  transition:
+    opacity var(--t-base) var(--e-settle),
+    transform var(--t-base) var(--e-settle),
+    visibility 0s linear var(--t-base);
+  transform:translateY(17px) scale(.972);
+}
+.svc__stage[data-active="0"] .scene[data-scene="0"],
+.svc__stage[data-active="1"] .scene[data-scene="1"],
+.svc__stage[data-active="2"] .scene[data-scene="2"],
+.svc__stage[data-active="3"] .scene[data-scene="3"],
+.svc__stage[data-active="4"] .scene[data-scene="4"]{
+  transform:none;
+  transition:
+    opacity var(--t-settle) var(--e-settle) 60ms,
+    transform var(--t-settle) var(--e-settle) 60ms,
+    visibility 0s;
+}
+
+/* --- per-scene meaning-specific motion, each fired by the active state --- */
+
+
+/* 02 REDESIGN — the seam already carries this scene's whole motion idea
+   (`redo-seam`, an 8s traverse of the new surface). Adding a second animation
+   here overrode it with a 4px nudge and destroyed the wipe. Left alone. */
+
+
+/* ==========================================================================
+   PROCESS — state-triggered only. Nothing here loops except Grow's ring.
+   ========================================================================== */
+.art{transition:opacity var(--t-base) var(--e-settle),
+                transform var(--t-base) var(--e-settle),
+                visibility 0s linear var(--t-base)}
+.proc__viz[data-step="1"] .art--1,
+.proc__viz[data-step="2"] .art--2,
+.proc__viz[data-step="3"] .art--3,
+.proc__viz[data-step="4"] .art--4,
+.proc__viz[data-step="5"] .art--5{
+  transition:opacity var(--t-settle) var(--e-settle) 70ms,
+             transform var(--t-settle) var(--e-settle) 70ms,visibility 0s;
+}
+
+
+/* ==========================================================================
+   PROOF — hover depth only. No scroll motion, no continuous float.
+   ========================================================================== */
+.case{--lift:0}
+.shot--desktop img{transition:transform var(--t-settle) var(--e-settle),
+                              box-shadow var(--t-settle) var(--e-settle)}
+.shot--mobile{transition:transform var(--t-settle) var(--e-settle)}
+.case:hover .shot--desktop img{
+  transform:translateY(-6px);
+  box-shadow:var(--srf-edge),0 46px 90px rgba(0,0,0,.62),0 0 60px var(--co-wash);
+}
+/* the phone crop moves a touch further than the surface behind it — parallax
+   on hover only, which is what gives the pair depth */
+.case:hover .shot--mobile{transform:translateY(-13px)}
+.case__link{position:relative;transition:color var(--t-fast) var(--e-ui)}
+.case__link::after{
+  content:'';position:absolute;left:0;right:0;bottom:-2px;height:1px;
+  background:var(--co-hair);transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t-base) var(--e-ui);
+}
+.case:hover .case__link::after,.case__link:focus-visible::after{transform:scaleX(1)}
+
+
+/* ==========================================================================
+   FAQ — the quietest thing on the page. Marker rotation and one hairline.
+   ========================================================================== */
+.qa summary::after{transition:transform var(--t-base) var(--e-ui),color var(--t-fast) var(--e-ui)}
+.qa[open] summary::after{color:var(--cobalt-lift)}
+.qa[open] summary{color:#fff}
+.qa p{animation:qa-open var(--t-base) var(--e-settle) 1 both}
+@keyframes qa-open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* ==========================================================================
+   FINAL CTA — the closing brand signature, and the biggest motion moment
+   below the hero. The type and the buttons never move; everything happens
+   BEHIND them: the ghosted mark drifts on a very long cycle while a cobalt
+   illumination crosses the field.
+   ========================================================================== */
+.final__mark{
+  animation:final-drift var(--t-ambient) ease-in-out infinite;
+  will-change:transform,opacity;
+}
+@keyframes final-drift{
+  0%,100%{transform:translate(-50%,-50%) scale(1) rotate(-1.6deg);opacity:.06}
+  50%{transform:translate(-50%,-55%) scale(1.14) rotate(2.4deg);opacity:.19}
+}
+/* the cobalt pass — wide, soft, slow, and entirely behind the content */
+.final::after{
+  content:'';position:absolute;inset:-20% -40%;
+  background:radial-gradient(42% 52% at 50% 50%,var(--co-glow),transparent 72%);
+  transform:translateX(-70%);pointer-events:none;
+  animation:final-light calc(var(--t-ambient) * 1.15) ease-in-out infinite;
+}
+@keyframes final-light{
+  0%,100%{transform:translateX(-70%);opacity:.35}
+  50%{transform:translateX(70%);opacity:1}
+}
+.final__in{position:relative;z-index:1}
+
+/* ==========================================================================
+   BUTTONS + LINKS — one interaction language across the page.
+   ========================================================================== */
+.btn{transition:background-color var(--t-fast) var(--e-ui),
+                border-color var(--t-fast) var(--e-ui),
+                color var(--t-fast) var(--e-ui),
+                transform var(--t-fast) var(--e-ui),
+                box-shadow var(--t-fast) var(--e-ui)}
+.btn--cobalt:hover,.btn--cobalt:focus-visible,
+.hero__ctas .btn--solid:hover,.hero__ctas .btn--solid:focus-visible{
+  transform:translateY(-1px);box-shadow:0 10px 26px var(--co-glow);
+}
+.btn--ghost:hover,.btn--ghost:focus-visible{
+  border-color:var(--cobalt-lift);background:rgba(255,255,255,.05);
+}
+
+/* ==========================================================================
+   REDUCED MOTION — last in the cascade, and deliberately total.
+   Every loop and every arrival animation stops. Hover COLOUR response is
+   kept (reduced motion removes travel, not feedback). Nothing is hidden:
+   each animated element's resting state is its designed state.
+   ========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  /* the scene/artifact stacking still has to work without transforms */
+  .scene{opacity:0}
+  .svc__stage[data-active="0"] .scene[data-scene="0"],
+  .svc__stage[data-active="1"] .scene[data-scene="1"],
+  .svc__stage[data-active="2"] .scene[data-scene="2"],
+  .svc__stage[data-active="3"] .scene[data-scene="3"],
+  .svc__stage[data-active="4"] .scene[data-scene="4"]{opacity:1}
+  .art{opacity:0}
+  .proc__viz[data-step="1"] .art--1,.proc__viz[data-step="2"] .art--2,
+  .proc__viz[data-step="3"] .art--3,.proc__viz[data-step="4"] .art--4,
+  .proc__viz[data-step="5"] .art--5{opacity:1}
+  /* the ghosted mark keeps its designed resting opacity, not 1 */
+  .final__mark{opacity:.05}
+  .final::after{opacity:.7}
+}
+
+
+/* room tokens, scoped to the section */
+.invest{--room:#F2F0EA;--room-deep:#EAE7DF;--ink-on-room:#0B1220;
+  --line-room:rgba(11,18,32,.16);--line-dark:rgba(11,18,32,.14)}
+/* ==========================================================================
+   3 · INVESTMENT — the one true tonal break
+   WHAT CHANGED: the whole section becomes an edge-to-edge warm-paper room —
+   the same paper stock the audit sheet and scope document are printed on.
+   Three engagements as ruled title-pages, price promoted to display scale,
+   Growth carried by a cobalt rule + scale (no RECOMMENDED pill, no card),
+   care + add-ons folded in as a quiet ruled footer. No rounded container,
+   no gradient transition, no white card inside navy.
+   ========================================================================== */
+.invest{background:var(--room);color:var(--ink-on-room);padding:var(--sec-lg) 0;border:0 !important;box-shadow:none !important}
+.proofctx{border:0 !important}.faqctx{border:0 !important}
+/* a hard, honest edge into the room — a single hairline, no gradient */
+
+.invest .pill-label{color:rgba(11,18,32,.66)}
+.invest .pill-label::before{background:var(--cobalt)}
+.invest .lead{color:rgba(11,18,32,.62)}
+.invest .h2{color:var(--ink-on-room)}
+
+.offers{border-top:0}
+.offer{position:relative;
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,2.8fr);
+  gap:clamp(18px,2.2vw,40px);align-items:start;
+  padding:clamp(30px,3.6vw,54px) clamp(16px,1.6vw,28px);
+  border-bottom:1px solid var(--line-room)}
+/* scope and price start optically level with the engagement name, so one
+   left-to-right read carries: package -> what you get -> price/action */
+.offer__scope{padding-top:clamp(22px,2.1vw,32px)}
+.offer__go{padding-top:clamp(20px,1.9vw,30px)}
+/* Market Leader breathes: extra room above, roomier text */
+.offer--ml{padding-top:clamp(44px,5.2vw,76px)}
+.offer--ml .offer__stage{line-height:1.7}
+.offer--ml .offer__scope{line-height:1.95}
+/* copy-candidate marker: visual flag removed by request — .cc classes retained
+   in the markup so implementation still knows which wording is unapproved */
+.cc{text-decoration:none}
+.offer__no{margin:0 0 8px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:500;font-size:19px;color:var(--cobalt)}
+.offer__name{margin:0 0 10px;font-size:clamp(34px,3.7vw,56px);font-weight:600;
+  letter-spacing:-.026em;line-height:1.0;color:var(--ink-on-room)}
+.offer__stage{margin:0;max-width:36ch;font-size:15px;line-height:1.55;color:rgba(11,18,32,.58)}
+.offer__scope{margin:0;max-width:34ch;font-size:14px;line-height:1.8;color:rgba(11,18,32,.56)}
+.offer__go{display:grid;gap:13px;justify-items:start}
+.offer__price{margin:0;display:grid;gap:8px;
+  font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(11,18,32,.44)}
+/* the figure is promoted to display scale — the strongest single fix to the
+   old "price hierarchy is weak" note */
+.offer__price span{display:block;
+  font:600 clamp(26px,2.4vw,36px)/1 'General Sans',system-ui;
+  letter-spacing:-.02em;text-transform:none;color:var(--ink-on-room)}
+.offer__cta--text{display:inline-block;padding:0 0 5px;border:0;
+  border-bottom:1px solid rgba(11,18,32,.32);
+  color:rgba(11,18,32,.78);text-decoration:none;
+  font:600 15px/1 'General Sans',system-ui;
+  transition:color var(--t-hover),border-color var(--t-hover)}
+.offer__cta--text:hover,.offer__cta--text:focus-visible{color:var(--ink-on-room);border-color:var(--cobalt)}
+/* the ONE button in the section — the primary engagement only */
+.offer__cta:not(.offer__cta--text){display:inline-flex;align-items:center;height:46px;
+  padding:0 22px;border-radius:999px;background:var(--cobalt);color:#fff;text-decoration:none;
+  font:600 14px/1 'General Sans',system-ui;transition:background-color var(--t-hover)}
+.offer__cta:not(.offer__cta--text):hover,
+.offer__cta:not(.offer__cta--text):focus-visible{background:var(--cobalt-hover)}
+/* the ink button — Launch and Market Leader. Growth keeps the only cobalt one. */
+.offer__cta--dark{background:var(--ink-on-room) !important;color:var(--room) !important}
+.offer__cta--dark:hover,.offer__cta--dark:focus-visible{background:#1B2740 !important}
+
+/* "See what's included" — the row's toggle. A text action, not a component. */
+.offer__see{display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:0 0 5px;
+  border-bottom:1px solid rgba(11,18,32,.32);cursor:pointer;
+  color:rgba(11,18,32,.78);font:600 15px/1 'General Sans',system-ui;
+  transition:color var(--t-hover),border-color var(--t-hover)}
+.offer__see i{font-style:normal;display:inline-block;transition:transform var(--t-pill);
+  color:var(--cobalt)}
+.offer__see:hover,.offer__see:focus-visible{color:var(--ink-on-room);border-color:var(--cobalt)}
+.offer__see:focus-visible{outline:2px solid var(--cobalt);outline-offset:4px}
+.offer.is-open .offer__see i{transform:rotate(90deg)}
+
+/* the inline expansion: the room simply grows. Full row width, ruled off
+   from the collapsed line above it, columns tracking the row's own grid. */
+.offer__x{grid-column:1 / -1;overflow:hidden;max-height:0;opacity:0;
+  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .3s ease}
+.offer.is-open .offer__x{max-height:960px;opacity:1;
+  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s ease .12s}
+.x__inner{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,2.8fr);
+  gap:clamp(18px,2.2vw,40px);
+  margin-top:clamp(26px,2.6vw,40px);padding-top:clamp(24px,2.4vw,36px);
+  border-top:1px solid rgba(11,18,32,.10)}
+.x__h{margin:0 0 14px;font:600 11.5px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(11,18,32,.44)}
+.x__h + .x__h{margin-top:0}
+.x__list{list-style:none;margin:0;padding:0}
+.x__list li{padding:6px 0;font-size:14.5px;line-height:1.55;color:rgba(11,18,32,.72)}
+.x__list li b{font-weight:600;color:var(--ink-on-room)}
+.x__p{margin:0 0 26px;font-size:14.5px;line-height:1.65;color:rgba(11,18,32,.66);max-width:38ch}
+.x__p:last-child{margin-bottom:0}
+/* the honest boundary line — what a package is NOT. Quieter than body copy
+   and ruled off, so it reads as a caveat rather than another selling point. */
+.x__p--edge{margin-top:-12px;padding-top:14px;font-size:13.5px;
+  border-top:1px solid rgba(11,18,32,.12);color:rgba(11,18,32,.5)}
+.x__ongoing{margin:0 0 26px;padding:0;list-style:none}
+.x__ongoing li{padding:5px 0;font-size:14px;line-height:1.55;color:rgba(11,18,32,.66)}
+.x__ongoing b{font-weight:600;color:var(--ink-on-room)}
+.x__ongoing span{color:var(--cobalt);font-weight:600}
+.x__note{margin:10px 0 0;font-size:12px;color:rgba(11,18,32,.42)}
+
+/* GROWTH — emphasis without a card: cobalt rule, one quiet line of text,
+   the numeral flips to filled cobalt language, name steps up a size */
+.offer--rec{border-left:none}
+.offer--rec::before{content:'';position:absolute;left:0;top:-1px;bottom:-1px;
+  width:3px;background:var(--cobalt)}
+.offer--rec .offer__name{font-size:clamp(40px,4.3vw,66px)}
+.offer__common{margin:0 0 12px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt)}
+
+/* CARE + ADD-ONS — folded in as one quiet ruled footer, two columns */
+.invest__after{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(28px,5vw,90px);margin-top:clamp(36px,4vw,60px)}
+.aftercol h3{margin:0 0 16px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(11,18,32,.44)}
+.aftercol{border-top:1px solid var(--line-room);padding-top:22px}
+.careline{display:flex;justify-content:space-between;gap:18px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid rgba(11,18,32,.10)}
+.careline b{font-weight:600;color:var(--ink-on-room);font-size:15px}
+.careline i{font-style:normal;font-size:13.5px;color:rgba(11,18,32,.52)}
+.careline span{flex:none;font:600 14px/1 'General Sans',system-ui;color:var(--cobalt)}
+.addonline{margin:0;padding:12px 0;font-size:14.5px;line-height:1.9;color:rgba(11,18,32,.62)}
+.addonline b{display:block;font-weight:600;color:var(--ink-on-room)}
+.invest__note{margin:clamp(30px,3vw,46px) 0 0;font-size:12px;letter-spacing:.02em;
+  color:rgba(11,18,32,.42)}
+
+/* ==========================================================================
+   CONTEXT SLICES — end of Proof and start of FAQ, in their EXISTING current
+   treatment (styles copied verbatim from the prototype). Not redesigned;
+   present only so the navy -> paper -> navy rhythm can be judged.
+   ========================================================================== */
+.ctxtag{margin:0 0 26px;font:600 10.5px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.30)}
+.proofctx{padding:clamp(36px,4.4vw,68px) 0 var(--sec-lg)}
+.quote{margin:0;padding-top:clamp(30px,3.6vw,52px);
+  border-top:1px solid rgba(255,255,255,.16);
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);
+  gap:clamp(28px,5vw,90px);align-items:center}
+.quote__label{margin:0 0 6px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt-lift)}
+.quote__intro{margin:0 0 26px;font-size:14px;color:rgba(255,255,255,.44)}
+.quote__text{position:relative;margin:0 0 26px;padding-left:clamp(44px,4.6vw,66px);
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:clamp(22px,2.2vw,31px);line-height:1.38;color:rgba(255,255,255,.92)}
+.quote__mark{position:absolute;left:0;top:-.12em;font-size:2.6em;line-height:1;
+  color:var(--cobalt-lift);opacity:.85}
+.quote__by{padding-left:clamp(44px,4.6vw,66px);
+  font:500 15px/1.5 'General Sans',system-ui;color:rgba(255,255,255,.72)}
+.quote__src{display:block;margin-top:3px;font-size:12.5px;letter-spacing:.03em;
+  color:rgba(255,255,255,.40)}
+.shot--quote{transform:rotate(1.4deg);aspect-ratio:16/10;
+  border:1.5px dashed rgba(255,255,255,.22);border-radius:10px;
+  display:grid;place-items:center;position:relative}
+.shot__await{font-size:12px;line-height:1.5;text-align:center;color:rgba(255,255,255,.40)}
+.quote__asidenote{margin:12px 0 0;font-size:12.5px;color:rgba(255,255,255,.42)}
+
+.faqctx{padding:var(--sec-sm) 0 clamp(30px,3.4vw,52px)}
+.faq__grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+  gap:clamp(28px,5vw,90px);align-items:start}
+.faq__list{border-top:1px solid var(--panel-line)}
+.qa{border-bottom:1px solid var(--panel-line)}
+.qa summary{list-style:none;cursor:pointer;position:relative;
+  padding:clamp(15px,1.7vw,20px) 44px clamp(15px,1.7vw,20px) 14px;
+  font:600 16.5px/1.35 'General Sans',system-ui;color:rgba(255,255,255,.84)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:'+';position:absolute;right:14px;top:50%;
+  width:22px;height:22px;margin-top:-11px;display:grid;place-items:center;
+  border-radius:50%;border:1px solid rgba(255,255,255,.28);
+  font:400 14px/1 'General Sans',system-ui;color:rgba(255,255,255,.6)}
+.qa[open]{background:rgba(255,255,255,.03);box-shadow:inset 2px 0 0 var(--cobalt)}
+.qa[open] summary{color:#fff}
+.qa[open] summary::after{transform:rotate(45deg);border-color:var(--cobalt-lift);color:var(--cobalt-lift)}
+.qa p{margin:0;padding:0 44px clamp(15px,1.7vw,20px) 14px;max-width:62ch;
+  font-size:15px;line-height:1.6;color:rgba(255,255,255,.62)}
+.faqctx__more{margin:22px 0 0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.28)}
+
+
+@media (max-width:900px){
+  .offer{grid-template-columns:1fr;gap:18px;align-items:start}
+  .offer__scope,.offer__go{padding-top:0}
+  .x__inner{grid-template-columns:1fr;gap:26px}
+  .invest__after{grid-template-columns:1fr}
+}
+
+/* ==========================================================================
+   SCENE ARTWORK — approved 2026-08-27 compositions, inlined as SVG.
+   The SVGs are transparent; the page canvas and blooms are theirs to sit on.
+   ========================================================================== */
+.scene > svg, .art > svg{display:block;width:100%;height:auto;max-height:100%}
+/* alive artwork, stable page: two quiet motions only */
+.kre-ping{transform-box:fill-box;transform-origin:center;
+  animation:kre-ping 2.6s ease-out infinite}
+.kre-ping--late{animation-delay:.5s}
+@keyframes kre-ping{
+  0%{transform:scale(.55);opacity:1}
+  70%{transform:scale(1.35);opacity:0}
+  100%{transform:scale(1.35);opacity:0}}
+.kre-seam{animation:kre-seam 4.5s ease-in-out infinite alternate}
+@keyframes kre-seam{from{opacity:.55}to{opacity:.95}}
+@media (prefers-reduced-motion:reduce){
+  .kre-ping,.kre-seam{animation:none}
+}
+
+
+/* ==========================================================================
+   DIAGRAM SCALE — services scenes and process artifacts read slightly larger.
+   Applied as a transform on the composition rather than by resizing any inner
+   part, so the Services containment system is untouched: the frame, the safe
+   region and every per-scene offset stay exactly as approved. --dz is the one
+   number, and reduced motion keeps it (it is scale, not travel).
+   ========================================================================== */
+:root{ --dz:1.16; --dz-art:1.26; }
+/* On a phone the artifact column is the full width, so the desktop scale
+   pushed it ~5px past the viewport and .proc{overflow:clip} silently cut it.
+   Mobile gets its own value. */
+/* Artifacts now fill their box (the viewBox aspect matches the container),
+   so the extra 1.04 would push them past .proc__viz{overflow:hidden} — the
+   size now comes from the viewBox instead. Services scenes are unchanged. */
+@media (max-width:900px){ :root{ --dz:1.04; --dz-art:1.0; } }
+
+.scene{transform:translateY(17px) scale(calc(var(--dz) * .96))}
+.svc__stage[data-active="0"] .scene[data-scene="0"],
+.svc__stage[data-active="1"] .scene[data-scene="1"],
+.svc__stage[data-active="2"] .scene[data-scene="2"],
+.svc__stage[data-active="3"] .scene[data-scene="3"],
+.svc__stage[data-active="4"] .scene[data-scene="4"]{transform:scale(var(--dz))}
+
+.art{transform:translateY(12px) scale(calc(var(--dz-art) * .96))}
+.proc__viz[data-step="1"] .art--1,
+.proc__viz[data-step="2"] .art--2,
+.proc__viz[data-step="3"] .art--3,
+.proc__viz[data-step="4"] .art--4,
+.proc__viz[data-step="5"] .art--5{transform:scale(var(--dz-art))}
+
+@media (prefers-reduced-motion:reduce){
+  /* the global reduced-motion rule zeroes transforms; these two keep their
+     scale, because that is size, not motion */
+  .scene{transform:scale(var(--dz))!important}
+  .art{transform:scale(var(--dz-art))!important}
+}
+
+/* ==========================================================================
+   RESPONSIVE CASCADE REPAIR — proof quote + FAQ grid
+   --------------------------------------------------------------------------
+   The <=900px collapse for `.quote` and `.faq__grid` is declared around L1169,
+   but a LATER pass re-declared both grids unconditionally (`.quote` ~L1566,
+   `.faq__grid` ~L1589). Same specificity, later in the file, no media query —
+   so the desktop two-column grid won at every width.
+
+   Measured at 390 before this block:
+     .quote      -> 189px / 108px, leaving the pull-quote 145px of text width
+                    (three or four words a line, Cormorant at 22px)
+     .faq__grid  -> 108px / 189px, squeezing every question into 189px
+   Re-asserting the collapse after both, rather than editing the earlier block,
+   keeps the desktop composition byte-for-byte identical.
+   ========================================================================== */
+@media (max-width:900px){
+  .quote{grid-template-columns:1fr}
+  .quote__text,.quote__by{padding-left:0}
+  .quote__mark{position:static;display:block;margin-bottom:6px}
+  .shot--quote{transform:none}
+  .faq__grid{grid-template-columns:1fr}
+  .faq__head{position:static}
+}
+
+/* ==========================================================================
+   PROCESS — PER-ARTIFACT MOTION
+   --------------------------------------------------------------------------
+   Each artifact plays its own short sequence when its step becomes active.
+   Everything is scoped to `.proc__viz[data-step="N"] .art--N`, so the
+   animation starts the moment the selector begins matching and re-runs if the
+   reader clicks back to that step. No JS, no new libraries, no scroll-linking.
+
+   Nothing here changes a diagram's composition — the resting state of every
+   animation is exactly the artwork as it was drawn. Only the arrival changes.
+   ========================================================================== */
+
+/* --- 1 · DISCOVER — the rings are actually drawn round each fault --------- */
+.p1-ring{ stroke-dasharray:var(--len); stroke-dashoffset:0; }
+.p1-lead{ stroke-dasharray:var(--len); stroke-dashoffset:0; }
+.proc__viz[data-step="1"] .art--1 .p1-ring{
+  animation:p1-draw .78s cubic-bezier(.4,0,.25,1) both;
+  animation-delay:calc(.28s + var(--i) * .82s);
+}
+.proc__viz[data-step="1"] .art--1 .p1-lead{
+  animation:p1-draw .34s ease-out both;
+  animation-delay:calc(.95s + var(--i) * .82s);
+}
+.proc__viz[data-step="1"] .art--1 .p1-note{
+  animation:p1-note .40s ease-out both;
+  animation-delay:calc(1.16s + var(--i) * .82s);
+}
+@keyframes p1-draw{ from{stroke-dashoffset:var(--len)} to{stroke-dashoffset:0} }
+@keyframes p1-note{ from{opacity:0} to{opacity:1} }
+
+/* --- 2 · STRATEGY — each priority takes the same cobalt as the first ------ */
+.proc__viz[data-step="2"] .art--2 .p2-rule{animation:p2-rule .34s ease-out both}
+.proc__viz[data-step="2"] .art--2 .p2-n{animation:p2-num .44s ease-out both}
+.proc__viz[data-step="2"] .art--2 .p2-t{animation:p2-title .44s ease-out both}
+.proc__viz[data-step="2"] .art--2 .p2-r2{animation-delay:.85s}
+.proc__viz[data-step="2"] .art--2 .p2-r3{animation-delay:1.60s}
+.proc__viz[data-step="2"] .art--2 .p2-r4{animation-delay:2.35s}
+@keyframes p2-rule{ from{opacity:0} to{opacity:1} }
+@keyframes p2-num{ from{fill:rgba(11,18,32,.38)} to{fill:#0A47F0} }
+@keyframes p2-title{ from{fill:rgba(11,18,32,.74)} to{fill:#0A47F0} }
+
+/* --- 3 · BUILD — the waiting module is placed into the layout -------------
+   The artwork already tells this story statically: a cobalt-outlined content
+   block sits below-right of the site, joined to an empty dashed slot in the
+   card row by a dashed leader. The motion just plays it in order —
+   module arrives, the leader runs toward the slot, the slot lands in the
+   site travelling up-and-left from the module's direction. */
+.p3-slot,.p3-block{ transform-box:fill-box; transform-origin:50% 50%; }
+.proc__viz[data-step="3"] .art--3 .p3-block{
+  animation:p3-block .55s cubic-bezier(.22,1,.32,1) .25s both}
+.proc__viz[data-step="3"] .art--3 .p3-path{
+  animation:p3-fade .40s ease-out .78s both,
+            p3-crawl 1.05s linear .78s infinite}
+.proc__viz[data-step="3"] .art--3 .p3-slot{
+  animation:p3-place .70s cubic-bezier(.22,1,.32,1) 1.05s both}
+@keyframes p3-block{
+  from{ opacity:0; transform:translate(20px,34px) scale(.94) }
+  to  { opacity:1; transform:none }
+}
+@keyframes p3-fade{ from{opacity:0} to{opacity:.7} }
+/* dashes run from the module toward the slot — negative offset travels
+   along the path direction, which is drawn block -> slot */
+@keyframes p3-crawl{ from{stroke-dashoffset:0} to{stroke-dashoffset:-12} }
+@keyframes p3-place{
+  from{ opacity:0; transform:translate(56px,78px) scale(.86) }
+  55% { opacity:1 }
+  to  { opacity:1; transform:none }
+}
+
+/* --- 4 · LAUNCH — site, then profile, then the map behind them ------------ */
+.proc__viz[data-step="4"] .art--4 .p4-site{
+  animation:p4-fly .74s cubic-bezier(.22,1,.32,1) .18s both}
+.proc__viz[data-step="4"] .art--4 .p4-gbp{
+  animation:p4-fly .74s cubic-bezier(.22,1,.32,1) .78s both}
+.proc__viz[data-step="4"] .art--4 .p4-link{
+  animation:p4-fade .40s ease-out 1.52s both}
+/* the map is the ground they land on, so it arrives last and underneath */
+.proc__viz[data-step="4"] .art--4 .p4-map{
+  animation:p4-fade .95s ease-out 1.58s both}
+.proc__viz[data-step="4"] .art--4 .p4-pin{
+  animation:p4-pin .55s cubic-bezier(.22,1,.32,1) 1.92s both}
+@keyframes p4-fly{
+  from{ opacity:0; transform:translateX(600px) }
+  35% { opacity:1 }
+  to  { opacity:1; transform:none }
+}
+@keyframes p4-fade{ from{opacity:0} to{opacity:1} }
+@keyframes p4-pin{
+  from{ opacity:0; transform:translateY(-22px) }
+  to  { opacity:1; transform:none }
+}
+
+/* --- 5 · GROW — the handset rings ----------------------------------------
+   A burst, not a permanent tremor: ~0.7s of shake every 4.2s, so it reads as
+   a call arriving rather than a stuck animation. This is the one artifact
+   that also renders on mobile (which parks on step 5), so it stays gentle. */
+.p5-phone{ transform-box:fill-box; transform-origin:50% 50%; }
+.proc__viz[data-step="5"] .art--5 .p5-phone{
+  animation:p5-ring 4.2s ease-in-out .6s infinite;
+}
+@keyframes p5-ring{
+  0%,100%      { transform:none }
+  1.5%         { transform:translateX(-3px) rotate(-.5deg) }
+  4%           { transform:translateX(3px)  rotate(.5deg) }
+  6.5%         { transform:translateX(-2.4px) rotate(-.4deg) }
+  9%           { transform:translateX(2.4px)  rotate(.4deg) }
+  11.5%        { transform:translateX(-1.4px) rotate(-.22deg) }
+  14%          { transform:translateX(1.4px)  rotate(.22deg) }
+  16.5%        { transform:none }
+}
+
+/* --- reduced motion: every artifact rests in its finished state ----------- */
+@media (prefers-reduced-motion:reduce){
+  .proc__viz .art .p1-ring,.proc__viz .art .p1-lead,.proc__viz .art .p1-note,
+  .proc__viz .art .p2-rule,.proc__viz .art .p2-n,.proc__viz .art .p2-t,
+  .proc__viz .art .p3-slot,.proc__viz .art .p3-block,.proc__viz .art .p3-path,.proc__viz .art .p4-site,.proc__viz .art .p4-gbp,
+  .proc__viz .art .p4-map,.proc__viz .art .p4-pin,.proc__viz .art .p4-link,
+  .proc__viz .art .p5-phone{
+    animation:none!important; opacity:1!important; transform:none!important;
+    stroke-dashoffset:0!important;
+  }
+  /* the lit-row colours are the artwork's finished state, so hold them */
+  .proc__viz .art--2 .p2-rule{opacity:1!important}
+  .proc__viz .art--2 .p2-n{fill:#0A47F0}
+  .proc__viz .art--2 .p2-t{fill:#0A47F0}
+}
+
+/* ==========================================================================
+   ACCESSIBILITY REPAIR — WCAG 2.2 AA
+   --------------------------------------------------------------------------
+   Two real failures found in production QA, fixed without touching layout,
+   type, spacing or composition. Appended so every change is reviewable in
+   one place and can be reverted as a block.
+
+   1.4.3 Contrast (Minimum). Measured against the actual painted background
+   (navy #0B1220 / warm paper #F2F0EA). Normal text needs 4.5:1, text >=24px
+   needs 3:1. The design intent here is quiet secondary text, so each value is
+   raised to the LOWEST alpha that clears the threshold — the hierarchy is
+   preserved, the text is just legible.
+   ========================================================================== */
+/* --- on navy: white needs alpha >= .46 normal, >= .35 large -------------- */
+.clients__label{color:rgba(255,255,255,.46)}   /* was .38 -> 3.56:1 */
+.stage__tag{color:rgba(255,255,255,.46)}       /* was .38 -> 3.56:1 */
+.proc__caption{color:rgba(255,255,255,.46)}    /* was .38 -> 3.56:1 */
+.quote__intro{color:rgba(255,255,255,.46)}     /* was .44 -> 4.37:1 */
+.quote__asidenote{color:rgba(255,255,255,.46)} /* was .42 -> 4.08:1 */
+.quote__src{color:rgba(255,255,255,.46)}       /* was .40 -> 3.81:1 */
+.proc__d{color:rgba(255,255,255,.46)}          /* inactive step copy, was .44 */
+.svc__n{color:rgba(255,255,255,.46)}           /* inactive numeral, was .35 -> 3.20:1 */
+.proc__n{color:rgba(255,255,255,.36)}          /* inactive numeral, 33px large, was .26 -> 2.30:1 */
+
+/* --- on warm paper: ink needs alpha >= .59 ------------------------------- */
+.offer__stage{color:rgba(11,18,32,.60)}        /* was .58 -> 4.41:1 */
+.offer__scope{color:rgba(11,18,32,.60)}        /* was .56 -> 4.14:1 */
+.x__h{color:rgba(11,18,32,.60)}                /* was .44 -> 2.87:1 */
+.x__p--edge{color:rgba(11,18,32,.60)}          /* was .50 -> 3.43:1 */
+.x__note{color:rgba(11,18,32,.60)}             /* was .42 */
+.invest__note{color:rgba(11,18,32,.60)}        /* was .42 */
+.careline i{color:rgba(11,18,32,.60)}          /* was .52 */
+
+/* ==========================================================================
+   2.5.8 Target Size (Minimum) — 24x24 CSS px for standalone controls.
+   Every fix below grows the HIT AREA only. Inline links take vertical
+   padding, which paints no box and does not affect the line box, so layout
+   is unchanged. Non-inline controls get padding cancelled by an equal
+   negative margin, so they occupy exactly the space they did before.
+   ========================================================================== */
+.head__nav a{padding-block:5px;margin-block:-5px}   /* was 15px tall */
+.foot a{padding-block:4px;margin-block:-4px}        /* was 18px tall */
+.case__link{padding-top:3px;margin-top:-3px}        /* was 21px tall */
+.offer__see{padding-top:3px;margin-top:-3px}        /* was 21px tall */
+.faq__more{padding-top:4px;margin-top:-4px}         /* was 20px tall */
+
+.aftercol h3{color:rgba(11,18,32,.60)}        /* was .44 -> 2.87:1 */
+.foot__cols h3{color:rgba(255,255,255,.46)}    /* was .40 -> 3.78:1 */
+
+/* skip link — offscreen until it takes keyboard focus */
+.skip{position:absolute;left:-9999px;top:0;z-index:100;
+  padding:12px 18px;border-radius:0 0 8px 0;
+  background:var(--cobalt);color:#fff;font:600 14px/1 'General Sans',system-ui;
+  text-decoration:none}
+.skip:focus{left:0}
+main:focus{outline:none}
+
+/* ==========================================================================
+   CONVERSION FORMS — project-enquiry and website-audit
+   --------------------------------------------------------------------------
+   No new design language: navy ground, cobalt action, General Sans, the
+   existing --line hairline and the existing .btn. Labels are real <label>
+   elements above their control — placeholders are never used as labels
+   (the one placeholder, "https://", is a format hint on an optional field).
+   Contrast and target sizes follow the WCAG block already in this file.
+   ========================================================================== */
+.formwrap{position:relative;z-index:2;margin:clamp(40px,5vw,66px) auto 0;
+  max-width:760px;text-align:left}
+.kform{border-top:1px solid var(--line);padding-top:clamp(28px,3vw,42px)}
+.kform__h{margin:0 0 8px;font:600 clamp(20px,1.7vw,24px)/1.2 'General Sans',system-ui;
+  letter-spacing:-.02em;color:rgba(255,255,255,.96)}
+.kform__lead{margin:0 0 clamp(22px,2.4vw,30px);max-width:52ch;
+  font-size:15px;line-height:1.6;color:rgba(255,255,255,.62)}
+.kform__grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+.field{margin:0;display:flex;flex-direction:column;gap:7px}
+.field--wide{grid-column:1 / -1}
+.field label{font:600 13px/1.35 'General Sans',system-ui;color:rgba(255,255,255,.84)}
+.field .req{color:var(--cobalt-lift)}
+.field .opt{font-weight:500;color:rgba(255,255,255,.46)}
+.field input,.field select,.field textarea{
+  width:100%;min-height:46px;padding:11px 14px;
+  font:500 15px/1.4 'General Sans',system-ui;color:var(--white);
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);border-radius:10px;
+  transition:border-color var(--t-hover),background-color var(--t-hover);
+  -webkit-appearance:none;appearance:none;
+}
+.field textarea{min-height:104px;resize:vertical;line-height:1.55}
+.field select{background-image:linear-gradient(45deg,transparent 50%,rgba(255,255,255,.5) 50%),
+  linear-gradient(135deg,rgba(255,255,255,.5) 50%,transparent 50%);
+  background-position:calc(100% - 19px) calc(50% + 1px),calc(100% - 13px) calc(50% + 1px);
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:40px}
+.field select option{background:#0B1220;color:var(--white)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.34)}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:rgba(255,255,255,.30)}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{
+  outline:2px solid var(--cobalt-lift);outline-offset:2px;
+  border-color:var(--cobalt-lift);background:rgba(255,255,255,.06)}
+/* error state — colour is never the only signal: the message text carries it */
+.field.is-bad input,.field.is-bad select,.field.is-bad textarea{border-color:#FF8A8A}
+.err{display:none;font:500 12.5px/1.4 'General Sans',system-ui;color:#FFB4B4}
+.field.is-bad .err{display:block}
+.kform__go{display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  margin-top:clamp(24px,2.6vw,32px)}
+.kform__go .btn{height:52px;padding:0 30px}
+.kform__note{margin:0;max-width:38ch;font-size:13px;line-height:1.5;color:rgba(255,255,255,.55)}
+.kform__note a{color:rgba(255,255,255,.78)}
+.kform__status{margin:18px 0 0;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.62)}
+.kform__status.is-ok{color:var(--cobalt-lift)}
+.kform__status.is-bad{color:#FFB4B4}
+.kform.is-sent .kform__grid,.kform.is-sent .kform__go{display:none}
+
+/* honeypot — off-canvas rather than display:none so Netlify still posts it,
+   aria-hidden + tabindex="-1" keep it away from assistive tech and Tab order */
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+
+@media (max-width:640px){
+  .kform__grid{grid-template-columns:1fr}
+  .kform__go{gap:14px}
+  .kform__go .btn{width:100%;justify-content:center}
+}
+
+/* --- standalone conversion pages (audit, thanks) ------------------------- */
+.page{min-height:calc(100svh - var(--head-h));display:flex;flex-direction:column;
+  justify-content:center;padding:clamp(48px,6vw,88px) 0}
+.page__kicker{margin:0 0 14px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt-lift)}
+.page__h{margin:0 0 18px;font-size:clamp(34px,4.4vw,60px);line-height:1.04;
+  font-weight:600;letter-spacing:-.03em;color:rgba(255,255,255,.97);max-width:16ch}
+.page__h em{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:600;font-size:1.14em;letter-spacing:-.012em}
+.page__lead{margin:0 0 clamp(28px,3vw,40px);max-width:56ch;
+  font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:rgba(255,255,255,.70)}
+.page__cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(28px,4vw,64px);align-items:start}
+.page__list{list-style:none;margin:0;padding:0}
+.page__list li{position:relative;padding:0 0 14px 22px;
+  font-size:15px;line-height:1.55;color:rgba(255,255,255,.70)}
+.page__list li::before{content:'';position:absolute;left:0;top:9px;
+  width:7px;height:7px;border-radius:50%;background:var(--cobalt-lift)}
+.page__list b{color:rgba(255,255,255,.92);font-weight:600}
+.page .formwrap{margin-top:0;max-width:none}
+.page .kform{border-top:0;padding-top:0}
+@media (max-width:900px){ .page__cols{grid-template-columns:1fr} }
+
+/* 2.5.8 Target Size for the links inside the new conversion components.
+   These are inline elements, so vertical padding grows the hit area without
+   painting a box or touching the line box — same technique as .foot a above. */
+.kform__note a,.kform__status a,.page__list a{padding-block:5px}

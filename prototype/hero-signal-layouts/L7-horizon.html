@@ -1,0 +1,232 @@
+<!doctype html>
+<!-- SIGNAL HERO LAYOUT L7 · "HORIZON" — a full-width hairline horizon near
+     the hero's base. The mark is half-risen behind it: upper arms above the
+     line, lower half cut. Echoes radiate upward into the open sky. The CTAs
+     sit ON the horizon line like stations on a wire. NOT PRODUCTION. -->
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>KREATED — Signal Layout L7 · Horizon</title>
+<style>
+/* HERO SIGNAL LAYOUT DEMO — NOT PRODUCTION. Artwork = approved "Signal"
+   direction (outer mark only, rotating cobalt beam, silhouette echoes).
+   Copy + typewriter mechanism = locked production hero copy. */
+@font-face{font-family:'General Sans';font-style:normal;font-weight:200 700;font-display:swap;
+  src:url(../kreated-v2/assets/fonts/general-sans-var.woff2) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:300 700;font-display:swap;
+  src:url(../kreated-v2/assets/fonts/cormorant-garamond-latin.woff2) format('woff2')}
+:root{
+  --navy:#0B1220;--ink:#070C14;--chrome:#C9D4E8;
+  --cobalt:#0A47F0;--lift:#5B86FF;--cobalt-hover:#2B5FF5;
+  --hair:rgba(255,255,255,.12);
+  --gutter:clamp(20px,8.4vw,120px);--head-h:60px;--t:.2s ease-in-out;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{background:var(--navy);color:#fff;
+  font:400 16px/1.55 'General Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.demo{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:16px;
+  height:var(--head-h);padding:0 22px;background:rgba(7,12,20,.85);
+  backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+.demo__mark{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+  font-size:16px;letter-spacing:.22em}
+.demo__nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+.demo__nav a{padding:7px 10px;border-radius:999px;text-decoration:none;
+  font:600 12px/1 'General Sans',system-ui;color:rgba(255,255,255,.55);
+  border:1px solid transparent;transition:color var(--t)}
+.demo__nav a:hover{color:#fff}
+.demo__nav a.is-here{color:#fff;border-color:rgba(91,134,255,.55)}
+.demo__tag{font:600 9px/1.3 'General Sans',system-ui;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.32)}
+@media (max-width:760px){.demo__tag{display:none}}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+/* typewriter mechanics — production behavior, restyled per layout */
+.hero__rotate{position:relative;display:inline-block;vertical-align:top}
+.hero__reserve{visibility:hidden}
+.hero__live{position:absolute;left:0;top:0;white-space:nowrap;color:var(--lift)}
+.hero__caret{display:inline-block;width:2px;height:.78em;margin-left:.06em;
+  vertical-align:-.06em;background:var(--lift);opacity:0}
+.js-type .hero__caret{opacity:1}
+.js-type.is-holding .hero__caret{animation:caret 1.06s steps(1,end) infinite}
+@keyframes caret{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+/* THE SIGNAL MARK — outer silhouette only */
+.sig{display:block;width:100%;height:100%;overflow:visible}
+.sig__base path{fill:var(--mark,#57637C)}
+.sig__base{filter:drop-shadow(0 0 44px rgba(10,71,240,.22)) drop-shadow(0 30px 50px rgba(0,0,0,.45))}
+.sig__spin{transform-origin:300px 262px;animation:sig-rot 12s linear infinite}
+@keyframes sig-rot{to{transform:rotate(360deg)}}
+.echo{transform-origin:300px 262px;opacity:0}
+.echo path{fill:none;stroke:var(--lift);stroke-width:1.4;vector-effect:non-scaling-stroke}
+.echo--a{animation:echo 16s cubic-bezier(.2,.6,.4,1) infinite}
+.echo--b{animation:echo 16s cubic-bezier(.2,.6,.4,1) 1.8s infinite}
+@keyframes echo{0%{transform:scale(1);opacity:0}2%{opacity:.5}
+  19%{transform:scale(1.42);opacity:0}100%{transform:scale(1.42);opacity:0}}
+/* CTA primitives — refined per layout */
+.k-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  height:58px;padding:0 28px;border-radius:999px;text-decoration:none;
+  font:600 15px/1 'General Sans',system-ui;
+  transition:background-color var(--t),border-color var(--t),color var(--t),transform var(--t)}
+.k-btn--cobalt{background:var(--cobalt);color:#fff;position:relative;overflow:hidden}
+.k-btn--cobalt::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55) 50%,transparent);
+  opacity:0;transition:opacity var(--t)}
+.k-btn--cobalt:hover{background:var(--cobalt-hover)}
+.k-btn--cobalt:hover::before{opacity:1}
+.k-btn--ghost{border:1px solid rgba(255,255,255,.25);color:#fff}
+.k-btn--ghost:hover{border-color:var(--lift);background:rgba(255,255,255,.05)}
+.k-arrow{display:grid;place-items:center;width:30px;height:30px;margin:-6px -12px -6px 0;
+  border-radius:50%;background:rgba(255,255,255,.16);font-size:13px;
+  transition:transform .4s cubic-bezier(.4,0,.2,1),background-color var(--t)}
+.k-btn--cobalt:hover .k-arrow{transform:translate(2px,-2px);background:rgba(255,255,255,.24)}
+.k-link{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:44px;
+  font:600 15px/1 'General Sans',system-ui;color:rgba(255,255,255,.62);
+  text-decoration:none;transition:color var(--t)}
+.k-link::after{content:'';position:absolute;left:0;right:0;bottom:8px;height:1px;
+  background:rgba(255,255,255,.25);transition:background-color var(--t)}
+.k-link:hover{color:#fff}.k-link:hover::after{background:var(--lift)}
+:where(a):focus-visible{outline:2px solid var(--lift);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero__caret{display:none}
+  .sig__spin{animation:none;transform:rotate(35deg)}
+  .echo{animation:none!important}
+  .echo--a{opacity:.14;transform:scale(1.18)}
+}
+.demo__nav a.demo__prev{color:rgba(255,255,255,.32);margin-left:8px;
+  border-left:1px solid rgba(255,255,255,.14);border-radius:0;padding-left:14px}
+.hero{position:relative;overflow:clip;min-height:calc(100svh - var(--head-h));
+  display:flex;flex-direction:column}
+/* the sky */
+/* overflow:hidden is the whole concept — the sky's bottom edge IS the
+   horizon, so the mark is cut exactly there rather than floating over it */
+.sky{position:relative;flex:1;overflow:hidden;
+  padding:clamp(48px,7vh,88px) var(--gutter) 0;
+  display:flex;flex-direction:column;justify-content:flex-start}
+.kicker{margin:0 0 30px;font:600 12.5px/1.2 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.hero__h1{position:relative;z-index:2;margin:0 0 28px;max-width:15ch;
+  font-size:clamp(42px,6.2vw,102px);line-height:1.0;font-weight:600;
+  letter-spacing:-.034em;color:rgba(255,255,255,.97)}
+.hero__h1 em{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:600;font-size:1.16em;letter-spacing:-.012em}
+.hero__static{display:block}
+.support{position:relative;z-index:2;margin:0;max-width:44ch;
+  font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:rgba(255,255,255,.68)}
+/* the half-risen mark: bottom-cropped by the horizon */
+/* half-risen: the mark's centre sits just below the horizon, so the upper
+   arms break the line and the lower half is simply gone */
+.risen{position:absolute;right:3%;bottom:0;width:min(46vw,620px);
+  aspect-ratio:1/1;transform:translateY(46%);pointer-events:none;z-index:1}
+.risen .sig__base{filter:drop-shadow(0 -14px 60px rgba(10,71,240,.34))}
+/* echoes radiate upward */
+.risen .echo--a,.risen .echo--b{animation-name:echo-up}
+@keyframes echo-up{0%{transform:scale(1) translateY(0);opacity:0}
+  2%{opacity:.45}
+  24%{transform:scale(1.5) translateY(-40px);opacity:0}
+  100%{transform:scale(1.5) translateY(-40px);opacity:0}}
+/* the horizon line + stations */
+/* The rule sits at the TOP of this band — i.e. exactly where the sky is cut,
+   so the mark rises out of the same line the stations sit on. Every child is
+   pulled up by half its own height, so each one is centred ON the wire. */
+.horizon{position:relative;z-index:3;display:flex;align-items:flex-start;
+  gap:clamp(18px,2.6vw,40px);flex-wrap:wrap;
+  padding:0 var(--gutter);margin-top:auto;height:clamp(104px,13vh,148px)}
+.horizon > *{transform:translateY(-50%)}
+.horizon::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.30) 22%,
+    rgba(91,134,255,.55) 60%,rgba(255,255,255,.10));}
+.horizon .k-btn,.horizon .k-link{position:relative;z-index:1}
+.horizon .k-btn{box-shadow:0 0 0 6px var(--navy)}
+.horizon .k-link{background:var(--navy);padding:0 14px}
+.horizon .station{margin-right:auto;position:relative;z-index:1;
+  background:var(--navy);padding-right:18px;
+  font:600 12px/1.4 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.42)}
+@media (max-width:900px){
+  .hero__h1{font-size:clamp(38px,9.6vw,50px);max-width:none}
+  .hero__rotate{display:block}
+  .risen{position:relative;right:auto;bottom:auto;width:auto;
+    aspect-ratio:7/4;transform:none;margin:24px calc(var(--gutter) * -1) 0;
+    clip-path:inset(0 0 18% 0)}
+  .horizon{height:auto;flex-direction:column;align-items:stretch;
+    gap:12px;padding-block:26px 30px}
+  .horizon > *{transform:none}
+  .horizon::before{top:0}
+  .horizon .k-btn{box-shadow:none;width:100%}
+  .horizon .k-link{padding:0;background:none}
+  .horizon .station{margin-right:0;padding-right:0;margin-bottom:6px}
+}
+</style></head><body>
+<header class="demo">
+  <span class="demo__mark">KREATED</span>
+  <span class="demo__tag">Signal hero layouts · not production</span>
+  <nav class="demo__nav">
+    <a  href="L6-inset.html">L6 · Inset</a>
+    <a class="is-here" href="L7-horizon.html">L7 · Horizon</a>
+    <a  href="L8-plate.html">L8 · Plate</a>
+    <a  href="L9-footnote.html">L9 · Footnote</a>
+    <a  href="L10-response.html">L10 · Response</a>
+    <a class="demo__prev" href="L1-meridian.html">← L1–L5</a>
+  </nav>
+</header>
+<main><section class="hero">
+  <div class="sky">
+    <p class="kicker">A design studio for local service businesses</p>
+      <h1 class="hero__h1">
+        <span class="sr-only">Your business is better than your website.</span>
+        <span class="hero__static" aria-hidden="true">Your business is <em>better</em> than your</span>
+        <span class="hero__rotate" aria-hidden="true"><span class="hero__reserve">first impression.</span><span class="hero__live"><span id="heroTyped">website.</span><i class="hero__caret" id="heroCaret"></i></span></span>
+      </h1>
+    <p class="support">We make local service businesses look as good online as they
+      are on the job — with better websites, stronger Google results, and sharper
+      branding that gives customers a reason to choose you.</p>
+    <div class="risen" aria-hidden="true">
+        <svg class="sig" viewBox="0 0 600 600" aria-hidden="true">
+          <defs>
+            <clipPath id="mk"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></clipPath>
+            <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0.30" stop-color="#5B86FF" stop-opacity="0"/>
+              <stop offset="0.50" stop-color="#5B86FF" stop-opacity="0.95"/>
+              <stop offset="0.56" stop-color="#DCE6FF" stop-opacity="0.9"/>
+              <stop offset="0.72" stop-color="#0A47F0" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g class="echo echo--a"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+          <g class="echo echo--b"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+          <g class="sig__base"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+          <g clip-path="url(#mk)"><g class="sig__spin">
+            <rect x="-320" y="-320" width="1240" height="1240" fill="url(#beam)" opacity="0.75"/>
+          </g></g>
+        </svg>
+    </div>
+  </div>
+  <div class="horizon">
+    <span class="station">Raleigh, North Carolina</span>
+    <a class="k-link" href="#">View Work</a>
+    <a class="k-btn k-btn--ghost" href="#">Free Website Audit</a>
+    <a class="k-btn k-btn--cobalt" href="#">Start a Project <span class="k-arrow" aria-hidden="true">↗</span></a>
+  </div>
+</section></main>
+<script>
+/* production typewriter, inlined: terminal phrase only, reserved width */
+(function(){
+  var out=document.getElementById('heroTyped');
+  var h1=out&&out.closest?out.closest('.hero__h1'):null;
+  if(!out||!h1)return;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+  if(mq&&mq.matches){out.textContent='website.';return}
+  var P=['website.','Google results.','first impression.'];
+  var TYPE=52,DEL=26,HOLD=2600,PAUSE=420,i=0,n=0;
+  h1.classList.add('js-type');
+  function hold(on){h1.classList.toggle('is-holding',!!on)}
+  function type(){var p=P[i];hold(false);
+    if(n<p.length){n++;out.textContent=p.slice(0,n);setTimeout(type,TYPE);return}
+    hold(true);setTimeout(del,HOLD)}
+  function del(){var p=P[i];hold(false);
+    if(n>0){n--;out.textContent=p.slice(0,n);setTimeout(del,DEL);return}
+    i=(i+1)%P.length;setTimeout(type,PAUSE)}
+  out.textContent='';n=0;setTimeout(type,600);
+})();
+</script></body></html>

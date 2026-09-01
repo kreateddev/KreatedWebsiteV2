@@ -1,0 +1,504 @@
+/* ==========================================================================
+   KREATED V2 — /services/web-design/ · THE GROUNDWORK SPECIMEN
+   Built 2026-08-30 from wd-specimen-presentation.svg.
+
+   TWO LAYERS, deliberately separated and never mixed:
+
+     PART A  .gw    Groundwork itself — an ORIGINAL, KREATED-OWNED
+                    demonstration website for a FICTIONAL company. Its own
+                    design language, its own tokens, its own type scale. It is
+                    real HTML and CSS, not a picture of a website.
+     PART B  .spec  the presentation module — how that page is shown on this
+                    leaf: the structure rail beside it, the phone beside that,
+                    the rail labels and the caption beneath.
+
+   🚫 GROUNDWORK IS NOT A CLIENT and must never be captioned, linked or listed
+   as one. The verbatim label above the object says so in every state.
+
+   ⚠ TOKEN ISOLATION IS THE POINT. Every value Part A uses is a `--gw-*` token
+   defined on `.gw` itself. It reads none of the leaf's tokens, and it defines
+   nothing the leaf can see. Groundwork's rounded surfaces, its cards and its
+   teal are ITS design language, not Kreated's — which is exactly why they are
+   sealed inside this namespace rather than added to the site's own system.
+   ========================================================================== */
+
+
+/* ==========================================================================
+   PART A — GROUNDWORK.  A fixed-size design surface: 1240x890 desktop,
+   208x436 phone. Part B scales it; nothing here knows or cares about that.
+   ========================================================================== */
+.gw{
+  --gw-paper:#F6F5F1;  --gw-paper2:#EDEBE4;
+  --gw-ink:#16181A;    --gw-ink2:rgba(22,24,26,.6);
+  --gw-teal:#0E6E78;   --gw-teal2:#0A555D;   --gw-cy:#53D6DF;
+  --gw-g1:#171B20;     --gw-g2:#1E242B;
+  --gw-warm:#E9E6DD;
+  --gw-cream:#F2F7F5;
+
+  position:relative;overflow:hidden;
+  background:var(--gw-paper);color:var(--gw-ink);
+  font-family:'General Sans','Helvetica Neue',Arial,sans-serif;
+  font-weight:400;letter-spacing:0;text-align:left;
+}
+/* ⚠ ZERO-SPECIFICITY RESET, and it has to stay that way.
+   `.gw p{margin:0}` scores (0,1,1) and silently beat every single-class
+   component rule below it — the header pill margins, the checklist spacing and
+   the approval card offset all collapsed to zero on the first build with no
+   error anywhere. `:where()` contributes nothing, so any class rule wins. */
+:where(.gw) :where(p){margin:0}
+.gw svg{display:block}
+
+/* the two gradients that exist on this page, and no others. No glow, no
+   background wash — the radial glow was removed on review. */
+.gw__app{background:linear-gradient(180deg,var(--gw-g2),var(--gw-g1))}
+.gw__band{background:linear-gradient(90deg,var(--gw-teal2),var(--gw-teal))}
+
+/* --------------------------------------------------------------------------
+   A1 · DESKTOP VIEW — 1240 x 890, 72px page margin
+   -------------------------------------------------------------------------- */
+.gw[data-view="desktop"]{width:1240px;height:890px}
+.gw[data-view="desktop"] .gw__burger,
+.gw[data-view="desktop"] .gw__kick-s,
+.gw[data-view="desktop"] .gw__h1--s,
+.gw[data-view="desktop"] .gw__lab--m,
+.gw[data-view="desktop"] .gw__mv,
+.gw[data-view="desktop"] .gw__mm,
+.gw[data-view="desktop"] .gw__did-s,
+.gw[data-view="desktop"] .gw__mready,
+.gw[data-view="desktop"] .gw__homebar{display:none}
+
+/* header */
+.gw[data-view="desktop"] .gw__hd{display:flex;align-items:center;height:72px;
+  padding:0 72px;border-bottom:1px solid rgba(22,24,26,.08)}
+.gw__brand{display:flex;align-items:center;gap:14px;
+  font-size:17.5px;font-weight:700;letter-spacing:-.012em}
+/* the glyph: a filled teal square with a cyan outlined square offset 5px */
+.gw__glyph{position:relative;flex:none;width:18px;height:18px}
+.gw__glyph::before,.gw__glyph::after{content:'';position:absolute;
+  width:13px;height:13px;border-radius:3px}
+.gw__glyph::before{left:0;top:0;background:var(--gw-teal)}
+.gw__glyph::after{left:5px;top:5px;border:1.7px solid var(--gw-cy)}
+
+.gw[data-view="desktop"] .gw__nav{display:flex;gap:24px;margin-left:auto;
+  font-size:13px;font-weight:500;color:var(--gw-ink2)}
+.gw__tel{display:inline-flex;align-items:center;gap:9px;flex:none;
+  height:34px;padding:0 17px;margin-left:28px;border-radius:17px;
+  border:1px solid rgba(22,24,26,.22);
+  font-size:11.5px;font-weight:650;letter-spacing:.02em}
+.gw__tel svg{width:14px;height:14px;color:var(--gw-teal)}
+.gw__cta{display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:128px;height:34px;margin-left:18px;border-radius:17px;
+  background:var(--gw-teal);color:var(--gw-cream);
+  font-size:10.6px;font-weight:680;letter-spacing:.02em}
+
+/* hero — text left, ONE product surface right. Nothing else lives in here:
+   no toast, no badge, no floating card. */
+.gw[data-view="desktop"] .gw__hero{position:relative;height:430px;padding:0 72px}
+.gw[data-view="desktop"] .gw__lede{width:500px;padding-top:46px}
+.gw__kick{font-size:10.5px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gw-teal)}
+.gw[data-view="desktop"] .gw__h1{margin-top:26px;font-size:38px;font-weight:690;
+  letter-spacing:-.02em;line-height:44px}
+.gw__h1 span{display:block}
+.gw[data-view="desktop"] .gw__sup{margin-top:22px;max-width:430px;
+  font-size:13.5px;line-height:20px;color:var(--gw-ink2)}
+.gw__acts{display:flex;align-items:center;gap:24px}
+.gw[data-view="desktop"] .gw__acts{margin-top:11px}
+.gw__pill{display:inline-flex;align-items:center;justify-content:center;
+  width:162px;height:46px;border-radius:23px;
+  background:var(--gw-teal);color:var(--gw-cream);
+  font-size:12px;font-weight:680;letter-spacing:.02em}
+.gw__slink{display:inline-flex;align-items:center;gap:12px;padding-bottom:5px;
+  border-bottom:1.5px solid var(--gw-teal);
+  font-size:13px;font-weight:600}
+.gw__slink i{font-style:normal;color:var(--gw-teal)}
+
+/* THE product surface — exactly one, 548x332. The only element on this page
+   that casts a shadow. */
+.gw[data-view="desktop"] .gw__app{position:absolute;left:620px;top:34px;
+  width:548px;height:332px;border-radius:16px;overflow:hidden;
+  box-shadow:0 16px 44px rgba(11,27,30,.35)}
+.gw[data-view="desktop"] .gw__app::before{content:'';position:absolute;
+  left:0;right:0;top:0;height:1px;background:rgba(83,214,223,.4)}
+.gw__apphd{display:flex;align-items:center;justify-content:space-between;gap:18px;
+  height:38px;padding:0 16px;border-bottom:1px solid rgba(246,245,241,.08)}
+.gw__apptitle{display:inline-flex;align-items:center;gap:7px;
+  font-size:11.5px;font-weight:600;color:rgba(246,245,241,.85)}
+.gw__sq{width:9px;height:9px;border-radius:2px;background:var(--gw-teal)}
+.gw__appmeta{font-size:10px;font-weight:450;color:rgba(246,245,241,.55)}
+
+/* stepper — one line inside the surface. Completed items carry a cyan tick at
+   60% text; the current item gets the cyan-tint chip and full-white text. */
+.gw__steps{display:flex;align-items:center;height:50px;padding:0 22px;
+  border-bottom:1px solid rgba(246,245,241,.08)}
+.gw__step{display:inline-flex;align-items:center;gap:8px;
+  font-size:10.5px;font-weight:500;white-space:nowrap}
+.gw__step.is-done{color:rgba(246,245,241,.6);margin-right:34px}
+.gw__tick{width:13px;height:13px;flex:none;color:var(--gw-cy)}
+.gw__step.is-now{margin-left:auto;height:26px;padding:0 13px;border-radius:13px;
+  background:rgba(83,214,223,.14);color:#F6F5F1;font-weight:650}
+.gw__ring{width:8px;height:8px;border-radius:50%;flex:none;
+  border:1.6px solid var(--gw-cy)}
+
+/* the mock splits the body 248 / 300 at the divider, not 50/50: the prepared
+   column has to hold a 254px approval card inside 24/22 padding */
+.gw[data-view="desktop"] .gw__body{display:grid;
+  grid-template-columns:minmax(0,45.26fr) minmax(0,54.74fr);height:244px}
+.gw[data-view="desktop"] .gw__col{padding:16px 22px 0}
+.gw[data-view="desktop"] .gw__col--r{border-left:1px solid rgba(246,245,241,.08);
+  padding-left:24px}
+.gw__lab{font-size:7.8px;font-weight:700;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gw-cy)}
+.gw[data-view="desktop"] .gw__lab--m{display:none}
+.gw__fk{margin-top:16px;font-size:7.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:rgba(246,245,241,.42)}
+.gw__fv{margin-top:4px;font-size:12px;font-weight:560;color:rgba(246,245,241,.9)}
+.gw__chip{display:inline-flex;align-items:center;justify-content:center;
+  margin-top:19px;height:20px;padding:0 12px;border-radius:10px;
+  background:rgba(83,214,223,.14);color:var(--gw-cy);
+  font-size:9.2px;font-weight:650}
+.gw__did{display:flex;align-items:center;gap:8px;margin-top:20px;
+  font-size:11px;font-weight:520;color:rgba(246,245,241,.85)}
+.gw__did .gw__tick{width:14px;height:14px}
+
+/* the approval card — the one warm surface inside the product */
+.gw__ready{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  height:44px;padding:0 14px;border-radius:12px;background:var(--gw-warm)}
+.gw[data-view="desktop"] .gw__ready{margin-top:30px}
+.gw__readytxt b{display:block;font-size:10.5px;font-weight:650;color:var(--gw-ink)}
+.gw__readytxt i{display:block;margin-top:2px;font-style:normal;
+  font-size:9.5px;font-weight:450;color:var(--gw-ink2)}
+.gw__send{display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:64px;height:28px;border-radius:14px;
+  background:var(--gw-teal);color:var(--gw-cream);
+  font-size:10px;font-weight:680;letter-spacing:.02em}
+.gw__foot{margin-top:14px;font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:italic;font-size:11px;color:rgba(246,245,241,.45)}
+
+/* value section */
+.gw[data-view="desktop"] .gw__value{height:238px;padding:0 72px;
+  border-top:1px solid rgba(22,24,26,.08)}
+.gw__h2{font-size:23px;font-weight:670;letter-spacing:-.012em}
+.gw[data-view="desktop"] .gw__h2{padding-top:34px}
+.gw[data-view="desktop"] .gw__cards{display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:19px}
+.gw__card{height:112px;padding:22px 26px;border-radius:14px;
+  background:var(--gw-paper2)}
+.gw__ic{display:block;color:var(--gw-teal)}
+.gw__ic svg{width:auto;height:15px}
+.gw__ct{margin-top:24px;font-size:15.5px;font-weight:670}
+.gw__cd{margin-top:6px;font-size:11.5px;font-weight:430;color:var(--gw-ink2)}
+
+/* CTA band, then the darker footer strip that closes the page card */
+.gw[data-view="desktop"] .gw__band{height:124px;padding:0 72px}
+.gw__bandin{display:flex;align-items:center;justify-content:space-between;
+  gap:32px;height:100%}
+.gw__bh{font-size:24px;font-weight:670;letter-spacing:-.012em;color:var(--gw-cream)}
+.gw__bs{margin-top:8px;font-size:13px;font-weight:420;color:rgba(242,247,245,.62)}
+.gw__bacts{display:flex;align-items:center;gap:26px}
+.gw__bpill{display:inline-flex;align-items:center;justify-content:center;
+  width:160px;height:46px;border-radius:23px;background:var(--gw-paper);
+  color:var(--gw-teal2);font-size:12px;font-weight:720;letter-spacing:.02em}
+.gw__blink{font-size:12.5px;font-weight:600;color:rgba(242,247,245,.85)}
+.gw[data-view="desktop"] .gw__rule{height:26px;background:var(--gw-teal2)}
+
+/* --------------------------------------------------------------------------
+   A2 · PHONE VIEW — 208 x 436, 20px margins.
+   The SAME markup: this is the component reflowing, not a scaled screenshot.
+   The desktop-only parts (full nav, stepper, qualification column, value
+   section, CTA band) are the ones a real responsive page drops or defers at
+   this width; the phone keeps the headline, the one action, and the single
+   decision the owner has to make.
+   -------------------------------------------------------------------------- */
+.gw[data-view="mobile"]{width:208px;height:436px;padding:0 20px}
+.gw[data-view="mobile"] .gw__nav,
+.gw[data-view="mobile"] .gw__tel,
+.gw[data-view="mobile"] .gw__cta,
+.gw[data-view="mobile"] .gw__sup,
+.gw[data-view="mobile"] .gw__slink,
+.gw[data-view="mobile"] .gw__apphd,
+.gw[data-view="mobile"] .gw__steps,
+.gw[data-view="mobile"] .gw__col:not(.gw__col--r),
+.gw[data-view="mobile"] .gw__lab--d,
+.gw[data-view="mobile"] .gw__did--d,
+.gw[data-view="mobile"] .gw__ready,
+.gw[data-view="mobile"] .gw__foot,
+.gw[data-view="mobile"] .gw__value,
+.gw[data-view="mobile"] .gw__band,
+.gw[data-view="mobile"] .gw__rule,
+.gw[data-view="mobile"] .gw__kick-l,
+.gw[data-view="mobile"] .gw__did-l,
+.gw[data-view="mobile"] .gw__h1:not(.gw__h1--s){display:none}
+
+.gw[data-view="mobile"] .gw__hd{display:flex;align-items:center;
+  height:48px;padding-top:22px}
+.gw[data-view="mobile"] .gw__brand{gap:6px;font-size:12px}
+.gw[data-view="mobile"] .gw__glyph{width:14px;height:14px}
+.gw[data-view="mobile"] .gw__glyph::before,
+.gw[data-view="mobile"] .gw__glyph::after{width:10px;height:10px;border-radius:2.5px}
+.gw[data-view="mobile"] .gw__glyph::after{left:4px;top:4px;border-width:1.4px}
+.gw__burger{margin-left:auto;font-size:11.5px;color:var(--gw-ink2)}
+
+.gw[data-view="mobile"] .gw__kick{margin-top:15px;font-size:7px;letter-spacing:.16em}
+.gw[data-view="mobile"] .gw__h1--s{margin-top:12px;font-size:17.5px;font-weight:690;
+  letter-spacing:-.015em;line-height:20px}
+.gw[data-view="mobile"] .gw__acts{margin-top:16px}
+.gw[data-view="mobile"] .gw__pill{width:168px;height:34px;border-radius:17px;
+  font-size:9.8px;font-weight:700}
+
+.gw[data-view="mobile"] .gw__app{margin-top:14px;width:168px;height:142px;
+  border-radius:12px;overflow:hidden}
+.gw[data-view="mobile"] .gw__body{display:block;height:auto}
+.gw[data-view="mobile"] .gw__col{padding:16px 12px 0;border:0}
+.gw[data-view="mobile"] .gw__lab--m{display:block;font-size:7px;letter-spacing:.16em}
+.gw__mv{margin-top:10px;font-size:10.5px;font-weight:580;color:rgba(246,245,241,.9)}
+.gw__mm{margin-top:3px;font-size:8.8px;font-weight:450;color:rgba(246,245,241,.6)}
+.gw[data-view="mobile"] .gw__did{margin-top:10px;gap:6px;
+  font-size:8.8px;color:rgba(246,245,241,.8)}
+.gw[data-view="mobile"] .gw__did .gw__tick{width:11px;height:11px}
+
+.gw__mready{display:flex;align-items:center;justify-content:space-between;
+  margin-top:14px;height:34px;padding:0 12px;border-radius:17px;
+  background:var(--gw-warm);color:var(--gw-teal2);
+  font-size:9px;font-weight:700}
+.gw__mready i{font-style:normal;font-size:9.5px;font-weight:650}
+.gw__homebar{display:block;height:4px;margin-top:2px;border-radius:2px;
+  background:rgba(22,24,26,.12)}
+
+
+/* ==========================================================================
+   PART B — THE PRESENTATION MODULE on the near-black leaf.
+
+   Geometry from wd-specimen-presentation.svg (1440x1000). The mock's content
+   spans x100 -> x1290 = 1190px; every horizontal value below is a percentage
+   of that span, which maps onto this page's 1200px column:
+     structure rail   x100  -> lane 0 .. 16.81%
+     page render      x300  -> left 16.81%   width 78.66%
+     phone            x1066 -> left 81.18%   width 18.82%  (right edge 100%)
+   Vertical values are percentages of the stage, whose height is the render's.
+   ========================================================================== */
+.spec{padding:0 0 clamp(44px,5.2vw,76px)}
+
+/* the label. Ships verbatim, sits OUTSIDE the object, and is visible in every
+   state and at every width. It is a real heading, not decoration. */
+.spec__label{margin:0 0 clamp(24px,3vw,44px);
+  font:600 11px/1.5 'General Sans',system-ui;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gray)}
+
+.spec__fig{margin:0}
+/* Three tracks: rail, page, and the 4.53% the phone needs to reach the
+   column's right edge. The phone is absolute, so nothing sits in the third. */
+.spec__stage{position:relative;display:grid;align-items:start;
+  grid-template-columns:16.81fr 78.66fr 4.53fr}
+
+/* --- the structure rail. Beside the page, never on it. ------------------- */
+.spec__rail{grid-column:1;position:relative;padding:22px 0 0 22px;
+  pointer-events:none}
+.spec__rail::before{content:'';position:absolute;left:0;top:0;bottom:5.3%;
+  width:1px;background:color-mix(in srgb, var(--ink-1) 14%, transparent)}
+/* ⚠ CONTRAST, deliberate deviation from the mock. The mock sets the strip's
+   labels at 60-75% and the rail labels at 75%, which measure 2.70:1 and
+   3.88:1 on #070707 — both under AA for text this size. They are aria-hidden,
+   but a sighted reader still reads them, so 1.4.3 applies and "decorative"
+   is not an escape hatch. Raised to the lowest value that clears it (4.71:1).
+   The strokes and rules around them are genuinely decorative diagram marks and
+   keep the mock's 16-35%. */
+.spec__rl{margin:0 0 26px -22px;
+  font:600 9.5px/1 'General Sans',system-ui;letter-spacing:.24em;
+  text-transform:uppercase;color:rgba(136,143,163,.90)}
+.spec__sl{margin:0;font:600 7.5px/1.4 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(136,143,163,.90)}
+.spec__sig{margin-bottom:34px}
+
+.spec__grid{display:flex;gap:25px;height:136px;margin-bottom:16px}
+.spec__grid i{display:block;width:1px;height:100%;background:rgba(237,232,222,.16)}
+
+.spec__dim{display:flex;align-items:center;gap:18px;margin-bottom:22px}
+/* the bracket: a 22px rule with a tick at each end */
+.spec__dim b{position:relative;display:block;width:1px;height:22px;
+  background:rgba(237,232,222,.35)}
+.spec__dim b::before,.spec__dim b::after{content:'';position:absolute;left:-6px;
+  width:13px;height:1px;background:rgba(237,232,222,.35)}
+.spec__dim b::before{top:0}
+.spec__dim b::after{bottom:0}
+.spec__dim em{font-family:'Cormorant Garamond',Georgia,serif;font-style:normal;
+  font-size:10px;color:var(--warm)}
+.spec__sig--space .spec__sl{margin-top:12px}
+
+.spec__dash{display:block;width:86px;height:28px;margin-bottom:22px;
+  border:1px dashed rgba(237,232,222,.3)}
+.spec__comp{display:block;width:56px;height:38px;margin-bottom:22px;
+  border:1px solid rgba(237,232,222,.3);border-radius:6px}
+.spec__bp{position:relative;display:block;width:86px;height:1px;
+  margin-bottom:22px;background:rgba(237,232,222,.3)}
+.spec__bp::after{content:'';position:absolute;left:50%;top:50%;
+  width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#53D6DF}
+.spec__bpv{margin:8px 0 0;font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:9.5px;color:var(--warm)}
+
+/* --- the finished page. Nothing is drawn on top of it: no veil, no dashed
+       box, no callout. The construction language lives only in the rail. --- */
+/* The render is a REAL 1240x926 page, scaled to the lane it is given.
+   ⚠ The scale factor cannot come from CSS alone. `transform: scale()` needs a
+   unitless number, and CSS has no way to divide a length by a length — so
+   `calc(100cqw / 1240)` is invalid and silently drops the whole transform.
+   That is exactly what it did on the first build. The factor is therefore set
+   by groundwork.js from the lane's measured width.
+
+   WITH JAVASCRIPT OFF the object must still be correct, so `--gs` carries a
+   per-breakpoint default below and the script only refines it between the
+   steps. Nothing is hidden behind the script; it makes an already-correct
+   render exact. */
+.spec__page{grid-column:2;position:relative;--gs:.761;
+  aspect-ratio:1240 / 926;border-radius:14px;overflow:hidden;
+  box-shadow:0 28px 68px rgba(0,0,0,.8)}
+.spec__screen{position:absolute;left:0;top:0;width:1240px;height:926px;
+  transform:scale(var(--gs));transform-origin:0 0}
+
+/* the browser chrome — ink bar, three dots, centred domain. NOT a link. */
+/* ⚠ literals, not var(--gw-*). Part A's tokens are scoped to `.gw` and are
+   out of scope here, so a var() would only ever resolve to its fallback. The
+   frame deliberately mirrors Groundwork's ink and paper. */
+.gwchrome{position:relative;display:flex;align-items:center;height:36px;
+  padding:0 20px;background:#16181A}
+.gwchrome__dots{display:flex;gap:8.6px}
+.gwchrome__dots i{display:block;width:8.4px;height:8.4px;border-radius:50%;
+  background:rgba(246,245,241,.35)}
+.gwchrome__url{position:absolute;left:0;right:0;text-align:center;
+  font:500 11.5px/1 'General Sans',system-ui;letter-spacing:.03em;
+  color:rgba(246,245,241,.6)}
+
+/* --- the phone. Overlaps only the finished desktop's lower-right, never the
+       rail, and carries its own deeper shadow. --------------------------- */
+/* ⚠ The bezel is 8px of a 224px phone. A percentage padding on an ABSOLUTELY
+   positioned element resolves against its containing block — the stage — not
+   against itself, so `3.571%` silently became 42.8px and shrank the screen to
+   140px. Expressed against the stage instead: 8/224 x 18.82% = 0.672%, which
+   is 8px here and stays proportional at every stage width. */
+.spec__phone{position:absolute;left:81.18%;width:18.82%;top:28.61%;
+  aspect-ratio:224 / 452;padding:.672%;
+  background:#16181A;border-radius:13.4% / 6.64%;
+  box-shadow:0 14px 30px rgba(0,0,0,.5)}
+.spec__phscreen{position:relative;width:100%;height:100%;overflow:hidden;
+  --gp:1.01;
+  border-radius:10.58% / 5.05%;background:#F6F5F1}
+.spec__phscreen .gw{position:absolute;left:0;top:0;
+  transform:scale(var(--gp));transform-origin:0 0}
+.spec__notch{position:absolute;z-index:2;left:50%;top:2.06%;
+  width:24%;height:1.15%;margin-left:-12%;border-radius:2px;
+  background:rgba(22,24,26,.18)}
+
+/* --- rail labels and the caption ---------------------------------------- */
+/* DESIGN sits at the page's left edge (16.81%), RESPONSIVE at the mock's
+   x956 (71.93%), LIVE flush right. Three tracks, and the last two labels share
+   the third — start and end aligned, so they cannot collide. */
+.spec__rails{display:grid;grid-template-columns:16.81fr 55.12fr 28.07fr;
+  margin:clamp(26px,3.4vw,44px) 0 0;
+  font:600 10.5px/1 'General Sans',system-ui;letter-spacing:.24em;
+  text-transform:uppercase;color:rgba(136,143,163,.90)}
+.spec__rails > span:nth-child(1){grid-column:2}
+.spec__rails > span:nth-child(2){grid-column:3}
+.spec__live{grid-column:3;grid-row:1;justify-self:end;
+  display:inline-flex;align-items:center;gap:11px;
+  color:rgba(237,232,222,.85)}
+.spec__live i{width:7px;height:7px;border-radius:50%;background:#53D6DF}
+.spec__cap{margin:clamp(20px,2.4vw,32px) 0 0;max-width:74ch;
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:15px;line-height:1.5;color:rgba(136,143,163,.90)}
+
+/* the text alternative for the whole specimen */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+  border:0}
+
+/* --------------------------------------------------------------------------
+   B1 · RESPONSIVE — the module recomposes; the specimen never squeezes.
+   -------------------------------------------------------------------------- */
+@media (max-width:1360px){ .spec__page{--gs:.66} }
+@media (max-width:1200px){ .spec__page{--gs:.60} }
+@media (max-width:1100px){
+  /* the rail keeps its labels and its marks and drops the tall grid lines */
+  .spec__grid{height:76px;gap:16px}
+  .spec__sig{margin-bottom:24px}
+  .spec__page{--gs:.55}
+}
+@media (max-width:1000px){ .spec__page{--gs:.50} }
+
+@media (max-width:900px){
+  /* the rail becomes a slim horizontal band above the object — same five
+     signals, one row — and the two renders stack, desktop first. The phone
+     is never squeezed in beside a shrinking page. */
+  .spec__stage{display:block}
+  .spec__rail{display:flex;align-items:flex-end;gap:clamp(20px,4vw,44px);
+    padding:0 0 20px;margin-bottom:24px;overflow:hidden;
+    border-bottom:1px solid color-mix(in srgb, var(--ink-1) 14%, transparent)}
+  .spec__rail::before{display:none}
+  .spec__rl{margin:0 auto 0 0;align-self:center}
+  .spec__sig{margin:0;flex:none}
+  .spec__grid{height:26px;gap:9px;margin-bottom:9px}
+  .spec__dim{margin:0 0 0 14px;display:inline-flex;gap:9px}
+  .spec__dim:first-of-type{margin-left:0}
+  .spec__dim b{height:14px}
+  .spec__sig--space{display:flex;align-items:center}
+  .spec__sig--space .spec__sl{margin:0 0 0 16px}
+  .spec__dash{width:44px;height:16px;margin-bottom:9px}
+  .spec__comp{width:32px;height:20px;margin-bottom:9px}
+  .spec__bp{width:52px;margin-bottom:9px}
+  .spec__bpv{display:none}
+  .spec__page{width:100%;--gs:.62}
+  .spec__phone{position:relative;left:auto;top:auto;padding:8px;
+    width:min(224px,42%);margin:clamp(26px,4vw,40px) 0 0 auto}
+  .spec__rails{grid-template-columns:1fr auto;gap:14px}
+  .spec__rails > span:nth-child(1){grid-column:1}
+  .spec__rails > span:nth-child(2){grid-column:1}
+  .spec__live{grid-column:2;grid-row:1 / span 2}
+}
+
+@media (max-width:640px){
+  /* One render, and it is the reflowed page. The desktop render's own
+     breakpoints would take over here anyway, at which point it and the phone
+     object would be showing the identical layout in two frames — so the phone
+     frame becomes the single render and the desktop box steps out.
+
+     ⚠ The first build hid the desktop `.gw` and left `.spec__page` in place,
+     which rendered an empty black box: the mobile-view `.gw` lives inside the
+     phone frame, not inside the page box. Hide the BOX, not its contents. */
+  .spec__page{display:none}
+  .spec__phone{display:block;position:relative;left:auto;top:auto;padding:8px;
+    width:min(248px,72%);margin:clamp(24px,6vw,36px) auto 0;
+    box-shadow:0 20px 46px rgba(0,0,0,.66)}
+  .spec__rail{flex-wrap:wrap;gap:16px 22px}
+  .spec__rl{flex-basis:100%;margin:0 0 4px}
+  .spec__rails{grid-template-columns:1fr auto}
+}
+
+/* --------------------------------------------------------------------------
+   B2 · MOTION — three small reveals, all gated. Nothing on the finished page
+   itself moves. No parallax, no 3D, no WebGL.
+   -------------------------------------------------------------------------- */
+.spec[data-anim] .spec__sig,
+.spec[data-anim] .spec__rl{opacity:0;transition:opacity .5s cubic-bezier(.4,0,.2,1)}
+.spec[data-anim] .spec__phone{opacity:0;transform:translateY(8px);
+  transition:opacity .55s cubic-bezier(.4,0,.2,1),transform .55s cubic-bezier(.4,0,.2,1)}
+.spec[data-anim].is-in .spec__sig,
+.spec[data-anim].is-in .spec__rl{opacity:1}
+.spec[data-anim].is-in .spec__phone{opacity:1;transform:none}
+.spec[data-anim].is-in .spec__sig:nth-of-type(2){transition-delay:.06s}
+.spec[data-anim].is-in .spec__sig:nth-of-type(3){transition-delay:.12s}
+.spec[data-anim].is-in .spec__sig:nth-of-type(4){transition-delay:.18s}
+.spec[data-anim].is-in .spec__sig:nth-of-type(5){transition-delay:.24s}
+.spec[data-anim].is-in .gw__step.is-now{animation:gwpulse 1.6s cubic-bezier(.4,0,.2,1) .5s 1}
+@keyframes gwpulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(83,214,223,0)}
+  40%{box-shadow:0 0 0 4px rgba(83,214,223,.16)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  /* fully static, fully readable: every gated element resolves to its
+     finished state and nothing animates. */
+  .spec[data-anim] .spec__sig,
+  .spec[data-anim] .spec__rl,
+  .spec[data-anim] .spec__phone{opacity:1!important;transform:none!important;
+    transition:none!important}
+  .spec[data-anim].is-in .gw__step.is-now{animation:none!important}
+}

@@ -1,0 +1,103 @@
+{
+ "width": 800,
+ "height": 620,
+ "frames": [
+  {
+   "file": "frame-00.webp",
+   "t": 0.0
+  },
+  {
+   "file": "frame-01.webp",
+   "t": 0.09
+  },
+  {
+   "file": "frame-02.webp",
+   "t": 0.18
+  },
+  {
+   "file": "frame-03.webp",
+   "t": 0.27
+  },
+  {
+   "file": "frame-04.webp",
+   "t": 0.35
+  },
+  {
+   "file": "frame-05.webp",
+   "t": 0.4
+  },
+  {
+   "file": "frame-06.webp",
+   "t": 0.45
+  },
+  {
+   "file": "frame-07.webp",
+   "t": 0.5
+  },
+  {
+   "file": "frame-08.webp",
+   "t": 0.55
+  },
+  {
+   "file": "frame-09.webp",
+   "t": 0.6
+  },
+  {
+   "file": "frame-10.webp",
+   "t": 0.65
+  },
+  {
+   "file": "frame-11.webp",
+   "t": 0.7
+  },
+  {
+   "file": "frame-12.webp",
+   "t": 0.75
+  },
+  {
+   "file": "frame-13.webp",
+   "t": 0.8
+  },
+  {
+   "file": "frame-14.webp",
+   "t": 0.85
+  },
+  {
+   "file": "frame-15.webp",
+   "t": 0.9
+  },
+  {
+   "file": "frame-16.webp",
+   "t": 0.95
+  },
+  {
+   "file": "frame-17.webp",
+   "t": 1.0
+  },
+  {
+   "file": "frame-18.webp",
+   "t": 1.05
+  },
+  {
+   "file": "frame-19.webp",
+   "t": 1.1
+  },
+  {
+   "file": "frame-20.webp",
+   "t": 1.19
+  },
+  {
+   "file": "frame-21.webp",
+   "t": 1.28
+  },
+  {
+   "file": "frame-22.webp",
+   "t": 1.37
+  },
+  {
+   "file": "frame-23.webp",
+   "t": 1.45
+  }
+ ],
+ "duration": 1.45
+}

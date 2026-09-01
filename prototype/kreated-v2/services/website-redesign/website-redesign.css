@@ -1,0 +1,193 @@
+/* ==========================================================================
+   KREATED V2 — /services/website-redesign/ · SERVICE LEAF
+   Built on the locked leaf system, 2026-08-28.
+
+   Loads, in order:
+     /services/services.css              tokens, header, drawer, footer, skip
+     /services/leaf.css                  the leaf system — hero, plate,
+                                         capability grid, pricing row, close
+   Neither is modified. This file carries ONLY what genuinely differs for
+   Website Redesign, which is deliberately very little: the family should read
+   as one system, and the corrective character comes from the title treatment
+   and the sequence, not from new decoration.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   HERO TITLE — the corrective pair.
+   The Services hub's approved 02 state already encodes this service's
+   character: "Website" held back, "Redesign" at full weight — the correction
+   inside the pair. The leaf inherits that rather than inventing a new device.
+   Web Design's title stacks onto two lines; this one is a single line, so the
+   two leaves are related without being interchangeable.
+   -------------------------------------------------------------------------- */
+.wr__h span{display:inline}
+/* The hub's 02 state holds this word at 34% white, which measures 2.98:1 on
+   #070707 — 0.02 under AA for large text. Raised to the lowest passing value;
+   the held/full contrast that carries the corrective idea is unaffected.
+   ⚠ The Services hub's own `.t--02 .dim` still carries .34 and needs the same
+   one-line change next time /services/ is opened. */
+.wr__held{color:var(--ink-4)}
+
+/* --------------------------------------------------------------------------
+   BOUNDARY LINE — carries an inline link to the sibling service, which is the
+   comparative move this page needs. Styled as quiet text with a cobalt rule
+   under the link only, so it reads as a sentence, not a button.
+   -------------------------------------------------------------------------- */
+/* .ilink moved to ../leaf.css on 2026-08-30 — three leaves use it. */
+
+/* --------------------------------------------------------------------------
+   PRICING — one extra factual line above the figures, stating that redesign
+   work has no package of its own. The row itself is the family's.
+   -------------------------------------------------------------------------- */
+.price__note{margin:0 0 clamp(16px,1.8vw,24px);max-width:52ch;
+  font-size:15px;line-height:1.55;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — the family stylesheet covers the rest; only the single-line
+   hero title needs its own guard so the pair never splits mid-word.
+   -------------------------------------------------------------------------- */
+@media (max-width:520px){
+  .wr__h span{display:block}
+}
+
+/* ==========================================================================
+   2 · REAL BEFORE / REAL AFTER — Rare Raleigh, as an editorial spread.
+   Rebuilt 2026-08-30 from correct-redesign-editorial.svg, which replaced the
+   earlier cobalt-seam composition. The seam and its snap connectors are gone:
+   this version divides the spread with a single faint hairline and lets the
+   size difference between the two objects carry the argument instead.
+
+   The mock is a 1440x925 canvas whose content spans x96 -> x1392 = 1296px.
+   Every horizontal value below is a percentage of that span, so it maps onto
+   this page's 1200px column unchanged:
+     before   x96   w392   ->  left 0        width 30.25%
+     rule     x566         ->  left 36.27%
+     after    x630  w716   ->  left 41.20%   width 55.25%
+     phone    x1194 w198   ->  left 84.72%   width 15.28%   (right edge 100%)
+   Vertical values are percentages of the STAGE box, which runs from the after
+   object's top (mock y150) to the phone's foot (mock y789) = 639 mock units.
+   The stage's own height is the after object plus a padding-bottom equal to
+   the phone's descent, so the AFTER label lands at the mock's y833.
+   ========================================================================== */
+.proof--ba{padding-bottom:clamp(48px,5.6vw,84px)}
+
+/* the header row: project line left, the owner's spread label right */
+.ba__head{display:flex;align-items:baseline;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4.6vw,66px)}
+/* the mock sets this line at 13px, untracked and sentence case, rather than
+   the family's tracked micro-label — it reads as a caption on a spread */
+.eyebrow--ba{margin:0;font:500 13px/1.4 'General Sans',system-ui;
+  letter-spacing:0;text-transform:none;color:var(--gray)}
+.ba__tag{margin:0;font:600 10.5px/1.4 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(237,232,222,.62)}
+
+.ba{margin:0}
+
+/* Four tracks, not three: the fourth is the 3.55% the phone needs to reach the
+   column's right edge. The phone is absolute, so nothing sits in it. */
+.ba__stage{position:relative;display:grid;align-items:start;
+  grid-template-columns:30.25fr 10.95fr 55.25fr 3.55fr;
+  padding-bottom:11.57%}
+
+/* the shared page-object: rounded surface, hairline, 40px label strip */
+.ba__obj{position:relative;border-radius:10px;background:var(--surface);
+  border:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent);overflow:hidden}
+.ba__obj img{display:block;width:100%;height:auto;object-fit:cover;
+  object-position:50% 0}
+.ba__strip{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  height:40px;padding:0 20px;font-size:12.5px;letter-spacing:.02em;
+  color:var(--ink-4)}
+
+/* before — subordinate: smaller, set 5.40% lower, softer depth, and the mock's
+   12% ink wash over the capture so the old site sits back */
+/* The mock drops the before object 70 units below the after object's top.
+   A percentage margin on a grid item resolves against its GRID AREA, not the
+   grid, so 70/1296 would only be 70/392 of the way down. Expressed against
+   this track it is 70/392 = 17.86%, which lands on the mock's y220 exactly. */
+.ba__col{grid-column:1;grid-row:1;display:flex;flex-direction:column;
+  margin-top:17.86%}
+.ba__obj--before{box-shadow:0 14px 32px rgba(0,0,0,.6)}
+.ba__obj--before img{aspect-ratio:392 / 296}
+.ba__obj--before::after{content:'';position:absolute;left:0;right:0;top:40px;bottom:0;
+  background:#070707;opacity:.12;pointer-events:none}
+
+/* after — dominant: foreground depth, warm top edge-light, brighter strip */
+.ba__obj--after{grid-column:3;grid-row:1;
+  border-color:color-mix(in srgb, var(--ink-1) 12%, transparent);
+  box-shadow:0 26px 60px rgba(0,0,0,.75)}
+.ba__obj--after img{aspect-ratio:716 / 447}
+.ba__obj--after::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:rgba(237,232,222,.35);z-index:1}
+.ba__obj--after .ba__strip{color:var(--ink-2);font-size:13px}
+.ba__live{display:inline-flex;align-items:center;gap:8px;flex:none;
+  font-size:10.5px;letter-spacing:.14em;color:var(--accent)}
+.ba__live i{width:8px;height:8px;border-radius:50%;background:var(--cobalt-lift)}
+
+/* the gutter rule — one hairline, no cobalt. It overhangs both objects, which
+   is what stops it reading as a column divider. */
+.ba__rule{position:absolute;left:36.27%;top:7.82%;bottom:17.06%;
+  width:1px;background:color-mix(in srgb, var(--ink-1) 10%, transparent)}
+
+/* the phone breaks the after object's lower-right corner and hangs below it */
+.ba__phone{position:absolute;left:84.72%;width:15.28%;top:39.91%;bottom:0;
+  padding:6px;border-radius:22px;background:#0B0B0B;
+  border:1px solid rgba(237,232,222,.22);
+  box-shadow:0 26px 60px rgba(0,0,0,.75)}
+.ba__phone img{display:block;width:100%;height:100%;object-fit:cover;
+  object-position:50% 0;border-radius:15px}
+
+/* the two margin labels. BEFORE sits under its object, inside the left column.
+   AFTER sits under the phone's descent, aligned to the after object's edge. */
+.ba__cap{margin:clamp(20px,3vw,39px) 0 0;
+  font:600 10.5px/1.4 'General Sans',system-ui;letter-spacing:.26em;
+  text-transform:uppercase;
+  /* the mock's .75 measured 3.88:1 on #070707 — under AA at 10.5px. Raised to
+     the lowest value that clears it; the label still reads as a margin note. */
+  color:rgba(136,143,163,.90)}
+.ba__caps{display:grid;grid-template-columns:30.25fr 10.95fr 55.25fr 3.55fr;
+  margin-top:clamp(22px,3.2vw,41px)}
+/* .85 measured 4.59:1 on the old #070707 ground and 4.38:1 on the navy one —
+   the ground change cost it AA. Full --cobalt-lift is 5.62:1 and is the value
+   the rest of the family already uses for a blue label on dark. */
+.ba__cap--after{grid-column:3;margin:0;color:var(--accent)}
+
+.ba__note{margin:clamp(26px,4vw,52px) 0 0;max-width:52ch;
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:clamp(15px,1.15vw,16px);line-height:1.45;color:var(--warm)}
+
+/* the family's plate caption, carrying the project attribution and the live
+   link. Same classes, so it is the same device; the elements are spans inside
+   a <figcaption>, so the block display the <p> version got for free has to be
+   restated. */
+.ba__meta{margin-top:clamp(30px,3.4vw,46px)}
+.ba__meta > span{display:block}
+.ba__meta .plate__name,.ba__meta .plate__scope,.ba__meta .plate__status{display:block}
+.ba__meta .plate__scope{margin-top:6px}
+.ba__meta .plate__status{margin-bottom:10px}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — the spread recomposes, it does not shrink.
+   -------------------------------------------------------------------------- */
+@media (max-width:900px){
+  /* stacked: before above after. The hairline gutter has nothing left to
+     divide, so it goes; the phone keeps breaking the after object's corner,
+     which is the one part of the composition that still reads at this width. */
+  .ba__stage{display:block;padding-bottom:14%}
+  .ba__col{margin-top:0}
+  .ba__obj--before{max-width:74%}
+  .ba__rule{display:none}
+  .ba__obj--after{margin-top:clamp(30px,5vw,48px)}
+  .ba__phone{left:auto;right:0;width:21%;top:auto;height:64%;bottom:0}
+  .ba__caps{display:block}
+  .ba__cap--after{margin-top:0}
+}
+
+@media (max-width:640px){
+  /* at this width an overlapping phone covers the capture it is meant to
+     support, so it steps out and sits inline under the desktop object. */
+  .ba__obj--before{max-width:none}
+  .ba__stage{padding-bottom:0}
+  .ba__phone{position:static;width:108px;margin:-30px 0 0 8px;height:auto;
+    border-radius:16px}
+  .ba__phone img{height:auto;aspect-ratio:390 / 780;border-radius:10px}
+}

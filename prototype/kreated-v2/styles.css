@@ -1,0 +1,2382 @@
+/* ==========================================================================
+   OMC-INSPIRED KREATED HOMEPAGE SHELL — NOT PRODUCTION
+   Reference: research/OMC_TEARDOWN.md
+   Decisions: concepts/OMC_KREATED_TRANSLATION.md
+
+   Numbers below are translated from measurements of the live OMC homepage at
+   1440x900 and 375x812, not invented. Where a value mirrors a measured OMC
+   value the comment says so.
+   ========================================================================== */
+
+/* --- TYPE ----------------------------------------------------------------
+   General Sans (Indian Type Foundry, via Fontshare, ITF Free Font Licence —
+   see assets/fonts/ITF-FreeFontLicense-GeneralSans.txt). Variable, 200-700,
+   38 KB. Carries hero scale, section headings, nav, buttons and body.
+   Still a TEST, not a ruling — but a legitimately licensed one.
+
+   Cormorant Garamond is deliberately RARE. It appears in exactly four places:
+     1. the KREATED wordmark          (settled, DECISION 011)
+     2. one accent word in the hero headline
+     3. one accent word in the footer
+     4. the capability labels and the Work lead — the two editorial moments
+        below the fold where the contrast materially helps
+   Every other lead paragraph is set in the sans. If Cormorant is ever ruled
+   out, those four places are the whole surface area.
+   ------------------------------------------------------------------------ */
+@font-face{
+  font-family:'General Sans';font-style:normal;font-weight:200 700;font-display:swap;
+  src:url(/assets/fonts/general-sans-var.woff2) format('woff2');
+}
+@font-face{
+  font-family:'Cormorant Garamond';font-style:normal;font-weight:300 700;font-display:swap;
+  src:url(/assets/fonts/cormorant-garamond-latin.woff2) format('woff2');
+}
+
+:root{
+  /* --- palette: inverted from OMC. Navy-dominant, light punctuation. ------
+     Inside the locked family (DECISION 012). No accent colour is invented —
+     the only chroma on the page is real client photography. */
+  /* ⚠ HUE-LOCKED TO THE COBALT, 2026-08-30. Every dark ground used to sit at
+     217-220 deg while --cobalt sits at 224 deg, so the ground read 4-7 deg
+     GREENER than the blue standing on it. That mismatch — not any single
+     colour — is what made the dark family read slate/teal. The whole family is
+     now 224-230 deg, saturation raised, luminance held. Measured before and
+     after across 22 foreground/background pairs: max delta 0.15, no threshold
+     crossed. 🚫 --cobalt and --cobalt-lift are NOT retuned; they are the
+     identity and moving them would break brand recognition. */
+  /* ⚠ RE-POINTED TO BX'S MEASURED DARK GROUND, 2026-09-01. --navy was
+     #020C2E and --ink was a second, slightly deeper dark used by the footer
+     and a handful of panels. There are no longer two darks: BX runs its whole
+     dark territory on ONE ground and the seam work in August had already
+     collapsed Kreated's three darks toward that. Both names now resolve to
+     the same colour so that a rule which still says var(--ink) cannot
+     reintroduce a step. --navy-2 survives only as a PANEL tone, lifted off
+     the ground rather than sunk below it. 🚫 Do not reintroduce a second
+     ground-level dark. */
+  --navy:#020C2E;      /* BX --a-dark-theme--dark-primary-background */
+  --navy-2:#0A1740;    /* panel lift, ~BX card-hover #040e30 opened up */
+  --ink:#020C2E;       /* was #060A1A — now the same ground, see above */
+  --paper:#F4F5FA;     /* 230 deg — was #F4F5F7 @ 220      */
+  --white:#FFFFFF;
+  --silver:#A6AEC7;
+  --line:color-mix(in srgb, var(--ink-1) 16%, transparent);
+
+  /* --- the identity blue ---------------------------------------------------
+     Cobalt. Chosen by rendering five candidates against the navy as rim, fill,
+     type and rule: #0047AB is rich but dull, #1B4DFF starts to read neon, and
+     #0A47F0 is the one that stays electric without either. It is the same blue
+     the Work mask is rendered in.
+
+     It is only 2.83:1 on --navy, so it is NEVER small text on a dark surface.
+     Where a label needs the blue on navy, --cobalt-lift is used instead
+     (5.62:1). On --paper the base cobalt is 6.07:1 and is fine for text. */
+  --cobalt:#0A47F0;
+  --cobalt-lift:#5B86FF;
+  --cobalt-hover:#2B5FF5;   /* primary CTA hover fill (hero) */
+  --cobalt-soft:rgba(10,71,240,.20);
+  --line-dark:rgba(2,12,46,.14);
+
+  /* --- type scale: OMC's two-number responsive system --------------------
+     Only the two display sizes change between breakpoints. Body, labels and
+     the serif lead are identical at every width, exactly as OMC does it. */
+  --h1:clamp(40px, 7.1vw, 104px);     /* sized so 2 lines reach OMC's measured 75vw */
+  --h2:clamp(30px, 2.65vw, 38px);     /* OMC measured 37.44 / 32            */
+  --h3:22px;
+  --lead:23px;                         /* OMC measured 23.2, unchanged       */
+  --body:16px;                         /* OMC measured 16, unchanged         */
+  --label:14px;                        /* OMC measured 14.4, unchanged       */
+
+  /* --- rhythm ------------------------------------------------------------ */
+  --gutter:clamp(20px, 8.4vw, 120px);
+  --gutter-hero:clamp(20px, 12.3vw, 177px);   /* OMC's measured 177px = 12.3vw */
+  --measure:min(410px, 100%);                 /* OMC never exceeds ~410px      */
+  --head-h:91px;                              /* OMC measured 91, both widths  */
+
+  /* the entire micro-interaction budget, measured off OMC */
+  --t-hover:.2s ease-in-out;
+  --t-pill:.4s cubic-bezier(.4,0,.2,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+/* overflow-x:CLIP, not hidden. `hidden` makes the body a scroll container, and
+   position:sticky inside a scroll container sticks to THAT container rather
+   than the viewport — which silently disabled every sticky on this page. The
+   Services stage and Process artifact both declared sticky and neither ever
+   engaged. `clip` prevents the same horizontal overflow without creating a
+   scrollport, so sticky works and nothing else changes. */
+html,body{margin:0;padding:0;overflow-x:clip}
+body{
+  /* ⚠ transparent. The ground is painted once on <html> so it also fills the
+     overscroll area; see theme.css. 🚫 Do not put a fill back on body. */
+  background:transparent;color:var(--ink-1);
+  font:400 var(--body)/1.55 'General Sans',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+.wrap{max-width:1680px;margin:0 auto;padding-inline:var(--gutter)}
+.hero .wrap{padding-inline:var(--gutter-hero)}
+
+.proto-flag{
+  position:fixed;bottom:0;left:0;right:0;z-index:60;margin:0;padding:7px 16px;
+  font:500 11px/1.45 'General Sans',system-ui;letter-spacing:.08em;
+  color:var(--ink-4);background:#05090F;
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent);
+}
+.proto-flag strong{color:var(--ink-2);font-weight:600}
+
+/* ==========================================================================
+   SHARED PATTERNS — OMC's repeatable section unit:
+   pill label -> h2 -> serif lead -> pill CTA + arrow
+   ========================================================================== */
+.h2{
+  margin:0;
+  font-size:var(--h2);line-height:1.02;   /* OMC sets section headings solid */
+  font-weight:700;letter-spacing:-.024em;
+}
+.h2--big{font-size:clamp(38px,4.2vw,60px);line-height:1.04}
+.h2 em,.foot__h em,.hero__line em{
+  /* the serif accent, sized 1.27x the sans exactly as OMC does */
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:italic;font-weight:600;font-size:1.27em;
+  letter-spacing:-.012em;
+}
+/* leads are set in the SANS by default — Cormorant is reserved (see TYPE) */
+.lead{
+  margin:0;max-width:var(--measure);
+  font:400 17px/1.6 'General Sans',system-ui;color:var(--ink-3);
+}
+.lead--dark{color:rgba(2,12,46,.66)}
+/* the one editorial lead below the fold, where the contrast earns its place */
+.lead--serif{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:var(--lead);line-height:1.22;font-weight:500;
+  color:var(--ink-1);
+}
+
+.pill-label{
+  display:inline-flex;align-items:center;gap:9px;margin:0 0 22px;
+  font:600 var(--label)/1.4 'General Sans',system-ui;letter-spacing:.01em;
+  color:var(--ink-2);
+}
+.pill-label::before{
+  /* a cropped cobalt pocket, not a dot — a fluid-derived detail at 9px */
+  content:'';width:9px;height:9px;background:var(--cobalt-lift);
+  border-radius:58% 42% 46% 54% / 44% 56% 44% 56%;
+}
+.pill-label--dark::before{background:var(--cobalt)}
+.pill-label--dark{color:rgba(2,12,46,.66)}
+
+.pill{
+  display:inline-flex;align-items:center;gap:14px;
+  margin-top:30px;padding:15px 22px;border-radius:999px;
+  background:var(--cta-fill);color:var(--cta-ink);
+  font:600 15px/1 'General Sans',system-ui;text-decoration:none;
+  transition:background-color var(--t-hover),color var(--t-hover);
+}
+.pill__arrow{
+  display:grid;place-items:center;width:30px;height:30px;margin:-8px -10px -8px 0;
+  border-radius:50%;background:var(--cta-ink);color:var(--cta-fill);
+  font-size:13px;transition:transform var(--t-pill),background-color var(--t-hover);
+}
+.pill:hover .pill__arrow{transform:translate(2px,-2px)}
+.pill--light{background:var(--cta-fill);color:var(--cta-ink)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:52px;padding:0 26px;border-radius:999px;
+  font:600 15px/1 'General Sans',system-ui;text-decoration:none;
+  transition:background-color var(--t-hover),border-color var(--t-hover),color var(--t-hover);
+}
+/* ⚠ THE SOLID PILL INVERTS WITH THE ROOM. It was a white fill with navy
+   type, which is the loudest object on a dark page and INVISIBLE on a light
+   one — and the hero is light territory now. --cta-fill/--cta-ink swap on
+   the same frame as the ink, so it is cobalt-on-white in day and
+   white-on-navy at night. Both ends measure over 8:1. */
+.btn--solid{background:var(--cta-fill);color:var(--cta-ink)}
+.btn--solid:hover,.btn--solid:focus-visible{background:var(--cta-fill-hover)}
+.btn--solid:hover{background:#DDE3EC}
+.btn--line{border:1px solid var(--stroke-hi);color:var(--ink-1)}
+.btn--line:hover{border-color:var(--accent)}
+.btn--text{
+  height:auto;padding:0 0 4px;border-radius:0;
+  border-bottom:1px solid color-mix(in srgb, var(--ink-1) 34%, transparent);
+}
+.btn--text:hover{border-bottom-color:var(--accent)}
+:where(a,button):focus-visible{outline:2px solid var(--stroke-focus);outline-offset:4px}
+
+/* ==========================================================================
+   HEADER — 91px, transparent, scrolls away (OMC). Returns on scroll-up with
+   the primary CTA (Kreated divergence 2).
+   ========================================================================== */
+/* STICKY, never fixed. This was `position:relative` switching to
+   `position:fixed` once past 0.9vh — which pulls 91px out of the document
+   flow, so every section below snapped up by exactly the header's height at
+   scrollY ~820. That is the jump between the hero and Services. Sticky pins
+   the header without ever leaving the flow, so the document height never
+   changes and there is nothing to jump. */
+/* SOLID from the first pixel, and sticky so it never leaves the flow.
+   It used to start transparent and switch to rgba(8,13,23,.86) + blur once
+   scrolled, which read as the header "turning opaque" partway down the page.
+   There is no background change now — only a hairline that appears once
+   content is actually passing underneath it, which is a border, not a
+   material change. */
+.head{
+  position:sticky;top:0;z-index:50;height:var(--head-h);
+  /* ⚠ the masthead travels across BOTH territories, so it cannot own a
+     colour. It paints the same interpolated ground as the page it is
+     pinned over, which is why there is no edge along its bottom at any
+     scroll position. 🚫 Do not give it a fixed fill or a blur. */
+  background:var(--ground);
+  border-bottom:1px solid transparent;
+  transition:border-color var(--t-hover);
+}
+.head.is-fixed{
+  left:0;right:0;
+  /* ⚠ .08, matching services.css's --line-faint. The masthead rule was .07 here
+     and .08 on the other 17 routes — one hairline with two values. The
+     difference is below perception, but it is the same object and it now has
+     one number. The homepage's TRANSPARENT state at the top of the hero is a
+     deliberate difference and stays: it is the only route whose masthead opens
+     over artwork. */
+  border-bottom-color:color-mix(in srgb, var(--ink-1) 8%, transparent);
+  transform:translateY(-100%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1),border-color var(--t-hover);
+}
+.head.is-shown{transform:translateY(0)}
+.head__in{
+  max-width:1680px;margin:0 auto;height:100%;
+  padding-inline:var(--gutter);
+  display:flex;align-items:center;gap:34px;
+}
+.head__mark{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:21px;
+  letter-spacing:.22em;margin-right:-.22em;   /* cancel trailing tracking */
+  text-decoration:none;
+}
+/* ⚠ NAV REBALANCED FOR FOUR ITEMS, 2026-09-01. The nav dropped from five items
+   to four when Method and Contact moved to the footer. Two things needed
+   adjusting so it reads as a deliberate four rather than a five with gaps: the
+   items sit slightly wider apart, and the CTA is pushed off by a larger margin
+   than the inter-item gap. Before, both were 34px, so "Start a Project" read as
+   a fifth link rather than as the page's action. */
+.head__nav{display:flex;gap:clamp(26px,2.6vw,38px);margin-left:auto}
+.head__cta{margin-left:clamp(18px,1.6vw,24px)}
+.head__nav a{
+  font:500 15px/1 'General Sans',system-ui;text-decoration:none;
+  color:var(--ink-2);transition:color var(--t-hover);
+}
+.head__nav a:hover{color:var(--ink-1)}
+/* Persistent from the first paint. It used to be `display:none` until the
+   sticky header engaged, so the homepage masthead had no call to action until
+   the reader scrolled — while every service page showed one immediately. Same
+   pill, same visual language; only its visibility changed. */
+.head__cta{
+  display:inline-flex;align-items:center;height:40px;padding:0 18px;border-radius:999px;
+  background:var(--cta-fill);color:var(--cta-ink);
+  font:600 14px/1 'General Sans',system-ui;text-decoration:none;
+}
+.head__burger{
+  /* ⚠ 44, not 34. services.css sized the same control 44x44 on sixteen routes
+     and this file sized it 34x34 on three (home, audit, thanks). Both clear
+     the 24px floor in 2.5.8, so neither was a violation — it was simply the
+     same button at two sizes depending on which stylesheet the route loads. */
+  display:none;margin-left:auto;width:44px;height:44px;padding:0;
+  background:none;border:0;cursor:pointer;
+}
+.head__burger span{display:block;height:1.5px;background:var(--ink-1);margin:6px 0;
+  transition:transform var(--t-hover),opacity var(--t-hover)}
+.head__burger[aria-expanded=true] span:first-child{transform:translateY(3.75px) rotate(45deg)}
+.head__burger[aria-expanded=true] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+
+.drawer{
+  position:fixed;inset:var(--head-h) 0 auto 0;z-index:49;
+  /* the ground, not a colour of its own: #070C14 was a fourth dark that
+     existed only here, and the drawer opens directly under a masthead
+     painting --ground */
+  background:color-mix(in srgb, var(--ground) 97%, transparent);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.drawer nav{display:flex;flex-direction:column;padding:8px var(--gutter) 28px}
+.drawer a{
+  padding:15px 0;font:600 20px/1 'General Sans',system-ui;text-decoration:none;
+  border-bottom:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent);
+}
+.drawer__cta{margin-top:20px;border:0!important;
+  background:var(--cta-fill);color:var(--cta-ink);border-radius:999px;text-align:center;padding:17px 0!important}
+.drawer__alt{border:1px solid var(--line)!important;border-radius:999px;
+  text-align:center;margin-top:10px;padding:16px 0!important}
+
+/* ==========================================================================
+   1 · HERO
+   OMC: band exactly 1.0vh; headline 75.3vw wide leaving 12.4vw open right;
+   label column 184px, body column 380px starting 245px from the gutter.
+   ========================================================================== */
+/* accessible-only text — the stable sentence behind the typewriter.
+   Lives above the hero block because the hero is the only consumer today but
+   it is a general utility; it was previously defined inside the hero block
+   and was lost when that block was replaced. */
+.sr-only{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+/* ==========================================================================
+   1 · HERO — SIGNAL / "FOOTNOTE" (layout L9)
+
+   Replaces the WebGL glass mark and its canvas. Everything here is SVG + CSS:
+   no renderer, no library, no canvas in the hero.
+
+   Three instances of one mark, each doing a different job at a different
+   scale, which is what lets the joke land without shrinking the brand:
+     .hero__ghost     brand presence, large, in the right column
+     .aster           the LIVE footnote marker ending the rotating line
+     .hero__notemark  the tiny static reference in the footnote itself
+   ========================================================================== */
+.hero{
+  position:relative;overflow:clip;
+  min-height:calc(100svh - var(--head-h));
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(16px,2vw,26px) 0 clamp(4px,.8vh,10px);
+}
+.hero__in{position:relative;z-index:2;width:100%}
+
+/* --- the mark, shared by all three instances ----------------------------- */
+.sig{display:block;width:100%;height:100%;overflow:visible}
+.sig__base path{fill:var(--mark,#57637C)}
+.sig__base{
+  filter:drop-shadow(0 0 44px rgba(10,71,240,.22))
+         drop-shadow(0 30px 50px rgba(0,0,0,.45));
+}
+/* The beam is clipped to the glyph, so the light reads as the mark lighting
+   ITSELF rather than a shape passing over it. */
+.sig__spin{transform-origin:300px 262px;animation:sig-rot 12s linear infinite}
+@keyframes sig-rot{to{transform:rotate(360deg)}}
+/* two outward echoes, offset in time — the "signal" */
+.echo{transform-origin:300px 262px;opacity:0}
+.echo path{fill:none;stroke:var(--cobalt-lift);stroke-width:1.4;
+  vector-effect:non-scaling-stroke}
+.echo--a{animation:sig-echo 16s cubic-bezier(.2,.6,.4,1) infinite}
+.echo--b{animation:sig-echo 16s cubic-bezier(.2,.6,.4,1) 1.8s infinite}
+@keyframes sig-echo{
+  0%{transform:scale(1);opacity:0}
+  2%{opacity:.5}
+  19%{transform:scale(1.42);opacity:0}
+  100%{transform:scale(1.42);opacity:0}
+}
+
+/* --- 1 · the ghost ------------------------------------------------------- */
+.hero__ghost{
+  position:absolute;z-index:0;pointer-events:none;
+  right:clamp(24px,5.5vw,100px);top:41%;transform:translateY(-50%);
+  width:min(40vw,548px);aspect-ratio:1/1;
+  --mark:#141E35;opacity:.9;
+}
+.hero__ghost .sig__base{filter:none}
+.hero__ghost .echo path{stroke-opacity:.35}
+
+/* --- 2 · the headline ---------------------------------------------------- */
+.hero__h1{
+  position:relative;z-index:2;margin:0 0 30px;max-width:14ch;
+  font-size:clamp(42px,6.2vw,104px);line-height:1.0;font-weight:600;
+  letter-spacing:-.034em;color:var(--ink-1);
+}
+.hero__h1 em{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:600;font-size:1.16em;letter-spacing:-.012em;
+}
+.hero__static{display:block}
+/* Width reservation is unchanged in principle: an invisible copy of the
+   LONGEST phrase — now including its asterisk — holds the box open, so typing
+   still cannot reflow the line. */
+.hero__rotate{position:relative;display:inline-block;vertical-align:top}
+.hero__reserve{visibility:hidden}
+.hero__live{position:absolute;left:0;top:0;white-space:nowrap;
+  color:var(--accent)}
+.hero__caret{
+  display:inline-block;width:2px;height:.78em;margin-left:.08em;
+  vertical-align:-.06em;background:var(--cobalt-lift);opacity:0;
+}
+.js-type .hero__caret{opacity:1}
+.js-type.is-holding .hero__caret{animation:caret-blink 1.06s steps(1,end) infinite}
+@keyframes caret-blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+
+/* --- 3 · the asterisk ---------------------------------------------------- */
+.aster{
+  display:inline-block;width:.42em;height:.42em;margin-left:.07em;
+  vertical-align:.28em;position:relative;z-index:2;
+  --mark:#7E9CFF;
+}
+.aster .sig__base{filter:drop-shadow(0 0 14px rgba(91,134,255,.5))}
+
+/* --- 4 · support + CTAs -------------------------------------------------- */
+.hero__support{
+  position:relative;z-index:2;margin:0 0 clamp(34px,5vh,56px);max-width:45ch;
+  font-size:clamp(16.5px,1.34vw,19.5px);line-height:1.58;color:var(--ink-2);
+}
+.hero__ctas{
+  position:relative;z-index:2;display:flex;align-items:center;
+  gap:22px;flex-wrap:wrap;margin:0;
+}
+.hero__ctas .btn{height:58px;padding:0 28px;gap:12px}
+/* Cobalt primary, per this layout. Scoped to the hero so .btn--solid keeps its
+   existing appearance in the header and the conversion section — this rule
+   lived in the previous hero block and was lost when it was replaced. */
+.hero__ctas .btn--solid{
+  background:var(--cobalt);color:#fff;position:relative;overflow:hidden;
+}
+.hero__ctas .btn--solid::before{
+  content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,
+    color-mix(in srgb, var(--ink-1) 0%, transparent),color-mix(in srgb, var(--ink-1) 55%, transparent) 50%,color-mix(in srgb, var(--ink-1) 0%, transparent));
+  opacity:0;transition:opacity var(--t-hover);
+}
+.hero__ctas .btn--solid:hover,
+.hero__ctas .btn--solid:focus-visible{background:var(--cobalt-hover)}
+.hero__ctas .btn--solid:hover::before,
+.hero__ctas .btn--solid:focus-visible::before{opacity:1}
+.hero__ctas .btn--line{border-color:color-mix(in srgb, var(--ink-1) 25%, transparent)}
+.hero__ctas .btn--line:hover,
+.hero__ctas .btn--line:focus-visible{
+  border-color:var(--accent);background:color-mix(in srgb, var(--ink-1) 5%, transparent);
+}
+.hero__ctas .btn:focus-visible,
+.hero__proof:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:3px}
+.btn__arrow{
+  display:grid;place-items:center;width:30px;height:30px;
+  margin:-6px -12px -6px 0;border-radius:50%;
+  background:color-mix(in srgb, var(--ink-1) 16%, transparent);font-size:13px;
+  transition:transform var(--t-pill),background-color var(--t-hover);
+}
+.hero__ctas .btn--solid:hover .btn__arrow,
+.hero__ctas .btn--solid:focus-visible .btn__arrow{
+  transform:translate(2px,-2px);background:color-mix(in srgb, var(--ink-1) 24%, transparent);
+}
+.hero__proof{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  min-height:44px;font:600 15px/1 'General Sans',system-ui;
+  color:var(--ink-3);text-decoration:none;border-bottom:0;
+  padding-bottom:0;transition:color var(--t-hover);
+}
+.hero__proof::after{
+  content:'';position:absolute;left:0;right:0;bottom:8px;height:1px;
+  background:color-mix(in srgb, var(--ink-1) 25%, transparent);transition:background-color var(--t-hover);
+}
+.hero__proof:hover,.hero__proof:focus-visible{color:var(--ink-1)}
+.hero__proof:hover::after,.hero__proof:focus-visible::after{
+  background:var(--cobalt-lift);
+}
+
+/* --- 5 · the footnote: where the kicker now lives ------------------------ */
+.hero__note{
+  position:relative;z-index:2;display:flex;align-items:center;gap:12px;
+  margin-top:clamp(40px,7vh,80px);padding:18px 0 30px;
+  /* ⚠ .09, NOT .16. Every separator on this page was .16 — twice the value the
+     rest of the site uses for the same job (services.css --line is .12, the
+     masthead rule is .08). At 1900px the hero's rule was the brightest object
+     above the fold after the type, and it read as a CUT rather than as a
+     separator. The device is unchanged and still does its job; only its weight
+     now matches the system. 🚫 Do not raise these back to .16. */
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 9%, transparent);
+}
+.hero__notemark{flex:none;width:15px;height:15px;--mark:var(--cobalt-lift)}
+.hero__notemark .sig__base{filter:none}
+.hero__note p{
+  margin:0;font:500 13.5px/1.5 'General Sans',system-ui;
+  letter-spacing:.04em;color:var(--ink-4);
+}
+
+/* ---- responsive --------------------------------------------------------- */
+@media (max-width:900px){
+  .hero{padding-top:clamp(28px,6vw,44px)}
+  .hero__h1{font-size:clamp(38px,9.6vw,50px);max-width:none}
+  /* the rotator owns its own line so typing can never re-wrap the static text */
+  .hero__rotate{display:block}
+  /* the ghost centres behind the type — the right column does not exist here */
+  /* QA 390/360: at top:52% / .7 the mark crossed the support paragraph for
+     125px of its height. It is brand presence, not content — so on mobile it
+     lifts off the body copy and drops to a watermark. */
+  .hero__ghost{right:50%;transform:translate(50%,-50%);top:44%;
+    width:min(76vw,368px);opacity:.4}
+  .hero__ctas{width:100%;gap:14px}
+  .hero__ctas .btn{width:100%;justify-content:center}
+  .hero__note{margin-top:34px}
+}
+
+/* ---- reduced motion ----------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  /* the beam parks at a composed angle rather than spinning, and one echo is
+     held mid-expansion, so the "signal" idea still reads statically */
+  .sig__spin{animation:none;transform:rotate(35deg)}
+  .echo{animation:none!important}
+  .echo--a{opacity:.14;transform:scale(1.18)}
+  .echo--b{opacity:0}
+  .hero__caret{display:none}
+}
+
+/* ==========================================================================
+   BELOW THE HERO — visual-direction correction pass (Aug 2026).
+   Architecture unchanged: Client Trust · Services (Index + Stage) ·
+   How It Works · Work + Testimonial · Investment · FAQ · Final CTA · Footer.
+
+   ONE CONTINUOUS CANVAS, now with real PEAKS AND VALLEYS:
+     Trust QUIET · Services HIGH · Process MEDIUM · Proof PEAK ·
+     Investment STRUCTURED/STILL · FAQ QUIET · Final CTA HIGH.
+   Variation comes from scale, cropping, edge-bleed, imagery and whitespace —
+   never from alternating section backgrounds.
+
+   Motion grammar unchanged: the artwork moves, the layout never does. No
+   scroll-linked motion below the hero. Everything stops composed under
+   prefers-reduced-motion.
+   ========================================================================== */
+:root{
+  /* Cut hard. Measured at 1440 the old values put 271px of pure padding
+     between Services and Process (150 bottom + 121 top) and 404px around the
+     final CTA — you were scrolling through empty canvas to reach the next
+     idea. Roughly halved here. The peak/valley RATIO is preserved, so the
+     rhythm still reads; there is simply far less dead air carrying it. */
+  --sec:clamp(44px, 4.6vw, 74px);           /* medium sections                */
+  --sec-lg:clamp(56px, 5.8vw, 94px);        /* peaks                          */
+  --sec-sm:clamp(30px, 3.2vw, 48px);        /* valleys                        */
+  --panel:color-mix(in srgb, var(--ink-1) 3%, transparent);
+  --panel-line:color-mix(in srgb, var(--ink-1) 10%, transparent);
+  --r:14px;
+  /* the one shared surface treatment for every dimensional object below the
+     hero: top edge catches light, deep soft ground shadow */
+  --srf-edge:inset 0 1px 0 color-mix(in srgb, var(--ink-1) 16%, transparent);
+  --srf-shadow:0 44px 90px rgba(0,0,0,.55);
+}
+
+/* --- shared section head ------------------------------------------------- */
+.sec-head{
+  display:grid;grid-template-columns:1fr minmax(0,var(--measure));
+  gap:clamp(24px,4vw,70px);align-items:end;
+  margin-bottom:clamp(30px,3.4vw,52px);
+}
+.sec-head--peak{margin-bottom:clamp(36px,4.2vw,66px)}
+/* peak display scale — Services, Proof. (Hero untouched; Final CTA has its own.) */
+.h2--peak{
+  font-size:clamp(42px,5.2vw,78px);line-height:1.0;
+  font-weight:700;letter-spacing:-.032em;
+}
+
+/* ==========================================================================
+   3 · CLIENT TRUST — a rotating rail of real client marks.
+
+   Still a valley: small, monotone, low-contrast at rest. The logos are real
+   captures of each client's own mark, flattened to one colour so three brand
+   palettes do not compete with the page or with each other.
+
+   The track holds the list TWICE and translates by exactly -50%, which is what
+   makes the loop seamless — at -50% the second copy sits precisely where the
+   first began, so the reset is invisible. The duplicate is aria-hidden and
+   untabbable (see the markup), so it exists for the eye only.
+   ========================================================================== */
+/* ⚠ overflow:clip removed 2026-08-30 — it scissored the seam glow below.
+   Nothing inside the strip can overflow; verified 1440-360. */
+.clients{padding:var(--sec-sm) 0;position:relative;isolation:isolate}
+/* ⚠ THE `.clients::after` GLOW WAS REMOVED HERE, 2026-08-31.
+   It predates .room__rise and was added back when the clients/room boundary was
+   a hard cut, to carry colour across it. The rise now does that job completely
+   and opaquely — but the two were fighting: measured at 1900px the old glow
+   peaked at rgb(15,34,90) on the right-hand side at y=1075, and the rise begins
+   at its DARKEST, rgb(10,17,42), at y=1100. So the ramp opened with a visible
+   step DOWN before climbing, and because the glow was lopsided (absent at the
+   left gutter, strong at x=1500) the step only showed in the middle and right
+   of the page. That is the visible edge at the top of the transition.
+   🚫 Do not add a second light source at this boundary. One ramp owns it. */
+
+/* ⚠ REBUILT 2026-09-01. The strip was a stacked label above a 920px-capped
+   row of three marks justified start / centre / end. At 1440 that put the last
+   mark at x≈1090 with a third of the page empty to its right, and because the
+   three lockups are built completely differently the row read as three
+   unrelated objects that had run out rather than as one strip. It looked
+   unfinished because it was.
+
+   It is now one line: the label sits on the left as a fixed column, and the
+   three marks share the remaining width in equal cells. Equal cells is the
+   trick — the marks are 3.6:1, 6.7:1 and 9.5:1 in aspect, so nothing short of
+   a shared grid track makes them look deliberately placed. */
+.clients__in{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-items:center;
+  gap:clamp(24px,4.5vw,72px);
+}
+.clients__label{
+  margin:0;font:600 11px/1 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-4);
+}
+/* A static row, not a marquee. Three clients cannot fill a loop, so the old
+   rail duplicated the whole set to stay seamless — six marks for three clients,
+   plus an edge mask that clipped whichever name happened to be leaving. Nothing
+   moves now, nothing repeats, and nothing is masked, so no name can crop. */
+.clients__row{position:relative}
+/* ==========================================================================
+   THE CLIENT STRIP — a cycling emphasis, 2026-08-31.
+   Owner decision: the treatment should cycle. It must not go back to the
+   infinite conveyor, which needed six marks on screen for three clients and
+   masked whichever name happened to be leaving.
+
+   WHAT CYCLES: the LIGHT, not the logos. All three marks stay present, in
+   place, at all times — nothing enters, leaves, duplicates or scrolls. One at
+   a time comes forward to full strength while the other two rest, and the
+   emphasis walks the row. Nothing is ever hidden, so there is no abundance to
+   fake and no name can be caught mid-crop.
+
+   WHY EMPHASIS AND NOT MOVEMENT: with three clients, any translation either
+   loops (a conveyor) or leaves gaps. Emphasis reads as deliberate at any
+   count — and it keeps every mark readable in every frame, which a slide
+   cannot promise.
+
+   ⚠ The resting state is .55, not near-zero: these are real client marks and
+   they stay legible in every frame of the cycle. 🚫 Do not lower it to make
+   the cycle more obvious.
+   ========================================================================== */
+.clients__list{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:center;
+  gap:clamp(20px,3vw,56px);
+  list-style:none;margin:0;padding:0;
+  /* 🚫 no max-width. The 920px cap is what left the dead third at the right. */
+}
+/* every mark centred in its OWN equal cell. The old first/centre/last rule made
+   the gaps between marks unequal, so even with the cap removed the row would
+   still have read as misaligned. */
+.clients__item{min-width:0;display:flex;justify-content:center}
+
+/* Each mark sits in a FITTED BOX of fixed height and fixed max width and is
+   CONTAINED inside it. That is what gives the strip a real declared height,
+   centres every mark optically, makes clipping structurally impossible, and
+   stops any one lockup dominating on width — the three are built completely
+   differently (llec 388x107, learnsmart 375x56, rare-raleigh 256x27). */
+.client{
+  display:grid;place-items:center;
+  height:var(--mark-box,56px);
+  width:100%;max-width:var(--mark-w,206px);
+  text-decoration:none;
+  /* ⚠ .70 AT REST, NOT .55. On the old all-dark ground .55 read as "dimmed";
+     on the day ground the same value reads as "not loaded". The lit/unlit
+     difference only has to be perceptible, and .70 -> 1 is, while leaving every
+     mark obviously PRESENT in every frame of the cycle. */
+  opacity:var(--rest,.70);
+  transition:opacity 900ms cubic-bezier(.4,0,.2,1);
+}
+.clients__list.is-cycling .client.is-lit{opacity:1}
+/* pointer and keyboard always beat the cycle */
+.client:hover,.client:focus-visible{opacity:1;transition-duration:200ms}
+.client:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:8px;border-radius:4px}
+/* contained, never cropped, never stretched */
+.client__logo{
+  display:block;width:auto;height:auto;
+  max-width:100%;max-height:100%;
+  object-fit:contain;
+  /* ⚠ ONE INK, NOT A GREYSCALE. This was grayscale(1) invert(1 - k), which
+     preserved each mark's internal tonal range — so the Leak Locators lockup,
+     which contains a large filled shape, inverted into a black blob at roughly
+     three times the optical weight of the two wordmarks beside it, while
+     LearnSmart's lighter strokes inverted to a mid grey that barely held.
+     Three clients, three weights, no relationship between them.
+
+     brightness(0) collapses every non-transparent pixel to one value and keeps
+     only the ALPHA channel, which is where the artwork actually lives in all
+     three files: every opaque pixel in all three samples at (224,224,224), so
+     they are already single-colour marks and the tonal range being preserved
+     was noise. invert() then takes that silhouette to white for the night side.
+     Three marks, one ink, one weight, antialiasing intact.
+     🚫 Do not go back to grayscale(). It is why the strip looked broken.
+     🚫 Do not add a second set of dark PNGs either — two files per client is
+     two things to keep in sync, and the client owns the artwork. */
+  filter:brightness(0) invert(var(--k));
+}
+/* OPTICAL tuning, one value per client, chosen so the WORDMARKS match on
+   screen rather than the bounding boxes. LLEC is held DOWN, not up: its
+   lockup is mostly satellite dish, so matching it on wordmark size alone
+   would give the graphic twice any neighbour's visual mass. Rare Raleigh is
+   a two-line lockup and is balanced on mass rather than cap height. */
+/* ⚠ OPTICAL, NOT MATHEMATICAL. Tuned so the three marks carry the same visual
+   WEIGHT, which is not the same as the same height or the same width. Leak
+   Locators is the densest lockup and takes the smallest box; Rare Raleigh is
+   the lightest and takes the largest. */
+.clients__item--llec  .client{--mark-w:168px}
+.clients__item--llec  .client__logo{max-height:62%}   /* was 84% — densest mark */
+.clients__item--ls    .client{--mark-w:184px}
+.clients__item--ls    .client__logo{max-height:52%}   /* was 44% — too light beside the others */
+.clients__item--rr    .client{--mark-w:204px}
+.clients__item--rr    .client__logo{max-height:54%}   /* was 48% — lightest mark, largest box */
+
+/* ⚠ REDUCED MOTION AND NO-JS BOTH LAND HERE. The cycle only runs when
+   clients.js adds `is-cycling`, and it never adds it under reduced motion. In
+   both cases every mark simply sits at full strength — a stable, finished
+   arrangement with nothing missing and nothing moving. */
+.clients__list:not(.is-cycling) .client{opacity:.88}
+@media (prefers-reduced-motion:reduce){
+  .client{transition:none;opacity:.88}
+  .clients__list.is-cycling .client.is-lit{opacity:.88}
+}
+
+@media (max-width:900px){
+  /* ⚠ the label column comes off below 900. .clients__in is a GRID now, so the
+     old `flex-direction:column` further down this file has no effect on it —
+     this is the rule that actually stacks the strip. */
+  .clients__in{grid-template-columns:1fr;gap:clamp(16px,3vw,22px)}
+  .clients__list{gap:18px 28px}
+  .client{--mark-box:46px}
+}
+@media (max-width:560px){
+  /* three cells cannot hold three lockups this wide on a phone, so the strip
+     becomes a two-up with the third under it — still one row of marks per
+     line, still nothing duplicated, still nothing hidden. The emphasis cycle
+     is unchanged: it walks all three wherever they sit. */
+  .clients__list{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px}
+  .client{--mark-box:42px;max-width:100%}
+  /* the third mark sits alone on the second line, so it aligns to the start
+     rather than floating in the middle of a two-column track */
+  .clients__item:last-child{justify-content:flex-start}
+}
+/* nothing here animates any more, so reduced motion has nothing to switch off */
+
+/* ==========================================================================
+   4 · SERVICES — INDEX + STAGE · "one world, five crops"
+   The Stage is no longer a card: the artwork sits on the open canvas, bleeds
+   to the right viewport edge, and every scene is one dominant surface.
+   ========================================================================== */
+/* ⚠ The huge top pad that used to be here existed to clear .room__rise, the
+   opaque ramp that carried the page from dark into the old light room. The room
+   is dark now, there is no ramp, and the padding is back to the section token. */
+.svc{padding:var(--sec-lg) 0}
+.svc__grid{
+  /* 46/54, not 52/48: the diagrams carry small type (nav labels, chips,
+     document lines) and were unreadable at the old column width. The index
+     copy is short and loses nothing by giving the space up. */
+  display:grid;grid-template-columns:minmax(0,46fr) minmax(0,54fr);
+  gap:clamp(24px,3.2vw,56px);align-items:start;
+}
+
+/* --- the index (unchanged treatment) -------------------------------------- */
+.svc__index{list-style:none;margin:0;padding:0;border-top:1px solid var(--panel-line)}
+.svc__item{border-bottom:1px solid var(--panel-line)}
+/* An <a>, not a <button>, since 2026-08-30 — see the note in the markup. The
+   button resets stay because they cost nothing; `text-decoration:none` is the
+   only thing a link needs that a button did not. */
+.svc__row{
+  display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;
+  width:100%;padding:clamp(30px,3.6vw,54px) 14px;
+  background:none;border:0;text-align:left;cursor:pointer;color:inherit;
+  text-decoration:none;
+  position:relative;
+  transition:background-color var(--t-hover);
+}
+.svc__row::before{
+  content:'';position:absolute;left:0;top:10px;bottom:10px;width:2px;
+  background:linear-gradient(180deg,
+    rgba(10,71,240,0) 0%, var(--cobalt) 14%,
+    var(--cobalt) 86%, rgba(10,71,240,0) 100%);
+  opacity:0;transition:opacity var(--t-hover);
+}
+.svc__n{
+  font:600 13px/1.9 'General Sans',system-ui;letter-spacing:.12em;
+  color:var(--ink-4);transition:color var(--t-hover);
+}
+.svc__t{
+  display:block;
+  font:600 clamp(21px,1.9vw,27px)/1.15 'General Sans',system-ui;
+  letter-spacing:-.02em;color:var(--ink-1);
+  transition:color var(--t-hover),transform var(--t-pill);
+}
+.svc__d{
+  display:block;margin-top:7px;max-width:44ch;
+  font-size:15px;line-height:1.5;color:var(--ink-4);
+  transition:color var(--t-hover);
+}
+/* Hover/active are EDGELESS washes, not filled rectangles. A solid
+   background-color on a full-width grid row draws four hard edges, which is
+   exactly the "selected card" read we're removing. A radial wash anchored to
+   the left rule has no edge to see. */
+.svc__row:hover,.svc__row:focus-visible{
+  background-color:transparent;
+  background-image:radial-gradient(52% 42% at 0% 50%,
+    color-mix(in srgb, var(--ink-1) 5.5%, transparent) 0%, color-mix(in srgb, var(--ink-1) 2%, transparent) 34%,
+    color-mix(in srgb, var(--ink-1) 0%, transparent) 74%);
+}
+.svc__row:hover .svc__t,.svc__row:focus-visible .svc__t{color:var(--ink-1)}
+.svc__item.is-active .svc__row{background-color:transparent}
+.svc__item.is-active .svc__row::before{opacity:1}
+.svc__item.is-active .svc__n{color:var(--accent);text-shadow:0 0 14px rgba(91,134,255,.55)}
+.svc__item.is-active .svc__t{color:var(--ink-1);transform:translateX(6px)}
+.svc__item.is-active .svc__d{color:var(--ink-3)}
+.svc__row:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:-2px}
+
+/* --- the stage: open canvas, bleeding right ------------------------------- */
+
+/* The cobalt bloom the artwork lives in — light, not a container.
+
+   It used to read as a hard-edged blob for two reasons, both fixed here:
+     · it faded to `transparent`, which is transparent BLACK. Interpolating
+       cobalt → black-at-zero-alpha muddies the middle of the ramp and leaves
+       a visible boundary. Every stop below is the same hue at falling alpha.
+     · it was a single linear stop ending at 70%, so the falloff was a
+       straight ramp that terminates. The eased multi-stop tail below reaches
+       true zero at the very edge of the ellipse, so there is nothing to end.
+   Also enlarged, because a soft glow needs room to actually be soft. */
+
+/* ==========================================================================
+   SERVICES CONTAINMENT — primary objects fit, one decorative layer bleeds.
+
+   The previous system anchored the safe region to the VIEWPORT, because the
+   stage carries `margin-right: -gutter` and so its right edge sits on the
+   viewport edge. That was the wrong foundation: it meant "contained" still
+   allowed a primary object to run all the way to the browser edge.
+
+   The frame is now the COLUMN. `.scene` is inset by a full gutter, which
+   undoes the stage's bleed exactly — so a scene's right edge lands where the
+   grid column actually ends, with page margin beyond it.
+
+     .scene      the primary frame. Dominant objects live here, at width
+                 <= 100%, with no negative right offset and no outward
+                 translate. Nothing primary is cropped.
+     .bleeds     ONE decorative layer per scene may opt out and run to the
+                 viewport edge — a map ground, a body panel continuation.
+                 Never the focal object.
+   ========================================================================== */
+:root{
+  --svc-frame:calc(var(--gutter) * .5);  /* half the bleed back: the scene
+                                            still ends inside the viewport but
+                                            gets ~130px more width to draw in */
+  --svc-gap:clamp(8px,1.2vw,22px);    /* breathing room inside the frame    */
+}
+/* the ONE decorative escape. Focal objects never use this. */
+.bleeds{margin-right:calc((var(--svc-frame) + var(--svc-gap)) * -1)}
+
+/* 01 · WEB — one big surface, tilted, its right edge cropped */
+
+
+/* 04 · GBP — one tall phone-proportioned surface, cropped at the bottom */
+
+
+/* ==========================================================================
+   5 · HOW IT WORKS — five artifacts, one job
+   ========================================================================== */
+
+/* Editorial numerals, not badges. The circled markers read as UI chrome —
+   a component library — against a page whose whole voice is typographic.
+   Cormorant at display size in a narrow column reads as a set numeral. */
+
+/* --- the artifact stage: open canvas, like Services ----------------------- */
+
+/* same treatment as the services bloom — eased tail, one hue, no
+   `transparent` keyword, and enough size that the falloff has room */
+
+
+/* 1 · audit — the dated site, marked up */
+/* ==========================================================================
+   PROCESS ARTIFACTS — shared art direction
+   The five were reading as five different illustration styles. These tokens
+   are the common language: one paper stock, one shadow, one perspective, one
+   radius. Sizes, layout and interaction are unchanged — this is finish only.
+   ========================================================================== */
+:root{
+  --art-r:10px;
+  /* real paper is not a flat fill: a warm gradient, a lit top edge, and a
+     shadow with both a tight contact term and a wide soft term */
+  --art-paper:linear-gradient(158deg,#F5F3EE 0%,#E7E3D9 62%,#DCD7CA 100%);
+  --art-sheet:linear-gradient(158deg,#F4F5FA 0%,#E6E9EE 70%,#DCE0E6 100%);
+  --art-lift:
+    0 2px 0 color-mix(in srgb, var(--ink-1) 55%, transparent) inset,
+    0 1px 2px rgba(0,0,0,.28),
+    0 34px 70px rgba(0,0,0,.55);
+  --art-tilt:perspective(1300px) rotateY(-7deg);
+}
+
+
+/* 4 · launch — site + local presence together */
+
+
+/* 5 · grow — the phone ringing */
+
+
+/* ==========================================================================
+   6 · WORK + TESTIMONIAL — the photographic PEAK
+   ========================================================================== */
+.proof{padding:var(--sec-lg) 0 var(--sec)}
+.case{padding:clamp(36px,4.6vw,72px) 0}
+.case + .case{border-top:1px solid color-mix(in srgb, var(--ink-1) 12%, transparent)}
+.case__grid{
+  display:grid;align-items:center;
+  gap:clamp(28px,4.5vw,80px);
+}
+.case--right .case__grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.case--left  .case__grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+
+.case__kicker{
+  margin:0 0 14px;font:600 11.5px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+}
+.case__name{
+  margin:0 0 14px;font-size:clamp(30px,3.2vw,46px);
+  font-weight:600;letter-spacing:-.025em;line-height:1.05;
+}
+.case__scope{margin:0 0 6px;font:600 13px/1.5 'General Sans',system-ui;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.case__meta{margin:0 0 18px;font-size:15px;color:var(--ink-3)}
+.case__obs{
+  margin:0 0 22px;max-width:44ch;padding:13px 17px;
+  border-left:2px solid rgba(91,134,255,.5);
+  font-size:14px;line-height:1.55;color:var(--ink-3);
+  background:var(--panel);border-radius:0 8px 8px 0;
+}
+.case__link{
+  display:inline-block;font:600 15px/1 'General Sans',system-ui;
+  color:var(--ink-2);text-decoration:none;
+  border-bottom:1px solid color-mix(in srgb, var(--ink-1) 28%, transparent);padding-bottom:5px;
+  transition:color var(--t-hover),border-color var(--t-hover);
+}
+.case__link:hover,.case__link:focus-visible{color:var(--ink-1);border-color:var(--accent)}
+
+/* --- the screenshot surfaces --------------------------------------------- */
+.case__media{position:relative}
+/* bleed the imagery past the safe gutter to the viewport edge */
+.case--right .case__media{margin-right:calc(var(--gutter) * -1)}
+.case--left  .case__media{margin-left:calc(var(--gutter) * -1)}
+.shot{margin:0}
+.shot--desktop img{
+  display:block;width:100%;height:auto;
+  border-radius:10px;border:1px solid color-mix(in srgb, var(--ink-1) 15%, transparent);
+  box-shadow:var(--srf-edge),var(--srf-shadow);
+}
+.case--right .shot--desktop{transform:perspective(1600px) rotateY(-3deg)}
+.case--left  .shot--desktop{transform:perspective(1600px) rotateY(3deg)}
+.shot--mobile{
+  position:absolute;bottom:-9%;
+  width:clamp(140px,13vw,185px);aspect-ratio:9/19;
+  border-radius:24px;overflow:hidden;
+  border:1px solid color-mix(in srgb, var(--ink-1) 20%, transparent);
+  /* the phone bezel's own screen backing — a depicted object, not page
+     furniture, so it stays dark in both territories */
+  background:var(--navy);
+  box-shadow:0 40px 80px rgba(0,0,0,.6);
+}
+/* The overlap is the composition and it stays — but it has to fall on the
+   capture's decorative side, not its message. LLEC sets its headline and its
+   two CTAs against the LEFT edge of the page, and at -7% the phone landed
+   directly on the first characters of every headline line. Moved out to -15.5%,
+   which puts the phone's right edge in the capture's left margin: the bleed
+   now eats whitespace instead of words. Rare Raleigh is mirrored, its headline
+   sits far left and the phone falls on the aerial photograph, so it is
+   unchanged. */
+.case--right .shot--mobile{left:-15.5%}
+.case--left  .shot--mobile{right:-4%}
+.shot--mobile img{width:100%;height:100%;object-fit:cover;object-position:top}
+
+/* honest missing state — a marked slot, never a fake */
+.shot.is-missing img{display:none}
+.shot__await{display:none}
+.shot--desktop.is-missing{
+  aspect-ratio:16/10;
+  border:1.5px dashed color-mix(in srgb, var(--ink-1) 22%, transparent);border-radius:10px;
+}
+.shot--mobile.is-missing{border-style:dashed;border-color:color-mix(in srgb, var(--ink-1) 25%, transparent)}
+.shot.is-missing{display:grid;place-items:center}
+.shot.is-missing .shot__await{
+  display:block;text-align:center;padding:12px;
+  font:600 11px/1.6 'General Sans',system-ui;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);
+}
+
+/* --- the one testimonial, with the real LearnSmart site beside it --------- */
+.quote{
+  margin:clamp(56px,7vw,104px) 0 0;padding-top:clamp(30px,3.6vw,52px);
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 9%, transparent);
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);
+  gap:clamp(28px,5vw,90px);align-items:center;
+}
+.quote__label{
+  margin:0 0 6px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+}
+.quote__intro{margin:0 0 26px;font-size:14px;color:var(--ink-4)}
+.quote__text{
+  position:relative;margin:0 0 26px;padding-left:clamp(44px,4.6vw,66px);
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:clamp(22px,2.2vw,31px);line-height:1.38;
+  color:var(--ink-1);
+}
+.quote__mark{
+  position:absolute;left:0;top:-.12em;
+  font-size:2.6em;line-height:1;color:var(--accent);opacity:.85;
+}
+.quote__by{
+  padding-left:clamp(44px,4.6vw,66px);
+  font:500 15px/1.5 'General Sans',system-ui;color:var(--ink-2);
+}
+.quote__src{
+  display:block;margin-top:3px;font-size:12.5px;letter-spacing:.03em;
+  color:var(--ink-4);
+}
+.shot--quote{
+  transform:rotate(1.4deg);
+}
+.shot--quote img{
+  display:block;width:100%;height:auto;border-radius:10px;
+  border:1px solid color-mix(in srgb, var(--ink-1) 15%, transparent);
+  box-shadow:var(--srf-edge),0 34px 70px rgba(0,0,0,.5);
+}
+.shot--quote.is-missing{aspect-ratio:16/10;border:1.5px dashed color-mix(in srgb, var(--ink-1) 22%, transparent);border-radius:10px}
+.quote__asidenote{margin:12px 0 0;font-size:12.5px;color:var(--ink-4)}
+
+
+/* scope as one calm run-in line — no checklist */
+
+
+/* ==========================================================================
+   8 · FAQ — a QUIET valley, tightened
+   ========================================================================== */
+.faq{padding:var(--sec-sm) 0}
+.faq__grid{
+  display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+  gap:clamp(28px,5vw,90px);align-items:start;
+}
+.faq__head{position:sticky;top:calc(var(--head-h) + 20px)}
+.faq__list{border-top:1px solid var(--panel-line)}
+.qa{border-bottom:1px solid var(--panel-line)}
+.qa summary{
+  list-style:none;cursor:pointer;position:relative;
+  padding:clamp(15px,1.7vw,20px) 44px clamp(15px,1.7vw,20px) 14px;
+  font:600 16.5px/1.35 'General Sans',system-ui;color:var(--ink-2);
+  transition:color var(--t-hover);
+}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{
+  content:'+';position:absolute;right:14px;top:50%;
+  width:22px;height:22px;margin-top:-11px;
+  display:grid;place-items:center;border-radius:50%;
+  border:1px solid color-mix(in srgb, var(--ink-1) 28%, transparent);
+  font:400 14px/1 'General Sans',system-ui;color:var(--ink-3);
+  transition:transform var(--t-pill),border-color var(--t-hover),color var(--t-hover);
+}
+.qa summary:hover{color:var(--ink-1)}
+.qa summary:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:-2px}
+.qa[open]{background:var(--panel);box-shadow:inset 2px 0 0 var(--cobalt)}
+.qa[open] summary{color:var(--ink-1)}
+.qa[open] summary::after{
+  transform:rotate(45deg);border-color:var(--accent);color:var(--accent);
+}
+.qa p{
+  margin:0;padding:0 44px clamp(15px,1.7vw,20px) 14px;max-width:62ch;
+  font-size:15px;line-height:1.6;color:var(--ink-3);
+}
+/* Same component as the FAQ's old "more" link, reused rather than re-invented:
+   one quiet underlined link out of a section. `.faq__more` itself is no longer
+   in any markup — the FAQ link it belonged to pointed at the section the reader
+   was already in and was removed — but the rules stay because this uses them. */
+.svc__more,
+.faq__more{
+  display:inline-block;margin-top:20px;
+  font:600 15px/1 'General Sans',system-ui;color:var(--ink-3);
+  text-decoration:none;border-bottom:1px solid color-mix(in srgb, var(--ink-1) 25%, transparent);padding-bottom:4px;
+  transition:color var(--t-hover),border-color var(--t-hover);
+}
+.svc__more:hover,.svc__more:focus-visible,
+.faq__more:hover,.faq__more:focus-visible{color:#fff;border-color:var(--accent)}
+
+/* ==========================================================================
+   9 · FINAL CTA — HIGH: the closing brand statement, scaled up
+   ========================================================================== */
+.final{
+  /* overflow:CLIP, not hidden — hidden makes this a scroll container. The clip
+     is kept only because .final__mark is a watermark that would otherwise spill
+     into the FAQ above; the glow below is inset:0 and does not need to escape,
+     because .faq carries the matching light on its own side of the seam. */
+  position:relative;isolation:isolate;overflow:clip;
+  /* was clamp(110px,14vw,210px) — its own scale, ignoring the section
+     tokens, which made this the single largest block of empty space on the
+     page at 202px top AND bottom. It is a peak, so it uses the peak token. */
+  padding:var(--sec-lg) 0;
+  text-align:center;
+}
+/* THE CLOSING LIGHT. The last thing on the page was a flat navy field behind
+   the largest headline on the site. This lifts it from below the CTA pair, so
+   the buttons sit in light rather than on a plain ground. Restrained on
+   purpose: the cobalt CTA is the brightest object here and must stay so. */
+/* ⚠ .final::before WAS REMOVED, 2026-09-01. It was a glow scoped to one section, so its
+   falloff was clipped at that section's edges — with the theme flip the ground
+   either side of it is a different colour, and the clip became a hard
+   horizontal line across the full width at the FAQ / closing CTA boundary. Section-scoped
+   light produced every seam fixed in August and it produced this one.
+   There is now exactly ONE light source on the site: the fixed .atmos layer
+   in theme.css, which is behind the whole document and has no edges to clip
+   against. 🚫 Do not add a section-scoped glow to any section, ever. */
+/* the same light on the FAQ's side of the seam, so the colour crosses the
+   boundary even though neither section can bleed into the other */
+.faq{position:relative;isolation:isolate}
+/* ⚠ .faq::after WAS REMOVED, 2026-09-01. It was a glow scoped to one section, so its
+   falloff was clipped at that section's edges — with the theme flip the ground
+   either side of it is a different colour, and the clip became a hard
+   horizontal line across the full width at the FAQ / closing CTA boundary. Section-scoped
+   light produced every seam fixed in August and it produced this one.
+   There is now exactly ONE light source on the site: the fixed .atmos layer
+   in theme.css, which is behind the whole document and has no edges to clip
+   against. 🚫 Do not add a section-scoped glow to any section, ever. */
+.final__mark{
+  /* Anchored to the CTA block, not the section's midpoint. The section grew
+     from ~520px to ~1430px when the project-enquiry form was added, and a
+     top:50% mark drifted to a centre of 688px — straight across the form's
+     first two field rows, at up to .19 opacity mid-drift. This keeps the
+     watermark where it was designed to sit, behind the headline. */
+  position:absolute;top:clamp(200px,18.5vw,280px);left:50%;
+  width:min(560px,80vw);height:auto;
+  transform:translate(-50%,-50%);
+  filter:invert(1);opacity:.05;pointer-events:none;
+}
+.final__in{position:relative}
+.final__h{
+  margin:0 0 22px;
+  font-size:clamp(40px,5.6vw,86px);line-height:1.02;font-weight:600;
+  letter-spacing:-.03em;
+}
+.final__h em{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;
+  font-size:1.22em;letter-spacing:-.012em;
+}
+.final__sub{
+  margin:0 auto 40px;max-width:52ch;
+  font-size:clamp(16px,1.2vw,18px);line-height:1.55;color:var(--ink-3);
+}
+.final__ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:16px}
+.btn--cobalt{
+  height:56px;background:var(--cobalt);color:#fff;position:relative;overflow:hidden;
+}
+.btn--cobalt::before{
+  content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,
+    color-mix(in srgb, var(--ink-1) 0%, transparent) 0%,color-mix(in srgb, var(--ink-1) 55%, transparent) 50%,color-mix(in srgb, var(--ink-1) 0%, transparent) 100%);
+  opacity:0;transition:opacity var(--t-hover);
+}
+.btn--cobalt:hover,.btn--cobalt:focus-visible{background:var(--cobalt-hover)}
+.btn--cobalt:hover::before,.btn--cobalt:focus-visible::before{opacity:1}
+.btn--ghost{height:56px;border:1px solid var(--stroke-hi);color:var(--ink-1)}
+.btn--ghost:hover,.btn--ghost:focus-visible{
+  border-color:var(--accent);background:color-mix(in srgb, var(--ink-1) 5%, transparent);
+}
+.btn--cobalt:focus-visible,.btn--ghost:focus-visible{
+  outline:2px solid var(--cobalt-lift);outline-offset:3px;
+}
+
+/* ==========================================================================
+   10 · FOOTER — utility, one step darker
+   ========================================================================== */
+/* ⚠ Same story as services.css: footer.css owns .foot now. The background
+   here was the homepage half of the footer ground split. 🚫 Do not restyle
+   .foot outside footer.css. */
+.foot__brand{margin-bottom:clamp(40px,5vw,64px)}
+.foot__mark{
+  margin:0 0 10px;
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:30px;
+  letter-spacing:.22em;margin-right:-.22em;color:var(--ink-1);
+}
+.foot__line{margin:0;font-size:15px;color:var(--ink-3)}
+.foot__cols{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(24px,4vw,64px);max-width:1080px;
+}
+.foot__cols h3{margin:0 0 14px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
+.foot__cols p{margin:0 0 9px;font-size:14.5px;color:var(--ink-2)}
+.foot__cols a{text-decoration:none;transition:color var(--t-hover)}
+.foot__cols a:hover,.foot__cols a:focus-visible{color:var(--accent)}
+.foot__legal{
+  display:flex;gap:22px;align-items:center;
+  margin:clamp(40px,5vw,64px) 0 0;padding-top:20px;
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 10%, transparent);
+  font-size:12.5px;color:var(--ink-4);
+}
+.foot__legal a{color:var(--ink-4);text-decoration:none;transition:color var(--t-hover)}
+.foot__legal a:hover{color:#fff}
+
+/* ==========================================================================
+   MOBILE — conversion first, aggressive cropping, no hover dependencies.
+   ========================================================================== */
+@media (max-width:900px){
+  .head__nav{display:none}
+  .head__burger{display:block}
+  /* The wordmark used to be hidden below 900 and only reappeared once the
+     sticky header engaged, so a phone visitor landing at the top of the page
+     saw a masthead with no brand in it at all. It stays now. The mobile
+     masthead is: mark left, menu right — the CTA lives in the drawer, and
+     phone prominence remains a separate owner decision. */
+  .head__cta{display:none}
+
+  .hero{
+    flex-direction:column;align-items:stretch;
+    min-height:0;padding:clamp(26px,7vw,44px) 0 clamp(48px,12vw,72px);
+  }
+  .hero__h1{max-width:none}
+
+  .sec-head,.sec-head--peak{grid-template-columns:1fr;align-items:start;gap:18px;
+    margin-bottom:clamp(36px,9vw,56px)}
+  .h2--peak{font-size:clamp(38px,10vw,52px)}
+
+  /* trust: single tight stack. 🚫 .clients__in is display:grid — its stacking
+     is handled in the 900 breakpoint above. Only the dead list is flex. */
+  .clients__deadlist{flex-direction:column;gap:12px;width:100%}
+  .clients__deadlist li{padding-left:0;border-left:0;padding-bottom:12px;
+    border-bottom:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent)}
+  .clients__deadlist li:last-child{border-bottom:0;padding-bottom:0}
+
+  /* services: index is the section; the stage re-seats under the active row */
+  .svc{padding:var(--sec) 0}
+  .svc__grid{grid-template-columns:1fr}
+  .svc__more{grid-column:1;grid-row:auto}
+
+/* process: steps stack; one static final artifact below */
+  
+  
+
+  /* proof: one dominant surface; imagery full-bleed both sides */
+  .case__grid,.case--right .case__grid,.case--left .case__grid{grid-template-columns:1fr}
+  .case--left .case__media{order:-1}
+  .case--right .case__media{margin-right:calc(var(--gutter) * -1);margin-left:calc(var(--gutter) * -1)}
+  .case--left  .case__media{margin-left:calc(var(--gutter) * -1);margin-right:calc(var(--gutter) * -1)}
+  .case--right .shot--desktop,.case--left .shot--desktop{transform:none}
+  .shot--mobile{width:124px;bottom:-6%}
+  .case--right .shot--mobile{left:6%}
+  .case--left .shot--mobile{right:6%}
+  .case__obs{max-width:none}
+
+  .quote{grid-template-columns:1fr}
+  .quote__text,.quote__by{padding-left:0}
+  .quote__mark{position:static;display:block;margin-bottom:6px}
+  .shot--quote{transform:none}
+
+  
+
+  .faq__grid{grid-template-columns:1fr}
+  .faq__head{position:static}
+
+  .final{text-align:left;padding:clamp(84px,20vw,130px) 0}
+  .final__mark{left:auto;right:-20%;width:min(420px,110vw)}
+  .final__sub{margin-inline:0}
+  .final__ctas{flex-direction:column;justify-content:flex-start}
+  .final__ctas .btn{width:100%}
+
+  .foot__cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .foot__cols{grid-template-columns:1fr}
+}
+
+/* ==========================================================================
+   REDUCED MOTION — every animated element rests at a composed frame.
+   No content is gated behind motion: scenes and artifacts still swap
+   (instantly), the seam rests mid-surface, pings are simply still.
+   ========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .head.is-fixed{transform:none}
+}
+
+/* --------------------------------------------------------------------------
+   AA REPAIRS — measured 2026-08-30, Phase 1.
+     .offer__price  rgba(2,12,46,.44) on #F2F0EA = 2.87:1 at 12px/600 -> .64 = 5.38:1
+     .foot__legal   color-mix(in srgb, var(--ink-1) 38%, transparent) on #060A1A = 3.52:1 at 12.5px -> .48 = 4.99:1
+   Both are real readable text: a price qualifier and the copyright line.
+   -------------------------------------------------------------------------- */
+
+/* ==========================================================================
+   SITE-WIDE MOTION + COLOUR SYSTEM
+   Appended last on purpose: the reduced-motion gate at the bottom of this
+   block must win the cascade over everything introduced here.
+
+   The governing rule is unchanged — STABLE LAYOUT, ALIVE ARTWORK. Nothing
+   below moves a section, a heading, a paragraph or a grid. Motion lives in
+   artwork, active states and hover response only, and every animated
+   property is transform or opacity so it stays on the compositor.
+
+   Services fit is LOCKED. Nothing here changes a width, inset, or safe
+   region — only transforms that resolve to identity at rest.
+   ========================================================================== */
+:root{
+  /* ---- one easing family, two curves ---------------------------------- */
+  --e-ui:cubic-bezier(.22,.61,.36,1);      /* interaction: quick, no bounce */
+  --e-settle:cubic-bezier(.16,.84,.44,1);  /* artwork arriving into place   */
+
+  /* ---- four durations, used everywhere -------------------------------- */
+  --t-fast:190ms;      /* hover / focus response                           */
+  --t-base:420ms;      /* state + scene transitions                        */
+  --t-settle:620ms;    /* deliberate artwork settle                        */
+  --t-ambient:11s;     /* continuous background motion                     */
+
+  /* ---- COBALT HIERARCHY ------------------------------------------------
+     T1 full cobalt — primary CTA, active service, one process cue, the
+        final CTA moment, artwork illumination. Used sparingly.
+     T2 environmental — rim light, bloom, hover glow, edge catch.
+     T3 accessible text — #5B86FF only, for small text on dark.            */
+  --co-1:var(--cobalt);
+  --co-edge:rgba(10,71,240,.72);
+  --co-glow:rgba(10,71,240,.46);
+  --co-wash:rgba(10,71,240,.24);
+  --co-hair:rgba(91,134,255,.78);
+}
+
+/* ==========================================================================
+   ⚠ THE STALE .client BLOCK THAT USED TO BE HERE IS GONE — 2026-08-31.
+   It set `.client{display:block}` 620 lines AFTER the rule that sets
+   `display:grid;place-items:center`, at equal specificity, so it won on source
+   order and silently killed the vertical centring. That is the ACTUAL cause of
+   the "LLEC clipping" — every mark was pinned to the top of its 56px box with
+   all the slack below it (measured: LLEC 46px tall with 10px under it,
+   LearnSmart 25px with 31px, Rare Raleigh 22px with 34px). It also added a
+   translateX(3px) hover and a drawn underline, both of which belonged to the
+   long-removed two-line client lockup with a name and a category.
+   The carousel below owns the whole component now.
+   ========================================================================== */
+
+/* ==========================================================================
+   SERVICES — active state + scene transition. NO sizing changes.
+   ========================================================================== */
+.svc__row{transition:background-color var(--t-base) var(--e-ui)}
+.svc__n{transition:color var(--t-base) var(--e-ui)}
+.svc__t{transition:color var(--t-base) var(--e-ui),transform var(--t-base) var(--e-ui)}
+.svc__d{transition:color var(--t-base) var(--e-ui)}
+/* T2: a low cobalt spill into the active row, brightest at the marker edge */
+.svc__item.is-active .svc__row{
+  /* was a 90deg linear block: full-height, so it painted a visible rectangle
+     with hard top/bottom/right edges. A radial anchored at the left rule
+     dissolves in every direction — a tonal wash, not a component.
+     The radii matter: the vertical radius is deliberately SMALLER than half
+     the row height (44% of the box vs the 50% that would reach the edge), so
+     the wash returns to zero before it can meet the row's top or bottom
+     hairline. Same idea horizontally. Nothing is clipped, so nothing edges. */
+  background-image:radial-gradient(58% 44% at 0% 50%,
+    rgba(10,71,240,.20) 0%, rgba(10,71,240,.09) 30%,
+    rgba(10,71,240,.03) 55%, rgba(10,71,240,0) 78%);
+}
+.svc__item.is-active .svc__row::before{
+  box-shadow:0 0 26px var(--co-glow),0 0 3px var(--cobalt-lift);
+  transition:opacity var(--t-base) var(--e-ui),box-shadow var(--t-base) var(--e-ui);
+}
+/* --- per-scene meaning-specific motion, each fired by the active state --- */
+
+
+/* 02 REDESIGN — the seam already carries this scene's whole motion idea
+   (`redo-seam`, an 8s traverse of the new surface). Adding a second animation
+   here overrode it with a 4px nudge and destroyed the wipe. Left alone. */
+
+
+/* ==========================================================================
+   PROCESS — state-triggered only. Nothing here loops except Grow's ring.
+   ========================================================================== */
+
+/* ==========================================================================
+   PROOF — hover depth only. No scroll motion, no continuous float.
+   ========================================================================== */
+.case{--lift:0}
+.shot--desktop img{transition:transform var(--t-settle) var(--e-settle),
+                              box-shadow var(--t-settle) var(--e-settle)}
+.shot--mobile{transition:transform var(--t-settle) var(--e-settle)}
+.case:hover .shot--desktop img{
+  transform:translateY(-6px);
+  box-shadow:var(--srf-edge),0 46px 90px rgba(0,0,0,.62),0 0 60px var(--co-wash);
+}
+/* the phone crop moves a touch further than the surface behind it — parallax
+   on hover only, which is what gives the pair depth */
+.case:hover .shot--mobile{transform:translateY(-13px)}
+.case__link{position:relative;transition:color var(--t-fast) var(--e-ui)}
+.case__link::after{
+  content:'';position:absolute;left:0;right:0;bottom:-2px;height:1px;
+  background:var(--co-hair);transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t-base) var(--e-ui);
+}
+.case:hover .case__link::after,.case__link:focus-visible::after{transform:scaleX(1)}
+
+
+/* ==========================================================================
+   FAQ — the quietest thing on the page. Marker rotation and one hairline.
+   ========================================================================== */
+.qa summary::after{transition:transform var(--t-base) var(--e-ui),color var(--t-fast) var(--e-ui)}
+.qa[open] summary::after{color:var(--accent)}
+.qa[open] summary{color:var(--ink-1)}
+.qa p{animation:qa-open var(--t-base) var(--e-settle) 1 both}
+@keyframes qa-open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* ==========================================================================
+   FINAL CTA — the closing brand signature, and the biggest motion moment
+   below the hero. The type and the buttons never move; everything happens
+   BEHIND them: the ghosted mark drifts on a very long cycle while a cobalt
+   illumination crosses the field.
+   ========================================================================== */
+.final__mark{
+  animation:final-drift var(--t-ambient) ease-in-out infinite;
+  will-change:transform,opacity;
+}
+@keyframes final-drift{
+  0%,100%{transform:translate(-50%,-50%) scale(1) rotate(-1.6deg);opacity:.06}
+  50%{transform:translate(-50%,-55%) scale(1.14) rotate(2.4deg);opacity:.19}
+}
+/* the cobalt pass — wide, soft, slow, and entirely behind the content */
+.final::after{
+  content:'';position:absolute;inset:-20% -40%;
+  background:radial-gradient(42% 52% at 50% 50%,var(--co-glow),transparent 72%);
+  transform:translateX(-70%);pointer-events:none;
+  animation:final-light calc(var(--t-ambient) * 1.15) ease-in-out infinite;
+}
+@keyframes final-light{
+  0%,100%{transform:translateX(-70%);opacity:.35}
+  50%{transform:translateX(70%);opacity:1}
+}
+.final__in{position:relative;z-index:1}
+
+/* ==========================================================================
+   BUTTONS + LINKS — one interaction language across the page.
+   ========================================================================== */
+.btn{transition:background-color var(--t-fast) var(--e-ui),
+                border-color var(--t-fast) var(--e-ui),
+                color var(--t-fast) var(--e-ui),
+                transform var(--t-fast) var(--e-ui),
+                box-shadow var(--t-fast) var(--e-ui)}
+.btn--cobalt:hover,.btn--cobalt:focus-visible,
+.hero__ctas .btn--solid:hover,.hero__ctas .btn--solid:focus-visible{
+  transform:translateY(-1px);box-shadow:0 10px 26px var(--co-glow);
+}
+.btn--ghost:hover,.btn--ghost:focus-visible{
+  border-color:var(--accent);background:color-mix(in srgb, var(--ink-1) 5%, transparent);
+}
+
+/* ==========================================================================
+   REDUCED MOTION — last in the cascade, and deliberately total.
+   Every loop and every arrival animation stops. Hover COLOUR response is
+   kept (reduced motion removes travel, not feedback). Nothing is hidden:
+   each animated element's resting state is its designed state.
+   ========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  /* the scene/artifact stacking still has to work without transforms */
+  
+/* the ghosted mark keeps its designed resting opacity, not 1 */
+  .final__mark{opacity:.05}
+  .final::after{opacity:.7}
+}
+
+
+/* room tokens, scoped to the section */
+.invest{--room:#F2F0EA;--room-deep:#EAE7DF;--ink-on-room:#020C2E;
+  --line-room:rgba(2,12,46,.16);--line-dark:rgba(2,12,46,.14)}
+/* ==========================================================================
+   3 · INVESTMENT — the one true tonal break
+   WHAT CHANGED: the whole section becomes an edge-to-edge warm-paper room —
+   the same paper stock the audit sheet and scope document are printed on.
+   Three engagements as ruled title-pages, price promoted to display scale,
+   Growth carried by a cobalt rule + scale (no RECOMMENDED pill, no card),
+   care + add-ons folded in as a quiet ruled footer. No rounded container,
+   no gradient transition, no white card inside navy.
+   ========================================================================== */
+.invest{background:var(--room);color:var(--ink-on-room);padding:var(--sec-lg) 0;border:0 !important;box-shadow:none !important}
+.proofctx{border:0 !important}.faqctx{border:0 !important}
+/* a hard, honest edge into the room — a single hairline, no gradient */
+
+.invest .pill-label{color:rgba(2,12,46,.66)}
+.invest .pill-label::before{background:var(--cobalt)}
+.invest .lead{color:rgba(2,12,46,.62)}
+.invest .h2{color:var(--ink-on-room)}
+
+.offers{border-top:0}
+.offer{position:relative;
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,2.8fr);
+  gap:clamp(18px,2.2vw,40px);align-items:start;
+  padding:clamp(30px,3.6vw,54px) clamp(16px,1.6vw,28px);
+  border-bottom:1px solid var(--line-room)}
+/* scope and price start optically level with the engagement name, so one
+   left-to-right read carries: package -> what you get -> price/action */
+.offer__scope{padding-top:clamp(22px,2.1vw,32px)}
+.offer__go{padding-top:clamp(20px,1.9vw,30px)}
+/* Market Leader breathes: extra room above, roomier text */
+.offer--ml{padding-top:clamp(44px,5.2vw,76px)}
+.offer--ml .offer__stage{line-height:1.7}
+.offer--ml .offer__scope{line-height:1.95}
+/* copy-candidate marker: visual flag removed by request — .cc classes retained
+   in the markup so implementation still knows which wording is unapproved */
+.cc{text-decoration:none}
+.offer__no{margin:0 0 8px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:500;font-size:19px;color:var(--cobalt)}
+.offer__name{margin:0 0 10px;font-size:clamp(34px,3.7vw,56px);font-weight:600;
+  letter-spacing:-.026em;line-height:1.0;color:var(--ink-on-room)}
+.offer__stage{margin:0;max-width:36ch;font-size:15px;line-height:1.55;color:rgba(2,12,46,.58)}
+.offer__scope{margin:0;max-width:34ch;font-size:14px;line-height:1.8;color:rgba(2,12,46,.56)}
+.offer__go{display:grid;gap:13px;justify-items:start}
+.offer__price{margin:0;display:grid;gap:8px;
+  font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(2,12,46,.64)}
+/* the figure is promoted to display scale — the strongest single fix to the
+   old "price hierarchy is weak" note */
+.offer__price span{display:block;
+  font:600 clamp(26px,2.4vw,36px)/1 'General Sans',system-ui;
+  letter-spacing:-.02em;text-transform:none;color:var(--ink-on-room)}
+.offer__cta--text{display:inline-block;padding:0 0 5px;border:0;
+  border-bottom:1px solid rgba(2,12,46,.32);
+  color:rgba(2,12,46,.78);text-decoration:none;
+  font:600 15px/1 'General Sans',system-ui;
+  transition:color var(--t-hover),border-color var(--t-hover)}
+.offer__cta--text:hover,.offer__cta--text:focus-visible{color:var(--ink-on-room);border-color:var(--cobalt)}
+/* the ONE button in the section — the primary engagement only */
+.offer__cta:not(.offer__cta--text){display:inline-flex;align-items:center;height:46px;
+  padding:0 22px;border-radius:999px;background:var(--cobalt);color:#fff;text-decoration:none;
+  font:600 14px/1 'General Sans',system-ui;transition:background-color var(--t-hover)}
+.offer__cta:not(.offer__cta--text):hover,
+.offer__cta:not(.offer__cta--text):focus-visible{background:var(--cobalt-hover)}
+/* the ink button — Launch and Market Leader. Growth keeps the only cobalt one. */
+.offer__cta--dark{background:var(--ink-on-room) !important;color:var(--room) !important}
+.offer__cta--dark:hover,.offer__cta--dark:focus-visible{background:#1B2740 !important}
+
+/* "See what's included" — the row's toggle. A text action, not a component. */
+.offer__see{display:inline-flex;align-items:center;gap:8px;background:none;border:0;padding:0 0 5px;
+  border-bottom:1px solid rgba(2,12,46,.32);cursor:pointer;
+  color:rgba(2,12,46,.78);font:600 15px/1 'General Sans',system-ui;
+  transition:color var(--t-hover),border-color var(--t-hover)}
+.offer__see i{font-style:normal;display:inline-block;transition:transform var(--t-pill);
+  color:var(--cobalt)}
+.offer__see:hover,.offer__see:focus-visible{color:var(--ink-on-room);border-color:var(--cobalt)}
+.offer__see:focus-visible{outline:2px solid var(--cobalt);outline-offset:4px}
+.offer.is-open .offer__see i{transform:rotate(90deg)}
+
+/* the inline expansion: the room simply grows. Full row width, ruled off
+   from the collapsed line above it, columns tracking the row's own grid. */
+.offer__x{grid-column:1 / -1;overflow:hidden;max-height:0;opacity:0;
+  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .3s ease}
+.offer.is-open .offer__x{max-height:960px;opacity:1;
+  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s ease .12s}
+.x__inner{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,2.8fr);
+  gap:clamp(18px,2.2vw,40px);
+  margin-top:clamp(26px,2.6vw,40px);padding-top:clamp(24px,2.4vw,36px);
+  border-top:1px solid rgba(2,12,46,.10)}
+.x__h{margin:0 0 14px;font:600 11.5px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(2,12,46,.44)}
+.x__h + .x__h{margin-top:0}
+.x__list{list-style:none;margin:0;padding:0}
+.x__list li{padding:6px 0;font-size:14.5px;line-height:1.55;color:rgba(2,12,46,.72)}
+.x__list li b{font-weight:600;color:var(--ink-on-room)}
+.x__p{margin:0 0 26px;font-size:14.5px;line-height:1.65;color:rgba(2,12,46,.66);max-width:38ch}
+.x__p:last-child{margin-bottom:0}
+/* the honest boundary line — what a package is NOT. Quieter than body copy
+   and ruled off, so it reads as a caveat rather than another selling point. */
+.x__p--edge{margin-top:-12px;padding-top:14px;font-size:13.5px;
+  border-top:1px solid rgba(2,12,46,.12);color:rgba(2,12,46,.5)}
+.x__ongoing{margin:0 0 26px;padding:0;list-style:none}
+.x__ongoing li{padding:5px 0;font-size:14px;line-height:1.55;color:rgba(2,12,46,.66)}
+.x__ongoing b{font-weight:600;color:var(--ink-on-room)}
+.x__ongoing span{color:var(--cobalt);font-weight:600}
+.x__note{margin:10px 0 0;font-size:12px;color:rgba(2,12,46,.42)}
+
+/* GROWTH — emphasis without a card: cobalt rule, one quiet line of text,
+   the numeral flips to filled cobalt language, name steps up a size */
+.offer--rec{border-left:none}
+.offer--rec::before{content:'';position:absolute;left:0;top:-1px;bottom:-1px;
+  width:3px;background:var(--cobalt)}
+.offer--rec .offer__name{font-size:clamp(40px,4.3vw,66px)}
+.offer__common{margin:0 0 12px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--cobalt)}
+
+/* CARE + ADD-ONS — folded in as one quiet ruled footer, two columns */
+.invest__after{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(28px,5vw,90px);margin-top:clamp(36px,4vw,60px)}
+.aftercol h3{margin:0 0 16px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(2,12,46,.44)}
+.aftercol{border-top:1px solid var(--line-room);padding-top:22px}
+.careline{display:flex;justify-content:space-between;gap:18px;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid rgba(2,12,46,.10)}
+.careline b{font-weight:600;color:var(--ink-on-room);font-size:15px}
+.careline i{font-style:normal;font-size:13.5px;color:rgba(2,12,46,.52)}
+.careline span{flex:none;font:600 14px/1 'General Sans',system-ui;color:var(--cobalt)}
+.addonline{margin:0;padding:12px 0;font-size:14.5px;line-height:1.9;color:rgba(2,12,46,.62)}
+.addonline b{display:block;font-weight:600;color:var(--ink-on-room)}
+.invest__note{margin:clamp(30px,3vw,46px) 0 0;font-size:12px;letter-spacing:.02em;
+  color:rgba(2,12,46,.42)}
+
+/* ==========================================================================
+   CONTEXT SLICES — end of Proof and start of FAQ, in their EXISTING current
+   treatment (styles copied verbatim from the prototype). Not redesigned;
+   present only so the navy -> paper -> navy rhythm can be judged.
+   ========================================================================== */
+.ctxtag{margin:0 0 26px;font:600 10.5px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-4)}
+.proofctx{padding:clamp(36px,4.4vw,68px) 0 var(--sec-lg)}
+.quote{margin:0;padding-top:clamp(30px,3.6vw,52px);
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 9%, transparent);
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);
+  gap:clamp(28px,5vw,90px);align-items:center}
+.quote__label{margin:0 0 6px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.quote__intro{margin:0 0 26px;font-size:14px;color:var(--ink-4)}
+.quote__text{position:relative;margin:0 0 26px;padding-left:clamp(44px,4.6vw,66px);
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;
+  font-size:clamp(22px,2.2vw,31px);line-height:1.38;color:var(--ink-1)}
+.quote__mark{position:absolute;left:0;top:-.12em;font-size:2.6em;line-height:1;
+  color:var(--accent);opacity:.85}
+.quote__by{padding-left:clamp(44px,4.6vw,66px);
+  font:500 15px/1.5 'General Sans',system-ui;color:var(--ink-2)}
+.quote__src{display:block;margin-top:3px;font-size:12.5px;letter-spacing:.03em;
+  color:var(--ink-4)}
+.shot--quote{transform:rotate(1.4deg);aspect-ratio:16/10;
+  border:1.5px dashed color-mix(in srgb, var(--ink-1) 22%, transparent);border-radius:10px;
+  display:grid;place-items:center;position:relative}
+.shot__await{font-size:12px;line-height:1.5;text-align:center;color:var(--ink-4)}
+.quote__asidenote{margin:12px 0 0;font-size:12.5px;color:var(--ink-4)}
+
+.faqctx{padding:var(--sec-sm) 0 clamp(30px,3.4vw,52px)}
+.faq__grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+  gap:clamp(28px,5vw,90px);align-items:start}
+.faq__list{border-top:1px solid var(--panel-line)}
+.qa{border-bottom:1px solid var(--panel-line)}
+.qa summary{list-style:none;cursor:pointer;position:relative;
+  padding:clamp(15px,1.7vw,20px) 44px clamp(15px,1.7vw,20px) 14px;
+  font:600 16.5px/1.35 'General Sans',system-ui;color:var(--ink-2)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:'+';position:absolute;right:14px;top:50%;
+  width:22px;height:22px;margin-top:-11px;display:grid;place-items:center;
+  border-radius:50%;border:1px solid color-mix(in srgb, var(--ink-1) 28%, transparent);
+  font:400 14px/1 'General Sans',system-ui;color:var(--ink-3)}
+.qa[open]{background:color-mix(in srgb, var(--ink-1) 3%, transparent);box-shadow:inset 2px 0 0 var(--cobalt)}
+.qa[open] summary{color:var(--ink-1)}
+.qa[open] summary::after{transform:rotate(45deg);border-color:var(--accent);color:var(--accent)}
+.qa p{margin:0;padding:0 44px clamp(15px,1.7vw,20px) 14px;max-width:62ch;
+  font-size:15px;line-height:1.6;color:var(--ink-3)}
+.faqctx__more{margin:22px 0 0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-4)}
+
+
+@media (max-width:900px){
+  .offer{grid-template-columns:1fr;gap:18px;align-items:start}
+  .offer__scope,.offer__go{padding-top:0}
+  .x__inner{grid-template-columns:1fr;gap:26px}
+  .invest__after{grid-template-columns:1fr}
+}
+
+/* ==========================================================================
+   SCENE ARTWORK — approved 2026-08-27 compositions, inlined as SVG.
+   The SVGs are transparent; the page canvas and blooms are theirs to sit on.
+   ========================================================================== */
+
+/* alive artwork, stable page: two quiet motions only */
+.kre-ping{transform-box:fill-box;transform-origin:center;
+  animation:kre-ping 2.6s ease-out infinite}
+.kre-ping--late{animation-delay:.5s}
+@keyframes kre-ping{
+  0%{transform:scale(.55);opacity:1}
+  70%{transform:scale(1.35);opacity:0}
+  100%{transform:scale(1.35);opacity:0}}
+.kre-seam{animation:kre-seam 4.5s ease-in-out infinite alternate}
+@keyframes kre-seam{from{opacity:.55}to{opacity:.95}}
+@media (prefers-reduced-motion:reduce){
+  .kre-ping,.kre-seam{animation:none}
+}
+
+
+/* ==========================================================================
+   DIAGRAM SCALE — services scenes and process artifacts read slightly larger.
+   Applied as a transform on the composition rather than by resizing any inner
+   part, so the Services containment system is untouched: the frame, the safe
+   region and every per-scene offset stay exactly as approved. --dz is the one
+   number, and reduced motion keeps it (it is scale, not travel).
+   ========================================================================== */
+:root{ --dz:1.16; --dz-art:1.26; }
+/* On a phone the artifact column is the full width, so the desktop scale
+   pushed it ~5px past the viewport and .proc{overflow:clip} silently cut it.
+   Mobile gets its own value. */
+/* Artifacts now fill their box (the viewBox aspect matches the container),
+   so the extra 1.04 would push them past .proc__viz{overflow:hidden} — the
+   size now comes from the viewBox instead. Services scenes are unchanged. */
+@media (max-width:900px){ :root{ --dz:1.04; --dz-art:1.0; } }
+
+@media (prefers-reduced-motion:reduce){
+  /* the global reduced-motion rule zeroes transforms; these two keep their
+     scale, because that is size, not motion */
+  
+}
+
+/* ==========================================================================
+   RESPONSIVE CASCADE REPAIR — proof quote + FAQ grid
+   --------------------------------------------------------------------------
+   The <=900px collapse for `.quote` and `.faq__grid` is declared around L1169,
+   but a LATER pass re-declared both grids unconditionally (`.quote` ~L1566,
+   `.faq__grid` ~L1589). Same specificity, later in the file, no media query —
+   so the desktop two-column grid won at every width.
+
+   Measured at 390 before this block:
+     .quote      -> 189px / 108px, leaving the pull-quote 145px of text width
+                    (three or four words a line, Cormorant at 22px)
+     .faq__grid  -> 108px / 189px, squeezing every question into 189px
+   Re-asserting the collapse after both, rather than editing the earlier block,
+   keeps the desktop composition byte-for-byte identical.
+   ========================================================================== */
+@media (max-width:900px){
+  .quote{grid-template-columns:1fr}
+  .quote__text,.quote__by{padding-left:0}
+  .quote__mark{position:static;display:block;margin-bottom:6px}
+  .shot--quote{transform:none}
+  .faq__grid{grid-template-columns:1fr}
+  .faq__head{position:static}
+}
+
+/* ==========================================================================
+   PROCESS — PER-ARTIFACT MOTION
+   --------------------------------------------------------------------------
+   Each artifact plays its own short sequence when its step becomes active.
+   Everything is scoped to `.proc__viz[data-step="N"] .art--N`, so the
+   animation starts the moment the selector begins matching and re-runs if the
+   reader clicks back to that step. No JS, no new libraries, no scroll-linking.
+
+   Nothing here changes a diagram's composition — the resting state of every
+   animation is exactly the artwork as it was drawn. Only the arrival changes.
+   ========================================================================== */
+
+/* --- 1 · DISCOVER — the rings are actually drawn round each fault --------- */
+.p1-ring{ stroke-dasharray:var(--len); stroke-dashoffset:0; }
+.p1-lead{ stroke-dasharray:var(--len); stroke-dashoffset:0; }
+@keyframes p1-draw{ from{stroke-dashoffset:var(--len)} to{stroke-dashoffset:0} }
+@keyframes p1-note{ from{opacity:0} to{opacity:1} }
+@keyframes p2-rule{ from{opacity:0} to{opacity:1} }
+@keyframes p2-num{ from{fill:rgba(2,12,46,.38)} to{fill:#0A47F0} }
+@keyframes p2-title{ from{fill:rgba(2,12,46,.74)} to{fill:#0A47F0} }
+
+/* --- 3 · BUILD — the waiting module is placed into the layout -------------
+   The artwork already tells this story statically: a cobalt-outlined content
+   block sits below-right of the site, joined to an empty dashed slot in the
+   card row by a dashed leader. The motion just plays it in order —
+   module arrives, the leader runs toward the slot, the slot lands in the
+   site travelling up-and-left from the module's direction. */
+.p3-slot,.p3-block{ transform-box:fill-box; transform-origin:50% 50%; }
+@keyframes p3-block{
+  from{ opacity:0; transform:translate(20px,34px) scale(.94) }
+  to  { opacity:1; transform:none }
+}
+@keyframes p3-fade{ from{opacity:0} to{opacity:.7} }
+/* dashes run from the module toward the slot — negative offset travels
+   along the path direction, which is drawn block -> slot */
+@keyframes p3-crawl{ from{stroke-dashoffset:0} to{stroke-dashoffset:-12} }
+@keyframes p3-place{
+  from{ opacity:0; transform:translate(56px,78px) scale(.86) }
+  55% { opacity:1 }
+  to  { opacity:1; transform:none }
+}
+
+/* --- 4 · LAUNCH — site, then profile, then the map behind them ------------ */
+
+/* the map is the ground they land on, so it arrives last and underneath */
+
+/* --- 5 · GROW — the handset rings ----------------------------------------
+   A burst, not a permanent tremor: ~0.7s of shake every 4.2s, so it reads as
+   a call arriving rather than a stuck animation. This is the one artifact
+   that also renders on mobile (which parks on step 5), so it stays gentle. */
+.p5-phone{ transform-box:fill-box; transform-origin:50% 50%; }
+@keyframes p5-ring{
+  0%,100%      { transform:none }
+  1.5%         { transform:translateX(-3px) rotate(-.5deg) }
+  4%           { transform:translateX(3px)  rotate(.5deg) }
+  6.5%         { transform:translateX(-2.4px) rotate(-.4deg) }
+  9%           { transform:translateX(2.4px)  rotate(.4deg) }
+  11.5%        { transform:translateX(-1.4px) rotate(-.22deg) }
+  14%          { transform:translateX(1.4px)  rotate(.22deg) }
+  16.5%        { transform:none }
+}
+
+/* --- reduced motion: every artifact rests in its finished state ----------- */
+@media (prefers-reduced-motion:reduce){
+  
+  /* the lit-row colours are the artwork's finished state, so hold them */
+  
+  
+  
+}
+
+/* ==========================================================================
+   ACCESSIBILITY REPAIR — WCAG 2.2 AA
+   --------------------------------------------------------------------------
+   Two real failures found in production QA, fixed without touching layout,
+   type, spacing or composition. Appended so every change is reviewable in
+   one place and can be reverted as a block.
+
+   1.4.3 Contrast (Minimum). Measured against the actual painted background
+   (navy #020C2E / warm paper #F2F0EA). Normal text needs 4.5:1, text >=24px
+   needs 3:1. The design intent here is quiet secondary text, so each value is
+   raised to the LOWEST alpha that clears the threshold — the hierarchy is
+   preserved, the text is just legible.
+   ========================================================================== */
+/* --- on navy: white needs alpha >= .46 normal, >= .35 large -------------- */
+.clients__label{color:var(--ink-4)}    /* was .38 -> 3.56:1 */
+.quote__intro{color:var(--ink-4)}     /* was .44 -> 4.37:1 */
+.quote__asidenote{color:var(--ink-4)} /* was .42 -> 4.08:1 */
+.quote__src{color:var(--ink-4)}          /* inactive step copy, was .44 */
+.svc__n{color:var(--ink-4)}           /* inactive numeral, was .35 -> 3.20:1 */
+          /* inactive numeral, 33px large, was .26 -> 2.30:1 */
+
+/* --- on warm paper: ink needs alpha >= .59 ------------------------------- */
+.offer__stage{color:rgba(2,12,46,.60)}        /* was .58 -> 4.41:1 */
+.offer__scope{color:rgba(2,12,46,.60)}        /* was .56 -> 4.14:1 */
+.x__h{color:rgba(2,12,46,.60)}                /* was .44 -> 2.87:1 */
+.x__p--edge{color:rgba(2,12,46,.60)}          /* was .50 -> 3.43:1 */
+.x__note{color:rgba(2,12,46,.60)}             /* was .42 */
+.invest__note{color:rgba(2,12,46,.60)}        /* was .42 */
+.careline i{color:rgba(2,12,46,.60)}          /* was .52 */
+
+/* ==========================================================================
+   2.5.8 Target Size (Minimum) — 24x24 CSS px for standalone controls.
+   Every fix below grows the HIT AREA only. Inline links take vertical
+   padding, which paints no box and does not affect the line box, so layout
+   is unchanged. Non-inline controls get padding cancelled by an equal
+   negative margin, so they occupy exactly the space they did before.
+   ========================================================================== */
+.head__nav a{padding-block:5px;margin-block:-5px}   /* was 15px tall */
+.foot a{padding-block:4px;margin-block:-4px}        /* was 18px tall */
+.case__link{padding-top:3px;margin-top:-3px}        /* was 21px tall */
+.offer__see{padding-top:3px;margin-top:-3px}        /* was 21px tall */
+/* the Work section is not a grid, so this one only needs its own top margin */
+.wk__all{grid-column:auto;grid-row:auto;margin-top:clamp(30px,3.6vw,52px)}
+
+/* explicit placement: .svc__grid is a two-column grid and auto-flow would put
+   this in the artwork column beside the list */
+.svc__more{grid-column:1;grid-row:2;justify-self:start;
+  margin-top:clamp(20px,2.2vw,30px)}
+.svc__more,
+.faq__more{padding-top:4px}          /* was 20px tall */
+
+.aftercol h3{color:rgba(2,12,46,.60)}        /* was .44 -> 2.87:1 */
+.foot__cols h3{color:var(--ink-4)}    /* was .40 -> 3.78:1 */
+
+/* skip link — offscreen until it takes keyboard focus */
+.skip{position:absolute;left:-9999px;top:0;z-index:100;
+  padding:12px 18px;border-radius:0 0 8px 0;
+  background:var(--cobalt);color:#fff;font:600 14px/1 'General Sans',system-ui;
+  text-decoration:none}
+.skip:focus{left:0}
+main:focus{outline:none}
+
+/* ==========================================================================
+   CONVERSION FORMS — project-enquiry and website-audit
+   --------------------------------------------------------------------------
+   No new design language: navy ground, cobalt action, General Sans, the
+   existing --line hairline and the existing .btn. Labels are real <label>
+   elements above their control — placeholders are never used as labels
+   (the one placeholder, "https://", is a format hint on an optional field).
+   Contrast and target sizes follow the WCAG block already in this file.
+   ========================================================================== */
+.formwrap{position:relative;z-index:2;margin:clamp(40px,5vw,66px) auto 0;
+  max-width:760px;text-align:left}
+.kform{border-top:1px solid color-mix(in srgb, var(--ink-1) 9%, transparent);padding-top:clamp(28px,3vw,42px)}
+.kform__h{margin:0 0 8px;font:600 clamp(20px,1.7vw,24px)/1.2 'General Sans',system-ui;
+  letter-spacing:-.02em;color:var(--ink-1)}
+.kform__lead{margin:0 0 clamp(22px,2.4vw,30px);max-width:52ch;
+  font-size:15px;line-height:1.6;color:var(--ink-3)}
+.kform__grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+.field{margin:0;display:flex;flex-direction:column;gap:7px}
+.field--wide{grid-column:1 / -1}
+.field label{font:600 13px/1.35 'General Sans',system-ui;color:var(--ink-2)}
+.field .req{color:var(--accent)}
+.field .opt{font-weight:500;color:var(--ink-4)}
+.field input,.field select,.field textarea{
+  width:100%;min-height:46px;padding:11px 14px;
+  font:500 15px/1.4 'General Sans',system-ui;color:var(--white);
+  background:color-mix(in srgb, var(--ink-1) 4%, transparent);
+  border:1px solid var(--line);border-radius:10px;
+  transition:border-color var(--t-hover),background-color var(--t-hover);
+  -webkit-appearance:none;appearance:none;
+}
+.field textarea{min-height:104px;resize:vertical;line-height:1.55}
+.field select{background-image:linear-gradient(45deg,transparent 50%,color-mix(in srgb, var(--ink-1) 50%, transparent) 50%),
+  linear-gradient(135deg,color-mix(in srgb, var(--ink-1) 50%, transparent) 50%,transparent 50%);
+  background-position:calc(100% - 19px) calc(50% + 1px),calc(100% - 13px) calc(50% + 1px);
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:40px}
+.field select option{background:var(--navy);color:#fff}
+.field input::placeholder,.field textarea::placeholder{color:var(--ink-4)}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:color-mix(in srgb, var(--ink-1) 30%, transparent)}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{
+  outline:2px solid var(--cobalt-lift);outline-offset:2px;
+  border-color:var(--accent);background:color-mix(in srgb, var(--ink-1) 6%, transparent)}
+/* error state — colour is never the only signal: the message text carries it */
+.field.is-bad input,.field.is-bad select,.field.is-bad textarea{border-color:#FF8A8A}
+.err{display:none;font:500 12.5px/1.4 'General Sans',system-ui;color:#FFB4B4}
+.field.is-bad .err{display:block}
+.kform__go{display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  margin-top:clamp(24px,2.6vw,32px)}
+.kform__go .btn{height:52px;padding:0 30px}
+.kform__note{margin:0;max-width:38ch;font-size:13px;line-height:1.5;color:var(--ink-3)}
+.kform__note a{color:var(--ink-2)}
+.kform__status{margin:18px 0 0;font-size:14.5px;line-height:1.55;color:var(--ink-3)}
+.kform__status.is-ok{color:var(--accent)}
+.kform__status.is-bad{color:#FFB4B4}
+.kform.is-sent .kform__grid,.kform.is-sent .kform__go{display:none}
+
+/* honeypot — off-canvas rather than display:none so Netlify still posts it,
+   aria-hidden + tabindex="-1" keep it away from assistive tech and Tab order */
+.hp{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+
+@media (max-width:640px){
+  .kform__grid{grid-template-columns:1fr}
+  .kform__go{gap:14px}
+  .kform__go .btn{width:100%;justify-content:center}
+}
+
+/* --- standalone conversion pages (audit, thanks) ------------------------- */
+.page{min-height:calc(100svh - var(--head-h));display:flex;flex-direction:column;
+  justify-content:center;padding:clamp(48px,6vw,88px) 0}
+.page__kicker{margin:0 0 14px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.page__h{margin:0 0 18px;font-size:clamp(34px,4.4vw,60px);line-height:1.04;
+  font-weight:600;letter-spacing:-.03em;color:var(--ink-1);max-width:16ch}
+.page__h em{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:600;font-size:1.14em;letter-spacing:-.012em}
+.page__lead{margin:0 0 clamp(28px,3vw,40px);max-width:56ch;
+  font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:var(--ink-2)}
+.page__cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(28px,4vw,64px);align-items:start}
+.page__list{list-style:none;margin:0;padding:0}
+.page__list li{position:relative;padding:0 0 14px 22px;
+  font-size:15px;line-height:1.55;color:var(--ink-2)}
+.page__list li::before{content:'';position:absolute;left:0;top:9px;
+  width:7px;height:7px;border-radius:50%;background:var(--cobalt-lift)}
+.page__list b{color:var(--ink-1);font-weight:600}
+.page .formwrap{margin-top:0;max-width:none}
+.page .kform{border-top:0;padding-top:0}
+@media (max-width:900px){ .page__cols{grid-template-columns:1fr} }
+
+/* 2.5.8 Target Size for the links inside the new conversion components.
+   These are inline elements, so vertical padding grows the hit area without
+   painting a box or touching the line box — same technique as .foot a above. */
+.kform__note a,.kform__status a,.page__list a{padding-block:5px}
+
+/* ==========================================================================
+   HOMEPAGE ENVIRONMENT — 2026-08-30
+   The page now reads as five rooms rather than one continuous dark surface:
+
+     DARK      hero + clients
+     LIGHT     services + process, with cobalt light entering from one edge
+     DEEPER    work — the visual climax
+     WARM      investment (unchanged, #F2F0EA)
+     DARK      faq + close
+
+   The point of the light middle is not decoration. Services and Process lost
+   their artwork stages, so they had to stop competing with the client work;
+   dropping them into a bright room makes the return to a deeper navy at Work
+   read as arrival rather than as more of the same.
+
+   ⚠ Implementation is CSS only — two radial gradients on a pseudo-element and
+   a set of tokens. No script, no scroll listener, no observer. With JavaScript
+   disabled or reduced motion on, the environment is identical, because nothing
+   about it moves.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   THE LIGHT ROOM. Tokens first, so the section rules below never name a
+   literal colour — the same pattern .invest already uses for the warm room.
+   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   ⚠ HOMEPAGE HAIRLINES REMOVED — 2026-08-31, owner decision.
+   The page carried eleven full-width 1px rules above the fold-and-a-half: one
+   over the Services list plus one under each of its five rows, and the same
+   again under Process. Stacked at that density they stopped reading as
+   structure and started reading as SLICES — the page looked like a column of
+   boxes rather than one composition, which is the single thing this pass was
+   asked to remove.
+
+   What replaces them: the number column, the type scale and the row padding.
+   Those already carried the structure; the rules were duplicating it.
+
+   🚫 Do NOT reinstate a full-width border on .svc__index or .svc__item.
+   ⚠ Rules that genuinely earn their place are KEPT and listed here so the
+   distinction is deliberate, not accidental:
+     .faq__list / .faq__q   an accordion needs a hit-target boundary — without
+                            one, a closed question has no visible extent
+     .hero__note            separates the footnote from the CTA row it follows
+     .quote                 opens the pull-quote, which is a change of voice
+     .plate / .case rules   belong to Work's proof objects, not to the page
+   ========================================================================== */
+.svc__index{border-top:0}
+.svc__item{border-bottom:0}
+/* the last row still needs to end somewhere, but as breathing room, not a line */
+.svc__item:last-child .svc__row{padding-bottom:clamp(30px,3.4vw,46px)}
+.svc__more{margin-top:clamp(4px,1vw,14px)}
+
+/* ==========================================================================
+   PRICING TEASER — replaces the 2,300px Investment room, 2026-08-31.
+   Deliberately the smallest full-width section on the page: a label, a figure,
+   a lead and two ways out. It sits INSIDE the dark run between Work and the
+   FAQ and owns no ground of its own, so Work -> teaser -> FAQ -> close reads
+   as one continuous descent rather than four stacked bands.
+   🚫 Do not give this a background, a border-top or the warm paper. The paper
+   went with the pricing to /pricing/, where it is that route's signature.
+   ========================================================================== */
+.teas{position:relative;padding:var(--sec) 0}
+.teas__in{display:grid;grid-template-columns:minmax(0,38fr) minmax(0,62fr);
+  gap:clamp(28px,5vw,90px);align-items:start}
+.teas__head .h2{margin:10px 0 0;font-size:var(--h2);line-height:1.04;
+  font-weight:600;letter-spacing:-.028em}
+.teas__head .h2 em{font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:italic;font-weight:400;font-size:1.18em;letter-spacing:-.01em}
+/* the figure is the point of the section, so it carries the scale */
+.teas__fig{margin:0 0 14px;font-size:clamp(20px,1.75vw,26px);line-height:1.25;
+  font-weight:400;color:var(--ink-2)}
+.teas__fig span{font-weight:600;color:var(--ink-1)}
+.teas__lead{margin:0 0 clamp(24px,2.6vw,34px);max-width:54ch;
+  font-size:clamp(15.5px,1.15vw,17px);line-height:1.6;
+  color:var(--ink-3)}
+.teas__ctas{display:flex;flex-wrap:wrap;gap:14px}
+
+@media (max-width:860px){
+  .teas__in{grid-template-columns:1fr;gap:clamp(20px,4vw,30px)}
+}
+
+/* ==========================================================================
+   THE ROOM — a scroll environment, not a section background.
+   Replaces the two per-section `.room--light` washes (2026-08-30). Those were
+   two separate `inset:0` glows anchored top-right, one per section, so the blue
+   died at the Services floor and RESTARTED at the Process ceiling. One room,
+   three layers, no seam:
+
+     1  ground        flat --room, with the entry and exit painted as bands
+     2  transitions   dark -> royal -> pale -> white, and back out again, so
+                      the handoff travels THROUGH the blue instead of cutting
+     3  atmosphere    ::before — near-nothing at the ceiling, strongest at the
+                      floor, so scrolling the room IS the white-to-blue journey
+
+   🚫 No JS. No scroll listener, no IntersectionObserver, no scroll-linked
+   variable. The progression is positional, so it is identical under
+   prefers-reduced-motion, identical with JS off, and costs nothing to paint.
+   ========================================================================== */
+/* ==========================================================================
+   THE ROOM — one dark field, lit like the closing CTA. Owner call, 2026-09-01.
+
+   ⚠ WHAT THIS REPLACES, AND WHY THE DELETION IS THE POINT.
+   Services used to be a light off-white room that inverted to dark partway
+   down. That inversion was real work: a measured crossover placed in an
+   ink-free gap, two complete theme token sets, a positional ground gradient and
+   an opaque entry ramp, all so that no text ever crossed the luminance band
+   where neither dark nor light ink can reach 4.5:1.
+
+   The owner's decision is that Services should instead carry the same blue
+   field as the closing CTA. That removes the light ground entirely — and with
+   it the crossover, the dead band, the two theme sets, the entry ramp and every
+   failure mode attached to them. There is now ONE ground on the page from the
+   clients strip to the footer, and nothing to transition between.
+
+   🚫 Do not reintroduce a light ground here without rebuilding the crossover
+   machinery. The archived version is in
+   _removed/backup-2026-09-01-pre-content.tgz.
+
+   WHAT --p STILL DOES. It is no longer a theme switch. It drives the INTENSITY
+   of the light in this room, so the atmosphere still strengthens as the visitor
+   scrolls into it. Nothing readable depends on it, so it cannot fail unsafely:
+   at --p:0 the room is the flat page ground, at --p:1 it is fully lit.
+   ========================================================================== */
+:root{--p:1}
+
+.room{
+  /* ⚠ THE ROOM NO LONGER OWNS A THEME, 2026-09-01. It used to declare a fixed
+     dark ground and a fixed white ink, which is why the page could only ever
+     be one temperature. Every one of these names now forwards to the global
+     interpolated token of the same job, defined in theme.css, so the room's
+     furniture rules did not have to be rewritten and yet the whole room
+     travels with the flip.
+     🚫 Do not put a colour literal back in this block. */
+  --rm-ink:     var(--ink-1);
+  --rm-ink-2:   var(--ink-2);
+  --rm-ink-3:   var(--ink-3);
+  --rm-line:    var(--stroke);
+  --rm-accent:  var(--accent);
+
+  --room:       transparent;
+  --room-ink:   var(--ink-1);
+  --room-ink-2: var(--ink-2);
+  --room-ink-3: var(--ink-3);
+  --room-line:  var(--stroke);
+  --room-line-soft:var(--stroke);
+
+  position:relative;isolation:isolate;
+  color:var(--ink-1);
+  /* transparent, not a fill: the ground is painted once on <html> and the
+     atmosphere is one fixed layer behind the whole document */
+  background:transparent;
+}
+/* ⚠ .room::before is gone. It was a scroll-reactive glow scoped to this one
+   section; the same light is now the global .atmos layer, which is fixed
+   rather than scrolled and covers every route. Keeping both stacked two
+   radial fields on top of each other through Services and read as a bright
+   patch behind the service rows. 🚫 Do not re-add a section-scoped glow. */
+
+@media (prefers-reduced-motion:reduce){
+  /* the finished state, held still. The JS never attaches under reduced motion,
+     so this is simply what the room is. */
+  :root{--p:1}
+}
+@media (max-width:900px){
+  /* overhead on a phone: there is no meaningful right edge to enter from */
+  .room::before{
+    background:
+      radial-gradient(90% 30% at 50% 10%,
+        rgba(45,74,168,.28) 0%, rgba(45,74,168,.06) 50%, rgba(45,74,168,0) 76%),
+      radial-gradient(110% 26% at 76% 0%,
+        rgba(10,71,240,.14) 0%, rgba(10,71,240,0) 72%),
+      radial-gradient(120% 26% at -10% 96%,
+        rgba(91,134,255,.12) 0%, rgba(91,134,255,0) 72%);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ⚠ The section inside the room owns NO ground of its own. Do not give .svc a
+   background, a border-top or an overflow — any of the three re-cuts the field.
+   -------------------------------------------------------------------------- */
+.svc{background:transparent}
+
+/* ==========================================================================
+   THE ROOM'S FURNITURE — every shared component, restated for the room.
+
+   ⚠ EVERY SELECTOR HERE IS SCOPED `.room ...` ON PURPOSE. These rules used to
+   be bare (`.svc__t{...}`) and won only because they sat AFTER the dark-ground
+   defaults in this file. That is a load-bearing dependency on source order,
+   and it has now silently broken TWICE — once when the room was rebuilt and
+   once when dead stage CSS was swept out around them. Both times the symptom
+   was the same and easy to miss: the service rows rendered in their DARK-ground
+   colours (white text) on the light room. Scoping them to .room raises their
+   specificity above the defaults, so their position in the file no longer
+   matters and neither failure can happen again.
+   🚫 Do not "simplify" these back to bare selectors.
+   ========================================================================== */
+/* --- shared section furniture -------------------------------------------
+   ⚠ These were written for a LIGHT ground and still work unchanged, because
+   every one of them reads a --room-* token rather than a literal colour, and
+   those tokens were repointed to the dark set when the room changed. That
+   indirection is the reason this block did not have to be rewritten.
+   ------------------------------------------------------------------------- */
+.room .pill-label{color:var(--room-ink-3)}
+.room .pill-label::before{background:var(--cobalt)}
+.room .h2{color:var(--room-ink)}
+/* ⚠ --cobalt-lift, NOT --cobalt. This override existed because the room was a
+   LIGHT ground, where the full cobalt measures 6.13:1. On the dark field it is
+   2.85:1 — under the 3:1 floor for large text, and exactly the case the palette
+   note warns about: --cobalt is never text on the navy, --cobalt-lift is.
+   Measured at 5.87:1 here. */
+/* ⚠ THE DISPLAY ACCENT FOLLOWS THE FLIP, 2026-09-01. This was --cobalt-lift,
+   a fixed #5B86FF chosen when the room was permanently dark, where it measures
+   5.87:1. In light territory the same blue on the day ground measures 2.42:1
+   and on the dusk ground 1.68:1 — under the 3:1 floor for display type at 95px
+   for the whole approach to the inversion. --accent deepens toward a dark
+   navy-blue as the room dims and re-ignites at --cobalt-lift once night has
+   fallen, which is the same relationship at both ends. */
+.room .h2 em{color:var(--accent)}
+.room .lead{color:var(--room-ink-2)}
+.room .sec-head{border-color:var(--room-line)}
+
+/* --------------------------------------------------------------------------
+   SERVICES — typographic, editorial, one column. The stage is gone, so the
+   grid that existed to hold it is gone with it; the list now sets its own
+   measure and the section is carried by numerals, names and air.
+   -------------------------------------------------------------------------- */
+.room .svc__grid{display:block}
+
+/* ==========================================================================
+   THE SERVICES INDEX — TWO COLUMNS, THREE ROWS (2026-09-01)
+   Six services in a single 2,400px column left the right-hand 54% of the
+   section empty for its whole height, which is what the artwork stage used to
+   occupy. Two columns of three fills the measure, halves the scroll distance
+   and — the actual reason — lets all six be COMPARED. A vertical list is read
+   in sequence; a 2x3 is read as a set, which is what a reader deciding
+   between services is trying to do.
+
+   🚫 Not cards. No panel, no border box, no shadow, no equal-height tiles.
+   Each cell is the same numeral / title / sentence it was in the list, given
+   its own column. The only thing that changed is where it sits.
+   ========================================================================== */
+.room .svc__index{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:clamp(30px,4.4vw,88px);
+  row-gap:clamp(6px,1vw,18px);
+}
+/* the row padding was tuned for a full-width row; in a half-width column the
+   horizontal inset reads as a much larger proportion of the cell, so it comes
+   off and the vertical rhythm carries the separation instead */
+.room .svc__index .svc__row{padding-inline:0 14px}
+/* the description was capped at 44ch for a full-width row and now sets the
+   column's own measure */
+.room .svc__index .svc__d{max-width:38ch}
+/* "View all services" is a sibling of the grid, not a cell in it */
+.room .svc__more{margin-top:clamp(26px,3vw,42px)}
+
+/* ⚠ ONE COLUMN AT 720, not at 390. Two columns of a 27px title need roughly
+   300px each to avoid a two-line title on every cell; below ~720 the second
+   column stops paying for itself. Checked at 768, 700, 480, 390 and 360. */
+@media (max-width:720px){
+  .room .svc__index{grid-template-columns:1fr;row-gap:0}
+  .room .svc__index .svc__d{max-width:44ch}
+}
+.room .svc__index{list-style:none;margin:0;padding:0}
+.room .svc__item{}
+.room .svc__row{
+  grid-template-columns:clamp(56px,6vw,92px) minmax(0,1fr);
+  gap:clamp(18px,2.4vw,34px);
+  padding:clamp(26px,3.2vw,44px) clamp(12px,1.4vw,20px) clamp(26px,3.2vw,44px) 0;
+  max-width:none;
+}
+.room .svc__n{color:var(--room-ink-3);
+  font:600 12.5px/1.9 'General Sans',system-ui;letter-spacing:.16em}
+/* the one place the service names are allowed to be big. This is the section's
+   whole visual argument now, so it gets the scale the stage used to take. */
+.room .svc__t{font:560 clamp(26px,3.4vw,46px)/1.08 'General Sans',system-ui;
+  letter-spacing:-.028em;color:var(--room-ink)}
+.room .svc__d{margin-top:10px;max-width:52ch;font-size:clamp(15px,1.15vw,16.5px);
+  line-height:1.55;color:var(--room-ink-2)}
+.room .svc__row:hover .svc__t, .room .svc__row:focus-visible .svc__t{color:var(--rm-accent)}
+.room .svc__row:hover .svc__n, .room .svc__row:focus-visible .svc__n{color:var(--rm-accent)}
+.room .svc__row::before{background:var(--rm-accent);opacity:0}
+.room .svc__row:hover::before, .room .svc__row:focus-visible::before{opacity:1}
+/* ⚠ the hover wash is a dilute CObalt tint, which only reads on a light ground.
+   On the dark side of the room the same gesture has to LIFT the surface instead
+   — same shape, same origin, same easing, opposite direction. */
+/* ⚠ was scoped to the dark half when the room had two. The whole room is dark
+   now, so this is simply the room's hover: a lift rather than a tint. */
+.room .svc__row:hover,
+.room .svc__row:focus-visible{
+  background-image:radial-gradient(48% 40% at 0% 50%,
+    color-mix(in srgb, var(--ink-1) 7.5%, transparent) 0%, color-mix(in srgb, var(--ink-1) 2.6%, transparent) 38%, color-mix(in srgb, var(--ink-1) 0%, transparent) 76%);
+}
+.room .svc__row:focus-visible{outline-color:var(--rm-accent)}
+.room .svc__more{color:var(--room-ink-2);border-bottom-color:var(--room-line)}
+.room .svc__more:hover, .room .svc__more:focus-visible{color:var(--rm-accent);border-bottom-color:var(--rm-accent)}
+
+/* --------------------------------------------------------------------------
+   PROCESS — the same room, a quieter voice. Five steps, read in order.
+   -------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------------------------------------------------
+   WORK — the visual climax. A deeper, cooler room than the page ground, so
+   arriving here from the light middle is a change of pressure. The captures
+   get more of the frame and the type steps up to meet them.
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   ⚠ The two sections inside the room own NO ground of their own. Both used to
+   carry `overflow:clip`, which is what scissored every glow at the section
+   boundary — the cutoff was structural, not a falloff problem. The clip was
+   there for the removed stage artwork; nothing inside either section can
+   overflow now. Verified at 1440/1280/1024/768/390/360 after removal.
+   -------------------------------------------------------------------------- */
+.svc,.proc{background:transparent}
+
+/* ==========================================================================
+   WORK — same ground as everything else, 2026-08-31.
+
+   ⚠ IT USED TO HAVE ITS OWN DARK (#060B1C) and needed two devices to hide the
+   fact: `.proof__ramp` to arrive out of the room's #0C1638, and a 230px fade at
+   the bottom to get back to the page's #020C2E before the pricing teaser. Both
+   existed only to bridge grounds that should never have differed. With one dark
+   across the site there is nothing to bridge, so both are gone — the room's
+   dark half, Work, the teaser, the FAQ, the close and the footer are now
+   literally the same colour and no boundary between them can show.
+   🚫 Do not give this section a ground of its own again.
+   ========================================================================== */
+.proof{
+  /* ⚠ TRANSPARENT, 2026-09-01. --work-room was #020C2E and this section
+     painted it. That was harmless while the whole site was one dark, but with
+     the theme flip Work's heading is already on screen during the LIGHT half —
+     so the section painted a near-black rectangle underneath #141414 type and
+     measured 1.02:1 for the whole approach to the inversion. It was the worst
+     defect the first sweep found. There is one ground, on <html>.
+     🚫 Do not give this section a ground of its own again. */
+  position:relative;isolation:isolate;
+  background:transparent;
+  padding:clamp(84px,9vw,150px) 0 var(--sec);
+}
+/* the light that opens Work, unchanged in intent: it now rides on a ground
+   identical to the room above it, so it reads as one continuous atmosphere */
+/* ⚠ .proof::before WAS REMOVED, 2026-09-01. It was a glow scoped to one section, so its
+   falloff was clipped at that section's edges — with the theme flip the ground
+   either side of it is a different colour, and the clip became a hard
+   horizontal line across the full width at the Services / Work boundary. Section-scoped
+   light produced every seam fixed in August and it produced this one.
+   There is now exactly ONE light source on the site: the fixed .atmos layer
+   in theme.css, which is behind the whole document and has no edges to clip
+   against. 🚫 Do not add a section-scoped glow to any section, ever. */
+.proof .case__name{font-size:clamp(30px,3.4vw,50px);letter-spacing:-.028em}
+.proof .case__kicker{color:var(--accent)}
+.proof .shot--desktop img{border-color:color-mix(in srgb, var(--ink-1) 18%, transparent)}
+
+/* --------------------------------------------------------------------------
+   TYPE RESET — form controls were inheriting the browser's font, not the
+   site's. Placed here rather than in the reset at the top of the file so it
+   lands after every component rule and cannot be silently outranked.
+   -------------------------------------------------------------------------- */
+button,input,select,textarea{font:inherit;color:inherit}
+
+@media (max-width:900px){
+  /* On a phone there is no meaningful right edge for the light to enter from,
+     so the source moves overhead. The descending field is UNCHANGED — that is
+     the part that carries the white-to-blue journey, and a phone scrolls
+     through more of the room, not less. */
+  .room::before{
+    background:
+      radial-gradient(150% 46% at 76% 0%,
+        rgba(10,71,240,.085) 0%, rgba(10,71,240,.026) 48%, rgba(10,71,240,0) 74%),
+      radial-gradient(120% 34% at -6% 92%,
+        rgba(91,134,255,.09) 0%, rgba(91,134,255,0) 72%);
+  }
+/* the entry and exit shorten with the viewport so a phone does not spend a
+     third of the room arriving in it */
+  .svc__row{padding-right:0}
+}
+
+/* --------------------------------------------------------------------------
+   ⚠ STALE ACTIVE STATE, neutralised. `.svc__item.is-active` and
+   `.proc__item.is-on/.is-active` were set by the stage scripts and styled for a
+   dark ground — white titles, white descriptions. With the stages gone the
+   scripts no longer set them, but the rules survived, and the one row that
+   still carried `is-active` in the markup rendered white-on-white.
+   The classes are neutralised rather than deleted so that reinstating a stage
+   from _removed/ cannot resurrect an invisible row.
+   -------------------------------------------------------------------------- */
+.room .svc__item.is-active .svc__row{background-color:transparent}
+.room .svc__item.is-active .svc__row::before{opacity:0}
+.room .svc__item.is-active .svc__n{color:var(--room-ink-3);text-shadow:none}
+.room .svc__item.is-active .svc__t{color:var(--room-ink);transform:none}
+.room .svc__item.is-active .svc__d{color:var(--room-ink-2)}
+
+/* ==========================================================================
+   HOMEPAGE TYPE SYSTEM — ratified 2026-08-30
+   The homepage is the strongest type reference on the site, so this records
+   what it actually uses rather than imposing something new. 🚫 Nothing was
+   mechanically normalised: the authored composition is intact and every large
+   Cormorant moment survives.
+
+   GENERAL SANS — four weight roles, and no fifth:
+     400  body, leads, long-form paragraphs
+     500  quiet UI — nav links, footer links, metadata, captions
+     560  editorial display — the service names in the light room, where the
+          section's whole visual argument now lives
+     600  everything structural — labels, buttons, section headings, names
+     ⚠ 200 / 300 / 700 each appear once or twice and are NOT roles. 300 is
+     Cormorant's wordmark weight (the KREATED lockup), not a sans weight.
+     🚫 Do not introduce a new numeric weight without retiring one.
+
+   CORMORANT GARAMOND — the expressive identity serif, italic, and deliberately
+   NOT confined to captions. Its job is to be the one warm voice in a
+   geometric page. It appears at three scales and all three are intentional:
+     DISPLAY   the hero rotator and the `em` inside every section h2
+               ("gets chosen", "to found", "real work") — full display size,
+               and the largest type on the page after the h1
+     EDITORIAL pull-quotes and the process numerals in the light room
+     MARK      the KREATED wordmark at 300 / 0.22em
+   🚫 Never shrink the display moments into captions. They are the identity.
+
+   SIZE LADDER — display clamps are authored per scene rather than pulled from
+   a global scale, which is correct for an editorial page. The systemic sizes
+   are the ones that repeat: --body, --label, and the section tokens.
+   ========================================================================== */

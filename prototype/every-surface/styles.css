@@ -1,0 +1,411 @@
+/* ==========================================================================
+   STEP 5 PROTOTYPE — NOT PRODUCTION
+   Kreated V2 · EVERY SURFACE hero motion prototype
+   Motion discipline: SET TRUE — uncover / seat / align
+
+   Vocabulary used throughout:
+     .surface--desktop / --mobile / --search   the three surfaces
+     .page--desktop / --mobile                 real LLEC page reconstruction
+     .photo-plane                              the ONE shared photograph,
+                                               positioned in STAGE coordinates
+                                               so it is continuous across masks
+     uncover  = clip-path mask edge travels
+     seat     = weighted landing, one stop
+     align    = final hairline/edge resolution
+   ========================================================================== */
+
+/* ---------- LLEC's real typefaces, self-hosted from the live site ---------- */
+@font-face{font-family:Manrope;font-style:normal;font-weight:400;font-display:block;src:url(assets/fonts/manrope-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Manrope;font-style:normal;font-weight:500;font-display:block;src:url(assets/fonts/manrope-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:Manrope;font-style:normal;font-weight:600;font-display:block;src:url(assets/fonts/manrope-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:500;font-display:block;src:url(assets/fonts/playfair-display-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:600;font-display:block;src:url(assets/fonts/playfair-display-latin-600-normal.woff2) format('woff2')}
+
+/* ==========================================================================
+   KREATED PLACEHOLDER ENVIRONMENT
+   Palette tokens are NOT decided (DECISION 012). These are placeholders inside
+   the locked family: deep navy / near-white / one neutral hairline. No accent
+   colour is invented. Type is neutral system-ui only (DECISION 011).
+   ========================================================================== */
+:root{
+  --k-bg:#080F1B;
+  --k-bg-2:#0B1626;
+  --k-ink:#EEF2F7;
+  --k-ink-2:rgba(238,242,247,.60);
+  --k-ink-3:rgba(238,242,247,.38);
+  --k-line:rgba(238,242,247,.18);
+
+  /* LLEC surface treatment — uniform, therefore identical at every scale,
+     which is what lets one photograph register across two masks. */
+  --llec-base:#0C1724;
+  --llec-photo-opacity:.30;   /* REVISION 5 — was .165; the sunset now reads */
+
+  /* stage geometry (stage-local px; see README for the derivation) */
+  --dk-scale:0.722222;   /* 1040 / 1440 */
+  --mb-scale:0.50;       /* 385 / 770  */
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--k-bg);
+  background-image:radial-gradient(120% 90% at 12% 8%, var(--k-bg-2) 0%, var(--k-bg) 62%);
+  color:var(--k-ink);
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* prototype label — never part of a design */
+.proto-flag{
+  position:relative;z-index:99;margin:0;
+  padding:6px 14px;
+  font:500 11px/1.4 system-ui;letter-spacing:.10em;
+  color:rgba(238,242,247,.5);
+  background:rgba(4,8,14,.86);
+  border-bottom:1px solid rgba(238,242,247,.10);
+}
+
+/* ==========================================================================
+   HERO SHELL
+   ========================================================================== */
+.hero{overflow:hidden}
+.hero__inner{
+  display:flex;align-items:center;
+  gap:clamp(24px,3.4vw,64px);
+  padding:clamp(46px,4vw,64px) clamp(22px,4vw,64px) clamp(30px,4vw,56px);
+  min-height:calc(100svh - 32px);
+  max-width:1780px;margin:0 auto;
+}
+
+/* ---------- LEFT / CONVERSION ZONE — static, present at first paint -------- */
+.zone--copy{flex:0 1 clamp(320px,34%,500px);min-width:0;position:relative;z-index:2}
+
+.copy-flag{
+  display:inline-block;margin:0 0 20px;
+  padding:5px 10px;
+  font:500 10.5px/1 system-ui;letter-spacing:.13em;
+  color:var(--k-ink-3);
+  border:1px dashed rgba(238,242,247,.20);
+}
+.k-headline{
+  margin:0;
+  font:600 clamp(27px,3.1vw,47px)/1.08 system-ui;
+  letter-spacing:-.022em;color:var(--k-ink);
+}
+.k-support{
+  margin:16px 0 0;max-width:44ch;
+  font:400 clamp(14px,1.05vw,17px)/1.55 system-ui;color:var(--k-ink-2);
+}
+.k-routes{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:clamp(22px,2.4vw,34px)}
+.k-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:48px;padding:0 22px;
+  font:500 14px/1 system-ui;letter-spacing:.005em;
+  text-decoration:none;border-radius:2px;
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease;
+}
+.k-btn--primary{background:var(--k-ink);color:#0A1220}
+.k-btn--primary:hover{background:#fff}
+.k-btn--ghost{border:1px solid rgba(238,242,247,.30);color:var(--k-ink)}
+.k-btn--ghost:hover{border-color:rgba(238,242,247,.62)}
+.k-btn--text{
+  height:auto;padding:0 0 3px;margin-left:6px;
+  color:rgba(238,242,247,.72);border-bottom:1px solid rgba(238,242,247,.34);border-radius:0;
+}
+.k-btn--text:hover{color:var(--k-ink);border-bottom-color:var(--k-ink)}
+.k-btn:focus-visible{outline:2px solid #EEF2F7;outline-offset:3px}
+/* with script, the artifact's own baseline (.rule--h2) does this job */
+.js-fit .k-baseline{display:none}
+
+/* On wide viewports the carrying baseline IS .rule--h2 — the search panel's
+   bottom edge, which lands on the desktop's content-band edge and runs left
+   under the CTA block. This element only exists for the stacked layout. */
+.k-baseline{margin-top:clamp(24px,2.6vw,38px);height:1px;
+  background:linear-gradient(90deg,rgba(238,242,247,.24),rgba(238,242,247,0))}
+
+/* ---------- RIGHT / ARTIFACT ZONE ---------------------------------------- */
+.zone--artifact{
+  position:relative;flex:1 1 auto;min-width:0;
+  /* --k is refined continuously by motion.js; these steps are the no-JS
+     fallback so the composition is still correctly scaled without script. */
+  --k:.58;
+  height:calc(700px * var(--k));
+}
+@media (min-width:1100px){.zone--artifact{--k:.70}}
+@media (min-width:1280px){.zone--artifact{--k:.82}}
+@media (min-width:1440px){.zone--artifact{--k:.92}}
+@media (min-width:1680px){.zone--artifact{--k:1.03}}
+.stage{
+  position:absolute;left:0;top:50%;margin:0;
+  width:1200px;height:685px;
+  transform:translateY(-50%) scale(var(--k));
+  transform-origin:0 50%;
+}
+.artifact-note{
+  position:absolute;left:0;top:calc(100% + 14px);max-width:52ch;
+  font:400 11px/1.5 system-ui;color:rgba(238,242,247,.30);
+}
+
+/* ==========================================================================
+   SHARED PHOTOGRAPH — the anti-card device
+   Every .photo-plane places the SAME image at the SAME size and position in
+   stage space. Each surface mask is therefore a window onto one photograph,
+   not a separate picture. The treatment (flat opacity over a flat base) is
+   scale-independent, so the two windows match exactly at the seam.
+   ========================================================================== */
+.photo-plane{position:absolute;pointer-events:none}
+.photo-plane img{
+  display:block;width:100%;height:100%;object-fit:cover;
+  opacity:var(--llec-photo-opacity);
+  filter:saturate(.72);
+}
+
+/* ==========================================================================
+   SURFACES
+   ========================================================================== */
+.surface{position:absolute;overflow:hidden;border-radius:0}
+
+/* --- SURFACE 1 · DESKTOP · stage (66,0) 1040x680 — never leaves the screen - */
+.surface--desktop{left:155px;top:0;width:1040px;height:680.4px;z-index:1}
+.page--desktop{
+  position:absolute;left:0;top:0;width:1440px;height:942px;
+  background:var(--llec-base);
+  transform:scale(var(--dk-scale));transform-origin:0 0;
+}
+.photo-plane--desktop{left:-754.6px;top:-140.4px;width:2215.4px;height:1661.5px}
+
+.dk-nav{
+  position:absolute;left:0;top:0;width:1440px;height:92px;
+  background:linear-gradient(180deg,rgba(7,13,22,.66),rgba(7,13,22,.14));
+  border-bottom:1px solid rgba(255,255,255,.13);
+}
+.dk-logo{position:absolute;left:46px;top:9px;width:190px;height:auto}
+.dk-navcall{position:absolute;right:126px;top:15px;text-align:right;font-family:Manrope,system-ui}
+.dk-navcall__label{display:block;font-weight:400;font-size:12.5px;color:rgba(255,255,255,.60)}
+.dk-navcall__num{display:block;font-weight:600;font-size:19px;color:#fff;margin-top:3px;letter-spacing:.005em}
+.dk-burger{position:absolute;right:70px;top:35px;width:26px}
+.dk-burger i{display:block;height:2px;background:#fff;margin-bottom:6px;border-radius:1px}
+.dk-burger i:last-child{margin-bottom:0}
+
+.dk-h1{
+  position:absolute;left:112px;top:272px;margin:0;width:640px;
+  font:500 63px/1.02 'Playfair Display',Georgia,serif;
+  color:#fff;letter-spacing:-.004em;
+}
+.dk-sub{
+  position:absolute;left:113px;top:421px;margin:0;width:404px;
+  font:400 17px/24px Manrope,system-ui;color:rgba(255,255,255,.80);
+}
+.dk-points{
+  position:absolute;left:112px;top:521px;margin:0;padding-left:20px;width:420px;
+  font:500 14.5px/21px Manrope,system-ui;color:#fff;
+}
+.dk-points li{margin-bottom:0}
+.dk-points li::marker{color:rgba(255,255,255,.7)}
+
+.dk-cta{position:absolute;left:110px;top:631px;display:flex;gap:21px}
+.dk-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  height:48px;padding:0 24px;
+  font:600 12.5px/1 Manrope,system-ui;letter-spacing:.055em;
+}
+.dk-btn--solid{background:#fff;color:#16202E}
+.dk-btn--outline{border:1px solid rgba(255,255,255,.78);color:#fff}
+.ic-phone{width:14px;height:14px;fill:currentColor;flex:none}
+.dk-btn--solid .ic-phone{width:15px;height:15px}
+
+.dk-media{
+  position:absolute;left:896px;top:366px;width:429px;height:235px;overflow:hidden;
+  box-shadow:0 16px 34px -16px rgba(0,0,0,.62);
+}
+.dk-media img{display:block;width:100%;height:100%;object-fit:cover}
+.dk-band{position:absolute;left:0;top:900px;width:1440px;height:42px;background:#F6F7F9}
+
+/* --- SURFACE 2 · MOBILE · stage (0,66.4) 195x385 · extracted, one layer forward
+   REVISION 2. Smaller, so the desktop clearly dominates; overlapping the desktop
+   by only 40px — enough for the photograph to cross the seam and no more; its top
+   edge on the desktop's own nav rule; and almost no drop shadow, because a
+   pronounced one is what made it read as a phone card floating on a screenshot.
+   The crop ends at the client's hero boundary (page y 770), so the phone carries
+   no light band and the search surface can attach flush beneath it. */
+.surface--mobile{
+  left:0;top:66.4px;width:195px;height:385px;z-index:2;
+  box-shadow:8px 12px 26px -20px rgba(0,0,0,.8);
+}
+.page--mobile{
+  position:absolute;left:0;top:0;width:390px;height:770px;
+  background:var(--llec-base);
+  transform:scale(var(--mb-scale));transform-origin:0 0;
+}
+/* in register with .photo-plane--desktop, expressed in mobile-page coordinates */
+.photo-plane--mobile{left:-780px;top:-335.6px;width:3200px;height:2400px}
+
+.mb-nav{position:absolute;left:0;top:0;width:390px;height:62px;
+  background:linear-gradient(180deg,rgba(7,13,22,.70),rgba(7,13,22,.16))}
+.mb-logo{position:absolute;left:10px;top:6px;width:140px;height:auto}
+.mb-call{position:absolute;right:16px;top:20px;display:inline-flex;align-items:center;gap:7px;
+  font:500 15px/1 Manrope,system-ui;color:#fff}
+.mb-call .ic-phone{width:15px;height:15px}
+.mb-navline{position:absolute;left:0;top:61px;width:390px;height:1px;
+  background:rgba(255,255,255,.15);transform-origin:0 50%}
+
+.mb-h1{position:absolute;left:10px;top:92px;margin:0;width:370px;text-align:center;
+  font:500 36px/1.17 'Playfair Display',Georgia,serif;color:#fff}
+.mb-sub{position:absolute;left:20px;top:196px;margin:0;width:350px;text-align:center;
+  font:400 15px/22px Manrope,system-ui;color:rgba(255,255,255,.82)}
+.mb-points{position:absolute;left:20px;top:282px;margin:0;padding:0;width:350px;list-style:none;
+  text-align:center;font:500 15px/26px Manrope,system-ui;color:#fff}
+.mb-points li::before{content:'• ';color:rgba(255,255,255,.7)}
+.mb-media{position:absolute;left:20px;top:372px;width:350px;height:208px;overflow:hidden;
+  box-shadow:0 14px 28px -14px rgba(0,0,0,.6)}
+.mb-media img{display:block;width:100%;height:100%;object-fit:cover}
+.mb-btn{position:absolute;left:65px;width:260px;height:46px;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font:600 12.5px/1 Manrope,system-ui;letter-spacing:.055em}
+.mb-btn--solid{top:600px;background:#fff;color:#16202E}
+.mb-btn--outline{top:658px;border:1px solid rgba(255,255,255,.78);color:#fff}
+
+/* --- SURFACE 3 · SEARCH / GBP · stage (0,451.4) 195x108 ---------------------
+   REVISION 3. No box, no border, no shadow, no map chip, no action chips. It is
+   the phone's own width, flush against the phone's bottom edge, showing the SAME
+   photograph in register under one quiet wash — so it reads as that surface
+   carrying on downward and changing what it shows, not as a third card on its own
+   plane. Truthful current GBP values only; recognisable by arrangement, never by
+   borrowed chrome. */
+.surface--search{
+  left:0;top:451.4px;width:195px;height:108px;z-index:3;
+  background:var(--llec-base);
+  font-family:Manrope,system-ui;
+}
+.photo-plane--search{left:-390px;top:-552.8px;width:1600px;height:1200px}
+.se-wash{position:absolute;inset:0;background:rgba(8,15,26,.70)}
+.se-body{position:absolute;left:12px;right:12px;top:11px}
+.se-logo{width:42px;height:auto;display:block;margin-bottom:5px}
+.se-name{margin:0;font:600 11.5px/1.2 'Playfair Display',Georgia,serif;color:#F2F5FA}
+.se-rating{margin:5px 0 0;display:flex;align-items:center;gap:4px}
+.se-score{font:600 9.5px/1 Manrope,system-ui;color:#E8EEF6}
+.se-stars svg{display:block;width:40px;height:7.6px}
+.se-count{font:400 8px/1 Manrope,system-ui;color:rgba(226,234,244,.62)}
+.se-meta{margin:5px 0 0;font:400 8px/1.35 Manrope,system-ui;color:rgba(226,234,244,.52)}
+
+/* --- continuity sliver (narrow viewports only) --------------------------- */
+.sliver{display:none;position:absolute;overflow:hidden;z-index:1}
+.photo-plane--sliver{left:-585px;top:-207.8px;width:1600px;height:1200px;
+  background:var(--llec-base)}
+.sliver::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(13,24,38,0),rgba(13,24,38,.75))}
+
+/* --- brand-continuity carriers (match-moved, stage-level, never clipped) -- */
+.hop{position:absolute;z-index:4;height:auto;opacity:0;pointer-events:none}
+.hop--1{left:5px;top:69.4px;width:70px;transform-origin:0 0}
+.hop--2{left:12px;top:462.4px;width:42px;transform-origin:0 0}
+
+/* --- alignment hairlines ------------------------------------------------- */
+.rule{position:absolute;z-index:4;background:rgba(238,242,247,.30);pointer-events:none}
+/* h1 continues the desktop's own nav rule out across the phone's top edge  */
+.rule--h1{left:0;top:66.4px;width:560px;height:1px;transform-origin:0 50%}
+/* v1 is the shared left edge of the phone and the search surface           */
+.rule--v1{left:0;top:66.4px;width:1px;height:489px;transform-origin:50% 0}
+/* h2 marks the phone's bottom edge, which is also the search surface's top edge.
+   It runs a short way LEFT into the gutter and no further — never across the
+   desktop, where it would cut through the client's own CTA row, and never into
+   the copy, where it would just be clutter. The copy block's alignment is felt
+   instead: its route row sits on the client's own CTA baseline. */
+.rule--h2{left:-120px;top:451.4px;width:315px;height:1px;transform-origin:100% 50%;
+  background:linear-gradient(90deg,rgba(238,242,247,0) 0%,rgba(238,242,247,.26) 46%)}
+
+/* ==========================================================================
+   MOTION — "from" states.
+   These exist ONLY under .js-motion, which is set before first paint and only
+   when we are actually going to animate. With JS off or reduced motion on,
+   every rule above is already the final composed state.
+   ========================================================================== */
+.js-motion .surface--mobile{clip-path:inset(0 0 100% 0);transform:translate(-16px,20px)}
+.js-motion .photo-plane--mobile{transform:translate(29px,-36.2px)}
+.js-motion .surface--search{clip-path:inset(0 0 100% 0);transform:translate(34px,-46px) scale(.965)}
+.js-motion .sliver{clip-path:inset(0 0 0 100%)}
+.js-motion .rule--h1,
+.js-motion .rule--h2{transform:scaleX(0)}
+.js-motion .rule--v1{transform:scaleY(0)}
+
+/* reflow choreography is a wide-viewport behaviour only */
+@media (min-width:861px){
+  .js-motion .mb-logo{opacity:0}
+  .js-motion .se-logo{opacity:0}
+  /* REVISION 1 — the mask opens on completely clean photograph. Every other
+     element of the mobile page is already off-mask at its "from" position; the
+     nav's scrim is the only thing that would cover the image, so it is held out
+     until the content arrives and seats over it. */
+  .js-motion .mb-nav{opacity:0}
+  .js-motion .mb-h1{transform:translate(637.9px,168.1px) scale(2.528);transform-origin:50% 0}
+  .js-motion .mb-sub{transform:translate(565.7px,279.3px) scale(1.637);transform-origin:50% 0}
+  .js-motion .mb-points{transform:translate(427px,337.8px) scale(1.396);transform-origin:50% 0}
+  .js-motion .mb-media{transform:translate(560px,90px) scale(1.5);transform-origin:50% 50%}
+  .js-motion .mb-btn--solid{transform:translate(431.3px,190.3px) scale(1.211);transform-origin:50% 50%}
+  .js-motion .mb-btn--outline{transform:translate(771.5px,132.3px) scale(1.172);transform-origin:50% 50%}
+  .js-motion .mb-call{clip-path:inset(0 0 0 100%)}
+  .js-motion .mb-navline{transform:scaleX(0)}
+}
+
+/* one small, transform-only depth response after the motion has resolved */
+.stage.is-resolved .surface--mobile,
+.stage.is-resolved .surface--search{transition:transform .28s cubic-bezier(.2,.7,.3,1)}
+.stage.is-resolved:hover .surface--mobile{transform:translate(-3px,-3px)}
+.stage.is-resolved:hover .surface--search{transform:translate(-2px,2px)}
+
+/* ==========================================================================
+   NARROW VIEWPORT — an independent design, not a shrunken desktop
+   Order: headline → support → Start a Project → Free Website Audit →
+          artifact → View Work
+   Artifact: mobile surface primary, search overlapping the lower corner,
+   desktop implied only by a cropped sliver of the same photograph.
+   ========================================================================== */
+@media (max-width:860px){
+  .hero__inner{flex-direction:column;align-items:stretch;gap:0;padding-top:56px}
+  .zone--copy{display:contents}
+  .k-routes{display:contents}
+
+  .copy-flag{order:1;align-self:flex-start}
+  .k-headline{order:2;font-size:clamp(28px,7.6vw,40px)}
+  .k-support{order:3;margin-top:14px}
+  .k-btn--primary{order:4;margin-top:26px;width:100%}
+  .k-btn--ghost{order:5;margin-top:10px;width:100%}
+  .zone--artifact{order:6;margin-top:34px;height:calc(540px * var(--k));--k:1.05}
+  .k-btn--text{order:7;margin:64px 0 0;align-self:flex-start}
+  .k-baseline{order:8;margin-top:26px}
+  .js-fit .k-baseline{display:block}
+  .artifact-note{order:9;top:calc(100% + 10px)}
+
+  .stage{width:300px;height:500px}
+
+  .surface--desktop{display:none}
+  .surface--mobile{left:0;top:0}
+
+  /* the desktop is implied only by a cropped sliver of the SAME photograph,
+     in register with the phone, so the horizon runs straight out of the phone
+     and continues past its edge */
+  .sliver{display:block;left:195px;top:40px;width:78px;height:360px}
+
+  /* same treatment as wide: the search surface is the phone's own width, flush
+     under it, on the same photograph, under one wash. No card. */
+  /* the search plane's offset happens to be identical in both layouts:
+     wide  -101.4 - 451.4 = -552.8 ; narrow -167.8 - 385 = -552.8 */
+  .surface--search{left:0;top:385px;width:195px;height:108px}
+
+  .hop{display:none}
+  .rule--h1{top:0;width:280px}
+  .rule--v1{top:0;height:493px}
+  .rule--h2{left:-40px;top:385px;width:235px}
+}
+
+/* ==========================================================================
+   REDUCED MOTION — the final composed state is the only state.
+   (.js-motion is never applied, so nothing above needs undoing; this block is
+   belt-and-braces for anything that might animate.)
+   ========================================================================== */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .stage.is-resolved:hover .surface--mobile,
+  .stage.is-resolved:hover .surface--search{transform:none}
+}

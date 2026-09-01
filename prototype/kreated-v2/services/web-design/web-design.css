@@ -1,0 +1,44 @@
+/* ==========================================================================
+   KREATED V2 — /services/web-design/ · PAGE-SPECIFIC OVERRIDES
+   The leaf system lives in ../leaf.css. This file holds only what this page
+   uses and no other leaf does, verified against the redesign leaf's DOM.
+   ========================================================================== */
+
+/* the serif ampersand in "Web Design & Development" — only this title has one */
+.shero__h .amp{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:500;font-size:.98em;color:var(--warm)}
+
+/* the smaller section label, used only by this page's FAQ heading */
+.sec__h--sm{margin-bottom:clamp(18px,2vw,26px)}
+
+/* --------------------------------------------------------------------------
+   SECONDARY REFERENCE — text only, deliberately subordinate.
+   No top rule: pricing and the secondary reference are one handoff band,
+   not two stacked utility strips.
+   -------------------------------------------------------------------------- */
+.also{padding:0 0 clamp(30px,3.4vw,44px)}
+.also__in{display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap}
+.also__l{margin:0;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.also__k{font:600 11.5px/1 'General Sans',system-ui;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gray)}
+.also__n{font-size:17px;font-weight:560;color:var(--white)}
+.also__s{font-size:14px;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   FAQ — one documented question, no answer written.
+   The OWNER ANSWER REQUIRED badge is bookkeeping, never public UI.
+   -------------------------------------------------------------------------- */
+.faq{padding:clamp(40px,4.6vw,66px) 0 clamp(30px,3.2vw,44px);border-top:1px solid var(--line)}
+.q{padding-top:4px}
+.q__q{margin:0;max-width:34ch;font-size:clamp(19px,1.9vw,26px);font-weight:520;
+  letter-spacing:-.015em;line-height:1.3;color:var(--white)}
+.q__flag{display:inline-block;margin:16px 0 0;padding:6px 12px;
+  border:1px dashed rgba(91,134,255,.5);border-radius:4px;
+  font:600 11px/1 'General Sans',system-ui;letter-spacing:.18em;
+  color:var(--cobalt-lift)}
+.q__flag[hidden]{display:none}
+
+@media (max-width:640px){
+  .also__in{flex-direction:column;align-items:flex-start;gap:16px}
+}

@@ -1,0 +1,344 @@
+/* ==========================================================================
+   KREATED V2 — /pricing/ · TOP-LEVEL ROUTE
+   Built 2026-08-31, when the Investment section moved off the homepage.
+
+   Loads, in order:
+     /styles.css              the ENTIRE pricing system (.invest, .offer,
+                              .offer__x, .aftercol, .careline) plus the
+                              warm-paper room tokens, unmodified
+     /services/services.css   tokens, header, drawer, skip link
+     /services/leaf.css       the shared top-level family — .shero, .crumb,
+                              .close
+     this file                only what the MOVE itself requires
+     /footer.css              last, the single footer definition
+
+   🚫 The pricing CSS is NOT forked. Every rule that draws an engagement row
+   still lives in styles.css and is shared with nothing else now that the
+   homepage no longer prints it. If a package changes, it changes in one place.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   THE HERO -> PAPER HANDOFF.
+   The page opens in the dark leaf family and moves into the warm-paper room
+   for the engagements. That change of ground is the point — it is the site's
+   one tonal break and it now belongs to this route.
+
+   ⚠ It is entered on the COLOUR ALONE. No hairline, no rounded container, no
+   gradient band. That was the approved treatment on the homepage and it is
+   preserved verbatim here. 🚫 Do not add a seam.
+   -------------------------------------------------------------------------- */
+.invest{margin-top:clamp(30px,4vw,58px)}
+
+/* The hero glow is anchored to the TOP of the hero and its falloff is spent
+   long before the hero's floor, so the dark side of the paper cut is quiet by
+   the time it gets there. That is left alone deliberately: extending the box
+   downward does nothing (measured — the gradient does not reach), and adding a
+   SECOND source at the hero's foot would be inventing a light to justify a cut
+   that already reads as deliberate. The cut is crisp, straight and full-width,
+   which is what a controlled tonal change is supposed to look like. */
+.shero::before{bottom:-8%}
+
+/* The dark room the page returns to after the paper. Without this the close
+   opened on flat ground and the second cut had the same unlit problem as the
+   first. One source, entering at the boundary, using the family's royal. */
+.close{position:relative;isolation:isolate}
+.close::before{
+  content:'';position:absolute;z-index:-1;pointer-events:none;
+  top:0;left:-6%;right:-6%;bottom:-40%;
+  background:radial-gradient(72% 78% at 82% 0%,
+    rgba(45,74,168,.30) 0%, rgba(45,74,168,.08) 44%, rgba(45,74,168,0) 74%);
+}
+
+/* --------------------------------------------------------------------------
+   The H1's second line takes the family's Cormorant italic emphasis, the same
+   device /services/ gives "in" and Web Design gives its ampersand. The word is
+   "start", from the approved heading — it is not new copy.
+   -------------------------------------------------------------------------- */
+.pr__amp{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:400;letter-spacing:-.01em}
+
+/* --------------------------------------------------------------------------
+   The engagements' own closing footnote sat directly above the homepage's FAQ.
+   Here it is the last thing before the page leaves the paper, so it needs the
+   room's floor under it rather than a section boundary.
+   -------------------------------------------------------------------------- */
+.invest > .wrap > :last-child{margin-bottom:0}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — the family stylesheet and styles.css cover the engagement rows
+   at every width; only the hero-to-paper gap needs to close up on a phone.
+   -------------------------------------------------------------------------- */
+@media (max-width:720px){
+  .invest{margin-top:clamp(20px,4vw,34px)}
+}
+
+/* --------------------------------------------------------------------------
+   The two ruled headings under the engagements were <h3> on the homepage,
+   below a section <h2>. Standing under this page's <h1> they had to become
+   <h2>, which would otherwise inherit the document h2 size. They keep the
+   micro-label appearance they were designed with.
+   -------------------------------------------------------------------------- */
+.aftercol__h{margin:0 0 18px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:rgba(2,12,46,.60)}
+
+/* --------------------------------------------------------------------------
+   ⚠ .ilink IS BUILT FOR A DARK GROUND. leaf.css sets it to var(--white) with a
+   cobalt underline, which is correct on every other route and invisible on this
+   page's warm paper. The AEO block added on 2026-09-01 was the first inline
+   link inside the paper room; it measured 1.14:1 until this rule existed.
+   Same ink the room already uses for its own copy, same cobalt underline.
+   -------------------------------------------------------------------------- */
+.invest .ilink{color:var(--ink-on-room);border-bottom-color:var(--cobalt)}
+.invest .ilink:hover{border-bottom-color:var(--cobalt-lift)}
+
+/* ==========================================================================
+   WHICH ONE IS YOU · WHAT MOVES THE NUMBER — added 2026-09-01
+   Both sit inside the warm-paper room, so they take the room's ink rather
+   than the site's interpolated tokens. They are ruled off the same way
+   .aftercol is, at the same weight, because they are the same kind of object:
+   quiet supporting matter under the four engagements, not a fifth offer.
+   🚫 No panel, no card, no tint. The paper is the surface.
+   ========================================================================== */
+.choose{
+  /* follows .offers, which ends in a hairline — see the note on .byp */
+  padding-top:0;
+  margin-top:clamp(36px,4vw,60px);
+}
+.movers{
+  /* follows .choose, which does NOT end in a rule, so this one earns its own */
+  border-top:1px solid var(--line-room);
+  padding-top:22px;
+  margin-top:clamp(36px,4vw,60px);
+}
+.choose__list{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(14px,1.8vw,26px) clamp(28px,5vw,80px);
+  counter-reset:choose;
+}
+/* the numeral is generated rather than typed so the order cannot drift out of
+   step with the four engagements above it */
+.choose__list li{
+  counter-increment:choose;position:relative;
+  padding:0 0 0 clamp(30px,2.6vw,40px);
+  font-size:15px;line-height:1.6;color:rgba(2,12,46,.72);
+}
+.choose__list li::before{
+  content:counter(choose,decimal-leading-zero);
+  position:absolute;left:0;top:.15em;
+  font:600 12px/1 'General Sans',system-ui;letter-spacing:.1em;
+  color:var(--cobalt);
+}
+.choose__list li b{font-weight:600;color:var(--ink-on-room)}
+
+.movers__list{list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(12px,1.5vw,20px) clamp(28px,5vw,80px)}
+.movers__list li{
+  padding:0 0 0 16px;position:relative;
+  font-size:14.5px;line-height:1.6;color:rgba(2,12,46,.68);
+}
+/* a rule, not a bullet glyph: the room already uses hairlines to separate and
+   a disc would be the only dot on the page */
+.movers__list li::before{
+  content:'';position:absolute;left:0;top:.62em;
+  width:7px;height:1px;background:rgba(2,12,46,.44);
+}
+.movers__list li b{font-weight:600;color:var(--ink-on-room)}
+
+.choose__note{
+  margin:clamp(20px,2.2vw,30px) 0 0;max-width:62ch;
+  /* .56 measured 4.31:1 on the warm paper. .60 is what every other quiet
+     line in this room already uses, and it clears at 4.92:1. */
+  font-size:13.5px;line-height:1.65;color:rgba(2,12,46,.60);
+}
+
+@media (max-width:900px){
+  .choose__list,.movers__list{grid-template-columns:1fr}
+}
+
+/* ==========================================================================
+   THE PACKAGES / INDIVIDUAL SERVICES SWITCHER — 2026-09-01
+   --------------------------------------------------------------------------
+   ⚠ NOT A SEGMENTED CONTROL. A pill-shaped two-up with a sliding highlight is
+   the SaaS default and it would be the only piece of dashboard UI on the site.
+   This is two editorial headings sitting on one rule, with the active one
+   carrying full ink, a cobalt underline and a subtitle. It reads as a
+   masthead choice, which is what it is.
+
+   ⚠ THE ACTIVE STATE IS NOT COLOUR ALONE (WCAG 1.4.1). Three things change
+   together: ink weight, the 2px cobalt rule under the active tab, and the
+   subtitle, which is only rendered at full strength on the active side. A
+   viewer who cannot distinguish the two inks still has the rule and the
+   emphasis.
+   ========================================================================== */
+/* ⚠ Until pricing.js proves it is running, the tablist does not exist and both
+   panels are open. This is the whole JS-off story and it lives in one place.
+   🚫 Do not add `[hidden]` styling that would fight the attribute. */
+.pswitch{display:none}
+.invest.is-live .pswitch{display:block;margin:0 0 clamp(30px,3.6vw,52px)}
+
+.pswitch__tabs{
+  display:flex;gap:clamp(24px,3.4vw,52px);
+  border-bottom:1px solid var(--line-room);
+}
+.pswitch__tab{
+  appearance:none;background:none;border:0;cursor:pointer;
+  padding:0 0 clamp(12px,1.4vw,18px);
+  margin-bottom:-1px;                 /* the active rule sits ON the hairline */
+  border-bottom:2px solid transparent;
+  text-align:left;display:grid;gap:5px;
+  /* ⚠ .60 is the floor on this warm paper: .52 measures 3.78:1, and at 560
+     the tab name drops to 17px where the 3:1 large-text allowance no longer
+     applies. Every quiet line in this room is .60 for the same reason. */
+  color:rgba(2,12,46,.60);
+  transition:color var(--t-hover),border-color var(--t-hover);
+}
+.pswitch__name{
+  font:600 clamp(19px,1.8vw,26px)/1.1 'General Sans',system-ui;
+  letter-spacing:-.022em;
+}
+.pswitch__sub{
+  font:500 13px/1.4 'General Sans',system-ui;
+  color:rgba(2,12,46,.60);        /* .46 measured 3.14:1 */
+  transition:color var(--t-hover);
+}
+.pswitch__tab:hover{color:rgba(2,12,46,.78)}
+.pswitch__tab[aria-selected="true"]{
+  color:var(--ink-on-room);
+  border-bottom-color:var(--cobalt);
+}
+.pswitch__tab[aria-selected="true"] .pswitch__sub{color:rgba(2,12,46,.78)}
+.pswitch__tab:focus-visible{outline:2px solid var(--cobalt);outline-offset:4px;border-radius:3px}
+.ppanel:focus{outline:none}
+
+/* ---- group headings ------------------------------------------------------
+   The catalog now has four package groups and three service groups, so the
+   groups need to be findable without being loud. Name left, term right, on a
+   hairline: the same object the .aftercol headings already are, one size up. */
+.pgroup{
+  display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  margin:clamp(44px,5vw,76px) 0 clamp(8px,1vw,16px);
+  padding-bottom:14px;border-bottom:1px solid var(--line-room);
+  font:600 clamp(15px,1.35vw,19px)/1.2 'General Sans',system-ui;
+  letter-spacing:-.012em;color:var(--ink-on-room);
+}
+/* the first group under the switcher does not need the big gap above it */
+.ppanel > .pgroup:first-child{margin-top:clamp(18px,2vw,30px)}
+.pgroup span{
+  flex:none;font:600 10.5px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(2,12,46,.60);
+}
+.pgroup--quiet{border-bottom:0;padding-bottom:0}
+
+/* one-time / recurring, stated on every package row rather than only inside
+   the disclosure — the distinction is the second thing a buyer needs and it
+   should not require a click */
+.offer__term{
+  margin:-4px 0 0;font:600 10.5px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(2,12,46,.60);   /* .50 = 3.55:1 */
+}
+
+/* ==========================================================================
+   INDIVIDUAL SERVICES
+   Three short blocks per item, side by side on the desk and stacked on a
+   phone. 🚫 Not cards: the same hairline-and-space language as everything
+   else in this room.
+   ========================================================================== */
+.isvcs{border-top:1px solid var(--line-room)}
+.isvc{
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:clamp(18px,2.6vw,48px);
+  padding:clamp(26px,3vw,42px) clamp(16px,1.6vw,28px);
+  border-bottom:1px solid var(--line-room);
+}
+.isvc__head{display:grid;gap:10px;align-content:start}
+.isvc__name{
+  margin:0;font:600 clamp(22px,2.2vw,32px)/1.08 'General Sans',system-ui;
+  letter-spacing:-.024em;color:var(--ink-on-room);
+}
+.isvc__price{
+  margin:0;font:600 clamp(16px,1.4vw,20px)/1 'General Sans',system-ui;
+  letter-spacing:-.01em;color:var(--cobalt);
+}
+.isvc__price--tbd{color:rgba(2,12,46,.60);font-weight:500}   /* .56 = 4.31:1 */
+.isvc__body{display:grid;gap:clamp(14px,1.6vw,22px)}
+.isvc__k{
+  margin:0 0 5px;font:600 10.5px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(2,12,46,.60);
+}
+.isvc__body p{margin:0;font-size:14.5px;line-height:1.6;color:rgba(2,12,46,.72);max-width:56ch}
+/* the boundary note: the paragraph that stops a buyer purchasing the wrong
+   thing. Ruled off and quieter, the same treatment .x__p--edge gets. */
+.isvc__extra{
+  grid-column:1 / -1;margin:clamp(6px,1vw,14px) 0 0;padding-top:16px;
+  border-top:1px solid rgba(2,12,46,.12);
+  font-size:13.5px;line-height:1.65;color:rgba(2,12,46,.6);max-width:92ch;
+}
+.isvc--soon{background:none}
+
+/* ---- Build Your Package -------------------------------------------------- */
+/* ⚠ NO border-top. .byp follows .isvcs, whose last row already ends in a
+   hairline, so a second rule 100px below the first framed an empty band that
+   read as a missing section. The same doubling was removed from .choose, which
+   follows .offers. 🚫 Before adding a top rule to a block in this room, check
+   what the block above it ends with. */
+.byp{
+  margin-top:clamp(44px,5vw,76px);padding-top:0;
+}
+.byp__lead{margin:14px 0 clamp(22px,2.4vw,30px);max-width:64ch;
+  font-size:15px;line-height:1.65;color:rgba(2,12,46,.72)}
+.byp__ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+/* the room is warm paper, so the two buttons take the room's ink rather than
+   the site's interpolated tokens */
+.byp .btn--pill{background:var(--cobalt);color:#fff}
+.byp .btn--ghost{border:1px solid rgba(2,12,46,.30);color:var(--ink-on-room);background:none}
+.byp .btn--ghost:hover,.byp .btn--ghost:focus-visible{border-color:var(--cobalt)}
+.byp__note{margin:clamp(18px,2vw,26px) 0 0;max-width:60ch;
+  font-size:13px;line-height:1.6;color:rgba(2,12,46,.60)}
+
+/* ---- terms --------------------------------------------------------------- */
+.terms{margin-top:clamp(44px,5vw,76px);padding-top:26px;border-top:1px solid var(--line-room)}
+.terms__list{list-style:none;margin:14px 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(12px,1.6vw,22px) clamp(28px,5vw,80px)}
+.terms__list li{padding:0 0 0 16px;position:relative;
+  font-size:14.5px;line-height:1.6;color:rgba(2,12,46,.68)}
+.terms__list li::before{content:'';position:absolute;left:0;top:.62em;
+  width:7px;height:1px;background:rgba(2,12,46,.44)}
+.terms__list li b{font-weight:600;color:var(--ink-on-room)}
+
+/* ==========================================================================
+   MOBILE
+   The switcher must stay obvious and the two service walls must stay
+   scannable. 🚫 Pricing itself is never hidden behind a tap — only the three
+   explanation blocks stack, and they stack open.
+   ========================================================================== */
+@media (max-width:900px){
+  .isvc{grid-template-columns:1fr;gap:16px}
+  .isvc__head{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+  .isvc__price{flex:none}
+  .terms__list{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .pswitch__tabs{gap:22px}
+  .pswitch__name{font-size:17px}
+  /* the subtitles are the first thing to go: at 360 they wrap to three lines
+     each and turn a two-word choice into a paragraph */
+  .pswitch__sub{display:none}
+  .pgroup{font-size:15px}
+  .pgroup span{font-size:9.5px;letter-spacing:.12em}
+  .isvc__name{font-size:20px}
+  .isvc__head{display:grid;gap:6px}
+}
+
+/* ⚠ THE MASTHEAD IS STICKY AND 91px TALL. Anything this page scrolls to
+   programmatically — the tablist after a panel swap, an in-page link to a
+   group, a deep link to one offer — lands UNDER it without this. It is not a
+   detail: the switcher scrolling itself out of sight behind the header was the
+   first thing that happened when the tabs were wired up.
+   🚫 Do not remove this when adding new anchor targets to the page; add them
+   to the list. */
+.pswitch__tabs,.ppanel,.pgroup,.offer,.isvc,.byp,.terms,.choose,.movers{
+  scroll-margin-top:calc(var(--head-h, 91px) + 18px);
+}

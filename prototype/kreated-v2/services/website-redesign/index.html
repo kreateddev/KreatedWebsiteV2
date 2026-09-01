@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- PROTOTYPE SAFETY — do not remove without an explicit launch instruction. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://kreated.dev/services/website-redesign/">
+
+<!-- Meta built from documented scope only. Primary keyword for this route per
+     docs/SEO.md §2: `website redesign Raleigh`; alternate `website redesign
+     without losing SEO`. No claims. COPY CANDIDATE — NOT APPROVED. -->
+<title>Website Redesign in Raleigh, NC | Kreated</title>
+<meta name="description" content="Website redesign in Raleigh, NC — improving or replacing an existing site, with its search foundations and old URLs carried across.">
+
+<!-- Open Graph / Twitter. Every route carries a deliberate preview: a shared
+     link produces the page's own title, description and URL rather than a bare
+     address, which is a trust signal in exactly the moment Kreated is being
+     passed between two people.
+
+     og:image policy — reuse only, nothing generated:
+       · Pages that show a REAL client capture use that capture (1600x1000,
+         close enough to 1.91:1 for a large card).
+       · Every other route uses the Kreated mark, with card type `summary`,
+         which is the correct card for a square brand image.
+     ⚠ REMAINING ITEM: no purpose-made 1200x630 social asset exists. When one
+     does, point the mark-based routes at it and switch them to
+     summary_large_image. 🚫 Do not invent one to close this gap. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kreated">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://kreated.dev/services/website-redesign/">
+<meta property="og:title" content="Website Redesign in Raleigh, NC | Kreated">
+<meta property="og:description" content="Website redesign in Raleigh, NC — improving or replacing an existing site, with its search foundations and old URLs carried across.">
+<meta property="og:image" content="https://kreated.dev/assets/img/proof/rr-desktop.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta property="og:image:alt" content="The live site">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Website Redesign in Raleigh, NC | Kreated">
+<meta name="twitter:description" content="Website redesign in Raleigh, NC — improving or replacing an existing site, with its search foundations and old URLs carried across.">
+<meta name="twitter:image" content="https://kreated.dev/assets/img/proof/rr-desktop.jpg">
+
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#020C2E">
+
+<!-- Three layers, outermost first:
+       services.css  tokens, header, drawer, footer, skip link
+       leaf.css      the service-leaf system, shared by every /services/ leaf
+       website-redesign.css  only what this page uses and no other leaf does
+     This page no longer borrows the sibling leaf's stylesheet — the shared
+     primitives were extracted to leaf.css on 2026-08-28. -->
+<link rel="stylesheet" href="/services/services.css?v=17">
+<link rel="stylesheet" href="/services/leaf.css?v=10">
+<link rel="stylesheet" href="website-redesign.css?v=10">
+<!-- last, so it is the single definition of the footer on every route -->
+<link rel="stylesheet" href="/theme.css?v=1">
+<link rel="stylesheet" href="/footer.css?v=5">
+</head>
+<body>
+<!-- The atmosphere: one fixed layer behind the whole document carrying the
+     blue. Fixed rather than scrolled so the light does not slide past the
+     content — the room dims around the reader. Colours and strength live in
+     theme.css. Decorative only, hence aria-hidden. -->
+<div class="atmos" aria-hidden="true"></div>
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- ==========================================================================
+     HEADER — the leaf family's chrome, unchanged. All links site-root-relative.
+     /work/ is an intended route that does not exist yet.
+     ========================================================================== -->
+<header class="head">
+  <div class="wrap head__in">
+    <a class="head__mark" href="/" aria-label="Kreated — home">KREATED</a>
+
+    <!-- ⚠ ONE NAV, ONE MEANING, EVERY ROUTE. Every item here is a real page,
+         so the header does the same thing whichever page you are standing on.
+         Investment and FAQ are deliberately NOT in the nav: they are homepage
+         sections with no routes of their own, so a header link to them worked
+         on the homepage and did nothing anywhere else. They live in the footer
+         and on the homepage itself. That ambiguity is what this replaces. -->
+    <nav class="head__nav" aria-label="Primary">
+      <a href="/services/">Services</a>
+      <a href="/work/">Work</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+    </nav>
+
+    <a class="head__cta" href="/contact/">Start a Project</a>
+
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="/services/">Services</a>
+    <a href="/work/">Work</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/about/">About</a>
+    <a href="/method/">Method</a>
+    <a href="/contact/">Contact</a>
+    <a class="drawer__cta" href="/contact/">Start a Project</a>
+    <a class="drawer__alt" href="/free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+<main id="top" tabindex="-1">
+
+<!-- ==========================================================================
+     1 · SERVICE HERO
+     The title inherits the Services hub's APPROVED 02 treatment: "Website" held
+     back, "Redesign" at full weight — the correction inside the pair. That is
+     already the locked visual language for this service on the hub, so the leaf
+     carries it forward rather than inventing a new corrective device.
+
+     The service line is the homepage's approved Services 02 description,
+     verbatim. No second explanatory paragraph.
+     ========================================================================== -->
+<section class="shero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/services/">SERVICES</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">WEBSITE REDESIGN</span>
+    </nav>
+
+    <h1 class="shero__h wr__h"><span class="wr__held">Website</span> <span>Redesign</span></h1>
+
+    <div class="shero__foot">
+      <p class="shero__fact">Your current site improved or replaced, keeping what
+        already works for you.</p>
+
+      <!-- OWNER INPUT — REDESIGN POSITIONING. Ships HIDDEN with an empty text
+           node. Nothing in the repo supplies a positioning line for this
+           service, and writing one would mean inventing buyer pain. To enable:
+           remove `hidden` and write the sentence into .shero__note. -->
+      <aside class="shero__owner" hidden>
+        <p class="shero__ownerlabel">POSITIONING</p>
+        <p class="shero__note"><!-- owner sentence goes here --></p>
+      </aside>
+    </div>
+
+    <p class="shero__ctas">
+      <a class="btn btn--cobalt" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="btn btn--quiet" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    </p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What it is</h2>
+      <p class="lgrid__note">And how it differs from a rebuild.</p>
+    </div>
+    <div class="prose">
+      <p><b>A website redesign improves or replaces an existing site while keeping
+        what already works: the pages that earn attention, the content that is
+        already correct, and the addresses those pages already live at.</b></p>
+      <p>A cosmetic refresh changes how a site looks. A structural redesign also
+        changes how it is organised, how its pages relate to each other and how
+        clearly it explains the business. A rebuild starts again from nothing. Most
+        businesses need the middle option, because the problem is usually structure
+        and clarity rather than the visual style alone.</p>
+      <p><b>Redesigns do not cost rankings. Badly handled migrations do.</b> The
+        damage comes from a specific set of avoidable mistakes: page addresses that
+        change with no redirect pointing the old one at the new, content rewritten
+        on the pages that were already earning attention, internal links left
+        broken, and crawling accidentally blocked at launch.</p>
+      <p>The way that is avoided is unglamorous. Every existing address is
+        inventoried before anything changes, each one is mapped to exactly one new
+        address, redirects are set at the server rather than in the browser,
+        chains of redirects are avoided, and the pages that already perform keep
+        their content rather than being rewritten for the sake of it.</p>
+      <p>Expect a short unsettled period after launch while search engines recrawl
+        and reassess the site. That is normal and it is monitored rather than
+        ignored. Nobody can promise that positions will be identical afterwards,
+        and this page will not.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     2 · PRIMARY PROOF — Rare Raleigh Restoration: real before, real after,
+     set as an editorial spread.
+
+     Reproduced from correct-redesign-editorial.svg (1440x925 canvas). Every
+     horizontal value in the CSS is that mock's geometry expressed as a
+     percentage of its 1296px content span (x96 -> x1392), so it maps onto this
+     page's 1200px column:
+       before object   x96   y220  392x330   ->  left 0       width 30.25%
+       gutter rule     x566        y200-680  ->  left 36.27%
+       after object    x630  y150  716x489   ->  left 41.20%  width 55.25%
+       phone           x1194 y405  198x384   ->  left 84.72%  width 15.28%
+       BEFORE label    x96   y592            ->  under the before object
+       AFTER label     x630  y833            ->  under the phone's descent
+     The phone breaks the after object's lower-right corner and hangs 150 mock
+     units below it; the stage carries that descent as padding-bottom so the
+     AFTER label lands where the mock puts it.
+
+     ⚠ EVIDENCE NOTE, read before editing this section.
+     All three images are real captures of the same business's website, and all
+     three already ship in this repo. Nothing was added for this module:
+       BEFORE  assets/img/proof/rr-before.jpg  — the client's previous site,
+               owner-supplied, canvas-only crop (no editor or browser chrome).
+       AFTER   assets/img/proof/rr-desktop.jpg — the live site Kreated built.
+       PHONE   assets/img/proof/rr-mobile.jpg  — the same live site on a phone.
+               The mock embeds its top 780px; object-fit:cover with a top
+               anchor reproduces exactly that crop, so no new asset exists.
+
+     PERMISSION: Skyler confirmed on 2026-08-30 that Rare Raleigh's previous
+     site is approved for public display. The finished-state-only plate that
+     used to stand here is gone, so the page shows ONE proof moment.
+
+     🚫 Still forbidden here: any metric, any speed / traffic / ranking /
+     revenue claim, any "X% better" framing. The comparison is visual and
+     factual only. The scope label stays the single verified word "Website" —
+     DECISION 019 supports it and states the full delivered-scope string is not
+     yet documented. Do not widen it without Skyler's confirmation.
+     ========================================================================== -->
+<section class="proof proof--ba">
+  <div class="wrap">
+
+    <div class="ba__head">
+      <h2 class="eyebrow eyebrow--ba">Rare Raleigh Restoration, the same business, rebuilt</h2>
+      <!-- COPY — owner-supplied, taken verbatim from the approved mock. -->
+      <p class="ba__tag">Real before &middot; real after: no mockups</p>
+    </div>
+
+    <figure class="ba">
+      <div class="ba__stage">
+
+        <div class="ba__col">
+          <div class="ba__obj ba__obj--before">
+            <div class="ba__strip">the previous site</div>
+            <img src="/assets/img/proof/rr-before.jpg"
+                 alt="Rare Raleigh Restoration's previous website, before the redesign"
+                 width="760" height="687" loading="lazy" decoding="async">
+          </div>
+          <p class="ba__cap">Before</p>
+        </div>
+
+        <span class="ba__rule" aria-hidden="true"></span>
+
+        <div class="ba__obj ba__obj--after">
+          <div class="ba__strip">rareraleighrestoration.com
+            <span class="ba__live"><i aria-hidden="true"></i>LIVE</span></div>
+          <img src="/assets/img/proof/rr-desktop.jpg"
+               alt="The live Rare Raleigh Restoration website Kreated designed and built"
+               width="1600" height="1000" loading="lazy" decoding="async">
+        </div>
+
+        <div class="ba__phone">
+          <img src="/assets/img/proof/rr-mobile.jpg"
+               alt="The live Rare Raleigh Restoration website on a phone"
+               width="390" height="1100" loading="lazy" decoding="async">
+        </div>
+      </div>
+
+      <figcaption>
+        <div class="ba__caps">
+          <p class="ba__cap ba__cap--after">After</p>
+        </div>
+
+        <!-- COPY CANDIDATE — owner-supplied wording, 2026-08-30. -->
+        <p class="ba__note">Same business. Real before, real after.</p>
+
+        <span class="plate__cap ba__meta">
+          <span>
+            <span class="plate__name">Rare Raleigh Restoration</span>
+            <span class="plate__scope">Website</span>
+          </span>
+          <span class="plate__right">
+            <span class="plate__status">Designed and built by Kreated &middot; Raleigh, NC &middot; Published &amp; live</span>
+            <a class="tlink" href="/work/rare-raleigh-restoration/">See the project <i aria-hidden="true">&#8594;</i></a>
+          </span>
+        </span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     3 · WHAT A REDESIGN CHANGES
+     Same grammar as the Web Design leaf: metadata channel left, editorial list
+     right, hairlines contained to the list. Seven lines, not six — the extra
+     one is redirects, which is the thing that only exists on a redesign.
+
+     Every line traces to documented scope:
+       structure/navigation      pricing ref §11 (navigation, footer, CTA system)
+                                 + §21 (stronger service architecture)
+       responsive design & build §11 (custom responsive design, mobile + desktop)
+       existing copy             §12 (existing-copy cleanup, page-content editing)
+       search foundations        §13 (titles, headings, URLs, sitemap, schema)
+       redirects                 §22 "old URL redirect planning where replacing
+                                 an existing site"  <- redesign-specific
+       analytics & tracking      §14 (GA4, conversion + phone-click tracking)
+       QA & launch               §15 (responsive/mobile QA, production launch)
+     ========================================================================== -->
+<section class="handles">
+  <div class="wrap">
+    <div class="handles__grid">
+      <div class="handles__aside">
+        <h2 class="sec__h">What a redesign changes</h2>
+        <p class="bound">A redesign starts from a site that already exists.
+          If there is no site yet, that is <a class="ilink" href="/services/web-design/">Web
+          Design &amp; Development</a>.</p>
+        <p class="prov">Scope per the approved pricing reference. Every project is scoped
+          and priced in writing before it begins.</p>
+      </div>
+
+      <ul class="hlist" role="list">
+        <li>Site structure &amp; navigation</li>
+        <li>Custom responsive design &amp; build</li>
+        <li>Existing copy, reorganised</li>
+        <li>Search foundations</li>
+        <li>Redirects from your old URLs</li>
+        <li>Analytics &amp; tracking</li>
+        <li>QA &amp; launch</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     PHASE 2B · SUBSTANCE.
+     Sources: the boundary between this service and Web Design is docs/
+     SERVICES.md §1 (existing site vs no site). The migration language is
+     limited to what the approved Growth list already carries — "redirects so
+     old pages don't break on the move" — and nothing more.
+     🚫 NO SEARCH PROMISE. This page must never say a redesign preserves,
+     protects or improves rankings or traffic. Nothing in the repo documents a
+     before/after search outcome for any redesign, so the honest claim is about
+     what is CARRIED OVER — the URLs, the content worth keeping, the redirects
+     — not about what happens to a ranking afterwards.
+     ========================================================================== -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">When a redesign beats patching</h2>
+      <p class="lgrid__note">Patching is cheaper right up until it isn&rsquo;t.</p>
+    </div>
+    <div class="prose">
+      <p>Patch it when the problem is local: a page that reads badly, a form nobody
+        can find, a section that has gone out of date. Those are edits, and a
+        redesign is an expensive way to make one.</p>
+      <p>Redesign it when the problem is structural, when the site is
+        organised around what the business used to do, when the layout fights
+        every new page you add, when it was never really built for a phone, or
+        when the quality of the work and the quality of the site have visibly
+        drifted apart. At that point each patch costs more than it returns.</p>
+      <p>If there is no site at all, this is the wrong service. That is
+        <a class="ilink" href="/services/web-design/">Web Design &amp; Development</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What gets looked at first</h2>
+      <p class="lgrid__note">Before anything is redrawn.</p>
+    </div>
+    <ul class="who" role="list">
+      <li><b>What the site is actually organised around</b>
+        <span>Which pages exist, what each one is for, and which ones exist only
+          because they always have.</span></li>
+      <li><b>What a first-time visitor sees in the first seconds</b>
+        <span>Whether the page says what the business does, for whom, and where, before anyone scrolls.</span></li>
+      <li><b>The path to contacting you</b>
+        <span>How many steps, how obvious, and whether it survives on a phone
+          with one thumb.</span></li>
+      <li><b>What is worth keeping</b>
+        <span>Copy, pages and URLs that already earn their place. A redesign is
+          not an excuse to throw away work that still works.</span></li>
+      <li><b>How it behaves at real screen sizes</b>
+        <span>Not a shrunk desktop layout. A rebuilt one.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Moving without breaking things</h2>
+      <p class="lgrid__note">The part people find out about afterwards.</p>
+    </div>
+    <div class="prose">
+      <p>Where a page still deserves to exist, its address is kept. Where it is
+        merged or replaced, a redirect points the old address at the new one, so
+        links other people have already published keep working.</p>
+      <p><b>What is not claimed:</b> no ranking, traffic or visibility outcome is
+        promised for a redesign. No such result is documented for any project
+        here, so none appears on this page.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     4 · PRICING HANDOFF
+     There is no redesign package and none is invented. Redesign work is priced
+     on the same website ladder: pricing ref §9 lists "companies replacing a
+     poor/basic website" among Launch's intended clients, and §22 adds old-URL
+     redirect planning at Growth when an existing site is being replaced.
+     Figures are approved facts and must not change.
+     ========================================================================== -->
+<section class="price">
+  <div class="wrap">
+    <p class="price__note">Redesign work is priced on the same ladder. There is no
+      separate redesign package.</p>
+    <div class="price__in">
+      <p class="price__line">
+        <span class="price__item"><b>Launch</b> starts at <span class="fig">$1,750</span></span>
+        <span class="price__item"><b>Growth</b> <span class="fig">$2,950</span> <i>adds redirect planning when replacing a site</i></span>
+      </p>
+      <a class="tlink" href="/pricing/">See Pricing <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     NO FAQ SECTION ON THIS PAGE — deliberate.
+     docs/SERVICES.md §6 records that every V1 service page ended with six FAQs,
+     but only the Web Design page's seventh question survives in the repo
+     verbatim. No Website Redesign question is documented anywhere, so there is
+     nothing to show and inventing one is out of the question. Add the section
+     when Skyler supplies real questions.
+
+     NO SECONDARY PROOF EITHER — deliberate. Neither LLEC nor LearnSmart is
+     documented as a redesign, so referencing them here would imply redesign
+     work that the repo does not support.
+     ========================================================================== -->
+
+<!-- ==========================================================================
+     FAQ — six, the default count per docs/SERVICES.md §6.
+     ⚠ RESOLVED 2026-08-30. Timeline, ownership and payment were all unset when
+     this page was written; Skyler has ruled on all three. Timeline and payment
+     are answered below because a redesign IS a website project. Ownership is
+     answered once, on the Web Design leaf, and linked rather than duplicated.
+     🚫 The 2–4 weeks is not a guarantee and never travels without its three
+     dependencies: scope, feedback, and how fast content and assets arrive.
+     ========================================================================== -->
+<section class="sec faqs__sec">
+  <div class="wrap lgrid">
+    <div><h2 class="sec__h">Questions</h2></div>
+    <div class="faqs">
+
+      <details>
+        <summary>Will I lose the pages I already rank for?</summary>
+        <div class="faqs__a">
+          <p>Pages worth keeping keep their addresses. Where a page is merged or
+            replaced, a redirect points the old address at the new one so existing
+            links still resolve.</p>
+          <p>What is deliberately not promised is a search outcome. No
+            before-and-after ranking or traffic result is documented for any
+            project here, so this page does not claim one.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Can you keep the copy we already have?</summary>
+        <div class="faqs__a">
+          <p>Where it earns its place, yes. And that is usually more of it
+            than owners expect. Existing wording gets tidied and reorganised rather
+            than replaced for the sake of it. What tends to change is the order,
+            the headings and the calls to action.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Do we have to rebuild everything at once?</summary>
+        <div class="faqs__a">
+          <p>Not necessarily. If the structure is sound and only the surface has
+            aged, the work is smaller and cheaper than a full rebuild. That is the
+            first thing worth establishing, and it is what the
+            <a href="/free-website-audit/">Free Website Audit</a> is for.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>What if our site is on a builder like Wix or Squarespace?</summary>
+        <div class="faqs__a">
+          <p>That is a normal starting point. What matters is what the site has to
+            do next, not what it was made with. The platform question is settled in
+            scoping, in writing, before anything is rebuilt.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Is a redesign cheaper than a new site?</summary>
+        <div class="faqs__a">
+          <p>Often, but not always. It depends on how much survives. A
+            redesign has no package of its own: it is scoped and priced against the
+            same Launch and Growth engagements, because the work is the same work
+            whether the starting point is a tired site or a blank page.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Can I see a redesign you have actually done?</summary>
+        <div class="faqs__a">
+          <p>Yes. <a href="/work/rare-raleigh-restoration/">Rare Raleigh
+            Restoration</a> is on this page above, the real previous site and
+            the real site that is live now, both captured, with no metric attached
+            to either.</p>
+        </div>
+      </details>
+
+
+      <details>
+        <summary>How long does a redesign take?</summary>
+        <div class="faqs__a">
+          <p>Most website projects take about 2&ndash;4 weeks, depending on scope,
+            feedback, and how quickly we receive the content and assets needed to
+            build. A redesign sits in the same range, and often at the shorter end
+            when a good amount of the existing content survives.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>How does payment work, and who owns the result?</summary>
+        <div class="faqs__a">
+          <p>Standard website projects are 50% to start and 50% before launch;
+            larger or custom projects may use milestones defined in the proposal.</p>
+          <p>After final payment you own the finished website and the design and
+            content created specifically for you. The full answer is on the
+            <a href="/services/web-design/">Web Design</a> page.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Will my rankings drop right after launch?</summary>
+        <div class="faqs__a">
+          <p>A short unsettled period is normal while search engines recrawl and reassess the site. What causes lasting damage is not the redesign itself but the avoidable mistakes around it: addresses changed without redirects, pages that were already performing rewritten, internal links broken, crawling blocked at launch.</p><p>Those are planned for rather than discovered afterwards, and the site is watched after launch rather than handed over and forgotten. Nobody can promise positions will be identical, and this page does not.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>What happens to my old page addresses?</summary>
+        <div class="faqs__a">
+          <p>Every existing address is listed before anything changes and mapped to exactly one address on the new site. Redirects are set at the server rather than in the browser, and chains where one redirect points at another are avoided, because each additional hop costs something.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div><h2 class="sec__h">Where to go next</h2></div>
+    <div>
+      <p class="next">No site yet? That is
+        <a class="ilink" href="/services/web-design/">Web Design &amp; Development</a>.
+        For the search work that runs after a rebuild, see
+        <a class="ilink" href="/services/local-seo/">Local SEO</a>.
+        The full comparison is on the
+        <a class="ilink" href="/work/rare-raleigh-restoration/">Rare Raleigh project page</a>,
+        and the rest is under <a class="ilink" href="/work/">Work</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     5 · CLOSING — the leaf family's close, unchanged.
+     ========================================================================== -->
+<section class="close">
+  <div class="wrap">
+
+    <!-- OWNER INPUT — CLOSING LINE. Ships HIDDEN with an empty text node. -->
+    <aside class="close__owner" hidden>
+      <p class="close__ownerlabel">CLOSING LINE</p>
+      <p class="close__note"><!-- owner sentence goes here --></p>
+    </aside>
+
+    <div class="close__row">
+      <a class="close__go" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="close__alt" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ⚠ ONE FOOTER, ALL 17 ROUTES. Identical markup everywhere, styled by
+     /footer.css which loads last on every page. Before this, About, Method,
+     Contact, Work and every service page ended in a wordmark and "Raleigh, NC"
+     — no pricing, no phone number, no privacy link — which read as an
+     incomplete mini-site to anyone who did not enter through the homepage.
+     🚫 If a route is added, this block is copied verbatim. Do not fork it. -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <a class="foot__mark" href="/" aria-label="Kreated — home">KREATED</a>
+      <!-- approved V1 positioning line, reusable verbatim -->
+      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+    </div>
+
+    <div class="foot__cols">
+      <div>
+        <h2>Contact</h2>
+        <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
+        <p><a href="tel:+19198058217">(919) 805-8217</a></p>
+        <p>Raleigh, North Carolina</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <p><a href="/services/">Services</a></p>
+        <p><a href="/work/">Work</a></p>
+        <p><a href="/method/">Method</a></p>
+        <p><a href="/about/">About</a></p>
+        <p><a href="/contact/">Contact</a></p>
+        <p><a href="/pricing/">Pricing</a></p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <p><a href="/services/web-design/">Web Design &amp; Development</a></p>
+        <p><a href="/services/website-redesign/">Website Redesign</a></p>
+        <p><a href="/services/local-seo/">Local SEO</a></p>
+        <p><a href="/services/google-business-profile/">Google Business Profile</a></p>
+        <p><a href="/services/brand-strategy/">Brand Strategy &amp; Identity</a></p>
+        <p><a href="/services/answer-engine-optimization/">Answer Engine Optimization</a></p>
+      </div>
+      <div>
+        <h2>Start</h2>
+        <p><a data-evt="cta_start_project" href="/contact/">Start a Project</a></p>
+        <p><a data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit</a></p>
+        <p><a href="/work/">View Work</a></p>
+      </div>
+    </div>
+
+    <p class="foot__legal">© 2026 Kreated
+      <a href="/privacy/">Privacy</a>
+    </p>
+  </div>
+</footer>
+
+<script src="/services/services.js?v=4" defer></script>
+</body>
+</html>

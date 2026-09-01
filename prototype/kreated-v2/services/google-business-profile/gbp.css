@@ -1,0 +1,136 @@
+/* ==========================================================================
+   KREATED V2 — /services/google-business-profile/ · PAGE-SPECIFIC OVERRIDES
+   The leaf system lives in ../leaf.css. This file holds only what this page
+   uses and no other leaf does.
+
+   The character of this service is RECORD, not statement. On the Services hub
+   the 04 row is the quietest in the ledger — weight 560 against every other
+   row's 640-660 — and the leaf carries that forward rather than inventing a
+   new device. The profile object is built from the same surface the Website
+   Redesign and Local SEO leaves give their objects (var(--surface), 10px radius, one
+   hairline), so all three read as one system.
+
+   🚫 Nothing here imitates Google. No Google red/yellow/green/blue, no stars,
+   no map tile, no Product Sans. The object is a Kreated object.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   HERO TITLE — two lines, the hub's 04 weight.
+   -------------------------------------------------------------------------- */
+.gb__h{font-weight:560;letter-spacing:-.025em}
+
+/* --------------------------------------------------------------------------
+   THE PROFILE OBJECT
+   -------------------------------------------------------------------------- */
+.proof--gbp{padding-bottom:clamp(48px,5.6vw,84px)}
+.gplate{margin:0}
+
+.gb{position:relative;border-radius:10px;background:var(--surface);
+  border:1px solid color-mix(in srgb, var(--ink-1) 9%, transparent);overflow:hidden;
+  box-shadow:0 26px 60px rgba(0,0,0,.75)}
+/* the warm top edge-light the family gives its foreground object */
+.gb::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:rgba(237,232,222,.3);z-index:2}
+
+/* The cover: the wordmark on black. It replaced a client photograph on
+   2026-08-30 — the object is Kreated's own example now, so the cover should be
+   Kreated's own mark rather than someone else's work.
+
+   Mechanics per docs/BRAND.md §B: Cormorant Garamond 300, uppercase, tracked
+   0.22em with the trailing tracking cancelled by an equal negative margin so
+   the optical right edge is true. It is decorative here — the accessible name
+   is the <h3> below it — so the element is aria-hidden. */
+.gb__cover{position:relative;aspect-ratio:4 / 1;overflow:hidden;background:#000;
+  display:flex;align-items:center;justify-content:center}
+.gb__cover::after{content:'';position:absolute;left:0;right:0;bottom:0;height:34%;
+  background:linear-gradient(to bottom,rgba(12,16,24,0),var(--surface))}
+.gb__wordmark{margin:0;position:relative;z-index:1;
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+  font-size:clamp(24px,3.4vw,50px);line-height:1;color:var(--white);
+  letter-spacing:.22em;margin-right:-.22em}
+
+.gb__grid{display:grid;grid-template-columns:minmax(0,58fr) minmax(0,42fr)}
+/* the identity sits at the top, the service area at the bottom: the anatomy
+   column is the taller of the two, and letting the gap fall between the name
+   and the places reads as air rather than as an unfinished column. */
+.gb__main{display:flex;flex-direction:column;
+  padding:clamp(24px,2.8vw,40px) clamp(24px,2.8vw,40px) clamp(26px,3vw,42px)}
+.gb__anat{padding:clamp(24px,2.8vw,40px) clamp(24px,2.8vw,40px) clamp(26px,3vw,42px);
+  border-left:1px solid color-mix(in srgb, var(--ink-1) 7%, transparent)}
+
+.gb__chip{margin:0 0 14px;font:600 10.5px/1 'General Sans',system-ui;
+  letter-spacing:.20em;text-transform:uppercase;color:var(--accent)}
+.gb__name{margin:0;font-size:clamp(26px,2.9vw,40px);font-weight:600;
+  letter-spacing:-.02em;line-height:1.1;color:var(--white)}
+.gb__site{margin:14px 0 clamp(28px,3.2vw,44px)}
+
+.gb__label{margin:0 0 14px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.20em;text-transform:uppercase;color:var(--gray)}
+.gb__areas{margin-top:auto;padding-top:clamp(22px,2.4vw,30px);
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 7%, transparent)}
+
+/* The three areaServed values, widest first. Worldwide carries the emphasis
+   because it is the widest documented area, not because it is a boast — see
+   docs/BUSINESS.md §1, where all three are recorded together. */
+.gb__places{display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  list-style:none;margin:0;padding:0}
+.gb__places li{padding:6px 12px;border:1px solid color-mix(in srgb, var(--ink-1) 13%, transparent);border-radius:999px;
+  font-size:13px;line-height:1.3;color:var(--ink-2)}
+.gb__place--wide{border-color:rgba(91,134,255,.42)!important;
+  color:var(--white)!important;font-weight:600;letter-spacing:.02em}
+.gb__areanote{margin:16px 0 0;max-width:46ch;font-size:13px;line-height:1.6;
+  color:var(--gray)}
+
+/* the real values. A completed profile is a set of filled fields, so this
+   reads as rows of fact rather than as a marketing list. */
+.gb__facts{margin:clamp(26px,3vw,38px) 0 0;padding-top:clamp(22px,2.4vw,30px);
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 7%, transparent)}
+.gb__facts > div{display:grid;grid-template-columns:minmax(0,30fr) minmax(0,70fr);
+  gap:clamp(12px,1.6vw,24px);padding:clamp(9px,1vw,13px) 0}
+.gb__facts > div + div{border-top:1px solid color-mix(in srgb, var(--ink-1) 6%, transparent)}
+.gb__facts dt{font:600 11px/1.5 'General Sans',system-ui;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gray)}
+.gb__facts dd{margin:0;font-size:clamp(14px,1.15vw,16px);line-height:1.45;
+  color:var(--ink-1)}
+
+/* anatomy — field names, no values. The rules belong to the list. */
+.gb__fields{list-style:none;margin:0;padding:0}
+.gb__fields li{padding:clamp(8px,.9vw,11px) 0;font-size:clamp(14px,1.15vw,16px);
+  line-height:1.35;color:var(--ink-2);
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 6%, transparent)}
+.gb__fields li:first-child{border-top:0;padding-top:0}
+.gb__anatnote{margin:18px 0 0;font-size:13px;line-height:1.6;color:var(--gray)}
+
+/* the evidence class, stated plainly rather than hidden — PROOF.md §7 treats
+   this as a conversion asset, not a disclaimer */
+.gb__class{margin:clamp(22px,2.4vw,30px) 0 0;max-width:64ch;font-size:14px;
+  line-height:1.6;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   THE APPROVED "no profile yet" SENTENCE — V1 copy, verbatim. It sits with the
+   boundary line in the left channel and must stay visually subordinate to it.
+   -------------------------------------------------------------------------- */
+.gb__first{margin:16px 0 0;max-width:38ch;font-size:14.5px;line-height:1.6;
+  color:var(--ink-2)}
+
+/* --------------------------------------------------------------------------
+   PRICING — one factual line above the figures.
+   -------------------------------------------------------------------------- */
+.price__note{margin:0 0 clamp(16px,1.8vw,24px);max-width:58ch;
+  font-size:15px;line-height:1.55;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width:900px){
+  .gb__grid{grid-template-columns:1fr}
+  .gb__facts > div{grid-template-columns:1fr;gap:5px}
+  .gb__areas{margin-top:clamp(28px,3.2vw,40px)}
+  .gb__anat{border-left:0;border-top:1px solid color-mix(in srgb, var(--ink-1) 7%, transparent);padding-top:clamp(24px,3vw,34px)}
+  .gb__cover{aspect-ratio:16 / 7}
+}
+@media (max-width:640px){
+  .gb__cover{aspect-ratio:16 / 9}
+  .gb__wordmark{letter-spacing:.16em;margin-right:-.16em}
+  .gb__places li{font-size:12.5px;padding:5px 10px}
+}

@@ -1,0 +1,191 @@
+<!doctype html>
+<!--
+  ============================================================================
+  STEP 5 PROTOTYPE — NOT PRODUCTION
+  ============================================================================
+  Kreated V2 · EVERY SURFACE hero motion prototype.
+  Motion discipline: SET TRUE — uncover / seat / align.
+
+  This file is a REVIEW ARTIFACT. It is not the homepage, it does not ship,
+  and it must not be copied into site/.
+
+  All Kreated-side copy is bracketed placeholder. All client-side content is
+  real Leak Locators East Coast material, captured 2026-08-21, unaltered.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>STEP 5 PROTOTYPE — EVERY SURFACE</title>
+<link rel="stylesheet" href="styles.css?v=19">
+<script>
+  /* Set the motion "from" states before first paint, but only when we will
+     actually animate. No JS / reduced motion => CSS default = final state. */
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce) document.documentElement.className = 'js-motion';
+  })();
+</script>
+</head>
+<body>
+
+<p class="proto-flag">STEP 5 PROTOTYPE — NOT PRODUCTION · isolated hero motion test · not the homepage</p>
+
+<main class="hero">
+  <div class="hero__inner">
+
+    <!-- ==================================================================
+         LEFT / CONVERSION ZONE — static from first paint, never animated
+         ================================================================== -->
+    <div class="zone zone--copy">
+      <p class="copy-flag">COPY PLACEHOLDER — NOT APPROVED</p>
+
+      <h1 class="k-headline">[HEADLINE — PLACEHOLDER, NOT APPROVED]</h1>
+      <p class="k-support">[SUPPORTING LINE — PLACEHOLDER, NOT APPROVED]</p>
+
+      <div class="k-routes">
+        <a class="k-btn k-btn--primary" href="#">Start a Project</a>
+        <a class="k-btn k-btn--ghost" href="#">Free Website Audit</a>
+        <a class="k-btn k-btn--text" href="#">View Work</a>
+      </div>
+
+      <div class="k-baseline" aria-hidden="true"></div>
+    </div>
+
+    <!-- ==================================================================
+         RIGHT / EVERY SURFACE ARTIFACT — real LLEC material
+         ================================================================== -->
+    <div class="zone zone--artifact">
+      <figure class="stage"
+              role="img"
+              aria-label="Leak Locators East Coast shown across desktop, mobile and search surfaces">
+
+        <!-- ---------- alignment hairlines (draw taut on the align beat) ---------- -->
+        <span class="rule rule--h1" aria-hidden="true"></span>
+        <span class="rule rule--v1" aria-hidden="true"></span>
+        <span class="rule rule--h2" aria-hidden="true"></span>
+
+        <!-- ============ SURFACE 1 — DESKTOP (never leaves the screen) ============ -->
+        <div class="surface surface--desktop">
+          <div class="page page--desktop">
+
+            <div class="photo-plane photo-plane--desktop">
+              <img src="assets/llec-hero-sunset.jpg" alt="" width="1900" height="1425" fetchpriority="high" decoding="sync">
+            </div>
+
+            <header class="dk-nav">
+              <img class="dk-logo" src="assets/llec-logo-lockup-light.png" alt="" width="520" height="201">
+              <div class="dk-navcall">
+                <span class="dk-navcall__label">Call a Leak Detection Expert</span>
+                <span class="dk-navcall__num">(919) 633-4975</span>
+              </div>
+              <span class="dk-burger" aria-hidden="true"><i></i><i></i><i></i></span>
+            </header>
+
+            <h2 class="dk-h1">Find the leak before<br>it costs you more.</h2>
+            <p class="dk-sub">Wilmington pool leak detection that finds where the water is going, so the repair can be focused and unnecessary work can be avoided.</p>
+            <!-- REVISION 4: the live site's "19 five-star Google reviews" line is
+                 suppressed here. It is real but stale against the current GBP (22),
+                 and showing both would put contradictory counts on one screen.
+                 Nothing is substituted in its place. -->
+            <ul class="dk-points">
+              <li>Locating leaks since 2006</li>
+              <li>Owner-led. No subcontractors.</li>
+            </ul>
+            <div class="dk-cta">
+              <span class="dk-btn dk-btn--solid"><svg class="ic-phone" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.2 1.6 6.6 4 5.3 5.6a8 8 0 0 0 5.1 5.1L12 9.4l2.4 1.4-.5 2.4a1.2 1.2 0 0 1-1.3.9C6.6 13.6 2.4 9.4 1.9 3.4A1.2 1.2 0 0 1 2.8 2Z"/></svg>CALL (919) 633-4975</span>
+              <span class="dk-btn dk-btn--outline">REQUEST AN INSPECTION</span>
+            </div>
+
+            <div class="dk-media">
+              <img src="assets/llec-hero-media-still.jpg" alt="" width="858" height="470">
+            </div>
+
+            <div class="dk-band" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- ============ SURFACE 2 — MOBILE (extracted from the desktop) ============ -->
+        <div class="surface surface--mobile">
+          <div class="page page--mobile">
+
+            <div class="photo-plane photo-plane--mobile">
+              <img src="assets/llec-hero-sunset.jpg" alt="" width="1900" height="1425" decoding="sync">
+            </div>
+
+            <header class="mb-nav">
+              <img class="mb-logo" src="assets/llec-logo-lockup-light.png" alt="" width="520" height="201">
+              <span class="mb-call"><svg class="ic-phone" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.2 1.6 6.6 4 5.3 5.6a8 8 0 0 0 5.1 5.1L12 9.4l2.4 1.4-.5 2.4a1.2 1.2 0 0 1-1.3.9C6.6 13.6 2.4 9.4 1.9 3.4A1.2 1.2 0 0 1 2.8 2Z"/></svg>Call</span>
+              <span class="mb-navline" aria-hidden="true"></span>
+            </header>
+
+            <h2 class="mb-h1">Find the leak before<br>it costs you more.</h2>
+            <p class="mb-sub">Wilmington pool leak detection that finds where the water is going, so the repair can be focused and unnecessary work can be avoided.</p>
+            <ul class="mb-points">
+              <li>Locating leaks since 2006</li>
+              <li>Owner-led. No subcontractors.</li>
+            </ul>
+            <div class="mb-media"><img src="assets/llec-hero-media-still.jpg" alt="" width="858" height="470"></div>
+            <span class="mb-btn mb-btn--solid"><svg class="ic-phone" viewBox="0 0 16 16" aria-hidden="true"><path d="M5.2 1.6 6.6 4 5.3 5.6a8 8 0 0 0 5.1 5.1L12 9.4l2.4 1.4-.5 2.4a1.2 1.2 0 0 1-1.3.9C6.6 13.6 2.4 9.4 1.9 3.4A1.2 1.2 0 0 1 2.8 2Z"/></svg>CALL (919) 633-4975</span>
+            <span class="mb-btn mb-btn--outline">REQUEST AN INSPECTION</span>
+          </div>
+        </div>
+
+        <!-- ============ SURFACE 3 — SEARCH / GBP ================================
+             Not a card. The same photograph continues through it in register with
+             the phone directly above, under one quiet wash — so it reads as the
+             mobile surface carrying on downward and changing what it is showing.
+             Truthful current GBP values only (2026-08-21 screenshot). No Google
+             logo, no search bar, no SERP replica, no browser chrome.
+        -->
+        <div class="surface surface--search">
+          <div class="photo-plane photo-plane--search">
+            <img src="assets/llec-hero-sunset.jpg" alt="" width="1900" height="1425" decoding="sync">
+          </div>
+          <span class="se-wash" aria-hidden="true"></span>
+
+          <div class="se-body">
+            <img class="se-logo" src="assets/llec-logo-lockup-light.png" alt="" width="520" height="201">
+            <p class="se-name">Leak Locators East Coast</p>
+            <p class="se-rating">
+              <span class="se-score">4.8</span>
+              <span class="se-stars" aria-hidden="true">
+                <svg viewBox="0 0 84 16"><g fill="#d9a441"><path d="M8 1l2.1 4.3 4.7.7-3.4 3.3.8 4.7L8 11.8 3.8 14l.8-4.7L1.2 6l4.7-.7z"/><path d="M25 1l2.1 4.3 4.7.7-3.4 3.3.8 4.7L25 11.8 20.8 14l.8-4.7L18.2 6l4.7-.7z"/><path d="M42 1l2.1 4.3 4.7.7-3.4 3.3.8 4.7L42 11.8 37.8 14l.8-4.7L35.2 6l4.7-.7z"/><path d="M59 1l2.1 4.3 4.7.7-3.4 3.3.8 4.7L59 11.8 54.8 14l.8-4.7L52.2 6l4.7-.7z"/><path d="M76 1l2.1 4.3 4.7.7-3.4 3.3.8 4.7L76 11.8 71.8 14l.8-4.7L69.2 6l4.7-.7z"/></g></svg>
+              </span>
+              <span class="se-count">22 Google reviews</span>
+            </p>
+            <p class="se-meta">Swimming pool contractor · Wilmington and nearby areas</p>
+          </div>
+        </div>
+
+        <!-- ============ MOBILE-VIEWPORT CONTINUITY SLIVER ============
+             At narrow viewports the desktop surface is implied only by a cropped
+             sliver of the SAME photograph, in register with the phone's photo.
+        -->
+        <div class="sliver" aria-hidden="true">
+          <div class="photo-plane photo-plane--sliver">
+            <img src="assets/llec-hero-sunset.jpg" alt="" width="1900" height="1425" decoding="sync">
+          </div>
+        </div>
+
+        <!-- brand-continuity carriers: match-moved lockups, stage-level so they
+             are never clipped by a surface mask -->
+        <img class="hop hop--1" src="assets/llec-logo-lockup-light.png" alt="" aria-hidden="true" width="520" height="201">
+        <img class="hop hop--2" src="assets/llec-logo-lockup-light.png" alt="" aria-hidden="true" width="520" height="201">
+
+      </figure>
+
+      <figcaption class="artifact-note">
+        Real client work — Leak Locators East Coast, leaklocatorseastcoast.com.
+        Site captured 2026-08-21; search values from the current Google Business Profile.
+      </figcaption>
+    </div>
+
+  </div>
+</main>
+
+<script src="motion.js?v=19"></script>
+</body>
+</html>

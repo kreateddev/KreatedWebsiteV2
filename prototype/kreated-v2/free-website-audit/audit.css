@@ -1,0 +1,106 @@
+/* ==========================================================================
+   KREATED V2 — /free-website-audit/ · PAGE-SPECIFIC
+   The hero and the form are unchanged and still come from styles.css. This
+   file carries only the sections added in Phase 2C, and it deliberately
+   borrows the leaf family's 26/74 metadata-channel grid rather than inventing
+   a fourth layout — this page sits between the homepage system and the leaf
+   system, and the grid is the thing they already share.
+
+   ⚠ leaf.css is loaded here for one component only: the native <details> FAQ.
+   Nothing else from it is used, and the leaf tokens it expects come from
+   styles.css, which defines the same names.
+   ========================================================================== */
+/* ⚠ NO FULL-BLEED RULE. Every one of these sections used to carry a
+   `border-top:1px solid var(--line)` that ran the entire viewport width. There
+   were ~50 of them across the site, all at the same value, and together they
+   were the single largest continuity defect: each page read as a column of
+   stacked bands rather than one continuous environment. Measured in the render
+   they were the strongest seams on the site (a jump of 85/255 in the page
+   gutters, against 28 for the masthead rule).
+   What carries the structure instead is what already was: the label column, the
+   type scale and the section padding — exactly as the homepage's Services list
+   does since its own rules came out.
+   🚫 Do not put a page-width border back on a section. Content-scoped rules
+   (list items, fact rows, FAQ questions, proof frames, the footer legal line)
+   are a different thing and are all still here. */
+.aud{padding:clamp(34px,4vw,56px) 0 clamp(12px,1.4vw,18px)}
+.aud__grid{display:grid;grid-template-columns:minmax(0,26fr) minmax(0,74fr);
+  gap:clamp(24px,3vw,44px)}
+.aud__h{margin:0 0 clamp(14px,1.6vw,20px);
+  font-size:13px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--ink-3)}
+.aud__aside{margin:0;max-width:32ch;font-size:14.5px;line-height:1.6;
+  color:var(--ink-4)}
+
+/* who it's for — lead phrase, then the situation */
+.aud__who{list-style:none;margin:0;padding:0}
+.aud__who li{padding:clamp(13px,1.5vw,18px) 0;
+  border-bottom:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent)}
+.aud__who li:first-child{border-top:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent)}
+.aud__who li:last-child{border-bottom:0}
+.aud__who b{display:block;font-size:clamp(17px,1.5vw,21px);font-weight:600;
+  letter-spacing:-.012em;color:#fff}
+.aud__who span{display:block;margin-top:5px;max-width:56ch;
+  font-size:15.5px;line-height:1.55;color:var(--ink-3)}
+
+/* what gets looked at — a set, not six bands */
+.aud__list{list-style:none;margin:0;padding:0}
+.aud__list li{position:relative;padding:11px 0 11px 26px;max-width:60ch;
+  font-size:clamp(15.5px,1.3vw,17.5px);line-height:1.55;
+  color:var(--ink-2)}
+.aud__list li::before{content:'';position:absolute;left:0;top:calc(.78em + 3px);
+  width:11px;height:1px;background:rgba(91,134,255,.75)}
+.aud__list b{font-weight:600;color:#fff}
+
+/* what happens next — the ledger's serif numeral, reused */
+.aud__steps{list-style:none;margin:0;padding:0;counter-reset:a}
+.aud__steps li{counter-increment:a;position:relative;
+  padding:clamp(13px,1.5vw,18px) 0 clamp(13px,1.5vw,18px) clamp(40px,4.2vw,60px);
+  border-bottom:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent)}
+.aud__steps li:first-child{border-top:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent)}
+.aud__steps li:last-child{border-bottom:0}
+.aud__steps li::before{content:counter(a,decimal-leading-zero);
+  position:absolute;left:0;top:clamp(16px,1.8vw,22px);
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:clamp(13px,1.1vw,16px);line-height:1;color:rgba(237,232,222,.5)}
+.aud__steps b{display:block;font-size:clamp(16.5px,1.4vw,20px);font-weight:600;
+  letter-spacing:-.012em;color:#fff}
+.aud__steps span{display:block;margin-top:5px;max-width:56ch;
+  font-size:15.5px;line-height:1.55;color:var(--ink-3)}
+
+.aud__note{margin:clamp(18px,2.2vw,26px) 0 0;max-width:58ch;
+  font-size:14.5px;line-height:1.65;color:var(--ink-4)}
+.aud__link{color:var(--ink-1);border-bottom:1px solid var(--cobalt);
+  padding-bottom:1px;padding-block:4px}
+.aud__link:hover{border-bottom-color:var(--accent)}
+
+/* the hidden owner slot — styled so that un-hiding it lands correctly */
+.aud__owner{margin:clamp(18px,2.2vw,26px) 0 0;padding-left:18px;
+  border-left:2px solid var(--cobalt)}
+.aud__owner[hidden]{display:none}
+.aud__owner-l{display:block;margin-bottom:8px;
+  font:600 10.5px/1 'General Sans',system-ui;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent)}
+.aud__owner-text{display:block;font-size:16px;line-height:1.55;
+  color:var(--ink-1)}
+
+/* the FAQ comes from leaf.css; only the surrounding colours differ here */
+.aud__faqs{border-top-color:color-mix(in srgb, var(--ink-1) 8%, transparent)}
+.aud__faqs details{border-bottom-color:color-mix(in srgb, var(--ink-1) 8%, transparent)}
+
+@media (max-width:900px){
+  .aud__grid{grid-template-columns:1fr;gap:clamp(16px,2.4vw,24px)}
+  .aud__aside{max-width:none}
+}
+@media (max-width:640px){
+  .aud__steps li{padding-left:32px}
+  .aud__steps li::before{top:15px}
+}
+
+/* the poor-fit promise. Deliberately styled as a statement rather than a note:
+   it is the strongest anti-spam signal the offer has — the audit is useful even
+   when the submission never becomes a client — and burying it in grey micro-copy
+   would waste it. */
+.aud__fit{margin:clamp(20px,2.4vw,28px) 0 0;max-width:56ch;padding-left:18px;
+  border-left:2px solid var(--cobalt);
+  font-size:clamp(15.5px,1.3vw,17px);line-height:1.6;color:var(--ink-1)}

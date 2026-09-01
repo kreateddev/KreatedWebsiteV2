@@ -1,0 +1,28 @@
+# ==========================================================================
+# KREATED V2 — Netlify redirects
+#
+# ⛔ AUDIT GATE — added 2026-08-30. THIS IS THE LAUNCH GATE FOR THE FREE
+#    WEBSITE AUDIT. Do not remove it casually.
+#
+#    /free-website-audit/ describes the approved product: the visitor submits,
+#    the audit runs, and the result appears on that page within a few minutes.
+#    That product does not exist yet — the page still carries the old
+#    form -> /thanks/ flow, so in production the page would be a promise the
+#    site cannot keep.
+#
+#    Rather than weaken the approved copy to fit the old architecture, the
+#    ROUTE is gated at the edge. In production the URL forwards to /contact/,
+#    which is the approved primary conversion for launch, so no link anywhere
+#    on the site breaks and no visitor reaches an unfulfillable promise. The
+#    page and its code stay in the repository and stay reachable on the local
+#    dev server, so the product can keep being built against it.
+#
+#    TO LIFT THE GATE: delete the single rule below. Nothing else changes —
+#    the page, its copy, its links and its metadata are already correct.
+#    ⚠ Do not lift it until submit -> process -> result actually works.
+# ==========================================================================
+/free-website-audit/*   /contact/   302
+
+# ==========================================================================
+# Everything below is ordinary hygiene, not a gate.
+# ==========================================================================

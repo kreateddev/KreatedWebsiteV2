@@ -1,0 +1,86 @@
+<!doctype html>
+<!--
+  ============================================================================
+  STEP 5B PROTOTYPE — NOT PRODUCTION
+  ============================================================================
+  Kreated V2 · APERTURE intro → hero.  Material: THE POUR.
+  Motion discipline: SET TRUE — uncover / seat / align.
+
+  This file is a REVIEW ARTIFACT. It is not the homepage, it does not ship,
+  and it must not be copied into site/.
+
+  All Kreated copy below is an unapproved candidate and is labelled as such.
+  The Pour is a PRE-RENDERED asset (tools/render-pour.py), not a CSS effect.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>STEP 5B PROTOTYPE — APERTURE · THE POUR</title>
+<link rel="preload" as="image" href="assets/pour/frame-00.webp">
+<link rel="stylesheet" href="styles.css?v=6">
+<script>
+  /* Set the intro's "from" states before first paint, and only when the intro
+     is actually going to play. No JS / reduced motion => CSS default is the
+     finished hero. */
+  (function () {
+    var m = window.matchMedia;
+    var reduce = m && m('(prefers-reduced-motion: reduce)').matches;
+    var narrow = m && m('(max-width: 860px)').matches;
+    if (!reduce && !narrow) document.documentElement.className = 'js-intro';
+  })();
+</script>
+</head>
+<body>
+
+<p class="proto-flag">STEP 5B PROTOTYPE — NOT PRODUCTION · isolated intro/hero test · not the homepage</p>
+
+<header class="site-head">
+  <!-- Cormorant Garamond appears exactly once in this build: the wordmark. -->
+  <a class="wordmark" href="#" aria-label="Kreated — home">KREATED</a>
+</header>
+
+<main class="hero">
+
+  <!-- ====================================================================
+       LEFT / CONVERSION ZONE — painted at 0.00s, never animated, never
+       covered by the intro.
+       ==================================================================== -->
+  <div class="hero__copy">
+    <p class="copy-flag">COPY CANDIDATE — NOT APPROVED</p>
+
+    <h1 class="headline">Make your business<br>the obvious choice.</h1>
+    <p class="support">Web design, branding, and local SEO for owner-operated companies.</p>
+
+    <div class="routes">
+      <a class="btn btn--primary" href="#">Start a Project</a>
+      <a class="btn btn--ghost" href="#">Free Website Audit</a>
+      <a class="btn btn--text" href="#">View Work</a>
+    </div>
+
+    <span class="baseline" aria-hidden="true"></span>
+  </div>
+
+  <!-- ====================================================================
+       RIGHT / APERTURE + POUR
+       .pour-still  the finished surface. Present always. This alone is the
+                    reduced-motion / no-JS state, and it is the design.
+       .pour-seq    the pre-rendered intro sequence, laid over the still and
+                    removed at the hard stop. Only exists when JS runs.
+       ==================================================================== -->
+  <div class="hero__field">
+    <figure class="pour" role="img"
+            aria-label="A deep navy satin surface, the Kreated wordmark impressed into it">
+      <img class="pour-still" src="assets/pour/pour-rest@2x.jpg" alt=""
+           width="1600" height="1240" decoding="sync" fetchpriority="high">
+      <div class="pour-seq" aria-hidden="true"></div>
+    </figure>
+  </div>
+
+</main>
+
+<script src="motion.js?v=6"></script>
+</body>
+</html>

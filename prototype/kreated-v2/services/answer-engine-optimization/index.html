@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- PROTOTYPE SAFETY — site-wide prelaunch state, do not remove. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://kreated.dev/services/answer-engine-optimization/">
+
+<!-- Built from documented scope only. Route target per docs/SEO.md §2:
+     primary `local SEO Raleigh NC`, alternate `local SEO for contractors
+     Raleigh`. One city, named once — SEO.md §2 also permanently rejects
+     "Raleigh SEO company" (implies a team) and bans city pages without a real
+     delivery basis, so no city stuffing here. COPY CANDIDATE — NOT APPROVED. -->
+<title>Answer Engine Optimization | Kreated</title>
+<meta name="description" content="Answer Engine Optimization from Kreated. Making a business's information clear, consistent and easy for search and AI systems to understand and quote correctly.">
+
+<!-- Open Graph / Twitter. Every route carries a deliberate preview: a shared
+     link produces the page's own title, description and URL rather than a bare
+     address, which is a trust signal in exactly the moment Kreated is being
+     passed between two people.
+
+     og:image policy — reuse only, nothing generated:
+       · Pages that show a REAL client capture use that capture (1600x1000,
+         close enough to 1.91:1 for a large card).
+       · Every other route uses the Kreated mark, with card type `summary`,
+         which is the correct card for a square brand image.
+     ⚠ REMAINING ITEM: no purpose-made 1200x630 social asset exists. When one
+     does, point the mark-based routes at it and switch them to
+     summary_large_image. 🚫 Do not invent one to close this gap. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kreated">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://kreated.dev/services/answer-engine-optimization/">
+<meta property="og:title" content="Answer Engine Optimization | Kreated">
+<meta property="og:description" content="Answer Engine Optimization from Kreated. Making a business's information clear, consistent and easy for search and AI systems to understand and quote correctly.">
+<meta property="og:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+<meta property="og:image:width" content="180">
+<meta property="og:image:height" content="180">
+<meta property="og:image:alt" content="The Kreated mark">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Answer Engine Optimization | Kreated">
+<meta name="twitter:description" content="Answer Engine Optimization from Kreated. Making a business's information clear, consistent and easy for search and AI systems to understand and quote correctly.">
+<meta name="twitter:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#020C2E">
+
+<!-- Three layers, outermost first:
+       services.css  tokens, header, drawer, footer, skip link
+       leaf.css      the service-leaf system, shared by every /services/ leaf
+       local-seo.css only what this page uses and no other leaf does -->
+<link rel="stylesheet" href="/services/services.css?v=17">
+<link rel="stylesheet" href="/services/leaf.css?v=10">
+<link rel="stylesheet" href="aeo.css?v=3">
+<!-- last, so it is the single definition of the footer on every route -->
+<link rel="stylesheet" href="/theme.css?v=1">
+<link rel="stylesheet" href="/footer.css?v=5">
+</head>
+<body>
+<!-- The atmosphere: one fixed layer behind the whole document carrying the
+     blue. Fixed rather than scrolled so the light does not slide past the
+     content — the room dims around the reader. Colours and strength live in
+     theme.css. Decorative only, hence aria-hidden. -->
+<div class="atmos" aria-hidden="true"></div>
+<a class="skip" href="#top">Skip to content</a>
+
+<header class="head">
+  <div class="wrap head__in">
+    <a class="head__mark" href="/" aria-label="Kreated — home">KREATED</a>
+
+    <!-- ⚠ ONE NAV, ONE MEANING, EVERY ROUTE. Every item here is a real page,
+         so the header does the same thing whichever page you are standing on.
+         Investment and FAQ are deliberately NOT in the nav: they are homepage
+         sections with no routes of their own, so a header link to them worked
+         on the homepage and did nothing anywhere else. They live in the footer
+         and on the homepage itself. That ambiguity is what this replaces. -->
+    <nav class="head__nav" aria-label="Primary">
+      <a href="/services/">Services</a>
+      <a href="/work/">Work</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+    </nav>
+
+    <a class="head__cta" href="/contact/">Start a Project</a>
+
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="/services/">Services</a>
+    <a href="/work/">Work</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/about/">About</a>
+    <a href="/method/">Method</a>
+    <a href="/contact/">Contact</a>
+    <a class="drawer__cta" href="/contact/">Start a Project</a>
+    <a class="drawer__alt" href="/free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+<main id="top" tabindex="-1">
+
+<section class="shero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/services/">SERVICES</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">ANSWER ENGINE OPTIMIZATION</span>
+    </nav>
+
+    <h1 class="shero__h aeo__h"><span>Answer Engine</span><span>Optimization</span></h1>
+
+    <div class="shero__foot">
+      <p class="shero__fact">Making a business&rsquo;s information clear, consistent and
+        easy for search and AI systems to understand, extract and quote correctly.</p>
+
+      <!-- OWNER INPUT — AEO POSITIONING. Ships HIDDEN with an empty text node, the
+           same pattern every other leaf uses. Nothing in the repo supplies a
+           positioning line for this service yet. -->
+      <aside class="shero__owner" hidden>
+        <p class="shero__ownerlabel">POSITIONING</p>
+        <p class="shero__note"><!-- owner sentence goes here --></p>
+      </aside>
+
+      <p class="shero__ctas">
+        <a class="btn btn--cobalt" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+        <a class="btn btn--quiet" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     1 · THE DEFINITION.
+     ⚠ ANSWER FIRST, ON PURPOSE. The opening sentence is a standalone definition
+     that makes sense lifted out of the page, because that is the single
+     structural thing every credible source agrees on. The honesty position
+     immediately after it is the whole reason this page can exist without
+     sounding like the agencies that renamed their SEO package.
+     ========================================================================== -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What it is</h2>
+      <p class="lgrid__note">The short version, before any of the detail.</p>
+    </div>
+    <div class="prose">
+      <p><b>Answer Engine Optimization is the work of making a business&rsquo;s
+        information clear enough, consistent enough and structured enough that
+        search engines and AI assistants can understand it, pull the right facts
+        out of it and repeat them accurately.</b></p>
+
+      <p>That is the entire idea. It is not a second ranking system sitting behind
+        the first one, and it is not a set of hidden files or tags that persuade an
+        AI model to prefer you.</p>
+
+      <p>Google is unusually direct about this. Its own guidance for site owners
+        says there are no additional requirements to appear in AI Overviews or AI
+        Mode, and no special optimizations necessary. In May 2026 Google went
+        further and said in writing that optimizing for generative AI search is
+        optimizing for the search experience, and is therefore still SEO.</p>
+
+      <p>Kreated agrees with that, and says so on the page that sells the service.
+        What is real is narrower and less exciting than the marketing around it:
+        most business websites are genuinely hard to read, hard to verify and
+        inconsistent with the business&rsquo;s own listings. That is fixable work,
+        it helps people as much as machines, and it is what this service actually
+        covers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     2 · SEO OVERLAP. The comparison a buyer needs before deciding whether this
+     is a separate purchase at all.
+     ========================================================================== -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">How it relates to SEO</h2>
+      <p class="lgrid__note">Mostly the same work, with a different emphasis.</p>
+    </div>
+    <div class="prose">
+      <p><b>Answer Engine Optimization and SEO overlap heavily. The prerequisites
+        are identical, and a site that fails at SEO fundamentals will not be read
+        correctly by an AI system either.</b></p>
+
+      <p>AI answers are drawn from the same index as ordinary search results. A page
+        has to be crawlable, indexed and eligible to show a snippet before it can be
+        quoted anywhere. Its important facts have to exist as real text rather than
+        being locked inside an image or assembled by a script. And traditional
+        search visibility still matters: independent analysis in 2026 found that
+        roughly three quarters of the pages cited in Google&rsquo;s AI Overviews
+        were also ranking in the top ten conventional results.</p>
+
+      <p>So the honest sequence is that
+        <a class="ilink" href="/services/local-seo/">Local SEO</a> and a
+        <a class="ilink" href="/services/web-design/">well built website</a> come
+        first. This service assumes those foundations exist, or fixes them as part
+        of the work.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     THE DIAGRAM. Every other leaf shows a real client object at this point in
+     the page; this one cannot, because no delivered Kreated engagement is
+     recorded as an AEO project and presenting one would be inventing proof.
+
+     ⚠ SO THIS IS EXPLICITLY A DIAGRAM, AND SAYS SO. It illustrates the single
+     structural idea the service rests on: the same facts, in the same words,
+     placed differently. Nothing in it is a capture, a client or a result.
+     🚫 Do not relabel this as an example, a case or a before/after.
+     ========================================================================== -->
+<section class="proof proof--aeo">
+  <div class="wrap">
+    <h2 class="eyebrow">A diagram, not a client</h2>
+
+    <figure class="aeo">
+      <div class="aeo__stage">
+
+        <article class="aeo__obj aeo__obj--before">
+          <div class="aeo__cap"><span>Answer buried</span></div>
+          <div class="aeo__body">
+            <p class="aeo__q">Do you cover Wake Forest?</p>
+            <span class="aeo__bar" aria-hidden="true"></span>
+            <span class="aeo__bar" aria-hidden="true"></span>
+            <span class="aeo__bar aeo__bar--s" aria-hidden="true"></span>
+            <span class="aeo__bar" aria-hidden="true"></span>
+            <span class="aeo__bar aeo__bar--s" aria-hidden="true"></span>
+            <p class="aeo__ans aeo__ans--dim">Yes. We cover Wake Forest.</p>
+            <span class="aeo__bar aeo__bar--s" aria-hidden="true"></span>
+          </div>
+        </article>
+
+        <article class="aeo__obj aeo__obj--after">
+          <div class="aeo__cap"><span>Answer first</span><i>extractable</i></div>
+          <div class="aeo__body">
+            <p class="aeo__q">Do you cover Wake Forest?</p>
+            <p class="aeo__ans">Yes. We cover Wake Forest.</p>
+            <span class="aeo__bar" aria-hidden="true"></span>
+            <span class="aeo__bar" aria-hidden="true"></span>
+            <span class="aeo__bar aeo__bar--s" aria-hidden="true"></span>
+            <span class="aeo__bar" aria-hidden="true"></span>
+            <span class="aeo__bar aeo__bar--s" aria-hidden="true"></span>
+          </div>
+        </article>
+
+      </div>
+
+      <figcaption class="aeo__note">Same facts, same words, different placement.
+        A reader in a hurry and a system building a summary both stop looking in
+        roughly the same place. This is the structural half of the work. The
+        other half is making sure the answer says the same thing on the website,
+        the Google profile and everywhere else the business is listed.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     3 · WHAT IS ACTUALLY DIFFERENT. Every item here is either documented by
+     Google or is labelled as an emerging practice. 🚫 Nothing in this list may
+     be upgraded from "emerging" to "established" without a source.
+     ========================================================================== -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What is genuinely different</h2>
+      <p class="lgrid__note">A narrow set of things, separated by how well
+        established they are.</p>
+    </div>
+    <div class="prose">
+      <p><b>Established.</b> These are documented by Google or follow directly from
+        how the systems work.</p>
+      <ul class="plist" role="list">
+        <li>A page has to be crawlable, indexed and eligible for a snippet before it
+          can be cited anywhere.</li>
+        <li>Important facts have to exist in text. Anything trapped in an image, a
+          PDF or a script is invisible to the systems doing the reading.</li>
+        <li>Structured data helps a machine understand what a page genuinely says.
+          It is one supporting layer. It does not make thin content credible, and
+          there is no special markup for AI features.</li>
+        <li>For a local business, a complete and accurate Google Business Profile is
+          named by Google itself as improving visibility in AI responses. That work
+          is <a class="ilink" href="/services/google-business-profile/">its own
+          service</a>.</li>
+      </ul>
+
+      <p><b>Emerging.</b> These are supported by current measurement rather than by
+        documentation, and the picture is still moving.</p>
+      <ul class="plist" role="list">
+        <li>Answers placed directly under the question they answer appear to be
+          easier to extract than answers buried several paragraphs down. One 2026
+          analysis found a majority of sampled AI Overview citations came from the
+          first third of the cited page.</li>
+        <li>Consistent naming of the business, its services and its service area
+          across the site, the profile and other listings appears to help systems
+          treat those mentions as the same organisation.</li>
+        <li>Different assistants behave differently. What one cites is not
+          necessarily what another cites, and no single source dominates.</li>
+      </ul>
+
+      <p>Anything beyond those two lists is speculation about systems nobody outside
+        the companies running them can observe. It will not be sold here as fact.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · WHO IT IS FOR -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Who it&rsquo;s for</h2>
+      <p class="lgrid__note">This service assumes a foundation already exists.</p>
+    </div>
+    <ul class="who" role="list">
+      <li><b>Businesses with a working site whose information is scattered</b>
+        <span>The facts exist, but they live in different words on the website, the
+          Google profile and every directory, so nothing reading them can be
+          confident which version is true.</span></li>
+      <li><b>Businesses that are described accurately by nobody, including
+        themselves</b>
+        <span>Services described in language customers never use, a service area
+          that is implied rather than stated, and no page that plainly answers what
+          the business does.</span></li>
+      <li><b>Businesses whose good answers are buried</b>
+        <span>The site does answer the real questions, but four paragraphs into a
+          page about something else, where neither a reader in a hurry nor a machine
+          will find it.</span></li>
+      <li><b>Businesses being compared before anyone visits the site</b>
+        <span>Buyers increasingly read a summary before they read a website. What
+          that summary can say is limited by what the business has made explicit.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 5 · WHAT KREATED DOES -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What Kreated does</h2>
+      <p class="lgrid__note">Two scoped pieces of work, and an ongoing option that
+        already exists.</p>
+    </div>
+    <div class="prose">
+      <p><b>The audit finds the problems. The foundation fixes them.</b> They are
+        sold separately so the first one can be bought without committing to the
+        second.</p>
+
+      <p><b>AEO Audit.</b> A review of whether the business can currently be read
+        correctly: crawling, indexing and snippet eligibility; whether the important
+        facts exist as text; how clearly the business, its services and its service
+        area are defined; whether the site, the Google profile and other listings
+        agree with each other; how the key pages are structured as answers; and a
+        baseline of whatever citation measurement is available. The deliverable is a
+        prioritised list of what to fix and in what order.</p>
+
+      <p><b>AEO Foundation.</b> The audit implemented. Key pages restructured so the
+        answer comes first and the explanation follows, a question and answer layer
+        built from questions buyers actually ask, the business and its services
+        defined explicitly, the service area stated rather than implied, internal
+        links added so related answers can be reached, factual inconsistencies
+        cleaned up across surfaces, and structured data added where it reflects
+        something genuinely on the page.</p>
+
+      <p><b>Ongoing work sits inside
+        <a class="ilink" href="/services/local-seo/">Local Growth</a>.</b> Keeping
+        answers current, adding them as new questions appear and holding the facts
+        consistent is the same monthly work the local search program already does.
+        Where the scope overlaps it is done there rather than charged for twice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · MEASUREMENT — the section most competitors leave out -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">How it is measured</h2>
+      <p class="lgrid__note">Honestly: not very well yet.</p>
+    </div>
+    <div class="prose">
+      <p><b>There is no equivalent of a rank tracker for AI answers, and anyone
+        offering one is describing something the platforms do not currently
+        publish.</b></p>
+
+      <p>Microsoft is the exception. Its Bing Webmaster Tools added an AI
+        Performance report in February 2026 that shows how often pages were cited by
+        Copilot and which queries prompted it. Microsoft states plainly that the
+        data is a sample rather than complete activity, that it cannot be exported
+        by API, and that it covers a rolling window of roughly ninety days. Google
+        offers no comparable report.</p>
+
+      <p>So measurement here means a baseline where one exists, the ordinary search
+        measurement that was always going to matter, and a clear account of what
+        changed on the site. It does not mean a monthly number describing your
+        position inside an AI assistant, because that number does not exist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · LIMITS -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What this is not</h2>
+      <p class="lgrid__note">The list matters more here than on any other service.</p>
+    </div>
+    <ul class="excl" role="list">
+      <li>Not a guarantee of a citation in ChatGPT, Perplexity, Gemini or any other
+        assistant. No agency controls what those systems quote.</li>
+      <li>Not a guarantee of inclusion in Google AI Overviews or AI Mode.</li>
+      <li>Not a ranking guarantee, and not a traffic guarantee.</li>
+      <li>Not a set of special files or markup that AI systems look for. Google has
+        said directly that no such thing is required.</li>
+      <li>Not a replacement for <a class="ilink" href="/services/local-seo/">Local
+        SEO</a>. The prerequisites are the same, and this work sits on top of
+        them.</li>
+      <li>Not an ongoing monthly retainer of its own. The recurring version of this
+        work lives inside Local Growth.</li>
+      <li>Not paid placement. Nothing here buys a mention anywhere.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8 · PRICING — approved 2026-09-01 -->
+<section class="price">
+  <div class="wrap">
+    <p class="price__note">Two one-time pieces of work. The audit can be bought on
+      its own, and the foundation is priced on the scope it finds.</p>
+    <div class="price__in">
+      <p class="price__line">
+        <span class="price__item"><b>AEO Audit</b> <span class="fig">$750</span> <i>one time</i></span>
+        <span class="price__item"><b>AEO Foundation</b> <span class="fig">$1,250&ndash;$1,750</span> <i>one time, by scope</i></span>
+      </p>
+      <a class="tlink" href="/pricing/">See Pricing <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · FAQ -->
+<section class="sec faqs__sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Questions</h2>
+      <p class="lgrid__note">The ones worth asking before buying this.</p>
+    </div>
+    <div class="faqs">
+
+      <details>
+        <summary>What is Answer Engine Optimization?</summary>
+        <div class="faqs__a">
+          <p>It is the work of making a business&rsquo;s information clear,
+            consistent and structured enough that search engines and AI assistants
+            can understand it, extract the right facts and repeat them accurately.
+            In practice that means explicit definitions, answers placed where they
+            can be found, and the same facts everywhere the business appears.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Is AEO different from SEO?</summary>
+        <div class="faqs__a">
+          <p>Mostly not. The prerequisites are identical, and AI answers are drawn
+            from the same index as ordinary results. Google published guidance in
+            May 2026 saying that optimizing for generative AI search is optimizing
+            for the search experience, and is therefore still SEO.</p>
+          <p>What differs is emphasis. This work concentrates on clarity,
+            consistency and extractability rather than on competing for a position,
+            and it treats the Google profile and other listings as part of the same
+            picture.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Is this just SEO with a new name?</summary>
+        <div class="faqs__a">
+          <p>Sold badly, yes, and a lot of it is. Google&rsquo;s own search advocate
+            has said the acronym itself signals scams, which is worth knowing before
+            buying it from anyone.</p>
+          <p>What is defensible is the underlying work. Most small business sites
+            genuinely fail at explicit definitions, consistent facts and findable
+            answers, and that is real work with a real deliverable. It is sold here
+            as two one-time projects rather than as a permanent retainer, because
+            that is what it honestly is.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Can Kreated get my business cited by ChatGPT?</summary>
+        <div class="faqs__a">
+          <p>No. Nobody can promise that. What can be done is remove the reasons a
+            system would get your business wrong or skip it: information that
+            cannot be crawled, facts that only exist inside images, services
+            described vaguely, and a website that disagrees with your own Google
+            profile.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Can you guarantee inclusion in Google AI Overviews?</summary>
+        <div class="faqs__a">
+          <p>No, and Google does not offer a route to it. Its documentation states
+            that there are no additional requirements and no special optimizations
+            for appearing in AI Overviews or AI Mode. Eligibility comes from being
+            indexed and being genuinely useful, which is the same thing ordinary
+            search has always rewarded.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>How is AEO measured?</summary>
+        <div class="faqs__a">
+          <p>Partially, and honestly not well yet. Bing Webmaster Tools reports how
+            often Copilot cited your pages, on sampled data over about ninety days,
+            with no export. Google publishes no equivalent. Everything else is
+            ordinary search measurement plus a clear record of what changed on the
+            site.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Do I need this if my SEO already works?</summary>
+        <div class="faqs__a">
+          <p>Possibly not, and that is worth checking before spending anything. If
+            the site already ranks, states its facts plainly and agrees with the
+            Google profile, most of this is already done. The audit exists to answer
+            that question for $750 rather than assuming the answer is yes.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Is this included in a website project?</summary>
+        <div class="faqs__a">
+          <p>The structure is. A website built here launches with information laid
+            out so it can be read and quoted correctly: real text, explicit
+            services, a stated service area and answers placed where they can be
+            found. That is a build standard, not an ongoing campaign, in the same
+            way a site launches search ready rather than with an SEO program
+            attached.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Is it included in Local Growth?</summary>
+        <div class="faqs__a">
+          <p>Where the scope overlaps, yes. Keeping answers current, adding them as
+            new questions appear and holding facts consistent across the site and
+            the profile is already what the monthly program does. That work is not
+            charged for twice.</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- 10 · WHERE IT SITS -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Where it sits</h2>
+      <p class="lgrid__note">Against the services next to it.</p>
+    </div>
+    <div class="prose">
+      <p><b><a class="ilink" href="/services/local-seo/">Local SEO</a></b> competes
+        for visibility in a place. This competes for being understood correctly.
+        They share prerequisites and they are usually done in that order.</p>
+      <p><b><a class="ilink" href="/services/google-business-profile/">Google
+        Business Profile</a></b> is one of the surfaces this work checks against.
+        Google names a complete profile as helping visibility in AI answers, so for
+        a local business the profile is part of the same job.</p>
+      <p><b><a class="ilink" href="/services/web-design/">Web Design</a></b> and
+        <b><a class="ilink" href="/services/website-redesign/">Website
+        Redesign</a></b> build the structure this depends on. A new site launches
+        with it. An older site often needs it added.</p>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <aside class="close__owner" hidden>
+      <p class="close__ownerlabel">CLOSING LINE</p>
+      <p class="close__note"><!-- owner sentence goes here --></p>
+    </aside>
+    <div class="close__row">
+      <a class="close__go" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="close__alt" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <a class="foot__mark" href="/" aria-label="Kreated — home">KREATED</a>
+      <!-- approved V1 positioning line, reusable verbatim -->
+      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+    </div>
+
+    <div class="foot__cols">
+      <div>
+        <h2>Contact</h2>
+        <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
+        <p><a href="tel:+19198058217">(919) 805-8217</a></p>
+        <p>Raleigh, North Carolina</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <p><a href="/services/">Services</a></p>
+        <p><a href="/work/">Work</a></p>
+        <p><a href="/method/">Method</a></p>
+        <p><a href="/about/">About</a></p>
+        <p><a href="/contact/">Contact</a></p>
+        <p><a href="/pricing/">Pricing</a></p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <p><a href="/services/web-design/">Web Design &amp; Development</a></p>
+        <p><a href="/services/website-redesign/">Website Redesign</a></p>
+        <p><a href="/services/local-seo/">Local SEO</a></p>
+        <p><a href="/services/google-business-profile/">Google Business Profile</a></p>
+        <p><a href="/services/brand-strategy/">Brand Strategy &amp; Identity</a></p>
+        <p><a href="/services/answer-engine-optimization/">Answer Engine Optimization</a></p>
+      </div>
+      <div>
+        <h2>Start</h2>
+        <p><a data-evt="cta_start_project" href="/contact/">Start a Project</a></p>
+        <p><a data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit</a></p>
+        <p><a href="/work/">View Work</a></p>
+      </div>
+    </div>
+
+    <p class="foot__legal">© 2026 Kreated
+      <a href="/privacy/">Privacy</a>
+    </p>
+  </div>
+</footer>
+
+<script src="/services/services.js?v=4" defer></script>
+</body>
+</html>

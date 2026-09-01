@@ -1,0 +1,274 @@
+/* ==========================================================================
+   KREATED V2 — THE THEME SYSTEM
+   Loaded on every one of the 19 routes, immediately after that route's base
+   stylesheet and before footer.css. This file is the single definition of
+   every colour that changes between the site's light territory and its dark
+   territory. Nothing else on the site is allowed to hard-code a ground, an
+   ink or a stroke.
+
+   ---------------------------------------------------------------------------
+   WHERE THE COLOURS COME FROM
+   ---------------------------------------------------------------------------
+   Measured off the live BX Studio stylesheet on 2026-09-01 by reading the
+   computed values of their own --a-light-theme--* and --a-dark-theme--*
+   custom properties. These are their numbers, not an interpretation:
+
+     token                 light        dark
+     primary-background    #f3f3f3      #020c2e
+     primary-text          #181818      #ffffff
+     secondary-text        #4f4f4f      #d1d1d1
+     gradient-textp        #243260      #ffffff
+     gradient-texts        #3467e5      #a9b0b7
+     card-background       #ffffff99    #040e3080
+     card-hover            #ffffff      #040e30
+     card-stroke           #e7e7e7      #11245a
+     card-stroke-hover     #b9dcff      #3467e5
+     tag-background        #ffffff99    #11245a
+     tag-stroke            #e7e7e7      #133995
+
+   ⚠ FINDING, 2026-09-01: the live BX homepage no longer runs the flip. The
+   dark tokens above are still declared in their stylesheet, but nothing on
+   the page invokes them — the body carries element-theme="1" (light) for its
+   whole 16,516px, no element paints a dark ground, and the theme values do
+   not move at any scroll position. The transition measured a week earlier
+   (dark territory from roughly y=3200 to y=6000) is gone. So the colour
+   ARCHITECTURE below is verified current; the transition BEHAVIOUR is
+   reconstructed from the earlier measurement of the same site.
+
+   ---------------------------------------------------------------------------
+   WHY THE INK STEPS AND THE GROUND DOES NOT
+   ---------------------------------------------------------------------------
+   BX interpolates ink and ground simultaneously and their body copy passes
+   through 1.35:1 on the way down. That is not a tuning mistake that could be
+   dialled out — it is unavoidable. Contrast between two colours is a ratio of
+   luminances, so if both the ink and the ground move continuously from
+   (dark ink, light ground) to (light ink, dark ground), their luminances must
+   cross. At the crossing the contrast is exactly 1:1 and the text is
+   invisible. There is no curve that avoids it.
+
+   So the ink cannot travel. It has to change sides in one frame.
+
+   That gives the second constraint. With ink #141414 on one side and #FFFFFF
+   on the other:
+
+     dark ink is readable  (4.5:1) only while ground luminance >= 0.2161
+     white ink is readable (4.5:1) only while ground luminance <= 0.1833
+
+   Those two ranges do not touch. There is a DEAD BAND 0.0328 wide in which
+   neither ink reaches AA. So the ground cannot smoothly cross it either — it
+   has to jump the band on the same frame the ink changes sides.
+
+   That is the whole mechanism:
+
+     --p1   the light half of the journey    #F4F5FA -> #6B80C5   (L .888 -> .225)
+     ----   INVERSION: one frame, ground and ink change together
+     --p2   the dark half of the journey     #5F72B0 -> #020C2E   (L .175 -> .005)
+
+   The jump is #6B80C5 -> #5F72B0. Twelve, fourteen and twenty-one units on
+   the three channels. It happens across the entire viewport on a single
+   frame, so there is no horizontal edge anywhere — this is nothing like the
+   three spatial seam attempts that failed in August, which were bands drawn
+   ACROSS the page. A whole-screen value change of that size, in one frame,
+   during scroll, is not perceptible as an event. What is perceptible is the
+   type inverting, which is the effect being bought.
+
+   ⚠ Measured across the full journey, every stop clears AA: primary ink
+   never drops below 4.65:1, secondary never below 4.65:1. The worst pair is
+   at the inversion itself, by construction. 🚫 Do not move --bx-dusk or
+   --bx-dawn without re-running sweep.py — they sit either side of the dead
+   band and there is no slack.
+
+   ---------------------------------------------------------------------------
+   WHY SECONDARY INK CONVERGES
+   ---------------------------------------------------------------------------
+   BX's secondary #4f4f4f is 7.38:1 on their light ground but only 3.06:1 on
+   the pre-inversion ground, and their #d1d1d1 is 12.56:1 on the night ground
+   but 2.95:1 just after the inversion. Held constant, both fail.
+
+   So secondary converges toward primary as the room dims and settles back
+   out once night has fallen: #4F4F4F -> #141414, invert, #FFFFFF -> #D1D1D1.
+   It reads as the quiet voice speaking up while the light goes, then
+   relaxing. It is also the only assignment that holds AA at every stop.
+   ========================================================================== */
+
+:root{
+  /* ---- the journey, written by atmosphere.js on the homepage --------------
+     Every other route leaves these at their defaults, which is full night.
+     🚫 Do not default these to 0. Eighteen routes never load atmosphere.js
+     and a 0 default would render them as unstyled light pages. */
+  --p:1;    /* 0 = full day, 1 = full night. Drives glow and atmosphere only. */
+  --p1:1;   /* progress through the LIGHT half.  0 -> 1 */
+  --p2:1;   /* progress through the DARK half.   0 -> 1 */
+  --k:1;    /* 0 = dark ink on light ground, 1 = light ink on dark ground.
+               Only ever exactly 0 or 1. Never a fraction. */
+
+  /* ---- BX's measured endpoints ------------------------------------------- */
+  --bx-day:#F4F5FA;    /* Kreated's paper, 230deg — BX's #f3f3f3 is neutral and
+                          read grey beside the cobalt. Same luminance (.888). */
+  --bx-dusk:#6B80C5;   /* L .2250 — last ground before the inversion */
+  /* ⚠ L .1600, NOT .1750. At .1750 the bare ground gives white ink 4.65:1,
+     which passes — but any translucent surface sitting ON that ground lifts it
+     and eats the margin. --panel is white at 3%, and .case__obs measured
+     4.46:1 through it at 768 in the frames just after the inversion. Taking
+     the dawn ground three hundredths of luminance darker restores 4.72:1
+     through the same panel, and the only cost is that the inversion step grows
+     from [12,14,21] to [16,19,29] on the three channels. Still one frame,
+     still whole-screen, still nothing anyone sees.
+     🚫 The floor is L .18333: above that, white ink fails on the bare ground. */
+  --bx-dawn:#5B6DA8;   /* L .1600 — first ground after the inversion */
+  --bx-night:#020C2E;  /* BX --a-dark-theme--dark-primary-background, verbatim */
+
+  --bx-ink-day:#141414;    /* BX #181818 taken 4 units darker: at #181818 the
+                              pre-inversion pair measures 4.65:1 and I am not
+                              shipping AA with two hundredths of headroom */
+  --bx-ink-night:#FFFFFF;  /* BX dark-primary-text, verbatim */
+  --bx-sec-day:#4F4F4F;    /* BX light-secondary-text, verbatim */
+  --bx-sec-night:#D1D1D1;  /* BX dark-secondary-text, verbatim */
+
+  /* BX's light accent #3467e5 measures 4.49:1 on their own light ground —
+     one hundredth under AA for body-size text. Kreated's day accent is two
+     steps deeper so it passes as a link, and it deepens further as the room
+     dims. At night it becomes the cobalt lift, which is the identity blue. */
+  --bx-acc-day:#2148D8;
+  --bx-acc-dusk:#0A1240;   /* #16267A measured 3.47:1 as 11.5px text on the
+                              dusk ground. The accent all but merges into the ink
+                              at the darkest point of the light half, which is the
+                              same convergence --ink-2 and --ink-3 make. */
+  --bx-acc-night:#5B86FF;
+
+  /* ---- the ground --------------------------------------------------------
+     Two segments, selected by --k. Because --k is only ever 0 or 1 the outer
+     mix resolves to exactly one segment, so this is not an approximation of a
+     branch — it IS a branch, written in a way that keeps the whole system in
+     one token. */
+  --ground:color-mix(in srgb,
+    color-mix(in srgb, var(--bx-day),  var(--bx-dusk)  calc(var(--p1) * 100%)),
+    color-mix(in srgb, var(--bx-dawn), var(--bx-night) calc(var(--p2) * 100%))
+    calc(var(--k) * 100%));
+
+  /* ---- the inks ---------------------------------------------------------- */
+  --ink-1:color-mix(in srgb, var(--bx-ink-day), var(--bx-ink-night) calc(var(--k) * 100%));
+
+  --ink-2:color-mix(in srgb,
+    color-mix(in srgb, var(--bx-sec-day), var(--bx-ink-day)   calc(var(--p1) * 100%)),
+    color-mix(in srgb, #FFFFFF,           var(--bx-sec-night) calc(var(--p2) * 100%))
+    calc(var(--k) * 100%));
+
+  /* the third voice: labels, meta, captions. Same convergence, one step
+     quieter at each end, and it stops short of the extremes so it never
+     becomes the 3.1:1 grey that the August audit found on four routes. */
+  --ink-3:color-mix(in srgb,
+    color-mix(in srgb, #5E5E5E, #1A1A1A calc(var(--p1) * 100%)),
+    color-mix(in srgb, #FFFFFF, #B9BFD4 calc(var(--p2) * 100%))
+    calc(var(--k) * 100%));
+
+  /* the quietest voice: legal lines, timestamps, "optional", the footer's
+     small print. BX has no fourth token — its dark end is borrowed from their
+     gradient-texts (#a9b0b7, 8.75:1 on the night ground), which is the tone
+     they use for exactly this kind of text.
+
+     ⚠ --ink-3 and --ink-4 resolve to the SAME colour at the dusk end and that
+     is not an oversight. On a ground at L .2260 the entire readable range for
+     dark ink is L 0 to L .0113 — about four steps of 8-bit grey. A four-voice
+     ladder cannot survive there, so the voices converge at the darkest moment
+     of the light half and separate again either side of it. The alternative
+     was to keep them apart and let the two quietest fail. */
+  --ink-4:color-mix(in srgb,
+    color-mix(in srgb, #6B6B6B, #1A1A1A calc(var(--p1) * 100%)),
+    color-mix(in srgb, #FFFFFF, #A9B0B7 calc(var(--p2) * 100%))
+    calc(var(--k) * 100%));
+
+  --accent:color-mix(in srgb,
+    color-mix(in srgb, var(--bx-acc-day), var(--bx-acc-dusk)  calc(var(--p1) * 100%)),
+    color-mix(in srgb, #FFFFFF,           var(--bx-acc-night) calc(var(--p2) * 100%))
+    calc(var(--k) * 100%));
+
+  /* ---- strokes and surfaces ----------------------------------------------
+     BX's card-stroke pair (#e7e7e7 / #11245a) is 1.11:1 and 1.30:1 against
+     its own ground. Those are decorative hairlines, not boundaries a reader
+     has to find, and WCAG 1.4.11 does not apply to them. Where a stroke IS
+     the only thing defining a control, --stroke-hi is used instead, which
+     clears 3:1 on both sides. */
+  --stroke:color-mix(in srgb,
+    color-mix(in srgb, #E7E7E7, #5A6894 calc(var(--p1) * 100%)),
+    color-mix(in srgb, #4C5E97, #11245A calc(var(--p2) * 100%))
+    calc(var(--k) * 100%));
+
+  --stroke-hi:color-mix(in srgb,
+    color-mix(in srgb, #9CA3B5, #2B3560 calc(var(--p1) * 100%)),
+    color-mix(in srgb, #C6CEE4, #7D88AE calc(var(--p2) * 100%))
+    calc(var(--k) * 100%));
+
+  --stroke-focus:color-mix(in srgb, var(--bx-acc-day), var(--bx-acc-night) calc(var(--k) * 100%));
+
+  --surface:color-mix(in srgb,
+    color-mix(in srgb, #FFFFFF, #7C90D0 calc(var(--p1) * 100%)),
+    color-mix(in srgb, #6E80BC, #040E30 calc(var(--p2) * 100%))
+    calc(var(--k) * 100%));
+
+  --surface-hi:color-mix(in srgb,
+    color-mix(in srgb, #FFFFFF, #8698D6 calc(var(--p1) * 100%)),
+    color-mix(in srgb, #7A8AC4, #0A1740 calc(var(--p2) * 100%))
+    calc(var(--k) * 100%));
+
+  /* ---- the two solid controls -------------------------------------------
+     A filled pill has to invert with the room or it stops being the loudest
+     thing on the page. Day: cobalt fill, white ink. Night: white fill, navy
+     ink. Both ends measured over 8:1. */
+  --cta-fill:color-mix(in srgb, var(--bx-acc-day), #FFFFFF calc(var(--k) * 100%));
+  --cta-ink:color-mix(in srgb, #FFFFFF, var(--bx-night) calc(var(--k) * 100%));
+  --cta-fill-hover:color-mix(in srgb, #123AC4, #E4E9FA calc(var(--k) * 100%));
+}
+
+/* ⚠ THE GROUND IS PAINTED ONCE, ON THE DOCUMENT.
+   Not on body, and not per-section. Painting it on html means the colour also
+   fills the overscroll area at both ends of the document, so a rubber-band
+   scroll on macOS or iOS does not expose a white strip above the header or
+   below the footer. Every section on the site is transparent and this is the
+   only thing under them.
+   🚫 Do not give any section its own background-color. That is what produced
+   every one of the seams fixed in August. */
+html{background:var(--ground)}
+body{background:transparent;color:var(--ink-1)}
+
+/* ==========================================================================
+   THE ATMOSPHERE
+   One fixed layer, behind everything, carrying the blue. It is fixed rather
+   than scrolled so the light does not slide past the content — the room dims
+   around the reader instead of the reader travelling through a painted band.
+
+   The geometry is NOT BX's. Theirs is a pair of large soft ellipses anchored
+   to section corners. This is a single low field plus a high corner wash,
+   which is the relationship their colour has to their ground, at Kreated's
+   proportions.
+   🚫 No teal, no green cast, no cyan, no visible circle, no gradient
+   rectangle. Every stop below reaches true zero inside the layer.
+   ========================================================================== */
+.atmos{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  /* the blue is nearly absent in full day and full strength at night — the
+     light does not travel across the page, it comes UP as the ground goes
+     down, which is why the transition reads as dusk rather than as a wipe */
+  opacity:calc(.20 + var(--p) * .80);
+  background:
+    radial-gradient(64% 46% at 50% 104%,
+      rgba(45,74,168,.34) 0%, rgba(45,74,168,.09) 44%, rgba(45,74,168,0) 76%),
+    radial-gradient(80% 44% at 106% -6%,
+      rgba(10,71,240,.18) 0%, rgba(10,71,240,.04) 44%, rgba(10,71,240,0) 74%),
+    radial-gradient(70% 42% at -10% 34%,
+      rgba(91,134,255,.13) 0%, rgba(91,134,255,0) 70%);
+}
+/* In day the same field would tint the paper violet, so on the light side it
+   is both weaker and warmer-neutral. The mix is on --k, so it swaps on the
+   same frame as everything else. */
+.atmos{
+  filter:saturate(calc(.55 + var(--k) * .45));
+}
+
+@media (prefers-reduced-motion: reduce){
+  /* atmosphere.js returns early under reduced motion, so --p/--p1/--p2/--k
+     keep their :root defaults and the homepage renders as full night with no
+     movement. Nothing here needs to change; this block exists so the next
+     person does not go looking for the missing branch. */
+  .atmos{opacity:1}
+}

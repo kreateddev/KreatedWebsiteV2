@@ -1,0 +1,251 @@
+<!doctype html>
+<!-- HERO CONCEPT DEMO 2/3 — "SIGNAL" · NOT PRODUCTION.
+     The mark as a beacon: a lighthouse sweep of cobalt light rotates inside
+     the letterform, and at slow intervals the mark's own silhouette expands
+     outward as a fading echo. Being found, made visual.
+     Base hero = current production hero.
+     REV: inner logo detail removed per Skyler 2026-08-26 - outer mark only. -->
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>KREATED — Hero Concept 2 · Signal</title>
+<style>
+/* ==========================================================================
+   HERO CONCEPT DEMO — NOT PRODUCTION.
+   Base = the current production hero (prototype/omc-kreated-home) verbatim:
+   same tokens, same left column, same art-region geometry (134% signage
+   scale, right-edge bleed, -46px optical lift). Only the artwork inside
+   .hero__art differs per concept.
+   ========================================================================== */
+@font-face{font-family:'General Sans';font-style:normal;font-weight:200 700;font-display:swap;
+  src:url(../kreated-v2/assets/fonts/general-sans-var.woff2) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:300 700;font-display:swap;
+  src:url(../kreated-v2/assets/fonts/cormorant-garamond-latin.woff2) format('woff2')}
+:root{
+  --navy:#0B1220;--ink:#070C14;--line:rgba(255,255,255,.16);
+  --cobalt:#0A47F0;--cobalt-lift:#5B86FF;--cobalt-hover:#2B5FF5;
+  --gutter:clamp(20px,8.4vw,120px);--gutter-hero:clamp(20px,12.3vw,177px);
+  --head-h:60px;--t-hover:.2s ease-in-out;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{background:var(--navy);color:#fff;
+  font:400 16px/1.55 'General Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1680px;margin:0 auto;padding-inline:var(--gutter)}
+.hero .wrap{padding-inline:var(--gutter-hero)}
+
+/* --- demo switcher bar (review chrome, not production UI) ----------------- */
+.demo{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:18px;
+  height:var(--head-h);padding:0 22px;background:rgba(7,12,20,.85);
+  backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+.demo__mark{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;
+  font-size:16px;letter-spacing:.22em}
+.demo__nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+.demo__nav a{padding:7px 12px;border-radius:999px;text-decoration:none;
+  font:600 12.5px/1 'General Sans',system-ui;color:rgba(255,255,255,.55);
+  border:1px solid transparent;transition:color var(--t-hover)}
+.demo__nav a:hover{color:#fff}
+.demo__nav a.is-here{color:#fff;border-color:rgba(91,134,255,.55)}
+.demo__tag{font:600 9.5px/1.3 'General Sans',system-ui;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.32)}
+@media (max-width:700px){.demo__tag{display:none}}
+
+/* --- hero: identical to production ---------------------------------------- */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.hero{position:relative;overflow:clip;
+  min-height:min(90svh,calc(100svh - var(--head-h)));
+  display:flex;align-items:center;
+  padding:clamp(30px,4vw,56px) 0 clamp(48px,6vw,84px)}
+.hero > .wrap{position:relative;z-index:1;width:100%}
+.hero__grid{display:grid;grid-template-columns:minmax(0,55fr) minmax(0,45fr);
+  align-items:center;gap:clamp(24px,3.4vw,52px)}
+.hero__kicker{margin:0 0 32px;
+  font:500 clamp(12px,.95vw,14px)/1.2 'General Sans',system-ui;
+  letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.60)}
+.hero__h1{margin:0 0 40px;font-size:clamp(36px,5.4vw,88px);line-height:1.02;
+  font-weight:600;letter-spacing:-.03em;color:rgba(255,255,255,.97);text-wrap:balance}
+.hero__static{display:block}
+.hero__rotate{position:relative;display:inline-block;vertical-align:top}
+.hero__reserve{visibility:hidden}
+.hero__live{position:absolute;left:0;top:0;white-space:nowrap;color:var(--cobalt-lift)}
+.hero__caret{display:inline-block;width:2px;height:.78em;margin-left:.06em;
+  vertical-align:-.06em;background:var(--cobalt-lift);opacity:0}
+.js-type .hero__caret{opacity:1}
+.js-type.is-holding .hero__caret{animation:caret-blink 1.06s steps(1,end) infinite}
+@keyframes caret-blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+.hero__support{margin:0 0 40px;max-width:52ch;
+  font-size:clamp(16px,1.25vw,20px);line-height:1.5;color:rgba(255,255,255,.70)}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:56px;
+  padding:0 26px;border-radius:999px;font:600 15px/1 'General Sans',system-ui;
+  text-decoration:none;
+  transition:background-color var(--t-hover),border-color var(--t-hover),color var(--t-hover)}
+.btn--solid{background:var(--cobalt);color:#fff;position:relative;overflow:hidden}
+.btn--solid::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55) 50%,rgba(255,255,255,0));
+  opacity:0;transition:opacity var(--t-hover)}
+.btn--solid:hover,.btn--solid:focus-visible{background:var(--cobalt-hover)}
+.btn--solid:hover::before,.btn--solid:focus-visible::before{opacity:1}
+.btn--line{border:1px solid rgba(255,255,255,.25);color:#fff}
+.btn--line:hover,.btn--line:focus-visible{border-color:var(--cobalt-lift);background:rgba(255,255,255,.05)}
+.btn:focus-visible,.hero__proof:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:3px}
+.hero__proof{position:relative;display:inline-flex;align-items:center;min-height:44px;
+  font-size:clamp(15px,1vw,16px);color:rgba(255,255,255,.60);text-decoration:none;
+  transition:color var(--t-hover)}
+.hero__proof::after{content:'';position:absolute;left:0;right:0;top:calc(50% + .72em);
+  height:1px;background:rgba(255,255,255,.25);transition:background-color var(--t-hover)}
+.hero__proof:hover{color:#fff}.hero__proof:hover::after{background:#fff}
+
+/* art region — production signage-scale geometry, verbatim */
+.hero__art{position:relative;aspect-ratio:1/1;width:134%;
+  margin-right:calc(var(--gutter-hero) * -1 - 15.5%);margin-left:auto;
+  transform:translateY(-46px);max-width:none}
+
+@media (max-width:900px){
+  .hero{min-height:0;padding-top:clamp(24px,6vw,40px)}
+  .hero__grid{grid-template-columns:minmax(0,1fr);gap:clamp(28px,7vw,44px)}
+  .hero__kicker{margin-bottom:20px;font-size:12px}
+  .hero__h1{margin-bottom:24px;font-size:clamp(36px,9.2vw,44px)}
+  .hero__support{margin-bottom:28px;font-size:clamp(16px,4.2vw,17px)}
+  .hero__art{transform:none;aspect-ratio:7/6;width:auto;
+    margin-right:calc(var(--gutter) * -1);margin-left:calc(var(--gutter) * -1);
+    margin-bottom:calc(clamp(24px,6vw,40px) * -1)}
+}
+@media (max-width:520px){
+  .hero__ctas{display:grid;grid-template-columns:1fr;gap:12px}
+  .hero__ctas .btn{width:100%;justify-content:center;text-align:center}
+  .hero__rotate{display:block}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero__caret{display:none}
+}
+/* ======================= CONCEPT 2 · SIGNAL ============================== */
+.mark{position:absolute;inset:6% 4% 4% 4%}
+.mark svg{display:block;width:100%;height:100%;overflow:visible}
+/* the still mark: dark-silver body the light travels through */
+.sig__base path{fill:#57637C}
+.sig__base{filter:drop-shadow(0 0 44px rgba(10,71,240,.22)) drop-shadow(0 30px 50px rgba(0,0,0,.45))}
+/* the rotating beam, clipped inside the letterform */
+.sig__spin{transform-origin:300px 262px;animation:sig-rot 12s linear infinite}
+.sig__aim{transform-origin:300px 262px;transition:transform 1.6s cubic-bezier(.25,.1,.25,1)}
+@keyframes sig-rot{to{transform:rotate(360deg)}}
+/* silhouette echoes — the mark broadcasting itself */
+.echo{transform-origin:300px 262px;opacity:0}
+.echo path{fill:none;stroke:#5B86FF;stroke-width:1.4;vector-effect:non-scaling-stroke}
+.echo--a{animation:echo 16s cubic-bezier(.2,.6,.4,1) infinite}
+.echo--b{animation:echo 16s cubic-bezier(.2,.6,.4,1) 1.8s infinite}
+@keyframes echo{
+  0%{transform:scale(1);opacity:0}
+  2%{opacity:.5}
+  19%{transform:scale(1.42);opacity:0}
+  100%{transform:scale(1.42);opacity:0}
+}
+/* the inner detail stays crisp above the beam */
+@media (prefers-reduced-motion:reduce){
+  .sig__spin{animation:none;transform:rotate(35deg)}
+  .echo{animation:none!important}
+  .echo--a{opacity:.14;transform:scale(1.18)}
+}
+</style>
+</head>
+<body>
+<header class="demo">
+  <span class="demo__mark">KREATED</span>
+  <span class="demo__tag">Hero concept demo · not production</span>
+  <nav class="demo__nav">
+    <a href="concept-1-draft.html">1 · The Draft</a>
+    <a class="is-here" href="concept-2-signal.html">2 · Signal</a>
+    <a href="concept-3-registration.html">3 · Registration</a>
+  </nav>
+</header>
+<main>
+<section class="hero" id="hero">
+  <div class="wrap hero__grid">
+
+    <div class="hero__copy">
+      <p class="hero__kicker">A DESIGN STUDIO FOR LOCAL SERVICE BUSINESSES</p>
+      <h1 class="hero__h1">
+        <span class="sr-only">Your business is better than your website.</span>
+        <span class="hero__static" aria-hidden="true">Your business is better than your</span>
+        <span class="hero__rotate" aria-hidden="true">
+          <span class="hero__reserve">first impression.</span>
+          <span class="hero__live"><span class="hero__typed" id="heroTyped">website.</span><i class="hero__caret" id="heroCaret"></i></span>
+        </span>
+      </h1>
+      <p class="hero__support">We make local service businesses look as good online
+        as they are on the job — with better websites, stronger Google results, and
+        sharper branding that gives customers a reason to choose you.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--solid" href="#">Start a Project</a>
+        <a class="btn btn--line" href="#">Free Website Audit</a>
+      </div>
+      <a class="hero__proof" href="#">View Work</a>
+    </div>
+    <div class="hero__art" id="heroArt" aria-hidden="true">
+      <div class="mark">
+      <svg id="sigSvg" viewBox="0 0 600 600">
+        <defs>
+          <clipPath id="mk"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></clipPath>
+          <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0.30" stop-color="#5B86FF" stop-opacity="0"/>
+            <stop offset="0.50" stop-color="#5B86FF" stop-opacity="0.95"/>
+            <stop offset="0.56" stop-color="#DCE6FF" stop-opacity="0.9"/>
+            <stop offset="0.72" stop-color="#0A47F0" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g class="echo echo--a"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+        <g class="echo echo--b"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+        <g class="sig__base"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+        <g clip-path="url(#mk)">
+          <g class="sig__aim" id="sigAim"><g class="sig__spin">
+            <rect x="-320" y="-320" width="1240" height="1240" fill="url(#beam)" opacity="0.75"/>
+          </g></g>
+        </g>
+      </svg>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+/* production typewriter, inlined: terminal phrase only, reserved width */
+(function(){
+  var out=document.getElementById('heroTyped');
+  var h1=out&&out.closest?out.closest('.hero__h1'):null;
+  if(!out||!h1)return;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+  if(mq&&mq.matches){out.textContent='website.';return}
+  var P=['website.','Google results.','first impression.'];
+  var TYPE=52,DEL=26,HOLD=2600,PAUSE=420,i=0,n=0;
+  h1.classList.add('js-type');
+  function hold(on){h1.classList.toggle('is-holding',!!on)}
+  function type(){var p=P[i];hold(false);
+    if(n<p.length){n++;out.textContent=p.slice(0,n);setTimeout(type,TYPE);return}
+    hold(true);setTimeout(del,HOLD)}
+  function del(){var p=P[i];hold(false);
+    if(n>0){n--;out.textContent=p.slice(0,n);setTimeout(del,DEL);return}
+    i=(i+1)%P.length;setTimeout(type,PAUSE)}
+  out.textContent='';n=0;setTimeout(type,600);
+})();
+/* SIGNAL — the beam leans toward the cursor, damped and slow */
+(function(){
+  var aim=document.getElementById('sigAim');
+  var art=document.getElementById('heroArt');
+  if(!aim||!art)return;
+  var mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+  if((mq&&mq.matches)||!window.matchMedia('(pointer:fine)').matches)return;
+  document.addEventListener('mousemove',function(e){
+    var r=art.getBoundingClientRect();
+    var cx=r.left+r.width/2,cy=r.top+r.height/2;
+    /* small damped lean, never a hard track */
+    var dx=(e.clientX-cx)/r.width,dy=(e.clientY-cy)/r.height;
+    var lean=Math.max(-28,Math.min(28,(Math.atan2(dy,dx)*180/Math.PI)*0.18));
+    aim.style.transform='rotate('+lean+'deg)';
+  });
+})();
+</script>
+</body>
+</html>

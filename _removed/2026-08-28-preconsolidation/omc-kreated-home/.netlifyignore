@@ -1,0 +1,4 @@
+# Development provenance — kept in the repo, excluded from the deploy bundle.
+tools/
+serve.py
+README.md

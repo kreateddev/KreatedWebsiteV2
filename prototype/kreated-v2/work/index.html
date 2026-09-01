@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- PROTOTYPE SAFETY — site-wide prelaunch state, do not remove. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://kreated.dev/work/">
+
+<!-- No route target is assigned to /work/ in docs/SEO.md §2 — it is a
+     navigational hub, not a commercial head-term page, and §2 forbids giving
+     one a competing term. The title is descriptive only.
+     COPY CANDIDATE — NOT APPROVED. -->
+<title>Work | Kreated</title>
+<meta name="description" content="Real businesses Kreated has worked with — what was delivered, where, and what is on record for each one.">
+
+<!-- Open Graph / Twitter. Every route carries a deliberate preview: a shared
+     link produces the page's own title, description and URL rather than a bare
+     address, which is a trust signal in exactly the moment Kreated is being
+     passed between two people.
+
+     og:image policy — reuse only, nothing generated:
+       · Pages that show a REAL client capture use that capture (1600x1000,
+         close enough to 1.91:1 for a large card).
+       · Every other route uses the Kreated mark, with card type `summary`,
+         which is the correct card for a square brand image.
+     ⚠ REMAINING ITEM: no purpose-made 1200x630 social asset exists. When one
+     does, point the mark-based routes at it and switch them to
+     summary_large_image. 🚫 Do not invent one to close this gap. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kreated">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://kreated.dev/work/">
+<meta property="og:title" content="Work | Kreated">
+<meta property="og:description" content="Real businesses Kreated has worked with — what was delivered, where, and what is on record for each one.">
+<meta property="og:image" content="https://kreated.dev/assets/img/proof/rr-desktop.jpg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta property="og:image:alt" content="The live site">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Work | Kreated">
+<meta name="twitter:description" content="Real businesses Kreated has worked with — what was delivered, where, and what is on record for each one.">
+<meta name="twitter:image" content="https://kreated.dev/assets/img/proof/rr-desktop.jpg">
+
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#020C2E">
+
+<!-- Three layers, outermost first:
+       services.css  tokens, header, drawer, footer, skip link
+       leaf.css      the shared leaf system — hero, plate, CTA row, close
+       work.css      the Work hub's own entries -->
+<link rel="stylesheet" href="/services/services.css?v=17">
+<link rel="stylesheet" href="/services/leaf.css?v=10">
+<link rel="stylesheet" href="/work/work.css?v=2">
+
+<!-- last, so it is the single definition of the footer on every route -->
+<link rel="stylesheet" href="/theme.css?v=1">
+<link rel="stylesheet" href="/footer.css?v=5">
+</head>
+<body>
+<!-- The atmosphere: one fixed layer behind the whole document carrying the
+     blue. Fixed rather than scrolled so the light does not slide past the
+     content — the room dims around the reader. Colours and strength live in
+     theme.css. Decorative only, hence aria-hidden. -->
+<div class="atmos" aria-hidden="true"></div>
+<a class="skip" href="#top">Skip to content</a>
+
+<header class="head">
+  <div class="wrap head__in">
+    <a class="head__mark" href="/" aria-label="Kreated — home">KREATED</a>
+
+    <!-- ⚠ ONE NAV, ONE MEANING, EVERY ROUTE. Every item here is a real page,
+         so the header does the same thing whichever page you are standing on.
+         Investment and FAQ are deliberately NOT in the nav: they are homepage
+         sections with no routes of their own, so a header link to them worked
+         on the homepage and did nothing anywhere else. They live in the footer
+         and on the homepage itself. That ambiguity is what this replaces. -->
+    <nav class="head__nav" aria-label="Primary">
+      <a href="/services/">Services</a>
+      <a href="/work/">Work</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+    </nav>
+
+    <a class="head__cta" href="/contact/">Start a Project</a>
+
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="/services/">Services</a>
+    <a href="/work/">Work</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/about/">About</a>
+    <a href="/method/">Method</a>
+    <a href="/contact/">Contact</a>
+    <a class="drawer__cta" href="/contact/">Start a Project</a>
+    <a class="drawer__alt" href="/free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+<main id="top" tabindex="-1">
+
+<!-- ==========================================================================
+     1 · WORK HERO
+
+     ⚠ THE EVIDENCE RULE FOR THIS WHOLE ROUTE, in one line: a project entry may
+     say what was DELIVERED and what is ON RECORD, and nothing else. No
+     percentage, no ranking, no traffic, no lead count, no revenue, no
+     timeline, no before/after outcome. A thinner entry beats a fuller one
+     built on a weaker claim.
+
+     🚫 There are three real projects. Never add a fourth, a placeholder, a
+     "coming soon", or an anonymised client.
+     ========================================================================== -->
+<section class="shero wk__hero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">KREATED</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">WORK</span>
+    </nav>
+
+    <!-- ⚠ Was "Three businesses, and what is on record." The second half was fine;
+         the first half told a buyer exactly how small the visible portfolio is
+         before they had looked at any of it. Nobody counts for you, and a
+         count is not what they came to evaluate.
+
+         Replaced with the homepage's own approved Work heading, so the two
+         surfaces now say the same thing and no new wording was invented.
+         🚫 Never replace this with volume language — "dozens", "growing
+         portfolio", "many clients", "countless industries". There are three
+         projects; the fix is presentation, not inflation. -->
+    <h1 class="shero__h wk__h">Real businesses,<span>real work.</span></h1>
+
+    <div class="shero__foot">
+      <p class="shero__fact">Every project below is live. What was delivered, for whom,
+        and where, each one checkable on the client&rsquo;s own site.</p>
+
+      <!-- OWNER INPUT — WORK POSITIONING. Ships HIDDEN with an empty text node.
+           Nothing in the repo supplies a positioning line for the Work route.
+           To enable: remove `hidden` and write the sentence into .shero__note. -->
+      <aside class="shero__owner" hidden>
+        <p class="shero__ownerlabel">POSITIONING</p>
+        <p class="shero__note"><!-- owner sentence goes here --></p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     2 · THE THREE PROJECTS — deliberately unequal.
+
+     Scale follows the strength of the VISUAL proof, because that is what this
+     page can actually show:
+       01 Rare Raleigh   the only project with a real before AND a real after,
+                         plus a mobile capture. Largest entry, full stage.
+       02 LLEC           real desktop and mobile captures of the live site.
+                         Medium entry, paired object.
+       03 LearnSmart     one real desktop capture. The deepest recorded SCOPE
+                         of the three and the only testimonial, but the least
+                         imagery — so the entry is the quietest, and its page
+                         carries the depth instead.
+     🚫 Do not flatten these into three equal cards. The unevenness is the
+     honest signal.
+     ========================================================================== -->
+<section class="wk">
+  <div class="wrap">
+
+    <!-- ---- 01 · RARE RALEIGH — largest ---------------------------------
+         SCOPE IS THE SINGLE WORD "Website". DECISION 019 confirms the site is
+         published and live and retires the old in-progress label, but states
+         outright that the exact delivered-scope string is NOT yet documented.
+         ⚠ docs/PROJECTS.md §3 still carries the pre-completion status and is
+         flagged stale by 019 itself — do not "correct" this back to it.
+         The previous-site capture is approved for public display (Skyler,
+         2026-08-30). -->
+    <article class="wk__p wk__p--lead">
+      <div class="wk__meta">
+        <p class="wk__no">01</p>
+        <h2 class="wk__name"><a class="wk__link" href="/work/rare-raleigh-restoration/">Rare Raleigh Restoration</a></h2>
+        <p class="wk__scope">Website</p>
+        <dl class="wk__facts">
+          <div><dt>Market</dt><dd>Raleigh, NC</dd></div>
+          <div><dt>Status</dt><dd>Published &amp; live</dd></div>
+        </dl>
+        <p class="wk__go" aria-hidden="true">View project <i>&#8594;</i></p>
+      </div>
+
+      <div class="wk__art wk__art--ba">
+        <figure class="wk__shot wk__shot--before">
+          <img src="/assets/img/proof/rr-before.jpg"
+               alt="Rare Raleigh Restoration's previous website"
+               width="760" height="687" loading="lazy" decoding="async">
+          <figcaption>Before</figcaption>
+        </figure>
+        <figure class="wk__shot wk__shot--after">
+          <img src="/assets/img/proof/rr-desktop.jpg"
+               alt="The live Rare Raleigh Restoration website Kreated designed and built"
+               width="1600" height="1000" loading="lazy" decoding="async">
+          <figcaption>After</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- ---- 02 · LLEC — medium ------------------------------------------
+         SCOPE STRING IS EXACT AND FIXED: "Website · Google Business Profile"
+         (PROOF.md §2). 🚫 Never widen it, never reduce it, never call this a
+         Local SEO engagement. The dated observation is NOT on this hub — it
+         needs all four of its facts plus both qualifiers, which is a paragraph,
+         and it lives on the project page instead. -->
+    <article class="wk__p">
+      <div class="wk__meta">
+        <p class="wk__no">02</p>
+        <h2 class="wk__name"><a class="wk__link" href="/work/leak-locators-east-coast/">Leak Locators East Coast</a></h2>
+        <p class="wk__scope">Website &middot; Google Business Profile</p>
+        <dl class="wk__facts">
+          <div><dt>Market</dt><dd>Wilmington, NC &amp; coastal North Carolina</dd></div>
+          <div><dt>Status</dt><dd>Delivered &amp; live</dd></div>
+        </dl>
+        <p class="wk__go" aria-hidden="true">View project <i>&#8594;</i></p>
+      </div>
+
+      <div class="wk__art wk__art--pair">
+        <figure class="wk__shot wk__shot--desk">
+          <img src="/assets/img/proof/llec-desktop.jpg"
+               alt="The live Leak Locators East Coast website"
+               width="1600" height="1000" loading="lazy" decoding="async">
+        </figure>
+        <figure class="wk__shot wk__shot--phone">
+          <img src="/assets/img/proof/llec-mobile.jpg"
+               alt="The live Leak Locators East Coast website on a phone"
+               width="390" height="1100" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </article>
+
+    <!-- ---- 03 · LEARNSMART — quietest ----------------------------------
+         The deepest recorded scope of the three and the source of the only
+         testimonial Kreated has — but one capture and no mobile asset, so the
+         entry stays small and the project page carries the weight.
+         🚫 The client-reported outcome is NOT on this hub. It only works with
+         its label attached, and a hub entry is too small to carry it without
+         the label reading as decoration. -->
+    <article class="wk__p wk__p--quiet">
+      <div class="wk__meta">
+        <p class="wk__no">03</p>
+        <h2 class="wk__name"><a class="wk__link" href="/work/learnsmart/">LearnSmart Educational Consulting</a></h2>
+        <p class="wk__scope">Brand identity &middot; Website &middot; Local SEO &middot; Analytics</p>
+        <dl class="wk__facts">
+          <div><dt>Market</dt><dd>Raleigh &middot; Durham &middot; Chapel Hill</dd></div>
+          <div><dt>Status</dt><dd>Delivered &amp; live</dd></div>
+        </dl>
+        <p class="wk__go" aria-hidden="true">View project <i>&#8594;</i></p>
+      </div>
+
+      <div class="wk__art wk__art--single">
+        <figure class="wk__shot wk__shot--desk">
+          <img src="/assets/img/proof/learnsmart-desktop.jpg"
+               alt="The live LearnSmart Educational Consulting website"
+               width="1600" height="1000" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ⚠ CONTEXT ONLY, added 2026-09-01. Explains what the projects demonstrate
+     and nothing else. 🚫 No outcome, no metric, no count of clients, no
+     characterisation of the portfolio's size. Evidence boundaries unchanged. -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What these show</h2>
+      <p class="lgrid__note">And what they deliberately do not.</p>
+    </div>
+    <div class="prose">
+      <p>Each project here is a real business with a live site you can open and
+        check. What is listed against each one is the scope that was actually
+        delivered, not everything that could have been.</p>
+      <p>Where something is measurable it is labelled, dated and attributed. Where
+        it was reported by the client rather than verified, it says so. Where no
+        evidence exists, nothing is claimed. That is why these read as records
+        rather than results pages.</p>
+      <p>What they are useful for is judging the work itself: how a site is
+        structured, how clearly a business explains itself, and what was delivered
+        against what was scoped.</p>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <div class="close__row">
+      <a class="close__go" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="close__alt" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ⚠ ONE FOOTER, ALL 17 ROUTES. Identical markup everywhere, styled by
+     /footer.css which loads last on every page. Before this, About, Method,
+     Contact, Work and every service page ended in a wordmark and "Raleigh, NC"
+     — no pricing, no phone number, no privacy link — which read as an
+     incomplete mini-site to anyone who did not enter through the homepage.
+     🚫 If a route is added, this block is copied verbatim. Do not fork it. -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <a class="foot__mark" href="/" aria-label="Kreated — home">KREATED</a>
+      <!-- approved V1 positioning line, reusable verbatim -->
+      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+    </div>
+
+    <div class="foot__cols">
+      <div>
+        <h2>Contact</h2>
+        <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
+        <p><a href="tel:+19198058217">(919) 805-8217</a></p>
+        <p>Raleigh, North Carolina</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <p><a href="/services/">Services</a></p>
+        <p><a href="/work/">Work</a></p>
+        <p><a href="/method/">Method</a></p>
+        <p><a href="/about/">About</a></p>
+        <p><a href="/contact/">Contact</a></p>
+        <p><a href="/pricing/">Pricing</a></p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <p><a href="/services/web-design/">Web Design &amp; Development</a></p>
+        <p><a href="/services/website-redesign/">Website Redesign</a></p>
+        <p><a href="/services/local-seo/">Local SEO</a></p>
+        <p><a href="/services/google-business-profile/">Google Business Profile</a></p>
+        <p><a href="/services/brand-strategy/">Brand Strategy &amp; Identity</a></p>
+        <p><a href="/services/answer-engine-optimization/">Answer Engine Optimization</a></p>
+      </div>
+      <div>
+        <h2>Start</h2>
+        <p><a data-evt="cta_start_project" href="/contact/">Start a Project</a></p>
+        <p><a data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit</a></p>
+        <p><a href="/work/">View Work</a></p>
+      </div>
+    </div>
+
+    <p class="foot__legal">© 2026 Kreated
+      <a href="/privacy/">Privacy</a>
+    </p>
+  </div>
+</footer>
+
+<script src="/services/services.js?v=4" defer></script>
+</body>
+</html>

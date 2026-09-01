@@ -1,0 +1,859 @@
+<!doctype html>
+<!--
+  ============================================================================
+  OMC-INSPIRED KREATED HOMEPAGE SHELL — NOT PRODUCTION
+  ============================================================================
+  Structural reference: research/OMC_TEARDOWN.md
+  Translation decisions: concepts/OMC_KREATED_TRANSLATION.md
+
+  This is a REVIEW ARTIFACT for visual architecture. It is not the homepage,
+  it does not ship, and it must not be copied into site/.
+
+  Every Kreated string below is an unapproved candidate and is labelled.
+  Nothing is invented: no results, rankings, reviews, revenue, awards, clients.
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ==========================================================================
+     PROTOTYPE SAFETY — DO NOT REMOVE WITHOUT AN EXPLICIT LAUNCH INSTRUCTION.
+     kreated.dev currently serves a DIFFERENT (older) site; the domain cutover
+     has not happened (docs/BUSINESS.md §"Domain cutover"). Until it does, this
+     page must not be indexable.
+       AT LAUNCH: delete this meta entirely (do not switch it to "index,follow"
+       — the absence of a robots meta is the correct production state).
+     ========================================================================== -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Canonical target is the documented production home: docs/BUSINESS.md §1
+     records `kreated.dev` as the domain (verified), docs/SEO.md maps the
+     homepage to `/`. Harmless while noindex is set; correct after cutover. -->
+<link rel="canonical" href="https://kreated.dev/">
+
+<!-- COPY CANDIDATE — NOT APPROVED. 57 chars. Carries the homepage's approved
+     primary keyword from docs/SEO.md §2 (`Raleigh web design and local SEO`),
+     which the alternative wording omitted. See the report for the comparison. -->
+<title>Web Design &amp; Local SEO in Raleigh, NC | Kreated</title>
+
+<!-- COPY CANDIDATE — NOT APPROVED. 156 chars. No performance claim, no
+     guarantee, no ranking claim. "Founder-led" is supported by
+     docs/BUSINESS.md §1 (run solo by Skyler Reyes). -->
+<meta name="description" content="Websites, local SEO and branding for local service businesses. Founder-led in Raleigh, NC — built so customers can find you and have a reason to choose you.">
+
+<!-- --- Open Graph / social preview -------------------------------------
+     og:image is the Kreated mark, with card type `summary` — the correct card
+     for a square brand image, and enough for a shared link to arrive as a
+     deliberate preview rather than a bare address.
+     ⚠ REMAINING ITEM: no purpose-made 1200x630 social asset exists. When one
+     does, point this at it and switch twitter:card to summary_large_image.
+     🚫 Do not invent one to close the gap. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kreated">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://kreated.dev/">
+<meta property="og:title" content="Kreated — Web Design, Local SEO &amp; Branding in Raleigh, NC">
+<meta property="og:description" content="Websites, local SEO and branding for local service businesses. Founder-led in Raleigh, NC — built so customers can find you and have a reason to choose you.">
+
+<meta property="og:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+<meta property="og:image:width" content="180">
+<meta property="og:image:height" content="180">
+<meta property="og:image:alt" content="The Kreated mark">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kreated — Web Design, Local SEO &amp; Branding in Raleigh, NC">
+<meta name="twitter:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+<meta name="twitter:description" content="Websites, local SEO and branding for local service businesses. Founder-led in Raleigh, NC — built so customers can find you and have a reason to choose you.">
+<!-- Favicon — the KREATED mark, geometry identical to assets/img/kreated-mark.svg
+     and to the inline hero instances. SVG first for modern browsers (scales to
+     any tab density); .ico carries 16/32/48 for legacy; apple-touch-icon is
+     composited on --navy because iOS fills transparency with white. -->
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<!-- ⚠ THE HOMEPAGE OPENS IN LIGHT TERRITORY, so its browser-chrome colour is
+     the day ground, not the night one. The other eighteen routes are dark from
+     the first pixel and keep #020C2E. Getting this wrong puts a black status
+     bar above a near-white page on iOS, which reads as a rendering fault. -->
+<meta name="theme-color" content="#F4F5FA">
+<link rel="stylesheet" href="/styles.css?v=108">
+<!-- last, so it is the single definition of the footer on every route -->
+<link rel="stylesheet" href="/theme.css?v=1">
+<link rel="stylesheet" href="/footer.css?v=5">
+</head>
+<body>
+<!-- The atmosphere: one fixed layer behind the whole document carrying the
+     blue. Fixed rather than scrolled so the light does not slide past the
+     content — the room dims around the reader. Colours and strength live in
+     theme.css. Decorative only, hence aria-hidden. -->
+<div class="atmos" aria-hidden="true"></div>
+<!-- WCAG 2.4.1 Bypass Blocks (Level A). Visually hidden until focused, so it
+     changes nothing on screen; the first Tab press now offers the jump. -->
+<a class="skip" href="#top">Skip to content</a>
+
+
+<!-- PROTOTYPE — NOT PRODUCTION. The visible banner was removed so the page
+     can be reviewed as an actual website (build-reset instruction). The facts
+     it carried still hold: this is a review artifact, all unapproved copy is
+     labelled COPY CANDIDATE in section comments, type + palette temporary. -->
+
+<!-- ==========================================================================
+     HEADER — 91px, transparent, scrolls away like OMC's.
+     DIVERGENCE 2: it returns on scroll-up carrying Start a Project, because
+     Kreated's buyer needs a route back to conversion.
+     ========================================================================== -->
+<header class="head" id="head">
+  <div class="head__in">
+    <a class="head__mark" href="#top" aria-label="Kreated — home">KREATED</a>
+    <!-- ⚠ ONE NAV, ONE MEANING, EVERY ROUTE. Every item here is a real page,
+         so the header does the same thing whichever page you are standing on.
+         Investment and FAQ are deliberately NOT in the nav: they are homepage
+         sections with no routes of their own, so a header link to them worked
+         on the homepage and did nothing anywhere else. They live in the footer
+         and on the homepage itself. That ambiguity is what this replaces. -->
+    <nav class="head__nav" aria-label="Primary">
+      <a href="/services/">Services</a>
+      <a href="/work/">Work</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+    </nav>
+    <a data-evt="cta_start_project" class="head__cta" href="/contact/">Start a Project</a>
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="/services/">Services</a>
+    <a href="/work/">Work</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/about/">About</a>
+    <a href="/method/">Method</a>
+    <a href="/contact/">Contact</a>
+    <a data-evt="cta_start_project" class="drawer__cta" href="/contact/">Start a Project</a>
+    <a data-evt="cta_website_audit" class="drawer__alt" href="/free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+<main id="top" tabindex="-1">
+
+<!-- ==========================================================================
+     1 · HERO — SIGNAL / "FOOTNOTE" (layout L9).
+
+     Replaces the WebGL glass mark. The mark IS the asterisk: a small live mark
+     rides the end of the rotating line as the sentence's footnote marker, and
+     the kicker is relocated to a real footnote at the hero's base, referenced
+     by a tiny static mark. A large ghosted mark in the right column keeps the
+     brand presence so the wit does not shrink the brand.
+
+     Three instances of the mark, each with UNIQUE clipPath/gradient ids. The
+     source layout reused id="mk" and id="beam" across all three SVGs; every
+     reference then resolved to the first definition, so the asterisk and the
+     footnote mark were driven by the ghost's beam. Ids are per-instance here.
+
+     Copy: CTA labels, support line and the accessible sentence are unchanged.
+     TWO copy changes come from the supplied layout and are flagged, not
+     silently absorbed — see the report: the static headline now italicises
+     "better", and the kicker becomes a footnote gaining a Raleigh clause.
+     ========================================================================== -->
+<section class="hero" id="hero">
+
+  <!-- brand presence, decorative -->
+  <div class="hero__ghost" aria-hidden="true">
+    <svg class="sig" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="mk-ghost"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></clipPath>
+        <linearGradient id="beam-ghost" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0.30" stop-color="#5B86FF" stop-opacity="0"/>
+          <stop offset="0.50" stop-color="#5B86FF" stop-opacity="0.95"/>
+          <stop offset="0.56" stop-color="#DCE6FF" stop-opacity="0.9"/>
+          <stop offset="0.72" stop-color="#0A47F0" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <g class="echo echo--a"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+      <g class="echo echo--b"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+      <g class="sig__base"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+      <g clip-path="url(#mk-ghost)"><g class="sig__spin">
+        <rect x="-320" y="-320" width="1240" height="1240" fill="url(#beam-ghost)" opacity="0.75"/>
+      </g></g>
+    </svg>
+  </div>
+
+  <div class="wrap hero__in">
+    <h1 class="hero__h1">
+      <!-- Split pattern: assistive tech reads one stable complete sentence;
+           the visible halves are decorative so a screen reader never sits
+           through changing fragments. -->
+      <span class="sr-only">Your business is better than your website. Kreated is web design and local SEO in Raleigh, NC.</span>
+      <span class="hero__static" aria-hidden="true">Your business is <em>better</em> than your</span>
+      <span class="hero__rotate" aria-hidden="true"><span class="hero__reserve">first impression.<i class="aster"></i><i class="hero__caret"></i></span><span class="hero__live"><span class="hero__typed" id="heroTyped">website.</span><span class="aster">
+        <svg class="sig" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+          <defs>
+            <clipPath id="mk-aster"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></clipPath>
+            <linearGradient id="beam-aster" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0.30" stop-color="#5B86FF" stop-opacity="0"/>
+              <stop offset="0.50" stop-color="#5B86FF" stop-opacity="0.95"/>
+              <stop offset="0.56" stop-color="#DCE6FF" stop-opacity="0.9"/>
+              <stop offset="0.72" stop-color="#0A47F0" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g class="echo echo--a"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+          <g class="echo echo--b"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+          <g class="sig__base"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+          <g clip-path="url(#mk-aster)"><g class="sig__spin">
+            <rect x="-320" y="-320" width="1240" height="1240" fill="url(#beam-aster)" opacity="0.75"/>
+          </g></g>
+        </svg>
+      </span><i class="hero__caret" id="heroCaret"></i></span></span>
+    </h1>
+
+    <p class="hero__support">We make local service businesses look as good online
+      as they are on the job, with better websites, stronger Google results, and
+      sharper branding that gives customers a reason to choose you.</p>
+
+    <div class="hero__ctas">
+      <!-- TODO: real destinations. Intended: project contact flow / audit request. -->
+      <a data-evt="cta_start_project" class="btn btn--solid" href="#project">Start a Project
+        <span class="btn__arrow" aria-hidden="true">↗</span></a>
+      <a data-evt="cta_website_audit" class="btn btn--line" href="/free-website-audit/">Free Website Audit</a>
+      <!-- TODO: real destination — work page. -->
+      <a class="hero__proof" href="/work/">View Work</a>
+    </div>
+
+    <!-- the kicker, relocated to an actual footnote -->
+    <div class="hero__note">
+      <span class="hero__notemark" aria-hidden="true">
+        <svg class="sig" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+          <defs>
+            <clipPath id="mk-note"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></clipPath>
+            <linearGradient id="beam-note" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0.30" stop-color="#5B86FF" stop-opacity="0"/>
+              <stop offset="0.50" stop-color="#5B86FF" stop-opacity="0.95"/>
+              <stop offset="0.56" stop-color="#DCE6FF" stop-opacity="0.9"/>
+              <stop offset="0.72" stop-color="#0A47F0" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <g class="echo echo--a"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+          <g class="echo echo--b"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+          <g class="sig__base"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g>
+          <g clip-path="url(#mk-note)"><g class="sig__spin">
+            <rect x="-320" y="-320" width="1240" height="1240" fill="url(#beam-note)" opacity="0.75"/>
+          </g></g>
+        </svg>
+      </span>
+      <p>A design studio for local service businesses, Raleigh, North Carolina.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     3 · CLIENT TRUST — quiet band directly below the hero. Tightened in the
+     visual-direction pass: this is a VALLEY. REAL CLIENTS ONLY.
+     All three engagements are live sites and all three lockups now link out.
+     Rare Raleigh is PUBLISHED/LIVE (Skyler, 2026-08-25 — see DECISIONS 019);
+     the old DECISION-008 status label is retired from the rendered page.
+     Section label is COPY CANDIDATE — NOT APPROVED.
+     ========================================================================== -->
+<section class="clients" aria-label="Clients">
+  <div class="wrap clients__in">
+    <p class="clients__label">Clients</p>
+
+    <!-- Static client row. Real logos, captured from each client's own live
+         site and reduced to a single monotone so three different brand palettes
+         do not fight the page. Every item links to that client's real site.
+
+         ⚠ The infinite marquee was removed 2026-08-30. With three clients a
+         seamless loop needs a duplicated copy of the whole set, so the page
+         carried six marks for three clients and drew the eye to exactly the
+         thing it was trying to soften. Three marks, standing still and
+         optically balanced, read as confidence rather than volume.
+
+         ⚠ RIGHTS TO CONFIRM — these are the clients' own marks. Displaying them
+         as a client list needs their permission; docs/PROJECTS.md already flags
+         client asset rights as unconfirmed. Flagged, not assumed.
+
+         Each client now appears exactly once, so there is nothing aria-hidden
+         to hide from assistive tech and nothing untabbable to skip. -->
+    <div class="clients__row">
+      <ul class="clients__list">
+        <li class="clients__item clients__item--llec">
+          <a class="client" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">
+            <img class="client__logo" src="/assets/img/clients/llec.png" alt="Leak Locators East Coast"
+                 width="388" height="107" loading="lazy" decoding="async">
+          </a>
+        </li>
+        <li class="clients__item clients__item--ls">
+          <a class="client" href="https://learnsmart.dev" target="_blank" rel="noopener">
+            <img class="client__logo" src="/assets/img/clients/learnsmart.png" alt="LearnSmart Educational Consulting"
+                 width="375" height="56" loading="lazy" decoding="async">
+          </a>
+        </li>
+        <li class="clients__item clients__item--rr">
+          <a class="client" href="https://rareraleighrestoration.com" target="_blank" rel="noopener">
+            <img class="client__logo" src="/assets/img/clients/rare-raleigh.png" alt="Rare Raleigh Restoration"
+                 width="256" height="27" loading="lazy" decoding="async">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     4 · SERVICES — INDEX + STAGE. Interaction model unchanged (hover/focus
+     desktop, accordion mobile, sections.js). Visual-direction pass:
+     "ONE WORLD, FIVE CROPS" — the rounded Stage container is gone; the
+     artwork emerges from the canvas like the hero art. Every scene is one
+     dominant Ashford & Sons surface at readable scale, cropped off at least
+     one edge, in the same graphite/navy/cobalt light.
+     Ashford & Sons remains the labelled ILLUSTRATIVE non-client specimen
+     (docs/PROOF.md §8); its demonstration label stays visible.
+     Star glyphs: previously removed (DECISION-017 ambiguity), then RESTORED
+     2026-08-27 by explicit owner override for this fictional specimen —
+     glyphs only, no numeric rating, no review count.
+     Scenes are the APPROVED 2026-08-27 art-direction compositions, inlined
+     as SVG (page fonts, transparent ground). Source of truth: the approved
+     mock SVGs; regenerate rather than hand-editing coordinates.
+     All headings/descriptions are COPY CANDIDATE — NOT APPROVED.
+     Service NAMES are canonical (docs/SERVICES.md) — do not rename.
+     ========================================================================== -->
+<!-- ==========================================================================
+     THE ROOM — ONE ENVIRONMENT, TWO SECTIONS.
+     ⚠ Services and Process each used to be their own `.room--light` section
+     with its own `inset:0` glow anchored top-right. The blue therefore RESTARTED
+     at the Process top edge, which is the visible horizontal seam this replaces.
+     They are now two sections inside ONE room, so the atmosphere is continuous:
+     it enters near-white at the top and strengthens into blue as you travel
+     down. The blue is the environment, not a section background.
+     🚫 Do not put a background, a border-top or an `overflow:clip` back on
+     `.svc` or `.proc` — any of the three re-cuts the room in half.
+     ========================================================================== -->
+<div class="room">
+  <!-- ⚠ .room__rise is gone. It was an opaque ramp carrying the page from the
+       dark clients strip into the light Services room. Services is the same dark
+       field now, so there is nothing to ramp between. -->
+<section class="svc" id="services">
+  <div class="wrap">
+    <header class="sec-head sec-head--peak">
+      <div>
+        <h2 class="h2 h2--peak">Six ways a business<br>gets <em>chosen</em></h2>
+      </div>
+      <p class="lead">Most of them are the same job seen from a different angle: being found, being compared, and being believed.</p>
+    </header>
+
+    <div class="svc__grid">
+      <!-- ⚠ These are LINKS, not buttons. They were <button type="button"> and
+           went nowhere: hovering one swapped the artwork beside it and that was
+           all, so the homepage listed five services and offered no way to reach
+           any of them. Each row now carries its real route.
+           The preview behaviour is unchanged — sections.js still swaps the
+           stage on hover and focus. What changed is that a click, or a second
+           tap on a phone, now navigates. -->
+      <ol class="svc__index">
+        <li class="svc__item">
+          <a class="svc__row" href="/services/web-design/" aria-expanded="false">
+            <span class="svc__n">01</span>
+            <span class="svc__body">
+              <span class="svc__t">Web Design &amp; Development</span>
+              <span class="svc__d">A custom site built to be found, trusted, and easy to
+                contact, including businesses with no website at all.</span>
+            </span>
+          </a>
+        </li>
+        <li class="svc__item">
+          <a class="svc__row" href="/services/website-redesign/" aria-expanded="false">
+            <span class="svc__n">02</span>
+            <span class="svc__body">
+              <span class="svc__t">Website Redesign</span>
+              <span class="svc__d">Your current site improved or replaced, keeping
+                what already works for you.</span>
+            </span>
+          </a>
+        </li>
+        <li class="svc__item">
+          <a class="svc__row" href="/services/local-seo/" aria-expanded="false">
+            <span class="svc__n">03</span>
+            <span class="svc__body">
+              <span class="svc__t">Local SEO</span>
+              <!-- phrasing tracks the approved V1 boundary string -->
+              <span class="svc__d">The wider local-search system: your website, local
+                pages, keywords, and business listings.</span>
+            </span>
+          </a>
+        </li>
+        <li class="svc__item">
+          <a class="svc__row" href="/services/google-business-profile/" aria-expanded="false">
+            <span class="svc__n">04</span>
+            <span class="svc__body">
+              <span class="svc__t">Google Business Profile</span>
+              <!-- "guidance" is the honest verb for verification (SERVICES.md §5) -->
+              <span class="svc__d">Your profile created, claimed, and completed, with
+                guidance through Google's verification.</span>
+            </span>
+          </a>
+        </li>
+        <li class="svc__item">
+          <a class="svc__row" href="/services/brand-strategy/" aria-expanded="false">
+            <span class="svc__n">05</span>
+            <span class="svc__body">
+              <span class="svc__t">Brand Strategy &amp; Identity</span>
+              <span class="svc__d">Positioning, identity, and the details that make
+                every surface look like the same company.</span>
+            </span>
+          </a>
+        </li>
+        <!-- ⚠ SERVICE 06, added 2026-09-01. The descriptor deliberately avoids the
+             acronym and describes the outcome, because an owner reading this list
+             may never have heard the term. 🚫 Adding or removing a row here
+             changes the theme crossover: it is derived from the third row on a
+             five row list and was re-measured for six. See --cross. -->
+        <li class="svc__item">
+          <a class="svc__row" href="/services/answer-engine-optimization/" aria-expanded="false">
+            <span class="svc__n">06</span>
+            <span class="svc__body">
+              <span class="svc__t">Answer Engine Optimization</span>
+              <span class="svc__d">Making your information clear and consistent enough
+                that search engines and AI assistants describe your business
+                correctly.</span>
+            </span>
+          </a>
+        </li>
+      </ol>
+
+      <!-- The homepage lists the five services; each one has its own page, and
+           until now nothing here said so — which is why the site read as a
+           one-pager while /services/ read as a tree. One link, the existing
+           quiet-link component, no new marketing language.
+           ⚠ .svc__grid was a two-column grid holding the list and the artwork
+           stage; the stage was removed on 2026-08-30 and the grid is now a
+           single column, so this simply follows the list. -->
+      <a class="svc__more" href="/services/">View all services</a>
+
+    </div>
+  </div>
+</section>
+
+</div><!-- /.room -->
+
+<!-- ==========================================================================
+     6 · FEATURED WORK + TESTIMONIAL — the page's photographic PEAK.
+     Real proof only, presented large:
+     · Case band 1 — LLEC: text left, live-site captures bleeding right.
+       Exact approved scope string; bounded observation verbatim.
+     · Case band 2 — Rare Raleigh: mirrored. PUBLISHED/LIVE (2026-08-25,
+       DECISIONS 019) — presented as completed live work; the old
+       in-progress label is retired. ⚠ Exact delivered-scope string for the
+       completed engagement is NOT yet documented — the scope line below is
+       COPY CANDIDATE pending Skyler confirmation.
+     · Testimonial: verbatim EXCERPT (⚠ trim still pending Skyler approval,
+       PROOF.md §5) with a real LearnSmart capture beside it.
+     CAPTURE SLOTS: real live-site screenshots belong at
+       assets/img/proof/{llec,rr}-{desktop,mobile}.jpg and
+       assets/img/proof/learnsmart-desktop.jpg.
+     Until captured, each slot renders as a labelled AWAITING-ASSET state
+     (project rule: missing media is a marked slot, never a fake).
+     Do NOT substitute fabricated or reconstructed UI.
+     ========================================================================== -->
+<section class="proof" id="work">
+  <!-- ⚠ The `.proof__ramp` element that was here is gone. It existed only to
+       bridge Work's own dark ground to the room's — and as of 2026-08-31 there
+       is one dark ground across the site, so there is nothing to bridge. -->
+  <div class="wrap">
+    <header class="sec-head sec-head--peak">
+      <div>
+        <h2 class="h2 h2--peak">Real businesses,<br>real <em>work</em></h2>
+      </div>
+      <p class="lead lead--serif">A site is only finished when the search result, the
+        phone screen and the brand all agree with it.</p>
+    </header>
+  </div>
+
+  <article class="case case--right">
+    <div class="wrap case__grid">
+      <div class="case__body">
+        <p class="case__kicker">Case, Pool leak detection</p>
+        <h3 class="case__name">Leak Locators East Coast</h3>
+        <!-- exact approved scope string — do not widen or reduce -->
+        <p class="case__scope">Website · Google Business Profile</p>
+        <p class="case__meta">Wilmington, NC · Delivered &amp; live</p>
+        <!-- bounded observation, approved wording pattern, all four facts -->
+        <p class="case__obs">Dated observation, not a guarantee. Checked on
+          August&nbsp;2,&nbsp;2026: #2 for “Pool leak detection” in Wilmington,&nbsp;NC.</p>
+        <a class="case__link" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">Visit the live site</a>
+      </div>
+      <div class="case__media">
+        <figure class="shot shot--desktop">
+          <img src="/assets/img/proof/llec-desktop.jpg"
+               alt="The live Leak Locators East Coast website"
+               width="1600" height="1000" loading="lazy" decoding="async"
+               onerror="this.closest('.shot').classList.add('is-missing')">
+          <span class="shot__await">Live-site capture, awaiting asset<br>leaklocatorseastcoast.com</span>
+        </figure>
+        <figure class="shot shot--mobile">
+          <img src="/assets/img/proof/llec-mobile.jpg"
+               alt="The live Leak Locators East Coast website on a phone"
+               width="390" height="1100" loading="lazy" decoding="async"
+               onerror="this.closest('.shot').classList.add('is-missing')">
+          <span class="shot__await">Mobile capture<br>awaiting</span>
+        </figure>
+      </div>
+    </div>
+  </article>
+
+  <article class="case case--left">
+    <div class="wrap case__grid">
+      <div class="case__media">
+        <figure class="shot shot--desktop">
+          <img src="/assets/img/proof/rr-desktop.jpg"
+               alt="The live Rare Raleigh Restoration website"
+               width="1600" height="1000" loading="lazy" decoding="async"
+               onerror="this.closest('.shot').classList.add('is-missing')">
+          <span class="shot__await">Live-site capture, awaiting asset<br>rareraleighrestoration.com</span>
+        </figure>
+        <figure class="shot shot--mobile">
+          <img src="/assets/img/proof/rr-mobile.jpg"
+               alt="The live Rare Raleigh Restoration website on a phone"
+               width="390" height="1100" loading="lazy" decoding="async"
+               onerror="this.closest('.shot').classList.add('is-missing')">
+          <span class="shot__await">Mobile capture<br>awaiting</span>
+        </figure>
+      </div>
+      <div class="case__body">
+        <p class="case__kicker">Case, Restoration contracting</p>
+        <h3 class="case__name">Rare Raleigh Restoration</h3>
+        <!-- ⚠ COPY CANDIDATE — delivered-scope string for the completed
+             engagement not yet documented; confirm before approval -->
+        <!-- ⚠ "Website", and only that. DECISION 019 confirms the site is published
+             and live but states the exact delivered-scope string is not documented;
+             "Audit · Strategy" traces only to PROJECTS.md §3, which 019 itself flags
+             as stale and which describes the PRE-completion state. The redesign leaf
+             and the project page have said "Website" since 2026-08-30 and this was
+             the last page still disagreeing with them.
+             🚫 Do not restore the longer string without documentation and Skyler. -->
+        <p class="case__scope">Website</p>
+        <p class="case__meta">Raleigh, NC · Published &amp; live</p>
+        <a class="case__link" href="https://rareraleighrestoration.com" target="_blank" rel="noopener">Visit the live site</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="wrap">
+    <figure class="quote">
+      <div class="quote__body">
+        <p class="quote__label">Word for word</p>
+        <!-- ⚠ Was: "One published review — quoted exactly." The second half is the
+             valuable part; the first half volunteered the review count, which is
+             the buyer's job to notice and not Kreated's job to announce. The
+             attribution below still names the source, so nothing is hidden and
+             nothing is inflated. 🚫 Never replace this with a volume claim. -->
+        <p class="quote__intro">Quoted exactly, in the client's own words.</p>
+        <blockquote class="quote__text">
+          <span class="quote__mark" aria-hidden="true">“</span>
+          Absolutely a wonderful experience from start to finish. […] His work is
+          extremely professional and he is very knowledgeable. From start to finish,
+          it only took two weeks to fully develop my site and have it up and running.
+          I could not be happier with how my new website and branding/logo turned out.
+          I would recommend him over and over again!
+        </blockquote>
+        <figcaption class="quote__by">
+          Missy Boyd — Founder, LearnSmart Educational Consulting and Academic Coaching
+          <span class="quote__src">Published Google review</span>
+        </figcaption>
+      </div>
+      <div class="quote__aside">
+        <figure class="shot shot--quote">
+          <img src="/assets/img/proof/learnsmart-desktop.jpg"
+               alt="The live LearnSmart Educational Consulting website"
+               width="1600" height="1000" loading="lazy" decoding="async"
+               onerror="this.closest('.shot').classList.add('is-missing')">
+          <span class="shot__await">Live-site capture, awaiting asset<br>learnsmart.dev</span>
+        </figure>
+        <p class="quote__asidenote">learnsmart.dev, delivered &amp; live</p>
+      </div>
+    </figure>
+
+    <!-- The three projects now have real pages. Same quiet-link component the
+         Services section uses, same reason: the section shows the work, the
+         link goes to it. -->
+    <a class="svc__more wk__all" href="/work/">View all work</a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     7 · PRICING TEASER — replaces the full Investment room, 2026-08-31.
+     The full section was 2,300px, the largest object on the homepage, and it
+     sat immediately after Work — so the page's climax was followed by its
+     densest utility content. It now lives at /pricing/, a real destination
+     that can be linked, shared and returned to.
+
+     ⚠ NO NEW SALES COPY. The label, the heading and the lead are the approved
+     Investment section's own wording, moved here verbatim. The only added line
+     is the starting figure, which is an approved fact ($1,750).
+
+     ⚠ DELIBERATELY NOT WARM PAPER. The paper room went WITH the pricing to
+     /pricing/, where it is the page's signature. Putting a 350px paper band
+     between two dark sections here would be exactly the stacked-box slicing
+     this pass removes — and it would spend the site's one tonal break on a
+     teaser. Work -> teaser -> FAQ -> close is now one continuous dark run.
+
+     ⚠ id="investment" is KEPT so that any bookmarked or external /#investment
+     link still lands on the pricing moment rather than nowhere. Every link
+     inside the site now points at /pricing/ instead.
+     ========================================================================== -->
+<section class="teas" id="investment" aria-labelledby="teasH">
+  <div class="wrap teas__in">
+    <header class="teas__head">
+      <h2 class="h2" id="teasH">Where projects<br><em>start</em></h2>
+    </header>
+    <div class="teas__body">
+      <p class="teas__fig">Website projects start at <span>$750</span></p>
+      <p class="teas__lead">Packages with real starting figures, or the individual
+        services you already know you need. Every project is scoped and priced in
+        writing before it begins.</p>
+      <div class="teas__ctas">
+        <a class="btn btn--cobalt" href="/pricing/">View Pricing</a>
+        <a data-evt="cta_start_project" class="btn btn--ghost" href="#project">Start a Project</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     8 · FAQ — clean accordion, 6 highest-friction questions, one open at a
+     time (sections.js). Native <details> so it works without JavaScript.
+     ALL questions and answers are COPY CANDIDATE — NOT APPROVED. V1's
+     approved FAQ copy lives on service pages, not the homepage; nothing here
+     claims results, timelines, or guarantees.
+     "Read more questions" targets the future FAQ page — TODO: real route.
+     ========================================================================== -->
+<section class="faq" id="faq">
+  <div class="wrap faq__grid">
+    <header class="faq__head">
+      <h2 class="h2">Fair questions,<br>straight answers</h2>
+    </header>
+
+    <div class="faq__list">
+      <details class="qa" open>
+        <summary>What does a project cost?</summary>
+        <p>Starting figures are published above, and every project is scoped and
+          priced before it begins. You approve the number before any work starts. There are no surprise invoices.</p>
+      </details>
+      <details class="qa">
+        <summary>How long does a project take?</summary>
+        <p>It depends on scope, and the timeline is set with you up front. You will
+          always know what happens next and when.</p>
+      </details>
+      <details class="qa">
+        <summary>I already have a website. Is that a problem?</summary>
+        <p>No, it's usually an advantage. A redesign keeps what already works,
+          fixes what doesn't, and protects what you've built up so far.</p>
+      </details>
+      <details class="qa">
+        <summary>Do I have to write the content?</summary>
+        <p>No. The wording is worked out with you. You know the business, and the
+          words are shaped around what you actually do and how you say it.</p>
+      </details>
+      <details class="qa">
+        <summary>Do you only build websites?</summary>
+        <p>No. Websites, redesigns, local SEO, Google Business Profile, brand
+          identity and answer engine optimization are built to connect, the site, the
+          search result and the brand working as one system, not six separate
+          purchases.</p>
+      </details>
+      <details class="qa">
+        <summary>What happens after launch?</summary>
+        <p>The site doesn't get abandoned. Ongoing care, updates, monitoring, small
+          improvements. Is available and scoped to what the business actually needs.</p>
+      </details>
+
+      <!-- "Read more questions" was removed 2026-08-30: it linked to #faq, the
+           section the reader is already inside, so it went nowhere. A real FAQ
+           page is a later phase; nothing is invented to fill the slot. -->
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     9 · FINAL CTA — the last strong brand moment before the footer.
+     Large statement, both conversion paths, and the Kreated mark returning
+     quietly behind the type. No motion beyond standard hovers; CTAs are
+     plain anchors, never gated behind animation.
+     Statement + support are COPY CANDIDATE — NOT APPROVED.
+     ========================================================================== -->
+<section class="final" id="start">
+  <img class="final__mark" src="/assets/img/kreated-mark.svg" alt="" aria-hidden="true"
+       width="600" height="600" loading="lazy" decoding="async">
+  <div class="wrap final__in">
+    <h2 class="final__h">Let's make your business<br>impossible to <em>overlook</em>.</h2>
+    <p class="final__sub">Tell me what the business does and what needs to change, you'll get a straight answer, not a pitch.</p>
+    <div class="final__ctas">
+      <a class="btn btn--cobalt" href="#project" data-evt="cta_start_project">Start a Project</a>
+      <a class="btn btn--ghost" href="/free-website-audit/" data-evt="cta_website_audit">Free Website Audit</a>
+    </div>
+
+    <!-- ======================================================================
+         PROJECT ENQUIRY — the primary conversion.
+         Placed in the homepage start section because docs/CONVERSION.md §3
+         records `project-enquiry` as living on `/contact/` AND the homepage
+         start section, and that the homepage form deliberately REUSED the
+         /contact/ form name and pipeline rather than creating a second form.
+         Kept to first-contact scope on purpose — the Universal Intake in the
+         pricing reference (§70-89) is post-sale onboarding, not this.
+
+         Netlify Forms, no build step: `data-netlify` + the hidden `form-name`
+         input is what makes an AJAX POST attributable. `action` points at
+         /thanks/ so the form still completes with JavaScript disabled.
+         Honeypot field name `company-website` is V1's (docs/CONVERSION.md §3).
+         ALL LABELS, HELPER TEXT AND ERRORS ARE COPY CANDIDATE — NOT APPROVED.
+         ====================================================================== -->
+    <div class="formwrap" id="project">
+      <form class="kform" name="project-enquiry" method="POST" action="/thanks/"
+            data-netlify="true" netlify-honeypot="company-website"
+            data-success-event="contact_form_submit" novalidate>
+        <input type="hidden" name="form-name" value="project-enquiry">
+        <p class="hp" aria-hidden="true">
+          <label>Company website<input type="text" name="company-website" tabindex="-1" autocomplete="off"></label>
+        </p>
+
+        <div class="kform__grid">
+          <p class="field">
+            <label for="pe-name">Your name <span class="req" aria-hidden="true">*</span></label>
+            <input id="pe-name" name="name" type="text" required autocomplete="name">
+            <span class="err" data-err-for="pe-name" aria-live="polite"></span>
+          </p>
+          <p class="field">
+            <label for="pe-business">Business name <span class="req" aria-hidden="true">*</span></label>
+            <input id="pe-business" name="business" type="text" required autocomplete="organization">
+            <span class="err" data-err-for="pe-business" aria-live="polite"></span>
+          </p>
+          <p class="field">
+            <label for="pe-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="pe-email" name="email" type="email" required autocomplete="email" inputmode="email">
+            <span class="err" data-err-for="pe-email" aria-live="polite"></span>
+          </p>
+          <p class="field">
+            <label for="pe-phone">Phone <span class="opt">optional</span></label>
+            <input id="pe-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+            <span class="err" data-err-for="pe-phone" aria-live="polite"></span>
+          </p>
+          <p class="field field--wide">
+            <label for="pe-site">Current website <span class="opt">optional</span></label>
+            <input id="pe-site" name="website" type="url" autocomplete="url" inputmode="url" placeholder="https://">
+            <span class="err" data-err-for="pe-site" aria-live="polite"></span>
+          </p>
+          <p class="field field--wide">
+            <label for="pe-need">What do you need help with? <span class="req" aria-hidden="true">*</span></label>
+            <select id="pe-need" name="need" required>
+              <option value="">Choose the closest fit</option>
+              <option>Web Design &amp; Development</option>
+              <option>Website Redesign</option>
+              <option>Local SEO</option>
+              <option>Google Business Profile</option>
+              <option>Brand Strategy &amp; Identity</option>
+              <option>More than one of these</option>
+              <option>Not sure yet</option>
+            </select>
+            <span class="err" data-err-for="pe-need" aria-live="polite"></span>
+          </p>
+          <p class="field field--wide">
+            <label for="pe-range">Investment range <span class="opt">optional</span></label>
+            <select id="pe-range" name="range">
+              <option value="">Prefer not to say yet</option>
+              <!-- ⚠ kept in step with /contact/ and /pricing/. The $750 band was
+                   missing while the teaser above already said projects start at $750. -->
+              <option>Around $750, One Page Website</option>
+              <option>Around $1,750, Launch</option>
+              <option>Around $2,950, Growth</option>
+              <option>$4,500+, Market Leader</option>
+              <option>Individual services, not a full site</option>
+              <option>Not sure, advise me</option>
+            </select>
+          </p>
+          <p class="field field--wide">
+            <label for="pe-context">Anything else worth knowing? <span class="opt">optional</span></label>
+            <textarea id="pe-context" name="context" rows="4"></textarea>
+          </p>
+        </div>
+
+        <div class="kform__go">
+          <button class="btn btn--cobalt" type="submit">Start a Project</button>
+          <p class="kform__note">Goes to <a href="mailto:contact@kreated.dev">contact@kreated.dev</a>.</p>
+        </div>
+
+        <p class="kform__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ⚠ ONE FOOTER, ALL 17 ROUTES. Identical markup everywhere, styled by
+     /footer.css which loads last on every page. Before this, About, Method,
+     Contact, Work and every service page ended in a wordmark and "Raleigh, NC"
+     — no pricing, no phone number, no privacy link — which read as an
+     incomplete mini-site to anyone who did not enter through the homepage.
+     🚫 If a route is added, this block is copied verbatim. Do not fork it. -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <a class="foot__mark" href="/" aria-label="Kreated — home">KREATED</a>
+      <!-- approved V1 positioning line, reusable verbatim -->
+      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+    </div>
+
+    <div class="foot__cols">
+      <div>
+        <h2>Contact</h2>
+        <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
+        <p><a href="tel:+19198058217">(919) 805-8217</a></p>
+        <p>Raleigh, North Carolina</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <p><a href="/services/">Services</a></p>
+        <p><a href="/work/">Work</a></p>
+        <p><a href="/method/">Method</a></p>
+        <p><a href="/about/">About</a></p>
+        <p><a href="/contact/">Contact</a></p>
+        <p><a href="/pricing/">Pricing</a></p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <p><a href="/services/web-design/">Web Design &amp; Development</a></p>
+        <p><a href="/services/website-redesign/">Website Redesign</a></p>
+        <p><a href="/services/local-seo/">Local SEO</a></p>
+        <p><a href="/services/google-business-profile/">Google Business Profile</a></p>
+        <p><a href="/services/brand-strategy/">Brand Strategy &amp; Identity</a></p>
+        <p><a href="/services/answer-engine-optimization/">Answer Engine Optimization</a></p>
+      </div>
+      <div>
+        <h2>Start</h2>
+        <p><a data-evt="cta_start_project" href="/contact/">Start a Project</a></p>
+        <p><a data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit</a></p>
+        <p><a href="/work/">View Work</a></p>
+      </div>
+    </div>
+
+    <p class="foot__legal">© 2026 Kreated
+      <a href="/privacy/">Privacy</a>
+    </p>
+  </div>
+</footer>
+
+<script src="/hero.js?v=9" defer></script>
+<script src="/motion.js?v=34"></script>
+<script src="/sections.js?v=6" defer></script>
+<script src="/forms.js?v=3" defer></script>
+<!-- the client strip's emphasis cycle: one timer, no scroll listener, and it
+     does not exist at all under reduced motion — see the file header -->
+<script src="/clients.js?v=1" defer></script>
+<!-- the scroll-driven light-to-blue transition. Publishes one custom property
+     and nothing else; the page is complete without it -->
+<script src="/atmosphere.js?v=9" defer></script>
+</body>
+</html>

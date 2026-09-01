@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- PROTOTYPE SAFETY — do not remove without an explicit launch instruction. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://kreated.dev/services/web-design/">
+
+<!-- Meta derived from the documented service scope only. No claims, no metrics.
+     Primary keyword for this route per docs/SEO.md §2: `Raleigh web design`.
+     COPY CANDIDATE — NOT APPROVED. -->
+<title>Web Design &amp; Development — Kreated</title>
+<meta name="description" content="Custom web design and development in Raleigh, NC — a site built to be found, trusted, and easy to contact, including businesses with no website at all.">
+
+<link rel="icon" href="../../omc-kreated-home/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../omc-kreated-home/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../../omc-kreated-home/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="../../omc-kreated-home/assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#070707">
+
+<!-- The hub's stylesheet supplies the shared layer only: tokens, header,
+     drawer, footer, skip link. It is LOADED, never modified — /services/ is
+     locked. Everything specific to this leaf lives in web-design.css. -->
+<link rel="stylesheet" href="../services.css?v=3">
+<link rel="stylesheet" href="web-design.css?v=3">
+</head>
+<body>
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- ==========================================================================
+     HEADER — the hub's chrome, unchanged.
+
+     ⚠ PROTOTYPE PATHS. The prototype tree is not the production tree.
+     AT INTEGRATION:
+       ../../omc-kreated-home/index.html#project  ->  /#project
+       ../../omc-kreated-home/index.html#investment -> /#investment
+       ../../omc-kreated-home/index.html#faq      ->  /#faq
+       ../../omc-kreated-home/free-website-audit/  ->  /free-website-audit/
+       ../                                         ->  /services/   (already correct)
+       ../../work/                                 ->  /work/       (route not built)
+     ========================================================================== -->
+<header class="head">
+  <div class="wrap head__in">
+    <a class="head__mark" href="../../omc-kreated-home/index.html" aria-label="Kreated — home">
+      <svg class="mk" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+        <path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/>
+        <path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/>
+      </svg>
+      <span>KREATED</span>
+    </a>
+
+    <nav class="head__nav" aria-label="Primary">
+      <a href="../" aria-current="page">Services</a>
+      <a href="../../work/">Work</a>
+      <a href="../../omc-kreated-home/index.html#investment">Investment</a>
+      <a href="../../omc-kreated-home/index.html#faq">FAQ</a>
+    </nav>
+
+    <a class="head__cta" href="../../omc-kreated-home/index.html#project">Start a Project</a>
+
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="../" aria-current="page">Services</a>
+    <a href="../../work/">Work</a>
+    <a href="../../omc-kreated-home/index.html#investment">Investment</a>
+    <a href="../../omc-kreated-home/index.html#faq">FAQ</a>
+    <a class="drawer__cta" href="../../omc-kreated-home/index.html#project">Start a Project</a>
+    <a class="drawer__alt" href="../../omc-kreated-home/free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+<main id="top" tabindex="-1">
+
+<!-- ==========================================================================
+     1 · SERVICE HERO
+     Oversized editorial title with the Cormorant ampersand, carried over from
+     the hub's 05 treatment so the two pages read as one system. One factual
+     service line — no second explanatory paragraph.
+     ========================================================================== -->
+<section class="shero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="../">SERVICES</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">WEB DESIGN &amp; DEVELOPMENT</span>
+    </nav>
+
+    <h1 class="shero__h"><span>Web Design</span><span><em class="amp">&amp;</em> Development</span></h1>
+
+    <div class="shero__foot">
+      <p class="shero__fact">A custom site built to be found, trusted, and easy to contact
+        — including businesses with no website at all.</p>
+
+      <!-- OWNER INPUT: buyer situation — enable when owner copy exists.
+           Ships HIDDEN with an empty text node. Nothing in the repo supplies
+           the buyer-situation statement this page's H2 slot needs, and
+           inventing one ("if your current site isn't converting…") is exactly
+           the generic pain-point copy this build must not produce.
+           To enable: remove `hidden` and write the sentence into .shero__note. -->
+      <aside class="shero__owner" hidden>
+        <p class="shero__ownerlabel">SITUATION</p>
+        <p class="shero__note"><!-- owner sentence goes here --></p>
+      </aside>
+    </div>
+
+    <p class="shero__ctas">
+      <a class="btn btn--cobalt" href="../../omc-kreated-home/index.html#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="btn btn--quiet" href="../../omc-kreated-home/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    </p>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     2 · PRIMARY PROOF — Rare Raleigh Restoration.
+     One real project, presented as a finished object: the real live-site
+     captures, no browser chrome, no device frame, no reconstruction.
+
+     EVIDENCE DISCIPLINE (docs/PROOF.md, DECISION 019): Rare Raleigh is
+     published and live, and may be shown as a completed Kreated website
+     project. NO performance, ranking, traffic or revenue claim exists for it
+     and none is implied here. The scope string "Audit · Strategy · Website"
+     matches the homepage and remains COPY CANDIDATE until Skyler confirms the
+     delivered-scope wording (DECISION 019 flags this explicitly).
+     ========================================================================== -->
+<section class="proof">
+  <div class="wrap">
+    <p class="eyebrow">Built by Kreated</p>
+
+    <figure class="plate">
+      <div class="plate__media">
+        <img class="plate__desk"
+             src="../../omc-kreated-home/assets/img/proof/rr-desktop.jpg"
+             alt="The live Rare Raleigh Restoration website"
+             width="1600" height="1000" loading="lazy" decoding="async">
+        <img class="plate__mob"
+             src="../../omc-kreated-home/assets/img/proof/rr-mobile.jpg"
+             alt="The live Rare Raleigh Restoration website on a phone"
+             width="390" height="1100" loading="lazy" decoding="async">
+      </div>
+
+      <figcaption class="plate__cap">
+        <div>
+          <p class="plate__name">Rare Raleigh Restoration</p>
+          <p class="plate__scope">Audit &middot; Strategy &middot; Website</p>
+        </div>
+        <div class="plate__right">
+          <p class="plate__status">Designed and built by Kreated &middot; Raleigh, NC &middot; Published &amp; live</p>
+          <a class="tlink" href="https://rareraleighrestoration.com" rel="noopener">Visit the live site <i aria-hidden="true">&#8594;</i></a>
+        </div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     3 · WHAT KREATED ACTUALLY HANDLES
+     Large type on open canvas. No cards, no icon grid, no capability matrix.
+     The six lines and the boundary line are documented scope, not marketing.
+     ========================================================================== -->
+<section class="handles">
+  <div class="wrap">
+    <h2 class="sec__h">What Kreated actually handles</h2>
+
+    <ul class="hlist" role="list">
+      <li>Strategy &amp; site architecture</li>
+      <li>Custom responsive design &amp; build</li>
+      <li>Copy assistance</li>
+      <li>SEO foundation</li>
+      <li>Analytics &amp; tracking</li>
+      <li>QA &amp; launch</li>
+    </ul>
+
+    <p class="bound">An SEO-ready website — not an ongoing SEO campaign.</p>
+    <p class="prov">Scope per the approved pricing reference. Every project is scoped
+      and priced in writing before it begins.</p>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     4 · PRICING HANDOFF — two figures and a route out. The Investment section
+     on the homepage owns the full package detail; this page does not repeat it.
+     Figures are approved facts and must not change.
+     ========================================================================== -->
+<section class="price">
+  <div class="wrap price__in">
+    <p class="price__line">
+      <span class="price__item"><b>Launch</b> starts at <span class="fig">$1,750</span></span>
+      <span class="price__item"><b>Growth</b> <span class="fig">$2,950</span> <i>most common engagement</i></span>
+    </p>
+    <a class="tlink" href="../../omc-kreated-home/index.html#investment">See Investment <i aria-hidden="true">&#8594;</i></a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     5 · SECONDARY REFERENCE — text only.
+     A second full website showcase was cut deliberately: one strong proof
+     moment carries this page, and /work/ owns project depth.
+     LearnSmart status is documented (docs/PROJECTS.md §1).
+     ========================================================================== -->
+<section class="also">
+  <div class="wrap also__in">
+    <p class="also__l"><span class="also__k">Also shipped</span>
+      <span class="also__n">LearnSmart Educational Consulting</span>
+      <span class="also__s">learnsmart.dev &middot; Delivered &amp; live</span></p>
+    <a class="tlink" href="../../work/">See the Work page <i aria-hidden="true">&#8594;</i></a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     6 · FAQ — one documented question, no invented answer.
+     docs/SERVICES.md §2 records this as an approved V1 question shipped on
+     this exact page. The answer is NOT documented anywhere and is not written
+     here. V1 shipped seven FAQs on web-design; the other six are neither
+     recorded nor invented.
+     ========================================================================== -->
+<section class="faq">
+  <div class="wrap">
+    <h2 class="sec__h sec__h--sm">Questions</h2>
+    <div class="q">
+      <p class="q__q">I don't have a website yet. Can you build one for my business?</p>
+      <p class="q__flag">OWNER ANSWER REQUIRED</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     7 · CLOSING — the ledger's grammar: hairline, 72px cobalt segment, one
+     large action. No closing paragraph.
+     ========================================================================== -->
+<section class="close">
+  <div class="wrap">
+
+    <!-- OWNER INPUT: closing line — enable when owner copy exists.
+         Ships HIDDEN with an empty text node. -->
+    <aside class="close__owner" hidden>
+      <p class="close__ownerlabel">CLOSING LINE</p>
+      <p class="close__note"><!-- owner sentence goes here --></p>
+    </aside>
+
+    <div class="close__row">
+      <a class="close__go" href="../../omc-kreated-home/index.html#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="close__alt" href="../../omc-kreated-home/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="foot__mark" href="../../omc-kreated-home/index.html" aria-label="Kreated — home">
+      <svg class="mk" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+        <path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/>
+        <path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/>
+      </svg>
+      <span>KREATED</span>
+    </a>
+    <p class="foot__where">Raleigh, NC</p>
+  </div>
+</footer>
+
+<script src="../services.js?v=1" defer></script>
+</body>
+</html>

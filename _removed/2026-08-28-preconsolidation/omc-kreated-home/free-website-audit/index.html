@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PROTOTYPE SAFETY — do not remove without an explicit launch instruction.
+     docs/SEO.md types /thanks/ as noindex permanently; /free-website-audit/ is
+     noindex only while V2 is pre-launch. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://kreated.dev/free-website-audit/">
+<title>Free Website Audit — Kreated</title>
+<meta name="description" content="A free, founder-run look at your website, your Google Business Profile and your local search presence — with the specific things holding them back.">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#0B1220">
+<link rel="stylesheet" href="../styles.css?v=71">
+</head>
+<body>
+<a class="skip" href="#top">Skip to content</a>
+<header class="head" id="head">
+  <div class="head__in">
+    <a class="head__mark" href="../index.html#top" aria-label="Kreated — home">KREATED</a>
+    <nav class="head__nav" aria-label="Primary">
+      <a href="../index.html#services">Services</a>
+      <a href="../index.html#process">Process</a>
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#investment">Investment</a>
+      <a href="../index.html#faq">FAQ</a>
+    </nav>
+    <a data-evt="cta_start_project" class="head__cta" href="../index.html#project">Start a Project</a>
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="../index.html#services">Services</a>
+    <a href="../index.html#process">Process</a>
+    <a href="../index.html#work">Work</a>
+    <a href="../index.html#investment">Investment</a>
+    <a href="../index.html#faq">FAQ</a>
+    <a data-evt="cta_start_project" class="drawer__cta" href="../index.html#project">Start a Project</a>
+    <a data-evt="cta_website_audit" class="drawer__alt" href="../free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+
+
+<main id="top" tabindex="-1">
+<!-- ==========================================================================
+     FREE WEBSITE AUDIT — the secondary conversion (docs/CONVERSION.md §1).
+     Route and form name come from the documented V1 flow: /free-website-audit/
+     with form `website-audit`, success path /thanks/ (docs/CONVERSION.md §3,
+     docs/SEO.md §1). Built in V2's own visual system — nothing copied from V1.
+     ⚠️ DECISION 010 in docs/CONVERSION.md says "do not design or implement the
+     audit yet". This page is built on the later, explicit instruction to build
+     it; the ruling is flagged in the report rather than silently overridden.
+     ALL COPY ON THIS PAGE IS COPY CANDIDATE — NOT APPROVED.
+     ========================================================================== -->
+<section class="page">
+  <div class="wrap">
+    <p class="page__kicker">Free Website Audit</p>
+    <h2 class="page__h">A look at your site and your <em>Google</em> presence.</h2>
+
+    <!-- ======================================================================
+         OWNER INPUT REQUIRED — what the free audit actually includes.
+         Nothing in the repo documents the deliverable. A "What you get back"
+         list was drafted here and REMOVED rather than shipped, because every
+         line of it was invented: what is reviewed, the format of the reply,
+         and what the reader is promised. DECISION 010 also still says the
+         audit's contents are unruled.
+         Do not refill this from guesswork — it needs Skyler's words. Until
+         then the page states only what is verifiable: who it reaches and how
+         the reply arrives.
+         ====================================================================== -->
+
+    <div class="page__cols">
+      <div>
+        <ul class="page__list">
+          <li>It goes to <b>Skyler</b> directly — Kreated is one person</li>
+          <li>The reply comes from <b>contact@kreated.dev</b></li>
+        </ul>
+      </div>
+
+      <div class="formwrap" id="audit">
+        <form class="kform" name="website-audit" method="POST" action="../thanks/"
+              data-netlify="true" netlify-honeypot="company-website"
+              data-success-event="website_audit_submit" novalidate>
+          <input type="hidden" name="form-name" value="website-audit">
+          <p class="hp" aria-hidden="true">
+            <label>Company website<input type="text" name="company-website" tabindex="-1" autocomplete="off"></label>
+          </p>
+
+          <div class="kform__grid">
+            <p class="field">
+              <label for="aw-name">Your name <span class="req" aria-hidden="true">*</span></label>
+              <input id="aw-name" name="name" type="text" required autocomplete="name">
+              <span class="err" data-err-for="aw-name" aria-live="polite"></span>
+            </p>
+            <p class="field">
+              <label for="aw-business">Business name <span class="req" aria-hidden="true">*</span></label>
+              <input id="aw-business" name="business" type="text" required autocomplete="organization">
+              <span class="err" data-err-for="aw-business" aria-live="polite"></span>
+            </p>
+            <p class="field">
+              <label for="aw-email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input id="aw-email" name="email" type="email" required autocomplete="email" inputmode="email">
+              <span class="err" data-err-for="aw-email" aria-live="polite"></span>
+            </p>
+            <p class="field">
+              <label for="aw-phone">Phone <span class="opt">optional</span></label>
+              <input id="aw-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+              <span class="err" data-err-for="aw-phone" aria-live="polite"></span>
+            </p>
+            <p class="field field--wide">
+              <label for="aw-url">Website to audit <span class="req" aria-hidden="true">*</span></label>
+              <input id="aw-url" name="website" type="url" required autocomplete="url" inputmode="url"
+                     placeholder="https://" data-evt="website_audit_url_interaction">
+              <span class="err" data-err-for="aw-url" aria-live="polite"></span>
+            </p>
+            <p class="field field--wide">
+              <label for="aw-issue">What would you most like improved? <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="aw-issue" name="issue" rows="4" required></textarea>
+              <span class="err" data-err-for="aw-issue" aria-live="polite"></span>
+            </p>
+          </div>
+
+          <div class="kform__go">
+            <button class="btn btn--cobalt" type="submit">Free Website Audit</button>
+          </div>
+
+          <p class="kform__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot" id="about">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <p class="foot__mark">KREATED</p>
+      <!-- approved V1 positioning line, reusable verbatim -->
+      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+    </div>
+
+    <div class="foot__cols">
+      <div>
+        <h3>Contact</h3>
+        <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
+        <p><a href="tel:+19198058217">(919) 805-8217</a></p>
+        <p>Raleigh, North Carolina</p>
+      </div>
+      <div>
+        <h3>Pages</h3>
+        <p><a href="../index.html#services">Services</a></p>
+        <p><a href="../index.html#process">How it works</a></p>
+        <p><a href="../index.html#work">Work</a></p>
+        <p><a href="../index.html#investment">Investment</a></p>
+        <p><a href="../index.html#faq">FAQ</a></p>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <p><a href="../index.html#services">Web Design &amp; Development</a></p>
+        <p><a href="../index.html#services">Website Redesign</a></p>
+        <p><a href="../index.html#services">Local SEO</a></p>
+        <p><a href="../index.html#services">Google Business Profile</a></p>
+        <p><a href="../index.html#services">Brand Strategy &amp; Identity</a></p>
+      </div>
+      <div>
+        <h3>Start</h3>
+        <p><a data-evt="cta_start_project" href="../index.html#project">Start a Project</a></p>
+        <p><a data-evt="cta_website_audit" href="../free-website-audit/">Free Website Audit</a></p>
+        <p><a href="../index.html#work">View Work</a></p>
+      </div>
+    </div>
+
+    <p class="foot__legal">© 2026 Kreated
+      <!-- TODO: privacy route when the page exists -->
+      <a href="../index.html#about">Privacy</a>
+    </p>
+  </div>
+</footer>
+<script src="../motion.js?v=34"></script>
+<script src="../forms.js?v=2" defer></script>
+</body>
+</html>

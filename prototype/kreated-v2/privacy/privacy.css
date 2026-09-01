@@ -1,0 +1,47 @@
+/* ==========================================================================
+   KREATED V2 — /privacy/ · PAGE-SPECIFIC
+   Loads services.css (tokens, header, drawer, footer) and leaf.css (the crumb,
+   the inline link, the focus ring). This file holds only the reading column.
+
+   No new component: a utility page should look like the site, not like a
+   feature. One measure, one rule per block, nothing decorative.
+   ========================================================================== */
+.pv{padding:clamp(34px,4.4vw,60px) 0 clamp(52px,6vw,84px)}
+/* ⚠ was 660 — the only hero in the family at a different weight. It is now the
+   family's 640, declared HERE rather than inherited, because this heading is
+   .pv__h alone and does not carry .shero__h: without a declaration it fell back
+   to the browser's bold 700, which is a default leak.
+   🚫 If this page ever adopts .shero__h, delete this line rather than tune it. */
+.pv__h{margin:0;font-size:clamp(38px,6vw,76px);font-weight:640;
+  letter-spacing:-.03em;line-height:1;color:var(--white)}
+.pv__lede{margin:clamp(22px,2.6vw,32px) 0 0;max-width:52ch;
+  font-size:clamp(16px,1.25vw,18.5px);line-height:1.55;color:var(--gray)}
+
+.pv__body{margin-top:clamp(40px,5vw,72px);max-width:64ch}
+.pv__b{padding-top:clamp(24px,2.8vw,36px);margin-top:clamp(24px,2.8vw,36px)}
+.pv__b:first-child{margin-top:0}
+.pv__b h2{margin:0 0 clamp(14px,1.6vw,20px);
+  font-size:13px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--gray)}
+.pv__b p{margin:0 0 14px;font-size:clamp(15.5px,1.25vw,17px);line-height:1.65;
+  color:var(--ink-1)}
+.pv__b p:last-child{margin-bottom:0}
+
+.pv__l{margin:0 0 14px}
+.pv__l > div{padding:12px 0;border-bottom:1px solid var(--line-faint)}
+.pv__l dt{font:600 11.5px/1.5 'General Sans',system-ui;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent)}
+.pv__l dd{margin:6px 0 0;font-size:clamp(15.5px,1.25vw,17px);line-height:1.65;
+  color:var(--ink-1)}
+
+.pv__u{margin:0;padding-left:20px;font-size:clamp(15.5px,1.25vw,17px);
+  line-height:1.65;color:var(--ink-1)}
+.pv__u li{margin-bottom:8px}
+/* the open items are held back, not hidden: this is the one block that says
+   the page is unfinished, and it should read as an admission, not a feature */
+.pv__b--open{border-top-color:var(--line-faint)}
+.pv__b--open p,.pv__b--open .pv__u{color:var(--gray)}
+
+.pv__rev{margin:clamp(30px,3.4vw,44px) 0 0;padding-top:20px;
+  border-top:1px solid var(--line-faint);
+  font-size:13.5px;line-height:1.6;color:var(--gray)}

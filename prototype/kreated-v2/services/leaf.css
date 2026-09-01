@@ -1,0 +1,434 @@
+/* ==========================================================================
+   KREATED V2 — SERVICE LEAF SYSTEM
+   The shared stylesheet for every /services/<leaf>/ page.
+
+   Extracted 2026-08-28 from web-design.css, which had become the de-facto
+   family stylesheet once a second leaf shipped. Nothing here was rewritten:
+   every rule moved byte-for-byte, and both existing leaves were pixel-diffed
+   before and after to prove the extraction changed nothing on screen.
+
+   What lives here: only rules DEMONSTRABLY used by more than one leaf. That
+   was established by querying the live DOM of /services/website-redesign/
+   against every selector in the original file, not by judgement.
+
+   Load order for a leaf:
+     /services/services.css        tokens, header, drawer, footer, skip link
+     /services/leaf.css            this file — the leaf system
+     <leaf>/<leaf>.css             that page's own overrides only
+
+   What does NOT belong here: anything only one leaf uses. Web Design's serif
+   ampersand, its "Also shipped" band and its FAQ block all stayed local, and
+   should stay local until a second page genuinely needs them.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SERVICE HERO
+   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   THE HERO ROOM — added 2026-08-30.
+   Every top-level and leaf page was a flat, unlit navy field from the masthead
+   to the footer, while the homepage carried both the artwork and a lit room.
+   That, more than any single component, is what made the site feel like it
+   reset on navigation: same type, same grid, no light.
+
+   One restrained source per page, entering past the TOP-RIGHT corner — the
+   same direction the homepage's room is lit from, so the two read as one
+   building. 🚫 Deliberately NOT the bright --cobalt: on a dark ground a
+   saturated blue at any usable opacity reads as a neon SaaS wash. This is the
+   deep royal the seams use, which shows as illumination rather than as colour.
+
+   NOT CLIPPED, BY CONSTRUCTION. The layer is inset NEGATIVELY on all four
+   sides, so its falloff finishes outside the hero box and the light continues
+   into the section below instead of stopping at a boundary. `isolation` keeps
+   the z-index:-1 layer behind the hero's own content without introducing an
+   `overflow` anywhere. 🚫 Never put `overflow:clip/hidden` on .shero, .sec or
+   .close — that is precisely the cut this pass removed from the homepage. */
+.shero{
+  position:relative;isolation:isolate;
+  padding:clamp(34px,4.4vw,60px) 0 clamp(40px,4.8vw,66px);
+}
+.shero::before{
+  content:'';position:absolute;z-index:-1;pointer-events:none;
+  top:calc(var(--head-h) * -1);right:-12%;bottom:-58%;left:-6%;
+  background:
+    radial-gradient(76% 82% at 96% 2%,
+      rgba(45,74,168,.24) 0%, rgba(45,74,168,.07) 46%, rgba(45,74,168,0) 74%),
+    radial-gradient(46% 52% at 88% -6%,
+      rgba(10,71,240,.13) 0%, rgba(10,71,240,0) 70%);
+}
+@media (max-width:900px){
+  /* overhead on a phone — there is no meaningful right edge to enter from */
+  .shero::before{
+    right:-24%;left:-24%;bottom:-40%;
+    background:
+      radial-gradient(78% 56% at 76% -4%,
+        rgba(45,74,168,.22) 0%, rgba(45,74,168,.06) 48%, rgba(45,74,168,0) 76%),
+      radial-gradient(50% 32% at 70% -6%,
+        rgba(10,71,240,.10) 0%, rgba(10,71,240,0) 72%);
+  }
+}
+
+.crumb{display:flex;align-items:center;gap:12px;margin:0 0 clamp(26px,3.4vw,46px);
+  font:600 12.5px/1 'General Sans',system-ui;letter-spacing:.24em}
+.crumb a{color:var(--gray);padding-block:6px}
+.crumb a:hover{color:var(--white)}
+/* .26 measured 2.18:1 on #070707. Raised to the lowest value that clears AA;
+   at 12.5px it still reads quieter than the crumb labels either side of it. */
+.crumb span[aria-hidden]{color:var(--ink-4)}
+.crumb [aria-current]{color:var(--white)}
+
+/* the oversized title, carrying the hub's 05 ampersand treatment forward */
+/* ⚠ 640 IS THE TOP-LEVEL FAMILY'S DISPLAY WEIGHT, AND IT NOW LIVES ONLY HERE.
+   It used to be declared 660 in this file and then overridden to 640 again by
+   a separate one-line rule in EVERY page stylesheet — .ab__h, .ct__h, .me__h,
+   .wk__h, .cs__h, .sv__h, .bs__h — with /privacy/ at 660 and the new /pricing/
+   at neither, so it was the only hero in the family rendering at a different
+   weight. Eight rules maintaining one number is how that happens.
+   🚫 Do not re-add a per-page hero weight. Change it here or nowhere. */
+.shero__h{margin:0;line-height:.98;letter-spacing:-.03em;font-weight:640;
+  font-size:clamp(38px,7vw,104px);color:var(--white)}
+.shero__h span{display:block}
+
+.shero__foot{display:flex;align-items:flex-start;justify-content:space-between;
+  gap:48px;margin-top:clamp(26px,3vw,40px)}
+.shero__fact{margin:0;max-width:46ch;font-size:clamp(16px,1.25vw,18.5px);
+  line-height:1.55;color:var(--gray)}
+.shero__owner{flex:none;max-width:300px;padding-left:18px;border-left:2px solid var(--cobalt)}
+.shero__ownerlabel{margin:0 0 8px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.20em;color:var(--accent)}
+.shero__note{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:19px;line-height:1.45;color:var(--warm)}
+
+.shero__ctas{display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  margin:clamp(30px,3.4vw,44px) 0 0}
+.btn{display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 26px;
+  border-radius:999px;font:600 15px/1 'General Sans',system-ui;
+  transition:background-color .2s,border-color .2s,color .2s}
+.btn i{font-style:normal;color:currentColor}
+.btn--cobalt{background:var(--cobalt);color:#fff}
+.btn--cobalt:hover{background:#0B52FF}
+.btn--quiet{border:1px solid var(--line);color:var(--ink-1)}
+.btn--quiet:hover{border-color:var(--accent);color:var(--white)}
+.btn--quiet i{color:var(--accent)}
+
+/* --------------------------------------------------------------------------
+   PROOF PLATE — one project, presented as a finished object.
+   The desktop capture is the object; the phone overlaps its lower-left so the
+   pair reads as one artefact rather than two screenshots side by side. The
+   homepage overlaps to the RIGHT — this deliberately does not mirror it.
+   -------------------------------------------------------------------------- */
+.proof{padding:0 0 clamp(48px,5.6vw,84px)}
+.eyebrow{margin:0 0 clamp(18px,2.2vw,28px);
+  font:600 11.5px/1 'General Sans',system-ui;letter-spacing:.26em;color:var(--gray)}
+
+.plate{margin:0}
+/* The desktop capture is inset from the left so the phone has real margin to
+   live in. The phone must BREAK the desktop's edge, not sit on top of its
+   content: the live site's headline and body copy occupy that left column, so
+   an overlap there hides the very thing the proof is showing. It crosses the
+   lower-left corner by a sliver and hangs below the frame instead. */
+.plate__media{position:relative;padding-left:clamp(96px,9.2vw,132px)}
+.plate__desk{width:100%;height:auto;border:1px solid var(--line);border-radius:4px;
+  box-shadow:0 40px 90px rgba(0,0,0,.62)}
+.plate__mob{position:absolute;left:0;bottom:-13%;width:clamp(92px,10.6vw,158px);
+  height:auto;border:1px solid color-mix(in srgb, var(--ink-1) 16%, transparent);border-radius:12px;
+  box-shadow:0 26px 54px rgba(0,0,0,.66)}
+
+.plate__cap{display:flex;align-items:flex-end;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;
+  margin-top:clamp(44px,5vw,72px);padding-top:22px}
+.plate__name{margin:0;font-size:clamp(20px,1.8vw,26px);font-weight:600;
+  letter-spacing:-.015em;color:var(--white)}
+.plate__scope{margin:6px 0 0;font-size:13px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent)}
+.plate__right{text-align:right}
+.plate__status{margin:0 0 10px;font-size:14.5px;line-height:1.5;color:var(--gray)}
+
+/* the shared quiet text link used across this page */
+.tlink{display:inline-flex;align-items:center;gap:9px;padding-block:5px;
+  font-size:14.5px;font-weight:600;color:var(--white);
+  border-bottom:1.5px solid var(--cobalt)}
+.tlink i{font-style:normal;color:var(--accent)}
+.tlink:hover{border-bottom-color:var(--accent)}
+
+/* --------------------------------------------------------------------------
+   CAPABILITY SECTION — metadata channel left, editorial list right
+   -------------------------------------------------------------------------- */
+.sec__h{margin:0 0 clamp(26px,3vw,42px);font-size:13px;font-weight:600;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gray)}
+
+/* ⚠ NO FULL-BLEED RULE. Every one of these sections used to carry a
+   `border-top:1px solid var(--line)` that ran the entire viewport width. There
+   were ~50 of them across the site, all at the same value, and together they
+   were the single largest continuity defect: each page read as a column of
+   stacked bands rather than one continuous environment. Measured in the render
+   they were the strongest seams on the site (a jump of 85/255 in the page
+   gutters, against 28 for the masthead rule).
+   What carries the structure instead is what already was: the label column, the
+   type scale and the section padding — exactly as the homepage's Services list
+   does since its own rules came out.
+   🚫 Do not put a page-width border back on a section. Content-scoped rules
+   (list items, fact rows, FAQ questions, proof frames, the footer legal line)
+   are a different thing and are all still here. */
+.handles{padding:clamp(36px,4vw,56px) 0 clamp(44px,5vw,72px)}
+ /* 26/74 with a tighter gap: the longest capability needs 821px on one line
+    and the right column now gives it 855. Nothing wraps, and the left channel
+    keeps ~300px, which is enough for a marginal note. */
+.handles__grid{display:grid;grid-template-columns:minmax(0,26fr) minmax(0,74fr);
+  gap:clamp(24px,3vw,44px)}
+.handles__aside .sec__h{margin-bottom:clamp(20px,2.2vw,30px)}
+
+.hlist{list-style:none;margin:0;padding:0}
+/* The rules belong to the LIST, not the page: they start and stop with the
+   column, so six capabilities read as one set instead of six page-wide bands.
+   The first item carries a rule too, which closes the set at the top. */
+.hlist li{padding:clamp(11px,1.2vw,16px) 0;border-bottom:1px solid var(--line-faint);
+  font-size:clamp(26px,3.7vw,52px);font-weight:520;letter-spacing:-.025em;
+  line-height:1.12;color:var(--white)}
+.hlist li:first-child{border-top:1px solid var(--line-faint);padding-top:0}
+.hlist li:last-child{border-bottom:0}
+
+.bound{margin:0;max-width:34ch;
+  font-size:clamp(16px,1.3vw,19px);line-height:1.5;color:var(--warm)}
+/* provenance stays visually subordinate to the boundary line above it */
+.prov{margin:14px 0 0;max-width:38ch;font-size:13px;line-height:1.55;
+  color:rgba(136,143,163,.92)}
+
+/* --------------------------------------------------------------------------
+   INLINE LINK inside a boundary sentence. Quiet text with a cobalt rule under
+   the link only, so the line reads as a sentence and not as a button.
+   Promoted here 2026-08-30 once a third leaf needed it; the rules are the ones
+   Website Redesign and Local SEO already carried, unchanged.
+   -------------------------------------------------------------------------- */
+.ilink{color:var(--white);border-bottom:1px solid var(--cobalt);
+  padding-bottom:1px;padding-block:4px}
+.ilink:hover{border-bottom-color:var(--accent)}
+.ilink:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:3px;border-radius:2px}
+
+/* --------------------------------------------------------------------------
+   PRICING / META BAND — compact. The homepage Investment section owns detail.
+   -------------------------------------------------------------------------- */
+.price{padding:clamp(30px,3.4vw,46px) 0 clamp(18px,2vw,26px)}
+.price__in{display:flex;align-items:center;justify-content:space-between;
+  gap:28px;flex-wrap:wrap}
+.price__line{display:flex;align-items:baseline;gap:clamp(20px,3vw,52px);
+  flex-wrap:wrap;margin:0}
+.price__item{font-size:16px;color:var(--gray)}
+.price__item b{font-weight:600;color:var(--white)}
+.price__item .fig{font-weight:600;color:var(--white)}
+.price__item i{font-style:normal;font-size:13px;color:rgba(136,143,163,.92)}
+
+/* --------------------------------------------------------------------------
+   5 · SECONDARY REFERENCE — text only, deliberately subordinate
+   -------------------------------------------------------------------------- */
+/* No top rule: pricing and the secondary reference are one handoff band,
+   not two stacked utility strips. */
+
+/* --------------------------------------------------------------------------
+   6 · FAQ — one documented question, no answer written
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   CLOSING — the ledger's rule signature, reused verbatim
+   -------------------------------------------------------------------------- */
+/* ⚠ THE CLOSING GLOW USED TO LIVE HERE AND IT WAS THE FOOTER "COLOUR SPLIT".
+   `.close::before` was inset `bottom:-70%`, which on a 297px section put its
+   box 208px INTO the footer — and its radial had not reached zero by then, so
+   the light simply stopped, dead, on a horizontal line partway down the footer
+   columns. Measured: .close 1448-1745, pseudo box 1341-1953, footer top 1745.
+   It read exactly like two different footer grounds because a hard-edged wash
+   covered the top third of the footer and nothing below it.
+
+   The closing light now belongs to the FOOTER (see footer.css), anchored to
+   the bottom of the document and reaching UP into this section. Its box ends
+   where the page ends, so there is no edge left for it to stop on.
+   🚫 Never give a glow a box that ends in the middle of another section.
+   That is the whole class of bug this pass and the last one kept chasing. */
+.close{position:relative;padding:clamp(38px,4.4vw,62px) 0 clamp(52px,6vw,84px)}
+.close__owner{max-width:520px;margin:0 0 32px;padding-left:18px;
+  border-left:2px solid var(--cobalt)}
+.close__ownerlabel{margin:0 0 8px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.20em;color:var(--accent)}
+.close__note{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:19px;line-height:1.45;color:var(--warm)}
+.close__row{display:flex;flex-direction:column;align-items:flex-start;padding-top:26px}
+.close__go{display:inline-flex;align-items:baseline;gap:22px;
+  font-size:clamp(30px,4vw,56px);font-weight:600;letter-spacing:-.02em;color:var(--white)}
+.close__go i{font-style:normal;font-size:.52em;color:var(--accent)}
+.close__go:hover i{color:var(--white)}
+.close__alt{display:inline-flex;align-items:center;gap:9px;margin-top:22px;
+  padding-top:4px;font-size:14.5px;font-weight:500;color:var(--ink-2);
+  border-bottom:1px solid var(--cobalt);padding-bottom:3px}
+.close__alt i{font-style:normal;color:var(--accent)}
+
+/* focus ring for every interactive element on this leaf */
+.crumb a:focus-visible,.btn:focus-visible,.tlink:focus-visible,
+.close__go:focus-visible,.close__alt:focus-visible{
+  outline:2px solid var(--cobalt-lift);outline-offset:4px;border-radius:2px}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width:1100px){
+  .plate__media{padding-left:clamp(84px,9vw,110px)}
+}
+
+@media (max-width:900px){
+  .handles__grid{grid-template-columns:1fr;gap:clamp(24px,3vw,34px)}
+  .shero__foot{flex-direction:column;gap:26px}
+  .shero__fact{max-width:none}
+  .shero__owner{max-width:none}
+  .plate__cap{flex-direction:column;align-items:flex-start;gap:18px}
+  .plate__right{text-align:left}
+}
+
+@media (max-width:640px){
+  /* the phone stops overlapping and sits inline: at this width an overlap
+     covers the desktop capture's content instead of framing it */
+  .plate__media{padding-left:0}
+  .plate__mob{position:static;width:112px;margin:-26px 0 0 8px;
+    border-radius:10px}
+  .hlist li{font-size:clamp(22px,7vw,30px)}
+  .price__in{flex-direction:column;align-items:flex-start;gap:16px}
+  .shero__ctas .btn{width:100%;justify-content:center}
+}
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION — leaves carry no animation of their own; the only motion is
+   the shared hover transitions, removed here for consistency with the hub.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  .btn,.tlink,.crumb a{transition:none!important}
+}
+
+/* ⚠ INHERITED FROM ../services.css — the footer wordmark is set there at
+   color-mix(in srgb, var(--ink-1) 45%, transparent), which measures 4.47:1 on #070707: 0.03 under AA for
+   13.5px. Overridden here rather than editing the hub, which is locked.
+   The hub's own footer still carries .45 and needs the same one-line change
+   next time /services/ is opened. */
+.foot__mark{color:var(--ink-4)}
+
+/* ==========================================================================
+   SERVICE-PAGE SUBSTANCE — added 2026-08-30 (Phase 2B).
+   Five sections that every leaf now needs and none had: who it is for, how the
+   engagement runs, what is deliberately excluded, plain prose, and the FAQ.
+
+   These live here rather than in five page stylesheets because all five leaves
+   use them. They extend the existing family — the 26/74 metadata-channel grid,
+   the hairline-topped block, the quiet aside label — rather than introducing a
+   second layout system. 🚫 No cards, no boxes, no icon grid.
+   ========================================================================== */
+.sec{padding:clamp(36px,4.2vw,58px) 0 clamp(12px,1.4vw,18px)}
+.lgrid{display:grid;grid-template-columns:minmax(0,26fr) minmax(0,74fr);
+  gap:clamp(24px,3vw,44px)}
+.lgrid .sec__h{margin-bottom:clamp(14px,1.6vw,20px)}
+.lgrid__note{margin:0;max-width:34ch;font-size:14.5px;line-height:1.6;
+  color:var(--gray)}
+
+/* plain reading copy — one measure, nothing decorative */
+.prose p{margin:0 0 16px;max-width:60ch;
+  font-size:clamp(16px,1.35vw,19px);line-height:1.6;color:var(--ink-1)}
+.prose p:last-child{margin-bottom:0}
+/* ⚠ EVERY bold inside the leaf family's prose components, not just .prose.
+   `.excl b` on /method/ was outside this selector and had no weight declared,
+   so it fell back to the browser's 700 — and the .ilink links inside those <b>
+   elements inherited it. That put five bold list items and their inline links a
+   full step heavier than every other bold on the site. 🚫 Do not add a bare
+   `b{...}` rule: scope it to the components that actually carry prose. */
+.prose b,.excl b,.who b,.steps b,.lgrid b{font-weight:600;color:var(--white)}
+
+/* WHO IT IS FOR — a lead phrase and the situation behind it. Rules belong to
+   the list, so the set reads as one answer rather than N stacked bands. */
+.who{list-style:none;margin:0;padding:0}
+.who li{padding:clamp(13px,1.5vw,18px) 0;border-bottom:1px solid var(--line-faint)}
+.who li:first-child{border-top:1px solid var(--line-faint)}
+.who li:last-child{border-bottom:0}
+.who b{display:block;font-size:clamp(17px,1.5vw,21px);font-weight:600;
+  letter-spacing:-.012em;color:var(--white)}
+.who span{display:block;margin-top:5px;max-width:56ch;
+  font-size:15.5px;line-height:1.55;color:var(--gray)}
+
+/* HOW IT RUNS — the ledger's serif numeral, reused. Counter-based so the
+   numbers can never drift out of step with the markup. */
+.steps{list-style:none;margin:0;padding:0;counter-reset:step}
+.steps li{counter-increment:step;position:relative;
+  padding:clamp(13px,1.5vw,18px) 0 clamp(13px,1.5vw,18px) clamp(40px,4.2vw,64px);
+  border-bottom:1px solid var(--line-faint)}
+.steps li:first-child{border-top:1px solid var(--line-faint)}
+.steps li:last-child{border-bottom:0}
+.steps li::before{content:counter(step,decimal-leading-zero);
+  position:absolute;left:0;top:clamp(16px,1.8vw,22px);
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:clamp(13px,1.1vw,16px);line-height:1;color:rgba(237,232,222,.52)}
+.steps b{display:block;font-size:clamp(17px,1.5vw,21px);font-weight:600;
+  letter-spacing:-.012em;color:var(--white)}
+.steps span{display:block;margin-top:5px;max-width:56ch;
+  font-size:15.5px;line-height:1.55;color:var(--gray)}
+
+/* WHAT IS NOT INCLUDED — the boundary list. It reads quieter than the
+   capability list on purpose: it is the page telling the truth about its own
+   edges, not a feature. */
+.excl{list-style:none;margin:0;padding:0}
+.excl li{position:relative;padding:9px 0 9px 26px;max-width:58ch;
+  font-size:clamp(15.5px,1.3vw,17.5px);line-height:1.5;
+  color:var(--ink-2)}
+.excl li::before{content:'';position:absolute;left:0;top:calc(.75em + 2px);
+  width:11px;height:1px;background:color-mix(in srgb, var(--ink-1) 34%, transparent)}
+
+/* --------------------------------------------------------------------------
+   FAQ — native <details>/<summary>. No script, works with JavaScript off,
+   keyboard-operable for free, and the disclosure state is announced by the
+   browser rather than by ARIA this file would have to keep in sync.
+   -------------------------------------------------------------------------- */
+.faqs{margin:0;border-top:1px solid var(--line-faint)}
+.faqs details{border-bottom:1px solid var(--line-faint)}
+.faqs summary{position:relative;list-style:none;cursor:pointer;
+  display:block;padding:clamp(15px,1.7vw,21px) 44px clamp(15px,1.7vw,21px) 0;
+  font-size:clamp(16.5px,1.45vw,20px);font-weight:560;letter-spacing:-.01em;
+  line-height:1.35;color:var(--white)}
+.faqs summary::-webkit-details-marker{display:none}
+/* the marker: a plus that becomes a minus. Drawn, not a glyph, so it never
+   depends on a font that might not have loaded. */
+.faqs summary::after,.faqs summary::before{content:'';position:absolute;
+  right:6px;top:50%;background:var(--cobalt-lift);
+  transition:transform var(--t-hover),opacity var(--t-hover)}
+.faqs summary::before{width:13px;height:1.5px;margin-top:-.75px}
+.faqs summary::after{width:1.5px;height:13px;right:11.75px;margin-top:-6.5px}
+.faqs details[open] summary::after{transform:scaleY(0);opacity:0}
+.faqs summary:hover{color:var(--white)}
+.faqs summary:focus-visible{outline:2px solid var(--cobalt-lift);
+  outline-offset:3px;border-radius:2px}
+.faqs .faqs__a{padding:0 44px clamp(18px,2vw,26px) 0}
+.faqs .faqs__a p{margin:0 0 12px;max-width:60ch;
+  font-size:clamp(15.5px,1.3vw,17.5px);line-height:1.62;
+  color:var(--ink-2)}
+.faqs .faqs__a p:last-child{margin-bottom:0}
+/* padding-block, not just padding-bottom: an inline link in a 15.5px paragraph
+   is only 22px tall, which is under the 24px target minimum. WCAG 2.5.8 exempts
+   inline targets, but four pixels of vertical padding clears it outright and
+   changes no layout. */
+.faqs .faqs__a a{color:var(--white);border-bottom:1px solid var(--cobalt);
+  padding-bottom:1px;padding-block:4px}
+.faqs .faqs__a a:hover{border-bottom-color:var(--accent)}
+
+/* contextual routes out of a leaf — one quiet line, not a link farm */
+.next{margin:clamp(22px,2.6vw,32px) 0 0;max-width:64ch;
+  font-size:15.5px;line-height:1.75;color:var(--gray)}
+/* same reason as the FAQ links above */
+.who span a,.excl a,.prose a,.steps span a{padding-block:4px}
+
+@media (max-width:900px){
+  .lgrid{grid-template-columns:1fr;gap:clamp(16px,2.4vw,24px)}
+  .lgrid__note{max-width:none}
+}
+@media (max-width:640px){
+  .steps li{padding-left:32px}
+  .steps li::before{top:15px}
+  .faqs summary{padding-right:38px}
+  .faqs .faqs__a{padding-right:0}
+}
+
+/* reduced motion: the marker swap is the only transition here */
+@media (prefers-reduced-motion:reduce){
+  .faqs summary::after,.faqs summary::before{transition:none!important}
+}

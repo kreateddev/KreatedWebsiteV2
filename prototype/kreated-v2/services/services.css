@@ -1,0 +1,432 @@
+/* ==========================================================================
+   KREATED V2 — /services/ · THE LEDGER
+   Approved refined selector direction (Composition B), 2026-08-28.
+
+   This page is a DEEPER, DARKER layer than the homepage: near-black ink, not
+   the homepage navy. Tokens are page-local on purpose — nothing here reaches
+   back into the homepage prototype and nothing there is modified.
+
+   The entire visual vocabulary is: typography, hairlines, and two ghost
+   signatures. No gradients, no shadows, no glows, no cards, no panels, no
+   images, no diagrams. Cobalt appears only as an action/state mark.
+   ========================================================================== */
+
+@font-face{
+  font-family:'General Sans';font-style:normal;font-weight:200 700;font-display:swap;
+  src:url(/assets/fonts/general-sans-var.woff2) format('woff2');
+}
+@font-face{
+  font-family:'Cormorant Garamond';font-style:normal;font-weight:300 700;font-display:swap;
+  src:url(/assets/fonts/cormorant-garamond-latin.woff2) format('woff2');
+}
+
+:root{
+  /* ⚠ ALIGNED TO THE KREATED NAVY SYSTEM, 2026-08-30. This was #070707 — a
+     near-black that made the whole /services/ family read as a second brand
+     next to the homepage. It is now the homepage's own --navy.
+
+     🚫 This was NOT a find-and-replace. The new ground is LIGHTER than the old
+     one (L 0.0061 vs 0.0021), which has two consequences that had to be
+     handled or the change would have quietly broken things:
+       1. Every light-on-dark value lost roughly 7% of its contrast ratio. The
+          one that fell below AA was rgba(136,143,163,.90) — 4.71 -> 4.48 —
+          raised to .90 wherever it appears.
+       2. The panel surface var(--surface) was LIGHTER than #070707 and is DARKER
+          than #020C2E, so every proof object would have inverted from a
+          lifted panel into a hole. Panels now come from --surface below.
+     🚫 --cobalt is 2.83:1 on this ground and must never be small text on it.
+     Use --cobalt-lift (5.62:1), which is what the family already does. */
+  --ink-page:var(--ground);
+  /* the footer ground. Defined here so the shared footer resolves the SAME
+     token on every route — it was falling back to #070707, a near-black that
+     is not in this palette at all, on all 14 pages that do not load
+     styles.css. That is why the footer read as a black block stuck to the
+     bottom of a navy page. */
+  --ink:#020C2E;   /* one ground, matching styles.css — see theme.css */
+  /* ⚠ NAME COLLISION RESOLVED, 2026-09-01. This file declared --surface:#0F1935
+     and theme.css declares an interpolated --surface for the same job. Both hit
+     :root, theme.css loads later, so the literal was being silently overridden
+     — the value below was dead code that still read as the source of truth.
+     The panel tone now comes from the theme deliberately, and --surface-2 is
+     expressed as a step off it rather than as a second literal. */
+  --surface-2:color-mix(in srgb, var(--surface) 86%, var(--bx-night));
+  --white:#FFFFFF;
+  --warm:#EDE8DE;
+  --gray:#888FA3;
+  --cobalt:#0A47F0;
+  --cobalt-lift:#5B86FF;
+  --line:color-mix(in srgb, var(--ink-1) 12%, transparent);
+  --line-faint:color-mix(in srgb, var(--ink-1) 8%, transparent);
+  --ghost:rgba(237,232,222,.12);
+
+  /* 120px at the 1440 reference, compressing fluidly like the homepage */
+  --gutter:clamp(20px, 8.4vw, 120px);
+  --head-h:91px;
+  --t-row:450ms;
+  --e-row:cubic-bezier(.4,0,.2,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ink-page);color:var(--white);
+  font-family:'General Sans',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  font-weight:400;-webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+main:focus{outline:none}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--gutter);width:100%}
+
+/* skip link — offscreen until focused, matching the homepage pattern */
+.skip{position:absolute;left:-9999px;top:0;z-index:100;padding:12px 18px;
+  background:var(--cobalt);color:#fff;font:600 14px/1 'General Sans',system-ui;
+  border-radius:0 0 8px 0}
+.skip:focus{left:0}
+
+/* --------------------------------------------------------------------------
+   HEADER
+   -------------------------------------------------------------------------- */
+/* ⚠ overflow-x:CLIP, not hidden. The hero and closing glows are inset
+   NEGATIVELY so their falloff finishes outside their own box — that is what
+   stops them being cut at a section boundary, and it is also what pushed the
+   document 100-170px wider than the viewport on every page in this family
+   until this rule landed. `clip` bounds it at the viewport edge without making
+   the root a scroll container, so the sticky header still works and every
+   INTERNAL boundary still gets the bleed. 🚫 Never change this to `hidden`. */
+html,body{overflow-x:clip}
+
+/* ⚠ the masthead paints the interpolated page ground, never a literal. It is
+   sticky over content that changes temperature, so a fixed fill would show
+   an edge along its bottom the moment the ground moved. */
+.head{position:sticky;top:0;z-index:50;height:var(--head-h);
+  background:var(--ground);border-bottom:1px solid var(--line-faint)}
+/* ==========================================================================
+   ⚠ ONE HEADER IDENTITY, ALL 17 ROUTES (2026-08-30).
+   These values were 15px / weight 500 / .30em tracking, plus a 17px KWLG
+   monogram — against the homepage's 21px / weight 300 / .22em and no monogram.
+   The brand therefore visibly RESET every time a visitor left the homepage:
+   different face weight, different scale, different tracking, and an extra
+   mark that only existed on inner pages. Worse, at 17px the monogram rendered
+   as an asterisk — the same glyph the homepage already uses as its hero
+   footnote marker, so the brand mark and a footnote were the same shape.
+
+   docs/BRAND.md was the tiebreaker: it records the KREATED WORDMARK as the
+   identity (line 20) and lists the monogram as an open question, not an
+   approved lock (line 157). No approved lock means the homepage treatment is
+   the source of truth. The monogram is archived, verbatim and recoverable, in
+   _removed/2026-08-30-header-monogram.md with the reasoning.
+
+   🚫 Do not reinstate the monogram on a subset of routes. If it is adopted it
+   goes on all 17, homepage included, at one size — a mark on 14 of 17 pages is
+   the exact condition this replaced.
+   ========================================================================== */
+.head__in{display:flex;align-items:center;height:100%;gap:34px}
+/* the header spans the same measure as the homepage's, so the masthead sits in
+   the same relationship to the viewport on every route. Page CONTENT keeps its
+   own narrower 1440 measure — only the masthead is unified. */
+.head .wrap{max-width:1680px}
+.head__mark{
+  font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:21px;
+  letter-spacing:.22em;margin-right:-.22em;   /* cancel trailing tracking */
+  text-decoration:none;color:var(--white)}
+/* ⚠ NAV REBALANCED FOR FOUR ITEMS, 2026-09-01. The nav dropped from five items
+   to four when Method and Contact moved to the footer. Two things needed
+   adjusting so it reads as a deliberate four rather than a five with gaps: the
+   items sit slightly wider apart, and the CTA is pushed off by a larger margin
+   than the inter-item gap. Before, both were 34px, so "Start a Project" read as
+   a fifth link rather than as the page's action. */
+.head__nav{display:flex;gap:clamp(26px,2.6vw,38px);margin-left:auto}
+.head__cta{margin-left:clamp(18px,1.6vw,24px)}
+.head__nav a{position:relative;padding-block:5px;
+  font:500 15px/1 'General Sans',system-ui;color:var(--ink-2)}
+.head__nav a:hover{color:var(--white)}
+/* active nav item — white plus a 2px cobalt underline, never colour alone */
+.head__nav a[aria-current]{color:var(--white)}
+.head__nav a[aria-current]::after{content:'';position:absolute;left:0;right:0;bottom:-2px;
+  height:2px;background:var(--cobalt)}
+.head__cta{display:grid;place-items:center;height:40px;padding:0 22px;
+  border-radius:999px;background:var(--cobalt);color:#fff;
+  font:600 14px/1 'General Sans',system-ui;transition:background-color .2s}
+.head__cta:hover{background:#0B52FF}
+.head__burger{display:none}
+
+/* ⚠ rgba(0,0,0,.97) was PURE BLACK — not a colour in this palette at all, and
+   it opened directly beneath a masthead painting the navy ground, so the
+   drawer read as a different product's panel. It takes the ground now. */
+.drawer{position:fixed;inset:var(--head-h) 0 auto 0;z-index:49;
+  background:color-mix(in srgb, var(--ground) 97%, transparent);
+  border-bottom:1px solid var(--line-faint)}
+.drawer nav{display:flex;flex-direction:column;padding:8px var(--gutter) 28px}
+.drawer a{padding-block:14px;font:500 17px/1 'General Sans',system-ui;
+  color:var(--ink-2);border-bottom:1px solid var(--line-faint)}
+.drawer__cta{margin-top:20px;border-bottom:0!important;border-radius:999px;
+  background:var(--cobalt);color:#fff!important;text-align:center;font-weight:600!important}
+.drawer__alt{margin-top:10px;border:1px solid var(--line)!important;border-radius:999px;
+  text-align:center}
+
+/* --------------------------------------------------------------------------
+   1 · HERO — small by design
+   -------------------------------------------------------------------------- */
+.hero{padding:clamp(40px,5.4vw,72px) 0 clamp(30px,3.6vw,48px)}
+.kick{display:flex;justify-content:space-between;align-items:baseline;gap:20px;
+  margin:0 0 clamp(30px,4vw,56px)}
+.kick__l{font:600 13px/1 'General Sans',system-ui;letter-spacing:.30em;color:var(--gray)}
+.kick__r{font:500 12.5px/1 'General Sans',system-ui;letter-spacing:.20em;
+  /* .70 measured 3.51:1 on #070707 — under AA for 12.5px normal weight. .83 is
+     the arithmetic minimum (4.54:1); .84 is one step above it so the pass does
+     not hinge on rounding. Colour only — size, weight, tracking and position
+     are untouched. */
+  color:rgba(136,143,163,.84)}
+
+.hero__row{display:flex;align-items:flex-start;justify-content:space-between;gap:48px}
+.hero__h{margin:0;line-height:1.02}
+.hero__sans{font-size:clamp(38px,5.6vw,80px);font-weight:230;letter-spacing:-.02em;
+  color:var(--white)}
+/* serif is used ONLY here, on No. 0X, on the ghosts, and on the 05 ampersand */
+.hero__serif{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:clamp(40px,5.9vw,84px);font-weight:480;color:var(--warm)}
+
+.hero__owner{flex:none;max-width:300px;padding-left:18px;border-left:2px solid var(--cobalt)}
+.hero__ownerlabel{margin:0 0 8px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.20em;color:var(--accent)}
+.hero__note{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:19px;line-height:1.45;color:var(--warm)}
+
+/* --------------------------------------------------------------------------
+   2 · THE LEDGER
+   -------------------------------------------------------------------------- */
+.ledgerwrap{padding-bottom:clamp(28px,3vw,44px)}
+.ledger{list-style:none;margin:0;padding:0}
+
+.row{position:relative;border-top:1px solid var(--line)}
+.row:last-child{border-bottom:1px solid var(--line)}
+/* the page's "selected" mark: 72px of 2px cobalt riding on the row's top rule.
+   Reused verbatim by the closing row so the close reads as row six. */
+.row::before{content:'';position:absolute;left:0;top:-1px;width:72px;height:2px;
+  background:var(--cobalt);opacity:0}
+.row.is-on::before{opacity:1}
+
+.row__a{display:block;position:relative}
+.row__a:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:4px}
+
+/* ---- the quiet line every row always shows ---- */
+/* The head shrinks 80 -> 52 when a row opens. That used to SNAP while the
+   panel below it animated over 450ms, so the row visibly jerked before it
+   expanded. Transitioned here so the whole row moves as one gesture. */
+.row__head{display:flex;align-items:center;gap:0;height:80px;
+  transition:height var(--t-row) var(--e-row)}
+/* MEANINGFUL TEXT, not decoration: the ledger numeral is the row's index and a
+   reader uses it. .40 measured 3.26:1 on #070707 — under AA at 13.5px. Raised
+   to the lowest value that clears it (4.84:1). The active row still steps up to
+   full --warm, so the quiet/selected contrast that carries the ledger is
+   unchanged.
+   ⚠ `.row__arrow` is deliberately NOT changed. It is aria-hidden, carries no
+   information the row's own name does not, disappears entirely on the active
+   row, and the real affordance is the "Explore →" line inside the open panel.
+   It is a decorative glyph, so 1.4.3 does not apply — and Skyler ruled on it
+   directly in the 2026-08-28 contrast pass: leave it unchanged. */
+.row__no{flex:none;width:96px;
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:13.5px;color:rgba(237,232,222,.52);
+  transition:font-size var(--t-row) var(--e-row),color var(--t-row) var(--e-row)}
+.row__name{flex:1;font-size:22px;font-weight:480;letter-spacing:-.012em;
+  /* .44 measured 4.32:1 on #070707 — under AA for 22px normal weight. These
+     are the page's actual service names, not decoration, so they clear it. */
+  color:var(--ink-4);
+  transition:color var(--t-row) var(--e-row),opacity var(--t-row) var(--e-row)}
+.row__arrow{flex:none;font-size:18px;color:rgba(91,134,255,.45);
+  transition:color var(--t-row) var(--e-row),opacity var(--t-row) var(--e-row)}
+.row__a:hover .row__name,
+.row__a:focus-visible .row__name{color:var(--ink-2)}
+
+.row.is-on .row__no{font-size:16px;color:var(--warm)}
+/* the title below is the same words at scale — showing both is a stutter */
+.row.is-on .row__name{opacity:0}
+.row.is-on .row__head{height:52px}
+.row.is-on .row__arrow{opacity:0}
+
+/* ---- the panel that opens ----
+   grid-template-rows 0fr -> 1fr animates height without a magic max-height. */
+.row__panel{display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows var(--t-row) var(--e-row)}
+.row.is-on .row__panel{grid-template-rows:1fr}
+.row__inner{overflow:hidden;min-height:0;position:relative}
+.row__inner > *{opacity:0;transition:opacity .3s var(--e-row)}
+.row.is-on .row__inner > *{opacity:1;transition-delay:.12s}
+
+/* ---- ghost signature: outlined numeral, or the mark on 05 ---- */
+/* ⚠ .ghost / .ghost--mark REMOVED 2026-08-30 — see the note in index.html.
+   The five row panels now carry no decorative object at all, which is what
+   makes them read as one system. The `--ghost` token is left defined because
+   the row hairlines still use it. */
+
+/* ---- the title zone. Air above and below is part of the authority. ---- */
+.row__title{display:block;position:relative;
+  padding:clamp(22px,2.4vw,34px) 0 clamp(24px,2.6vw,38px);
+  line-height:1.0;color:var(--white)}
+.row__title span{display:inline}
+
+/* per-service title behaviour — the ONLY thing that changes between states */
+.t--01{font-size:clamp(40px,6.8vw,96px);font-weight:680;letter-spacing:-.03em}
+.t--01 span{display:block}
+.t--02{font-size:clamp(42px,7.8vw,110px);font-weight:620;letter-spacing:-.02em}
+/* .34 measured 2.98:1 on #070707 — 0.02 under AA for large text. Raised to
+   the lowest value that clears it; the held/full contrast that carries 02's
+   corrective character is unaffected. Accessibility only, not a design change.
+   Matches .wr__held on /services/website-redesign/. */
+.t--02 .dim{color:var(--ink-4)}
+.t--03{font-size:clamp(42px,7.8vw,110px);font-weight:600;letter-spacing:.08em}
+/* the page's only free-floating cobalt mark */
+.t--03 .dot{display:inline-block;position:relative;width:5px;height:5px;
+  border-radius:50%;background:var(--cobalt-lift);
+  vertical-align:baseline;top:clamp(-100px,-7vw,-38px)}
+.t--04{font-size:clamp(36px,6.2vw,88px);font-weight:560;letter-spacing:-.02em}
+.t--05{font-size:clamp(40px,6.8vw,96px);font-weight:640;letter-spacing:-.02em}
+/* ⚠ 06, added 2026-09-01. The lightest and most tightly set of the six on
+   purpose: it is the longest name in the ledger and the only one that has to
+   fit two full words per line, and it is the service whose whole argument is
+   that it has been oversold. It should not shout. */
+.t--06{font-size:clamp(30px,4.6vw,66px);font-weight:520;letter-spacing:-.018em}
+.t--06 span{display:block}
+.t--05 span{display:block}
+.t--05 .amp{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:.98em;font-weight:500;color:var(--warm)}
+
+/* ---- the triad: fact — joining hairline — Explore ---- */
+.triad{display:flex;align-items:center;gap:0;padding-bottom:clamp(26px,2.8vw,40px)}
+.triad__fact{flex:none;max-width:56ch;font-size:16.5px;font-weight:400;line-height:1.5;
+  color:var(--gray)}
+.triad__join{flex:1;height:1px;margin:0 34px;background:color-mix(in srgb, var(--ink-1) 10%, transparent);
+  min-width:24px}
+.triad__go{flex:none;display:inline-flex;align-items:center;gap:9px;
+  font-size:15.5px;font-weight:600;color:var(--white);
+  border-bottom:1.5px solid var(--cobalt);padding-bottom:3px}
+.triad__go i{font-style:normal;color:var(--accent)}
+
+/* the hub's one line of reading copy: what the five cover, so the page is
+   legible before anyone hovers a row */
+.hero__lede{margin:clamp(22px,2.6vw,34px) 0 0;max-width:46ch;
+  font-size:clamp(16px,1.25vw,18.5px);line-height:1.55;color:var(--gray)}
+
+/* ---- the quiet instruction under the ledger ---- */
+.meta{margin:clamp(20px,2.4vw,30px) 0 0;
+  font:600 10.5px/1 'General Sans',system-ui;letter-spacing:.18em;
+  /* .55 measured 2.56:1 — this line is an instruction, not ornament */
+  color:rgba(136,143,163,.90)}
+
+/* --------------------------------------------------------------------------
+   3 · CLOSING ROW — "row six"
+   -------------------------------------------------------------------------- */
+.close{padding:clamp(40px,5vw,68px) 0 clamp(52px,6vw,84px)}
+/* row six: the hairline and the 72px cobalt segment align to the ledger's
+   gutter exactly, so the close reads as part of the same ruled system */
+.close .wrap{position:relative}
+.close .wrap::before{content:'';position:absolute;left:var(--gutter);right:var(--gutter);
+  top:0;height:1px;background:var(--line)}
+.close .wrap::after{content:'';position:absolute;left:var(--gutter);top:0;
+  width:72px;height:2px;background:var(--cobalt)}
+.close__owner{max-width:520px;margin:0 0 32px;padding-left:18px;
+  border-left:2px solid var(--cobalt)}
+.close__ownerlabel{margin:0 0 8px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.20em;color:var(--accent)}
+.close__note{margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:19px;line-height:1.45;color:var(--warm)}
+.close__go{display:inline-flex;align-items:baseline;gap:22px;
+  font-size:clamp(30px,4vw,56px);font-weight:600;letter-spacing:-.02em;color:var(--white)}
+.close__go i{font-style:normal;font-size:.52em;color:var(--accent)}
+.close__go:hover i{color:var(--white)}
+.close__alt{display:inline-flex;align-items:center;gap:9px;margin-top:22px;padding-top:4px;
+  font-size:14.5px;font-weight:500;color:var(--ink-2);
+  border-bottom:1px solid var(--cobalt);padding-bottom:3px}
+.close__alt i{font-style:normal;color:var(--accent)}
+.close__row{display:flex;flex-direction:column;align-items:flex-start}
+
+/* --------------------------------------------------------------------------
+   FOOTER
+   -------------------------------------------------------------------------- */
+/* ⚠ THIS RULE'S border-top IS THE 1px LINE THAT SURVIVED THE FOOTER
+   UNIFICATION. footer.css is the single definition of the footer and loads
+   last, so its `padding` correctly overrode this one — but it no longer
+   DECLARES a border-top, and an undeclared property cannot override a declared
+   one. The stale hairline therefore kept drawing across the top of the footer
+   on all 16 routes that load this file, which read exactly like the ground
+   split it was supposed to have replaced.
+   🚫 Do not style .foot here. footer.css owns it. */
+.foot__in{display:flex;align-items:center;justify-content:space-between;gap:20px}
+/* .45 measured 4.47:1 — 0.03 under AA at 13.5px. The leaf stylesheet has
+   carried the corrected value since 2026-08-28; the hub itself still had the
+   old one. Fixed at the source this time. */
+.foot__mark{display:flex;align-items:center;gap:11px;padding-block:7px;color:var(--ink-4);
+  font:500 13.5px/1 'Cormorant Garamond',Georgia,serif;letter-spacing:.30em}
+.foot__mark .mk{width:15px;height:15px;flex:none}
+.foot__where{margin:0;font:500 13px/1 'General Sans',system-ui;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width:1100px){
+}
+
+@media (max-width:900px){
+  .head__nav,.head__cta{display:none}
+  .head__burger{display:flex;flex-direction:column;justify-content:center;gap:5px;
+    width:44px;height:44px;margin-left:auto;padding:0;
+    background:none;border:0;cursor:pointer}
+  .head__burger span{display:block;width:22px;height:1.5px;background:var(--white)}
+
+  /* ghost signatures are hidden entirely — they are an editorial luxury that
+     only reads at desktop scale, and at this width they crowd the title */
+
+  .hero__row{flex-direction:column;gap:26px}
+  .hero__h{max-width:none}
+  .hero__owner{max-width:none}
+
+  /* the joining hairline is dropped; Explore moves under the fact, left-aligned */
+  .triad{flex-direction:column;align-items:flex-start;gap:20px}
+  .triad__join{display:none}
+  .triad__fact{max-width:none}
+}
+
+@media (max-width:640px){
+  .row__head{height:68px}
+  .row__no{width:66px;font-size:12.5px}
+  .row.is-on .row__no{font-size:14px}
+  .row__name{font-size:17px}
+  .t--01,.t--05{font-size:clamp(34px,10.5vw,48px)}
+  .t--02,.t--03{font-size:clamp(34px,11vw,48px)}
+  .t--04{font-size:clamp(30px,9.2vw,44px)}
+  .t--06{font-size:clamp(26px,7.4vw,38px)}
+  .t--03{letter-spacing:.05em}
+  .t--03 .dot{top:-28px}
+  .triad__fact{font-size:15px}
+  .close__go{gap:14px}
+}
+
+/* --------------------------------------------------------------------------
+   REDUCED MOTION — instant swap, no height animation, no fades.
+   The state must still be fully legible; only the movement is removed.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  .row__panel,.row__inner > *,.row__no,.row__name,.row__arrow,.row__head,
+  .head__cta{
+    transition:none!important}
+}
+
+/* ==========================================================================
+   /services/ — the hub reformatted into the shared top-level family, 2026-08-30
+   The page now loads leaf.css for .shero / .crumb / .close like every other
+   top-level route. Only two things are page-specific: the title's serif "in",
+   which is this page's equivalent of the Web Design leaf's ampersand, and the
+   run-in before the ledger.
+   ========================================================================== */
+.sv__hero{padding-bottom:clamp(26px,3.2vw,44px)}
+/* hero weight now comes from .shero__h in leaf.css — see the note there */
+.sv__h span{display:block;color:var(--ink-4)}
+.sv__amp{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-weight:400;color:var(--warm);padding-right:.06em}
+/* the ledger is the page's main content object, so it opens on a rule the way
+   every other top-level route opens its content */
+.ledgerwrap{padding-top:clamp(24px,3vw,40px)}

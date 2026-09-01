@@ -1,0 +1,168 @@
+/* ==========================================================================
+   KREATED V2 — /work/<project>/ · THE CASE-STUDY FAMILY
+   Loads services.css and leaf.css; this file holds only what a project page
+   adds on top of the leaf system.
+
+   ONE FAMILY, DIFFERENT DEPTHS. Every project page uses the same hero, the
+   same facts row, the same two-column body and the same closing row — but the
+   number of blocks is set by how much evidence exists, not by a template.
+   Rare Raleigh has a before and an after. LLEC has two captures, a page count
+   and one dated observation. LearnSmart has one capture, a testimonial and a
+   client-reported line. 🚫 Do not pad a page to match its neighbours.
+   ========================================================================== */
+.cs__hero{padding-bottom:clamp(28px,3.2vw,44px)}
+/* weight comes from .shero__h in leaf.css */
+.cs__h{font-size:clamp(34px,5.6vw,84px)}
+.cs__h span{display:block;color:var(--ink-4)}
+
+/* the facts row — the same four questions on every project */
+.cs__facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(18px,2.4vw,36px);
+  margin:clamp(34px,4vw,56px) 0 0;padding-top:clamp(20px,2.4vw,28px)}
+.cs__facts dt{font:600 10.5px/1.5 'General Sans',system-ui;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gray)}
+.cs__facts dd{margin:8px 0 0;font-size:clamp(14.5px,1.15vw,16px);line-height:1.45;
+  color:var(--ink-1)}
+
+/* --------------------------------------------------------------------------
+   PROOF — the same object surface the rest of the site gives a real capture.
+   -------------------------------------------------------------------------- */
+.cs__proof{padding:clamp(30px,3.6vw,52px) 0 clamp(40px,4.6vw,68px)}
+.cs__shot{position:relative;margin:0;border-radius:10px;overflow:hidden;
+  background:var(--surface);border:1px solid color-mix(in srgb, var(--ink-1) 10%, transparent)}
+.cs__shot img{display:block;width:100%;height:auto;object-fit:cover;
+  object-position:50% 0}
+.cs__shot figcaption{position:absolute;left:16px;bottom:14px;
+  padding:6px 13px;border-radius:999px;
+  background:rgba(7,7,7,.72);backdrop-filter:blur(6px);
+  font:600 10px/1 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-1)}
+
+/* Rare Raleigh — before recessed, after forward, phone breaking the corner */
+.cs__ba{margin:0}
+.cs__bastage{position:relative;display:grid;
+  grid-template-columns:31fr 7fr 62fr;align-items:start;padding-bottom:6%}
+.cs__shot--before{grid-column:1;margin-top:8%;
+  box-shadow:0 14px 32px rgba(0,0,0,.6)}
+.cs__shot--before img{aspect-ratio:392/296}
+.cs__shot--after{grid-column:3;border-color:color-mix(in srgb, var(--ink-1) 14%, transparent);
+  box-shadow:0 26px 60px rgba(0,0,0,.75)}
+.cs__shot--after::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:rgba(237,232,222,.3);z-index:1}
+.cs__shot--after img{aspect-ratio:1600/1000}
+.cs__ba .cs__shot--phone{position:absolute;right:0;bottom:0;width:14%;
+  border-radius:16px;border-color:color-mix(in srgb, var(--ink-1) 18%, transparent);
+  box-shadow:0 22px 46px rgba(0,0,0,.7)}
+.cs__ba .cs__shot--phone img{aspect-ratio:390/760}
+.cs__note{margin:clamp(24px,2.8vw,36px) 0 0;max-width:52ch;
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:clamp(16px,1.3vw,19px);line-height:1.45;color:var(--warm)}
+
+/* LLEC — desktop with the phone at its lower right. LearnSmart — one capture. */
+.cs__plate{margin:0}
+.cs__pair{position:relative;padding-bottom:5%}
+.cs__pair .cs__shot--desk img{aspect-ratio:1600/1000}
+.cs__pair .cs__shot--desk{box-shadow:0 26px 60px rgba(0,0,0,.72)}
+.cs__pair .cs__shot--phone{position:absolute;right:1%;bottom:0;width:14%;
+  border-radius:16px;border-color:color-mix(in srgb, var(--ink-1) 18%, transparent);
+  box-shadow:0 22px 46px rgba(0,0,0,.7)}
+.cs__pair .cs__shot--phone img{aspect-ratio:390/760}
+.cs__plate--solo{max-width:84%}
+.cs__plate--solo .cs__shot{box-shadow:0 26px 60px rgba(0,0,0,.72)}
+.cs__plate--solo .cs__shot img{aspect-ratio:1600/1000}
+
+.cs__class{margin:clamp(24px,2.8vw,34px) 0 0;max-width:62ch;font-size:14px;
+  line-height:1.6;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   BODY BLOCKS — the leaf's metadata-channel grid, reused verbatim so a project
+   page and a service page read as the same document type.
+   -------------------------------------------------------------------------- */
+/* ⚠ NO FULL-BLEED RULE. Every one of these sections used to carry a
+   `border-top:1px solid var(--line)` that ran the entire viewport width. There
+   were ~50 of them across the site, all at the same value, and together they
+   were the single largest continuity defect: each page read as a column of
+   stacked bands rather than one continuous environment. Measured in the render
+   they were the strongest seams on the site (a jump of 85/255 in the page
+   gutters, against 28 for the masthead rule).
+   What carries the structure instead is what already was: the label column, the
+   type scale and the section padding — exactly as the homepage's Services list
+   does since its own rules came out.
+   🚫 Do not put a page-width border back on a section. Content-scoped rules
+   (list items, fact rows, FAQ questions, proof frames, the footer legal line)
+   are a different thing and are all still here. */
+.cs__b{padding:clamp(34px,4vw,56px) 0 clamp(10px,1.2vw,16px)}
+.cs__grid{display:grid;grid-template-columns:minmax(0,26fr) minmax(0,74fr);
+  gap:clamp(24px,3vw,44px)}
+.cs__aside .sec__h{margin-bottom:clamp(14px,1.6vw,20px)}
+.cs__col p{margin:0 0 16px;max-width:58ch;
+  font-size:clamp(16px,1.35vw,19px);line-height:1.6;color:var(--ink-1)}
+.cs__col p:last-child{margin-bottom:0}
+.cs__src{font-size:13.5px!important;line-height:1.6!important;
+  color:var(--gray)!important;max-width:58ch}
+
+/* the page counts — inventory, not performance, so the label leads */
+.cs__counts{display:flex;flex-wrap:wrap;gap:clamp(26px,4.4vw,64px);margin:0 0 20px}
+.cs__counts dt{font:600 10.5px/1 'General Sans',system-ui;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gray)}
+.cs__counts dd{margin:10px 0 0;font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(28px,2.8vw,40px);line-height:1;color:var(--warm)}
+
+/* --------------------------------------------------------------------------
+   THE LABELLED CLAIMS. Both the dated observation and the client-reported line
+   use this block, because both are true only with their label attached. The
+   label is not decoration: it is the reason the claim is publishable.
+   🚫 Never render either statement without its .cs__obslabel and .cs__obsqual.
+   -------------------------------------------------------------------------- */
+.cs__obs{padding-left:20px;border-left:2px solid var(--cobalt);max-width:58ch}
+.cs__obs--rep{border-left-color:rgba(237,232,222,.5)}
+.cs__obslabel{margin:0 0 12px!important;
+  font:600 10.5px/1 'General Sans',system-ui;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent)!important}
+.cs__obs--rep .cs__obslabel{color:var(--warm)!important}
+.cs__obstext{margin:0 0 12px!important;
+  font-size:clamp(16px,1.35vw,19px)!important;line-height:1.5!important;
+  color:var(--ink-1)!important}
+.cs__obstext b{font-weight:600;color:var(--white)}
+.cs__obsqual{margin:0!important;font-size:13.5px!important;line-height:1.6!important;
+  color:var(--gray)!important}
+/* a note that follows the labelled block needs air, or the qualifier inside the
+   block and the note outside it read as one run-on paragraph */
+.cs__obs + .cs__src{margin-top:clamp(18px,2.2vw,28px)!important}
+
+/* the testimonial — the only one Kreated has, quoted whole */
+.cs__quote{margin:0 0 18px;max-width:58ch}
+.cs__quote blockquote{margin:0;padding-left:20px;
+  border-left:2px solid rgba(237,232,222,.35)}
+.cs__quote blockquote p{margin:0;
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(17px,1.55vw,21px);line-height:1.5;color:var(--warm)}
+.cs__quote figcaption{margin:16px 0 0 22px;font-size:13.5px;line-height:1.5;
+  color:var(--gray)}
+
+.cs__b--links{padding-bottom:clamp(20px,2.4vw,30px)}
+.cs__visit{margin:0 0 14px}
+.cs__rel{margin:0;max-width:60ch;font-size:15px;line-height:1.7;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width:1000px){
+  .cs__facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 28px}
+  .cs__grid{grid-template-columns:1fr;gap:clamp(16px,2.4vw,24px)}
+  .cs__plate--solo{max-width:none}
+}
+@media (max-width:640px){
+  .cs__facts{grid-template-columns:1fr;gap:16px}
+  /* the comparison becomes a sequence and the phones step out rather than
+     shrinking on top of the capture they are meant to support */
+  .cs__bastage{display:block;padding-bottom:0}
+  .cs__shot--before{margin-top:0;max-width:76%}
+  .cs__shot--after{margin-top:clamp(18px,4vw,26px)}
+  .cs__ba .cs__shot--phone,
+  .cs__pair .cs__shot--phone{position:static;width:36%;margin:-20px 0 0 8px}
+  .cs__ba .cs__shot--phone img,
+  .cs__pair .cs__shot--phone img{aspect-ratio:390/620}
+  .cs__pair{padding-bottom:0}
+  .cs__counts{gap:20px 34px}
+}

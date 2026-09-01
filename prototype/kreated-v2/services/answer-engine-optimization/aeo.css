@@ -1,0 +1,98 @@
+/* ==========================================================================
+   KREATED V2 — /services/answer-engine-optimization/ · SERVICE LEAF 06
+   Built 2026-09-01.
+
+   Loads, in order:
+     /services/services.css   tokens, header, drawer, footer, skip link
+     /services/leaf.css       the shared leaf system
+     this file                only what genuinely differs for this service
+     /footer.css              last, the single footer definition
+
+   ⚠ This file is deliberately almost empty. Every other leaf earned a handful
+   of rules because it carries a proof object of its own; this page has no
+   client capture behind it, because no delivered Kreated engagement is
+   documented as an AEO project. Presenting one would be inventing proof.
+   The page therefore runs on the shared components only.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   HERO TITLE — two lines, no decoration. The other leaves take a device from
+   their own subject (the corrective pair on Redesign, the dot on Local SEO).
+   The device here is restraint: a service whose whole argument is that it has
+   been oversold should not open with a flourish.
+   -------------------------------------------------------------------------- */
+.aeo__h span{display:block}
+@media (max-width:560px){
+  /* the two words are long; at this width they set better as one flow */
+  .aeo__h span{display:inline}
+}
+
+/* --------------------------------------------------------------------------
+   THE ESTABLISHED / EMERGING LISTS.
+   ⚠ These are NOT .hlist. That component is the family's display-scale
+   capability list (26-52px) and it exists for short phrases like "Local keyword
+   architecture". These items are full sentences with citations in them, and at
+   52px they rendered as headlines. This is a prose-scale list: same rule
+   treatment as the family's other lists, body copy sizing.
+   -------------------------------------------------------------------------- */
+.plist{list-style:none;margin:14px 0 26px;padding:0}
+.plist li{padding:11px 0;border-bottom:1px solid var(--line-faint);
+  font-size:clamp(15px,1.15vw,16.5px);line-height:1.55;color:var(--warm)}
+.plist li:first-child{border-top:1px solid var(--line-faint)}
+.plist li:last-child{border-bottom:0}
+.plist a{color:var(--white)}
+
+/* ==========================================================================
+   THE DIAGRAM — two page objects, the same content placed differently.
+   Built from the leaf family's own surface treatment so it reads as part of the
+   system rather than as an illustration dropped into it. Everything is drawn in
+   CSS: no image, no SVG, nothing generated.
+   ⚠ The bars are decorative stand-ins for body copy and are aria-hidden. The
+   only real text is the question and the answer, which is the whole point.
+   ========================================================================== */
+.proof--aeo{padding:clamp(30px,3.6vw,52px) 0 clamp(36px,4.2vw,60px)}
+.aeo{margin:0}
+.aeo__stage{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(18px,2.6vw,40px);align-items:start;
+}
+.aeo__obj{
+  border-radius:10px;background:var(--surface);
+  border:1px solid color-mix(in srgb, var(--ink-1) 9%, transparent);overflow:hidden;
+}
+/* the "after" object is the one being argued for, so it sits forward */
+.aeo__obj--after{border-color:color-mix(in srgb, var(--ink-1) 16%, transparent);
+  box-shadow:0 22px 52px rgba(0,0,0,.42)}
+.aeo__obj--before{opacity:.82}
+
+.aeo__cap{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  height:36px;padding:0 16px;border-bottom:1px solid color-mix(in srgb, var(--ink-1) 7%, transparent);
+  font:600 10.5px/1 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.aeo__cap i{font-style:normal;letter-spacing:.14em;color:var(--accent)}
+.aeo__body{padding:clamp(16px,1.8vw,24px)}
+
+.aeo__q{margin:0 0 12px;font:600 clamp(13px,1.05vw,15px)/1.35 'General Sans',system-ui;
+  color:var(--ink-1)}
+.aeo__ans{margin:0 0 12px;padding:9px 12px;border-radius:6px;
+  background:rgba(91,134,255,.14);border-left:2px solid var(--cobalt-lift);
+  font:500 clamp(12.5px,1vw,14.5px)/1.4 'General Sans',system-ui;
+  color:#fff}
+/* buried: same answer, no emphasis, far down the object */
+.aeo__ans--dim{background:transparent;border-left-color:color-mix(in srgb, var(--ink-1) 16%, transparent);
+  color:var(--ink-2);margin-top:12px}
+
+.aeo__bar{display:block;height:7px;border-radius:3px;margin:0 0 9px;
+  background:color-mix(in srgb, var(--ink-1) 9%, transparent)}
+.aeo__bar--s{width:62%}
+
+.aeo__note{margin:clamp(20px,2.4vw,32px) 0 0;max-width:62ch;
+  font-size:clamp(14px,1.05vw,15.5px);line-height:1.6;color:var(--gray)}
+
+@media (max-width:720px){
+  /* stacked, and the "before" object leads so the comparison reads top to
+     bottom in the order the sentence describes it */
+  .aeo__stage{grid-template-columns:1fr;gap:16px}
+}

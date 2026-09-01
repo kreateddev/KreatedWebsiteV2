@@ -1,0 +1,30 @@
+# ==========================================================================
+# KREATED V2
+# The site is plain HTML/CSS/JS with no build step, so almost everything in
+# this repository is source. Only OS and editor debris is excluded.
+#
+# ⚠ _removed/ IS TRACKED ON PURPOSE. It is the project's archive convention:
+# superseded sections, dead assets and dated pre-change backups live there so
+# a decision can be reversed without archaeology. It is ~7MB and it stays.
+# 🚫 Do not add _removed/ here.
+# ==========================================================================
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# local tooling / scratch
+*.log
+.netlify/
+node_modules/
+
+# local dev-server registration; contains an absolute path to this machine
+.claude/launch.json

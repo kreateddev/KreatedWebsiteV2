@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- PROTOTYPE SAFETY — do not remove without an explicit launch instruction.
+     Matches the homepage prototype: kreated.dev still serves a different site
+     and the domain cutover has not happened. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://kreated.dev/services/">
+
+<!-- Meta derived factually from the five canonical service names. No claims,
+     no metrics, no positioning. COPY CANDIDATE — NOT APPROVED. -->
+<title>Services — Kreated</title>
+<meta name="description" content="Web Design &amp; Development, Website Redesign, Local SEO, Google Business Profile, and Brand Strategy &amp; Identity.">
+
+<link rel="icon" href="../omc-kreated-home/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../omc-kreated-home/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../omc-kreated-home/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="../omc-kreated-home/assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#070707">
+
+<link rel="stylesheet" href="services.css?v=3">
+</head>
+<body>
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- ==========================================================================
+     HEADER — same structure as the homepage prototype (mark + wordmark, nav,
+     cobalt CTA pill), rendered on this page's darker ink layer.
+
+     ⚠ PROTOTYPE PATHS. The prototype folder tree is not the production tree:
+     the homepage lives at ../omc-kreated-home/ here but at / in production.
+     Cross-page links below use the local path so the prototype is clickable.
+     AT INTEGRATION: ../omc-kreated-home/index.html#project  ->  /#project
+                     ../omc-kreated-home/free-website-audit/ ->  /free-website-audit/
+     The five service-leaf links are already production-correct (relative to
+     /services/), so they need no change.
+     ========================================================================== -->
+<header class="head">
+  <div class="wrap head__in">
+    <a class="head__mark" href="../omc-kreated-home/index.html" aria-label="Kreated — home">
+      <svg class="mk" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+        <path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/>
+        <path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/>
+      </svg>
+      <span>KREATED</span>
+    </a>
+
+    <nav class="head__nav" aria-label="Primary">
+      <a href="./" aria-current="page">Services</a>
+      <a href="../omc-kreated-home/index.html#work">Work</a>
+      <a href="../omc-kreated-home/index.html#investment">Investment</a>
+      <a href="../omc-kreated-home/index.html#faq">FAQ</a>
+    </nav>
+
+    <a class="head__cta" href="../omc-kreated-home/index.html#project">Start a Project</a>
+
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="./" aria-current="page">Services</a>
+    <a href="../omc-kreated-home/index.html#work">Work</a>
+    <a href="../omc-kreated-home/index.html#investment">Investment</a>
+    <a href="../omc-kreated-home/index.html#faq">FAQ</a>
+    <a class="drawer__cta" href="../omc-kreated-home/index.html#project">Start a Project</a>
+    <a class="drawer__alt" href="../omc-kreated-home/free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+<main id="top" tabindex="-1">
+
+<!-- ==========================================================================
+     1 · HERO — deliberately small. The ledger is the subject of this page.
+     Kicker row, one headline line, nothing else. No paragraph.
+     ========================================================================== -->
+<section class="hero">
+  <div class="wrap">
+    <p class="kick">
+      <span class="kick__l">SERVICES</span>
+      <span class="kick__r">KREATED — RALEIGH, NC</span>
+    </p>
+
+    <div class="hero__row">
+      <h1 class="hero__h"><span class="hero__sans">The five,</span> <em class="hero__serif">in order</em></h1>
+
+      <!-- OWNER INPUT: services positioning — enable when owner copy exists.
+           The slot is built and ships HIDDEN. No placeholder text is rendered.
+           Nothing in the repo supplies an approved services positioning line
+           (DECISION 013 leaves V2 positioning unresolved), so writing one here
+           would be inventing owner voice. To enable: remove the `hidden`
+           attribute and insert the owner's sentence in .hero__note. -->
+      <aside class="hero__owner" hidden>
+        <p class="hero__ownerlabel">POSITIONING</p>
+        <p class="hero__note"><!-- owner sentence goes here --></p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     2 · THE LEDGER — five ruled rows, exactly one active at a time.
+
+     01 is rendered active IN THE MARKUP (is-on + aria-current), not applied by
+     script after load, so the default state costs no layout shift.
+
+     Every row is a real <a> wrapping its whole content: the row is the hit
+     area and keyboard order is the canonical service order. The five names and
+     the five fact lines are verbatim from the handover and must not be edited.
+     ========================================================================== -->
+<section class="ledgerwrap">
+  <div class="wrap">
+    <ul class="ledger" role="list">
+
+      <li class="row is-on" data-svc="01">
+        <a class="row__a" href="web-design/" aria-current="true">
+          <span class="row__head">
+            <span class="row__no">No. 01</span>
+            <span class="row__name">Web Design &amp; Development</span>
+            <span class="row__arrow" aria-hidden="true">&#8594;</span>
+          </span>
+          <span class="row__panel">
+            <span class="row__inner">
+              <span class="ghost" aria-hidden="true">01</span>
+              <span class="row__title t--01"><span>Web Design</span><span>&amp; Development</span></span>
+              <span class="triad">
+                <span class="triad__fact">New site creation — including businesses with no website at all.</span>
+                <span class="triad__join" aria-hidden="true"></span>
+                <span class="triad__go">Explore <i aria-hidden="true">&#8594;</i></span>
+              </span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+      <li class="row" data-svc="02">
+        <a class="row__a" href="website-redesign/">
+          <span class="row__head">
+            <span class="row__no">No. 02</span>
+            <span class="row__name">Website Redesign</span>
+            <span class="row__arrow" aria-hidden="true">&#8594;</span>
+          </span>
+          <span class="row__panel">
+            <span class="row__inner">
+              <span class="ghost" aria-hidden="true">02</span>
+              <span class="row__title t--02"><span class="dim">Website</span> <span>Redesign</span></span>
+              <span class="triad">
+                <span class="triad__fact">Improving or replacing an existing site.</span>
+                <span class="triad__join" aria-hidden="true"></span>
+                <span class="triad__go">Explore <i aria-hidden="true">&#8594;</i></span>
+              </span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+      <li class="row" data-svc="03">
+        <a class="row__a" href="local-seo/">
+          <span class="row__head">
+            <span class="row__no">No. 03</span>
+            <span class="row__name">Local SEO</span>
+            <span class="row__arrow" aria-hidden="true">&#8594;</span>
+          </span>
+          <span class="row__panel">
+            <span class="row__inner">
+              <span class="ghost" aria-hidden="true">03</span>
+              <!-- the page's only free-floating cobalt mark, over the word gap -->
+              <span class="row__title t--03">Local<span class="dot" aria-hidden="true"></span> SEO</span>
+              <span class="triad">
+                <span class="triad__fact">The broader local-search system — website, local pages, keywords, business listings.</span>
+                <span class="triad__join" aria-hidden="true"></span>
+                <span class="triad__go">Explore <i aria-hidden="true">&#8594;</i></span>
+              </span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+      <li class="row" data-svc="04">
+        <a class="row__a" href="google-business-profile/">
+          <span class="row__head">
+            <span class="row__no">No. 04</span>
+            <span class="row__name">Google Business Profile</span>
+            <span class="row__arrow" aria-hidden="true">&#8594;</span>
+          </span>
+          <span class="row__panel">
+            <span class="row__inner">
+              <span class="ghost" aria-hidden="true">04</span>
+              <span class="row__title t--04">Google Business Profile</span>
+              <span class="triad">
+                <span class="triad__fact">Profile creation, claiming, verification guidance, and optimization.</span>
+                <span class="triad__join" aria-hidden="true"></span>
+                <span class="triad__go">Explore <i aria-hidden="true">&#8594;</i></span>
+              </span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+      <li class="row" data-svc="05">
+        <a class="row__a" href="brand-strategy/">
+          <span class="row__head">
+            <span class="row__no">No. 05</span>
+            <span class="row__name">Brand Strategy &amp; Identity</span>
+            <span class="row__arrow" aria-hidden="true">&#8594;</span>
+          </span>
+          <span class="row__panel">
+            <span class="row__inner">
+              <!-- 05 is the one exception: the ghost is the outlined mark,
+                   not an outlined numeral. Same stroke, same restraint. -->
+              <span class="ghost ghost--mark" aria-hidden="true">
+                <svg viewBox="0 0 600 600" focusable="false">
+                  <path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/>
+                  <path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/>
+                </svg>
+              </span>
+              <span class="row__title t--05"><span>Brand Strategy</span><span><em class="amp">&amp;</em> Identity</span></span>
+              <span class="triad">
+                <span class="triad__fact">Brand strategy, positioning, identity.</span>
+                <span class="triad__join" aria-hidden="true"></span>
+                <span class="triad__go">Explore <i aria-hidden="true">&#8594;</i></span>
+              </span>
+            </span>
+          </span>
+        </a>
+      </li>
+
+    </ul>
+
+    <p class="meta" id="ledgerMeta">HOVER TO PREVIEW &middot; EXPLORE TO OPEN</p>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     3 · CLOSING ROW — visually "row six". Same cobalt rule signature as the
+     active ledger row, so the close speaks the ledger's grammar rather than
+     becoming a second hero. No paragraph.
+     ========================================================================== -->
+<section class="close">
+  <div class="wrap">
+
+    <!-- OWNER INPUT: closing line — enable when owner copy exists.
+         Ships HIDDEN with no placeholder text. Nothing in the repo supplies an
+         approved closing sentence for this page. To enable: remove `hidden`
+         and insert the owner's sentence in .close__note. -->
+    <aside class="close__owner" hidden>
+      <p class="close__ownerlabel">CLOSING LINE</p>
+      <p class="close__note"><!-- owner sentence goes here --></p>
+    </aside>
+
+    <div class="close__row">
+      <a class="close__go" href="../omc-kreated-home/index.html#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="close__alt" href="../omc-kreated-home/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <a class="foot__mark" href="../omc-kreated-home/index.html" aria-label="Kreated — home">
+      <svg class="mk" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+        <path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/>
+        <path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/>
+      </svg>
+      <span>KREATED</span>
+    </a>
+    <p class="foot__where">Raleigh, NC</p>
+  </div>
+</footer>
+
+<script src="services.js?v=1" defer></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+/* ==========================================================================
+   KREATED V2 — /work/ · THE HUB
+   Loads services.css (tokens, header, drawer, footer) and leaf.css (hero,
+   crumb, close row, focus ring). This file holds only the project entries.
+
+   The composition principle: three projects, three different sizes. A grid of
+   equal cards would say the three engagements are equivalent, and they are
+   not — one has a real before and after, one has two captures, one has a
+   single screenshot. The layout tells the truth about that before a word is
+   read, which is the whole point of putting Work behind an evidence policy.
+   ========================================================================== */
+.wk__hero{padding-bottom:clamp(30px,3.6vw,52px)}
+/* hero weight now comes from .shero__h in leaf.css — see the note there */
+.wk__h span{display:block;color:var(--ink-4)}
+
+.wk{padding:0 0 clamp(20px,2.4vw,32px)}
+
+/* --------------------------------------------------------------------------
+   A PROJECT ENTRY — metadata channel left, the evidence right.
+   Same 26/74 relationship the service leaves use for their capability grid, so
+   the Work route reads as part of the family rather than a new system.
+   -------------------------------------------------------------------------- */
+.wk__p{display:grid;grid-template-columns:minmax(0,27fr) minmax(0,73fr);
+  gap:clamp(24px,3.4vw,56px);align-items:start;
+  padding:clamp(40px,5vw,78px) 0;border-top:1px solid var(--line)}
+.wk__p:first-child{border-top:0;padding-top:clamp(10px,1.4vw,20px)}
+
+.wk__no{margin:0 0 clamp(16px,1.8vw,22px);
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:15px;color:rgba(237,232,222,.52)}
+.wk__name{margin:0;font-size:clamp(24px,2.5vw,34px);font-weight:600;
+  letter-spacing:-.022em;line-height:1.12;color:var(--white)}
+/* the whole entry is the target: the heading link stretches over the row, so a
+   click anywhere on the entry opens the project. The visible focus ring stays
+   on the words, where a keyboard user is looking. */
+.wk__link{color:inherit}
+.wk__link::after{content:'';position:absolute;inset:0}
+.wk__p{position:relative}
+.wk__link:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:4px;
+  border-radius:2px}
+
+.wk__scope{margin:12px 0 0;font-size:13px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent)}
+
+.wk__facts{margin:clamp(20px,2.4vw,30px) 0 0}
+.wk__facts > div{padding:10px 0;border-top:1px solid var(--line-faint)}
+.wk__facts dt{font:600 10.5px/1.5 'General Sans',system-ui;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gray)}
+.wk__facts dd{margin:4px 0 0;font-size:15px;line-height:1.45;
+  color:var(--ink-1)}
+
+.wk__go{margin:clamp(22px,2.6vw,32px) 0 0;display:inline-flex;align-items:center;
+  gap:10px;padding-bottom:3px;border-bottom:1.5px solid var(--cobalt);
+  font-size:14.5px;font-weight:600;color:var(--white)}
+.wk__go i{font-style:normal;color:var(--accent)}
+.wk__p:hover .wk__go{border-bottom-color:var(--accent)}
+
+/* --------------------------------------------------------------------------
+   THE EVIDENCE SIDE — one object family, three arrangements.
+   -------------------------------------------------------------------------- */
+.wk__shot{position:relative;margin:0;border-radius:10px;overflow:hidden;
+  background:var(--surface);border:1px solid color-mix(in srgb, var(--ink-1) 10%, transparent)}
+.wk__shot img{display:block;width:100%;height:auto;object-fit:cover;
+  object-position:50% 0}
+.wk__shot figcaption{position:absolute;left:14px;bottom:12px;
+  padding:5px 11px;border-radius:999px;
+  background:rgba(7,7,7,.72);backdrop-filter:blur(6px);
+  font:600 9.5px/1 'General Sans',system-ui;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-1)}
+
+/* 01 — before and after, the before recessed and the after forward. Same
+   language as the Website Redesign leaf's spread, at hub scale. */
+.wk__art--ba{position:relative;display:grid;
+  grid-template-columns:34fr 8fr 58fr;align-items:start}
+.wk__shot--before{grid-column:1;margin-top:9%;
+  box-shadow:0 14px 32px rgba(0,0,0,.6)}
+.wk__shot--before img{aspect-ratio:392/296}
+.wk__shot--after{grid-column:3;border-color:color-mix(in srgb, var(--ink-1) 14%, transparent);
+  box-shadow:0 26px 60px rgba(0,0,0,.75)}
+.wk__shot--after::before{content:'';position:absolute;left:0;right:0;top:0;
+  height:1px;background:rgba(237,232,222,.3);z-index:1}
+.wk__shot--after img{aspect-ratio:1600/1000}
+
+/* 02 — desktop with the phone breaking its lower-right */
+.wk__art--pair{position:relative}
+.wk__art--pair .wk__shot--desk{box-shadow:0 26px 60px rgba(0,0,0,.7)}
+.wk__art--pair .wk__shot--desk img{aspect-ratio:1600/1000}
+.wk__shot--phone{position:absolute;right:-2%;bottom:-13%;width:15.5%;
+  border-radius:16px;border-color:color-mix(in srgb, var(--ink-1) 18%, transparent);
+  box-shadow:0 22px 46px rgba(0,0,0,.66)}
+.wk__shot--phone img{aspect-ratio:390/720}
+
+/* 03 — one capture, held back to two thirds so the entry stays the quietest */
+.wk__art--single{max-width:74%}
+.wk__art--single .wk__shot{box-shadow:0 20px 46px rgba(0,0,0,.62)}
+.wk__art--single .wk__shot img{aspect-ratio:1600/1000}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE — the hierarchy survives; only the columns fold.
+   -------------------------------------------------------------------------- */
+@media (max-width:1000px){
+  .wk__p{grid-template-columns:1fr;gap:clamp(22px,3.4vw,34px)}
+  .wk__facts{display:flex;gap:clamp(22px,4vw,44px);flex-wrap:wrap}
+  .wk__facts > div{border-top:0;padding:0;flex:none}
+  .wk__art--single{max-width:none}
+  .wk__shot--phone{width:18%;bottom:-9%}
+}
+@media (max-width:640px){
+  /* the before/after stops overlapping and becomes a sequence; the phone steps
+     out from under the desktop rather than shrinking on top of it */
+  .wk__art--ba{display:block}
+  .wk__shot--before{margin-top:0;max-width:74%}
+  .wk__shot--after{margin-top:clamp(18px,4vw,26px)}
+  .wk__shot--phone{position:static;width:34%;margin:-22px 0 0 8px}
+  .wk__shot--phone img{aspect-ratio:390/620}
+  .wk__facts{gap:16px 28px}
+}
+
+/* nothing on this route animates, so there is nothing for reduced motion to
+   switch off beyond the shared hover transitions leaf.css already handles */

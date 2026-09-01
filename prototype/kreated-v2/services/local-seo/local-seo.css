@@ -1,0 +1,185 @@
+/* ==========================================================================
+   KREATED V2 — /services/local-seo/ · PAGE-SPECIFIC OVERRIDES
+   The leaf system lives in ../leaf.css. This file holds only what this page
+   uses and no other leaf does.
+
+   Local SEO's character is precise / geographic / structured, expressed the
+   way the rest of the family expresses character: type, alignment, numbering
+   and one cobalt point. No maps, no SERP mockups, no dashboards, no icons.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   HERO TITLE — the cobalt point.
+   The Services hub's approved 03 state puts a single cobalt dot above the word
+   gap in "Local SEO" and tracks the pair open. The leaf carries that forward
+   rather than inventing a new device; it is the page's only free-floating
+   cobalt mark, exactly as on the hub.
+   -------------------------------------------------------------------------- */
+.ls__h{letter-spacing:.04em}
+/* leaf.css sets `.shero__h span{display:block}` so Web Design's title can
+   stack. The dot is a span too, so it needs the higher-specificity override or
+   it becomes a block and breaks "Local SEO" onto two lines. */
+.ls__h .ls__dot{display:inline-block;position:relative;width:5px;height:5px;
+  border-radius:50%;background:var(--cobalt-lift);vertical-align:baseline;
+  top:clamp(-64px,-4.6vw,-24px)}
+
+/* --------------------------------------------------------------------------
+   PROOF — the page architecture, as real page objects.
+
+   Every object below is a real live page. The objects use the same surface the
+   Website Redesign leaf gives its before/after objects (var(--surface), 10px radius,
+   one hairline, a 40px URL strip) so the two leaves read as one system showing
+   two different kinds of artefact: that one shows sites, this one shows the
+   structure inside a site. The connectors reuse that leaf's snap language —
+   a gray curve in, a cobalt level-out to a 3px dot.
+   -------------------------------------------------------------------------- */
+.proof--arch{padding-bottom:clamp(48px,5.6vw,84px)}
+.arch{margin:0 0 clamp(44px,5vw,72px)}
+
+/* 56 / 9.67 / 34.33 — the main page holds the left, the two pages it links
+   into sit right and further back. The middle track is the channel the
+   connectors cross, so it is empty by design. */
+.arch__stage{position:relative;display:grid;align-items:start;
+  grid-template-columns:56fr 9.67fr 34.33fr}
+
+.arch__obj{position:relative;border-radius:10px;background:var(--surface);
+  border:1px solid color-mix(in srgb, var(--ink-1) 9%, transparent);overflow:hidden}
+
+.arch__url{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  height:40px;padding:0 20px;font-size:12.5px;letter-spacing:.01em;
+  border-bottom:1px solid color-mix(in srgb, var(--ink-1) 6%, transparent)}
+/* .42 measured 4.09:1 on the object surface var(--surface) — under AA for 12.5px
+   text. Raised to the lowest value that clears it with margin; the host still
+   reads quieter than the path beside it, which is the point. */
+.arch__host{color:var(--ink-4);flex:none}
+.arch__path{color:var(--ink-2);min-width:0;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.arch__role{flex:none;font:600 10px/1 'General Sans',system-ui;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent)}
+
+.arch__body{padding:clamp(20px,2.2vw,30px) clamp(20px,2.2vw,30px) clamp(14px,1.6vw,22px)}
+.arch__kick{margin:0 0 12px;font:600 10.5px/1 'General Sans',system-ui;
+  letter-spacing:.20em;text-transform:uppercase;color:var(--accent)}
+.arch__h1{margin:0;font-size:clamp(22px,2.5vw,34px);font-weight:600;
+  letter-spacing:-.02em;line-height:1.12;color:var(--white)}
+.arch__h2{margin:0;font-size:clamp(15px,1.45vw,19px);font-weight:550;
+  letter-spacing:-.01em;line-height:1.25;color:var(--ink-2)}
+
+/* the real H2s of the real page, set as the rows they are */
+.arch__secs{list-style:none;margin:clamp(20px,2.2vw,28px) 0 0;padding:0}
+.arch__secs li{padding:clamp(9px,1vw,13px) 0;font-size:clamp(14px,1.15vw,16px);
+  line-height:1.35;color:var(--ink-3);
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 6%, transparent)}
+
+/* main — foreground depth and the warm top edge-light, matching the redesign
+   leaf's corrected object, so "this is the one in focus" is the same signal */
+.arch__obj--main{grid-column:1;grid-row:1 / span 2;
+  box-shadow:0 26px 60px rgba(0,0,0,.75)}
+.arch__obj--main::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:rgba(237,232,222,.3);z-index:1}
+
+/* supporting — recessed: dimmer hairline, softer shadow, no edge-light */
+.arch__obj--sup{grid-column:3;border-color:color-mix(in srgb, var(--ink-1) 7%, transparent);
+  box-shadow:0 14px 32px rgba(0,0,0,.6)}
+.arch__obj--sup:nth-of-type(2){grid-row:1;margin-top:14px}
+.arch__obj--sup:nth-of-type(3){grid-row:2;margin-top:clamp(40px,5vw,74px)}
+
+.arch__links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+/* --- the counts. Page inventory, not performance — hence the label above the
+   figure, the warm (not white) numeral, and the dated source line under it. -- */
+.arch__cap{margin-top:clamp(30px,3.4vw,46px);padding-top:24px;
+  border-top:1px solid var(--line)}
+.arch__counts{display:flex;flex-wrap:wrap;gap:clamp(28px,4.4vw,72px);margin:0}
+.arch__count dt{font:600 11px/1 'General Sans',system-ui;letter-spacing:.20em;
+  text-transform:uppercase;color:var(--gray)}
+.arch__count dd{margin:10px 0 0;font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(30px,3vw,44px);line-height:1;color:var(--warm)}
+.arch__src{margin:clamp(18px,2vw,26px) 0 0;max-width:60ch;font-size:14px;
+  line-height:1.6;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   PROOF RECORD — the engagement facts under the architecture.
+   The evidence for this service is delivered scope, which is textual, so the
+   proof is set as a record rather than borrowed from the website plate. That
+   also keeps this leaf visually distinct from the two that show sites.
+   -------------------------------------------------------------------------- */
+
+
+.rec{border-top:1px solid var(--line);padding-top:clamp(26px,3vw,40px);position:relative}
+/* the family's "selected" mark, reused: 72px of 2px cobalt on the top rule */
+.rec::before{content:'';position:absolute;left:0;top:-1px;width:72px;height:2px;
+  background:var(--cobalt)}
+
+.rec__head{display:flex;align-items:baseline;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;margin-bottom:clamp(24px,2.8vw,36px)}
+.rec__name{margin:0;font-size:clamp(24px,2.6vw,38px);font-weight:600;
+  letter-spacing:-.02em;line-height:1.1;color:var(--white)}
+
+.rec__list{margin:0}
+.rec__row{display:grid;grid-template-columns:minmax(0,22fr) minmax(0,78fr);
+  gap:clamp(16px,2.4vw,40px);
+  padding:clamp(12px,1.4vw,18px) 0;border-bottom:1px solid var(--line-faint)}
+.rec__row dt{font:600 11.5px/1.5 'General Sans',system-ui;letter-spacing:.20em;
+  text-transform:uppercase;color:var(--gray)}
+.rec__row dd{margin:0;font-size:clamp(16px,1.4vw,20px);line-height:1.4;
+  color:var(--ink-1)}
+.rec__row dd b{font-weight:600;color:var(--white)}
+
+/* the evidence class, stated plainly — PROOF.md §7 treats this as a
+   conversion asset rather than a disclaimer, so it is legible, not hidden */
+.rec__class{margin:clamp(20px,2.2vw,28px) 0 0;max-width:56ch;
+  font-size:14px;line-height:1.6;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   CAPABILITY LIST — numbered.
+   A quiet serif numeral per row, echoing the Services hub's ledger. It says
+   "system, in order" without a diagram. Counter-based, so the numbers can
+   never drift out of sync with the markup.
+   -------------------------------------------------------------------------- */
+.hlist--num{counter-reset:cap}
+.hlist--num li{counter-increment:cap;position:relative;
+  padding-left:clamp(38px,4vw,62px)}
+.hlist--num li::before{
+  content:counter(cap,decimal-leading-zero);
+  position:absolute;left:0;top:clamp(14px,1.5vw,20px);
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+  font-size:clamp(13px,1.1vw,16px);line-height:1;
+  color:rgba(237,232,222,.52)}
+
+/* --------------------------------------------------------------------------
+   BOUNDARY LINE — inline link to the sibling service, same treatment as the
+   Website Redesign leaf so the two boundary sentences read as one device.
+   -------------------------------------------------------------------------- */
+/* .ilink moved to ../leaf.css on 2026-08-30 — three leaves use it. */
+
+/* --------------------------------------------------------------------------
+   PRICING — one factual line above the figures, stating where Local SEO sits.
+   -------------------------------------------------------------------------- */
+.price__note{margin:0 0 clamp(16px,1.8vw,24px);max-width:56ch;
+  font-size:15px;line-height:1.55;color:var(--gray)}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE
+   -------------------------------------------------------------------------- */
+@media (max-width:900px){
+  .rec__row{grid-template-columns:1fr;gap:6px}
+  /* the layered composition becomes a sequence: the main page, then the two
+     pages it links into. The connectors are the only thing lost, and the role
+     chips in each URL strip already carry that relationship in words. */
+  .arch__stage{display:block}
+  .arch__links{display:none}
+  .arch__obj--sup:nth-of-type(2),
+  .arch__obj--sup:nth-of-type(3){margin-top:18px}
+  .arch__obj--sup{margin-left:clamp(16px,4vw,44px)}
+}
+@media (max-width:640px){
+  .ls__dot{top:-22px}
+  .arch__url{height:auto;min-height:40px;padding:9px 14px;flex-wrap:wrap;gap:6px}
+  .arch__host{display:none}
+  .arch__obj--sup{margin-left:0}
+  .arch__counts{gap:24px 34px}
+  .hlist--num li{padding-left:32px}
+  .hlist--num li::before{top:12px}
+  .rec__head{gap:12px}
+}

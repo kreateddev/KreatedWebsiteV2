@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- PROTOTYPE SAFETY — site-wide prelaunch state, do not remove. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://kreated.dev/about/">
+
+<!-- Descriptive. docs/SEO.md §2 assigns no commercial route target to
+     /about/ and forbids giving a non-commercial route a competing head term.
+     COPY CANDIDATE — NOT APPROVED. -->
+<title>About | Kreated</title>
+<meta name="description" content="Kreated is one person in Raleigh, North Carolina. What it is, who it works with, and what to expect from working directly with the person doing the work.">
+
+<!-- Open Graph / Twitter. Every route carries a deliberate preview: a shared
+     link produces the page's own title, description and URL rather than a bare
+     address, which is a trust signal in exactly the moment Kreated is being
+     passed between two people.
+
+     og:image policy — reuse only, nothing generated:
+       · Pages that show a REAL client capture use that capture (1600x1000,
+         close enough to 1.91:1 for a large card).
+       · Every other route uses the Kreated mark, with card type `summary`,
+         which is the correct card for a square brand image.
+     ⚠ REMAINING ITEM: no purpose-made 1200x630 social asset exists. When one
+     does, point the mark-based routes at it and switch them to
+     summary_large_image. 🚫 Do not invent one to close this gap. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kreated">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://kreated.dev/about/">
+<meta property="og:title" content="About | Kreated">
+<meta property="og:description" content="Kreated is one person in Raleigh, North Carolina. What it is, who it works with, and what to expect from working directly with the person doing the work.">
+<meta property="og:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+<meta property="og:image:width" content="180">
+<meta property="og:image:height" content="180">
+<meta property="og:image:alt" content="The Kreated mark">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="About | Kreated">
+<meta name="twitter:description" content="Kreated is one person in Raleigh, North Carolina. What it is, who it works with, and what to expect from working directly with the person doing the work.">
+<meta name="twitter:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#020C2E">
+
+<!-- Three layers, outermost first:
+       services.css  tokens, header, drawer, footer, skip link
+       leaf.css      the shared leaf system — hero, crumb, sections, FAQ, close
+       about.css     this page only -->
+<link rel="stylesheet" href="/services/services.css?v=17">
+<link rel="stylesheet" href="/services/leaf.css?v=10">
+<link rel="stylesheet" href="/about/about.css?v=3">
+<!-- last, so it is the single definition of the footer on every route -->
+<link rel="stylesheet" href="/theme.css?v=1">
+<link rel="stylesheet" href="/footer.css?v=5">
+</head>
+<body>
+<!-- The atmosphere: one fixed layer behind the whole document carrying the
+     blue. Fixed rather than scrolled so the light does not slide past the
+     content — the room dims around the reader. Colours and strength live in
+     theme.css. Decorative only, hence aria-hidden. -->
+<div class="atmos" aria-hidden="true"></div>
+<a class="skip" href="#top">Skip to content</a>
+
+<header class="head">
+  <div class="wrap head__in">
+    <a class="head__mark" href="/" aria-label="Kreated — home">KREATED</a>
+
+    <!-- ⚠ ONE NAV, ONE MEANING, EVERY ROUTE. Every item here is a real page,
+         so the header does the same thing whichever page you are standing on.
+         Investment and FAQ are deliberately NOT in the nav: they are homepage
+         sections with no routes of their own, so a header link to them worked
+         on the homepage and did nothing anywhere else. They live in the footer
+         and on the homepage itself. That ambiguity is what this replaces. -->
+    <nav class="head__nav" aria-label="Primary">
+      <a href="/services/">Services</a>
+      <a href="/work/">Work</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+    </nav>
+
+    <a class="head__cta" href="/contact/">Start a Project</a>
+
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="/services/">Services</a>
+    <a href="/work/">Work</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/about/">About</a>
+    <a href="/method/">Method</a>
+    <a href="/contact/">Contact</a>
+    <a class="drawer__cta" href="/contact/">Start a Project</a>
+    <a class="drawer__alt" href="/free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+<main id="top" tabindex="-1">
+
+<!-- ==========================================================================
+     ABOUT
+
+     ⚠ EVERY FACT HERE IS IN docs/BUSINESS.md §1, marked ✅ canonical:
+     trading name Kreated · founder Skyler Reyes · founder-led and SOLO ·
+     based Raleigh, North Carolina · areaServed Raleigh + North Carolina +
+     Worldwide · five services · kreated.dev · contact@kreated.dev.
+
+     ⚠ FOUNDING YEAR: 2025, approved by Skyler 2026-08-30. Used ONCE, as a
+     fact in the identity row. 🚫 Never inflated into longevity language —
+     "since 2025", "years of experience", "established" and anything similar
+     are false for a practice this young and would undo the point of the page.
+
+     🚫 NOT ON THIS PAGE, because none of it is documented: a client count, a team size, an award, a revenue figure, a founding story,
+     a "we started because…" narrative, or anything in the first person plural.
+     BUSINESS.md §1 states plainly that nothing may imply staff, departments or
+     a team, and docs/SEO.md §2 rejects "branding agency Raleigh" for exactly
+     that reason. The word "agency" is avoided here for the same reason —
+     BUSINESS.md uses it internally, but on a public About page it reads as a
+     building full of people, which would be false.
+
+     🚫 The page carries NO proof of its own. Evidence lives on /work/, where
+     each claim sits next to the thing that supports it. An About page that
+     asserts quality is worth less than a link to three projects.
+     ========================================================================== -->
+<section class="shero ab__hero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/">KREATED</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">ABOUT</span>
+    </nav>
+
+    <h1 class="shero__h ab__h">One person,<span>in Raleigh.</span></h1>
+
+    <div class="shero__foot">
+      <p class="shero__fact">The person who diagnoses the problem is the person who
+        builds the fix. One line of accountability from the first conversation to
+        launch. Nothing is lost in a handover, and you always know who is
+        responsible for the work.</p>
+
+      <!-- OWNER INPUT — ABOUT FOUNDER VOICE. Ships HIDDEN with an empty text
+           node. A founder paragraph is the one thing this page cannot be
+           written without the owner: an invented origin story is exactly the
+           kind of fabrication the rest of the site refuses. To enable: remove
+           `hidden` and write the sentences into .shero__note. -->
+      <aside class="shero__owner" hidden>
+        <p class="shero__ownerlabel">IN SKYLER&rsquo;S WORDS</p>
+        <p class="shero__note"><!-- owner paragraph goes here --></p>
+      </aside>
+    </div>
+
+    <dl class="ab__facts">
+      <div><dt>Started</dt><dd>2025, in Raleigh</dd></div>
+      <div><dt>Founded by</dt><dd>Skyler Reyes</dd></div>
+      <div><dt>Structure</dt><dd>Led directly by the founder</dd></div>
+      <div><dt>Works with</dt><dd>Raleigh, North Carolina, worldwide</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div><h2 class="sec__h">What Kreated is</h2></div>
+    <div class="prose">
+      <p>A one-person practice that designs and builds websites, and the local
+        search and brand work around them, for businesses whose online presence
+        has fallen behind the quality of their actual work.</p>
+      <p>There are <a class="ilink" href="/services/">six services</a>. Most
+        businesses need two or three of them, and the reason they sit together is
+        practical rather than philosophical: the same decisions keep coming up in
+        each one, and splitting them across three vendors is usually why the last
+        attempt did not hold together.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Who it works with</h2>
+      <p class="lgrid__note">Documented from real engagements, not from a target
+        persona exercise.</p>
+    </div>
+    <ul class="who" role="list">
+      <li><b>Local service businesses</b>
+        <span>Contractors, restoration, trades: work that is searched for urgently, compared quickly, and won by whoever looks most capable.</span></li>
+      <li><b>Businesses with a site that has aged out</b>
+        <span>Something that was fine to launch with and now argues against the
+          quality of the work it is supposed to represent.</span></li>
+      <li><b>Founders and small practices</b>
+        <span>Where the person you talk to is the person who does the job. That
+          cuts both ways, and it is why this practice is built the same way.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div><h2 class="sec__h">The problem it exists for</h2></div>
+    <div class="prose">
+      <p>The customers this work is for are usually better at their job than their
+        online presence suggests. The pain is not &ldquo;I need a website&rdquo;. It is being judged as smaller and less capable than you are, by
+        someone who spent forty seconds deciding.</p>
+      <p>That is a solvable problem, and it is mostly not an aesthetic one. It is
+        structure, clarity, and being findable at the moment somebody is looking.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div><h2 class="sec__h">What to expect</h2></div>
+    <div>
+      <ul class="who" role="list">
+        <li><b>You deal directly with the person doing the work</b>
+          <span>No account manager in between, no brief passed to someone who
+            wasn&rsquo;t in the room, no explaining your business twice.</span></li>
+        <li><b>Scope and price in writing, before anything starts</b>
+          <span>Standard website projects are 50% to start and 50% before launch.
+            Most take about 2&ndash;4 weeks, depending on scope, feedback, and how
+            quickly the content and assets arrive.</span></li>
+        <li><b>You own what was made for you</b>
+          <span>After final payment, the finished website and the design and
+            content created specifically for your project are yours.</span></li>
+        <li><b>Nothing gets claimed that cannot be shown</b>
+          <span>There are no invented numbers anywhere on this site. Where a
+            result exists it is labelled and dated; where it does not, the page
+            says so. <a class="ilink" href="/work/">Work</a> is where that
+            is easiest to check.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ⚠ FACTUAL POSITIONING, added 2026-09-01. Everything here is an argument
+     about how websites work, supported by the research pass. There is NO founder
+     biography in it: no origin story, no account of other agencies, no quote, no
+     reason given for the solo structure beyond what it produces. Those need the
+     owner's own words and are deliberately absent rather than invented.
+     ========================================================================== -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What this is built on</h2>
+      <p class="lgrid__note">A view about what a website is for.</p>
+    </div>
+    <div class="prose">
+      <p><b>A website is judged on more than how it looks. It has to be found,
+        understood, trusted and acted on.</b></p>
+
+      <p>Appearance is the part that is easiest to see and easiest to sell. It is
+        also the part that gets checked first and argued about most. But a site that
+        looks considered and cannot be found, or reads well and never explains what
+        the business actually does, has not done its job.</p>
+
+      <p>The parts that decide whether a site earns anything are mostly the ones
+        that are not obvious from a screenshot. Whether someone can tell within
+        seconds what the business does and whether it covers them. Whether the next
+        step is clear enough to take on a phone. Whether the information is
+        structured so search engines can index it and, increasingly, so the systems
+        that summarise businesses describe it correctly rather than guessing.
+        Whether the site says the same thing as the Google profile and everywhere
+        else the business appears.</p>
+
+      <p>None of that is exotic. It is ordinary work that is frequently skipped,
+        because it is invisible in a portfolio shot and hard to charge for as a
+        separate line item. It is included here because leaving it out produces a
+        site that photographs well and underperforms quietly.</p>
+
+      <p>The practical consequence is how the work is scoped. Design decisions are
+        made alongside the structure, the copy and the way the site will be found,
+        rather than after them. One person carries all of it, so those decisions do
+        not get separated from each other.</p>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <div class="close__row">
+      <a class="close__go" href="/contact/">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="close__alt" href="/work/">See the work <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ⚠ ONE FOOTER, ALL 17 ROUTES. Identical markup everywhere, styled by
+     /footer.css which loads last on every page. Before this, About, Method,
+     Contact, Work and every service page ended in a wordmark and "Raleigh, NC"
+     — no pricing, no phone number, no privacy link — which read as an
+     incomplete mini-site to anyone who did not enter through the homepage.
+     🚫 If a route is added, this block is copied verbatim. Do not fork it. -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <a class="foot__mark" href="/" aria-label="Kreated — home">KREATED</a>
+      <!-- approved V1 positioning line, reusable verbatim -->
+      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+    </div>
+
+    <div class="foot__cols">
+      <div>
+        <h2>Contact</h2>
+        <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
+        <p><a href="tel:+19198058217">(919) 805-8217</a></p>
+        <p>Raleigh, North Carolina</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <p><a href="/services/">Services</a></p>
+        <p><a href="/work/">Work</a></p>
+        <p><a href="/method/">Method</a></p>
+        <p><a href="/about/">About</a></p>
+        <p><a href="/contact/">Contact</a></p>
+        <p><a href="/pricing/">Pricing</a></p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <p><a href="/services/web-design/">Web Design &amp; Development</a></p>
+        <p><a href="/services/website-redesign/">Website Redesign</a></p>
+        <p><a href="/services/local-seo/">Local SEO</a></p>
+        <p><a href="/services/google-business-profile/">Google Business Profile</a></p>
+        <p><a href="/services/brand-strategy/">Brand Strategy &amp; Identity</a></p>
+        <p><a href="/services/answer-engine-optimization/">Answer Engine Optimization</a></p>
+      </div>
+      <div>
+        <h2>Start</h2>
+        <p><a data-evt="cta_start_project" href="/contact/">Start a Project</a></p>
+        <p><a data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit</a></p>
+        <p><a href="/work/">View Work</a></p>
+      </div>
+    </div>
+
+    <p class="foot__legal">© 2026 Kreated
+      <a href="/privacy/">Privacy</a>
+    </p>
+  </div>
+</footer>
+
+<script src="/services/services.js?v=4" defer></script>
+</body>
+</html>

@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- PROTOTYPE SAFETY — do not remove without an explicit launch instruction. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://kreated.dev/services/web-design/">
+
+<!-- Meta derived from the documented service scope only. No claims, no metrics.
+     Primary keyword for this route per docs/SEO.md §2: `Raleigh web design`.
+     COPY CANDIDATE — NOT APPROVED. -->
+<title>Raleigh Web Design &amp; Development | Kreated</title>
+<meta name="description" content="Custom web design and development in Raleigh, NC — a site built to be found, trusted, and easy to contact, including businesses with no website at all.">
+
+<!-- Open Graph / Twitter. Every route carries a deliberate preview: a shared
+     link produces the page's own title, description and URL rather than a bare
+     address, which is a trust signal in exactly the moment Kreated is being
+     passed between two people.
+
+     og:image policy — reuse only, nothing generated:
+       · Pages that show a REAL client capture use that capture (1600x1000,
+         close enough to 1.91:1 for a large card).
+       · Every other route uses the Kreated mark, with card type `summary`,
+         which is the correct card for a square brand image.
+     ⚠ REMAINING ITEM: no purpose-made 1200x630 social asset exists. When one
+     does, point the mark-based routes at it and switch them to
+     summary_large_image. 🚫 Do not invent one to close this gap. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kreated">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://kreated.dev/services/web-design/">
+<meta property="og:title" content="Raleigh Web Design &amp; Development | Kreated">
+<meta property="og:description" content="Custom web design and development in Raleigh, NC — a site built to be found, trusted, and easy to contact, including businesses with no website at all.">
+<meta property="og:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+<meta property="og:image:width" content="180">
+<meta property="og:image:height" content="180">
+<meta property="og:image:alt" content="The Kreated mark">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Raleigh Web Design &amp; Development | Kreated">
+<meta name="twitter:description" content="Custom web design and development in Raleigh, NC — a site built to be found, trusted, and easy to contact, including businesses with no website at all.">
+<meta name="twitter:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#020C2E">
+
+<!-- Three layers, outermost first:
+       services.css  tokens, header, drawer, footer, skip link
+       leaf.css      the service-leaf system, shared by every /services/ leaf
+       web-design.css  only what this page uses and no other leaf does -->
+<link rel="stylesheet" href="/services/services.css?v=17">
+<link rel="stylesheet" href="/services/leaf.css?v=10">
+<link rel="stylesheet" href="/services/web-design/web-design.css?v=9">
+<link rel="stylesheet" href="/services/web-design/groundwork.css?v=10">
+<!-- last, so it is the single definition of the footer on every route -->
+<link rel="stylesheet" href="/theme.css?v=1">
+<link rel="stylesheet" href="/footer.css?v=5">
+</head>
+<body>
+<!-- The atmosphere: one fixed layer behind the whole document carrying the
+     blue. Fixed rather than scrolled so the light does not slide past the
+     content — the room dims around the reader. Colours and strength live in
+     theme.css. Decorative only, hence aria-hidden. -->
+<div class="atmos" aria-hidden="true"></div>
+<a class="skip" href="#top">Skip to content</a>
+
+<!-- ==========================================================================
+     HEADER — the hub's chrome, unchanged.
+
+     All links are site-root-relative and production-correct as written.
+     /work/ and the four remaining service leaves are intended routes that do
+     not exist yet — they will resolve as soon as those pages are built.
+     ========================================================================== -->
+<header class="head">
+  <div class="wrap head__in">
+    <a class="head__mark" href="/" aria-label="Kreated — home">KREATED</a>
+
+    <!-- ⚠ ONE NAV, ONE MEANING, EVERY ROUTE. Every item here is a real page,
+         so the header does the same thing whichever page you are standing on.
+         Investment and FAQ are deliberately NOT in the nav: they are homepage
+         sections with no routes of their own, so a header link to them worked
+         on the homepage and did nothing anywhere else. They live in the footer
+         and on the homepage itself. That ambiguity is what this replaces. -->
+    <nav class="head__nav" aria-label="Primary">
+      <a href="/services/">Services</a>
+      <a href="/work/">Work</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+    </nav>
+
+    <a class="head__cta" href="/contact/">Start a Project</a>
+
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="/services/">Services</a>
+    <a href="/work/">Work</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/about/">About</a>
+    <a href="/method/">Method</a>
+    <a href="/contact/">Contact</a>
+    <a class="drawer__cta" href="/contact/">Start a Project</a>
+    <a class="drawer__alt" href="/free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+<main id="top" tabindex="-1">
+
+<!-- ==========================================================================
+     1 · SERVICE HERO
+     Oversized editorial title with the Cormorant ampersand, carried over from
+     the hub's 05 treatment so the two pages read as one system. One factual
+     service line — no second explanatory paragraph.
+     ========================================================================== -->
+<section class="shero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/services/">SERVICES</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">WEB DESIGN &amp; DEVELOPMENT</span>
+    </nav>
+
+    <h1 class="shero__h"><span>Web Design</span><span><em class="amp">&amp;</em> Development</span></h1>
+
+    <div class="shero__foot">
+      <p class="shero__fact">A custom site built to be found, trusted, and easy to contact, including businesses with no website at all.</p>
+
+      <!-- OWNER INPUT: buyer situation — enable when owner copy exists.
+           Ships HIDDEN with an empty text node. Nothing in the repo supplies
+           the buyer-situation statement this page's H2 slot needs, and
+           inventing one ("if your current site isn't converting…") is exactly
+           the generic pain-point copy this build must not produce.
+           To enable: remove `hidden` and write the sentence into .shero__note. -->
+      <aside class="shero__owner" hidden>
+        <p class="shero__ownerlabel">SITUATION</p>
+        <p class="shero__note"><!-- owner sentence goes here --></p>
+      </aside>
+    </div>
+
+    <p class="shero__ctas">
+      <a class="btn btn--cobalt" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="btn btn--quiet" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    </p>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ⚠ ANSWER FIRST, added 2026-09-01. The opening sentence is a standalone
+     definition that still makes sense lifted out of the page. Every leaf now
+     opens this way: it is what a buyer skimming needs, and it is the one
+     structural thing every credible source on machine readability agrees on.
+     🚫 Do not move the definition below the supporting prose.
+     ========================================================================== -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What it is</h2>
+      <p class="lgrid__note">Before any of the detail.</p>
+    </div>
+    <div class="prose">
+      <p><b>Web design and development is the work of planning, designing and
+        building a website: what it says, how it is structured, how it looks and
+        how it behaves, through to a finished site that is live and working.</b></p>
+      <p>A Kreated website is built by one person from the first conversation to
+        launch. The person who scopes the project is the person who designs and
+        builds it, so nothing is lost in a handover and there is never a question
+        about who is responsible for the work.</p>
+      <p>Websites typically take two to four weeks depending on scope, feedback and
+        how quickly content and assets arrive. Payment is 50% to start and 50%
+        before launch. After the final payment the finished website and the design
+        and content created for the project are yours, and you can keep working on
+        it with or without Kreated.</p>
+      <p>Every site launches search ready and structured so its information can be
+        read correctly by people and by the systems that summarise businesses. That
+        is a build standard rather than an ongoing campaign. The continuing versions
+        of that work are <a class="ilink" href="/services/local-seo/">Local SEO</a>
+        and <a class="ilink" href="/services/answer-engine-optimization/">Answer
+        Engine Optimization</a>.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     2 · THE GROUNDWORK SPECIMEN — the leaf's primary visual module.
+
+     ⚠ READ THIS BEFORE CHANGING ANYTHING BELOW.
+
+     WHAT IT IS: "Groundwork" is an ORIGINAL, KREATED-OWNED demonstration
+     website for a FICTIONAL AI-systems company. It is built here as real HTML
+     and CSS — not a drawing, not a screenshot, not an image. It exists to show
+     design and build skill.
+
+     🚫 IT IS NOT A CLIENT. It must never be presented, captioned, linked or
+     listed as one. The label above the object ships VERBATIM and is visible in
+     every state and at every width:
+        KREATED DESIGN SPECIMEN — AN ORIGINAL DEMONSTRATION, NOT A CLIENT
+
+     🚫 NEVER ADD to the specimen: testimonials, customer logos, counts,
+     "trusted by", percentages, case studies, or any outcome claim. The whole
+     point is that it demonstrates craft without borrowing credibility.
+
+     🚫 `919-000-0000` IS DELIBERATELY A NON-NUMBER. Never replace it with a
+     real one. `groundwork.example` is a reserved-for-documentation domain and
+     is NEVER linked. Nothing inside the specimen is an <a> or a <button>:
+     every control is a <span>, so none of it is focusable or clickable.
+
+     ACCESSIBILITY: the rendered specimen is `aria-hidden` and carries a
+     visually-hidden text alternative instead — the same treatment a screenshot
+     gets. Exposing a second website's navigation inside Kreated's own page
+     would be actively misleading to a screen reader.
+
+     THE STRUCTURE STRIP lives to the LEFT of the page, never on it. Hard rule
+     from the brief: if any annotation, panel or decorative object overlaps the
+     H1, a CTA, the product UI or body copy, the implementation is wrong. The
+     strip is `aria-hidden` and `pointer-events:none`.
+
+     GEOMETRY is reproduced from wd-specimen-presentation.svg (1440x1000
+     canvas). The mock's content spans x100 -> x1290 = 1190px, so every
+     horizontal value in groundwork.css is a percentage of that span mapped
+     onto this page's 1200px column:
+        strip rail   x100  -> left 0        lane 16.81%
+        page render  x300  -> left 16.81%   width 78.66%   (scale 0.755)
+        phone        x1066 -> left 81.18%   width 18.82%   (right edge 100%)
+     ⚠ `wd-landing-clean.svg` was not supplied. It is not needed: the same
+     presentation SVG contains the full finished page at 0.755 scale, and the
+     handoff specifies every token, measure and string. Both were used.
+     ========================================================================== -->
+<section class="spec">
+  <div class="wrap">
+    <h2 class="spec__label">Kreated design specimen, an original demonstration, not a client</h2>
+
+    <figure class="spec__fig">
+      <p class="sr-only">Groundwork, an original Kreated design specimen and not a client
+        project: a landing page for a fictional company that sells AI systems to service
+        businesses. It is shown twice, as a desktop render and as a phone render of the
+        same page. The headline reads &ldquo;AI systems that handle the work behind your
+        business.&rdquo; Beside the renders, a narrow rail marks the page&rsquo;s underlying
+        structure, its twelve-column grid, its spacing steps of 96, 24 and 88, the
+        boundary of its headline, one component outline, and its breakpoints at 1200, 768
+        and 390 pixels.</p>
+
+      <div class="spec__stage" aria-hidden="true">
+
+        <div class="spec__rail">
+          <p class="spec__rl">Structure</p>
+          <span class="spec__spine"></span>
+
+          <div class="spec__sig spec__sig--grid">
+            <span class="spec__grid"><i></i><i></i><i></i><i></i><i></i></span>
+            <p class="spec__sl">12-col grid</p>
+          </div>
+
+          <div class="spec__sig spec__sig--space">
+            <span class="spec__dim"><b></b><em>96</em></span>
+            <span class="spec__dim"><b></b><em>24</em></span>
+            <span class="spec__dim"><b></b><em>88</em></span>
+            <p class="spec__sl">Spacing</p>
+          </div>
+
+          <div class="spec__sig">
+            <span class="spec__dash"></span>
+            <p class="spec__sl">H1 boundary</p>
+          </div>
+
+          <div class="spec__sig">
+            <span class="spec__comp"></span>
+            <p class="spec__sl">Component</p>
+          </div>
+
+          <div class="spec__sig">
+            <span class="spec__bp"></span>
+            <p class="spec__sl">Breakpoints</p>
+            <p class="spec__bpv">1200 / 768 / 390</p>
+          </div>
+        </div>
+
+        <div class="spec__page">
+          <div class="spec__screen">
+            <div class="gwchrome">
+              <span class="gwchrome__dots"><i></i><i></i><i></i></span>
+              <span class="gwchrome__url">groundwork.example</span>
+            </div>
+            <div class="gw" data-view="desktop">
+              <div class="gw__hd">
+                <p class="gw__brand"><span class="gw__glyph" aria-hidden="true"></span>Groundwork</p>
+                <p class="gw__nav"><span>Home</span><span>Systems</span><span>How it works</span><span>Pricing</span><span>Contact</span></p>
+                <p class="gw__tel"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2,4 a2,2 0 0 1 2,-2 l2.5,0 l1.5,3.5 l-1.8,1.6 a9,9 0 0 0 4.4,4.4 l1.6,-1.8 l3.5,1.5 l0,2.5 a2,2 0 0 1 -2,2 a13,13 0 0 1 -11.7,-11.7 z" fill="currentColor"/></svg>919-000-0000</p>
+                <p class="gw__cta">Build My System</p>
+                <p class="gw__burger" aria-hidden="true">&#9776;</p>
+              </div>
+
+              <div class="gw__hero">
+                <div class="gw__lede">
+                  <p class="gw__kick"><span class="gw__kick-l">For service businesses, agencies &amp; small teams</span><span class="gw__kick-s">For service businesses</span></p>
+                  <p class="gw__h1"><span>AI systems that handle</span><span>the work behind</span><span>your business.</span></p>
+                  <p class="gw__h1 gw__h1--s"><span>AI systems that</span><span>handle the work</span><span>behind your</span><span>business.</span></p>
+                  <p class="gw__sup">Groundwork connects intake, follow-up, proposals, and your CRM. Then automates the repetitive steps between.</p>
+                  <p class="gw__acts"><span class="gw__pill">Build My System</span><span class="gw__slink">See How It Works <i aria-hidden="true">&#8594;</i></span></p>
+                </div>
+
+                <div class="gw__app">
+                  <div class="gw__apphd">
+                    <span class="gw__apptitle"><span class="gw__sq" aria-hidden="true"></span>Groundwork, Today</span>
+                    <span class="gw__appmeta">M. Alvarez &middot; Kitchen remodel &middot; Cary, NC</span>
+                  </div>
+
+                  <div class="gw__steps">
+                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Lead received</span>
+                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Qualified</span>
+                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Actions prepared</span>
+                    <span class="gw__step is-now"><span class="gw__ring" aria-hidden="true"></span>Owner approves</span>
+                  </div>
+
+                  <div class="gw__body">
+                    <div class="gw__col">
+                      <p class="gw__lab">Qualification</p>
+                      <p class="gw__fk">Service</p><p class="gw__fv">Kitchen remodel</p>
+                      <p class="gw__fk">Fit</p><p class="gw__fv">In service area</p>
+                      <p class="gw__fk">Urgency</p><p class="gw__fv">Call this week</p>
+                      <p class="gw__chip">Good fit</p>
+                    </div>
+
+                    <div class="gw__col gw__col--r">
+                      <p class="gw__lab gw__lab--m">Owner approves</p>
+                      <p class="gw__lab gw__lab--d">Prepared for you</p>
+                      <p class="gw__mv">Kitchen remodel</p>
+                      <p class="gw__mm">Cary, NC &middot; call this week</p>
+                      <p class="gw__did"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="gw__did-l">CRM updated, new opportunity</span><span class="gw__did-s">CRM updated</span></p>
+                      <p class="gw__did"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Follow-up drafted</p>
+                      <p class="gw__did gw__did--d"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Estimate task assigned</p>
+                      <div class="gw__ready">
+                        <span class="gw__readytxt"><b>Follow-up ready</b><i>for M. Alvarez</i></span>
+                        <span class="gw__send">Send</span>
+                      </div>
+                      <p class="gw__foot">Nothing sends itself. You approve.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="gw__mready"><span>1 ready, Send follow-up</span><i aria-hidden="true">&#8594;</i></p>
+                <p class="gw__homebar" aria-hidden="true"></p>
+              </div>
+
+              <div class="gw__value">
+                <p class="gw__h2">One system. Fewer manual steps.</p>
+                <div class="gw__cards">
+                  <div class="gw__card">
+                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="1" y="1" width="15" height="15" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="2.4" fill="currentColor"/></svg></span>
+                    <p class="gw__ct">Capture</p>
+                    <p class="gw__cd">every inquiry lands in one place</p>
+                  </div>
+                  <div class="gw__card">
+                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 26 16"><path d="M1,8 h22 m-7,-7 l7,7 l-7,7" fill="none" stroke="currentColor" stroke-width="2.3"/></svg></span>
+                    <p class="gw__ct">Automate</p>
+                    <p class="gw__cd">qualification, follow-up &amp; routing run themselves</p>
+                  </div>
+                  <div class="gw__card">
+                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 16 14"><path d="M1,6.2 l4.2,4.2 l8.4,-9.4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+                    <p class="gw__ct">Approve</p>
+                    <p class="gw__cd">you make the calls, the system does the typing</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="gw__band">
+                <div class="gw__bandin">
+                  <div>
+                    <p class="gw__bh">Put the busywork on the system.</p>
+                    <p class="gw__bs">Built around the way your business already works.</p>
+                  </div>
+                  <p class="gw__bacts"><span class="gw__bpill">Build My System</span><span class="gw__blink">See How It Works</span></p>
+                </div>
+              </div>
+              <div class="gw__rule" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec__phone">
+          <div class="spec__phscreen">
+            <span class="spec__notch"></span>
+            <div class="gw" data-view="mobile">
+              <div class="gw__hd">
+                <p class="gw__brand"><span class="gw__glyph" aria-hidden="true"></span>Groundwork</p>
+                <p class="gw__nav"><span>Home</span><span>Systems</span><span>How it works</span><span>Pricing</span><span>Contact</span></p>
+                <p class="gw__tel"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2,4 a2,2 0 0 1 2,-2 l2.5,0 l1.5,3.5 l-1.8,1.6 a9,9 0 0 0 4.4,4.4 l1.6,-1.8 l3.5,1.5 l0,2.5 a2,2 0 0 1 -2,2 a13,13 0 0 1 -11.7,-11.7 z" fill="currentColor"/></svg>919-000-0000</p>
+                <p class="gw__cta">Build My System</p>
+                <p class="gw__burger" aria-hidden="true">&#9776;</p>
+              </div>
+
+              <div class="gw__hero">
+                <div class="gw__lede">
+                  <p class="gw__kick"><span class="gw__kick-l">For service businesses, agencies &amp; small teams</span><span class="gw__kick-s">For service businesses</span></p>
+                  <p class="gw__h1"><span>AI systems that handle</span><span>the work behind</span><span>your business.</span></p>
+                  <p class="gw__h1 gw__h1--s"><span>AI systems that</span><span>handle the work</span><span>behind your</span><span>business.</span></p>
+                  <p class="gw__sup">Groundwork connects intake, follow-up, proposals, and your CRM. Then automates the repetitive steps between.</p>
+                  <p class="gw__acts"><span class="gw__pill">Build My System</span><span class="gw__slink">See How It Works <i aria-hidden="true">&#8594;</i></span></p>
+                </div>
+
+                <div class="gw__app">
+                  <div class="gw__apphd">
+                    <span class="gw__apptitle"><span class="gw__sq" aria-hidden="true"></span>Groundwork, Today</span>
+                    <span class="gw__appmeta">M. Alvarez &middot; Kitchen remodel &middot; Cary, NC</span>
+                  </div>
+
+                  <div class="gw__steps">
+                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Lead received</span>
+                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Qualified</span>
+                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Actions prepared</span>
+                    <span class="gw__step is-now"><span class="gw__ring" aria-hidden="true"></span>Owner approves</span>
+                  </div>
+
+                  <div class="gw__body">
+                    <div class="gw__col">
+                      <p class="gw__lab">Qualification</p>
+                      <p class="gw__fk">Service</p><p class="gw__fv">Kitchen remodel</p>
+                      <p class="gw__fk">Fit</p><p class="gw__fv">In service area</p>
+                      <p class="gw__fk">Urgency</p><p class="gw__fv">Call this week</p>
+                      <p class="gw__chip">Good fit</p>
+                    </div>
+
+                    <div class="gw__col gw__col--r">
+                      <p class="gw__lab gw__lab--m">Owner approves</p>
+                      <p class="gw__lab gw__lab--d">Prepared for you</p>
+                      <p class="gw__mv">Kitchen remodel</p>
+                      <p class="gw__mm">Cary, NC &middot; call this week</p>
+                      <p class="gw__did"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="gw__did-l">CRM updated, new opportunity</span><span class="gw__did-s">CRM updated</span></p>
+                      <p class="gw__did"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Follow-up drafted</p>
+                      <p class="gw__did gw__did--d"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Estimate task assigned</p>
+                      <div class="gw__ready">
+                        <span class="gw__readytxt"><b>Follow-up ready</b><i>for M. Alvarez</i></span>
+                        <span class="gw__send">Send</span>
+                      </div>
+                      <p class="gw__foot">Nothing sends itself. You approve.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="gw__mready"><span>1 ready, Send follow-up</span><i aria-hidden="true">&#8594;</i></p>
+                <p class="gw__homebar" aria-hidden="true"></p>
+              </div>
+
+              <div class="gw__value">
+                <p class="gw__h2">One system. Fewer manual steps.</p>
+                <div class="gw__cards">
+                  <div class="gw__card">
+                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="1" y="1" width="15" height="15" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="2.4" fill="currentColor"/></svg></span>
+                    <p class="gw__ct">Capture</p>
+                    <p class="gw__cd">every inquiry lands in one place</p>
+                  </div>
+                  <div class="gw__card">
+                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 26 16"><path d="M1,8 h22 m-7,-7 l7,7 l-7,7" fill="none" stroke="currentColor" stroke-width="2.3"/></svg></span>
+                    <p class="gw__ct">Automate</p>
+                    <p class="gw__cd">qualification, follow-up &amp; routing run themselves</p>
+                  </div>
+                  <div class="gw__card">
+                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 16 14"><path d="M1,6.2 l4.2,4.2 l8.4,-9.4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
+                    <p class="gw__ct">Approve</p>
+                    <p class="gw__cd">you make the calls, the system does the typing</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="gw__band">
+                <div class="gw__bandin">
+                  <div>
+                    <p class="gw__bh">Put the busywork on the system.</p>
+                    <p class="gw__bs">Built around the way your business already works.</p>
+                  </div>
+                  <p class="gw__bacts"><span class="gw__bpill">Build My System</span><span class="gw__blink">See How It Works</span></p>
+                </div>
+              </div>
+              <div class="gw__rule" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <figcaption>
+        <p class="spec__rails"><span>Design</span><span>Responsive</span><span class="spec__live"><i></i>Live</span></p>
+        <p class="spec__cap">The finished site carries the story; the structure sits beside it, never on it.</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     3 · WHAT KREATED ACTUALLY HANDLES
+     Large type on open canvas. No cards, no icon grid, no capability matrix.
+     The six lines and the boundary line are documented scope, not marketing.
+     ========================================================================== -->
+<section class="handles">
+  <div class="wrap">
+    <!-- Two columns: the label and the two meta lines sit in a left channel,
+         the six capabilities stand alone on the right. Same words, same order,
+         same type scale — only the alignment changed, so the list reads as a
+         set rather than as a stack of page-wide rules. -->
+    <div class="handles__grid">
+      <div class="handles__aside">
+        <h2 class="sec__h">What Kreated actually handles</h2>
+        <p class="bound">An SEO-ready website, not an ongoing SEO campaign.</p>
+        <p class="prov">Scope per the approved pricing reference. Every project is scoped
+          and priced in writing before it begins.</p>
+      </div>
+
+      <ul class="hlist" role="list">
+        <li>Strategy &amp; site architecture</li>
+        <li>Custom responsive design &amp; build</li>
+        <li>Copy assistance</li>
+        <li>SEO foundation</li>
+        <li>Analytics &amp; tracking</li>
+        <li>QA &amp; launch</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     4 · NO CLIENT PROOF ON THIS PAGE — a decision, not an oversight.
+
+     REMOVED 2026-08-30 on Skyler's instruction: the entire Rare Raleigh
+     Restoration presence. Its section, both live-site captures, its name, its
+     scope row and the link to rareraleighrestoration.com are all gone from
+     this leaf. Nothing of that client renders here.
+
+     ⚠ CONSEQUENCE, recorded so nobody re-derives it later. This page now shows
+     no delivered client website at all. The Groundwork specimen above is the
+     only site on the page, and it is — correctly and permanently — labelled
+     "AN ORIGINAL DEMONSTRATION, NOT A CLIENT". So /services/web-design/ now
+     demonstrates craft and claims no delivered web-design project.
+
+     The nearest thing left is the "Also shipped" line below, which names
+     LearnSmart Educational Consulting and points at /work/. That is a
+     reference, not proof: no capture, no scope row, no case study.
+
+     🚫 Do NOT let the specimen drift into the gap. It must never gain a client
+     name, a testimonial, a logo, a count, a "trusted by", a percentage or an
+     outcome claim — see the note above section 2. If this page needs delivered
+     proof again, restore a real project section; do not dress up the
+     demonstration.
+
+     Rare Raleigh remains available elsewhere: it is still the proof on
+     /services/website-redesign/, and its captures still ship in
+     assets/img/proof/. Restoring a section here is a copy-back, not a rebuild.
+     ========================================================================== -->
+
+<!-- ==========================================================================
+     PHASE 2B · SUBSTANCE. Every factual statement below traces to a source:
+       package inclusions  the homepage Investment section, which carries the
+                           approved Launch / Growth lists verbatim
+       the boundary        docs/SERVICES.md §1 — web design covers businesses
+                           with NO website at all
+       revisions           pricing reference §93 — revisions are SCOPED, and a
+                           material scope change may need a timeline
+                           adjustment, change order or fee
+       after launch        Launch buys Site Care from $149/mo; Growth adds a
+                           review about 30 days after launch
+     🚫 Nothing here promises a ranking, a traffic figure, a lead figure, a
+     delivery date or unlimited anything.
+     ⚠ Two FAQs are answered from documented scope; the rest are too. Where a
+     policy is genuinely unset, the question is NOT asked rather than answered
+     with a guess — see the OWNER INPUT note above the FAQ block.
+     ========================================================================== -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Who it&rsquo;s for</h2>
+      <p class="lgrid__note">Three situations, and they are not the same job.</p>
+    </div>
+    <ul class="who" role="list">
+      <li><b>A business with no website at all</b>
+        <span>Everything a customer would use to judge you has to be made rather
+          than improved, the structure, the wording, the way it reads on a
+          phone. This is a normal starting point, not a disadvantage.</span></li>
+      <li><b>A business whose site was never really built for it</b>
+        <span>A template that was fine to launch with, and now works against the
+          quality of the work. If the bones are sound and only the surface is
+          tired, <a class="ilink" href="/services/website-redesign/">Website
+          Redesign</a> is the cheaper answer.</span></li>
+      <li><b>A business that gets found on a phone, at the moment of need</b>
+        <span>Local service work is compared quickly and called quickly. The site
+          has to make the case in the few seconds before the next contractor
+          gets the call.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">How the engagement runs</h2>
+      <p class="lgrid__note">One person does all of it, so the diagnosis and the
+        build never get separated.</p>
+    </div>
+    <ol class="steps" role="list">
+      <li><b>Scope, in writing, first</b>
+        <span>What the site has to do, which pages exist and what each one is for.
+          Nothing starts until that is agreed and priced.</span></li>
+      <li><b>Structure before surface</b>
+        <span>The page map and the path to contacting you are settled before any
+          design happens. Rearranging a structure later is expensive; rearranging
+          it now is a conversation.</span></li>
+      <li><b>Design and build together</b>
+        <span>Designed and built by the same person, so what is drawn is what
+          ships. Responsive from the start rather than adapted afterwards.</span></li>
+      <li><b>Copy worked through with you</b>
+        <span>Your existing wording tidied, with headlines and calls to action
+          written for you. A Growth project extends that to conversion copy
+          across the site.</span></li>
+      <li><b>Measurement wired in before launch</b>
+        <span>GA4 with form submissions and phone taps recorded as conversions,
+          so the site can be judged on something other than opinion.</span></li>
+      <li><b>QA, then launch</b>
+        <span>Checked across real screen sizes and browsers, with titles,
+          headings, clean URLs, sitemap and Search Console live from day one.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What this is not</h2>
+      <p class="lgrid__note">The edges, stated plainly, so nothing has to be
+        walked back later.</p>
+    </div>
+    <div>
+      <ul class="excl" role="list">
+        <li>Not an ongoing SEO campaign. The site launches search-ready; the
+          continuing work is <a class="ilink" href="/services/local-seo/">Local
+          SEO</a>, priced separately.</li>
+        <li>Not unlimited revisions. Revisions are scoped with the project, and a
+          change that materially moves the agreed scope may need a timeline
+          adjustment or a change order.</li>
+        <li>Not a monthly retainer by default. Site Care is available from
+          $149/mo and is a separate decision.</li>
+        <li>Not a mass-produced set of city pages. Service and location pages are
+          added where real demand supports them, and not otherwise.</li>
+        <li>Not Google Ads, social media management, or ongoing content
+          production.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ⚠ THE FIVE APPROVED POLICIES — Skyler, 2026-08-30. These replaced the
+     OWNER INPUT slots that used to stand where these answers now are. All five
+     are quoted from the approval, and the qualifications are part of the fact:
+
+       TIMELINE   Most website projects take about 2–4 weeks, depending on
+                  scope, feedback, and how quickly we receive the content and
+                  assets needed to build.
+                  🚫 NOT A GUARANTEE and never to be written as one. The three
+                  dependencies travel with the number, always.
+                  🚫 This is the WEBSITE PROJECT timeline. It is NOT the audit
+                  turnaround — that policy is still unset. Never reuse it there.
+       OWNERSHIP  After final payment the client owns the finished website and
+                  the client-specific design and content made for them. Kreated
+                  keeps its reusable internal systems, tooling, software,
+                  processes and reusable components.
+                  🚫 Keep it plain. Site copy is not the contract.
+       PAYMENT    50% to start · 50% before launch. Larger or custom projects
+                  may use proposal-defined milestones.
+                  🚫 No other fee, deposit, discount or financing term exists.
+       GBP        Growth includes a ONE-TIME audit/optimization of an existing
+                  profile. There is deliberately NO standalone recurring GBP
+                  package or price. Ongoing profile work sits inside a broader
+                  recurring engagement.
+                  🚫 Never imply monthly GBP management is inside Growth.
+       LOCAL      Local Growth $900/mo · 3-month initial commitment · then
+       GROWTH     month-to-month. Reporting may cover work completed, search
+                  and visibility changes, GBP/search observations, next
+                  priorities, and items needing client input — where relevant
+                  and measurable.
+                  🚫 No ranking, lead, revenue or growth-percentage promise.
+     ========================================================================== -->
+<!-- ==========================================================================
+     4 · PRICING HANDOFF — two figures and a route out. The Investment section
+     on the homepage owns the full package detail; this page does not repeat it.
+     Figures are approved facts and must not change.
+     ========================================================================== -->
+<section class="price">
+  <div class="wrap price__in">
+    <p class="price__line">
+      <span class="price__item"><b>Launch</b> starts at <span class="fig">$1,750</span></span>
+      <span class="price__item"><b>Growth</b> <span class="fig">$2,950</span> <i>most common engagement</i></span>
+    </p>
+    <a class="tlink" href="/pricing/">See Pricing <i aria-hidden="true">&#8594;</i></a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     5 · SECONDARY REFERENCE — text only.
+     A second full website showcase was cut deliberately: one strong proof
+     moment carries this page, and /work/ owns project depth.
+     LearnSmart status is documented (docs/PROJECTS.md §1).
+     ========================================================================== -->
+<section class="also">
+  <div class="wrap also__in">
+    <p class="also__l"><span class="also__k">Also shipped</span>
+      <span class="also__n">LearnSmart Educational Consulting</span>
+      <span class="also__s">learnsmart.dev &middot; Delivered &amp; live</span></p>
+    <a class="tlink" href="/work/">See the work <i aria-hidden="true">&#8594;</i></a>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     6 · FAQ — one documented question, no invented answer.
+     docs/SERVICES.md §2 records this as an approved V1 question shipped on
+     this exact page. The answer is NOT documented anywhere and is not written
+     here. V1 shipped seven FAQs on web-design; the other six are neither
+     recorded nor invented.
+     ========================================================================== -->
+<!-- ==========================================================================
+     FAQ — seven questions. docs/SERVICES.md §6 records seven as the approved
+     count for THIS page specifically and six as the default elsewhere; the
+     first question below is V1's approved seventh, kept verbatim.
+
+     Native <details>/<summary>: keyboard-operable and announced by the browser
+     with no script, and it still works with JavaScript off.
+
+     ⚠ RESOLVED 2026-08-30. Three questions used to be absent here because the
+     policy behind them was unset. Skyler ruled on all three, so they are now
+     answered in full below — timeline, ownership and payment terms. The
+     approved wording and its qualifications are recorded above section 4.
+     ========================================================================== -->
+<section class="sec faqs__sec">
+  <div class="wrap lgrid">
+    <div><h2 class="sec__h">Questions</h2></div>
+    <div class="faqs">
+
+      <details>
+        <summary>I don&rsquo;t have a website yet. Can you build one for my business?</summary>
+        <div class="faqs__a">
+          <p>Yes. Starting from nothing is a normal case here, not an exception, the brand, the structure and the words get made rather than
+            migrated. <a href="/work/learnsmart/">LearnSmart</a> is exactly that:
+            a real practice with no website at all, now delivered and live.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>What happens before any design starts?</summary>
+        <div class="faqs__a">
+          <p>Scope, in writing. What the site has to do, which pages exist, what
+            each one is for, and what it costs. Then the page map and the contact
+            path are settled. Design begins after that, because structure decided
+            late is the expensive kind.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>How much of the copy do I have to write?</summary>
+        <div class="faqs__a">
+          <p>Less than you would expect. A Launch project tidies your existing
+            wording and writes the headlines and calls to action for you. A Growth
+            project extends that to conversion copy across the homepage, service
+            pages and FAQs.</p>
+          <p>What is genuinely needed from you is the substance only you have:
+            what you actually do, where you work, and the questions customers ask
+            before they hire.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Is the mobile version included, or is that extra?</summary>
+        <div class="faqs__a">
+          <p>Included, and not as an afterthought. Every project is built to work
+            on a phone as well as a desk. For local service work the phone is
+            usually the first screen the site is ever judged on.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Is SEO included, or do I need that separately?</summary>
+        <div class="faqs__a">
+          <p>The foundations are included: titles, headings, clean URLs, a sitemap
+            and Search Console, live from day one. A Growth project adds keyword
+            research and mapping, expanded schema, internal linking and redirects.</p>
+          <p>That is an SEO-ready website, not an ongoing SEO campaign. The
+            continuing work is <a href="/services/local-seo/">Local SEO</a> and is
+            priced separately.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>What happens after launch?</summary>
+        <div class="faqs__a">
+          <p>A Growth project includes a review about 30 days after launch: indexing, tracking, and any early friction. Market Leader adds
+            a second at about 60 days.</p>
+          <p>Beyond that, Site Care is available from $149/mo for hosting, SSL,
+            uptime monitoring, backups, minor content edits and analytics
+            monitoring. It is a separate decision, not an automatic add-on.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>How many revisions do I get?</summary>
+        <div class="faqs__a">
+          <p>Revisions are scoped with the project rather than unlimited. Working
+            through the design is expected and included; a change that materially
+            moves the agreed scope may need a timeline adjustment or a change
+            order, and you would be told that before any work on it starts.</p>
+        </div>
+      </details>
+
+
+      <details>
+        <summary>How long does a website take?</summary>
+        <div class="faqs__a">
+          <p>Most website projects take about 2&ndash;4 weeks, depending on scope,
+            feedback, and how quickly we receive the content and assets needed to
+            build.</p>
+          <p>Those three things are what actually move the date. A project waiting
+            on photographs or on a round of approvals is not a project being
+            worked on, and the honest answer is that the schedule is shared.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Who owns the website when it&rsquo;s finished?</summary>
+        <div class="faqs__a">
+          <p>You do. After final payment you own the finished website and the
+            design and content created specifically for your project.</p>
+          <p>Kreated keeps ownership of its own reusable internal systems, tooling,
+            software, processes and reusable components, the things carried
+            from one project to the next. Nothing specific to your business is in
+            that category.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>How does payment work?</summary>
+        <div class="faqs__a">
+          <p>Standard website projects are 50% to start and 50% before launch.
+            Larger or custom projects may use milestones defined in the proposal.</p>
+          <p>Every engagement is scoped and priced in writing before any work
+            begins, so the figure is agreed before the first payment.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Who actually does the work?</summary>
+        <div class="faqs__a">
+          <p>One person, from the first conversation to launch. The person who scopes the project designs and builds it. Nothing is handed to a junior after the sale, because there is nobody to hand it to.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>What happens if we stop working together?</summary>
+        <div class="faqs__a">
+          <p>After the final payment the finished website and the design and content created for it are yours. There is no arrangement here that depends on you staying, and nothing is withheld to make leaving difficult.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div><h2 class="sec__h">Where to go next</h2></div>
+    <div>
+      <p class="next">If a site already exists and only needs to catch up, start with
+        <a class="ilink" href="/services/website-redesign/">Website Redesign</a>.
+        If you want the search work that runs after launch, that is
+        <a class="ilink" href="/services/local-seo/">Local SEO</a>.
+        To see delivered projects, go to <a class="ilink" href="/work/">Work</a>, or send the site you already have through the
+        <a class="ilink" href="/free-website-audit/">Free Website Audit</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     7 · CLOSING — the ledger's grammar: hairline, 72px cobalt segment, one
+     large action. No closing paragraph.
+     ========================================================================== -->
+<section class="close">
+  <div class="wrap">
+
+    <!-- OWNER INPUT: closing line — enable when owner copy exists.
+         Ships HIDDEN with an empty text node. -->
+    <aside class="close__owner" hidden>
+      <p class="close__ownerlabel">CLOSING LINE</p>
+      <p class="close__note"><!-- owner sentence goes here --></p>
+    </aside>
+
+    <div class="close__row">
+      <a class="close__go" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+      <a class="close__alt" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ⚠ ONE FOOTER, ALL 17 ROUTES. Identical markup everywhere, styled by
+     /footer.css which loads last on every page. Before this, About, Method,
+     Contact, Work and every service page ended in a wordmark and "Raleigh, NC"
+     — no pricing, no phone number, no privacy link — which read as an
+     incomplete mini-site to anyone who did not enter through the homepage.
+     🚫 If a route is added, this block is copied verbatim. Do not fork it. -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <a class="foot__mark" href="/" aria-label="Kreated — home">KREATED</a>
+      <!-- approved V1 positioning line, reusable verbatim -->
+      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+    </div>
+
+    <div class="foot__cols">
+      <div>
+        <h2>Contact</h2>
+        <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
+        <p><a href="tel:+19198058217">(919) 805-8217</a></p>
+        <p>Raleigh, North Carolina</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <p><a href="/services/">Services</a></p>
+        <p><a href="/work/">Work</a></p>
+        <p><a href="/method/">Method</a></p>
+        <p><a href="/about/">About</a></p>
+        <p><a href="/contact/">Contact</a></p>
+        <p><a href="/pricing/">Pricing</a></p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <p><a href="/services/web-design/">Web Design &amp; Development</a></p>
+        <p><a href="/services/website-redesign/">Website Redesign</a></p>
+        <p><a href="/services/local-seo/">Local SEO</a></p>
+        <p><a href="/services/google-business-profile/">Google Business Profile</a></p>
+        <p><a href="/services/brand-strategy/">Brand Strategy &amp; Identity</a></p>
+        <p><a href="/services/answer-engine-optimization/">Answer Engine Optimization</a></p>
+      </div>
+      <div>
+        <h2>Start</h2>
+        <p><a data-evt="cta_start_project" href="/contact/">Start a Project</a></p>
+        <p><a data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit</a></p>
+        <p><a href="/work/">View Work</a></p>
+      </div>
+    </div>
+
+    <p class="foot__legal">© 2026 Kreated
+      <a href="/privacy/">Privacy</a>
+    </p>
+  </div>
+</footer>
+
+<script src="/services/services.js?v=4" defer></script>
+<script src="/services/web-design/groundwork.js?v=1" defer></script>
+</body>
+</html>
