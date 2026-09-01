@@ -1,5 +1,4 @@
-# Netlify configuration — Kreated V2 homepage prototype.
-# NOT DEPLOYED. This exists so connecting the site is a one-step operation.
+# Netlify configuration — Kreated V2.
 #
 # There is no build step: the site is plain HTML/CSS/JS, so `publish` is the
 # folder itself and `command` is intentionally empty. Netlify's form detection
@@ -12,23 +11,25 @@
   command = ""
 
 # ⚠ The audit endpoint. Node 20 for fetch(), AbortSignal.timeout() and the
-# structured clone the handler relies on. The function has NO dependencies, so
-# there is nothing to install and the build command stays empty.
+# structured clone the handler relies on.
+#
+# The FUNCTIONS have exactly one dependency — @netlify/blobs, declared in
+# package.json — which Netlify installs from the base directory before
+# bundling. The SITE still has none: no build step, no client-side packages,
+# `command` stays empty and `publish` is the source folder.
 [functions]
   directory = "netlify/functions"
-  # ⚠ esbuild, because @netlify/blobs is ESM and the audit function is
-  # CommonJS. esbuild resolves and bundles it; zisi (the default) would leave
-  # a CJS require() of an ESM-only package to fail at runtime.
+  # ⚠ esbuild, so the require('@netlify/blobs') in netlify/functions/lib/
+  # rate-limit.js is resolved and bundled into the function. This is also what
+  # makes the dependency visible to Netlify, which is what triggers it to
+  # inject the Blobs credentials the store needs.
   # 🚫 The only valid values are esbuild and zisi. "none" is not one — it was
   # set to that once and the deploy failed rather than being ignored.
   node_bundler = "esbuild"
-  # ⚠ node_bundler is DELIBERATELY UNSET, 2026-09-01. It was `"none"`, which is
-  # not a valid value — the documented options are `esbuild` and `zisi` — and an
-  # invalid value fails the deploy rather than being ignored. Unset means zisi,
-  # the default, which traces require() and packages netlify/functions/lib/*.js
-  # with the handler. The audit still has ZERO npm dependencies, so there is
-  # nothing to install and the build command stays empty.
-  # 🚫 Do not set node_bundler to anything that is not esbuild or zisi.
+  # History, because this key has already broken one deploy: it was `"none"`,
+  # which is not a valid value, and the deploy FAILED rather than ignoring it.
+  # It was then left unset (= zisi) while the functions had no dependencies.
+  # Now @netlify/blobs is a dependency and esbuild is required.
 
 # ⚠ NO [functions."audit"] timeout KEY. It was `timeout = 26`, which is not a
 # supported netlify.toml property; function timeout is a site setting in the

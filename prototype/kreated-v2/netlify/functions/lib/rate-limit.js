@@ -37,29 +37,36 @@ const WINDOW_MS = 60 * 60 * 1000;
 /* ---- backend 1: Netlify Blobs, via the official package ------------------
    ⚠ REPLACED THE HAND-ROLLED CLIENT, 2026-09-01. The previous version read
    NETLIFY_BLOBS_CONTEXT and called the API with fetch, to avoid adding a
-   dependency. In production that variable was never injected — Netlify sets it
-   for functions it detects using the package — so the limiter silently fell
-   through to per-instance memory and reported degraded:true on every request.
-   Reporting it was right; relying on an undocumented runtime contract was not.
+   dependency. In production that variable was never injected, so the limiter
+   fell through to per-instance memory and reported degraded:true on every
+   request. Reporting it was right; depending on an undocumented runtime
+   contract was not.
 
-   getStore() picks up siteID and token automatically inside a Netlify
-   Function, so there is nothing to configure and no credential to manage.
+   ⚠ THE require() IS DELIBERATELY STATIC AND TOP-LEVEL. Two reasons, and the
+   second is the one that cost a deploy to learn:
+     1. @netlify/blobs is dual-published — package.json exports a ./dist/
+        main.cjs for require — so CommonJS needs no dynamic import.
+     2. Netlify decides whether to inject the Blobs credentials by looking at
+        what the bundled function actually depends on. A dynamic import() is
+        not a dependency it can see, so the credentials never arrive and
+        getStore() throws "the environment has not been configured".
+   🚫 Do not "tidy" this into a lazy import.
 
-   ⚠ DYNAMIC import(), not require(). @netlify/blobs is ESM and this file is
-   CommonJS; a top-level require() would throw. The import is also what makes
-   the local fallback work: with no node_modules present it rejects and the
-   file backend takes over, which is how the tests run. */
+   The try/catch is what keeps local development working: with no node_modules
+   present the require throws and the file backend takes over. */
+let blobsLib = null;
+try { blobsLib = require('@netlify/blobs'); } catch (e) { blobsLib = null; }
+
 async function blobsBackend() {
-  let getStore;
-  try { ({ getStore } = await import('@netlify/blobs')); }
-  catch (e) { return null; }                    /* package absent: local dev */
-  if (typeof getStore !== 'function') return null;
+  if (!blobsLib || typeof blobsLib.getStore !== 'function') return null;
 
   let store;
-  try { store = getStore('kreated-audit-rate'); }
-  catch (e) { return null; }                    /* no Netlify credentials */
+  /* ⚠ getStore() THROWS, it does not return null, when the environment has no
+     Blobs credentials — which is exactly the local case. */
+  try { store = blobsLib.getStore('kreated-audit-rate'); }
+  catch (e) { return null; }
 
-  /* prove it actually works before committing to it — a store object that
+  /* prove it actually works before committing to it: a store object that
      throws on first use would look healthy and then fail open */
   try { await store.get('__probe__', { type: 'json' }); }
   catch (e) { return null; }

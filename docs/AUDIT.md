@@ -162,9 +162,13 @@ It now uses `getStore('kreated-audit-rate')` from `@netlify/blobs`, which picks
 up `siteID` and `token` automatically inside a Function. Two details are load-
 bearing:
 
-* the import is **dynamic** (`await import(...)`), because the package is ESM
-  and the function is CommonJS — and because a rejected import is exactly what
-  lets local tests fall through to the file backend;
+* the `require` is **static and top-level**, inside a `try`. The package is
+  dual-published so CommonJS can require it directly — but the real reason is
+  that Netlify decides whether to inject the Blobs credentials by looking at
+  what the bundled function depends on. A dynamic `import()` is invisible to
+  that analysis, the credentials never arrive, and `getStore()` throws. 🚫 Do
+  not convert it to a lazy import. The `try` is what lets local runs with no
+  `node_modules` fall through to the file backend;
 * the backend **probes the store with a real read** before committing to it, so
   a store object that would throw on first use is rejected rather than adopted.
 
