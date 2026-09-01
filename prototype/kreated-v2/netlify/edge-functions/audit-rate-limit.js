@@ -14,19 +14,10 @@
    KREATED_AUDIT_MAX_PER_HOUR so the two layers agree. If you change one,
    change the other. 🚫 Do not expose either number in a response body.
    ========================================================================== */
-export default async (request, context) => {
-  const res = await context.next();
-  /* ⚠ TEMPORARY PROOF HEADER. There is no other way from outside to tell
-     "the edge function ran and the limit is not reached" from "the edge
-     function never ran". Remove once the layer is confirmed. */
-  try { res.headers.set('x-kreated-edge', 'ran'); } catch (e) {}
-  return res;
-};
+export default async (request, context) => context.next();
 
 export const config = {
-  /* ⚠ TEMPORARILY WIDENED to cover the diagnostic function too, so this can
-     be probed without spending audit quota. */
-  path: '/.netlify/functions/*',
+  path: '/.netlify/functions/audit',
   rateLimit: {
     windowSize: 3600,
     /* ⚠ must match the default in netlify/functions/lib/rate-limit.js */

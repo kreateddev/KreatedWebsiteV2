@@ -320,7 +320,7 @@ async function rlTests() {
   });
 
   await ta('the threshold is never exposed to the caller', () => {
-    const src = fsx.readFileSync(pathx.resolve(__dirname, '../netlify/functions/audit.js'), 'utf8');
+    const src = fsx.readFileSync(pathx.resolve(__dirname, '../netlify/functions/lib/audit-core.js'), 'utf8');
     const at = src.indexOf('rate-limited');
     ok(at > 0, 'the rate-limited branch must exist');
     /* the 429 branch may carry only the message and Retry-After — never the
@@ -386,7 +386,7 @@ async function rlTests() {
    ====================================================================== */
 async function modelTests() {
   const http = require('http');
-  const handler = require('../netlify/functions/audit.js').handler;
+  const handler = require('../netlify/functions/lib/audit-core.js').handler;
 
   /* ⚠ SPEAKS THE OPENAI RESPONSES SHAPE, because that is what the function
      now parses: { output: [ { type:"message", content:[ {type:"output_text",
@@ -594,6 +594,40 @@ async function modelTests() {
     /* the injected price text lands in a prose field, which is the only thing
        the model may write — and no price ever reaches the engine */
     ok(!JSON.stringify(r.needs).includes('9,999'));
+  });
+
+  /* ---- THE FUNCTION SHAPE ----------------------------------------------
+     🚨 v1 vs v2 is not a style choice. Netlify injects NETLIFY_BLOBS_CONTEXT
+     into the v2 runtime ONLY. Measured in production 2026-09-01: a v1
+     exports.handler function saw SITE_ID and nothing else, getStore() threw,
+     the limiter fell back to per-instance memory, and eight consecutive
+     requests were all served. A v2 function on the same deploy read and wrote
+     Blobs successfully. Reverting the shape silently removes rate limiting,
+     so it is pinned here. */
+  await ta('the deployed entry is a v2 function, not a v1 handler', () => {
+    const entry = fsx.readFileSync(pathx.resolve(__dirname, '../netlify/functions/audit.js'), 'utf8');
+    ok(/export default/.test(entry), 'v2 requires an export default');
+    /* ⚠ anchored, because the file's own comment says the words
+       "exports.handler" and an unanchored guard matches that instead. */
+    ok(!/^\s*exports\.handler\s*=/m.test(entry), 'a v1 exports.handler does not receive the Blobs context');
+    ok(/from '\.\/lib\/audit-core\.js'/.test(entry), 'the entry must delegate to the CommonJS core');
+  });
+
+  await ta('the v2 adapter maps a Request onto the core and back', async () => {
+    const mod = await import(pathx.resolve(__dirname, '../netlify/functions/audit.js'));
+    const req = new Request('https://kreated.dev/.netlify/functions/audit', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-nf-client-connection-ip': 'v2-' + Math.random() },
+      body: JSON.stringify({ url: 'https://example.com', email: 'a@b.com' })
+    });
+    const res = await mod.default(req, { ip: '203.0.113.9' });
+    eq(res.status, 200);
+    const b = await res.json();
+    ok(b.ok, 'the adapter must return the core\'s body');
+    eq(b.findings.length, 6);
+    /* a GET must still be refused, and must not need a body */
+    const bad = await mod.default(new Request('https://kreated.dev/x', { method: 'GET' }), {});
+    eq(bad.status, 405, 'method check still applies through the adapter:');
   });
 
   await ta('at most three pages are ever analysed', async () => {

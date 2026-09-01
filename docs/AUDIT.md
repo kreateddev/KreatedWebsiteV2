@@ -172,6 +172,26 @@ bearing:
 * the backend **probes the store with a real read** before committing to it, so
   a store object that would throw on first use is rejected rather than adopted.
 
+### 🚨 The audit must be a v2 function, or Blobs does not work at all
+
+`netlify/functions/audit.js` is a **v2 function** (`export default`), and that
+is not a style choice. **Netlify injects `NETLIFY_BLOBS_CONTEXT` into the v2
+runtime only.** Measured in production on 2026-09-01, on the same deploy:
+
+| Function shape | Env the runtime provided | `getStore()` | Result |
+|---|---|---|---|
+| v1 `exports.handler` | `SITE_ID`, `AWS_LAMBDA_FUNCTION_NAME` | throws *"the environment has not been configured"* | limiter falls back to memory |
+| v2 `export default` | **`NETLIFY_BLOBS_CONTEXT`**, `SITE_ID`, `AWS_LAMBDA_FUNCTION_NAME` | ok — read and write both succeed | limiter shared, `degraded: false` |
+
+While the function was v1, **eight consecutive production requests were all
+served** with no refusal. The endpoint was effectively unlimited, and the only
+reason that was visible at all is that the limiter reports `degraded`.
+
+The audit logic stays CommonJS in `lib/audit-core.js` so the tests and the local
+shim can require it directly; `audit.js` is a thin adapter that maps the v2
+`Request` onto the `event` shape the core speaks. 🚫 Do not move the logic into
+the entry, and 🚫 do not convert the entry back to a handler — a test pins both.
+
 If Blobs is unavailable for any reason the limiter still falls through to
 memory, still limits, and still says `degraded: true` — proven by a test.
 

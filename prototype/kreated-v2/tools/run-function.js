@@ -11,7 +11,13 @@ process.stdin.on('data', d => raw += d);
 process.stdin.on('end', async () => {
   try {
     const event = JSON.parse(raw || '{}');
-    const fn = require('../netlify/functions/' + process.argv[2] + '.js');
+    /* ⚠ the deployed entry is a v2 ESM adapter that this CJS shim cannot
+       require, so run the CommonJS core directly — same handler, same
+       event shape, which is the whole point of keeping the core separate. */
+    const name = process.argv[2];
+    const fn = name === 'audit'
+      ? require('../netlify/functions/lib/audit-core.js')
+      : require('../netlify/functions/' + name + '.js');
     const res = await fn.handler(event, {});
     process.stdout.write(JSON.stringify(res));
   } catch (e) {
