@@ -21,6 +21,11 @@
 *.swp
 *~
 
+# local audit rate-limit state. The file backend is a DEV convenience so the
+# limiter can be tested across processes; production uses Netlify Blobs.
+# 🚫 Never commit it, and never set KREATED_AUDIT_STATE_DIR in production.
+prototype/.audit-state/
+
 # local tooling / scratch
 *.log
 .netlify/

@@ -46,7 +46,7 @@
 <meta name="theme-color" content="#020C2E">
 <link rel="stylesheet" href="/styles.css?v=109">
 <link rel="stylesheet" href="/services/leaf.css?v=10">
-<link rel="stylesheet" href="/free-website-audit/audit.css?v=3">
+<link rel="stylesheet" href="/free-website-audit/audit.css?v=5">
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=1">
 <link rel="stylesheet" href="/footer.css?v=5">
@@ -168,7 +168,8 @@
       <div class="formwrap" id="audit">
         <form class="kform" name="website-audit" method="POST" action="/thanks/"
               data-netlify="true" netlify-honeypot="company-website"
-              data-success-event="website_audit_submit" novalidate>
+              data-success-event="website_audit_submit"
+              data-own-submit novalidate>
           <input type="hidden" name="form-name" value="website-audit">
           <p class="hp" aria-hidden="true">
             <label>Company website<input type="text" name="company-website" tabindex="-1" autocomplete="off"></label>
@@ -214,6 +215,27 @@
 
           <p class="kform__status" role="status" aria-live="polite"></p>
         </form>
+
+        <!-- ⚠ SHIPPED VISIBLE, HIDDEN BY SCRIPT. Without JavaScript the form
+             above is an ordinary Netlify POST and this paragraph explains what
+             the visitor will and will not get. 🚫 Do not hide it in CSS: a
+             no-script visitor would then see a form with no explanation of why
+             nothing appears on the page. -->
+        <p class="aud__nojs" id="auditNoJs">The interactive audit needs JavaScript.
+          Submitting this form still reaches Skyler, and you will get the same
+          answer by email rather than on this page. You can also see
+          <a class="ilink" href="/pricing/">what things cost</a> or
+          <a class="ilink" href="/contact/">start a project</a> directly.</p>
+      </div>
+
+      <!-- ⚠ A DIRECT CHILD OF .page__cols, spanning both columns. It was
+           inside .formwrap and rendered 416px wide, which is a form field's
+           width, not a findings document's. 🚫 Do not move it back inside the
+           form wrapper. -->
+      <div class="aud" id="auditApp" hidden>
+        <p class="aud__live sr-only" role="status" aria-live="polite"></p>
+        <div class="aud__stage" hidden></div>
+        <div class="aud__result" hidden></div>
       </div>
     </div>
   </div>
@@ -451,6 +473,11 @@
   </div>
 </footer>
 <script src="/motion.js?v=34"></script>
-<script src="/forms.js?v=3" defer></script>
+<!-- offers -> recommend -> audit. The audit client computes no prices: it
+     hands `needs` to the same engine the pricing builder uses. -->
+<script src="/assets/data/offers.js?v=1" defer></script>
+<script src="/assets/data/recommend.js?v=3" defer></script>
+<script src="/forms.js?v=4" defer></script>
+<script src="/free-website-audit/audit.js?v=2" defer></script>
 </body>
 </html>

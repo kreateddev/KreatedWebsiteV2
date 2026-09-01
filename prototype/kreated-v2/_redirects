@@ -1,27 +1,34 @@
 # ==========================================================================
 # KREATED V2 — Netlify redirects
 #
-# ⛔ AUDIT GATE — added 2026-08-30. THIS IS THE LAUNCH GATE FOR THE FREE
-#    WEBSITE AUDIT. Do not remove it casually.
+# ✅ AUDIT GATE LIFTED 2026-09-01, after the production-hardening pass.
 #
-#    /free-website-audit/ describes the approved product: the visitor submits,
-#    the audit runs, and the result appears on that page within a few minutes.
-#    That product does not exist yet — the page still carries the old
-#    form -> /thanks/ flow, so in production the page would be a promise the
-#    site cannot keep.
+#    The removed rule was exactly:
 #
-#    Rather than weaken the approved copy to fit the old architecture, the
-#    ROUTE is gated at the edge. In production the URL forwards to /contact/,
-#    which is the approved primary conversion for launch, so no link anywhere
-#    on the site breaks and no visitor reaches an unfulfillable promise. The
-#    page and its code stay in the repository and stay reachable on the local
-#    dev server, so the product can keep being built against it.
+#        /free-website-audit/*   /contact/   302
 #
-#    TO LIFT THE GATE: delete the single rule below. Nothing else changes —
-#    the page, its copy, its links and its metadata are already correct.
-#    ⚠ Do not lift it until submit -> process -> result actually works.
+#    It existed because the page described a product that did not exist: the
+#    visitor submitted, and nothing analysed anything. That is no longer true.
+#    The full path now works — submit, fetch up to three scored pages,
+#    extract signals, classify deterministically, optionally rewrite the prose,
+#    recommend through the same engine /pricing/ uses, and hand off to the
+#    builder or to /contact/.
+#
+#    What had to be true before the line came out, and now is:
+#      · shared rate limiting that survives instance recycling, not a Map
+#        in process memory (netlify/edge-functions/audit-rate-limit.js plus
+#        netlify/functions/lib/rate-limit.js)
+#      · a crawl capped at three pages, chosen by score and not by link order
+#      · an enforced time budget with real headroom under the function timeout
+#      · the audit still complete and honest with no model configured
+#      · every SSRF control re-tested after those changes
+#
+#    ⚠ The route is no longer gated at the edge. /free-website-audit/ becomes
+#    publicly reachable on the next deploy. `noindex` still applies, as it does
+#    on all 19 routes.
+#    🚫 If the audit is ever broken again, put the line back rather than
+#    weakening the page's copy to match a product that does not work.
 # ==========================================================================
-/free-website-audit/*   /contact/   302
 
 # ==========================================================================
 # Everything below is ordinary hygiene, not a gate.

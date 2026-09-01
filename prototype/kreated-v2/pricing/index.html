@@ -64,7 +64,7 @@
 <link rel="stylesheet" href="/styles.css?v=109">
 <link rel="stylesheet" href="/services/services.css?v=17">
 <link rel="stylesheet" href="/services/leaf.css?v=10">
-<link rel="stylesheet" href="/pricing/pricing.css?v=13">
+<link rel="stylesheet" href="/pricing/pricing.css?v=15">
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=1">
 <link rel="stylesheet" href="/footer.css?v=5">
@@ -1353,32 +1353,63 @@
       </div>
 
       <!-- ======================================================================
-           BUILD YOUR PACKAGE — entry point only, 2026-09-01.
-           ⚠ FOUNDATION, NOT A CONFIGURATOR. The rules that would drive it are
-           designed and written down in docs/PACKAGE-MATCHING-RULES.md, and the
-           service/price map they run on is docs/OFFER-MAP.md. Neither the live
-           total nor the package-matching is built, because the discount logic
-           depends on package inclusion boundaries that are still being settled
-           and a configurator that computes a wrong saving is worse than none.
+           BUILD YOUR PACKAGE — the configurator, 2026-09-01.
+           ⚠ PROGRESSIVE ENHANCEMENT. What ships in this markup is the working
+           no-script state: two real links. builder.js hides it and reveals the
+           configurator only once it has proven it can run. 🚫 Do not author the
+           configurator here and hide it with CSS — without script a keyboard
+           user would tab through a dead form.
 
-           🚫 Do not wire a fake total to this. 🚫 Do not call it "Checkout".
-           The CTA leads to /contact/ with the intent carried in the URL, which
-           is a real, working, non-broken destination today.
+           🚫 NO PRICES IN THIS FILE. Every figure the builder shows comes from
+           /assets/data/offers.js, which is generated from docs/OFFER-MAP.md and
+           asserted against the locked catalogue by tools/test-engine.js.
            ====================================================================== -->
-      <div class="byp">
-        <h2 class="pgroup pgroup--quiet">Build Your Package</h2>
-        <p class="byp__lead cc">If you want to combine several of these, say which ones
-          and they will be quoted together. Where the combination substantially matches
-          an existing package, you will be told so, and offered the package price if it
-          is genuinely lower. A combination is never presented as a saving unless the
-          arithmetic is real.</p>
-        <div class="byp__ctas">
-          <a class="btn btn--pill" data-evt="cta_build_package" href="/contact/?intent=build">Build This Project <span class="btn__arrow" aria-hidden="true">&#8599;</span></a>
-          <a class="btn btn--ghost" href="#panelPackages" data-tab="tabPackages">Start With A Package</a>
+      <div class="byp" id="byp">
+        <h2 class="pgroup pgroup--quiet" id="bypH">Build Your Package</h2>
+        <p class="byp__lead cc">Choose what the business actually needs. The estimate
+          builds as you go, and if one of the existing packages is the better answer you
+          will be told so rather than sold the longer list.</p>
+
+        <div class="byp__nojs">
+          <div class="byp__ctas">
+            <a class="btn btn--pill" data-evt="cta_build_package" href="/contact/?intent=build">Build This Project <span class="btn__arrow" aria-hidden="true">&#8599;</span></a>
+            <a class="btn btn--ghost" href="#panelPackages" data-tab="tabPackages">Start With A Package</a>
+          </div>
+          <p class="byp__note cc">The interactive builder needs JavaScript. Without it this
+            goes to a short form and a written scope, which is where it would have sent you
+            anyway.</p>
         </div>
-        <p class="byp__note cc">The interactive builder is not live yet. Until it is,
-          this goes to a short form and a written scope, which is where it would have
-          sent you anyway.</p>
+
+        <div class="byp__app" hidden>
+          <div class="byp__layout">
+            <div class="byp__picker"></div>
+
+            <aside class="byp__summary" aria-labelledby="bypSumH">
+              <div class="byp__sumin">
+                <h3 class="byp__sumh" id="bypSumH" tabindex="-1">Your project</h3>
+                <div class="byp__sumbody"></div>
+                <div class="byp__verdict" hidden></div>
+                <a class="btn btn--pill byp__go" data-evt="cta_build_package"
+                   href="/contact/?intent=build">Build This Project
+                   <span class="btn__arrow" aria-hidden="true">&#8599;</span></a>
+                <p class="byp__terms cc">These are starting estimates, not a quote. Every
+                  project is scoped and priced in writing, and you approve the number before
+                  any work starts. Complex scope can move the figure.</p>
+              </div>
+            </aside>
+          </div>
+
+          <!-- ⚠ ONE short sentence, debounced 700ms. Announcing the whole
+               summary on every quantity keystroke makes the page unusable
+               with a screen reader. -->
+          <p class="byp__status sr-only" role="status" aria-live="polite"></p>
+
+          <!-- the mobile bar: the running total must never be three screens away -->
+          <div class="byp__bar" hidden>
+            <span class="byp__barcount">Nothing selected yet</span>
+            <a class="byp__barlink" href="#bypSumH">View project</a>
+          </div>
+        </div>
       </div>
     </div><!-- /#panelIndividual -->
   </div>
@@ -1456,6 +1487,12 @@
      nothing here. services.js carries the shared header/drawer behaviour. -->
 <script src="/sections.js?v=6" defer></script>
 <script src="/services/services.js?v=4" defer></script>
+<!-- ⚠ ORDER MATTERS: offers -> recommend -> builder. recommend.js reads
+     window.KreatedOffers at definition time, and builder.js reads both.
+     All three are `defer`, so they execute in document order. -->
+<script src="/assets/data/offers.js?v=1" defer></script>
+<script src="/assets/data/recommend.js?v=3" defer></script>
 <script src="/pricing/pricing.js?v=2" defer></script>
+<script src="/pricing/builder.js?v=2" defer></script>
 </body>
 </html>

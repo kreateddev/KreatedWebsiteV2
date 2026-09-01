@@ -53,7 +53,13 @@
     if (el && el.tagName !== 'FORM') window.kreatedTrack(el.getAttribute('data-evt'), {});
   });
 
-  var forms = Array.prototype.slice.call(document.querySelectorAll('form.kform'));
+  /* ⚠ [data-own-submit] opts a form OUT of this file entirely. The website
+     audit form is taken over by /free-website-audit/audit.js, which runs the
+     analysis and renders results in place; without this both scripts would
+     handle the same submit and the visitor would get a "thank you" message on
+     top of their audit. 🚫 Do not remove the attribute from that form. */
+  var forms = Array.prototype.slice.call(
+    document.querySelectorAll('form.kform:not([data-own-submit])'));
   if (!forms.length) return;
 
   function fieldOf(input) { return input.closest('.field'); }

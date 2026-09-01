@@ -1,5 +1,7 @@
 # PACKAGE MATCHING AND AUDIT RECOMMENDATION RULES
-Designed 2026-09-01. Not implemented. Both tools read `docs/OFFER-MAP.md`.
+Designed 2026-09-01. **Part 1 implemented the same day** in
+`assets/data/recommend.js`; Part 2 remains the design for the audit.
+Both tools read `assets/data/offers.js`, which is this repo's `OFFER-MAP.md` as data.
 
 This document exists because the rules are the hard part, not the interface.
 Written down now, they can be argued with before anyone builds them.
@@ -93,8 +95,10 @@ Kreated no longer charges, and the URL is the one thing a buyer can edit.
 
 ## Part 2 — The audit recommendation engine
 
-Not built in this pass. The classification and the mapping are defined here so
-that when it is built, it is built on the same map.
+**BUILT 2026-09-01.** See `docs/AUDIT.md`. The classification lives in
+`netlify/functions/lib/classify.js` and is deterministic; the recommendation is
+`recommendFromNeeds()` in the same engine the pricing builder uses. Everything
+below is what was implemented.
 
 ### Four classifications
 
@@ -205,6 +209,89 @@ and structuring supplied material. That must never mark `svc.copy.full` as
 covered — the coverage table has it as `—` for all four website tiers on
 purpose. A matcher that treats included copy support as coverage will tell a
 buyer their site content is paid for when it is not.
+
+---
+
+---
+
+## Part 4 — Three rules, LOCKED by the owner 2026-09-01
+
+All three were flagged as open on implementation and have since been ruled on.
+They are live in `assets/data/recommend.js` and asserted by eleven tests in
+`tools/test-engine.js`. 🚫 None of them may be changed without changing those
+tests in the same commit.
+
+### 1. Upsell ceiling — 1.6×, INTERNAL — LOCKED
+
+Coverage alone recommends Growth to someone who asked for one $450 service
+page, because Growth genuinely "covers" service pages and coverage computes as
+1.0. That is precisely the outcome Scenario D forbids.
+
+`recommend.js` therefore adds `MAX_UPSELL_MULTIPLE = 1.6`: a package is offered
+only when it is **cheaper than the selection**, or **within 1.6× of it**.
+
+**RULED 2026-09-01.** A package may be recommended when it is cheaper, **or**
+when it costs no more than **1.6×** the identified scope *and* is materially
+better matched.
+
+🚫 **1.6 is internal and must never reach a customer.** It appears in no
+rendered string, no data attribute and no handoff payload. A test asserts that
+the string does not occur in `builder.js` or `build-handoff.js` at all.
+
+### 2. Page allowances are REAL INCLUDED SCOPE — LOCKED
+
+`OFFER-MAP` §3 says the page allowances are descriptive copy rather than
+contractual, and warns that this is what stopped the configurator being built.
+The engine takes the conservative reading:
+
+- **`full` coverage** → the item is not charged again, and says *"Included in
+  Growth"*. This is the hard no-double-charge rule and it is unambiguous.
+- **`partial` coverage** → the item **is** charged, and the buyer is told
+  *"Growth already covers up to two service or location pages. Add these only if
+  you need them on top."*
+
+**RULED 2026-09-01: the documented service and location page allowances are
+contractual.** The engine charges only **beyond** the allowance.
+
+| Package | Included service/location pages |
+|---|---|
+| Launch | — |
+| Growth | **2**, pooled |
+| Market Leader | **4**, pooled (the documented *floor* of "four to eight-plus") |
+
+⚠ **Pooled, not per-type.** The published copy reads *"up to two service or
+location pages"*, so both draw on one allowance. Two location pages exhaust
+Growth's allowance and a third is charged at $550.
+
+⚠ **The pool is spent dearest-first**, which puts the included units on the
+most expensive pages. That is the reading favourable to the buyer.
+
+🚫 **Additional Standard Pages get NO allowance.** "Six to ten pages" is the
+size of the site being built, not a credit against buying more on top. The
+ruling named service and location pages; standard pages were not in it.
+
+### 3. AEO credit — a full $750 — LOCKED
+
+`/pricing/` says the audit is *"credited against AEO Foundation if you go on to
+implement within the same engagement"*. The **amount** is not documented
+(`PRICING-SOURCE-OF-TRUTH-AUDIT` §D.3). The engine takes the plain reading —
+selecting both charges the Foundation range only, and the audit line reads
+*"credited against Foundation within the same engagement"*.
+
+**RULED 2026-09-01: a full $750 credit, as real arithmetic.** Both lines are
+charged and a visible credit line is subtracted:
+
+```
+AEO Audit            $750
+AEO Foundation     $1,250–$1,750
+Credit               −$750
+                   ─────────────
+                   $1,250–$1,750
+```
+
+🚫 Not a zeroed line. The buyer sees the money they already spent coming off.
+The credit is capped at the one-time subtotal and can never produce a negative
+total, and it does not apply to an audit bought on its own.
 
 ---
 

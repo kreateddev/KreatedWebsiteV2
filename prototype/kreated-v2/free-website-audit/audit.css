@@ -104,3 +104,102 @@
 .aud__fit{margin:clamp(20px,2.4vw,28px) 0 0;max-width:56ch;padding-left:18px;
   border-left:2px solid var(--cobalt);
   font-size:clamp(15.5px,1.3vw,17px);line-height:1.6;color:var(--ink-1)}
+
+/* ==========================================================================
+   THE INTERACTIVE AUDIT — 2026-09-01
+   Findings, then a recommendation. Same dark room as the rest of the route:
+   hairlines and space, no cards, no gauges, no score dial.
+   🚫 NO OVERALL SCORE. Priorities are the output; a number would be the least
+   honest thing on the page.
+   ========================================================================== */
+.aud__nojs{margin:clamp(20px,2.4vw,30px) 0 0;font-size:14px;line-height:1.65;color:var(--ink-3)}
+/* spans both columns of .page__cols — see the note in the markup */
+.aud{grid-column:1 / -1;margin:clamp(28px,3.4vw,46px) 0 0}
+/* the findings themselves keep a readable measure inside that width */
+.aud__result{max-width:820px}
+
+/* ---- analysing ---------------------------------------------------------- */
+.aud__stage{border-top:1px solid var(--line);padding-top:clamp(22px,2.6vw,30px)}
+.aud__stageh{margin:0 0 16px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.aud__stages{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.aud__st{display:flex;align-items:center;gap:11px;font-size:14.5px;color:var(--ink-4)}
+.aud__dot{width:8px;height:8px;flex:none;border-radius:50%;
+  border:1.5px solid color-mix(in srgb, var(--ink-1) 30%, transparent)}
+/* is-done is not colour alone: the dot fills AND the label goes to full ink */
+.aud__st.is-done{color:var(--ink-1)}
+.aud__st.is-done .aud__dot{background:var(--cobalt);border-color:var(--cobalt)}
+.aud__wait{margin:18px 0 0;font-size:13px;color:var(--ink-4)}
+@media (prefers-reduced-motion:reduce){ .aud__dot{transition:none} }
+
+/* ---- results ------------------------------------------------------------ */
+.aud__head{border-top:1px solid var(--line);padding-top:clamp(22px,2.6vw,32px)}
+.aud__h2{margin:0 0 6px;font:600 clamp(24px,2.4vw,34px)/1.1 'General Sans',system-ui;
+  letter-spacing:-.024em;color:var(--ink-1)}
+.aud__h2:focus{outline:2px solid var(--cobalt-lift);outline-offset:4px}
+.aud__site{margin:0 0 14px;font:600 12px/1 'General Sans',system-ui;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
+.aud__summary{margin:0 0 clamp(26px,3vw,38px);max-width:56ch;
+  font-size:clamp(16px,1.3vw,18.5px);line-height:1.6;color:var(--ink-2)}
+
+.aud__group{margin:0 0 clamp(26px,3vw,40px)}
+.aud__h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;
+  margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line);
+  font:600 15px/1.2 'General Sans',system-ui;letter-spacing:-.012em;color:var(--ink-1)}
+.aud__h3 span{font:500 12.5px/1.4 'General Sans',system-ui;letter-spacing:0;
+  text-transform:none;color:var(--ink-4)}
+
+/* ⚠ severity is NOT colour alone: each group carries a left rule of a
+   different weight AND its own heading text. A viewer who cannot separate the
+   inks still has the heading and the rule. */
+.af{padding:14px 0 16px 16px;border-left:2px solid var(--line);
+  border-bottom:1px solid color-mix(in srgb, var(--ink-1) 7%, transparent)}
+.aud__group--critical .af{border-left-color:var(--cobalt);border-left-width:3px}
+.aud__group--recommended .af{border-left-color:var(--cobalt-lift)}
+.aud__group--optional .af{border-left-color:color-mix(in srgb, var(--ink-1) 26%, transparent)}
+.aud__group--alreadyStrong .af{border-left-color:color-mix(in srgb, var(--ink-1) 16%, transparent)}
+.af__h{margin:0 0 6px;font:600 16.5px/1.35 'General Sans',system-ui;color:var(--ink-1)}
+.af__cat{display:block;margin-bottom:4px;font:600 10.5px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.af__why{margin:0 0 9px;max-width:60ch;font-size:14.5px;line-height:1.6;color:var(--ink-3)}
+.af__ev{list-style:none;margin:0;padding:0}
+.af__ev li{position:relative;padding:3px 0 3px 15px;max-width:64ch;
+  font-size:13.5px;line-height:1.55;color:var(--ink-4)}
+.af__ev li::before{content:'';position:absolute;left:0;top:.72em;width:7px;height:1px;
+  background:color-mix(in srgb, var(--ink-1) 34%, transparent)}
+.af__next{margin:10px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink-3)}
+
+/* ---- the plan ----------------------------------------------------------- */
+.aud__plan{margin:clamp(30px,3.4vw,46px) 0 0;padding-top:clamp(22px,2.6vw,30px);
+  border-top:2px solid var(--ink-1)}
+.aud__none{margin:0;max-width:58ch;font-size:15.5px;line-height:1.65;color:var(--ink-2)}
+.aud__poor{margin:0 0 14px;padding:12px 16px;border-left:2px solid var(--cobalt-lift);
+  background:color-mix(in srgb, var(--ink-1) 4%, transparent);
+  max-width:62ch;font-size:14px;line-height:1.6;color:var(--ink-2)}
+.aud__why{margin:0 0 14px;max-width:58ch;font-size:15px;line-height:1.6;color:var(--ink-2)}
+.aud__lines{list-style:none;margin:0 0 12px;padding:0;max-width:520px}
+.aud__lines li{display:flex;justify-content:space-between;gap:16px;padding:7px 0;
+  border-bottom:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent);
+  font-size:14.5px;color:var(--ink-2)}
+.aud__lines li span:last-child{flex:none;font-weight:600;color:var(--ink-1)}
+.aud__t{display:flex;justify-content:space-between;gap:16px;max-width:520px;margin:0;
+  padding:8px 0;font:600 11px/1.6 'General Sans',system-ui;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3)}
+.aud__t b{font-size:19px;letter-spacing:-.01em;text-transform:none;color:var(--ink-1)}
+.aud__terms{margin:12px 0 0;max-width:58ch;font-size:12.5px;line-height:1.6;color:var(--ink-4)}
+.aud__ctas{display:flex;flex-wrap:wrap;gap:12px;margin:clamp(20px,2.4vw,28px) 0 0}
+.aud__scope{margin:clamp(24px,2.8vw,34px) 0 0;padding-top:16px;
+  border-top:1px solid var(--line);max-width:64ch;
+  font-size:12.5px;line-height:1.6;color:var(--ink-4)}
+
+/* ---- failure ------------------------------------------------------------ */
+.aud__fail{border-top:1px solid var(--line);padding-top:clamp(22px,2.6vw,30px)}
+.aud__fail p{margin:0 0 12px;max-width:58ch;font-size:15px;line-height:1.6;color:var(--ink-2)}
+.aud__failalt{font-size:13.5px !important;color:var(--ink-3) !important}
+
+@media (max-width:560px){
+  .aud__h2{font-size:22px}
+  .af{padding-left:13px}
+  .aud__lines,.aud__t{max-width:none}
+  .aud__ctas .btn{width:100%;justify-content:center}
+}

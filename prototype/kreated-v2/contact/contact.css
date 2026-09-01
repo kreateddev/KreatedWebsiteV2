@@ -59,3 +59,29 @@
    pixel under the 24px minimum. Restored locally rather than touching either
    shared stylesheet. */
 .foot .foot__mark{padding-block:8px}
+
+/* ==========================================================================
+   SELECTED PROJECT — carried in from the pricing builder, 2026-09-01
+   Quiet. It is a receipt of a decision already made, not a second sales
+   surface, so it sits above the form in the page's own hairline language.
+   ========================================================================== */
+.bsum{margin:0 0 clamp(26px,3vw,38px);padding:18px 20px;
+  border-left:2px solid var(--cobalt);
+  background:color-mix(in srgb, var(--ink-1) 4%, transparent);
+  border-radius:0 10px 10px 0}
+.bsum__h{margin:0 0 12px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.bsum__list{list-style:none;margin:0 0 12px;padding:0}
+.bsum__list li{display:flex;justify-content:space-between;gap:16px;
+  padding:5px 0;border-bottom:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent);
+  font-size:14px;line-height:1.45;color:var(--ink-2)}
+.bsum__list li span:last-child{flex:none;font-weight:600;color:var(--ink-1)}
+.bsum__t{display:flex;justify-content:space-between;gap:16px;margin:0;padding:6px 0;
+  font:600 11px/1.6 'General Sans',system-ui;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3)}
+.bsum__t b{font-size:17px;letter-spacing:-.01em;text-transform:none;color:var(--ink-1)}
+.bsum__fit{margin:8px 0 0;padding-top:10px;
+  border-top:1px solid color-mix(in srgb, var(--ink-1) 12%, transparent);
+  font-size:14px;color:var(--ink-2)}
+.bsum__fit b{color:var(--ink-1)}
+.bsum__note{margin:10px 0 0;font-size:12.5px;line-height:1.55;color:var(--ink-4)}

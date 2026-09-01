@@ -187,6 +187,12 @@
         Business Profile, or brand work, or some combination, which is the
         usual case. Tell Skyler what the business does and what is going wrong.</p>
         <div class="formwrap" id="project">
+      <!-- ⚠ EMPTY AND `hidden` IN THE MARKUP. The handoff script fills it only
+           when the visitor actually arrived from the pricing builder. It stays
+           empty here on purpose: Netlify parses this file at deploy time and
+           anything resembling a field would be registered as one.
+           🚫 Do not put form controls in this container. -->
+      <div class="bsum" id="buildSummary" hidden></div>
               <form class="kform" name="project-enquiry" method="POST" action="/thanks/"
                     data-netlify="true" netlify-honeypot="company-website"
                     data-success-event="contact_form_submit" novalidate>
@@ -352,7 +358,12 @@
      undefined, so `contact_form_submit` never fired on the page every header
      CTA on the site points at.
      🚫 Never ship a page containing form.kform without this script. -->
-<script src="/forms.js?v=3" defer></script>
+<!-- offers -> recommend -> handoff. The handoff re-derives every price from
+     the same engine the builder used; nothing but ids and quantities travels. -->
+<script src="/assets/data/offers.js?v=1" defer></script>
+<script src="/assets/data/recommend.js?v=3" defer></script>
+<script src="/forms.js?v=4" defer></script>
+<script src="/contact/build-handoff.js?v=1" defer></script>
 <script src="/services/services.js?v=4" defer></script>
 </body>
 </html>

@@ -11,6 +11,36 @@
   publish = "."
   command = ""
 
+# ⚠ The audit endpoint. Node 20 for fetch(), AbortSignal.timeout() and the
+# structured clone the handler relies on. The function has NO dependencies, so
+# there is nothing to install and the build command stays empty.
+[functions]
+  directory = "netlify/functions"
+  # ⚠ "none" is deliberate: the audit has ZERO npm dependencies, so there is
+  # nothing to bundle and no install step. 🚫 A require() of an uninstalled
+  # package would throw at runtime rather than fail the build, which is why
+  # the rate limiter talks to Netlify Blobs over its HTTP API instead of
+  # importing @netlify/blobs.
+  node_bundler = "none"
+
+[edge_functions]
+  directory = "netlify/edge-functions"
+
+[functions."audit"]
+  # ⚠ 26s is the CEILING, not the plan. The function enforces its own budget
+  # (see BUDGET in netlify/functions/audit.js): 3 pages at 8s each with a
+  # 15s deadline on starting new fetches, and the model pass skipped unless
+  # 7s remain. Worst realistic case is ~21s, so this leaves genuine headroom
+  # rather than relying on the platform to cut the request off.
+  timeout = 26
+
+# ⚠ Netlify's own edge rate limiting sits in front of the audit function.
+# Platform-held state, shared across instances. See the edge function for why
+# there is also a second limiter inside the function itself.
+[[edge_functions]]
+  function = "audit-rate-limit"
+  path = "/.netlify/functions/audit"
+
 # Pretty URLs already resolve as directories (/free-website-audit/, /thanks/),
 # so no redirect rules are required. No SPA fallback: this is a static site and
 # a real 404 should stay a 404.

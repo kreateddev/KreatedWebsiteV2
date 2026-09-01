@@ -110,8 +110,8 @@ includes a bounded amount and more is a separate purchase.
 | Service | onepage | launch | growth | leader |
 |---|---|---|---|---|
 | `svc.page.standard` | — | partial (3–5 pages) | partial (6–10) | partial (10–20+) |
-| `svc.page.service` | — | — | partial (up to 2) | partial (4–8+) |
-| `svc.page.location` | — | — | partial (up to 2) | partial (4–8+) |
+| `svc.page.service` | — | — | **allowance 2, pooled** | **allowance 4, pooled** |
+| `svc.page.location` | — | — | **allowance 2, pooled** | **allowance 4, pooled** |
 | `svc.page.landing` | — | — | — | full |
 | `svc.search.gbp` | — | — | full (one-time audit) | full |
 | `svc.track.analytics` | — | full | full | full |
@@ -135,22 +135,35 @@ strategic consistency, not create excessive discounting."* The matcher must
 never compute a saving for it.
 | `svc.prod.photo` | — | — | — | — |
 
-⚠ **The `partial` rows are why the configurator is not built yet.** "Growth
-includes up to two location pages" means selecting three location pages should
-recommend Growth *plus one*, not Growth. Encoding that correctly needs the page
-allowances confirmed as contractual rather than descriptive, and they are
-currently descriptive copy on `/pricing/`.
+⚠ **RESOLVED 2026-09-01: the allowances are contractual.** Growth includes two
+service or location pages and Market Leader four, pooled across both types, and
+the engine charges only beyond that. `svc.page.standard` keeps no allowance —
+its page range is the size of the site, not a credit. See
+`PACKAGE-MATCHING-RULES.md` Part 4.2.
 
 ---
 
-## 4. Implementation note
-
-When this becomes code:
+## 4. Implementation — BUILT 2026-09-01
 
 ```
-/assets/data/offers.json     ← generated from this document, the only copy
-/pricing/  builder           ← imports it, computes totals and matches
-/free-website-audit/  engine ← imports it, maps findings to services
+prototype/kreated-v2/assets/data/offers.js      ← this document, as data. The only copy.
+prototype/kreated-v2/assets/data/recommend.js   ← the deterministic engine
+prototype/kreated-v2/pricing/builder.js         ← Build Your Package  (consumer 1)
+prototype/kreated-v2/contact/build-handoff.js   ← carries the build into the form
+prototype/kreated-v2/tools/test-engine.js       ← 32 tests, run with plain node
+/free-website-audit/                            ← findings -> offers  (consumer 2, next)
+```
+
+`.js` rather than `.json`: the site has no build step and no module loader, so a
+UMD wrapper lets Node `require()` it for the tests and the browser read it as
+`window.KreatedOffers` from one file. No duplication, no fetch, no bundler.
+
+⚠ **The tests assert this file against the locked catalogue.** `test-engine.js`
+retypes all 23 public prices independently and fails if `offers.js` disagrees.
+Run it after any pricing change:
+
+```
+node prototype/kreated-v2/tools/test-engine.js
 ```
 
 🚫 Neither tool may hold its own price table, its own coverage table, or its own

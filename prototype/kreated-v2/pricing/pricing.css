@@ -342,3 +342,178 @@
 .pswitch__tabs,.ppanel,.pgroup,.offer,.isvc,.byp,.terms,.choose,.movers{
   scroll-margin-top:calc(var(--head-h, 91px) + 18px);
 }
+
+/* ==========================================================================
+   BUILD YOUR PACKAGE — 2026-09-01
+   --------------------------------------------------------------------------
+   Lives in the warm-paper room and takes the room's ink, exactly as .offer and
+   .isvc do. 🚫 No cards, no dashboard chrome, no progress bars, no icon set,
+   no checkmark confetti. A selectable row is the row it already was, with a
+   real control on the left and a rule that lights when it is chosen.
+
+   ⚠ THE SELECTED STATE IS NOT COLOUR ALONE (WCAG 1.4.1). Three things change
+   together: the box fills, the left rule appears, and the name goes to full
+   ink at 600. A viewer who cannot distinguish the inks still has two of them.
+   ========================================================================== */
+.byp__lead{margin:14px 0 clamp(22px,2.4vw,32px);max-width:64ch;
+  font-size:15px;line-height:1.65;color:rgba(2,12,46,.72)}
+
+.byp__layout{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);
+  gap:clamp(28px,4vw,64px);align-items:start;
+}
+
+/* ---- groups -------------------------------------------------------------- */
+.bg{border:0;padding:0;margin:0 0 clamp(30px,3.4vw,46px);min-width:0}
+.bg__legend{display:block;width:100%;padding:0 0 12px;
+  border-bottom:1px solid var(--line-room);margin-bottom:4px}
+.bg__name{display:block;font:600 clamp(15px,1.3vw,18px)/1.2 'General Sans',system-ui;
+  letter-spacing:-.012em;color:var(--ink-on-room)}
+.bg__hint{display:block;margin-top:5px;font-size:13px;line-height:1.5;
+  color:rgba(2,12,46,.60)}
+.bg__clear{margin:10px 0 0}
+.bg__clearbtn{appearance:none;background:none;border:0;padding:4px 0;cursor:pointer;
+  font:500 12.5px/1 'General Sans',system-ui;color:rgba(2,12,46,.60);
+  border-bottom:1px solid rgba(2,12,46,.28)}
+.bg__clearbtn:hover{color:var(--ink-on-room);border-bottom-color:var(--cobalt)}
+.bg__clearbtn:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+
+/* ---- one selectable offer ------------------------------------------------ */
+.bo{padding:14px 0 16px;border-bottom:1px solid rgba(2,12,46,.10);position:relative}
+/* the left rule: the second, non-colour signal that a row is chosen */
+.bo::before{content:'';position:absolute;left:-14px;top:12px;bottom:12px;width:2px;
+  background:var(--cobalt);opacity:0;transition:opacity var(--t-hover)}
+.bo.is-on::before{opacity:1}
+
+.bo__pick{display:flex;align-items:flex-start;gap:13px;cursor:pointer;
+  padding:2px 0 2px 2px}
+/* the real input stays in the accessibility tree and takes focus; it is drawn
+   by .bo__box beside it. 🚫 Do not display:none it. */
+.bo__input{position:absolute;opacity:0;width:20px;height:20px;margin:0;cursor:pointer}
+.bo__box{flex:none;width:20px;height:20px;margin-top:1px;border-radius:5px;
+  border:1.5px solid rgba(2,12,46,.34);background:rgba(255,255,255,.6);
+  display:grid;place-items:center;transition:border-color var(--t-hover),background-color var(--t-hover)}
+.bo__input[type=radio] + .bo__box{border-radius:50%}
+.bo__box::after{content:'';width:8px;height:8px;border-radius:2px;
+  background:var(--room);transform:scale(0);transition:transform var(--t-pill)}
+.bo__input[type=radio] + .bo__box::after{border-radius:50%}
+.bo.is-on .bo__box{background:var(--cobalt);border-color:var(--cobalt)}
+.bo.is-on .bo__box::after{transform:scale(1)}
+.bo__input:focus-visible + .bo__box{outline:2px solid var(--cobalt);outline-offset:3px}
+.bo__pick:hover .bo__box{border-color:rgba(2,12,46,.55)}
+
+.bo__text{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;min-width:0}
+.bo__name{font:500 16px/1.3 'General Sans',system-ui;color:rgba(2,12,46,.86)}
+.bo.is-on .bo__name{font-weight:600;color:var(--ink-on-room)}
+.bo__price{font:600 13px/1.3 'General Sans',system-ui;color:var(--cobalt);white-space:nowrap}
+
+.bo__detail{margin:7px 0 0 33px;max-width:62ch}
+.bo__detail p{margin:0 0 4px;font-size:13.5px;line-height:1.55;color:rgba(2,12,46,.66)}
+.bo__detail b{font-weight:600;color:rgba(2,12,46,.82)}
+.bo__caveat{margin-top:7px !important;padding-top:7px;
+  border-top:1px solid rgba(2,12,46,.10);font-size:12.5px !important;
+  color:rgba(2,12,46,.60) !important}
+
+/* ---- quantity — compact, and only where more than one is sensible -------- */
+.bo__qty{display:flex;align-items:center;gap:8px;margin:11px 0 0 33px}
+.bo__step{appearance:none;width:30px;height:30px;flex:none;cursor:pointer;
+  border:1px solid rgba(2,12,46,.26);border-radius:7px;background:rgba(255,255,255,.6);
+  font:500 16px/1 'General Sans',system-ui;color:var(--ink-on-room)}
+.bo__step:hover{border-color:var(--cobalt)}
+.bo__step:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+.bo__num{width:56px;height:30px;text-align:center;
+  border:1px solid rgba(2,12,46,.26);border-radius:7px;background:rgba(255,255,255,.6);
+  font:600 14px/1 'General Sans',system-ui;color:var(--ink-on-room)}
+.bo__num:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+.bo__unit{font-size:12.5px;color:rgba(2,12,46,.60)}
+
+/* ---- per-row guidance ---------------------------------------------------- */
+.bo__flag{margin:10px 0 0 33px;padding:8px 12px;border-radius:0 7px 7px 0;
+  font-size:12.5px;line-height:1.5;max-width:58ch}
+.bo__flag--included{border-left:2px solid var(--cobalt);
+  background:rgba(2,12,46,.045);color:rgba(2,12,46,.74)}
+.bo__flag--overlap,.bo__flag--note{border-left:2px solid rgba(2,12,46,.30);
+  background:rgba(2,12,46,.035);color:rgba(2,12,46,.68)}
+/* ⚠ .60 is this room's floor. The included state was .44 (2.96:1) and .55
+   (4.17:1) — de-emphasis is not a licence to drop text below AA. The
+   strike-through and the 'Included' word carry the meaning; the alpha was
+   only ever reinforcing it. */
+.bo.is-included .bo__price{color:rgba(2,12,46,.60);text-decoration:line-through}
+
+/* ==========================================================================
+   YOUR PROJECT — the summary
+   ========================================================================== */
+.byp__summary{position:sticky;top:calc(var(--head-h,91px) + 20px)}
+.byp__sumin{border-top:2px solid var(--ink-on-room);padding-top:18px}
+.byp__sumh{margin:0 0 14px;font:600 11.5px/1 'General Sans',system-ui;
+  letter-spacing:.15em;text-transform:uppercase;color:rgba(2,12,46,.60)}
+.byp__sumh:focus{outline:2px solid var(--cobalt);outline-offset:3px}
+.bs__empty{margin:0;font-size:13.5px;line-height:1.6;color:rgba(2,12,46,.60)}
+
+.bs__lines{list-style:none;margin:0 0 16px;padding:0}
+.bs__line{display:grid;grid-template-columns:1fr auto;gap:4px 14px;
+  padding:7px 0;border-bottom:1px solid rgba(2,12,46,.09);
+  font-size:13.5px;line-height:1.4}
+.bs__nm{color:rgba(2,12,46,.80)}
+.bs__nm i{font-style:normal;color:rgba(2,12,46,.55)}
+.bs__amt{font-weight:600;color:var(--ink-on-room);white-space:nowrap}
+.bs__amt em{font-style:normal;font-weight:500;color:rgba(2,12,46,.60)}
+.bs__note{grid-column:1 / -1;font-size:11.5px;color:rgba(2,12,46,.58)}
+.bs__line.is-included .bs__nm{color:rgba(2,12,46,.60)}
+
+.bs__total{display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding:12px 0 0;border-top:1px solid rgba(2,12,46,.16);margin-top:4px}
+.bs__total--mo{border-top-width:1px;margin-top:10px}
+.bs__tl{font:600 10.5px/1 'General Sans',system-ui;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(2,12,46,.60)}
+.bs__tv{font:600 clamp(20px,1.8vw,26px)/1 'General Sans',system-ui;
+  letter-spacing:-.02em;color:var(--ink-on-room)}
+.bs__sub{margin:8px 0 0;font-size:12px;line-height:1.5;color:rgba(2,12,46,.60)}
+
+/* ---- the fit verdict ----------------------------------------------------- */
+.byp__verdict{margin:20px 0 0;padding:16px 0 0;border-top:1px solid rgba(2,12,46,.16)}
+.bv__h{margin:0 0 7px;font:600 15px/1.25 'General Sans',system-ui;
+  letter-spacing:-.014em;color:var(--ink-on-room)}
+.bv__p{margin:0 0 10px;font-size:13px;line-height:1.55;color:rgba(2,12,46,.70)}
+.bv__cmp{margin:0 0 10px}
+.bv__cmp > div{display:flex;justify-content:space-between;gap:12px;
+  padding:5px 0;font-size:13px;border-bottom:1px solid rgba(2,12,46,.09)}
+.bv__cmp dt{color:rgba(2,12,46,.70)}
+.bv__cmp dd{margin:0;font-weight:600;color:var(--ink-on-room)}
+.bv__win dd{color:var(--cobalt)}
+.bv__why{margin:0;font-size:12px;line-height:1.55;color:rgba(2,12,46,.60)}
+
+.byp__go{margin-top:20px;width:100%;justify-content:center;
+  background:var(--cobalt);color:#fff}
+.byp__go[disabled]{opacity:.4;pointer-events:none}
+.byp__terms{margin:14px 0 0;font-size:12px;line-height:1.55;color:rgba(2,12,46,.60)}
+
+/* ==========================================================================
+   MOBILE — the total must never be three screens away
+   ========================================================================== */
+.byp__bar{display:none}
+@media (max-width:900px){
+  .byp__layout{grid-template-columns:1fr;gap:clamp(24px,4vw,34px)}
+  /* 🚫 not sticky on a phone: a sticky column plus a sticky bar plus a sticky
+     masthead leaves almost no room to read. The bar carries the total. */
+  .byp__summary{position:static}
+  .bo__detail,.bo__qty,.bo__flag{margin-left:33px}
+  .byp__bar{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    position:sticky;bottom:0;z-index:20;
+    margin:clamp(24px,4vw,34px) calc(var(--gutter) * -1) 0;
+    padding:12px var(--gutter);
+    background:var(--room-deep,#EAE7DF);
+    border-top:1px solid var(--line-room);
+  }
+  .byp__barcount{font:600 13px/1.3 'General Sans',system-ui;color:var(--ink-on-room)}
+  .byp__barlink{flex:none;font:600 13px/1 'General Sans',system-ui;
+    color:var(--cobalt);text-decoration:none;padding:9px 2px;
+    border-bottom:1px solid var(--cobalt)}
+  .byp__barlink:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+}
+@media (max-width:560px){
+  .bo__text{gap:3px 10px}
+  .bo__detail{max-width:none}
+  .bg__hint{font-size:12.5px}
+}
