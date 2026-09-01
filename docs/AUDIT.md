@@ -209,16 +209,27 @@ Enforced in the function, not left to the platform.
 
 | Stage | Budget |
 |---|---|
-| DNS, connect and read, per page | 8s (`safe-fetch`) |
+| DNS, connect and read, per page | 4s (`safe-fetch`) |
 | Pages | **3 maximum** |
 | Signals and classification | <50ms, synchronous, no network |
 | Model prose | 6s, and skipped unless 7s remain |
-| **Enforced ceiling** | **21s**, against a 26s function timeout |
+| **Enforced ceiling** | **8.5s**, against Netlify's **default 10s** function timeout |
 
-`PAGE_DEADLINE_MS` (15s) stops a *new* page fetch from starting when the clock
+⚠ **`netlify.toml` cannot set a function timeout** — the `timeout` key is not a
+supported property there, and an earlier version of this file wrongly assumed
+26s because of it. The budget is therefore sized for the 10s default. If the
+site's function timeout is raised in the Netlify UI, `BUDGET` and
+`safe-fetch`'s `TIMEOUT_MS` can be raised with it.
+
+⚠ **`node_bundler` must be `esbuild` or `zisi`.** It was set to `"none"`, which
+is not a valid value. Unset means `zisi`, which traces `require()` and packages
+`netlify/functions/lib/*.js` alongside the handler.
+
+`PAGE_DEADLINE_MS` (5.5s) stops a *new* page fetch from starting when the clock
 says there is no room, and the model pass is skipped entirely below
-`MODEL_MIN_REMAINING_MS`. A slow site therefore returns a two-page audit with
-plain copy — a real result — rather than a 502.
+`MODEL_MIN_REMAINING_MS` (3s). The real worst case is about 8s: two pages then
+a stop. A slow site returns a two-page audit with plain copy — a real result —
+rather than a 502.
 
 🚫 Do not raise the page maximum without redoing this arithmetic.
 

@@ -52,24 +52,31 @@ const MAX_BODY = 4000;
    deadline of its own so the audit returns something useful instead of being
    killed mid-flight.
 
-     DNS + connect + read, per page   8s   (safe-fetch's own timeout)
-     3 pages, worst case             24s
+     DNS + connect + read, per page   4s   (safe-fetch's own timeout)
+     3 pages, worst case             12s
      signals + classify              <50ms, synchronous, no network
-     model prose                      6s   and SKIPPED when time is short
+     model prose                    2.5s   and SKIPPED when time is short
      ------------------------------------
-     unbounded worst case            ~30s against a 26s function timeout
+     unbounded worst case          ~14.5s against a 10s function timeout
 
    ⚠ Which is why the budget is ENFORCED rather than hoped for. No new page
-   fetch starts after PAGE_DEADLINE_MS, and the model pass is skipped unless
-   MODEL_MIN_REMAINING_MS is left. A slow site returns a two-page audit with
-   plain copy — a real result — instead of a 502.
+   fetch starts after PAGE_DEADLINE_MS, so the real worst case is ~8s: two
+   pages then a stop. The model pass is skipped unless MODEL_MIN_REMAINING_MS
+   is left. A slow site returns a two-page audit with plain copy — a real
+   result — instead of a 502.
    🚫 Do not raise MAX_PAGES without redoing this arithmetic.
    ========================================================================== */
 const BUDGET = {
-  TOTAL_MS: 21000,             /* our ceiling, comfortably under the platform's */
-  PAGE_DEADLINE_MS: 15000,     /* start no new page fetch after this */
-  MODEL_MS: 6000,
-  MODEL_MIN_REMAINING_MS: 7000
+  /* ⚠ SIZED FOR A 10s FUNCTION TIMEOUT, which is Netlify's default and which
+     netlify.toml cannot change (the `timeout` key is not supported there).
+     Worst case: page 1 at 4s, deadline check passes, page 2 at 4s = 8s, page 3
+     skipped, model skipped. ~8s against 10s.
+     🚫 Do not raise these without raising the site's function timeout in the
+     Netlify UI first, and 🚫 do not raise MAX_PAGES without redoing the sum. */
+  TOTAL_MS: 8500,
+  PAGE_DEADLINE_MS: 5500,      /* start no new page fetch after this */
+  MODEL_MS: 2500,
+  MODEL_MIN_REMAINING_MS: 3000
 };
 
 /* ⚠ The in-process Map that used to live here is gone. It limited one warm

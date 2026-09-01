@@ -16,34 +16,25 @@
 # there is nothing to install and the build command stays empty.
 [functions]
   directory = "netlify/functions"
-  # ⚠ "none" is deliberate: the audit has ZERO npm dependencies, so there is
-  # nothing to bundle and no install step. 🚫 A require() of an uninstalled
-  # package would throw at runtime rather than fail the build, which is why
-  # the rate limiter talks to Netlify Blobs over its HTTP API instead of
-  # importing @netlify/blobs.
-  node_bundler = "none"
+  # ⚠ node_bundler is DELIBERATELY UNSET, 2026-09-01. It was `"none"`, which is
+  # not a valid value — the documented options are `esbuild` and `zisi` — and an
+  # invalid value fails the deploy rather than being ignored. Unset means zisi,
+  # the default, which traces require() and packages netlify/functions/lib/*.js
+  # with the handler. The audit still has ZERO npm dependencies, so there is
+  # nothing to install and the build command stays empty.
+  # 🚫 Do not set node_bundler to anything that is not esbuild or zisi.
 
-[edge_functions]
-  directory = "netlify/edge-functions"
+# ⚠ NO [functions."audit"] timeout KEY. It was `timeout = 26`, which is not a
+# supported netlify.toml property; function timeout is a site setting in the
+# Netlify UI. The function therefore has to fit inside whatever the site's
+# timeout is, and the default is 10s — so the budget in netlify/functions/
+# audit.js is sized for 10s, not 26s. If the site timeout is raised later, the
+# budget can be raised with it. 🚫 Do not put the key back and assume it works.
 
-[functions."audit"]
-  # ⚠ 26s is the CEILING, not the plan. The function enforces its own budget
-  # (see BUDGET in netlify/functions/audit.js): 3 pages at 8s each with a
-  # 15s deadline on starting new fetches, and the model pass skipped unless
-  # 7s remain. Worst realistic case is ~21s, so this leaves genuine headroom
-  # rather than relying on the platform to cut the request off.
-  timeout = 26
-
-# ⚠ Netlify's own edge rate limiting sits in front of the audit function.
-# Platform-held state, shared across instances. See the edge function for why
-# there is also a second limiter inside the function itself.
-[[edge_functions]]
-  function = "audit-rate-limit"
-  path = "/.netlify/functions/audit"
-
-# Pretty URLs already resolve as directories (/free-website-audit/, /thanks/),
-# so no redirect rules are required. No SPA fallback: this is a static site and
-# a real 404 should stay a 404.
+# ⚠ NO [edge_functions] BLOCK. The rate-limit edge function declares its own
+# path in its exported `config`, and Netlify auto-discovers files in
+# netlify/edge-functions/. Declaring it here as well is a second, competing
+# declaration of the same function.
 
 [[headers]]
   for = "/*"

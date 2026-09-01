@@ -27,7 +27,11 @@ const https = require('https');
 const { URL } = require('url');
 
 const LIMITS = {
-  TIMEOUT_MS: 8000,
+  /* ⚠ 4s, not 8s. The function has to fit inside Netlify's default 10s
+     timeout (see netlify.toml), and three pages at 8s could not. Measured
+     real crawls run 0.3-4s for all three pages together, so this is
+     generous in practice and only bites a genuinely slow host. */
+  TIMEOUT_MS: 4000,
   MAX_BYTES: 1200000,     /* 1.2MB of HTML is far more than any real homepage */
   MAX_REDIRECTS: 3,
   ALLOWED_PORTS: new Set([80, 443]),
