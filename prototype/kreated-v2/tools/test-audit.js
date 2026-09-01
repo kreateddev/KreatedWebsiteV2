@@ -604,6 +604,17 @@ async function modelTests() {
      requests were all served. A v2 function on the same deploy read and wrote
      Blobs successfully. Reverting the shape silently removes rate limiting,
      so it is pinned here. */
+  /* 🚨 Eventual consistency silently disables the limiter: every request
+     inside the 60s propagation window reads the same stale count and is
+     allowed. It cannot be caught locally, because the file backend is
+     immediately consistent. Pinned in the source instead. */
+  await ta('Blobs reads are strongly consistent', () => {
+    const src = fsx.readFileSync(pathx.resolve(__dirname, '../netlify/functions/lib/rate-limit.js'), 'utf8');
+    ok(/consistency:\s*'strong'/.test(src), "the store must be opened with consistency: 'strong'");
+    ok(!/store\.get\([^)]*type:\s*'json'\s*\}\)/.test(src),
+       'every read must name its consistency, not fall back to the default');
+  });
+
   await ta('the deployed entry is a v2 function, not a v1 handler', () => {
     const entry = fsx.readFileSync(pathx.resolve(__dirname, '../netlify/functions/audit.js'), 'utf8');
     ok(/export default/.test(entry), 'v2 requires an export default');

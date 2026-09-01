@@ -62,18 +62,32 @@ async function blobsBackend() {
 
   let store;
   /* ⚠ getStore() THROWS, it does not return null, when the environment has no
-     Blobs credentials — which is exactly the local case. */
-  try { store = blobsLib.getStore('kreated-audit-rate'); }
+     Blobs credentials — which is exactly the local case.
+
+     🚨 consistency: 'strong' IS MANDATORY HERE, and its absence is invisible.
+     Blobs reads are EVENTUALLY consistent by default: a write propagates to
+     all edge locations within 60 seconds, and until it does a read returns the
+     PREVIOUS value. For a counter that means every request inside that window
+     reads the same stale count, writes 1, and is allowed. Measured in
+     production 2026-09-01: with the store healthy and degraded:false, six
+     consecutive requests against a limit of four were all served.
+
+     Strong reads are slower. One extra read per audit is nothing next to
+     fetching three pages, and a limiter that cannot see its own last write is
+     not a limiter. 🚫 Do not remove this for latency. */
+  try { store = blobsLib.getStore({ name: 'kreated-audit-rate', consistency: 'strong' }); }
   catch (e) { return null; }
 
   /* prove it actually works before committing to it: a store object that
      throws on first use would look healthy and then fail open */
-  try { await store.get('__probe__', { type: 'json' }); }
+  try { await store.get('__probe__', { type: 'json', consistency: 'strong' }); }
   catch (e) { return null; }
 
   return {
     kind: 'blobs',
-    async get(key) { return await store.get(key, { type: 'json' }); },
+    /* consistency is set store-wide above; named again here so a future
+       reader cannot mistake this for a default read */
+    async get(key) { return await store.get(key, { type: 'json', consistency: 'strong' }); },
     async set(key, value) { await store.setJSON(key, value); }
   };
 }

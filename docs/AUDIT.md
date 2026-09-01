@@ -172,6 +172,21 @@ bearing:
 * the backend **probes the store with a real read** before committing to it, so
   a store object that would throw on first use is rejected rather than adopted.
 
+### 🚨 Reads must be strongly consistent
+
+Netlify Blobs is **eventually consistent by default**: a write propagates to all
+edge locations within 60 seconds, and until it does a read returns the previous
+value. For a counter that is fatal and completely invisible — the store is
+healthy, `degraded` is `false`, and every request inside the window reads the
+same stale count, writes 1, and is allowed. Measured in production on
+2026-09-01: six consecutive requests against a limit of four, all served.
+
+The store is therefore opened with `consistency: 'strong'`, and each read names
+it again. 🚫 Do not remove this for latency: one strong read is nothing next to
+fetching three pages, and a limiter that cannot see its own last write is not a
+limiter. It cannot be caught by a local test — the file backend is immediately
+consistent — so a test pins it in the source instead.
+
 ### 🚨 The audit must be a v2 function, or Blobs does not work at all
 
 `netlify/functions/audit.js` is a **v2 function** (`export default`), and that
