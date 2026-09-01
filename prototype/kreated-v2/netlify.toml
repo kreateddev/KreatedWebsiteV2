@@ -31,12 +31,19 @@
   # It was then left unset (= zisi) while the functions had no dependencies.
   # Now @netlify/blobs is a dependency and esbuild is required.
 
-# ⚠ NO [functions."audit"] timeout KEY. It was `timeout = 26`, which is not a
-# supported netlify.toml property; function timeout is a site setting in the
-# Netlify UI. The function therefore has to fit inside whatever the site's
-# timeout is, and the default is 10s — so the budget in netlify/functions/
-# audit.js is sized for 10s, not 26s. If the site timeout is raised later, the
-# budget can be raised with it. 🚫 Do not put the key back and assume it works.
+# ⚠ NO [functions."audit"] timeout KEY, AND NONE IS NEEDED. It was once
+# `timeout = 26`, which is not a supported netlify.toml property — the keys
+# under [functions] are region, memory, vcpu, directory, node_bundler,
+# external_node_modules and included_files.
+#
+# ⚠ CORRECTED 2026-09-01: this file used to claim the platform default was 10s
+# and that raising it was a Netlify UI setting. Both were wrong. Netlify's
+# synchronous function limit is 60 SECONDS and is documented as NOT
+# configurable: there is no toml key, no UI control, and nothing to request.
+# The 10s figure was real in 2022-23 and is simply out of date.
+# The audit's own budget is 22s, set in netlify/functions/lib/audit-core.js,
+# and the gap to 60s is deliberate headroom rather than unused capacity.
+# 🚫 Do not put a timeout key back, and 🚫 do not size the budget to 60s.
 
 # ⚠ NO [edge_functions] BLOCK. The rate-limit edge function declares its own
 # path in its exported `config`, and Netlify auto-discovers files in

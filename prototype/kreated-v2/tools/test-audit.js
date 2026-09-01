@@ -608,6 +608,16 @@ async function modelTests() {
      inside the 60s propagation window reads the same stale count and is
      allowed. It cannot be caught locally, because the file backend is
      immediately consistent. Pinned in the source instead. */
+  /* ⚠ The limiter runs on the audit's clock. Two round trips is the floor for
+     a read-then-write counter; a third was costing real audits. */
+  await ta('the limiter makes no more than a read and a write', () => {
+    const src = fsx.readFileSync(pathx.resolve(__dirname, '../netlify/functions/lib/rate-limit.js'), 'utf8');
+    const blobs = src.slice(src.indexOf('function blobsBackend'), src.indexOf('function fileBackend'));
+    eq((blobs.match(/store\.(get|setJSON)\(/g) || []).length, 2,
+       'exactly one read and one write may reach the store per request:');
+    ok(!/__probe__/.test(src), 'the liveness probe was a third round trip and is redundant');
+  });
+
   await ta('Blobs reads are strongly consistent', () => {
     const src = fsx.readFileSync(pathx.resolve(__dirname, '../netlify/functions/lib/rate-limit.js'), 'utf8');
     ok(/consistency:\s*'strong'/.test(src), "the store must be opened with consistency: 'strong'");
@@ -639,6 +649,87 @@ async function modelTests() {
     /* a GET must still be refused, and must not need a body */
     const bad = await mod.default(new Request('https://kreated.dev/x', { method: 'GET' }), {});
     eq(bad.status, 405, 'method check still applies through the adapter:');
+  });
+
+  /* ---- THE PRODUCTION FAILURE THIS PHASE FIXED --------------------------
+     🚨 The budget clock used to start AFTER the rate-limit check, so the two
+     seconds the limiter spends in Netlify Blobs were invisible to it. The
+     audit then started a page fetch it could not afford and was killed at the
+     10s function timeout; Netlify returned its own non-JSON error page and the
+     browser reported a network failure. These two tests pin the arithmetic. */
+  /* ⚠ THE ARITHMETIC, PINNED. The budget must fit three full-length page
+     fetches plus the limiter, and must still sit well under the platform's 60s
+     synchronous ceiling. Both halves have been wrong before: the ceiling was
+     documented here as 10s for two phases, and the budget was sized to it. */
+  await ta('the budget fits three worst-case pages and stays clear of the ceiling', () => {
+    /* ⚠ READ THE REAL VALUES, do not regex the source. The first version of
+       this test parsed the file, stopped matching when TOTAL_MS moved inside
+       Number(env || default), produced NaN, and NaN >= x is false — so it
+       failed loudly. It could as easily have been NaN <= x somewhere and
+       passed silently. */
+    const { BUDGET } = require('../netlify/functions/lib/audit-core.js');
+    const { LIMITS } = require('../netlify/functions/lib/safe-fetch.js');
+    const total = BUDGET.TOTAL_MS, reserve = BUDGET.PAGE_RESERVE_MS, page = LIMITS.TIMEOUT_MS;
+    [['TOTAL_MS',total],['PAGE_RESERVE_MS',reserve],['TIMEOUT_MS',page]]
+      .forEach(([k,v]) => ok(Number.isFinite(v) && v > 0, k + ' must be a real number, got ' + v));
+
+    const LIMITER = 2100;   /* measured in production */
+    const CEILING = 60000;  /* Netlify synchronous limit, not configurable */
+    ok(reserve >= page, 'the reserve must cover a whole page fetch: ' + reserve + ' < ' + page);
+    const afterTwo = total - LIMITER - page * 2;
+    ok(afterTwo >= reserve, 'a third page must still fit: ' + afterTwo + 'ms left, needs ' + reserve);
+    const worst = LIMITER + page * 3;
+    ok(worst <= total, 'worst case ' + worst + 'ms must fit the ' + total + 'ms budget');
+    ok(total <= CEILING * 0.5,
+       'the budget must keep real headroom under the 60s ceiling, got ' + total + 'ms');
+  });
+
+  await ta('time spent before the crawl comes out of the budget', async () => {
+    const RL = require('../netlify/functions/lib/rate-limit.js');
+    const original = RL.check;
+    /* ⚠ THE SITE MUST HAVE PAGES TO SKIP. An earlier version of this test used
+       example.com, which has no followable links, so "1 page inspected" was
+       true whatever the budget did and the test proved nothing. Wikipedia was
+       no better: its portal homepage yields one page too. iana.org reliably
+       gives three, and the budget is squeezed through the env override so the
+       whole thing still runs in seconds. */
+    process.env.KREATED_AUDIT_BUDGET_MS = '7000';
+    RL.check = async (ip, opts) => { await new Promise(r => setTimeout(r, 3000)); return original(ip, opts); };
+    delete require.cache[require.resolve('../netlify/functions/lib/audit-core.js')];
+    const fresh = require('../netlify/functions/lib/audit-core.js').handler;
+    const began = Date.now();
+    let r;
+    try {
+      const res = await fresh({ httpMethod: 'POST',
+        headers: { 'x-forwarded-for': 'slowstore-' + Math.random() },
+        body: JSON.stringify({ url: 'https://www.iana.org', email: 'a@b.com' }) });
+      r = JSON.parse(res.body);
+    } finally {
+      RL.check = original;
+      delete process.env.KREATED_AUDIT_BUDGET_MS;
+      delete require.cache[require.resolve('../netlify/functions/lib/audit-core.js')];
+    }
+    const took = Date.now() - began;
+    ok(r.ok, 'a slow store must still produce an audit');
+    ok(r.findings.length === 6, 'and a complete one: ' + r.findings.length + ' findings');
+    ok(r.pagesInspected.length < 3,
+       'with 3s of a 7s budget gone before the crawl, the third page cannot start; got ' +
+       r.pagesInspected.length + ' pages');
+    ok(r.pagesSkipped.some(p => /budget/.test(p.why)),
+       'and the skipped pages must say why: ' + JSON.stringify(r.pagesSkipped));
+    ok(took < 9000, 'the call must stay inside the squeezed budget, took ' + took + 'ms');
+  });
+
+  await ta('the reported elapsed time is the whole call, not just the crawl', async () => {
+    const began = Date.now();
+    const res = await handler({ httpMethod: 'POST',
+      headers: { 'x-forwarded-for': 'clock-' + Math.random() },
+      body: JSON.stringify({ url: 'https://example.com', email: 'a@b.com' }) });
+    const wall = Date.now() - began;
+    const b = JSON.parse(res.body);
+    /* the old bug showed 542ms for a call that really took 2539ms */
+    ok(b.meta.elapsedMs <= wall + 50 && b.meta.elapsedMs >= wall - 400,
+       'elapsedMs ' + b.meta.elapsedMs + ' should track the real ' + wall + 'ms');
   });
 
   await ta('at most three pages are ever analysed', async () => {

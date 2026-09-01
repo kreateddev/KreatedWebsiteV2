@@ -48,33 +48,63 @@ const MAX_BODY = 4000;
 
 /* ==========================================================================
    THE TIME BUDGET
-   Netlify's function timeout is the ceiling, not the plan. Every stage gets a
-   deadline of its own so the audit returns something useful instead of being
-   killed mid-flight.
 
-     DNS + connect + read, per page   4s   (safe-fetch's own timeout)
-     3 pages, worst case             12s
-     signals + classify              <50ms, synchronous, no network
-     model prose                    2.5s   and SKIPPED when time is short
+   ⚠ THE PLATFORM CEILING IS 60 SECONDS, corrected 2026-09-01. Every earlier
+   version of this file said 10s and sized itself for it. That number was
+   historical: Netlify's synchronous limit was 10s in 2022-23 and is now 60s,
+   documented as NOT configurable — there is no UI setting and no netlify.toml
+   key, so nothing needs changing to get it.
+
+   🚫 THE BUDGET IS NOT THE CEILING. The worst case below is about 20s against
+   that 60s limit, roughly a third of it. The remaining forty seconds is not
+   spare capacity to spend: it absorbs a cold start, a slow Blobs region, a
+   host that TCP-connects fast and then stalls, and the response encoding. A
+   budget sized to the platform maximum has no answer when any one of those
+   goes long.
+
+   WHERE THE TIME GOES, worst case:
+
+     shared rate limiter        ~2.0s   two strong Blobs round trips, and the
+                                        only part that runs before the clock
+                                        is useful. Measured 2.1s in production.
+     DNS validation           <0.05s    per hop, inside each page fetch below;
+                                        every address is resolved and checked
+     3 page fetches           18.0s     3 x safe-fetch's own 6s timeout
+     signals + classification <0.05s    synchronous, no network
+     recommendation           <0.01s    a table lookup and arithmetic
+     model prose                 0      OFF. Gated behind KREATED_AUDIT_ENRICH
+                                        and not called in production.
      ------------------------------------
-     unbounded worst case          ~14.5s against a 10s function timeout
+     worst case               ~20.1s    against a 22s budget and a 60s ceiling
 
-   ⚠ Which is why the budget is ENFORCED rather than hoped for. No new page
-   fetch starts after PAGE_DEADLINE_MS, so the real worst case is ~8s: two
-   pages then a stop. The model pass is skipped unless MODEL_MIN_REMAINING_MS
-   is left. A slow site returns a two-page audit with plain copy — a real
-   result — instead of a 502.
+   🚨 GATING IS BY TIME REMAINING, NOT TIME ELAPSED, and that is the fix that
+   matters more than any number here. A fixed "no new page after Ns" threshold
+   is only correct if everything before it is free. Nothing before it is free:
+   the limiter's Blobs round trips cost about two seconds and used to sit
+   entirely outside the clock, because startedAt was set AFTER the rate-limit
+   check. The audit believed it had its whole budget when a tenth of it was
+   already gone, and meta.elapsedMs under-reported the real call by the same
+   two seconds. The clock now starts on the handler's first line.
+
+   A SLOW SITE DEGRADES, IT DOES NOT FAIL. No page fetch starts unless the
+   worst case of that fetch still fits, so a slow host returns a two-page or
+   one-page audit — a real result, with the skipped pages named — instead of
+   being killed mid-flight.
    🚫 Do not raise MAX_PAGES without redoing this arithmetic.
    ========================================================================== */
 const BUDGET = {
-  /* ⚠ SIZED FOR A 10s FUNCTION TIMEOUT, which is Netlify's default and which
-     netlify.toml cannot change (the `timeout` key is not supported there).
-     Worst case: page 1 at 4s, deadline check passes, page 2 at 4s = 8s, page 3
-     skipped, model skipped. ~8s against 10s.
-     🚫 Do not raise these without raising the site's function timeout in the
-     Netlify UI first, and 🚫 do not raise MAX_PAGES without redoing the sum. */
-  TOTAL_MS: 8500,
-  PAGE_DEADLINE_MS: 5500,      /* start no new page fetch after this */
+  /* ⚠ 22s of a 60s platform ceiling. 🚫 Do not raise this toward 60: see the
+     paragraph above on what the difference is actually for.
+
+     KREATED_AUDIT_BUDGET_MS exists so the page-skip gating can be proven in a
+     test without a twenty-second test, and so the budget can be tuned without
+     a deploy if a real crawl ever needs it. 🚫 Never set it in production to
+     anything above the ceiling arithmetic above. */
+  TOTAL_MS: Number(process.env.KREATED_AUDIT_BUDGET_MS || 22000),
+  /* the worst case of ONE page fetch plus slack, which is what has to be left
+     on the clock before another one may start. Tracks safe-fetch's TIMEOUT_MS,
+     so 🚫 do not change one without the other. */
+  PAGE_RESERVE_MS: 6500,
   MODEL_MS: 2500,
   MODEL_MIN_REMAINING_MS: 3000
 };
@@ -274,6 +304,11 @@ function toNeeds(findings) {
 }
 
 exports.handler = async function (event) {
+  /* 🚨 FIRST LINE. Everything below, the rate limiter included, spends this
+     budget. See the BUDGET comment for the failure this ordering caused. */
+  const startedAt = Date.now();
+  const remaining = () => BUDGET.TOTAL_MS - (Date.now() - startedAt);
+
   if (event.httpMethod !== 'POST') return reply(405, { error: 'Use POST.' });
   if ((event.body || '').length > MAX_BODY) return reply(413, { error: 'That request was too large.' });
 
@@ -310,7 +345,6 @@ exports.handler = async function (event) {
     };
   }
 
-  const startedAt = Date.now();
   try {
     /* 2. fetch — the homepage, then at most two SCORED pages of its own */
     const first = await safeFetch(/^https?:\/\//i.test(url) ? url : 'https://' + url);
@@ -320,7 +354,11 @@ exports.handler = async function (event) {
     const skipped = [];
 
     for (const c of chosen) {
-      if (Date.now() - startedAt > BUDGET.PAGE_DEADLINE_MS) {
+      /* ⚠ "is there room for the worst case of this fetch" — not "how long has
+         it been". A page that cannot finish inside the function timeout must
+         never be started: a skipped page costs one line of the report, and an
+         overrun costs the whole audit. */
+      if (remaining() < BUDGET.PAGE_RESERVE_MS) {
         skipped.push({ url: c.url, why: 'the time budget was reached' });
         continue;
       }
@@ -342,8 +380,7 @@ exports.handler = async function (event) {
     const fit      = fitVerdict(findings, summary);
 
     /* 5 — enrichment only if there is genuinely time for it */
-    const remaining = BUDGET.TOTAL_MS - (Date.now() - startedAt);
-    const polished = remaining >= BUDGET.MODEL_MIN_REMAINING_MS
+    const polished = remaining() >= BUDGET.MODEL_MIN_REMAINING_MS
       ? await polish(findings, { host: summary.home.host })
       : { findings, modelUsed: false, modelError: 'skipped to stay inside the time budget' };
 
@@ -372,3 +409,8 @@ exports.handler = async function (event) {
     return reply(500, { error: 'The audit could not be completed. Try again in a moment.' });
   }
 };
+
+/* exported for the tests, which assert the budget arithmetic directly rather
+   than by regexing this file — a source regex silently produced NaN and passed
+   an inequality that should have failed. */
+exports.BUDGET = BUDGET;

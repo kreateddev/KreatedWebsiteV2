@@ -27,11 +27,13 @@ const https = require('https');
 const { URL } = require('url');
 
 const LIMITS = {
-  /* ⚠ 4s, not 8s. The function has to fit inside Netlify's default 10s
-     timeout (see netlify.toml), and three pages at 8s could not. Measured
-     real crawls run 0.3-4s for all three pages together, so this is
-     generous in practice and only bites a genuinely slow host. */
-  TIMEOUT_MS: 4000,
+  /* ⚠ 6s, raised from 4s on 2026-09-01 when the platform ceiling turned out
+     to be 60s rather than the 10s this file had assumed. Three pages at 6s is
+     18s, which fits the 22s budget in audit-core.js with the ~2s rate limiter
+     in front of it. Measured real crawls run 0.3-4s for ALL THREE pages
+     together, so this only bites a genuinely slow host — which is exactly the
+     case it was raised for. 🚫 Tied to BUDGET.PAGE_RESERVE_MS: change both. */
+  TIMEOUT_MS: 6000,
   MAX_BYTES: 1200000,     /* 1.2MB of HTML is far more than any real homepage */
   MAX_REDIRECTS: 3,
   ALLOWED_PORTS: new Set([80, 443]),

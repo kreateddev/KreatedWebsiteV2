@@ -29,9 +29,15 @@
 (function () {
   'use strict';
 
-  var room = document.querySelector('.room');
-  var work = document.getElementById('work');
-  if (!room || !work) return;
+  /* ⚠ THE ANCHOR IS NOW DECLARED BY THE PAGE. It used to be hardcoded to the
+     homepage's `.room`, with `#work` as a second guard that nothing else read.
+     /free-website-audit/ needs the same journey anchored to a different
+     section, so the element carries the decision: put data-atmos-anchor on the
+     first section that should be read in night territory.
+     🚫 Do not go back to a hardcoded selector. The homepage keeps working
+     because `.room` is still the fallback, not because it is special. */
+  var room = document.querySelector('[data-atmos-anchor]') || document.querySelector('.room');
+  if (!room) return;
 
   var root = document.documentElement;
 
@@ -165,6 +171,25 @@
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize, { passive: true });
+
+  /* ⚠ THE ANCHOR MOVES WHEN CONTENT IS INJECTED ABOVE IT, and a resize event
+     is not fired when that happens. On /free-website-audit/ the result is
+     written into the page above the anchor and pushes it down by roughly two
+     thousand pixels; measure() had run once, at load, against a layout that no
+     longer existed. The page then scrolled to the fresh result, compared that
+     position against a boundary two thousand pixels too high, and inverted —
+     so the audit result was read in night on a page designed to keep it on
+     paper.
+
+     A ResizeObserver on the document element catches every layout change, not
+     just the ones the viewport causes. It is debounced through the same path
+     as resize, so a burst of mutations costs one measurement.
+     🚫 Do not replace this with a one-off timer after submit: the result can
+     also change height later, when an image loads or a details opens. */
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(onResize);
+    ro.observe(document.documentElement);
+  }
   window.addEventListener('load', function () {
     measure();
     lastP1 = lastP2 = lastP = -1;

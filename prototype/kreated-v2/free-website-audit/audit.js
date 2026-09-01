@@ -135,6 +135,18 @@
       '</div></section>';
   }
 
+  /* ⚠ THE WRAPPER MATTERS. render() used to be called inside the fetch
+     chain, so any exception in it landed in .catch() and told the visitor the
+     service could not be reached. A rendering bug is not a network problem and
+     must not be reported as one. */
+  function show(data) {
+    try { render(data); }
+    catch (e) {
+      fail('The audit ran, but the result could not be displayed. Send the site over and you will get the findings directly.', false);
+      if (window.console && console.error) console.error('audit render failed', e);
+    }
+  }
+
   function render(data) {
     var rec = Rec.recommendFromNeeds(data.needs);
 
@@ -248,9 +260,18 @@
     if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Checking…'; }
     startAnalyzing();
 
+    /* ⚠ A CLIENT DEADLINE, because fetch has none. If the function is killed
+       mid-flight the browser can otherwise wait indefinitely on a request that
+       is never going to answer. 30s sits above the function's own 22s budget
+       with room to spare, so this only fires when something has genuinely
+       gone wrong rather than racing a slow but healthy audit. */
+    var ctl = window.AbortController ? new AbortController() : null;
+    var giveUp = setTimeout(function () { if (ctl) ctl.abort(); }, 30000);
+
     fetch('/.netlify/functions/audit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      signal: ctl ? ctl.signal : undefined,
       body: JSON.stringify({
         url: url.trim(),
         business: (form.querySelector('[name="business"]') || {}).value || '',
@@ -259,16 +280,66 @@
         'company-website': (form.querySelector('[name="company-website"]') || {}).value || ''
       })
     })
-    .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-    .then(function (res) {
-      stopAnalyzing();
-      if (!res.ok || !res.j.ok) { fail(res.j.error || 'Something went wrong reading that site.', true); return; }
-      render(res.j);
-    })
-    .catch(function () { fail('The audit service could not be reached. Try again in a moment.', true); })
-    .finally(function () {
-      busy = false;
-      if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Free Website Audit'; }
-    });
+      /* ⚠ TEXT, THEN PARSE. r.json() throws on a non-JSON body, and the
+         browser cannot tell that throw apart from a dead network. When the
+         function is killed at its timeout Netlify answers with its own error
+         page, which is HTML, and the page used to blame the network for what
+         was really the audit running out of time. */
+      .then(function (r) {
+        return r.text().then(function (text) {
+          var body = null;
+          try { body = JSON.parse(text); } catch (e) {}
+          return { status: r.status, ok: r.ok, body: body };
+        });
+      })
+      .then(function (res) {
+        stopAnalyzing();
+
+        if (res.body && res.body.ok) { show(res.body); return; }
+
+        /* a JSON error from our own function: it already says the right thing */
+        if (res.body && res.body.error) { fail(res.body.error, res.status !== 400); return; }
+
+        /* no JSON at all. The status is the only honest signal left, and it
+           has to be read carefully: some of these are worth retrying and some
+           will never succeed however many times the visitor presses. */
+        if (res.status === 429) {
+          fail('You have reached the audit limit for now. Try again later, or send the site over and get a straight answer instead.', false);
+
+        } else if (res.status === 504 || res.status === 502 || res.status === 500 || res.status === 0) {
+          /* the function ran and was cut off, or crashed. Worth one retry. */
+          fail('That site took too long to read. Large or slow sites can run past the time the check has. Send it over and it can be looked at properly.', true);
+
+        } else if (res.status === 404 || res.status === 405 || res.status === 501) {
+          /* ⚠ THE ENDPOINT IS NOT THERE. 🚫 NOT RETRYABLE — the button would
+             fail identically every time, which is worse than no button.
+             In production this means the function did not deploy. In local
+             development it means the site is being served by something that
+             only serves files: `python3 -m http.server` answers a POST with
+             501 and an HTML body, which is exactly this branch. Run
+             `python3 serve.py <port>` from prototype/kreated-v2 instead — it
+             shims /.netlify/functions/* through node. */
+          fail('The audit service is not available on this address. If you are running the site locally, start it with serve.py so the audit endpoint exists.', false);
+
+        } else {
+          fail('The check did not complete. Try again in a moment.', true);
+        }
+      })
+      .catch(function (err) {
+        stopAnalyzing();
+        /* 🚫 Do not lump every throw together as a network failure. That is
+           what produced "the audit service could not be reached" for a request
+           that had in fact been answered. */
+        if (err && err.name === 'AbortError') {
+          fail('That site took too long to read. Send it over and it can be looked at properly.', true);
+        } else {
+          fail('The check could not be reached. Your connection dropped, or the service is briefly unavailable.', true);
+        }
+      })
+      .finally(function () {
+        clearTimeout(giveUp);
+        busy = false;
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Run the audit'; }
+      });
   });
 }());

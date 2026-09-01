@@ -78,10 +78,12 @@ async function blobsBackend() {
   try { store = blobsLib.getStore({ name: 'kreated-audit-rate', consistency: 'strong' }); }
   catch (e) { return null; }
 
-  /* prove it actually works before committing to it: a store object that
-     throws on first use would look healthy and then fail open */
-  try { await store.get('__probe__', { type: 'json', consistency: 'strong' }); }
-  catch (e) { return null; }
+  /* ⚠ THE LIVENESS PROBE IS GONE, deliberately. It was a third round trip on
+     every cold start, and strong reads are not cheap: the limiter was costing
+     about two seconds, which the audit's time budget then overspent. It was
+     also redundant — check() already try/catches both the read and the write
+     and reports degraded:true when either fails, which is the same protection
+     for no latency. 🚫 Do not add it back. */
 
   return {
     kind: 'blobs',

@@ -220,6 +220,27 @@
   --cta-fill-hover:color-mix(in srgb, #123AC4, #E4E9FA calc(var(--k) * 100%));
 }
 
+/* ⚠ ROUTES THAT BEGIN IN DAY — A SEPARATE BLOCK, AFTER :root CLOSES.
+   🚨 THIS OVERRIDES FOUR VALUES AND NOTHING ELSE. It was first written by
+   inserting a closing brace after --k above, which ended :root early and left
+   every token below it — --ground, --ink-1..4, --accent, --stroke, --surface,
+   the lot — scoped to .day-start. The eighteen routes that do not carry that
+   class lost their entire palette and rendered as white pages with no blue.
+   The comment inside :root warns about exactly that outcome; the mistake was
+   structural, not a wrong value, so nothing looked wrong in the diff.
+   🚫 Never put anything but the four journey variables in here, and never
+   reopen this block above the end of :root.
+
+   The class is set in the markup, not by script, so there is no flash of the
+   wrong theme on first paint. atmosphere.js then writes inline custom
+   properties on scroll and an inline style beats a class rule, so the journey
+   takes over from here. Under prefers-reduced-motion the script returns early
+   and the page simply stays in day: a complete, readable light page rather
+   than a dark one the visitor never asked to travel into. */
+:root.day-start{
+  --p:0; --p1:0; --p2:0; --k:0;
+}
+
 /* ⚠ THE GROUND IS PAINTED ONCE, ON THE DOCUMENT.
    Not on body, and not per-section. Painting it on html means the colour also
    fills the overscroll area at both ends of the document, so a rubber-band

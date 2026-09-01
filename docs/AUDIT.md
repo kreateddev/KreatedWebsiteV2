@@ -283,22 +283,37 @@ Enforced in the function, not left to the platform.
 | Model prose | 6s, and skipped unless 7s remain |
 | **Enforced ceiling** | **8.5s**, against Netlify's **default 10s** function timeout |
 
-⚠ **`netlify.toml` cannot set a function timeout** — the `timeout` key is not a
-supported property there, and an earlier version of this file wrongly assumed
-26s because of it. The budget is therefore sized for the 10s default. If the
-site's function timeout is raised in the Netlify UI, `BUDGET` and
-`safe-fetch`'s `TIMEOUT_MS` can be raised with it.
+⚠ **The platform ceiling is 60 seconds, and there is nothing to configure.**
+Netlify's synchronous function limit is 60s and is documented as **not
+configurable** — no `netlify.toml` key (`timeout` is not a valid property
+there), no UI setting, nothing to request. Earlier revisions of this document
+and of `netlify.toml` asserted a **10s default that could be raised in the
+Netlify UI**. Both halves were wrong: 10s was the real limit in 2022-23 and has
+since been raised, and it was never a UI control. The budget was sized to that
+wrong number for two phases.
 
-⚠ **`node_bundler` must be `esbuild` or `zisi`.** It was set to `"none"` once,
-which is not a valid value, and the deploy failed rather than ignoring it. It is
-now **`esbuild`**, which is required: `@netlify/blobs` is ESM and the function is
-CommonJS, so the dynamic import has to be resolved and bundled. `zisi` would
-leave it to fail at runtime.
+**The internal budget is 22s**, set in `netlify/functions/lib/audit-core.js`:
 
-⚠ **`prototype/kreated-v2/package.json` exists solely for that one dependency.**
-The site itself still has no build step and no client-side dependencies — the
-Netlify build command is empty and the publish directory is the source. 🚫 Do
-not add anything else to it.
+| Stage | Worst case |
+|---|---|
+| shared rate limiter (2 strong Blobs round trips) | ~2.0s |
+| DNS validation | <0.05s per hop, inside each fetch |
+| 3 page fetches @ `safe-fetch` 6s | 18.0s |
+| signals + classification | <0.05s |
+| recommendation | <0.01s |
+| model prose | 0 — disabled |
+| **total** | **~20.1s against a 22s budget and a 60s ceiling** |
+
+🚫 **The budget is not the ceiling.** The forty seconds between them is not
+spare capacity: it absorbs a cold start, a slow Blobs region, a host that
+connects fast then stalls, and response encoding. Do not size the budget to the
+platform maximum.
+
+🚨 **Gating is by time remaining, not time elapsed**, and that matters more than
+any number above. A fixed "no new page after Ns" threshold is only correct if
+everything before it is free, and the limiter costs about two seconds. A slow
+site therefore returns a two-page or one-page audit, with the skipped pages
+named, instead of being killed mid-flight.
 
 `PAGE_DEADLINE_MS` (5.5s) stops a *new* page fetch from starting when the clock
 says there is no room, and the model pass is skipped entirely below

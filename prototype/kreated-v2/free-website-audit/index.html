@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="day-start">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,12 +43,13 @@
 <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
-<meta name="theme-color" content="#020C2E">
+<!-- the page opens on paper, so the browser chrome should too -->
+<meta name="theme-color" content="#F4F5FA">
 <link rel="stylesheet" href="/styles.css?v=109">
 <link rel="stylesheet" href="/services/leaf.css?v=10">
-<link rel="stylesheet" href="/free-website-audit/audit.css?v=5">
+<link rel="stylesheet" href="/free-website-audit/audit.css?v=11">
 <!-- last, so it is the single definition of the footer on every route -->
-<link rel="stylesheet" href="/theme.css?v=1">
+<link rel="stylesheet" href="/theme.css?v=3">
 <link rel="stylesheet" href="/footer.css?v=5">
 </head>
 <body>
@@ -94,275 +95,267 @@
 
 
 
-<!-- ==========================================================================
-     ⛔ THIS ROUTE IS GATED FROM PRODUCTION. See /_redirects.
-
-     The copy below describes the APPROVED product — submit, it runs, the
-     result appears on this page within a few minutes. The engine that does
-     that does not exist yet; the form still posts to /thanks/. Rather than
-     weaken the approved vision to fit the old flow, the route forwards to
-     /contact/ in production until the product works.
-
-     🚫 Do not "fix" this page by rewriting the copy back to a manual model.
-     🚫 Do not remove the gate to make the page reachable.
-     TO SHIP IT: build submit -> process -> result, then delete the one rule in
-     /_redirects. Everything on this page is already correct for that day.
-     ========================================================================== -->
 <main id="top" tabindex="-1">
+
 <!-- ==========================================================================
-     FREE WEBSITE AUDIT — the secondary conversion (docs/CONVERSION.md §1).
-     Route and form name come from the documented V1 flow: /free-website-audit/
-     with form `website-audit`, success path /thanks/ (docs/CONVERSION.md §3,
-     docs/SEO.md §1). Built in V2's own visual system — nothing copied from V1.
-     ⚠️ DECISION 010 in docs/CONVERSION.md says "do not design or implement the
-     audit yet". This page is built on the later, explicit instruction to build
-     it; the ruling is flagged in the report rather than silently overridden.
-     ALL COPY ON THIS PAGE IS COPY CANDIDATE — NOT APPROVED.
+     THE HERO. Light paper, deep blue ink, one centred column, and the form as
+     the primary object rather than something parked in a side rail.
+
+     ⚠ THE PAGE OPENS IN DAY AND TRAVELS TO NIGHT. <html class="day-start">
+     sets the starting theme in markup so there is no flash, and
+     data-atmos-anchor further down says where the inversion fires. The hero
+     AND the whole audit result therefore sit on light paper: a findings
+     document should read like a document.
+
+     🚫 No badges, no award marks, no logo wall, no counters. Everything in the
+     strip below the form is a fact about how this actually works.
      ========================================================================== -->
-<section class="page">
-  <div class="wrap">
-    <p class="page__kicker">Free Website Audit</p>
-    <!-- Promoted h2 -> h1 on 2026-08-30: this page had no h1 at all. Same words,
-         same styling (.page__h carries it), correct element. -->
-    <h1 class="page__h">A look at your site and your <em>Google</em> presence.</h1>
-    <p class="page__lead">Send the site you already have. The audit runs after you
-      submit and the result appears here in the same visit: what is working, what is not, and what would actually be worth doing first.</p>
+<section class="ah">
+  <div class="ah__glow" aria-hidden="true"></div>
+  <div class="wrap ah__in">
+
+    <h1 class="ah__h">See what your website is costing you.</h1>
+
+    <p class="ah__lead">Send the site you already have. It gets read the way a
+      customer reads it, and you get back what is working, what is not, and what
+      is worth doing first.</p>
 
     <!-- ======================================================================
-         ⚠ GENERATION MODEL — RESOLVED BY SKYLER, 2026-08-30.
-         The audit is AI-GENERATED. It is not manually reviewed by the founder
-         by default. The visitor submits, the system runs, and the result
-         appears on THIS PAGE in the same session, normally within a few
-         minutes.
+         ⚠ GENERATION MODEL — RESOLVED BY SKYLER, 2026-08-30, still binding.
+         The audit runs automatically. It is not reviewed by the founder by
+         default, and the result appears on THIS PAGE in the same session.
 
-         🚫 THE PAGE MUST NOT SAY, and no longer does:
-            · "it goes to Skyler directly"      (it does not, by default)
-            · "the reply comes from contact@…"  (the result is on-page)
-            · anything implying a person reads every submission, or that an
-              answer arrives days later by email.
-
-         🚫 IT ALSO MUST NOT LEAD WITH "AI". DECISION 010 removed "AI Audit"
-         from the customer-facing positioning and that ruling still stands —
-         the generation model changed, the public name did not. Worse,
+         🚫 The page must not say a person reads every submission, must not
+         promise an emailed reply, and must not lead with "AI": DECISION 010
+         removed that from the customer-facing positioning and
          research/AUDIT_RESEARCH.md §3 records that visibly automated output
-         "reads as worthless" to this buyer, and §7 forbids implying an engine.
-         So the copy describes the EXPERIENCE — submit, it runs, the result
-         appears — and claims neither a human reviewer nor a robot.
-
-         🚫 NO EXACT DURATION. "A few minutes" only, until the architecture is
-         built and measured. 🚫 Never reuse the 2–4 week website-project
-         timeline here.
-         ⚠ The result view itself does not exist yet. See the audit-product
-         recommendation in the 2026-08-30 whole-site audit report.
+         reads as worthless to this buyer. So the copy describes the
+         EXPERIENCE and claims neither a human reviewer nor an engine.
+         🚫 No exact duration beyond "a few minutes".
          ====================================================================== -->
+    <div class="ah__card">
+      <form class="kform af-form" name="website-audit" method="POST" action="/thanks/"
+            data-netlify="true" netlify-honeypot="company-website"
+            data-success-event="website_audit_submit"
+            data-own-submit novalidate>
+        <input type="hidden" name="form-name" value="website-audit">
+        <p class="hp" aria-hidden="true">
+          <label>Company website<input type="text" name="company-website" tabindex="-1" autocomplete="off"></label>
+        </p>
 
-    <div class="page__cols">
-      <div>
-        <ul class="page__list">
-          <li>Your audit is <b>generated after you submit</b>, usually a few minutes</li>
-          <li>The result appears <b>on this page</b>, in the same visit</li>
-          <li>You get the whole thing, even if Kreated is not the right fit to do the work</li>
-        </ul>
-      </div>
-
-      <div class="formwrap" id="audit">
-        <form class="kform" name="website-audit" method="POST" action="/thanks/"
-              data-netlify="true" netlify-honeypot="company-website"
-              data-success-event="website_audit_submit"
-              data-own-submit novalidate>
-          <input type="hidden" name="form-name" value="website-audit">
-          <p class="hp" aria-hidden="true">
-            <label>Company website<input type="text" name="company-website" tabindex="-1" autocomplete="off"></label>
+        <!-- ⚠ THE ADDRESS IS THE ONLY THING IN THE PRIMARY ROW. Everything the
+             audit itself needs is this one field; the rest is how the result
+             reaches you. Putting six fields in front of the button is what
+             made this read as paperwork rather than as a tool. -->
+        <div class="af-form__lead">
+          <p class="field field--url">
+            <label for="aw-url">Your website address <span class="req" aria-hidden="true">*</span></label>
+            <input id="aw-url" name="website" type="url" required autocomplete="url" inputmode="url"
+                   placeholder="yourbusiness.com" data-evt="website_audit_url_interaction">
+            <span class="err" data-err-for="aw-url" aria-live="polite"></span>
           </p>
+          <button class="btn btn--cobalt af-form__go" type="submit">Run the audit</button>
+        </div>
 
-          <div class="kform__grid">
-            <p class="field">
-              <label for="aw-name">Your name <span class="req" aria-hidden="true">*</span></label>
-              <input id="aw-name" name="name" type="text" required autocomplete="name">
-              <span class="err" data-err-for="aw-name" aria-live="polite"></span>
-            </p>
-            <p class="field">
-              <label for="aw-business">Business name <span class="req" aria-hidden="true">*</span></label>
-              <input id="aw-business" name="business" type="text" required autocomplete="organization">
-              <span class="err" data-err-for="aw-business" aria-live="polite"></span>
-            </p>
-            <p class="field">
-              <label for="aw-email">Email <span class="req" aria-hidden="true">*</span></label>
-              <input id="aw-email" name="email" type="email" required autocomplete="email" inputmode="email">
-              <span class="err" data-err-for="aw-email" aria-live="polite"></span>
-            </p>
-            <p class="field">
-              <label for="aw-phone">Phone <span class="opt">optional</span></label>
-              <input id="aw-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
-              <span class="err" data-err-for="aw-phone" aria-live="polite"></span>
-            </p>
-            <p class="field field--wide">
-              <label for="aw-url">Website to audit <span class="req" aria-hidden="true">*</span></label>
-              <input id="aw-url" name="website" type="url" required autocomplete="url" inputmode="url"
-                     placeholder="https://" data-evt="website_audit_url_interaction">
-              <span class="err" data-err-for="aw-url" aria-live="polite"></span>
-            </p>
-            <p class="field field--wide">
-              <label for="aw-issue">What would you most like improved? <span class="req" aria-hidden="true">*</span></label>
-              <textarea id="aw-issue" name="issue" rows="4" required></textarea>
-              <span class="err" data-err-for="aw-issue" aria-live="polite"></span>
-            </p>
-          </div>
+        <div class="kform__grid af-form__rest">
+          <p class="field">
+            <label for="aw-name">Your name <span class="req" aria-hidden="true">*</span></label>
+            <input id="aw-name" name="name" type="text" required autocomplete="name">
+            <span class="err" data-err-for="aw-name" aria-live="polite"></span>
+          </p>
+          <p class="field">
+            <label for="aw-business">Business name <span class="req" aria-hidden="true">*</span></label>
+            <input id="aw-business" name="business" type="text" required autocomplete="organization">
+            <span class="err" data-err-for="aw-business" aria-live="polite"></span>
+          </p>
+          <p class="field">
+            <label for="aw-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="aw-email" name="email" type="email" required autocomplete="email" inputmode="email">
+            <span class="err" data-err-for="aw-email" aria-live="polite"></span>
+          </p>
+          <p class="field">
+            <label for="aw-phone">Phone <span class="opt">optional</span></label>
+            <input id="aw-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+            <span class="err" data-err-for="aw-phone" aria-live="polite"></span>
+          </p>
+          <p class="field field--wide">
+            <label for="aw-issue">What would you most like improved? <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="aw-issue" name="issue" rows="3" required></textarea>
+            <span class="err" data-err-for="aw-issue" aria-live="polite"></span>
+          </p>
+        </div>
 
-          <div class="kform__go">
-            <button class="btn btn--cobalt" type="submit">Free Website Audit</button>
-          </div>
-
-          <p class="kform__status" role="status" aria-live="polite"></p>
-        </form>
-
-        <!-- ⚠ SHIPPED VISIBLE, HIDDEN BY SCRIPT. Without JavaScript the form
-             above is an ordinary Netlify POST and this paragraph explains what
-             the visitor will and will not get. 🚫 Do not hide it in CSS: a
-             no-script visitor would then see a form with no explanation of why
-             nothing appears on the page. -->
-        <p class="aud__nojs" id="auditNoJs">The interactive audit needs JavaScript.
-          Submitting this form still reaches Skyler, and you will get the same
-          answer by email rather than on this page. You can also see
-          <a class="ilink" href="/pricing/">what things cost</a> or
-          <a class="ilink" href="/contact/">start a project</a> directly.</p>
-      </div>
-
-      <!-- ⚠ A DIRECT CHILD OF .page__cols, spanning both columns. It was
-           inside .formwrap and rendered 416px wide, which is a form field's
-           width, not a findings document's. 🚫 Do not move it back inside the
-           form wrapper. -->
-      <div class="aud" id="auditApp" hidden>
-        <p class="aud__live sr-only" role="status" aria-live="polite"></p>
-        <div class="aud__stage" hidden></div>
-        <div class="aud__result" hidden></div>
-      </div>
+        <p class="kform__status" role="status" aria-live="polite"></p>
+      </form>
     </div>
-  </div>
-</section>
-<!-- ==========================================================================
-     THE OFFER, EXPANDED — Phase 2C.
 
-     ⚠ DECISION 020 IS STILL BINDING ON THE PART THAT MATTERS: "What the audit
-     actually contains is still unruled and still needs Skyler's words.
-     Turnaround time, report format, audit-point count and any strategy call
-     remain undefined and must not be written by Claude."
+    <!-- ⚠ FACTS, NOT CREDENTIALS. Every line here is something the product
+         actually does. 🚫 Never put a badge, an award, a client count, a star
+         rating or a partner mark in this strip. -->
+    <ul class="ah__facts" role="list">
+      <li>Free, with nothing to book</li>
+      <li>Usually a few minutes</li>
+      <li>The result appears on this page</li>
+    </ul>
 
-     So this page now says WHAT GETS LOOKED AT — which the Phase 2C brief
-     explicitly authorises, and which maps one-to-one onto the five services —
-     and it still refuses to say what arrives, when, or in what format.
-
-     🚫 NEVER ADD without Skyler's words: a turnaround time, a report format, a
-     number of findings, a page count, a call, a monetary value, or any
-     scarcity device. A drafted "what you get back" list was removed once
-     already for being invented. Do not redraft it.
-     🚫 The 2–4 week WEBSITE PROJECT timeline is not the audit turnaround and
-     must never be borrowed for it.
-     ========================================================================== -->
-<section class="aud">
-  <div class="wrap aud__grid">
-    <div><h2 class="aud__h">Who it&rsquo;s for</h2></div>
-    <div>
-      <ul class="aud__who" role="list">
-        <li><b>You have a site and you are not sure it is doing its job</b>
-          <span>It exists, people occasionally mention it, and nothing about it
-            tells you whether it is helping or quietly costing you work.</span></li>
-        <li><b>You are deciding between patching and rebuilding</b>
-          <span>Worth knowing which one the site actually needs before spending
-            money on either.</span></li>
-        <li><b>You are being found less than you think you should be</b>
-          <span>Or found for the wrong things, or not in the places customers
-            look first.</span></li>
-      </ul>
-      <p class="aud__note">If you do not have a website yet, this is the wrong
-        starting point. There is nothing to review.
-        <a class="aud__link" href="/services/web-design/">Web Design &amp;
-        Development</a> is where that conversation starts.</p>
-    </div>
+    <!-- ⚠ SHIPPED VISIBLE, HIDDEN BY SCRIPT. Without JavaScript the form above
+         is an ordinary Netlify POST and this explains what the visitor will and
+         will not get. 🚫 Do not hide it in CSS: a no-script visitor would then
+         see a form with no explanation of why nothing appears on the page. -->
+    <p class="ah__nojs" id="auditNoJs">The on-page audit needs JavaScript.
+      Submitting this form still reaches Skyler, and the same answer comes back
+      by email rather than appearing here. You can also see
+      <a class="ilink" href="/pricing/">what things cost</a> or
+      <a class="ilink" href="/contact/">start a project</a>.</p>
   </div>
 </section>
 
-<section class="aud">
-  <div class="wrap aud__grid">
-    <div>
-      <h2 class="aud__h">What gets looked at</h2>
-      <p class="aud__aside">The same things a build would have to get right.</p>
-    </div>
-    <div>
-      <ul class="aud__list" role="list">
-        <li><b>Clarity</b>: whether the site says what you do, for whom, and
-          where, before anyone has to scroll or guess.</li>
-        <li><b>The path to contacting you</b>: how many steps it takes, how
-          obvious it is, and whether it survives on a phone.</li>
-        <li><b>Mobile</b>: how it behaves at real phone sizes, which for local
-          service work is usually the first and only screen it is judged on.</li>
-        <li><b>Search fundamentals</b>, titles, headings, page structure and
-          whether each page has a job, rather than a full keyword study.</li>
-        <li><b>Local presence</b>, whether the site and your public business
-          information agree about what you do and where you work.</li>
-        <li><b>Trust gaps</b>, the obvious missing pieces a customer looks for
-          before calling a stranger.</li>
-      </ul>
-    </div>
+<!-- ⚠ FULL WIDTH, AND OUTSIDE THE FORM. This used to live inside the form
+     wrapper and rendered 416px wide, which is a field's width, not a findings
+     document's. It also sits ABOVE the flip anchor, so a result stays on light
+     paper however long it is. 🚫 Do not move it back inside the form. -->
+<div class="aud" id="auditApp" hidden>
+  <div class="wrap">
+    <p class="aud__live sr-only" role="status" aria-live="polite"></p>
+    <div class="aud__stage" hidden></div>
+    <div class="aud__result" hidden></div>
   </div>
-</section>
-
-<section class="aud">
-  <div class="wrap aud__grid">
-    <div><h2 class="aud__h">What happens after you send it</h2></div>
-    <div>
-      <ol class="aud__steps" role="list">
-        <li><b>You submit the form</b>
-          <span>The site address and one line about what is bothering you. The rest
-            is optional and only makes the result more specific.</span></li>
-        <li><b>The audit runs</b>
-          <span>It usually takes a few minutes. You stay on this page while it
-            works. There is nothing to check later and nothing to wait for
-            in an inbox.</span></li>
-        <li><b>The result appears here</b>
-          <span>What stood out, what is worth doing first, and what is not worth
-            bothering with. If your site is in good shape, that is what it
-            says.</span></li>
-      </ol>
-
-      <!-- ⚠ POOR-FIT HANDLING — RESOLVED BY SKYLER, 2026-08-30.
-           A submission that is not a good implementation fit STILL GETS THE
-           COMPLETE AUDIT. Value is never withheld to protect a sales outcome.
-           Where Kreated is probably not the right partner to carry the work
-           out, the audit says so plainly.
-           🚫 No manufactured urgency. 🚫 No distorting the findings to create an
-           opportunity. This also satisfies research/AUDIT_RESEARCH.md §8a:
-           "confirming that something is fine must be a possible outcome" — an
-           audit that can only find problems is a sales instrument, and this
-           buyer recognises the genre. -->
-      <p class="aud__fit">You get the complete audit either way. If Kreated is
-        probably not the right partner to carry out the work, the audit says that
-        too. And still tells you what to do.</p>
-
-      <p class="aud__note">No cost, and no obligation on either side. Sending it
-        does not put you in a sales sequence.</p>
-    </div>
-  </div>
-</section>
+</div>
 
 <!-- ==========================================================================
-     FAQ — four. Deliberately short, because three of the questions a buyer
-     would most like answered here (how long it takes, what format the reply
-     is in, whether unsuitable sites are turned down) are the exact three
-     DECISION 020 leaves unruled. Asking them and dodging would be worse than
-     not asking. See the OWNER INPUT block above and the report.
+     ⚠ data-atmos-anchor: THE INVERSION FIRES HERE. Everything above is read on
+     paper; everything from here down is night. Moving this attribute moves the
+     boundary. 🚫 Do not put it above the result container, or a long audit will
+     change theme under the reader mid-sentence.
      ========================================================================== -->
-<section class="aud">
-  <div class="wrap aud__grid">
-    <div><h2 class="aud__h">Questions</h2></div>
-    <div class="faqs aud__faqs">
+<section class="ax" data-atmos-anchor>
+  <div class="wrap">
+    <h2 class="ax__h">What the audit checks</h2>
+    <p class="ax__sub">Six areas, the same six a build has to get right.</p>
+    <ul class="ax__grid" role="list">
+      <li class="ax__c">
+        <h3>Clarity</h3>
+        <p>Whether the site says what you do, who it is for and where you work,
+          before anyone has to scroll or guess.</p>
+      </li>
+      <li class="ax__c">
+        <h3>The path to contacting you</h3>
+        <p>How many steps it takes to reach you, how obvious it is, and whether
+          it survives on a phone.</p>
+      </li>
+      <li class="ax__c">
+        <h3>Mobile</h3>
+        <p>How the site behaves at real phone sizes, which for local service
+          work is usually the only screen it is judged on.</p>
+      </li>
+      <li class="ax__c">
+        <h3>Trust</h3>
+        <p>The pieces a customer looks for before calling a stranger, and the
+          obvious ones that are missing.</p>
+      </li>
+      <li class="ax__c">
+        <h3>Local discoverability</h3>
+        <p>Whether your pages, your market and your public business information
+          agree about what you do and where.</p>
+      </li>
+      <li class="ax__c">
+        <h3>Technical friction</h3>
+        <p>Titles, headings, page structure and the plumbing that quietly
+          decides whether a page can be found at all.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="ax ax--steps">
+  <div class="wrap">
+    <h2 class="ax__h">How it works</h2>
+    <ol class="ax__steps" role="list">
+      <li>
+        <span class="ax__n" aria-hidden="true">01</span>
+        <h3>Enter your site</h3>
+        <p>The address, and one line about what is bothering you. Everything
+          else on the form is so the result can reach you.</p>
+      </li>
+      <li>
+        <span class="ax__n" aria-hidden="true">02</span>
+        <h3>It reads the site</h3>
+        <p>Your homepage and the pages that matter most get read and checked
+          across the six areas. You stay on this page while it runs.</p>
+      </li>
+      <li>
+        <span class="ax__n" aria-hidden="true">03</span>
+        <h3>The result appears here</h3>
+        <p>Findings, what is worth doing first, and what it would cost. Nothing
+          to check later and nothing waiting in an inbox.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="ax">
+  <div class="wrap">
+    <h2 class="ax__h">What you get</h2>
+    <ul class="ax__get" role="list">
+      <li>
+        <h3>Findings</h3>
+        <p>Six areas, each with what was found and the evidence it was found
+          from. Not a score.</p>
+      </li>
+      <li>
+        <h3>Priority</h3>
+        <p>What is costing you enquiries now, what is worth doing next, and what
+          is already fine and needs no money.</p>
+      </li>
+      <li>
+        <h3>A recommendation</h3>
+        <p>The work that answers what was found, priced from the same table the
+          pricing page uses. No invented discounts.</p>
+      </li>
+      <li>
+        <h3>A way to change it</h3>
+        <p>Take the recommendation into the builder and adjust it, or send it
+          over and talk it through.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ⚠ POOR-FIT HANDLING — RESOLVED BY SKYLER, 2026-08-30. A submission that is
+     not a good implementation fit STILL GETS THE COMPLETE AUDIT. Value is
+     never withheld to protect a sales outcome, and where Kreated is probably
+     not the right partner the audit says so.
+     🚫 No manufactured urgency. 🚫 No distorting findings to create an
+     opportunity. This is also research/AUDIT_RESEARCH.md §8a: "confirming that
+     something is fine must be a possible outcome". -->
+<section class="ax ax--close">
+  <div class="wrap ax__close">
+    <h2 class="ax__closeh">If the audit cannot help, it says so.</h2>
+    <p class="ax__closep">A check that can only find problems is a sales
+      instrument. This one is allowed to tell you your site is fine and to
+      recommend buying nothing, and it does. You get the complete result either
+      way, including when Kreated is not the right partner to carry the work
+      out.</p>
+    <div class="ax__ctas">
+      <a class="btn btn--cobalt" href="#top">Run the audit</a>
+      <a class="btn btn--ghost" href="/contact/">Talk to Skyler instead</a>
+    </div>
+    <p class="ax__meta">Based in Raleigh, working with businesses anywhere.
+      <a class="ilink" href="tel:+19198058217">(919) 805-8217</a></p>
+  </div>
+</section>
+
+<section class="ax">
+  <div class="wrap ax__faqwrap">
+    <h2 class="ax__h">Questions</h2>
+    <div class="faqs ax__faqs">
 
       <details>
         <summary>Is it actually free, or is it a sales call in disguise?</summary>
         <div class="faqs__a">
           <p>Free, and there is no call attached to it. You submit the site, the
-            audit runs, and the result appears on the page. If nothing needs doing,
-            that is what it says.</p>
+            audit runs, and the result appears on the page. If nothing needs
+            doing, that is what it says.</p>
         </div>
       </details>
 
@@ -370,8 +363,8 @@
         <summary>Do I have to buy anything afterwards?</summary>
         <div class="faqs__a">
           <p>No. If you want to go further, the routes are
-            <a href="/#project">Start a Project</a> or one of the
-            <a href="/services/">six services</a>. If you don&rsquo;t, nothing
+            <a href="/contact/">Start a Project</a> or one of the
+            <a href="/services/">six services</a>. If you do not, nothing
             happens.</p>
         </div>
       </details>
@@ -379,28 +372,28 @@
       <details>
         <summary>What do I need to send?</summary>
         <div class="faqs__a">
-          <p>Your website address and a sentence about what is bothering you. The
-            rest of the form is optional and exists so the reply can be more
-            specific, the more you say about what you want the site to do,
-            the more useful the answer.</p>
+          <p>Your website address and a sentence about what is bothering you.
+            The rest of the form exists so the result can reach you, and the
+            more you say about what you want the site to do, the more useful
+            the answer.</p>
         </div>
       </details>
 
       <details>
         <summary>How long does it take?</summary>
         <div class="faqs__a">
-          <p>Usually a few minutes. It runs after you submit and the result appears
-            on this page in the same visit. You are not waiting on an email
-            or on someone getting back to you.</p>
+          <p>Usually a few minutes. It runs after you submit and the result
+            appears on this page in the same visit. You are not waiting on an
+            email or on someone getting back to you.</p>
         </div>
       </details>
 
       <details>
-        <summary>What if my site is fine, or I&rsquo;m not a good fit for Kreated?</summary>
+        <summary>What if my site is fine, or I am not a good fit for Kreated?</summary>
         <div class="faqs__a">
           <p>You still get the complete audit. It is not withheld or trimmed
-            because a submission is unlikely to become a project, and if Kreated is
-            probably not the right partner to do the work, the audit says so
+            because a submission is unlikely to become a project, and if Kreated
+            is probably not the right partner to do the work, the audit says so
             rather than steering you.</p>
         </div>
       </details>
@@ -473,11 +466,15 @@
   </div>
 </footer>
 <script src="/motion.js?v=34"></script>
+<!-- the theme journey. The anchor is data-atmos-anchor on the section that
+     should be the first read in night territory, so the hero and the whole
+     audit result stay on light paper. -->
+<script src="/atmosphere.js?v=10" defer></script>
 <!-- offers -> recommend -> audit. The audit client computes no prices: it
      hands `needs` to the same engine the pricing builder uses. -->
 <script src="/assets/data/offers.js?v=1" defer></script>
 <script src="/assets/data/recommend.js?v=3" defer></script>
 <script src="/forms.js?v=4" defer></script>
-<script src="/free-website-audit/audit.js?v=2" defer></script>
+<script src="/free-website-audit/audit.js?v=4" defer></script>
 </body>
 </html>
