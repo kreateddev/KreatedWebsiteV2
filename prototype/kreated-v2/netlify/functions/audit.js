@@ -155,7 +155,28 @@ const INSTRUCTIONS =
   'Return one entry per finding you were given, reusing its i value. ' +
   'Keep "finding" under 120 characters and "why" under 240.';
 
+/* ⚠ THE ENRICHMENT SWITCH. Owner decision, 2026-09-01: production ships the
+   DETERMINISTIC audit and makes ZERO model calls. Enrichment is opt-in and OFF
+   unless KREATED_AUDIT_ENRICH is explicitly set to a true-ish value.
+
+   🚨 A CONFIGURED KEY IS NOT CONSENT. The gate used to be key-presence alone,
+   which meant adding KREATED_AUDIT_MODEL_KEY to Netlify for any reason silently
+   switched on paid calls on a free public endpoint. The flag and the key are now
+   two separate decisions and BOTH are required.
+
+   Everything downstream of here — the strict schema, the field-by-field merge,
+   the length caps, the time budget — is untouched and still tested. This is a
+   switch, not a removal: set KREATED_AUDIT_ENRICH=1 to turn it back on. */
+function enrichmentEnabled() {
+  const v = String(process.env.KREATED_AUDIT_ENRICH || '').trim().toLowerCase();
+  return v === '1' || v === 'true' || v === 'on' || v === 'yes';
+}
+
 async function polish(findings, ctx) {
+  /* 🚫 Checked BEFORE the key is even read, so there is no path on which a
+     request is built or sent while enrichment is off. */
+  if (!enrichmentEnabled()) return { findings, modelUsed: false, modelError: 'enrichment disabled' };
+
   /* ⚠ PRECEDENCE, documented in docs/AUDIT.md: the Kreated-specific variable
      wins, because that is what is configured in Netlify and it keeps the
      audit's key separable from any other OpenAI usage. OPENAI_API_KEY is

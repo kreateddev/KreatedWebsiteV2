@@ -268,9 +268,28 @@ async function rlTests() {
   const RL = require('../netlify/functions/lib/rate-limit.js');
   RL.resetBackendForTests();
 
-  await ta('the store is shared, not process memory', () => {
-    eq(RL.backend().kind, 'file', 'a shared backend must be selected:');
-    ok(!RL.backend().degraded);
+  /* ⚠ backend() is ASYNC since the move to @netlify/blobs — selecting the
+     store now means a dynamic import and a live probe of it. */
+  await ta('the store is shared, not process memory', async () => {
+    const b = await RL.backend();
+    eq(b.kind, 'file', 'a shared backend must be selected:');
+    ok(!b.degraded);
+  });
+
+  /* 🚨 The failure the production deploy actually hit: Blobs unavailable meant
+     the limiter fell through to memory. It must still LIMIT, and still say so. */
+  await ta('with no store available at all, the limiter still limits and reports it', async () => {
+    const saved = process.env.KREATED_AUDIT_STATE_DIR;
+    delete process.env.KREATED_AUDIT_STATE_DIR;
+    RL.resetBackendForTests();
+    const ip = 'nostore-' + Math.random();
+    let last;
+    for (let i = 0; i < 5; i++) last = await RL.check(ip);
+    ok(last.limited, 'the 5th request must still be refused');
+    eq(last.backend, 'memory');
+    eq(last.degraded, true, 'and it must announce that it is degraded:');
+    process.env.KREATED_AUDIT_STATE_DIR = saved;
+    RL.resetBackendForTests();
   });
 
   await ta('the LOCKED public default is 4 per IP per hour', () => {
@@ -419,6 +438,10 @@ async function modelTests() {
   async function run(behaviour) {
     const srv = await stub(behaviour);
     const port = srv.address().port;
+    /* ⚠ THE FLAG IS PART OF THE FIXTURE. Enrichment is off by default in
+       production (owner decision 2026-09-01), so every test below that wants a
+       model call has to opt in exactly the way a future re-enable would. */
+    process.env.KREATED_AUDIT_ENRICH    = '1';
     process.env.KREATED_AUDIT_MODEL_KEY = 'test-key-not-a-secret';
     process.env.KREATED_AUDIT_MODEL_URL = 'http://127.0.0.1:' + port + '/';
     const res = await handler({
@@ -426,6 +449,7 @@ async function modelTests() {
       body: JSON.stringify({ url: 'https://example.com', email: 'a@b.com' })
     });
     srv.close();
+    delete process.env.KREATED_AUDIT_ENRICH;
     delete process.env.KREATED_AUDIT_MODEL_KEY;
     delete process.env.KREATED_AUDIT_MODEL_URL;
     return JSON.parse(res.body);
@@ -441,6 +465,69 @@ async function modelTests() {
     ok(baseline.ok);
     eq(baseline.meta.modelUsed, false);
     eq(baseline.findings.length, 6);
+  });
+
+  /* ---- THE PRODUCTION DEFAULT ------------------------------------------
+     🚨 The point of the whole phase: with a KEY CONFIGURED but no flag, the
+     function must not open a socket to the model. Counting requests at a stub
+     server is the only assertion that actually proves "zero calls" — checking
+     modelUsed:false would also pass if the call was made and then failed. */
+  await ta('PRODUCTION DEFAULT: a configured key with no flag makes ZERO model requests', async () => {
+    let hits = 0;
+    const srv = await new Promise(resolve => {
+      const s2 = http.createServer((req, res) => { hits++; res.writeHead(200); res.end('{}'); });
+      s2.listen(0, '127.0.0.1', () => resolve(s2));
+    });
+    const port = srv.address().port;
+    delete process.env.KREATED_AUDIT_ENRICH;                 /* the default */
+    process.env.KREATED_AUDIT_MODEL_KEY = 'test-key-not-a-secret';
+    process.env.KREATED_AUDIT_MODEL_URL = 'http://127.0.0.1:' + port + '/';
+    const res = await handler({ httpMethod: 'POST',
+      headers: { 'x-forwarded-for': 'noflag-' + Math.random() },
+      body: JSON.stringify({ url: 'https://example.com', email: 'a@b.com' }) });
+    srv.close();
+    delete process.env.KREATED_AUDIT_MODEL_KEY;
+    delete process.env.KREATED_AUDIT_MODEL_URL;
+    const r = JSON.parse(res.body);
+    eq(hits, 0, 'the model endpoint must not be contacted at all:');
+    ok(r.ok, 'and the audit must still succeed');
+    eq(r.meta.modelUsed, false);
+    eq(r.findings.length, 6, 'a full deterministic audit, not a reduced one:');
+    eq(r.needs, baseline.needs, 'needs identical to the deterministic run:');
+  });
+
+  await ta('an off-ish flag value does not enable enrichment', async () => {
+    let hits = 0;
+    const srv = await new Promise(resolve => {
+      const s2 = http.createServer((req, res) => { hits++; res.writeHead(200); res.end('{}'); });
+      s2.listen(0, '127.0.0.1', () => resolve(s2));
+    });
+    const port = srv.address().port;
+    process.env.KREATED_AUDIT_MODEL_KEY = 'test-key-not-a-secret';
+    process.env.KREATED_AUDIT_MODEL_URL = 'http://127.0.0.1:' + port + '/';
+    for (const v of ['', '0', 'false', 'off', 'no']) {
+      process.env.KREATED_AUDIT_ENRICH = v;
+      const res = await handler({ httpMethod: 'POST',
+        headers: { 'x-forwarded-for': 'off-' + v + '-' + Math.random() },
+        body: JSON.stringify({ url: 'https://example.com', email: 'a@b.com' }) });
+      ok(JSON.parse(res.body).ok, 'audit must succeed for flag value "' + v + '"');
+    }
+    srv.close();
+    delete process.env.KREATED_AUDIT_ENRICH;
+    delete process.env.KREATED_AUDIT_MODEL_KEY;
+    delete process.env.KREATED_AUDIT_MODEL_URL;
+    eq(hits, 0, 'no off-ish value may open a model connection:');
+  });
+
+  await ta('the flag alone, with no key, is still safe', async () => {
+    process.env.KREATED_AUDIT_ENRICH = '1';
+    const res = await handler({ httpMethod: 'POST',
+      headers: { 'x-forwarded-for': 'flagonly-' + Math.random() },
+      body: JSON.stringify({ url: 'https://example.com', email: 'a@b.com' }) });
+    delete process.env.KREATED_AUDIT_ENRICH;
+    const r = JSON.parse(res.body);
+    ok(r.ok); eq(r.meta.modelUsed, false);
+    eq(r.findings.length, 6);
   });
 
   await ta('model 500: findings and needs identical to the deterministic run', async () => {

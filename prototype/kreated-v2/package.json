@@ -1,0 +1,9 @@
+{
+  "name": "kreated-v2-functions",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Dependencies for the Kreated Netlify Functions. The SITE itself has no build step and no dependencies — this file exists only so the audit function can use Netlify Blobs for shared rate-limit state.",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

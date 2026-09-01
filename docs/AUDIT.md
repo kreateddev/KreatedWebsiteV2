@@ -1,6 +1,14 @@
 # THE FREE WEBSITE AUDIT
 Built 2026-09-01, production-hardened and launched the same day.
-**Rate limit 4/IP/hour. OpenAI prose enrichment enabled. Gate lifted.**
+**Rate limit 4/IP/hour. OpenAI prose enrichment DISABLED. Deterministic launch.**
+
+> **2026-09-01, second revision — owner decision.** Production ships the
+> deterministic audit and makes **zero** model calls. The OpenAI integration
+> stays in the codebase, fully tested, behind an explicit opt-in flag
+> (`KREATED_AUDIT_ENRICH`). Nothing about the product depends on it. The same
+> revision replaced the hand-rolled Blobs client with the official package,
+> because the hand-rolled one was falling through to per-instance memory in
+> production.
 
 ---
 
@@ -74,16 +82,24 @@ does not need a frontier model, and a free product cannot carry one. Roughly
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `KREATED_AUDIT_MODEL_KEY` | no | The OpenAI key. Enables the prose pass; without it the deterministic copy ships. **Set in Netlify.** |
+| `KREATED_AUDIT_ENRICH` | no | **The enrichment switch. Off unless set to `1`/`true`/`on`/`yes`.** Currently unset in production, so no model call is ever made. 🚨 A configured key is **not** consent — the flag and a key are two separate decisions and both are required. |
+| `KREATED_AUDIT_MODEL_KEY` | no | The OpenAI key. Read **only** when `KREATED_AUDIT_ENRICH` is on. Present in Netlify but inert. |
 | `OPENAI_API_KEY` | no | Conventional fallback. ⚠ **Precedence: `KREATED_AUDIT_MODEL_KEY` wins.** The Kreated-specific name keeps the audit's key separable from any other OpenAI usage on the site. |
 | `KREATED_AUDIT_MODEL_URL` | no | Defaults to `https://api.openai.com/v1/responses`. |
 | `KREATED_AUDIT_MODEL_NAME` | no | Defaults to `gpt-5.6-luna`. The name lives in one place; override it here. |
 | `KREATED_AUDIT_MAX_PER_HOUR` | no | Per-IP cap per hour. **Defaults to 4** — the locked public limit. Read by **both** limiters, so they agree. |
 | `KREATED_AUDIT_STATE_DIR` | no | **Local development only.** Points the rate-limit store at a directory so the limiter can be tested across separate processes. 🚫 Never set this in production — Netlify Blobs is used there. |
 
-No variable is needed for the shared limiter in production: Netlify injects
-`NETLIFY_BLOBS_CONTEXT` into the function runtime, and the edge limiter is
-configured in `netlify.toml`.
+No variable is needed for the shared limiter in production: `getStore()` picks
+up its credentials automatically inside a Netlify Function, and the edge limiter
+is configured in `netlify.toml`.
+
+### Turning enrichment back on
+
+Set `KREATED_AUDIT_ENRICH=1` in Netlify and redeploy. Nothing else changes: the
+key, URL and model name are already configured, the strict schema and the
+field-by-field merge are unchanged, and the failure-mode tests still cover every
+way the call can go wrong. Watch `meta.modelUsed` on a live response to confirm.
 
 🚫 No secret value is committed to this repository. Set them in the Netlify UI
 under Site configuration → Environment variables. 🚫 Never expose the key to the
@@ -131,16 +147,29 @@ best backend actually available:
 
 | Backend | When | Shared? |
 |---|---|---|
-| **Netlify Blobs**, over its runtime HTTP API | production | yes |
+| **Netlify Blobs**, via the official `@netlify/blobs` package | production | yes |
 | **File**, under `KREATED_AUDIT_STATE_DIR` | local dev and tests | yes, across processes |
 | **Memory** | last resort | no — reported as `degraded` |
 
-⚠ Blobs is reached by reading the `NETLIFY_BLOBS_CONTEXT` the runtime injects
-and calling the API with `fetch`, **not** by importing `@netlify/blobs`. The
-repo has zero dependencies and `node_bundler = "none"`, so a `require()` of an
-uninstalled package would throw at runtime rather than fail the build. If that
-runtime contract ever changes, the limiter falls through to memory **and says
-so** in `meta.rateLimit.degraded` rather than silently losing protection.
+⚠ **This was rebuilt on 2026-09-01 and the reason matters.** The first version
+avoided a dependency by reading `NETLIFY_BLOBS_CONTEXT` and calling the API with
+`fetch`. That variable is injected only for functions Netlify detects using the
+package, so in production it was never there: the limiter fell through to
+per-instance memory and reported `degraded: true` on every request. Reporting it
+was right. Depending on an undocumented runtime contract was not.
+
+It now uses `getStore('kreated-audit-rate')` from `@netlify/blobs`, which picks
+up `siteID` and `token` automatically inside a Function. Two details are load-
+bearing:
+
+* the import is **dynamic** (`await import(...)`), because the package is ESM
+  and the function is CommonJS — and because a rejected import is exactly what
+  lets local tests fall through to the file backend;
+* the backend **probes the store with a real read** before committing to it, so
+  a store object that would throw on first use is rejected rather than adopted.
+
+If Blobs is unavailable for any reason the limiter still falls through to
+memory, still limits, and still says `degraded: true` — proven by a test.
 
 Two layers because edge rate limiting is a platform feature whose availability
 depends on the plan, and a public endpoint should not rest on a single control
@@ -221,9 +250,16 @@ supported property there, and an earlier version of this file wrongly assumed
 site's function timeout is raised in the Netlify UI, `BUDGET` and
 `safe-fetch`'s `TIMEOUT_MS` can be raised with it.
 
-⚠ **`node_bundler` must be `esbuild` or `zisi`.** It was set to `"none"`, which
-is not a valid value. Unset means `zisi`, which traces `require()` and packages
-`netlify/functions/lib/*.js` alongside the handler.
+⚠ **`node_bundler` must be `esbuild` or `zisi`.** It was set to `"none"` once,
+which is not a valid value, and the deploy failed rather than ignoring it. It is
+now **`esbuild`**, which is required: `@netlify/blobs` is ESM and the function is
+CommonJS, so the dynamic import has to be resolved and bundled. `zisi` would
+leave it to fail at runtime.
+
+⚠ **`prototype/kreated-v2/package.json` exists solely for that one dependency.**
+The site itself still has no build step and no client-side dependencies — the
+Netlify build command is empty and the publish directory is the source. 🚫 Do
+not add anything else to it.
 
 `PAGE_DEADLINE_MS` (5.5s) stops a *new* page fetch from starting when the clock
 says there is no room, and the model pass is skipped entirely below

@@ -6,15 +6,9 @@
 
    THE STORE IS PLUGGABLE, and picks the best backend actually available:
 
-     1. NETLIFY BLOBS, over its runtime HTTP API. Netlify injects
-        NETLIFY_BLOBS_CONTEXT (base64 JSON: { edgeURL|apiURL, token, siteID }).
-        Reading it directly means genuine shared state with NO npm dependency,
-        which matters because this repo has none and netlify.toml sets
-        node_bundler = "none" — a require() of an uninstalled package would
-        throw at runtime, not at build.
-        ⚠ That env var is a runtime contract rather than a documented API. If
-        Netlify changes its shape the code falls through to (3) and SAYS SO in
-        the response meta, rather than silently losing protection.
+     1. NETLIFY BLOBS, via the official @netlify/blobs package. Credentials are
+        automatic inside a Netlify Function. This is the ONLY backend that is
+        genuinely shared in production.
 
      2. FILE, under the OS temp dir. Used locally so the limiter can be tested
         across separate processes, which is the property that actually matters.
@@ -40,35 +34,40 @@ const fs = require('fs');
 
 const WINDOW_MS = 60 * 60 * 1000;
 
-/* ---- backend 1: Netlify Blobs over its runtime HTTP API ---------------- */
-function blobsBackend() {
-  const raw = process.env.NETLIFY_BLOBS_CONTEXT;
-  if (!raw) return null;
-  let ctx;
-  try { ctx = JSON.parse(Buffer.from(raw, 'base64').toString('utf8')); }
-  catch (e) { return null; }
-  const base = ctx.edgeURL || ctx.apiURL;
-  if (!base || !ctx.token || !ctx.siteID) return null;
+/* ---- backend 1: Netlify Blobs, via the official package ------------------
+   ⚠ REPLACED THE HAND-ROLLED CLIENT, 2026-09-01. The previous version read
+   NETLIFY_BLOBS_CONTEXT and called the API with fetch, to avoid adding a
+   dependency. In production that variable was never injected — Netlify sets it
+   for functions it detects using the package — so the limiter silently fell
+   through to per-instance memory and reported degraded:true on every request.
+   Reporting it was right; relying on an undocumented runtime contract was not.
 
-  const store = 'kreated-audit-rate';
-  const url = key => base.replace(/\/$/, '') + '/' + ctx.siteID + '/' + store + '/' + encodeURIComponent(key);
-  const auth = { authorization: 'Bearer ' + ctx.token };
+   getStore() picks up siteID and token automatically inside a Netlify
+   Function, so there is nothing to configure and no credential to manage.
+
+   ⚠ DYNAMIC import(), not require(). @netlify/blobs is ESM and this file is
+   CommonJS; a top-level require() would throw. The import is also what makes
+   the local fallback work: with no node_modules present it rejects and the
+   file backend takes over, which is how the tests run. */
+async function blobsBackend() {
+  let getStore;
+  try { ({ getStore } = await import('@netlify/blobs')); }
+  catch (e) { return null; }                    /* package absent: local dev */
+  if (typeof getStore !== 'function') return null;
+
+  let store;
+  try { store = getStore('kreated-audit-rate'); }
+  catch (e) { return null; }                    /* no Netlify credentials */
+
+  /* prove it actually works before committing to it — a store object that
+     throws on first use would look healthy and then fail open */
+  try { await store.get('__probe__', { type: 'json' }); }
+  catch (e) { return null; }
 
   return {
     kind: 'blobs',
-    async get(key) {
-      const r = await fetch(url(key), { headers: auth, signal: AbortSignal.timeout(1500) });
-      if (r.status === 404) return null;
-      if (!r.ok) throw new Error('blobs get ' + r.status);
-      return JSON.parse(await r.text());
-    },
-    async set(key, value) {
-      const r = await fetch(url(key), {
-        method: 'PUT', headers: { ...auth, 'content-type': 'application/json' },
-        body: JSON.stringify(value), signal: AbortSignal.timeout(1500)
-      });
-      if (!r.ok) throw new Error('blobs put ' + r.status);
-    }
+    async get(key) { return await store.get(key, { type: 'json' }); },
+    async set(key, value) { await store.setJSON(key, value); }
   };
 }
 
@@ -125,9 +124,12 @@ function memoryBackend() {
 }
 
 let cached = null;
-function backend() {
+async function backend() {
   if (cached) return cached;
-  cached = blobsBackend() || fileBackend() || memoryBackend();
+  /* ⚠ order matters and is the whole policy: real shared state first, a
+     shared file second so local tests can prove cross-process behaviour, and
+     per-instance memory only as a last resort that announces itself. */
+  cached = (await blobsBackend()) || fileBackend() || memoryBackend();
   return cached;
 }
 function resetBackendForTests() { cached = null; }
@@ -142,7 +144,7 @@ async function check(ip, opts) {
   const max = Number(opts.max || process.env.KREATED_AUDIT_MAX_PER_HOUR || 4);
   const windowMs = Number(opts.windowMs || WINDOW_MS);
   const now = Date.now();
-  const store = backend();
+  const store = await backend();
   const key = 'ip:' + String(ip || 'unknown');
 
   let entry = null;

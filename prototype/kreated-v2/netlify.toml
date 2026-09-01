@@ -16,6 +16,12 @@
 # there is nothing to install and the build command stays empty.
 [functions]
   directory = "netlify/functions"
+  # ⚠ esbuild, because @netlify/blobs is ESM and the audit function is
+  # CommonJS. esbuild resolves and bundles it; zisi (the default) would leave
+  # a CJS require() of an ESM-only package to fail at runtime.
+  # 🚫 The only valid values are esbuild and zisi. "none" is not one — it was
+  # set to that once and the deploy failed rather than being ignored.
+  node_bundler = "esbuild"
   # ⚠ node_bundler is DELIBERATELY UNSET, 2026-09-01. It was `"none"`, which is
   # not a valid value — the documented options are `esbuild` and `zisi` — and an
   # invalid value fails the deploy rather than being ignored. Unset means zisi,
