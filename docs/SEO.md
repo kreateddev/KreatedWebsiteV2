@@ -2,6 +2,13 @@
 
 **Preserved SEO knowledge from V1. Nothing here has been optimized, rewritten or re-planned.**
 
+> ⚠ **STILL BINDING, AND NOW ACTED ON.** The site launched for search on 2026-09-01. The
+> rulings in this file — the rejected keywords, the no-city-pages rule, the assigned keyword
+> map — were treated as constraints rather than history by the post-launch research, and none
+> were overturned. Forward-looking strategy lives in **`docs/SEO-ROADMAP.md`**; measurement
+> lives in **`docs/GSC-BASELINE.md`**. 🚫 Keep those separate from this record: this file is
+> what V1 decided, not what V2 plans.
+
 🚫 This is a record, not a strategy. No keyword research has been redone. No routes have been
 re-decided for V2. Imported from `KreatedWebsiteV1` (`docs/SEO_AND_CONTENT.md`,
 `docs/ROUTE_INVENTORY.md`, `docs/SEO_BASELINE.md`), read-only inspection 2026-08-19.

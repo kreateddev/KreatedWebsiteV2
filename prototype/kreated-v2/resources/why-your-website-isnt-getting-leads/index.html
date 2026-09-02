@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ==========================================================================
+     GOOGLE TAG MANAGER — GTM-TH3JQWL8. Owner-supplied 2026-09-01.
+
+     🚨 GTM ONLY. THERE IS DELIBERATELY NO SECOND gtag.js SNIPPET, and this is
+     the whole point. docs/BUSINESS.md records the old site running this
+     container alongside GA4 G-ENJ4QV1FQX directly and DUPLICATE-FIRING as a
+     result: the container loads a GA4 tag, the page loads gtag as well, and
+     every pageview counts twice. GA4 reaches this site through the container
+     and through nothing else.
+     🚫 Do not add googletagmanager.com/gtag/js here. If GA4 stops reporting,
+     the fix is a tag inside the container, not a second snippet on the page.
+
+     ⚠ This must stay ABOVE /track.js. GTM defines window.dataLayer
+     synchronously; kreatedTrack pushes to it and does nothing if it is absent,
+     so loading them the other way round would drop the first events.
+     ========================================================================== -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TH3JQWL8');</script>
+
+<link rel="canonical" href="https://kreated.dev/resources/why-your-website-isnt-getting-leads/">
+
+<title>Why Your Website Isn&rsquo;t Getting Leads | Kreated</title>
+<meta name="description" content="A website with visitors and no calls is failing at one of six checkable things. What each one looks like, why owners usually blame the design, and how to tell which is yours.">
+
+<!-- Open Graph / Twitter. og:image policy is reuse only, nothing generated:
+     pages showing a real client capture use that capture; everything else uses
+     the Kreated mark with card type `summary`, which is correct for a square
+     brand image. ⚠ No purpose-made 1200x630 asset exists yet. 🚫 Do not invent
+     one to close that gap. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kreated">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://kreated.dev/resources/why-your-website-isnt-getting-leads/">
+<meta property="og:title" content="Why Your Website Isn&rsquo;t Getting Leads | Kreated">
+<meta property="og:description" content="A website with visitors and no calls is failing at one of six checkable things. What each one looks like, why owners usually blame the design, and how to tell which is yours.">
+<meta property="og:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Why Your Website Isn&rsquo;t Getting Leads | Kreated">
+<meta name="twitter:description" content="A website with visitors and no calls is failing at one of six checkable things. What each one looks like, why owners usually blame the design, and how to tell which is yours.">
+<meta name="twitter:image" content="https://kreated.dev/assets/img/apple-touch-icon.png">
+
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<meta name="theme-color" content="#020C2E">
+
+<!-- Three layers, outermost first:
+       services.css  tokens, header, drawer, footer, skip link
+       leaf.css      the service-leaf system, shared by every /services/ leaf
+       local-seo.css only what this page uses and no other leaf does -->
+<link rel="stylesheet" href="/services/services.css?v=17">
+<link rel="stylesheet" href="/services/leaf.css?v=10">
+<!-- last, so it is the single definition of the footer on every route -->
+<link rel="stylesheet" href="/theme.css?v=3">
+<link rel="stylesheet" href="/footer.css?v=5">
+
+<!-- STRUCTURED DATA. 🚫 Only visible facts: the breadcrumb mirrors the crumb
+     rendered at the top of this page. No rating, review, author, date or
+     street address — see docs/SEO.md §4. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kreated",
+          "item": "https://kreated.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Resources",
+          "item": "https://kreated.dev/resources/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Why your website isn't getting leads",
+          "item": "https://kreated.dev/resources/why-your-website-isnt-getting-leads/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- GTM fallback for visitors without JavaScript. Paired with the head
+     snippet above; it is the documented install and is not a second container. -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TH3JQWL8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- The atmosphere: one fixed layer behind the whole document carrying the
+     blue. Fixed rather than scrolled so the light does not slide past the
+     content — the room dims around the reader. Colours and strength live in
+     theme.css. Decorative only, hence aria-hidden. -->
+<div class="atmos" aria-hidden="true"></div>
+<a class="skip" href="#top">Skip to content</a>
+
+<header class="head">
+  <div class="wrap head__in">
+    <a class="head__mark" href="/" aria-label="Kreated — home">KREATED</a>
+
+    <!-- ⚠ ONE NAV, ONE MEANING, EVERY ROUTE. Every item here is a real page,
+         so the header does the same thing whichever page you are standing on.
+         Investment and FAQ are deliberately NOT in the nav: they are homepage
+         sections with no routes of their own, so a header link to them worked
+         on the homepage and did nothing anywhere else. They live in the footer
+         and on the homepage itself. That ambiguity is what this replaces. -->
+    <nav class="head__nav" aria-label="Primary">
+      <a href="/services/">Services</a>
+      <a href="/work/">Work</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/about/">About</a>
+    </nav>
+
+    <a class="head__cta" href="/contact/">Start a Project</a>
+
+    <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav aria-label="Mobile">
+    <a href="/services/">Services</a>
+    <a href="/work/">Work</a>
+    <a href="/pricing/">Pricing</a>
+    <a href="/about/">About</a>
+    <a href="/method/">Method</a>
+    <a href="/resources/">Resources</a>
+    <a href="/contact/">Contact</a>
+    <a class="drawer__cta" href="/contact/">Start a Project</a>
+    <a class="drawer__alt" href="/free-website-audit/">Free Website Audit</a>
+  </nav>
+</div>
+
+<main id="top" tabindex="-1">
+
+<!-- ==========================================================================
+     RESOURCE — DIAGNOSTIC. 🚫 This is not a Website Redesign sales page. The
+     job is to help the reader identify which of six areas is failing, and the
+     honest end of that is the audit, which inspects their actual site.
+
+     🚫 THE AUDIT'S BOUNDARY IS REAL AND MUST BE STATED. It reads public website
+     HTML only. It does not see analytics, Search Console, the Google Business
+     Profile or anything private, and the result says so. Do not write a
+     sentence here that implies otherwise.
+     ⚠ The six areas below are the SAME six the audit actually classifies
+     (netlify/functions/lib/classify.js). 🚫 If that list ever changes, this
+     page changes with it or it starts lying.
+     ========================================================================== -->
+<section class="shero">
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb">
+      <a href="/resources/">RESOURCES</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">NO LEADS FROM YOUR WEBSITE</span>
+    </nav>
+
+    <h1 class="shero__h"><span>Your website gets visitors</span><span>and no calls.
+      Here is how to find out why.</span></h1>
+
+    <div class="shero__foot">
+      <p class="shero__fact">It is almost always one of six things, and every one
+        of them is checkable rather than a matter of opinion.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">The short answer</h2>
+      <p class="lgrid__note">Before the detail.</p>
+    </div>
+    <div class="prose">
+      <p><b>A website that gets visitors and produces no calls is failing at one of
+        six things: what it says, how someone contacts you, how it behaves on a
+        phone, whether a stranger trusts it, whether the right people find it at
+        all, or something technical getting in the way.</b></p>
+      <p>They are not equally likely, and they are not equally expensive to fix.
+        The mistake that costs owners the most money is assuming it is the first
+        thing they can see, which is usually the design.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">The six, and how each one fails</h2>
+      <p class="lgrid__note">In roughly the order they cost work.</p>
+    </div>
+    <div>
+      <ul class="who" role="list">
+        <li><b>1. Clarity, what the business actually does</b>
+          <span>A visitor decides in a few seconds whether they are in the right
+            place. A landscaper whose homepage says &ldquo;transforming outdoor
+            spaces&rdquo; and never says the words retaining wall, drainage or
+            sod is asking the visitor to work it out. Most will not. This is the
+            most common failure and the cheapest to fix, because it is words.</span></li>
+        <li><b>2. The path to contacting you</b>
+          <span>Count the taps between landing and reaching you. If the number is
+            in an image, if the form asks for a budget range before a name, if the
+            only option is email when the job is urgent, the visit ends. A
+            plumbing emergency at 9pm does not fill in a contact form.</span></li>
+        <li><b>3. How it behaves on a phone</b>
+          <span>Most local service traffic is mobile. Text that needs pinching, a
+            menu that will not close, a button under a sticky bar. This one is easy
+            to miss because owners check their own site on a laptop.</span></li>
+        <li><b>4. Whether a stranger trusts you</b>
+          <span>Referrals arrive already trusting you. Search traffic does not. No
+            photographs of your own work, no reviews, no named person, no license
+            or insurance detail where the trade expects it, and a careful buyer
+            keeps looking.</span></li>
+        <li><b>5. Whether the right people find it</b>
+          <span>The site may be fine and simply invisible for the searches that
+            matter. One page covering nine services, no page naming the towns you
+            cover, or a Google listing that disagrees with the site. This is the
+            failure that looks like a website problem and is not.</span></li>
+        <li><b>6. Technical friction</b>
+          <span>Slow loading, pages that cannot be read properly by search
+            engines, a contact form that has been quietly failing for months.
+            Rarer than owners fear, but genuinely fatal when present.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Why owners usually guess wrong</h2>
+      <p class="lgrid__note">The visible problem is not usually the expensive one.</p>
+    </div>
+    <div class="prose">
+      <p>Design is the only one of the six you can see without checking anything.
+        So when the phone is quiet, the site looking dated is the explanation that
+        presents itself first, and a rebuild is the purchase that follows.</p>
+      <p>Sometimes that is right. A site that argues against the quality of the
+        work is a real problem, and
+        <a class="ilink" href="/services/website-redesign/">Website Redesign</a>
+        exists for it. But a rebuild fixes clarity, contact path, mobile and trust.
+        It does not, by itself, fix being invisible. If the actual failure is
+        number five, a beautiful new site produces the same silence at greater
+        expense, which is the single most common way local businesses waste money
+        on a website.</p>
+      <p>The distinction is worth being sure about before spending, and it is not
+        something you can settle by looking at your own site. You already know what
+        it means.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">How to find out which one is yours</h2>
+      <p class="lgrid__note">Without guessing, and without a call.</p>
+    </div>
+    <div class="prose">
+      <p>The <a class="ilink" href="/free-website-audit/">Free Website Audit</a>
+        reads your site and reports on the same six areas above, with the evidence
+        it found each judgment from, so you can check the reasoning rather than
+        take it. If everything is already in good shape it says that and recommends
+        nothing.</p>
+      <p><b>What it does not do matters as much.</b> It reads your public website
+        only. It cannot see your analytics, your Search Console, your Google
+        Business Profile or anything else private, and the result states which
+        things it did not inspect rather than implying it knows them.</p>
+      <p class="prov">Free, no call attached, and the result appears on the page in
+        the same visit.</p>
+      <p><a class="tlink" data-evt="cta_website_audit" href="/free-website-audit/">Run the free audit on your site <i aria-hidden="true">&#8594;</i></a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">If it turns out to be visibility</h2>
+      <p class="lgrid__note">Two different fixes, often confused.</p>
+    </div>
+    <div class="prose">
+      <p>Being hard to find splits into two pieces of work.
+        <a class="ilink" href="/services/google-business-profile/">Google Business
+        Profile</a> is the listing itself: categories, services, area, hours, the
+        information Google shows before anyone reaches your site.
+        <a class="ilink" href="/services/local-seo/">Local SEO</a> is the wider
+        system around it, including the pages on your own site that have to exist
+        before they can rank.</p>
+      <p>Which comes first depends on what you already have.
+        <a class="ilink" href="/resources/local-seo-vs-google-business-profile/">Local
+        SEO and your Google Business Profile are not the same thing</a> works
+        through that.</p>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <div class="close__row">
+      <a class="close__go" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+      <a class="close__alt" href="/resources/">All resources <i aria-hidden="true">&#8594;</i></a>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="wrap foot__in">
+    <div class="foot__brand">
+      <a class="foot__mark" href="/" aria-label="Kreated — home">KREATED</a>
+      <!-- approved V1 positioning line, reusable verbatim -->
+      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+    </div>
+
+    <div class="foot__cols">
+      <div>
+        <h2>Contact</h2>
+        <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
+        <p><a href="tel:+19198058217">(919) 805-8217</a></p>
+        <p>Raleigh, North Carolina</p>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <p><a href="/services/">Services</a></p>
+        <p><a href="/work/">Work</a></p>
+        <p><a href="/method/">Method</a></p>
+        <p><a href="/resources/">Resources</a></p>
+        <p><a href="/about/">About</a></p>
+        <p><a href="/contact/">Contact</a></p>
+        <p><a href="/pricing/">Pricing</a></p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <p><a href="/services/web-design/">Web Design &amp; Development</a></p>
+        <p><a href="/services/website-redesign/">Website Redesign</a></p>
+        <p><a href="/services/local-seo/">Local SEO</a></p>
+        <p><a href="/services/google-business-profile/">Google Business Profile</a></p>
+        <p><a href="/services/brand-strategy/">Brand Strategy &amp; Identity</a></p>
+        <p><a href="/services/answer-engine-optimization/">Answer Engine Optimization</a></p>
+      </div>
+      <div>
+        <h2>Start</h2>
+        <p><a data-evt="cta_start_project" href="/contact/">Start a Project</a></p>
+        <p><a data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit</a></p>
+        <p><a href="/work/">View Work</a></p>
+      </div>
+    </div>
+
+    <p class="foot__legal">© 2026 Kreated
+      <a href="/privacy/">Privacy</a>
+    </p>
+  </div>
+</footer>
+
+<script src="/services/services.js?v=4" defer></script>
+<!-- event emitter. Loads on every route so the [data-evt] CTAs in the
+     header and footer are tracked everywhere, not only where forms.js runs.
+     Contacts nothing until an analytics container is present. -->
+<script src="/track.js?v=1" defer></script>
+</body>
+</html>
