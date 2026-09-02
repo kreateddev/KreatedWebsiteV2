@@ -673,7 +673,11 @@ async function modelTests() {
     [['TOTAL_MS',total],['PAGE_RESERVE_MS',reserve],['TIMEOUT_MS',page]]
       .forEach(([k,v]) => ok(Number.isFinite(v) && v > 0, k + ' must be a real number, got ' + v));
 
-    const LIMITER = 2100;   /* measured in production */
+    /* ⚠ an ALLOWANCE, not a measurement. A complete three-page production
+       audit reports 401ms on the function's own clock; the 2.1s once recorded
+       here was laptop wall time, mostly TLS. Kept high on purpose so the
+       arithmetic below holds for a cold start too. */
+    const LIMITER = 2100;
     const CEILING = 60000;  /* Netlify synchronous limit, not configurable */
     ok(reserve >= page, 'the reserve must cover a whole page fetch: ' + reserve + ' < ' + page);
     const afterTwo = total - LIMITER - page * 2;

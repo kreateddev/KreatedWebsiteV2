@@ -64,9 +64,18 @@ const MAX_BODY = 4000;
 
    WHERE THE TIME GOES, worst case:
 
-     shared rate limiter        ~2.0s   two strong Blobs round trips, and the
-                                        only part that runs before the clock
-                                        is useful. Measured 2.1s in production.
+     shared rate limiter        ~2.0s   two strong Blobs round trips. ⚠ THIS IS
+                                        AN ALLOWANCE, NOT A MEASUREMENT. An
+                                        earlier note here claimed "measured
+                                        2.1s in production"; that 2.1s was the
+                                        wall time of a curl from a laptop and
+                                        was almost all TLS and edge routing.
+                                        The function's own clock reports 401ms
+                                        for a COMPLETE three-page audit, so the
+                                        warm limiter costs a few hundred
+                                        milliseconds at most. 2s is kept
+                                        deliberately as headroom for a cold
+                                        start or a slow Blobs region.
      DNS validation           <0.05s    per hop, inside each page fetch below;
                                         every address is resolved and checked
      3 page fetches           18.0s     3 x safe-fetch's own 6s timeout
@@ -80,11 +89,11 @@ const MAX_BODY = 4000;
    🚨 GATING IS BY TIME REMAINING, NOT TIME ELAPSED, and that is the fix that
    matters more than any number here. A fixed "no new page after Ns" threshold
    is only correct if everything before it is free. Nothing before it is free:
-   the limiter's Blobs round trips cost about two seconds and used to sit
-   entirely outside the clock, because startedAt was set AFTER the rate-limit
-   check. The audit believed it had its whole budget when a tenth of it was
-   already gone, and meta.elapsedMs under-reported the real call by the same
-   two seconds. The clock now starts on the handler's first line.
+   the limiter is not free and used to sit entirely outside the clock, because
+   startedAt was set AFTER the rate-limit check. How much it costs varies with
+   cold starts and Blobs latency, which is exactly why a fixed threshold cannot
+   be right. The clock now starts on the handler's first line, so whatever the
+   limiter costs on a given request is spent from the same budget as the crawl.
 
    A SLOW SITE DEGRADES, IT DOES NOT FAIL. No page fetch starts unless the
    worst case of that fetch still fits, so a slow host returns a two-page or

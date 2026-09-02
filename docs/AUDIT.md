@@ -296,7 +296,7 @@ wrong number for two phases.
 
 | Stage | Worst case |
 |---|---|
-| shared rate limiter (2 strong Blobs round trips) | ~2.0s |
+| shared rate limiter (2 strong Blobs round trips) | ~2.0s **allowance** |
 | DNS validation | <0.05s per hop, inside each fetch |
 | 3 page fetches @ `safe-fetch` 6s | 18.0s |
 | signals + classification | <0.05s |
@@ -309,9 +309,17 @@ spare capacity: it absorbs a cold start, a slow Blobs region, a host that
 connects fast then stalls, and response encoding. Do not size the budget to the
 platform maximum.
 
+⚠ **The 2s limiter figure is an allowance, not a measurement.** An earlier
+revision recorded it as "measured 2.1s in production". That 2.1s was the wall
+time of a `curl` from a laptop and was almost entirely TLS and edge routing.
+The function's own clock reports **401ms for a complete three-page production
+audit**, so a warm limiter costs a few hundred milliseconds. The 2s stays as
+headroom for a cold start or a slow Blobs region.
+
 🚨 **Gating is by time remaining, not time elapsed**, and that matters more than
 any number above. A fixed "no new page after Ns" threshold is only correct if
-everything before it is free, and the limiter costs about two seconds. A slow
+everything before it is free, and the limiter is not free — how unfree varies
+with cold starts, which is the point. A slow
 site therefore returns a two-page or one-page audit, with the skipped pages
 named, instead of being killed mid-flight.
 
