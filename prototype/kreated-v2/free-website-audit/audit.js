@@ -131,7 +131,14 @@
       'in writing, and you approve the number before any work starts.</p>' +
       '<div class="aud__ctas">' +
         '<a class="btn btn--cobalt" id="auditToBuilder" href="/pricing/#panelIndividual">Customize This Plan</a>' +
-        '<a class="btn btn--ghost" id="auditToContact" href="/contact/?intent=audit">Start This Project</a>' +
+        /* ⚠ NO ?intent= HERE, deliberately. It used to say ?intent=audit, and
+           forms.js only ever acted on ?intent=build — audit fell through to an
+           early return, so the parameter announced a handoff it did not
+           perform. The REAL handoff is the sessionStorage payload written by
+           stash() below, which contact/build-handoff.js reads and which
+           preselects the investment band. 🚫 Do not add the parameter back
+           unless something actually reads it. */
+        '<a class="btn btn--ghost" id="auditToContact" href="/contact/">Start This Project</a>' +
       '</div></section>';
   }
 

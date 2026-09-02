@@ -1,5 +1,5 @@
 /* ==========================================================================
-   OMC-INSPIRED KREATED HOMEPAGE SHELL — NOT PRODUCTION
+   KREATED — SITE STYLESHEET  (live since the 2026-09-01 cutover)
    Reference: research/OMC_TEARDOWN.md
    Decisions: concepts/OMC_KREATED_TRANSLATION.md
 
@@ -119,13 +119,7 @@ a{color:inherit}
 .wrap{max-width:1680px;margin:0 auto;padding-inline:var(--gutter)}
 .hero .wrap{padding-inline:var(--gutter-hero)}
 
-.proto-flag{
-  position:fixed;bottom:0;left:0;right:0;z-index:60;margin:0;padding:7px 16px;
-  font:500 11px/1.45 'General Sans',system-ui;letter-spacing:.08em;
-  color:var(--ink-4);background:#05090F;
-  border-top:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent);
-}
-.proto-flag strong{color:var(--ink-2);font-weight:600}
+
 
 /* ==========================================================================
    SHARED PATTERNS — OMC's repeatable section unit:

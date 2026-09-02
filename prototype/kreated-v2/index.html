@@ -1,13 +1,16 @@
 <!doctype html>
 <!--
   ============================================================================
-  OMC-INSPIRED KREATED HOMEPAGE SHELL — NOT PRODUCTION
+  KREATED — HOMEPAGE  (live since the 2026-09-01 cutover)
   ============================================================================
   Structural reference: research/OMC_TEARDOWN.md
   Translation decisions: concepts/OMC_KREATED_TRANSLATION.md
 
-  This is a REVIEW ARTIFACT for visual architecture. It is not the homepage,
-  it does not ship, and it must not be copied into site/.
+  ⚠ THIS IS THE LIVE HOMEPAGE. It began as a review artifact for visual
+  architecture and this header said it would never ship; kreated.dev has served
+  it since the 2026-09-01 cutover. The `noindex` on this page is a PRELAUNCH
+  GATE against indexing, not a statement that the page is unreleased.
+  🚫 Do not remove noindex without an explicit launch instruction.
 
   Every Kreated string below is an unapproved candidate and is labelled.
   Nothing is invented: no results, rankings, reviews, revenue, awards, clients.
@@ -94,10 +97,12 @@
 <a class="skip" href="#top">Skip to content</a>
 
 
-<!-- PROTOTYPE — NOT PRODUCTION. The visible banner was removed so the page
+<!-- ⚠ The visible prototype banner was removed so the page
      can be reviewed as an actual website (build-reset instruction). The facts
-     it carried still hold: this is a review artifact, all unapproved copy is
-     labelled COPY CANDIDATE in section comments, type + palette temporary. -->
+     it carried partly still hold: unapproved copy is marked COPY CANDIDATE in
+     the section comments below. ⚠ The type and palette are NO LONGER
+     temporary — the BX theme in theme.css is the locked system, and
+     .proto-flag has been deleted from styles.css. -->
 
 <!-- ==========================================================================
      HEADER — 91px, transparent, scrolls away like OMC's.
@@ -216,11 +221,9 @@
       sharper branding that gives customers a reason to choose you.</p>
 
     <div class="hero__ctas">
-      <!-- TODO: real destinations. Intended: project contact flow / audit request. -->
       <a data-evt="cta_start_project" class="btn btn--solid" href="#project">Start a Project
         <span class="btn__arrow" aria-hidden="true">↗</span></a>
       <a data-evt="cta_website_audit" class="btn btn--line" href="/free-website-audit/">Free Website Audit</a>
-      <!-- TODO: real destination — work page. -->
       <a class="hero__proof" href="/work/">View Work</a>
     </div>
 
@@ -637,7 +640,6 @@
      ALL questions and answers are COPY CANDIDATE — NOT APPROVED. V1's
      approved FAQ copy lives on service pages, not the homepage; nothing here
      claims results, timelines, or guarantees.
-     "Read more questions" targets the future FAQ page — TODO: real route.
      ========================================================================== -->
 <section class="faq" id="faq">
   <div class="wrap faq__grid">

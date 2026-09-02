@@ -127,7 +127,7 @@
 
     { id:'pkg.aeo.foundation', name:'AEO Foundation', group:'search', kind:'one-time',
       price:1250, high:1750,
-      what:'The audit implemented: answer-first structure on the pages that need it, consistency across the sources that describe you, and a re-check afterwards.',
+      what:'The audit implemented: answer-first structure on the pages that need it, consistency across the sources that describe you, and a re-check afterward.',
       does:'Makes a direct question about your business get a direct, correct answer.',
       fit:'Your audit found real inconsistency and the website itself is otherwise sound.' },
 
@@ -136,12 +136,12 @@
       price:400, from:true,
       what:'Analytics and meaningful conversion events configured on a site that already exists, so the things that count as a lead are recorded as one.',
       does:'Turns “we get some traffic” into a number you can act on: how many people got in touch, and which pages did the work.',
-      fit:'You have a site and no reliable idea how many enquiries it produces.' },
+      fit:'You have a site and no reliable idea how many inquiries it produces.' },
 
     { id:'svc.prod.photo', name:'Photography Coordination', group:'production', kind:'one-time',
       price:350, from:true, plusThirdParty:true,
-      what:'Planning and running the photography around a project: the brief, the shot list, finding and coordinating the photographer, scheduling, and organising what comes back.',
-      does:'Real pictures of your own work change a site more than any other single input, and coordination is what stops the site waiting six weeks for photos nobody organised.',
+      what:'Planning and running the photography around a project: the brief, the shot list, finding and coordinating the photographer, scheduling, and organizing what comes back.',
+      does:'Real pictures of your own work change a site more than any other single input, and coordination is what stops the site waiting six weeks for photos nobody organized.',
       fit:'Your current images are stock, out of date, or taken on a phone in bad light.' },
 
     /* ⚠ PER-UNIT. The only offer priced per page rather than per engagement.
@@ -159,13 +159,13 @@
     /* ================= BRAND — one tier at a time ======================= */
     { id:'pkg.brand.refresh', name:'Brand Refresh', group:'brand', kind:'one-time',
       price:750, from:true, exclusive:'brand-tier',
-      what:'The existing mark cleaned up or redrawn, type and colour settled, and a short usage guide.',
+      what:'The existing mark cleaned up or redrawn, type and color settled, and a short usage guide.',
       does:'Keeps the recognition you already have and stops the brand looking older than the work.',
       fit:'You are already known locally under your current mark and starting over would spend that rather than build on it.' },
 
     { id:'pkg.brand.identity', name:'Brand Identity', group:'brand', kind:'one-time',
       price:1500, from:true, exclusive:'brand-tier',
-      what:'A logo system, a typography system, a colour system, a messaging foundation and the essential assets.',
+      what:'A logo system, a typography system, a color system, a messaging foundation and the essential assets.',
       does:'Gives every surface one set of decisions to be built from, so a sign, a truck, an invoice and a screen agree.',
       fit:'You have outgrown your mark, or never really had one.' },
 

@@ -10,7 +10,8 @@
 
 <!-- Descriptive. docs/SEO.md §2 assigns no commercial route target to
      /about/ and forbids giving a non-commercial route a competing head term.
-     COPY CANDIDATE — NOT APPROVED. -->
+     ⚠ Title and meta description are still COPY CANDIDATE — NOT APPROVED. The
+     2026-09-01 approval covered the founder copy in the body, not the head. -->
 <title>About | Kreated</title>
 <meta name="description" content="Kreated is one person in Raleigh, North Carolina. What it is, who it works with, and what to expect from working directly with the person doing the work.">
 
@@ -149,14 +150,15 @@
         launch. Nothing is lost in a handover, and you always know who is
         responsible for the work.</p>
 
-      <!-- OWNER INPUT — ABOUT FOUNDER VOICE. Ships HIDDEN with an empty text
-           node. A founder paragraph is the one thing this page cannot be
-           written without the owner: an invented origin story is exactly the
-           kind of fabrication the rest of the site refuses. To enable: remove
-           `hidden` and write the sentences into .shero__note. -->
-      <aside class="shero__owner" hidden>
+      <!-- ✅ RESOLVED 2026-09-01 with the owner's own words. This slot shipped
+           hidden and empty because an invented origin story is exactly the kind
+           of fabrication the rest of the site refuses; it now carries the line
+           the founder actually wrote. The rest of that story is the section
+           immediately below. 🚫 Do not paraphrase either. -->
+      <aside class="shero__owner">
         <p class="shero__ownerlabel">IN SKYLER&rsquo;S WORDS</p>
-        <p class="shero__note"><!-- owner paragraph goes here --></p>
+        <p class="shero__note">Kreated started with a real business, not a
+          hypothetical one.</p>
       </aside>
     </div>
 
@@ -166,6 +168,39 @@
       <div><dt>Structure</dt><dd>Led directly by the founder</dd></div>
       <div><dt>Works with</dt><dd>Raleigh, North Carolina, worldwide</dd></div>
     </dl>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ⚠ FOUNDER COPY, OWNER-APPROVED 2026-09-01. Every word in this section and
+     in "What a website is for", "Why marketing is not separate from it" and
+     "Working directly with me" is the founder's, edited only for flow and
+     duplicate wording. 🚫 Do not rewrite it into third person, do not add
+     history, numbers, awards or years of experience, and 🚫 do not soften the
+     marketing conviction into a hedge.
+
+     ⚠ AMERICAN SPELLING. This was written American on owner direction because
+     Kreated is a Raleigh business, at a point when the rest of the site still
+     leaned British. That is no longer the exception it was: the 2026-09-01
+     prelaunch QA normalized every route to American English, so the whole site
+     now agrees. 🚫 Do not "fix" inquiries or prioritizes back the other way.
+     ========================================================================== -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div><h2 class="sec__h">Where this started</h2></div>
+    <div class="prose">
+      <p>I was studying Marketing in college while working for my father&rsquo;s
+        business. I had already spent years paying attention to content, trends,
+        and what makes people stop, click, and care, so marketing was the
+        direction that made the most sense to me.</p>
+
+      <p>It began because I wanted to help his business grow. Once I could
+        actually see the difference that better positioning, a stronger website,
+        and more intentional marketing could make, it stopped feeling like a
+        school subject or a side project.</p>
+
+      <p>It became something I wanted to keep doing for other businesses.</p>
+    </div>
   </div>
 </section>
 
@@ -218,14 +253,130 @@
   </div>
 </section>
 
+
+<!-- ==========================================================================
+     ⚠ SUPERSEDED 2026-09-01. This slot used to hold "What this is built on":
+     five third-person paragraphs arguing the same case at greater length, plus
+     specifics about structured data, indexing, AI summarisation and Google
+     profile consistency. The owner ruled those out of the About page by name:
+     they belong in Method and in the SEO and AEO service pages, not in founder
+     biography. 🚫 Do not reinsert them here.
+
+     The old comment claimed this page deliberately contained NO founder
+     biography and that an origin story would have to be invented. That is no
+     longer true: the owner supplied it, and it is above and below.
+     ========================================================================== -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">What a website is for</h2>
+      <p class="lgrid__note">The standard I build around.</p>
+    </div>
+    <div class="prose">
+      <p><b>A website should do more than look good.</b></p>
+
+      <p>A lot of businesses have been taught to judge a website by how polished
+        it looks. That matters, but appearance alone does not create growth. Too
+        much of the industry prioritizes appearance or deliverables without
+        enough attention to business outcomes.</p>
+
+      <p>A beautiful website with no visibility, no clear message, and no path to
+        action can still do nothing for the business behind it.</p>
+
+      <p>I look at a website as a business tool. It should help people understand
+        what you do, trust you, find you, and take the next step.</p>
+
+      <p>That is the standard I build around.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ⚠ THE CONVICTION HERE IS APPROVED AND MUST NOT BE HEDGED: marketing is not
+     optional for growth. 🚫 It is also not a promise. There is no ranking, lead,
+     revenue or ROI claim anywhere in this section, and none may be added: the
+     argument is attention, trust and opportunity, which is what the owner
+     approved. -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Why marketing is not separate from it</h2>
+      <p class="lgrid__note">Marketing is what creates the opportunity for
+        growth.</p>
+    </div>
+    <div class="prose">
+      <p>The same applies to marketing. If nobody sees the business, the business
+        has fewer chances to win the customer.</p>
+
+      <p>A business can have a great product, strong service, and years of
+        experience, but none of that matters if the right people never see
+        it.</p>
+
+      <p>More attention creates more opportunities to earn trust, generate
+        inquiries, and win customers. That is why I do not separate a website
+        from the marketing around it.</p>
+
+      <p><b>The website is the tool. Marketing is what puts people in front of
+        it.</b></p>
+
+      <p>Marketing is not optional for growth. If a business wants more
+        customers, it needs more attention, more trust, and more opportunities to
+        be chosen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ⚠ THIS SECTION IS THE ONE PLACE THE FOUNDER-LED CLAIM IS ARGUED. The hero
+     paragraph states the accountability fact in one line and stops there, and
+     the redundant "You deal directly with the person doing the work" item was
+     removed from "What to expect" when this section was added. 🚫 Do not
+     reintroduce a third statement of it. -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Working directly with me</h2>
+      <p class="lgrid__note">You work directly with the person building it.</p>
+    </div>
+    <div class="prose">
+      <p>Kreated is founder-led and intentionally hands-on.</p>
+
+      <p>There is no account manager translating your goals to another team.
+        There is no handoff where important context gets lost. Every part of the
+        project comes through me, which means I know what was decided, why it was
+        decided, and what still needs attention.</p>
+
+      <p>I think of it the same way I think about trusting someone with a car. I
+        would rather know who is working on it and understand what is being done
+        than hand it off and receive a report afterward without really knowing
+        what happened in between.</p>
+
+      <p>That direct relationship makes the process more personal, but more
+        importantly it keeps responsibility clear.</p>
+
+      <p><b>I do not look at clients as transactions. I look at the businesses I
+        work with as partners.</b></p>
+
+      <p>The best part of the work is seeing something we built together actually
+        make a difference: stronger presentation, better visibility, more trust,
+        better leads, or simply giving the owner a system they finally feel
+        confident sending people to.</p>
+
+      <p>I want clients to be proud they chose Kreated, see progress in the
+        business, and feel like the process was smooth from beginning to end.
+        That matters more to me than finishing another website.</p>
+    </div>
+  </div>
+</section>
+
 <section class="sec">
   <div class="wrap lgrid">
     <div><h2 class="sec__h">What to expect</h2></div>
     <div>
       <ul class="who" role="list">
-        <li><b>You deal directly with the person doing the work</b>
-          <span>No account manager in between, no brief passed to someone who
-            wasn&rsquo;t in the room, no explaining your business twice.</span></li>
+        <!-- ⚠ "You deal directly with the person doing the work" was the first
+             item here and was REMOVED 2026-09-01. With the hero paragraph and
+             the new "Working directly with me" section it was the third
+             statement of the same claim on one page. This list is now the
+             practical terms only. 🚫 Do not add it back. -->
         <li><b>Scope and price in writing, before anything starts</b>
           <span>Standard website projects are 50% to start and 50% before launch.
             Most take about 2&ndash;4 weeks, depending on scope, feedback, and how
@@ -235,7 +386,7 @@
             content created specifically for your project are yours.</span></li>
         <li><b>Nothing gets claimed that cannot be shown</b>
           <span>There are no invented numbers anywhere on this site. Where a
-            result exists it is labelled and dated; where it does not, the page
+            result exists it is labeled and dated; where it does not, the page
             says so. <a class="ilink" href="/work/">Work</a> is where that
             is easiest to check.</span></li>
       </ul>
@@ -243,55 +394,22 @@
   </div>
 </section>
 
-<!-- ==========================================================================
-     ⚠ FACTUAL POSITIONING, added 2026-09-01. Everything here is an argument
-     about how websites work, supported by the research pass. There is NO founder
-     biography in it: no origin story, no account of other agencies, no quote, no
-     reason given for the solo structure beyond what it produces. Those need the
-     owner's own words and are deliberately absent rather than invented.
-     ========================================================================== -->
-<section class="sec">
-  <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What this is built on</h2>
-      <p class="lgrid__note">A view about what a website is for.</p>
-    </div>
-    <div class="prose">
-      <p><b>A website is judged on more than how it looks. It has to be found,
-        understood, trusted and acted on.</b></p>
-
-      <p>Appearance is the part that is easiest to see and easiest to sell. It is
-        also the part that gets checked first and argued about most. But a site that
-        looks considered and cannot be found, or reads well and never explains what
-        the business actually does, has not done its job.</p>
-
-      <p>The parts that decide whether a site earns anything are mostly the ones
-        that are not obvious from a screenshot. Whether someone can tell within
-        seconds what the business does and whether it covers them. Whether the next
-        step is clear enough to take on a phone. Whether the information is
-        structured so search engines can index it and, increasingly, so the systems
-        that summarise businesses describe it correctly rather than guessing.
-        Whether the site says the same thing as the Google profile and everywhere
-        else the business appears.</p>
-
-      <p>None of that is exotic. It is ordinary work that is frequently skipped,
-        because it is invisible in a portfolio shot and hard to charge for as a
-        separate line item. It is included here because leaving it out produces a
-        site that photographs well and underperforms quietly.</p>
-
-      <p>The practical consequence is how the work is scoped. Design decisions are
-        made alongside the structure, the copy and the way the site will be found,
-        rather than after them. One person carries all of it, so those decisions do
-        not get separated from each other.</p>
-    </div>
-  </div>
-</section>
-
 <section class="close">
   <div class="wrap">
+    <!-- ✅ RESOLVED 2026-09-01 with the owner's own words. .close__owner and
+         .close__note are already defined in services/leaf.css, which this page
+         loads, so this needs no new CSS. 🚫 The same line has NOT been enabled
+         on the six service pages that carry an empty CLOSING LINE slot; that is
+         a separate decision the owner has not made. -->
+    <aside class="close__owner">
+      <p class="close__ownerlabel">CLOSING LINE</p>
+      <p class="close__note">Good design gets attention. Good marketing creates
+        opportunity. The goal is to build both around the business you are
+        actually trying to grow.</p>
+    </aside>
     <div class="close__row">
       <a class="close__go" href="/contact/">Start a Project <i aria-hidden="true">&#8594;</i></a>
-      <a class="close__alt" href="/work/">See the work <i aria-hidden="true">&#8594;</i></a>
+      <a class="close__alt" href="/work/">View Work <i aria-hidden="true">&#8594;</i></a>
     </div>
   </div>
 </section>

@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- PROTOTYPE SAFETY — do not remove without an explicit launch instruction.
-     Matches the homepage prototype: kreated.dev still serves a different site
-     and the domain cutover has not happened. -->
+<!-- PRELAUNCH GATE — do not remove without an explicit launch instruction.
+     ⚠ This note used to say kreated.dev "still serves a different site and the
+     domain cutover has not happened". The cutover happened on 2026-09-01 and
+     this site is live. noindex stays because indexing has not been authorized,
+     which is a separate decision from being deployed. -->
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://kreated.dev/services/">
 
@@ -148,10 +150,19 @@
         Profile, brand, and answer engine work. Each row below opens that
         service&rsquo;s page.</p>
 
-      <!-- OWNER INPUT: services positioning — ships HIDDEN with an empty text
-           node. Nothing in the repo supplies an approved services positioning
-           line. To enable: remove `hidden` and write the sentence into
-           .shero__note. -->
+      <!-- ⏸ DEFERRED — NOT REQUIRED FOR LAUNCH (owner decision 2026-09-01).
+     This slot ships HIDDEN and empty. The owner reviewed all 17 remaining
+     owner-input slots and deferred every one of them; the page is complete
+     without it. 🚫 Do not invent a line to fill it, and 🚫 do not reuse the
+     About closing line here — that was explicitly ruled out.
+     To enable later: remove `hidden` and write the owner's words into the
+     note element below.
+
+     Original note, kept for context:
+     OWNER INPUT: services positioning — ships HIDDEN with an empty text
+     node. Nothing in the repo supplies an approved services positioning
+     line. To enable: remove `hidden` and write the sentence into
+     .shero__note. -->
       <aside class="shero__owner" hidden>
         <p class="shero__ownerlabel">POSITIONING</p>
         <p class="shero__note"><!-- owner sentence goes here --></p>
@@ -347,7 +358,7 @@
       <p><b>Local SEO or Answer Engine Optimization.</b> Local search competes for a
         position when someone nearby is looking. Answer engine work is about being
         understood and described correctly when a search engine or an AI assistant
-        summarises the business. They share the same prerequisites, and local search
+        summarizes the business. They share the same prerequisites, and local search
         usually comes first.</p>
 
       <p><b>Brand Strategy or marketing.</b> Brand strategy decides who the business
@@ -361,10 +372,19 @@
 <section class="close">
   <div class="wrap">
 
-    <!-- OWNER INPUT: closing line — enable when owner copy exists.
-         Ships HIDDEN with no placeholder text. Nothing in the repo supplies an
-         approved closing sentence for this page. To enable: remove `hidden`
-         and insert the owner's sentence in .close__note. -->
+    <!-- ⏸ DEFERRED — NOT REQUIRED FOR LAUNCH (owner decision 2026-09-01).
+     This slot ships HIDDEN and empty. The owner reviewed all 17 remaining
+     owner-input slots and deferred every one of them; the page is complete
+     without it. 🚫 Do not invent a line to fill it, and 🚫 do not reuse the
+     About closing line here — that was explicitly ruled out.
+     To enable later: remove `hidden` and write the owner's words into the
+     note element below.
+
+     Original note, kept for context:
+     OWNER INPUT: closing line — enable when owner copy exists.
+     Ships HIDDEN with no placeholder text. Nothing in the repo supplies an
+     approved closing sentence for this page. To enable: remove `hidden`
+     and insert the owner's sentence in .close__note. -->
     <aside class="close__owner" hidden>
       <p class="close__ownerlabel">CLOSING LINE</p>
       <p class="close__note"><!-- owner sentence goes here --></p>

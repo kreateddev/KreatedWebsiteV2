@@ -1,5 +1,5 @@
 /* ==========================================================================
-   OMC-INSPIRED KREATED HOMEPAGE SHELL — NOT PRODUCTION
+   KREATED — MOTION  (live since the 2026-09-01 cutover)
 
    The whole motion budget, measured from the live OMC homepage 2026-08-24.
    Full measurements: research/OMC_MOTION_TEARDOWN.md

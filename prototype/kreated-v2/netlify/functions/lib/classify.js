@@ -48,7 +48,7 @@ function classify(s) {
     if (s.pathsSeen <= 2) { bad.push('shallow'); ev.push('Only ' + s.pathsSeen + ' internal ' + (s.pathsSeen === 1 ? 'page was' : 'pages were') + ' linked from the homepage.'); }
     if (!home.ctas.length) { bad.push('no cta'); ev.push('No obvious call to action was found in the homepage links or buttons.'); }
     else ev.push('Calls to action found: ' + home.ctas.slice(0, 3).map(c => '“' + c + '”').join(', ') + '.');
-    if (!s.anyForm && !s.anyTel) { bad.push('no contact'); ev.push('Neither an enquiry form nor a click-to-call number was found.'); }
+    if (!s.anyForm && !s.anyTel) { bad.push('no contact'); ev.push('Neither an inquiry form nor a click-to-call number was found.'); }
 
     /* ⚠ CRITICAL MEANS "COSTING ENQUIRIES NOW", not "could be better". Thin
        copy was in this trigger and made a working site with a form, a phone
@@ -56,7 +56,7 @@ function classify(s) {
        a broken conversion path is critical. 🚫 Do not add a quality signal to
        this condition; add it to the recommended branch below. */
     if (bad.includes('no contact') || bad.includes('no cta'))
-      out.push(F(cat, 'critical', 'The site is not set up to turn a visitor into an enquiry.',
+      out.push(F(cat, 'critical', 'The site is not set up to turn a visitor into an inquiry.',
         'Someone who arrives ready to contact you has to work out how. Most will not.', ev,
         'A website engagement that puts the contact path where people look.'));
     else if (bad.length)
