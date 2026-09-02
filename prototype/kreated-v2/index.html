@@ -85,6 +85,76 @@
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=3">
 <link rel="stylesheet" href="/footer.css?v=5">
+
+<!-- ==========================================================================
+     STRUCTURED DATA — prepared 2026-09-01 for a later search launch.
+
+     🚫 EVERY VALUE BELOW IS A FACT THAT IS VISIBLE ON THIS SITE. Nothing is
+     asserted that a reader cannot check: the name, the Raleigh location, the
+     phone number and the worldwide availability are all in the footer and on
+     /about/. There is NO aggregateRating, NO review, NO founder credential,
+     NO employee count, NO award and NO street address — Kreated does not
+     publish one, and inventing one to satisfy LocalBusiness would be exactly
+     the fabrication the rest of this site refuses. Organization is used for
+     that reason: it does not require a street address.
+
+     🚫 NO sameAs. The owner's Instagram handle is a real fact, but it is not
+     linked anywhere on the site, and sameAs asserts a verified profile URL.
+     Add it here only when the link is actually on the page.
+
+     ⚠ Apex URLs, matching the canonical on every route. See robots.txt for the
+     unresolved apex/www redirect.
+     ========================================================================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://kreated.dev/#organization",
+      "name": "Kreated",
+      "url": "https://kreated.dev/",
+      "logo": "https://kreated.dev/assets/img/apple-touch-icon.png",
+      "telephone": "+1-919-805-8217",
+      "email": "contact@kreated.dev",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Raleigh",
+        "addressRegion": "NC",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Raleigh"
+        },
+        {
+          "@type": "State",
+          "name": "North Carolina"
+        },
+        {
+          "@type": "Place",
+          "name": "Worldwide"
+        }
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Skyler Reyes"
+      },
+      "description": "Websites, local SEO and branding for local service businesses. Based in Raleigh, North Carolina, working with businesses anywhere."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://kreated.dev/#website",
+      "url": "https://kreated.dev/",
+      "name": "Kreated",
+      "publisher": {
+        "@id": "https://kreated.dev/#organization"
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <!-- The atmosphere: one fixed layer behind the whole document carrying the

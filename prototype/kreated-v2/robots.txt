@@ -1,0 +1,37 @@
+# ==========================================================================
+# KREATED — robots.txt
+#
+# PREPARED 2026-09-01 FOR A LATER SEARCH LAUNCH. Indexing has NOT been
+# released: every one of the 19 routes still carries
+# <meta name="robots" content="noindex, nofollow">.
+#
+# ⚠ THIS FILE DELIBERATELY ALLOWS CRAWLING, and that is not a contradiction.
+# A crawler has to FETCH a page to see the noindex on it. "Disallow: /" would
+# block the fetch, the noindex would never be read, and the URL could still be
+# indexed from external links with no content behind it — the worst of both
+# states. Allowing the crawl is what makes the page-level noindex effective.
+# 🚫 Do not add "Disallow: /" while the noindex meta tags are in place.
+#
+# THE SITEMAP REFERENCE IS INTENTIONAL AND CURRENTLY INERT. It lists the 18
+# routes intended for indexing; while they carry noindex a crawler will fetch
+# them and decline to index them, which is exactly the prepared state.
+#
+# ⚠ THE APEX/WWW MISMATCH IS NOT SETTLED. Canonicals and the sitemap use the
+# apex, https://kreated.dev/, per owner direction. Netlify currently redirects
+# apex -> www with a 301, so those canonical targets are redirects. The fix is
+# a one-click primary-domain change in Netlify, not a change to this file. See
+# the launch checklist. 🚫 Do not "fix" it by rewriting canonicals to www
+# without an owner decision: apex is the stated canonical domain.
+# ==========================================================================
+
+User-agent: *
+Allow: /
+
+# The audit endpoint is a POST-only function. There is nothing for a crawler
+# to read at this path and a GET returns 405.
+Disallow: /.netlify/functions/
+
+# Netlify Forms' own submission target. Not a page.
+Disallow: /.netlify/
+
+Sitemap: https://kreated.dev/sitemap.xml

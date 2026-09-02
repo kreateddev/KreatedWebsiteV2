@@ -60,6 +60,42 @@
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=3">
 <link rel="stylesheet" href="/footer.css?v=5">
+
+<!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
+     🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
+     of this page; the service name and description mirror the H1 and the meta
+     description. No price is asserted here: /pricing/ publishes ranges and
+     "from" figures, and a single Offer value would misstate them. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kreated",
+          "item": "https://kreated.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Work",
+          "item": "https://kreated.dev/work/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Rare Raleigh Restoration",
+          "item": "https://kreated.dev/work/rare-raleigh-restoration/"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <!-- The atmosphere: one fixed layer behind the whole document carrying the

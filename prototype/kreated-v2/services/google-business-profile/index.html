@@ -62,6 +62,66 @@
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=3">
 <link rel="stylesheet" href="/footer.css?v=5">
+
+<!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
+     🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
+     of this page; the service name and description mirror the H1 and the meta
+     description. No price is asserted here: /pricing/ publishes ranges and
+     "from" figures, and a single Offer value would misstate them. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kreated",
+          "item": "https://kreated.dev/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Services",
+          "item": "https://kreated.dev/services/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Google Business Profile Optimization",
+          "item": "https://kreated.dev/services/google-business-profile/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "Google Business Profile Optimization",
+      "description": "Google Business Profile setup and optimization",
+      "serviceType": "Google Business Profile Optimization",
+      "provider": {
+        "@id": "https://kreated.dev/#organization"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Raleigh"
+        },
+        {
+          "@type": "State",
+          "name": "North Carolina"
+        },
+        {
+          "@type": "Place",
+          "name": "Worldwide"
+        }
+      ],
+      "url": "https://kreated.dev/services/google-business-profile/"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <!-- The atmosphere: one fixed layer behind the whole document carrying the
