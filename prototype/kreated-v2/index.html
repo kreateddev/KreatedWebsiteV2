@@ -94,7 +94,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      the first pixel and keep #020C2E. Getting this wrong puts a black status
      bar above a near-white page on iOS, which reads as a rendering fault. -->
 <meta name="theme-color" content="#F4F5FA">
-<link rel="stylesheet" href="/styles.css?v=139">
+<link rel="stylesheet" href="/styles.css?v=140">
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=3">
 <link rel="stylesheet" href="/footer.css?v=8">
@@ -153,6 +153,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }
         ],
         "sameAs": [
+          "https://maps.google.com/?cid=8487494845949998738",
           "https://www.instagram.com/kreated.dev/"
         ],
         "founder": {
@@ -791,80 +792,117 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </article>
 
   <div class="wrap">
-    <!-- ⚠ CLIENT REVIEWS — replaced the single "Word for word" quote block,
-         owner request 2026-09-02. Four published Google reviews, quoted exactly.
-         🚫 PROOF.md §5 rules that govern this block:
-           · NO review-count framing. Never print "4 reviews" or any count.
-           · NO star glyphs — DECISION 017 allows them only with evidence AND a
-             logged design approval from Skyler. Neither exists, so they are out.
-           · NO Review / aggregateRating / testimonial schema. PROOF.md §6 bans it
-             site-wide, and Google does not accept self-serving review markup for
-             a business on its own site anyway.
-         ⚠ Names are first name + last initial, per the owner. Owner responses to
-         the reviews are deliberately not shown. Quote text is verbatim; the only
-         edits are elisions marked with […]. 🚫 Do not paraphrase a review. -->
+    <!-- ⚠ CLIENT REVIEWS — four published Google reviews, IN FULL. Owner
+         instruction 2026-09-02: "do not cut any of it out", so there are no
+         elisions. 🚫 Do not re-trim these to fit a layout; change the layout.
+         ⚠ Each reviewer's own sign-off line ("- J.R.", "— Keely Brzezicka",
+         "Missy Boyd- founder of…") is rendered as the attribution rather than
+         left inside the body. That is placement, not an edit — no words are
+         dropped. Names are first name + last initial, per the owner. Owner
+         replies to the reviews are deliberately not shown.
+         🚫 PROOF.md rules still binding here: NO review count, NO star glyphs
+         (§5 needs evidence AND a logged design approval), NO Review /
+         aggregateRating schema (§6, site-wide). -->
     <section class="revs" aria-labelledby="revsLabel">
-      <p class="revs__label" id="revsLabel">Word for word</p>
-      <p class="revs__intro">Quoted exactly, in each client&rsquo;s own words.</p>
+      <h2 class="revs__h" id="revsLabel">Testimonials</h2>
+      <p class="revs__intro">Published Google reviews, in each client&rsquo;s own words.</p>
 
-      <div class="revs__stage" aria-live="polite">
-        <figure class="rev" data-rev="0">
-          <blockquote class="rev__text">We&rsquo;ve had a great experience working with
-            Kreated. They rebuilt our website for Leak Locators East Coast and have helped
-            us improve our SEO, Google Business Profile, and overall presence online.
-            […] we&rsquo;ve definitely seen more leads and actual jobs coming in through
-            Google. That was the biggest thing for us. A better looking website is great,
-            but seeing it actually start bringing in more business is what made the
-            difference. […] Skyler is very responsive and continues to make improvements
-            instead of just finishing the site and moving on.</blockquote>
+      <!-- ⚠ A real horizontally scrollable track, not a fade carousel. The
+           reader can drag, swipe or trackpad-scroll it at any time; the script
+           only nudges it along and gets out of the way while they are touching
+           it. 🚫 Do not replace this with absolutely-positioned panels — that
+           removes native scrolling and with it the behaviour asked for. -->
+      <div class="revs__track" tabindex="0" role="group" aria-label="Client testimonials">
+        <article class="rev">
+          <blockquote class="rev__text">
+            <p>We&rsquo;ve had a great experience working with Kreated. They rebuilt our
+              website for Leak Locators East Coast and have helped us improve our SEO,
+              Google Business Profile, and overall presence online.</p>
+            <p>It did take about a month before we started seeing a noticeable increase,
+              but since then we&rsquo;ve definitely seen more leads and actual jobs coming
+              in through Google. That was the biggest thing for us. A better looking
+              website is great, but seeing it actually start bringing in more business is
+              what made the difference.</p>
+            <p>The website is much more professional, easy to use, and does a much better
+              job explaining what we do and the areas we serve. Skyler is very responsive
+              and continues to make improvements instead of just finishing the site and
+              moving on.</p>
+            <p>We&rsquo;re very happy with the results so far and would definitely
+              recommend Kreated to any local business looking for a better website,
+              stronger SEO, and more leads!!</p>
+          </blockquote>
           <figcaption class="rev__by">J.R.
             <span class="rev__role">CEO, <a class="rev__case" href="/work/leak-locators-east-coast/">Leak Locators East Coast</a></span>
             <span class="rev__src">Published Google review</span></figcaption>
-        </figure>
+        </article>
 
-        <figure class="rev" data-rev="1">
-          <blockquote class="rev__text">We had an excellent experience working with Kreated
-            on our company&rsquo;s new website. Before making a decision, we researched and
-            compared several other website designers, and Kreated offered the best
-            combination of quality and affordability. […] They listened to exactly what we
-            wanted, offered helpful suggestions, and created a website that represents our
-            company perfectly.</blockquote>
+        <article class="rev">
+          <blockquote class="rev__text">
+            <p>We had an excellent experience working with Kreated on our company&rsquo;s
+              new website. Before making a decision, we researched and compared several
+              other website designers, and Kreated offered the best combination of quality
+              and affordability. Communication was excellent throughout the entire process,
+              and they were responsive, professional, and easy to work with. They listened
+              to exactly what we wanted, offered helpful suggestions, and created a website
+              that represents our company perfectly. We couldn&rsquo;t be happier with the
+              finished product and highly recommend Kreated to any business looking for a
+              professional, modern, and affordable website!</p>
+          </blockquote>
           <figcaption class="rev__by">Keely B.
             <span class="rev__role">CFO, <a class="rev__case" href="/work/rare-raleigh-restoration/">Rare Raleigh Restoration</a></span>
             <span class="rev__src">Published Google review</span></figcaption>
-        </figure>
+        </article>
 
-        <figure class="rev" data-rev="2">
-          <blockquote class="rev__text">I own a clothing brand with a large following and
-            the website I had live was very awfully built (by me lol) and I was losing
-            customers due to this. I chose the growth offer and care plan and the pricing
-            moving forward was very transparent and upfront. […] I was asked for my opinion
-            throughout the build of the website and I felt like my requests were always
-            added/removed. Also, I have no clue how all the SEO stuff works so thankfully
-            the care plan option is provided.</blockquote>
+        <article class="rev">
+          <blockquote class="rev__text">
+            <p>I own a clothing brand with a large following and the website I had live was
+              very awfully built (by me lol) and I was losing customers due to this. I chose
+              the growth offer and care plan and the pricing moving forward was very
+              transparent and upfront. Skyler had my new website and google business page
+              live within a week and I couldn&rsquo;t be more happy with how it turned out!
+              I was asked for my opinion throughout the build of the website and I felt like
+              my requests were always added/removed. Also, I have no clue how all the SEO
+              stuff works so thankfully the care plan option is provided. I&rsquo;d give
+              them 10 stars if I could!!</p>
+          </blockquote>
           <figcaption class="rev__by">Gracie R.
             <span class="rev__role">Clothing brand owner</span>
             <span class="rev__src">Published Google review</span></figcaption>
-        </figure>
+        </article>
 
-        <figure class="rev" data-rev="3">
-          <blockquote class="rev__text">Absolutely a wonderful experience from start to
-            finish. Skylar helped me make my idea come to life! He worked with me every
-            step of the way, and asked my input at every turn. […] His work is extremely
-            professional and he is very knowledgeable. From start to finish, it only took
-            two weeks to fully develop my site and have it up and running. I could not be
-            happier with how my new website and branding/logo turned out.</blockquote>
+        <article class="rev">
+          <blockquote class="rev__text">
+            <p>Absolutely a wonderful experience from start to finish. Skylar helped me make
+              my idea come to life! He worked with me every step of the way, and asked my
+              input at every turn. We worked closely together deciding on how I wanted things
+              worded, color schemes and pictures. He listened to my preferences and changed
+              things as soon as I asked. He was very timely in his response, never letting
+              more than a couple of hours pass without a response, any day of the week. His
+              work Is extremely professional and he is very knowledgeable. From start to
+              finish, it only took two weeks to fully develop my site and have it up and
+              running. I could not be happier with how my new website and branding/logo
+              turned out. I would recommend him over and over again!</p>
+          </blockquote>
           <figcaption class="rev__by">Missy B.
-            <span class="rev__role">Founder, <a class="rev__case" href="/work/learnsmart/">LearnSmart Educational Consulting</a></span>
+            <span class="rev__role">Founder, <a class="rev__case" href="/work/learnsmart/">LearnSmart Educational Consulting and Academic Coaching</a></span>
             <span class="rev__src">Published Google review</span></figcaption>
-        </figure>
+        </article>
       </div>
 
       <div class="revs__nav">
-        <button class="revs__arrow" type="button" data-rev-prev aria-label="Previous review">&#8592;</button>
-        <div class="revs__dots" role="tablist" aria-label="Choose a review"></div>
-        <button class="revs__arrow" type="button" data-rev-next aria-label="Next review">&#8594;</button>
+        <button class="revs__arrow" type="button" data-rev-prev aria-label="Previous testimonial">&#8592;</button>
+        <div class="revs__dots" role="tablist" aria-label="Choose a testimonial"></div>
+        <button class="revs__arrow" type="button" data-rev-next aria-label="Next testimonial">&#8594;</button>
       </div>
+      <!-- ⚠ Real Google Business Profile, resolved from the live listing and
+           verified against the site's own phone number and domain before use:
+           "Kreated · Website designer · kreated.dev · (919) 805-8217".
+           🚫 Do not swap this for a hand-built /search or writereview URL — the
+           cid form is the stable identifier for the listing itself, and it is
+           the same URL carried in Organization.sameAs. Keep the two identical
+           or they stop corroborating each other. -->
+      <a class="revs__all" href="https://maps.google.com/?cid=8487494845949998738" target="_blank" rel="noopener">Read all reviews
+        <i aria-hidden="true">&#8599;</i><span class="sr-only"> on Google (opens in a new tab)</span></a>
     </section>
 
     <!-- The three projects now have real pages. Same quiet-link component the
@@ -1167,7 +1205,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- the client strip's emphasis cycle: one timer, no scroll listener, and it
      does not exist at all under reduced motion — see the file header -->
 <script src="/clients.js?v=5" defer></script>
-<script src="/reviews.js?v=2" defer></script>
+<script src="/reviews.js?v=3" defer></script>
 <!-- the scroll-driven light-to-blue transition. Publishes one custom property
      and nothing else; the page is complete without it -->
 <script src="/atmosphere.js?v=10" defer></script>

@@ -2852,76 +2852,106 @@ button,input,select,textarea{font:inherit;color:inherit}
 }
 
 /* ==========================================================================
-   REVIEWS CAROUSEL — replaces the single "Word for word" quote, 2026-09-02.
-   ⚠ PROGRESSIVE ENHANCEMENT. Panels are VISIBLE by default and stacked; the
-   carousel only exists once reviews.js adds .is-carousel, so with no script the
-   reader still gets all four quotes.
-   🚫 Do not hide .rev by default. That would make the content JS-dependent.
-   ⚠ Reduced motion keeps the carousel and drops the transition only — see the
-   media query at the end of this block.
-   ⚠ This block sits in the page's day half, so ink is the normal --ink-*
-   scale, not the night values used by .social further down.
+   TESTIMONIALS — full-length reviews in a scroll-snapped track, 2026-09-02.
+   ⚠ CENTRED, per the owner: heading, intro, the track's cards, the controls
+   and the "Read all reviews" link all sit on the page's centre line. The card
+   TEXT stays left-aligned — centring a four-paragraph review makes it unreadable.
+   ⚠ NATIVE SCROLLING IS THE POINT. .revs__track is a real overflow-x element
+   with scroll-snap; the reader can drag or swipe it whether or not the script
+   runs. 🚫 Do not swap it for absolutely-positioned panels.
+   ⚠ This block sits in the page's night half — the ink tokens are k-aware, so
+   they resolve correctly here without hard-coded light values.
    ========================================================================== */
-.revs{margin:clamp(46px,6vw,84px) 0 clamp(30px,4vw,54px)}
-.revs__label{margin:0 0 8px;font:600 11px/1 'General Sans',system-ui;
-  letter-spacing:.20em;text-transform:uppercase;color:var(--cobalt)}
-.revs__intro{margin:0 0 clamp(20px,2.6vw,34px);font-size:15.5px;color:var(--ink-3)}
+.revs{margin:clamp(46px,6vw,84px) 0 clamp(30px,4vw,54px);text-align:center}
+.revs__h{
+  font:400 clamp(30px,4.4vw,50px)/1.1 'Cormorant Garamond',Georgia,serif;
+  letter-spacing:.01em;margin:0 0 10px;color:var(--ink-1);
+}
+.revs__intro{margin:0 auto clamp(24px,3vw,38px);font-size:15.5px;color:var(--ink-3);
+  max-width:52ch}
 
-/* stacked fallback */
-.rev{margin:0 0 26px;padding:0 0 0 20px;border-left:2px solid var(--line,rgba(20,28,60,.14))}
-.rev:last-child{margin-bottom:0}
-.rev__text{margin:0 0 14px;font:400 clamp(17px,1.65vw,21px)/1.6 'General Sans',system-ui;
-  color:var(--ink-1);text-wrap:pretty}
-.rev__by{font:600 14.5px/1.5 'General Sans',system-ui;color:var(--ink-1)}
+/* ---- the track ------------------------------------------------------- */
+.revs__track{
+  display:flex;gap:clamp(14px,1.6vw,22px);
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;
+  padding:4px 0 22px;margin:0 auto;
+  scrollbar-width:none;                       /* the dots are the affordance */
+}
+.revs__track::-webkit-scrollbar{display:none}
+.revs__track:focus-visible{outline:2px solid var(--cobalt);outline-offset:6px;
+  border-radius:14px}
+
+/* ---- a card ---------------------------------------------------------- */
+.rev{
+  flex:0 0 auto;scroll-snap-align:center;
+  width:min(560px,86vw);
+  display:flex;flex-direction:column;
+  text-align:left;                            /* ⚠ NOT centred — see note above */
+  padding:clamp(22px,2.4vw,32px);
+  border:1px solid color-mix(in srgb,
+    rgba(20,28,60,.14), rgba(255,255,255,.16) calc(var(--k) * 100%));
+  border-radius:16px;
+  background:color-mix(in srgb,
+    rgba(255,255,255,.75), rgba(255,255,255,.045) calc(var(--k) * 100%));
+}
+.rev__text{margin:0 0 18px}
+.rev__text p{margin:0 0 13px;font:400 clamp(15.5px,1.15vw,16.5px)/1.68
+  'General Sans',system-ui;color:var(--ink-1);text-wrap:pretty}
+.rev__text p:last-child{margin-bottom:0}
+.rev__by{margin-top:auto;font:600 14.5px/1.5 'General Sans',system-ui;color:var(--ink-1)}
 .rev__role,.rev__src{display:block;font-weight:400;color:var(--ink-3)}
 .rev__role{font-size:14px}
 .rev__src{font-size:12.5px;letter-spacing:.02em;margin-top:3px;opacity:.85}
-/* ⚠ The client name in the attribution links to its case study. Underlined on
-   purpose: inside a grey caption a colour change alone is not a reliable
-   affordance, and three of the four reviews carry one while Gracie R. does not
-   — so the underline is what distinguishes a linked name from a plain one. */
+/* ⚠ The client name links to its case study. Underlined on purpose: inside a
+   muted caption a colour shift alone is not a reliable affordance, and only
+   three of the four cards carry one. */
 .rev__case{color:inherit;text-decoration:underline;
   text-underline-offset:3px;text-decoration-thickness:1px;
   text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);
   transition:text-decoration-color var(--t-hover,.18s ease),color var(--t-hover,.18s ease)}
-.rev__case:hover{color:var(--cobalt);text-decoration-color:currentColor}
+.rev__case:hover{color:var(--cobalt-lift,#5B86FF);text-decoration-color:currentColor}
 
-.revs__nav{display:none}
-
-/* ---- carousel, only once the script has opted in --------------------- */
-.revs.is-carousel .revs__stage{position:relative}
-.revs.is-carousel .rev{
-  position:absolute;inset:0;margin:0;
-  opacity:0;visibility:hidden;transform:translateY(6px);
-  transition:opacity .45s ease,transform .45s ease,visibility 0s linear .45s;
-}
-.revs.is-carousel .rev.is-on{
-  position:relative;opacity:1;visibility:visible;transform:none;
-  transition:opacity .45s ease,transform .45s ease;
-}
-.revs.is-carousel .revs__nav{
-  display:flex;align-items:center;gap:14px;margin-top:clamp(18px,2vw,26px)}
+/* ---- controls -------------------------------------------------------- */
+.revs__nav{display:flex;align-items:center;justify-content:center;gap:14px;
+  margin-top:clamp(6px,1vw,12px)}
 .revs__arrow{
-  width:38px;height:38px;flex:none;display:grid;place-items:center;
-  border:1px solid var(--line,rgba(20,28,60,.16));border-radius:50%;
-  background:none;cursor:pointer;font-size:15px;color:var(--ink-2);
+  width:40px;height:40px;flex:none;display:grid;place-items:center;
+  border:1px solid color-mix(in srgb,
+    rgba(20,28,60,.18), rgba(255,255,255,.24) calc(var(--k) * 100%));
+  border-radius:50%;background:none;cursor:pointer;font-size:15px;
+  color:var(--ink-2);
   transition:border-color var(--t-hover,.18s ease),color var(--t-hover,.18s ease);
 }
-.revs__arrow:hover{border-color:var(--cobalt);color:var(--cobalt)}
+.revs__arrow:hover{border-color:var(--cobalt-lift,#5B86FF);color:var(--cobalt-lift,#5B86FF)}
 .revs__dots{display:flex;gap:8px}
 .revs__dot{
   width:8px;height:8px;padding:0;border:0;border-radius:50%;cursor:pointer;
-  background:var(--ink-4,rgba(20,28,60,.28));
+  background:color-mix(in srgb,
+    rgba(20,28,60,.26), rgba(255,255,255,.34) calc(var(--k) * 100%));
   transition:background var(--t-hover,.18s ease),transform var(--t-hover,.18s ease);
 }
-.revs__dot[aria-selected=true]{background:var(--cobalt);transform:scale(1.35)}
+.revs__dot[aria-selected=true]{background:var(--cobalt-lift,#5B86FF);transform:scale(1.35)}
 .revs__arrow:focus-visible,.revs__dot:focus-visible{
-  outline:2px solid var(--cobalt);outline-offset:3px}
+  outline:2px solid var(--cobalt-lift,#5B86FF);outline-offset:3px}
+
+/* ---- read all -------------------------------------------------------- */
+.revs__all{
+  display:inline-flex;align-items:center;gap:9px;
+  margin-top:clamp(20px,2.4vw,30px);padding:13px 22px;
+  border:1px solid color-mix(in srgb,
+    rgba(20,28,60,.20), rgba(255,255,255,.26) calc(var(--k) * 100%));
+  border-radius:999px;text-decoration:none;border-bottom-width:1px;
+  font:600 14.5px/1 'General Sans',system-ui;color:var(--ink-1);
+  transition:border-color var(--t-hover,.18s ease),color var(--t-hover,.18s ease);
+}
+.revs__all:hover{border-color:var(--cobalt-lift,#5B86FF);color:var(--cobalt-lift,#5B86FF)}
+.revs__all i{font-style:normal;font-size:12px;opacity:.7}
 
 @media (prefers-reduced-motion: reduce){
-  .revs.is-carousel .rev{transition:none}
+  .revs__track{scroll-behavior:auto}
 }
 @media (max-width:900px){
   .revs{margin:34px 0 26px}
-  .rev{padding-left:16px}
+  .rev{width:86vw;border-radius:14px}
 }

@@ -1,87 +1,121 @@
 /* ==========================================================================
-   REVIEWS — a rotating carousel over four published Google reviews.
+   TESTIMONIALS — a horizontally scrollable track of full-length reviews.
 
-   ⚠ CONTENT RULES LIVE IN THE MARKUP, NOT HERE. This file only moves panels.
-   🚫 It must never render a review count, a star glyph or a rating: PROOF.md
-   §5 forbids count framing outright and allows stars only with evidence plus a
-   logged design approval, and §6 bans review schema site-wide.
+   ⚠ THE TRACK IS A REAL SCROLL CONTAINER. Drag, swipe, trackpad and keyboard
+   all work natively because the cards are laid out in an overflow-x element
+   with scroll-snap; this script only nudges it along. 🚫 Do not reimplement
+   this with transforms or absolute positioning — that takes away the native
+   scrolling the owner specifically asked to keep.
 
-   ⚠ NO-JS SHOWS EVERY REVIEW. The panels are visible by default in CSS and this
-   script opts INTO the carousel by adding .is-carousel, so if the script never
-   runs the reader gets four stacked quotes — complete content, no interaction.
-   🚫 Do not invert that by hiding panels in CSS.
-   ⚠ REDUCED MOTION IS DIFFERENT: the carousel stays, the movement stops. The
-   preference means "do not animate", not "do not paginate", so auto-advance and
-   the panel transition are disabled while the arrows and dots keep working.
+   ⚠ THE READER ALWAYS WINS. Auto-advance yields the moment they touch the
+   track and resumes a beat after they let go. Because a programmatic
+   scrollTo fires the same 'scroll' events a human does, the script marks its
+   own moves with `self` and ignores those — without that flag the carousel
+   reads its own animation as user input and stops forever on the first tick.
+
+   🚫 Never render a review count, star glyph or rating here. PROOF.md §5
+   forbids count framing outright and allows stars only with evidence AND a
+   design approval logged in DECISIONS.md; §6 bans review schema site-wide.
    ========================================================================== */
 (function () {
   var root = document.querySelector('.revs');
   if (!root) return;
-  var stage = root.querySelector('.revs__stage');
-  var panels = [].slice.call(root.querySelectorAll('.rev'));
+  var track = root.querySelector('.revs__track');
+  var cards = track ? [].slice.call(track.querySelectorAll('.rev')) : [];
   var dotWrap = root.querySelector('.revs__dots');
-  if (!stage || panels.length < 2 || !dotWrap) return;
+  if (!track || cards.length < 2 || !dotWrap) return;
 
   var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var HOLD = 7000;            /* long enough to actually read a quote */
-  var i = 0, timer = null;
 
-  /* ⚠ THREE REASONS, ONE STATE — the same trap that froze the client marquee.
-     Each pause reason is tracked separately and the timer is derived from all
-     of them, so a late callback for one reason cannot clear another's pause.
-     🚫 Do not collapse these into a single boolean. */
-  var hidden = false, hovered = false, focused = false;
+  /* ⚠ 15s. These are FULL reviews, not pull quotes — the longest runs four
+     paragraphs. The previous 7s was called out as too fast to read. This is a
+     nudge for someone who has stopped reading, not a slideshow. */
+  var HOLD = 15000;
+  var SETTLE = 1600;          /* quiet time after a human scroll before resuming */
 
-  function auto() { return !(mq && mq.matches); }
+  var timer = null, settleTimer = null, self = false, idx = 0;
+  var hidden = false, hovered = false, focused = false, touching = false;
+
+  function moving() { return !(mq && mq.matches); }
   function stop() { if (timer) { clearTimeout(timer); timer = null; } }
   function sync() {
     stop();
-    if (auto() && !hidden && !hovered && !focused) timer = setTimeout(next, HOLD);
+    if (moving() && !hidden && !hovered && !focused && !touching) {
+      timer = setTimeout(advance, HOLD);
+    }
   }
 
-  function show(n) {
-    i = (n + panels.length) % panels.length;
-    panels.forEach(function (p, k) {
-      var on = k === i;
-      p.classList.toggle('is-on', on);
-      /* inert to AT and to the tab order while off-screen */
-      p.setAttribute('aria-hidden', on ? 'false' : 'true');
+  function current() {
+    /* nearest card to the track's left edge — survives manual scrolling */
+    var best = 0, bestD = Infinity, x = track.scrollLeft;
+    cards.forEach(function (c, k) {
+      var d = Math.abs(c.offsetLeft - track.offsetLeft - x);
+      if (d < bestD) { bestD = d; best = k; }
     });
-    [].slice.call(dotWrap.children).forEach(function (d, k) {
-      d.setAttribute('aria-selected', k === i ? 'true' : 'false');
-      d.tabIndex = k === i ? 0 : -1;
-    });
+    return best;
+  }
+
+  function go(n, smooth) {
+    idx = Math.max(0, Math.min(cards.length - 1, n));
+    self = true;
+    var left = cards[idx].offsetLeft - track.offsetLeft;
+    try { track.scrollTo({ left: left, behavior: smooth === false ? 'auto' : 'smooth' }); }
+    catch (e) { track.scrollLeft = left; }
+    /* release the flag after the smooth scroll has finished emitting events */
+    setTimeout(function () { self = false; paint(); }, 700);
+    paint();
     sync();
   }
-  function next() { show(i + 1); }
 
-  panels.forEach(function (p, k) {
+  function advance() {
+    var n = current() + 1;
+    go(n >= cards.length ? 0 : n);
+  }
+
+  function paint() {
+    var k = current();
+    [].slice.call(dotWrap.children).forEach(function (d, i) {
+      d.setAttribute('aria-selected', i === k ? 'true' : 'false');
+      d.tabIndex = i === k ? 0 : -1;
+    });
+  }
+
+  cards.forEach(function (c, k) {
     var d = document.createElement('button');
     d.type = 'button';
     d.className = 'revs__dot';
     d.setAttribute('role', 'tab');
-    d.setAttribute('aria-label', 'Review ' + (k + 1) + ' of ' + panels.length);
-    d.addEventListener('click', function () { show(k); });
+    d.setAttribute('aria-label', 'Testimonial ' + (k + 1) + ' of ' + cards.length);
+    d.addEventListener('click', function () { go(k); });
     dotWrap.appendChild(d);
   });
 
   var prev = root.querySelector('[data-rev-prev]');
   var fwd  = root.querySelector('[data-rev-next]');
-  if (prev) prev.addEventListener('click', function () { show(i - 1); });
-  if (fwd)  fwd.addEventListener('click', function () { show(i + 1); });
+  if (prev) prev.addEventListener('click', function () { go(current() - 1); });
+  if (fwd)  fwd.addEventListener('click', function () { go(current() + 1); });
 
-  root.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft')  { show(i - 1); e.preventDefault(); }
-    if (e.key === 'ArrowRight') { show(i + 1); e.preventDefault(); }
-  });
+  /* ⚠ A human scroll pauses; letting go resumes after SETTLE. `self` keeps the
+     script's own smooth scroll from tripping this. */
+  track.addEventListener('scroll', function () {
+    if (self) return;
+    touching = true;
+    stop();
+    if (settleTimer) clearTimeout(settleTimer);
+    settleTimer = setTimeout(function () { touching = false; paint(); sync(); }, SETTLE);
+  }, { passive: true });
 
   root.addEventListener('mouseenter', function () { hovered = true;  sync(); });
   root.addEventListener('mouseleave', function () { hovered = false; sync(); });
   root.addEventListener('focusin',    function () { focused = true;  sync(); });
   root.addEventListener('focusout',   function () { focused = false; sync(); });
 
-  /* ⚠ Re-derive on the way back in rather than trusting whatever fired last —
-     a backgrounded tab or a bfcache restore can deliver stale events. */
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft')  { go(current() - 1); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { go(current() + 1); e.preventDefault(); }
+  });
+
+  /* re-derive on the way back in rather than trusting a stale queued event */
   function resume() { hidden = document.hidden; sync(); }
   document.addEventListener('visibilitychange', resume);
   window.addEventListener('pageshow', resume);
@@ -92,6 +126,7 @@
     else if (mq.addListener) mq.addListener(onMQ);
   }
 
-  root.classList.add('is-carousel');
-  show(0);
+  root.classList.add('is-live');
+  paint();
+  sync();
 }());

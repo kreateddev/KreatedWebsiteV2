@@ -131,11 +131,26 @@ reviews now exist and the homepage carries all four in a rotating carousel (`.re
 | **Gracie R.** | Clothing brand owner | Company not named in the review — 🚫 do not invent one |
 | **Missy B.** | Founder, LearnSmart Educational Consulting | Also quoted on `/work/learnsmart/` |
 
+**External profiles now verified and live in `Organization.sameAs`:** the Google Business Profile
+(`https://maps.google.com/?cid=8487494845949998738`, confirmed against the site's own phone number
+and domain) and Instagram (`https://www.instagram.com/kreated.dev/`, owner-supplied). The
+"Read all reviews" button uses the same GBP URL. ⚠ Keep the button and `sameAs` identical — the
+matching pair is what makes the reconciliation bidirectional.
+
 🚫 **Display rules for these, all still binding:**
 - **First name + last initial only**, per the owner. 🚫 Do not restore full surnames.
 - **Owner replies are not shown.** Two of the reviews have a Kreated response on Google; the site
   quotes the reviewer only.
-- Quote verbatim. Elisions marked `[…]`. 🚫 Never paraphrase or "tighten" a review.
+- Quote verbatim, **in full**. Owner instruction 2026-09-02: "do not cut any of it out", so
+  the cards carry each review complete and there are no elisions. 🚫 Never paraphrase,
+  "tighten" or re-trim a review to fit a layout — change the layout.
+- ⚠ Original wording is preserved including its errors: the reviewer's spelling **"Skylar"**,
+  and the capitalised **"His work Is extremely professional"**. 🚫 Do not silently fix these.
+- ⚠ Gracie R.'s review contains the phrase **"I'd give them 10 stars if I could!!"**. That is
+  the reviewer's own words inside a quoted testimonial, not a Kreated rating claim, and it is
+  why it does not trip the §5 rating rules. 🚫 Do not lift it out as a pull quote or a badge.
+- Each reviewer's own sign-off line is rendered as the attribution rather than left in the
+  body. That is placement, not an edit; no words are dropped.
 - 🚫 **No review count.** DECISION 017 still forbids it — do not print "four reviews" or any
   number, on the page or in this file's copy.
 - 🚫 **No star glyphs** without evidence *and* a logged design approval (see below). None exist,
