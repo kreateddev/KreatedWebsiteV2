@@ -1,8 +1,9 @@
 # ==========================================================================
 # KREATED — robots.txt
 #
-# LAUNCHED FOR SEARCH 2026-09-01. Eighteen routes are indexable; /thanks/
-# carries "noindex, follow" and is deliberately absent from the sitemap.
+# LAUNCHED FOR SEARCH 2026-09-01 with eighteen indexable routes. Thirty-four as
+# of the final content expansion (2026-09-02): +1 vertical page, +14 resources.
+# /thanks/ carries "noindex, follow" and is deliberately absent from the sitemap.
 #
 # ⚠ CANONICAL HOST IS THE APEX, https://kreated.dev/. www 301s to it,
 # path-preserving, and every canonical resolves to a 200 in zero hops. 🚫 Do

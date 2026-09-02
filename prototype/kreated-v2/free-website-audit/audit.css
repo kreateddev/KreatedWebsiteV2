@@ -293,6 +293,19 @@
 }
 .ax__c p{margin:0;font-size:15px;line-height:1.62;color:var(--ink-3)}
 
+/* ⚠ THE LIMITATION NOTE, added 2026-09-02. Sits under the six-cell grid and
+   states what the tool cannot see. It is deliberately NOT styled as fine print:
+   the honesty is the product, so it reads at the same size as the cell copy,
+   set apart by a rule rather than by being made small and grey. 🚫 Do not
+   shrink it, hide it, or move it below the fold of the section. */
+.ax__note{
+  max-width:76ch;
+  margin:clamp(20px,2.4vw,28px) 0 0;
+  padding-top:clamp(18px,2vw,24px);
+  border-top:1px solid var(--stroke);
+  font-size:15px;line-height:1.62;color:var(--ink-3);
+}
+
 /* ---- how it works -------------------------------------------------------- */
 .ax__steps{
   display:grid;

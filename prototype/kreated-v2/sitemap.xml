@@ -2,11 +2,20 @@
 <!--
   KREATED — sitemap.xml   LIVE 2026-09-01.
 
-  The 23 indexable routes. Every one returns 200 on the apex in zero hops and
+  The 34 indexable routes. Every one returns 200 on the apex in zero hops and
   carries a self-referencing canonical to the same URL.
 
   ⚠ 2026-09-01, first post-launch content batch: added /web-design-for-contractors/
-  and the four /resources/ URLs, taking 18 to 23. See docs/SEO-ROADMAP.md §10.
+  and the four /resources/ URLs, taking 18 to 23.
+  ⚠ 2026-09-01, full SEO expansion: added the remaining four resources, taking
+  23 to 27. The library was then seven resources.
+  ⚠ 2026-09-01, FINAL content expansion: added seven resources, taking 27 to 34.
+  The library is now fourteen. A commercial landing-page service URL was
+  considered in the same pass and REJECTED on SERP evidence — Google answers
+  that query with general web-design pages, so the page would have cannibalized
+  /services/web-design/. See docs/SEO-ROADMAP.md §10 and §12.
+  🚫 This was the last content-expansion batch. The next pass is an architecture
+  audit, not more URLs.
 
   APEX URLS. The Netlify primary domain is the apex, www 301s to it
   path-preserving, and these URLs match the canonical on every page.
@@ -116,6 +125,61 @@
     <loc>https://kreated.dev/resources/local-seo-vs-google-business-profile/</loc>
     <lastmod>2026-09-01</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/how-long-local-seo-takes/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/why-your-business-isnt-on-google-maps/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/how-many-service-pages/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/what-answer-engine-optimization-is/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/website-or-seo-first/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/is-local-seo-worth-it/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/custom-website-vs-website-builder/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/contractor-website-checklist/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/why-customers-dont-trust-your-website/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/when-to-rebrand/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://kreated.dev/resources/what-to-actually-track/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://kreated.dev/about/</loc>

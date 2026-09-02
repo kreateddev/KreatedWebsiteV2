@@ -74,7 +74,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
        leaf.css      the service-leaf system, shared by every /services/ leaf
        web-design.css  only what this page uses and no other leaf does -->
 <link rel="stylesheet" href="/services/services.css?v=17">
-<link rel="stylesheet" href="/services/leaf.css?v=10">
+<link rel="stylesheet" href="/services/leaf.css?v=11">
 <link rel="stylesheet" href="/services/web-design/web-design.css?v=9">
 <link rel="stylesheet" href="/services/web-design/groundwork.css?v=10">
 <!-- last, so it is the single definition of the footer on every route -->
@@ -268,7 +268,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p>A Kreated website is built by one person from the first conversation to
         launch. The person who scopes the project is the person who designs and
         builds it, so nothing is lost in a handover and there is never a question
-        about who is responsible for the work.</p>
+        about who is responsible for the work.
+        <!-- ⚠ /about/ had ZERO in-content inbound links across the whole site; it
+             was reachable only from the global header and footer. This is the one
+             place the claim it argues is actually made. 🚫 One link, not a
+             sitewide "meet the founder" pattern. -->
+        <a class="ilink" href="/about/">Who that is, and why it works that
+        way</a>.</p>
       <p>Websites typically take two to four weeks depending on scope, feedback and
         how quickly content and assets arrive. Payment is 50% to start and 50%
         before launch. After the final payment the finished website and the design
@@ -742,9 +748,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li>Not a monthly retainer by default. Site Care is available from
           $149/mo and is a separate decision.</li>
         <li>Not a mass-produced set of city pages. Service and location pages are
-          added where real demand supports them, and not otherwise.</li>
+          added where real demand supports them, and not otherwise.
+          <a class="ilink" href="/resources/how-many-service-pages/">How many
+          service pages your website actually needs</a> explains how that is
+          decided.</li>
         <li>Not Google Ads, social media management, or ongoing content
           production.</li>
+        <!-- ⚠ ADDED 2026-09-02, architecture audit §19. A dedicated landing-page
+             MONEY PAGE was validated and REJECTED in the previous batch
+             (SEO-ROADMAP §15.3): the local commercial SERP for that query returns
+             general web-design pages, so a separate page would have competed with
+             THIS one. But the offer itself exists — Conversion Landing Page, on
+             /pricing/ — and was explained nowhere. This line closes that gap the
+             correct way: on the page Google already sends that reader to.
+             🚫 Do not grow this into a section, and 🚫 do not revive the separate
+             page on the strength of it. -->
+        <li>Not the same thing as a landing page. A landing page is one page built
+          for one campaign, and it works when something is already sending traffic
+          to it &mdash; usually paid ads, which Kreated does not run. It is
+          available as an individual piece of work on
+          <a class="ilink" href="/pricing/">Pricing</a>. If nothing is driving
+          traffic yet, a landing page is not the thing that fixes that.</li>
+        <!-- ⚠ INTERNAL LINK ADDED 2026-09-01 with the final content expansion.
+             The comparison resource had only the hub linking to it. It belongs in
+             the exclusions for the same reason the Brand Strategy link below
+             does: the honest answer is sometimes that a buyer does not need this
+             service, and the resource says so at length. 🚫 Do not add a second
+             link to it on this page. -->
+        <li>Not always the right answer. Some businesses are genuinely better
+          served by a builder they run themselves, and
+          <a class="ilink" href="/resources/custom-website-vs-website-builder/">the
+          comparison</a> sets out where that line falls, including the costs on
+          both sides that usually go unmentioned.</li>
         <!-- ⚠ INTERNAL LINK ADDED 2026-09-01, docs/SEO-ROADMAP.md §11. Brand
              Strategy had four in-content inbound links. /method/ already links
              to it, so this is the second half of that fix and it belongs in the

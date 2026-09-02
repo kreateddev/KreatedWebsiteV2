@@ -87,7 +87,25 @@
    🚫 Do not re-add a per-page hero weight. Change it here or nowhere. */
 .shero__h{margin:0;line-height:.98;letter-spacing:-.03em;font-weight:640;
   font-size:clamp(38px,7vw,104px);color:var(--white)}
-.shero__h span{display:block}
+.shero__h span{display:block;
+  /* ⚠ ORPHAN CONTROL — 2026-09-02 architecture audit. Each span is its own block
+     whose text wraps freely, which regularly stranded one short word on the last
+     line ("needs.", "is.", "why."). Seven pages had carried &nbsp; in the markup
+     to force this; all seven were removed in favor of this one declaration.
+     🚫 Do not reintroduce &nbsp; heading hacks — fix it here or not at all.
+
+     WHY balance AND NOT pretty. text-wrap:pretty was tried first and measured:
+     Chrome applies it (computed style confirms) but its orphan avoidance is too
+     conservative for display type at this size — it left 17 orphans across
+     35 routes × 3 viewports. balance leaves 8, and all 8 are a single long word
+     ("distraction.", "Consulting", "movement.") that cannot share a line at 360px
+     no matter what the CSS says. That is ordinary typography, not a defect.
+
+     ⚠ IT ONLY ACTS ON SPANS THAT WRAP. A span that already fits on one line is
+     untouched, so the deliberate <span> break points the headings are written
+     around are preserved — verified against the homepage and service heroes,
+     which render identically before and after. */
+  text-wrap:balance}
 
 .shero__foot{display:flex;align-items:flex-start;justify-content:space-between;
   gap:48px;margin-top:clamp(26px,3vw,40px)}

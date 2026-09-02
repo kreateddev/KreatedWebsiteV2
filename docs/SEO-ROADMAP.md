@@ -2,7 +2,55 @@
 
 **Research and architecture, 2026-09-01.**
 
-> ## ✅ FIRST CONTENT BATCH — BUILT + PUBLISHED, 2026-09-01
+> ## ✅ FULL JUSTIFIED SEO ARCHITECTURE — BUILT, 2026-09-01
+>
+> **Owner decided not to wait 30–60 days.** Everything the research justified is
+> now built together, so the site can be crawled and evaluated as one coherent
+> architecture rather than in two waves.
+>
+> **27 indexable routes.** Seven resources, one vertical money page, six service
+> pages, and the supporting link clusters.
+>
+> ## ✅ FINAL CONTENT EXPANSION — BUILT, 2026-09-02
+>
+> **34 indexable routes.** Seven further resources took the library to fourteen.
+> A commercial landing-page service page was validated in the same pass and
+> **rejected on the evidence** — see §15.3.
+>
+> 🚫 **THE CONTENT LIBRARY IS NOW CLOSED.** This was the final content-expansion
+> batch by owner instruction. The next pass is an architecture audit, which
+> rebalances what exists. It is not a discovery exercise for another batch.
+>
+> ## ✅ SITEWIDE ARCHITECTURE + FUNNEL AUDIT — COMPLETE, 2026-09-02
+>
+> **34 indexable routes, unchanged.** No page was merged, removed or redirected:
+> the audit found no two pages competing for one primary intent. What changed is
+> routing, metadata and three duplications. See §16 for the authoritative
+> ownership map, cluster map and funnel table.
+>
+> | Route | Type | Batch |
+> |---|---|---|
+> | `/web-design-for-contractors/` | Money, vertical | First |
+> | `/resources/` | Hub, now 7 entries | First, expanded |
+> | `/resources/why-your-website-isnt-getting-leads/` | Resource | First |
+> | `/resources/what-a-small-business-website-costs/` | Resource | First |
+> | `/resources/local-seo-vs-google-business-profile/` | Resource | First |
+> | ✅ **BUILT** `/resources/how-long-local-seo-takes/` | Resource | **Full expansion** |
+> | ✅ **BUILT** `/resources/why-your-business-isnt-on-google-maps/` | Resource | **Full expansion** |
+> | ✅ **BUILT** `/resources/how-many-service-pages/` | Resource | **Full expansion** |
+> | ✅ **BUILT** (owner override of the 60-day deferral) `/resources/what-answer-engine-optimization-is/` | Resource | **Full expansion, owner override** |
+>
+> ⚠ **The AEO resource was Low priority with a "revisit at 60 days" note.** The
+> owner overrode that to build the architecture in one pass. The reasoning
+> behind the original deferral is preserved below and was sound: the fix for
+> that service page was links, not a companion page. Both were done — AEO went
+> 3 → 6 in-content inbound links AND has its explainer.
+>
+> 🚫 **Nothing in the do-not-build list became buildable.** No city pages, no
+> `/seo-for-contractors/`, no `/local-seo-for-contractors/`, no national
+> contractor targeting, none of the three permanently rejected keywords.
+>
+> ### ✅ FIRST CONTENT BATCH — PUBLISHED, 2026-09-01
 >
 > All four approved pages are live, plus the `/resources/` hub. The sitemap went
 > from 18 to 23 URLs.
@@ -221,10 +269,10 @@ differentiator, not a copy trick. **Strongest resource opportunity on the list.*
 | why a website gets traffic but no leads | Problem-aware | ✅ **BUILT** `/resources/why-your-website-isnt-getting-leads/` | Audit → Redesign → Web Design | Ends in a check that names the reader's actual failing area. No competitor can do this. | **Immediate** |
 | what a small business website really costs, with real numbers | Commercial investigation | ✅ **BUILT** `/resources/what-a-small-business-website-costs/` | Pricing → Web Design | Answers with published figures in a field of hedged ranges. | **High** |
 | local SEO vs Google Business Profile: which do I need | Comparison | ✅ **BUILT** `/resources/local-seo-vs-google-business-profile/` | Local SEO + GBP | Disambiguates two of Kreated's six services that buyers routinely conflate. | **High** |
-| how long local SEO takes before anything happens | Expectation-setting | `/resources/how-long-local-seo-takes/` | Local SEO | Filters out buyers wanting overnight results. Reduces bad-fit leads. | Medium |
-| why my business isn't showing on Google Maps | Problem-aware | `/resources/why-your-business-isnt-on-google-maps/` | GBP | High intent, crowded SERP (§3e). | Medium |
-| how many service pages a site needs / a page for every city? | Planning | `/resources/how-many-service-pages/` | Web Design + Local SEO | Kreated has a real, documented opinion here and page allowances are already priced. | Medium |
-| what AEO is and whether a local business needs it yet | Emerging, explanatory | `/resources/what-answer-engine-optimization-is/` | AEO | Open SERP (§3f), but fix AEO's inbound links first and re-measure. | Low, revisit at 60 days |
+| how long local SEO takes before anything happens | Expectation-setting | ✅ **BUILT** `/resources/how-long-local-seo-takes/` | Local SEO | Filters out buyers wanting overnight results. Reduces bad-fit leads. | Medium |
+| why my business isn't showing on Google Maps | Problem-aware | ✅ **BUILT** `/resources/why-your-business-isnt-on-google-maps/` | GBP | High intent, crowded SERP (§3e). | Medium |
+| how many service pages a site needs / a page for every city? | Planning | ✅ **BUILT** `/resources/how-many-service-pages/` | Web Design + Local SEO | Kreated has a real, documented opinion here and page allowances are already priced. | Medium |
+| what AEO is and whether a local business needs it yet | Emerging, explanatory | ✅ **BUILT** (owner override of the 60-day deferral) `/resources/what-answer-engine-optimization-is/` | AEO | Open SERP (§3f), but fix AEO's inbound links first and re-measure. | Low, revisit at 60 days |
 
 ### Class D — do not target
 
@@ -461,7 +509,7 @@ problem. Fix the inbound links (§11), let it accumulate 60 days of data, then d
 | `how-long-local-seo-takes` | Medium | High | High | Low-medium | Medium | Medium |
 | `why-your-business-isnt-on-google-maps` | High | Medium | Low-medium | Medium | Low | Medium |
 | `how-many-service-pages` | Low-medium | High | High | Low | High | Medium |
-| AEO resource page | Low today | High | High | Low | High | Low, revisit at 60 days |
+| AEO resource page | Low today | High | High | Low | High | ✅ **BUILT** — owner overrode the deferral 2026-09-01 |
 | National contractor money page | High | Medium | **Very low** | High | Low | **Do not build** |
 | City pages | Medium | Low | Medium | Low | **None** | **Do not build** |
 
@@ -498,3 +546,199 @@ services). These are the same properties that make the page good for a human.
    `/services/`? Top level recommended: it is a vertical positioning, not a seventh service.
 5. **The AEO link fixes in §11** — these need no new content. Approve separately and they can
    ship immediately.
+
+
+---
+
+## 15. Second opportunity map and the final expansion — 2026-09-02
+
+The first map (§3–§5) looked at the families closest to the six services. This pass
+went one ring wider: sequencing questions, buying decisions, credibility, and
+measurement. It also revisited the one commercial page still arguably missing.
+
+### 15.1 Method, and what it is not
+
+Live SERP inspection of the actual result pages, recorded per query below. Every page
+built was written against what the top ten results actually contained.
+
+🚫 **No keyword tool was available in this session, so no volume, CPC or difficulty
+figure appears anywhere in this document.** Where this document says a family is
+"saturated" or "open", that is a description of who currently ranks and what their
+pages contain — an observation, not a metric. Any number presented as search volume
+would have been invented, and an invented baseline is worse than none.
+
+### 15.2 The seven built, with the SERP reading behind each
+
+| Route | Query family | What the SERP showed | Why Kreated can add something |
+|---|---|---|---|
+| `/resources/website-or-seo-first/` | website or SEO first | Agency blogs answering "both, hire us" | The page argues for spending on neither yet when the evidence says so |
+| `/resources/is-local-seo-worth-it/` | is local SEO worth it | SEO companies answering their own question yes | Written from the selling side, and says when the answer is no |
+| `/resources/custom-website-vs-website-builder/` | custom site vs builder | Builders' own comparison pages (Wix, Squarespace) | The only party in the SERP with nothing to gain from the builder answer |
+| `/resources/contractor-website-checklist/` | contractor website checklist | Lead-gen listicles gated behind a form | Ungated, eleven items, ordered by cost of absence |
+| `/resources/why-customers-dont-trust-your-website/` | website credibility / trust | Statistic-led posts citing unsourced figures | No invented statistics; first supporting resource for Brand Strategy |
+| `/resources/when-to-rebrand/` | when to rebrand | Branding studios' "N signs it's time" listicles, each selling rebrands | The "when not to" section, which no ranking page carries |
+| `/resources/what-to-actually-track/` | what to track / small business KPIs | Agency posts listing 17–25 metrics | Four, and an explicit account of what attribution cannot do |
+
+**Rebrand SERP check, run first as instructed.** `signs you need a rebrand` /
+`when should a small business rebrand` returned Ignyte Brands, Selah Creative, OuterBox,
+Blue Kite, Wildheart, BethanyWorks, a Forbes Councils contribution and a college
+entrepreneurship center. The buyer is explicitly an established business. **No material
+conflict with Kreated's positioning — the page proceeded.**
+
+### 15.3 Conversion Landing Page money page — REJECTED
+
+Validated as instructed rather than assumed. Two queries:
+
+| Query | What actually ranked |
+|---|---|
+| `landing page design service for small business Raleigh` | **General web design pages** — Emulent, WebFX, Triad, Lion Tree, Tyndall, TMS, Expertise.com. Only Think Designs LLC had a dedicated landing-page URL. |
+| `landing page vs website` | Owned by **Wix, HubSpot and AWeber** — platform content, not agency content. |
+
+**Ruling: do not build.** Four reasons, any one of which is sufficient:
+
+1. **There is no distinct commercial SERP.** Google answers the local commercial query
+   with general web-design pages, which means a Kreated landing-page page would compete
+   against `/services/web-design/` for the same results. That is cannibalization by
+   construction, and §9 already rules against it.
+2. **The informational half is platform-owned.** Wix, HubSpot and AWeber rank there
+   because they are the tools people use. A services business does not displace them.
+3. **The offer would be incomplete.** WebFX and the others sell landing pages as part of
+   paid-ads engagements. Kreated does not sell ads, so the page would describe a service
+   detached from the traffic source that makes it work.
+4. **There is no proof to put on it.** No landing-page engagement exists in `/work/`, and
+   🚫 nothing on this site is illustrated with work that was not done.
+
+**What was done instead:** nothing. The absence is the correct answer, and the two pages
+that would have linked to it (`/services/web-design/`, `/pricing/`) are unchanged.
+
+### 15.4 Cannibalization audit — 2026-09-02
+
+Run mechanically across all 34 indexable routes: shared 10-word sequences between every
+page pair involving a new page, then read by intent rather than keyword.
+
+**Seven genuine duplications were found and fixed**, all of them a resource restating a
+commercial page's own sentences:
+
+| Duplication | Owner of the argument | Resolution |
+|---|---|---|
+| "a service page can rank … a bullet cannot" | `/web-design-for-contractors/` | Rewritten in the checklist |
+| "guessing loses to the competitor who named the town" | `/web-design-for-contractors/` | Rewritten in the checklist |
+| "a business with nothing of its own to show" | `/web-design-for-contractors/` | Rewritten in the checklist |
+| Both case studies re-presented with full scope lists | `/web-design-for-contractors/` and `/work/*` | Checklist now names the vertical page and hands over |
+| "three versions of the mark, two typefaces nobody chose…" | `/services/brand-strategy/` | Rewritten in `when-to-rebrand` |
+| "a simple site that is clear, loads fast…" | `what-a-small-business-website-costs` | Rewritten in the builder comparison |
+| "…Web Design & Development, and if a site already exists, Website Redesign…" | `what-a-small-business-website-costs` | Rewritten in the builder comparison |
+
+Residual overlap between any new page and any other route is **anchor text matching the
+linked page's own H1**, which is correct practice, plus the site-wide provenance
+disclaimer. 🚫 A resource must never restate a commercial page's argument in the
+commercial page's own words — it competes with the page it is supposed to feed.
+
+### 15.5 Hub regrouping
+
+`/resources/` was re-cut from three groups to five. The old "if your website is not
+producing work" had absorbed cost and planning questions, which is a different reader at
+a different moment; identity was split away from conversion. Headings remain situations
+an owner recognizes about themselves. 🚫 Still no dates, authors, categories, counts,
+filters or tags.
+
+### 15.6 What the next pass is
+
+An **architecture audit**, not content. It rebalances the internal link graph across all
+34 routes, which this batch deliberately left minimal (three contextual links added, one
+per orphaned page). 🚫 It does not commission more pages. If a resource is not earning
+anything by the 60-day reading in `GSC-BASELINE.md`, the answer is to improve or retire
+it.
+
+
+---
+
+# 16. AUTHORITATIVE ARCHITECTURE — 2026-09-02
+
+This section supersedes earlier link and funnel guidance. §1–§15 are kept as the
+research record; where they disagree with this section, **this section wins**.
+
+## 16.1 Topic ownership — one primary owner per topic
+
+| Topic | Primary owner | Supporting resources |
+|---|---|---|
+| Buying a website | `/services/web-design/` | website costs · builder vs custom · how many service pages |
+| Websites for contractors | `/web-design-for-contractors/` | contractor website checklist |
+| Replacing a website | `/services/website-redesign/` | why your website isn't getting leads |
+| Local search | `/services/local-seo/` | how long it takes · is it worth it · website or SEO first |
+| The Google listing | `/services/google-business-profile/` | not showing on Maps · local SEO vs GBP |
+| Brand and credibility | `/services/brand-strategy/` | why a good business looks less credible · when to rebrand |
+| AI-assisted search | `/services/answer-engine-optimization/` | what AEO is |
+| Measurement | `/resources/what-to-actually-track/` | — (no service page; sold as an individual offer on Pricing) |
+| Price and packaging | `/pricing/` | what a small business website costs |
+| Diagnosis | `/free-website-audit/` | — (the tool is the page) |
+
+**Verified:** every supporting resource links to its topic owner in content. No
+topic has two owners. No resource behaves like a money page, and no money page
+reads as an article index.
+
+🚫 **Measurement is the one topic owned by a resource.** That is correct — Analytics
+& Conversion Tracking is an individual offer on `/pricing/`, not a service leaf.
+Do not promote it to a seventh service page to tidy the table.
+
+## 16.2 Clusters
+
+1. **Website / conversion** — web-design, website-redesign, the audit tool, and the
+   costs / builder / page-count / no-leads resources.
+2. **Contractor** — the vertical money page, the checklist, and the two contractor
+   case studies. Self-contained and correctly cross-linked in both directions.
+3. **Local search** — local-seo, google-business-profile, and the four local
+   resources. The largest cluster and the strongest internally.
+4. **Brand / trust** — brand-strategy, credibility, rebrand. Newest cluster; it had
+   no resources at all before 2026-09-01.
+5. **Measurement** — what-to-actually-track → Contact and Pricing.
+
+`website-or-seo-first` deliberately spans clusters 1 and 3, and
+`what-a-small-business-website-costs` spans 1 and price. 🚫 Do not force either
+into one silo; the whole point of both pages is that they sit between two.
+
+## 16.3 Funnel rules
+
+1. **A resource never closes on the hub.** Five did before this audit; all now
+   close on a commercial destination. 🚫 `/resources/` is not a CTA.
+2. **The CTA must match the question asked.** A value question goes to Pricing, a
+   credibility question to Brand Strategy, a diagnosis question to the audit, a
+   measurement question to Contact.
+3. **The audit is not the default.** It was the primary CTA on 9 of 14 resources;
+   it is now on 3, where the tool genuinely answers the page's question.
+4. **Never route a Google-listing question to the audit as primary.** The tool
+   cannot open a Google Business Profile.
+5. **Pricing receives buying intent only** — costs, builder comparison, worth-it,
+   rebrand. Not informational pages.
+6. **Build Your Package** (`/pricing/#byp`) is the destination for
+   `website-or-seo-first`, where "which do I need" is exactly the question.
+
+Resulting spread: 14 resources across 8 destinations.
+
+## 16.4 Link rules
+
+- Every indexable page reachable in **≤2 clicks** from `/`.
+- **Service, product and case-study names are proper nouns.** Link them by name;
+  do not manufacture anchor variation for them.
+- **Resource titles are not.** 🚫 Do not use a resource's full title as the anchor
+  on more than two pages — vary it into the sentence.
+- A resource must **never restate a commercial page's argument in that page's own
+  words**. It competes with the page it exists to feed.
+- Deliberately shared factual statements (timelines, contractual terms, testimonials,
+  the provenance disclaimer) **stay identical**. Consistency beats variety for facts.
+
+## 16.5 Rejected, and still rejected
+
+| Considered | Ruling | Why |
+|---|---|---|
+| Conversion Landing Page money page | **Rejected** 2026-09-01, re-affirmed | No distinct commercial SERP; would cannibalize `/services/web-design/`. §15.3. The demand is now served by a clarifying exclusion on the web-design page plus the existing $850 individual offer on Pricing. |
+| City / location doorway pages | **Rejected** | §6. |
+| National contractor money page | **Rejected** | §12. |
+| Contractor SEO money page | **Rejected** | Would split the contractor cluster's one owner. |
+| A seventh "Analytics" service leaf | **Rejected** | Sold as an individual offer; a leaf would outrank the resource that actually answers the question. |
+
+## 16.6 What the next pass is NOT
+
+🚫 There is no next content batch. 🚫 There are no more architecture questions
+open. The site is architecturally complete at 34 routes. The next real input is
+**Search Console data**, per `GSC-BASELINE.md` — behavior, not construction.
