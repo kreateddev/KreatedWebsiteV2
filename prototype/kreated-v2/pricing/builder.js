@@ -255,6 +255,15 @@
      ===================================================================== */
   function update() {
     persist();
+
+    /* ⚠ ANALYTICS — START, on the first selection that actually puts something
+       in the basket. Not on page view (the builder is below the fold on a page
+       most visitors are reading for prices) and not on every change — update()
+       runs on EVERY checkbox and quantity keystroke, so without the once-guard
+       this would push an event per interaction. */
+    if (Object.keys(selection).length && window.kreatedTrackOnce) {
+      window.kreatedTrackOnce('package_builder_start', {});
+    }
     var r = Rec.evaluate(selection);
     renderSummary(r);
     renderVerdict(r);
@@ -336,6 +345,8 @@
      everything from the same engine. */
   root.querySelector('.byp__go').addEventListener('click', function (e) {
     var r = root.__result;
+    /* the empty-basket guard also guards the analytics: an aborted click is not
+       a completed configuration */
     if (!r || r.verdict === 'empty') { e.preventDefault(); return; }
     try {
       sessionStorage.setItem('kreated.build.handoff.v1', JSON.stringify({
@@ -344,6 +355,26 @@
         at: 'builder'
       }));
     } catch (err) {}
+
+    /* ⚠ ANALYTICS — COMPLETE, then HANDOFF. Two events because they answer two
+       questions: "did the tool produce a usable configuration" and "did that
+       carry into the project flow". They happen together today, but a future
+       change could show a result without a handoff.
+       🚫 COUNTS AND BOOLEANS ONLY. No offer ids, no free text, and no price.
+       The price is re-derived on /contact/ from the same engine, so sending it
+       here would add a number that can go stale without adding an answer. */
+    if (window.kreatedTrackOnce) {
+      window.kreatedTrackOnce('package_builder_complete', {
+        items_selected: Object.keys(selection).length,
+        has_one_time: !!(r.oneTime && r.oneTime.low),
+        has_monthly: !!(r.monthly && r.monthly.low),
+        matched_package: !!r.match
+      });
+      window.kreatedTrackOnce('project_handoff', {
+        source: 'package_builder',
+        destination: 'contact'
+      });
+    }
   });
 
   /* ---- go ---------------------------------------------------------------- */

@@ -84,6 +84,18 @@
   }
 
   forms.forEach(function (form) {
+    /* ⚠ IN-FLIGHT GUARD. The disabled button already stops a real double-click —
+       measured, twice — but it cannot stop a submit that never touches the
+       button: requestSubmit() called twice in a tick, or an extension or script
+       firing the event directly. Without this, that path produced TWO Netlify
+       submissions and TWO generate_lead events.
+       🚫 IT IS SET ONLY IN THE FETCH BRANCH. Validation failures and the legacy
+       no-fetch path must never set it, or a visitor who mistypes a field once,
+       or anyone on a browser without fetch, would be locked out of the form
+       permanently. Cleared in .catch() so a failed send can be retried; left set
+       on success, which matches the button staying disabled once the form is
+       sent. */
+    var busy = false;
     var status = form.querySelector('.kform__status');
     var fields = Array.prototype.slice.call(
       form.querySelectorAll('.field input, .field select, .field textarea'));
@@ -101,6 +113,9 @@
     });
 
     form.addEventListener('submit', function (e) {
+      /* a request is already in flight — swallow this one entirely */
+      if (busy) { e.preventDefault(); return; }
+
       var bad = fields.filter(function (i) { return !validate(i); });
       if (bad.length) {
         e.preventDefault();
@@ -116,6 +131,7 @@
       if (typeof window.fetch !== 'function' || typeof FormData !== 'function') return;
 
       e.preventDefault();
+      busy = true;
       var btn = form.querySelector('button[type=submit]');
       var label = btn ? btn.textContent : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
@@ -134,8 +150,20 @@
         /* SUCCESS — and only here does the conversion event fire, exactly once */
         var evt = form.getAttribute('data-success-event');
         if (evt) {
+          /* ⚠ THE ONE PRIMARY CONVERSION. Fires only inside the success branch
+             of a real POST, so a validation failure, a network failure or a
+             half-filled form can never produce it. The button is disabled for
+             the duration, which is what prevents a double-click double-count —
+             verified against a real double-click and against Enter pressed
+             twice.
+             🚫 PARAMETERS ARE SHAPE, NEVER CONTENT. form_location distinguishes
+             the homepage form from /contact/ (both post to the same Netlify
+             form, so form_name alone cannot). has_website / has_phone are
+             booleans describing whether a field was filled, never what was
+             typed into it. Never add name, email, phone, business or message. */
           window.kreatedTrack(evt, {
             form_name: form.getAttribute('name'),   /* not personal data */
+            form_location: location.pathname === '/' ? 'homepage' : 'contact_page',
             has_website: !!(data.get('website') || '').trim(),
             has_phone: !!(data.get('phone') || '').trim()
           });
@@ -149,6 +177,7 @@
         status.setAttribute('tabindex', '-1');
         status.focus();
       }).catch(function () {
+        busy = false;
         if (btn) { btn.disabled = false; btn.textContent = label; }
         status.className = 'kform__status is-bad';
         /* never pretend a failed send succeeded — give a route that works */

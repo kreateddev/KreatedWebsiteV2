@@ -43,12 +43,77 @@
     };
   }
 
-  /* delegated [data-evt] click tracking — V1's pattern, unchanged */
+  /* ==========================================================================
+     ONCE-PER-PAGE GUARD. Funnel milestones must not repeat when a view
+     re-renders. The audit re-renders on every result and the package builder
+     recalculates on every checkbox, so without this a single session could push
+     dozens of "complete" events and GA4 would count each one.
+     🚫 Do not use this for cta_click — a second deliberate click IS a second
+     click and should be recorded.
+     ========================================================================== */
+  window.__kreatedOnce = window.__kreatedOnce || {};
+  window.kreatedTrackOnce = function (name, detail) {
+    if (window.__kreatedOnce[name]) return false;
+    window.__kreatedOnce[name] = true;
+    window.kreatedTrack(name, detail);
+    return true;
+  };
+
+  /* ==========================================================================
+     CTA CLICKS — ONE EVENT NAME, TWO PARAMETERS.
+     ⚠ Before 2026-09-02 this pushed the [data-evt] value AS the event name with
+     an EMPTY payload. Measured in production: 71 different elements all emitted
+     `cta_start_project` with `{}`, so GA4 could not tell a header button from a
+     footer link from a service page's closing CTA. Four event names, no
+     dimensions, no answerable question.
+
+     Now: one `cta_click` event carrying cta_name (the [data-evt] value, kept as
+     the stable identity) and cta_location (derived from where the element sits).
+     🚫 Do not go back to unique event names per button — GA4 gives 50 custom
+     dimensions and unlimited event names, and the scarce resource is the
+     analyst's attention, not the schema.
+     ========================================================================== */
+  function ctaLocation(el) {
+    if (el.closest('.drawer')) return 'mobile_drawer';
+    if (el.closest('header, .head')) return 'header';
+    if (el.closest('footer, .foot')) return 'footer';
+    if (el.closest('.close')) return 'page_close';
+    if (el.closest('.shero, .hero')) return 'hero';
+    if (el.closest('.price, .byp')) return 'pricing';
+    if (el.closest('main')) return 'body';
+    return 'other';
+  }
+
   if (!window.__kreatedTrackBound) {
     window.__kreatedTrackBound = true;
     document.addEventListener('click', function (e) {
       var el = e.target.closest && e.target.closest('[data-evt]');
-      if (el && el.tagName !== 'FORM') window.kreatedTrack(el.getAttribute('data-evt'), {});
+      if (!el || el.tagName === 'FORM') return;
+      window.kreatedTrack('cta_click', {
+        cta_name: el.getAttribute('data-evt'),
+        cta_location: ctaLocation(el)
+      });
+    });
+  }
+
+  /* ==========================================================================
+     #project DEEP LINK — LAND ON THE FIELD, NOT NEAR IT.
+     ⚠ forms.js already does this for same-page `#project` clicks, but 17 of the
+     21 links to the form are CROSS-PAGE `/#project` (every service page's
+     closing CTA among them). A cross-page link navigates, so the click handler
+     on the destination page never runs and focus stayed on <body> — the reader
+     arrived looking at the form with their keyboard position still at the top of
+     the document. This closes that gap on load.
+     🚫 preventScroll matters: the browser has already scrolled to the anchor and
+     re-scrolling would fight it.
+     ========================================================================== */
+  if (window.location.hash === '#project') {
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        var first = document.querySelector('#project .field input');
+        if (!first) return;
+        try { first.focus({ preventScroll: true }); } catch (err) { first.focus(); }
+      }, 420);
     });
   }
 }());

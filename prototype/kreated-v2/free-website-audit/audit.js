@@ -147,7 +147,22 @@
      service could not be reached. A rendering bug is not a network problem and
      must not be reported as one. */
   function show(data) {
-    try { render(data); }
+    try {
+      render(data);
+      /* ⚠ ANALYTICS — COMPLETE. Deliberately AFTER render() returns: if render
+         throws, the visitor sees the failure message and this must not claim a
+         completed audit. kreatedTrackOnce guards against a re-render pushing a
+         second completion.
+         🚫 fit and the counts are safe — they describe OUR verdict and how many
+         of OUR pages were read. Never the site URL, never the findings text. */
+      if (window.kreatedTrackOnce) {
+        window.kreatedTrackOnce('website_audit_complete', {
+          fit: (data.fit && data.fit.fit) || 'unknown',
+          pages_checked: (data.pagesInspected || []).length,
+          model_used: !!(data.meta && data.meta.modelUsed)
+        });
+      }
+    }
     catch (e) {
       fail('The audit ran, but the result could not be displayed. Send the site over and you will get the findings directly.', false);
       if (window.console && console.error) console.error('audit render failed', e);
@@ -203,10 +218,22 @@
         }));
       } catch (e) {}
     }
+    /* ⚠ ANALYTICS — HANDOFF. One event for "left a tool and entered the project
+       flow", with a `source` parameter, rather than two near-identical events.
+       stash() already writes at:'audit' into sessionStorage, so the parameter
+       and the payload agree by construction. */
+    function stashAndTrack(dest) {
+      return function () {
+        stash();
+        if (window.kreatedTrackOnce) {
+          window.kreatedTrackOnce('project_handoff', { source: 'audit', destination: dest });
+        }
+      };
+    }
     var b = document.getElementById('auditToBuilder');
     var c = document.getElementById('auditToContact');
-    if (b) b.addEventListener('click', stash);
-    if (c) c.addEventListener('click', stash);
+    if (b) b.addEventListener('click', stashAndTrack('package_builder'));
+    if (c) c.addEventListener('click', stashAndTrack('contact'));
 
     /* ---- lead capture: the original Netlify form, plus context ---------- */
     postLead(data, rec, selection);
@@ -266,6 +293,14 @@
     var btn = form.querySelector('button[type="submit"]');
     if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Checking…'; }
     startAnalyzing();
+
+    /* ⚠ ANALYTICS — START. Fires here and not on form focus or on click, because
+       this is the first moment a real audit is actually being processed: the URL
+       and email have validated and the request is about to go out. `busy` above
+       already prevents a second concurrent run, so this cannot double-fire.
+       🚫 No URL, email, business name or phone — this event carries nothing the
+       visitor typed. */
+    if (window.kreatedTrack) window.kreatedTrack('website_audit_start', {});
 
     /* ⚠ A CLIENT DEADLINE, because fetch has none. If the function is killed
        mid-flight the browser can otherwise wait indefinitely on a request that
