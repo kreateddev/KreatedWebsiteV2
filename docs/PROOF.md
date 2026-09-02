@@ -118,10 +118,35 @@ raises the visibility of this claim; it does not raise what may be claimed.
 
 ---
 
-## 5. Testimonial — the only one
+## 5. Testimonials
 
-**One published Google review exists.** Source: Google. Reviewer: **Missy Boyd**, founder of
-LearnSmart Educational Consulting and Academic Coaching. Rated 5 stars.
+⚠ **UPDATED 2026-09-02 — this section used to read "the only one".** Four published Google
+reviews now exist and the homepage carries all four in a rotating carousel (`.revs`,
+`reviews.js`). Owner-supplied 2026-09-02.
+
+| Reviewer, as displayed | Attribution | Note |
+|---|---|---|
+| **J.R.** | CEO, Leak Locators East Coast | |
+| **Keely B.** | CFO, Rare Raleigh Restoration | |
+| **Gracie R.** | Clothing brand owner | Company not named in the review — 🚫 do not invent one |
+| **Missy B.** | Founder, LearnSmart Educational Consulting | Also quoted on `/work/learnsmart/` |
+
+🚫 **Display rules for these, all still binding:**
+- **First name + last initial only**, per the owner. 🚫 Do not restore full surnames.
+- **Owner replies are not shown.** Two of the reviews have a Kreated response on Google; the site
+  quotes the reviewer only.
+- Quote verbatim. Elisions marked `[…]`. 🚫 Never paraphrase or "tighten" a review.
+- 🚫 **No review count.** DECISION 017 still forbids it — do not print "four reviews" or any
+  number, on the page or in this file's copy.
+- 🚫 **No star glyphs** without evidence *and* a logged design approval (see below). None exist,
+  so the carousel ships without them.
+- 🚫 **No `Review` / `aggregateRating` schema.** §6 bans it site-wide, and Google does not accept
+  self-serving review markup for a business on its own site.
+
+### The original single-review record, retained
+
+Source: Google. Reviewer: **Missy Boyd**, founder of LearnSmart Educational Consulting and
+Academic Coaching. Rated 5 stars.
 
 **Exact wording — do not edit, trim, paraphrase, or "tighten":**
 
@@ -241,6 +266,7 @@ Locked verbatim labels for that demonstration: `Conceptual redesign demonstratio
 | LearnSmart fully booked 2026 | Client reported | ✅ only while labelled client-reported |
 | LearnSmart delivered & live, scope of four | Project fact | ✅ |
 | Missy Boyd review | Testimonial | ✅ verbatim |
+| J.R., Keely B., Gracie R. reviews | Testimonial | ✅ verbatim, first name + last initial (2026-09-02) |
 | `1 review on Google` — or any review **count** | Review-count framing | 🚫 forbidden (DECISION 017) |
 | `Rated 5 Stars` / star glyphs | Testimonial metadata | ⚠️ available **subject to evidence + design approval** — never silently introduced |
 | Rare Raleigh website · GBP · ongoing monthly SEO delivered | Project fact | ✅ (Skyler, 2026-09-01) |

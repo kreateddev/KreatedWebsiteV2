@@ -2803,3 +2803,125 @@ button,input,select,textarea{font:inherit;color:inherit}
   .clients .client__logo{filter:brightness(0) invert(1)}
   .clients__list.is-marquee .client{opacity:1}
 }
+
+/* ==========================================================================
+   INSTAGRAM SIGN-OFF — homepage only, below the fold. Owner request
+   2026-09-02, after the bx.studio reference.
+   ⚠ This sits in the page's NIGHT half: atmosphere.js has flipped --k long
+   before this scroll depth, so the ground is navy and the ink is light. The
+   handle uses --cobalt-lift, NOT --cobalt: the day cobalt (#0A47F0) is far too
+   dark to read on the night ground. 🚫 Do not swap it for --cobalt.
+   ========================================================================== */
+.social{padding:clamp(30px,4vw,54px) 0 clamp(46px,5.5vw,74px)}
+/* ⚠ Centred, owner request 2026-09-02. The link is inline-flex so it only
+   wraps its own content — the centring has to happen on the .wrap (text-align)
+   AND inside the link (align-items), or the chip and the handle sit centred as
+   a block but left-aligned to each other. */
+.social .wrap{text-align:center}
+.social__link{display:inline-flex;flex-direction:column;align-items:center;
+  gap:clamp(16px,2vw,24px);text-decoration:none;border-bottom:0;padding-bottom:0}
+.social__chip{
+  display:inline-block;padding:11px 18px;border-radius:9px;
+  /* ⚠ Both colours follow --k. In practice this block only ever renders in the
+     night half — it sits ~6600px down and --k flips at ~440px — but a value
+     hard-coded for night measures 1.06:1 against the day ground and is a real
+     failure the moment anything changes the scroll maths. Same color-mix idiom
+     as the rest of the site's ink: day value first, night value second. */
+  border:1px solid color-mix(in srgb,
+    rgba(20,28,60,.24), rgba(255,255,255,.22) calc(var(--k) * 100%));
+  font:500 13.5px/1 ui-monospace,'SF Mono',Menlo,monospace;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:color-mix(in srgb, #2B3350, rgba(255,255,255,.72) calc(var(--k) * 100%));
+  transition:border-color var(--t-hover,.18s ease),color var(--t-hover,.18s ease);
+}
+.social__handle{
+  font:400 clamp(38px,7.4vw,86px)/1 'General Sans',system-ui,sans-serif;
+  letter-spacing:-.02em;
+  color:color-mix(in srgb, var(--cobalt,#0A47F0),
+                  var(--cobalt-lift,#5B86FF) calc(var(--k) * 100%));
+  transition:color var(--t-hover,.18s ease);
+}
+.social__at{opacity:.55}
+.social__link:hover .social__chip{border-color:rgba(255,255,255,.45);color:#fff}
+.social__link:hover .social__handle{color:#fff}
+.social__link:focus-visible{outline:2px solid var(--cobalt-lift,#5B86FF);
+  outline-offset:6px;border-radius:4px}
+@media (max-width:900px){
+  .social{padding:26px 0 40px}
+  .social__link{gap:14px}
+}
+
+/* ==========================================================================
+   REVIEWS CAROUSEL — replaces the single "Word for word" quote, 2026-09-02.
+   ⚠ PROGRESSIVE ENHANCEMENT. Panels are VISIBLE by default and stacked; the
+   carousel only exists once reviews.js adds .is-carousel, so with no script the
+   reader still gets all four quotes.
+   🚫 Do not hide .rev by default. That would make the content JS-dependent.
+   ⚠ Reduced motion keeps the carousel and drops the transition only — see the
+   media query at the end of this block.
+   ⚠ This block sits in the page's day half, so ink is the normal --ink-*
+   scale, not the night values used by .social further down.
+   ========================================================================== */
+.revs{margin:clamp(46px,6vw,84px) 0 clamp(30px,4vw,54px)}
+.revs__label{margin:0 0 8px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.20em;text-transform:uppercase;color:var(--cobalt)}
+.revs__intro{margin:0 0 clamp(20px,2.6vw,34px);font-size:15.5px;color:var(--ink-3)}
+
+/* stacked fallback */
+.rev{margin:0 0 26px;padding:0 0 0 20px;border-left:2px solid var(--line,rgba(20,28,60,.14))}
+.rev:last-child{margin-bottom:0}
+.rev__text{margin:0 0 14px;font:400 clamp(17px,1.65vw,21px)/1.6 'General Sans',system-ui;
+  color:var(--ink-1);text-wrap:pretty}
+.rev__by{font:600 14.5px/1.5 'General Sans',system-ui;color:var(--ink-1)}
+.rev__role,.rev__src{display:block;font-weight:400;color:var(--ink-3)}
+.rev__role{font-size:14px}
+.rev__src{font-size:12.5px;letter-spacing:.02em;margin-top:3px;opacity:.85}
+/* ⚠ The client name in the attribution links to its case study. Underlined on
+   purpose: inside a grey caption a colour change alone is not a reliable
+   affordance, and three of the four reviews carry one while Gracie R. does not
+   — so the underline is what distinguishes a linked name from a plain one. */
+.rev__case{color:inherit;text-decoration:underline;
+  text-underline-offset:3px;text-decoration-thickness:1px;
+  text-decoration-color:color-mix(in srgb,currentColor 40%,transparent);
+  transition:text-decoration-color var(--t-hover,.18s ease),color var(--t-hover,.18s ease)}
+.rev__case:hover{color:var(--cobalt);text-decoration-color:currentColor}
+
+.revs__nav{display:none}
+
+/* ---- carousel, only once the script has opted in --------------------- */
+.revs.is-carousel .revs__stage{position:relative}
+.revs.is-carousel .rev{
+  position:absolute;inset:0;margin:0;
+  opacity:0;visibility:hidden;transform:translateY(6px);
+  transition:opacity .45s ease,transform .45s ease,visibility 0s linear .45s;
+}
+.revs.is-carousel .rev.is-on{
+  position:relative;opacity:1;visibility:visible;transform:none;
+  transition:opacity .45s ease,transform .45s ease;
+}
+.revs.is-carousel .revs__nav{
+  display:flex;align-items:center;gap:14px;margin-top:clamp(18px,2vw,26px)}
+.revs__arrow{
+  width:38px;height:38px;flex:none;display:grid;place-items:center;
+  border:1px solid var(--line,rgba(20,28,60,.16));border-radius:50%;
+  background:none;cursor:pointer;font-size:15px;color:var(--ink-2);
+  transition:border-color var(--t-hover,.18s ease),color var(--t-hover,.18s ease);
+}
+.revs__arrow:hover{border-color:var(--cobalt);color:var(--cobalt)}
+.revs__dots{display:flex;gap:8px}
+.revs__dot{
+  width:8px;height:8px;padding:0;border:0;border-radius:50%;cursor:pointer;
+  background:var(--ink-4,rgba(20,28,60,.28));
+  transition:background var(--t-hover,.18s ease),transform var(--t-hover,.18s ease);
+}
+.revs__dot[aria-selected=true]{background:var(--cobalt);transform:scale(1.35)}
+.revs__arrow:focus-visible,.revs__dot:focus-visible{
+  outline:2px solid var(--cobalt);outline-offset:3px}
+
+@media (prefers-reduced-motion: reduce){
+  .revs.is-carousel .rev{transition:none}
+}
+@media (max-width:900px){
+  .revs{margin:34px 0 26px}
+  .rev{padding-left:16px}
+}

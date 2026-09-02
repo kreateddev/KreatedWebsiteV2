@@ -94,10 +94,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      the first pixel and keep #020C2E. Getting this wrong puts a black status
      bar above a near-white page on iOS, which reads as a rendering fault. -->
 <meta name="theme-color" content="#F4F5FA">
-<link rel="stylesheet" href="/styles.css?v=133">
+<link rel="stylesheet" href="/styles.css?v=139">
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=3">
-<link rel="stylesheet" href="/footer.css?v=6">
+<link rel="stylesheet" href="/footer.css?v=8">
 
 <!-- ==========================================================================
      STRUCTURED DATA — prepared 2026-09-01 for a later search launch.
@@ -151,6 +151,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "@type": "Place",
             "name": "Worldwide"
           }
+        ],
+        "sameAs": [
+          "https://www.instagram.com/kreated.dev/"
         ],
         "founder": {
           "@id": "https://kreated.dev/#founder"
@@ -288,7 +291,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "name": "Do you only build websites?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Websites, redesigns, local SEO, Google Business Profile, brand identity and answer engine optimization are built to connect \u2014 the site, the search result and the brand working as one system, not six separate purchases."
+              "text": "No. Websites, redesigns, local SEO, Google Business Profile, brand identity and answer engine optimization are built to connect — the site, the search result and the brand working as one system, not six separate purchases."
             }
           },
           {
@@ -788,39 +791,81 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </article>
 
   <div class="wrap">
-    <figure class="quote">
-      <div class="quote__body">
-        <p class="quote__label">Word for word</p>
-        <!-- ⚠ Was: "One published review — quoted exactly." The second half is the
-             valuable part; the first half volunteered the review count, which is
-             the buyer's job to notice and not Kreated's job to announce. The
-             attribution below still names the source, so nothing is hidden and
-             nothing is inflated. 🚫 Never replace this with a volume claim. -->
-        <p class="quote__intro">Quoted exactly, in the client's own words.</p>
-        <blockquote class="quote__text">
-          <span class="quote__mark" aria-hidden="true">“</span>
-          Absolutely a wonderful experience from start to finish. […] His work is
-          extremely professional and he is very knowledgeable. From start to finish,
-          it only took two weeks to fully develop my site and have it up and running.
-          I could not be happier with how my new website and branding/logo turned out.
-          I would recommend him over and over again!
-        </blockquote>
-        <figcaption class="quote__by">
-          Missy Boyd — Founder, LearnSmart Educational Consulting and Academic Coaching
-          <span class="quote__src">Published Google review</span>
-        </figcaption>
-      </div>
-      <div class="quote__aside">
-        <figure class="shot shot--quote">
-          <img src="/assets/img/proof/learnsmart-desktop.jpg"
-               alt="The live LearnSmart Educational Consulting website"
-               width="1600" height="1000" loading="lazy" decoding="async"
-               onerror="this.closest('.shot').classList.add('is-missing')">
-          <span class="shot__await">Live-site capture, awaiting asset<br>learnsmart.dev</span>
+    <!-- ⚠ CLIENT REVIEWS — replaced the single "Word for word" quote block,
+         owner request 2026-09-02. Four published Google reviews, quoted exactly.
+         🚫 PROOF.md §5 rules that govern this block:
+           · NO review-count framing. Never print "4 reviews" or any count.
+           · NO star glyphs — DECISION 017 allows them only with evidence AND a
+             logged design approval from Skyler. Neither exists, so they are out.
+           · NO Review / aggregateRating / testimonial schema. PROOF.md §6 bans it
+             site-wide, and Google does not accept self-serving review markup for
+             a business on its own site anyway.
+         ⚠ Names are first name + last initial, per the owner. Owner responses to
+         the reviews are deliberately not shown. Quote text is verbatim; the only
+         edits are elisions marked with […]. 🚫 Do not paraphrase a review. -->
+    <section class="revs" aria-labelledby="revsLabel">
+      <p class="revs__label" id="revsLabel">Word for word</p>
+      <p class="revs__intro">Quoted exactly, in each client&rsquo;s own words.</p>
+
+      <div class="revs__stage" aria-live="polite">
+        <figure class="rev" data-rev="0">
+          <blockquote class="rev__text">We&rsquo;ve had a great experience working with
+            Kreated. They rebuilt our website for Leak Locators East Coast and have helped
+            us improve our SEO, Google Business Profile, and overall presence online.
+            […] we&rsquo;ve definitely seen more leads and actual jobs coming in through
+            Google. That was the biggest thing for us. A better looking website is great,
+            but seeing it actually start bringing in more business is what made the
+            difference. […] Skyler is very responsive and continues to make improvements
+            instead of just finishing the site and moving on.</blockquote>
+          <figcaption class="rev__by">J.R.
+            <span class="rev__role">CEO, <a class="rev__case" href="/work/leak-locators-east-coast/">Leak Locators East Coast</a></span>
+            <span class="rev__src">Published Google review</span></figcaption>
         </figure>
-        <p class="quote__asidenote">learnsmart.dev, delivered &amp; live</p>
+
+        <figure class="rev" data-rev="1">
+          <blockquote class="rev__text">We had an excellent experience working with Kreated
+            on our company&rsquo;s new website. Before making a decision, we researched and
+            compared several other website designers, and Kreated offered the best
+            combination of quality and affordability. […] They listened to exactly what we
+            wanted, offered helpful suggestions, and created a website that represents our
+            company perfectly.</blockquote>
+          <figcaption class="rev__by">Keely B.
+            <span class="rev__role">CFO, <a class="rev__case" href="/work/rare-raleigh-restoration/">Rare Raleigh Restoration</a></span>
+            <span class="rev__src">Published Google review</span></figcaption>
+        </figure>
+
+        <figure class="rev" data-rev="2">
+          <blockquote class="rev__text">I own a clothing brand with a large following and
+            the website I had live was very awfully built (by me lol) and I was losing
+            customers due to this. I chose the growth offer and care plan and the pricing
+            moving forward was very transparent and upfront. […] I was asked for my opinion
+            throughout the build of the website and I felt like my requests were always
+            added/removed. Also, I have no clue how all the SEO stuff works so thankfully
+            the care plan option is provided.</blockquote>
+          <figcaption class="rev__by">Gracie R.
+            <span class="rev__role">Clothing brand owner</span>
+            <span class="rev__src">Published Google review</span></figcaption>
+        </figure>
+
+        <figure class="rev" data-rev="3">
+          <blockquote class="rev__text">Absolutely a wonderful experience from start to
+            finish. Skylar helped me make my idea come to life! He worked with me every
+            step of the way, and asked my input at every turn. […] His work is extremely
+            professional and he is very knowledgeable. From start to finish, it only took
+            two weeks to fully develop my site and have it up and running. I could not be
+            happier with how my new website and branding/logo turned out.</blockquote>
+          <figcaption class="rev__by">Missy B.
+            <span class="rev__role">Founder, <a class="rev__case" href="/work/learnsmart/">LearnSmart Educational Consulting</a></span>
+            <span class="rev__src">Published Google review</span></figcaption>
+        </figure>
       </div>
-    </figure>
+
+      <div class="revs__nav">
+        <button class="revs__arrow" type="button" data-rev-prev aria-label="Previous review">&#8592;</button>
+        <div class="revs__dots" role="tablist" aria-label="Choose a review"></div>
+        <button class="revs__arrow" type="button" data-rev-next aria-label="Next review">&#8594;</button>
+      </div>
+    </section>
 
     <!-- The three projects now have real pages. Same quiet-link component the
          Services section uses, same reason: the section shows the work, the
@@ -1036,6 +1081,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- ⚠ INSTAGRAM — below the fold, owner request 2026-09-02, shaped after the
+     bx.studio reference: a small label chip over an oversized handle, the whole
+     block one link. Placed last inside <main> so it reads as a sign-off after
+     the CTA row rather than competing with it.
+     ⚠ The ground here is the NIGHT state (--k has flipped by this scroll
+     depth), so the type is white and cobalt-lift, not the day cobalt.
+     🚫 Do not move this above the .close CTAs. -->
+<section class="social" aria-labelledby="socialLabel">
+  <div class="wrap">
+    <a class="social__link" href="https://www.instagram.com/kreated.dev/"
+       target="_blank" rel="noopener me">
+      <span class="social__chip" id="socialLabel">Instagram</span>
+      <span class="social__handle"><span class="social__at">@</span>kreated.dev</span>
+    </a>
+  </div>
+</section>
+
 </main>
 
 <!-- ⚠ ONE FOOTER, ALL 17 ROUTES. Identical markup everywhere, styled by
@@ -1058,6 +1120,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
         <p><a href="tel:+19198058217">(919) 805-8217</a></p>
         <p>Raleigh, North Carolina</p>
+        <p class="foot__social"><a class="foot__ig" href="https://www.instagram.com/kreated.dev/"
+             target="_blank" rel="noopener me"><svg class="foot__igmark" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg><span>@kreated.dev</span></a></p>
       </div>
       <div>
         <h2>Pages</h2>
@@ -1103,6 +1167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- the client strip's emphasis cycle: one timer, no scroll listener, and it
      does not exist at all under reduced motion — see the file header -->
 <script src="/clients.js?v=5" defer></script>
+<script src="/reviews.js?v=2" defer></script>
 <!-- the scroll-driven light-to-blue transition. Publishes one custom property
      and nothing else; the page is complete without it -->
 <script src="/atmosphere.js?v=10" defer></script>

@@ -120,3 +120,21 @@
     display:inline-flex;align-items:center;min-height:44px;
   }
 }
+
+/* ==========================================================================
+   INSTAGRAM — the only external profile the site links to, added 2026-09-02.
+   ⚠ rel="noopener me": `me` is the XFN token that marks this as the site
+   owner's own profile. It is the visible half of the bidirectional link that
+   Organization.sameAs makes machine-readable — keep the URL identical in both
+   places or the two stop corroborating each other.
+   🚫 Do not add empty social icons beside it. One real profile is a signal;
+   a row of dead icons is noise.
+   ========================================================================== */
+/* ⚠ .foot__cols a — NOT .foot__ig alone. The column rule `.foot__cols a`
+   (0,1,1) sets display:inline-block and outranks a bare `.foot__ig` (0,1,0),
+   so the icon and the handle broke onto two lines. Match its specificity. */
+.foot__social{margin-top:14px}
+.foot__cols a.foot__ig{display:inline-flex;align-items:center;gap:8px;
+  white-space:nowrap}
+.foot__igmark{flex:none;opacity:.85;transition:opacity var(--t-hover,.18s ease)}
+.foot__ig:hover .foot__igmark{opacity:1}
