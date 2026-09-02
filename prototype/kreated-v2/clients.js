@@ -63,7 +63,11 @@
      comes round quickly whatever the speed, so pace is the only thing telling
      the reader this is a standing list rather than a ticker. The floor moved
      with it: 34s is roughly a full lap of a phone-width track. */
-  var seconds = Math.max(34, Math.round(setWidth / 22));
+  /* ⚠ Speed is px/second, not a fixed duration — the strip's width changes with
+     viewport and with the marks in it, so a hard duration would run at a
+     different apparent speed on every screen. 38px/s with a 20s floor.
+     History: 46 was too fast to read, 22 (34s floor) was called too slow. */
+  var seconds = Math.max(20, Math.round(setWidth / 38));
   list.style.setProperty('--marquee-duration', seconds + 's');
 
   list.classList.add('is-marquee');
