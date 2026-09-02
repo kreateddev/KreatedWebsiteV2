@@ -492,8 +492,15 @@ a{color:inherit}
   /* QA 390/360: at top:52% / .7 the mark crossed the support paragraph for
      125px of its height. It is brand presence, not content — so on mobile it
      lifts off the body copy and drops to a watermark. */
+  /* ⚠ 2026-09-02 mobile pass. The earlier fix lifted the mark off the copy and
+     dropped it to .4, but measurement at 390px still showed 38,000px² of it
+     sitting behind .hero__support — legible, because that paragraph carries
+     z-index:2, but visually noisy exactly where the reader is trying to read.
+     .18 keeps the brand presence the comment above asks for and stops it
+     competing with the sentence. 🚫 Do not raise this back above ~.2 on phones
+     without re-checking the overlap. */
   .hero__ghost{right:50%;transform:translate(50%,-50%);top:44%;
-    width:min(76vw,368px);opacity:.4}
+    width:min(76vw,368px);opacity:.18}
   .hero__ctas{width:100%;gap:14px}
   .hero__ctas .btn{width:100%;justify-content:center}
   .hero__note{margin-top:34px}
@@ -2383,3 +2390,46 @@ button,input,select,textarea{font:inherit;color:inherit}
    a global scale, which is correct for an editorial page. The systemic sizes
    are the ones that repeat: --body, --label, and the section tokens.
    ========================================================================== */
+
+
+/* ==========================================================================
+   MOBILE REFINEMENTS — 2026-09-02
+   Measured at 390 and 360, not guessed. Each rule below fixes something the
+   automated pass could see and the earlier structural QA could not, because
+   "no overflow and one H1" is not the same question as "does this feel right
+   in the hand".
+   ========================================================================== */
+@media (max-width:900px){
+
+  /* ⚠ 16px IS A FUNCTIONAL MINIMUM, NOT A TASTE CALL. iOS Safari zooms the
+     whole page when a focused input is under 16px, which throws the layout
+     sideways mid-form and is the single worst thing a phone visitor can hit on
+     a page whose only job is a form. The fields were 15px.
+     🚫 Never take these below 16px on a touch breakpoint. Desktop keeps 15px —
+     the rule is scoped, so nothing above 900px changes. */
+  .field input,.field select,.field textarea{font-size:16px}
+
+  /* ⚠ TAP TARGETS. These are standalone controls that render as text links, so
+     they inherited a text-line height: 24-30px against a 44px comfortable
+     minimum. Only the STANDALONE classes are listed — .ilink is deliberately
+     absent because it appears inside sentences, where a 44px box would wreck
+     the line rhythm and where the pointer-target exemption applies anyway.
+     Padding rather than height keeps the underline sitting where it was. */
+  .case__link,.offer__see,.svc__more{
+    min-height:44px;
+    padding-top:10px;
+    align-items:center;
+  }
+  .case__link{display:inline-flex}
+}
+
+
+/* ==========================================================================
+   MOBILE — 2026-09-02. The wordmark is the "go home" control and measured 25-38px
+   depending on the page. It is wide (123px), so the horizontal target was never
+   the problem; the vertical one was. inline-flex + min-height gives it a real
+   box without moving the mark itself, because the text stays centred in it.
+   ========================================================================== */
+@media (max-width:900px){
+  .head__mark,.foot__mark{display:inline-flex;align-items:center;min-height:44px}
+}

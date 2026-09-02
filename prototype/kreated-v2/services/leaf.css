@@ -450,3 +450,20 @@
 @media (prefers-reduced-motion:reduce){
   .faqs summary::after,.faqs summary::before{transition:none!important}
 }
+
+
+/* ==========================================================================
+   MOBILE REFINEMENTS — 2026-09-02. .tlink is a standalone "read this next"
+   control, not a link inside a sentence, and it measured 30px tall on a phone.
+   🚫 Do not apply this to .ilink: that one lives mid-paragraph.
+   ========================================================================== */
+@media (max-width:900px){
+  .tlink{min-height:44px;padding-block:11px}
+
+  /* ⚠ Breadcrumb links measured 25px. They are a real navigation control on a
+     phone — often the fastest way back to the hub — and 6px of block padding
+     was never going to be enough. The row keeps its height because the gap and
+     the separator sit on the flex line, not on the links. */
+  .crumb a{min-height:44px;display:inline-flex;align-items:center;padding-block:0}
+  .crumb{margin-top:-8px}
+}

@@ -105,3 +105,18 @@
 @media (max-width:520px){
   .foot__cols{grid-template-columns:1fr;gap:26px}
 }
+
+
+/* ==========================================================================
+   MOBILE — 2026-09-02. The email and phone links are the only footer entries a
+   visitor taps with intent rather than to navigate, and they measured 26px.
+   ⚠ Scoped to href^=mailto / href^=tel ON PURPOSE. Giving all nineteen footer
+   links a 44px box would add roughly 340px of footer to every phone page to
+   fix two controls that matter; the nav columns are secondary and already have
+   comfortable gaps between rows.
+   ========================================================================== */
+@media (max-width:900px){
+  .foot a[href^="mailto:"],.foot a[href^="tel:"]{
+    display:inline-flex;align-items:center;min-height:44px;
+  }
+}

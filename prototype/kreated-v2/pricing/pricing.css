@@ -517,3 +517,12 @@
   .bo__detail{max-width:none}
   .bg__hint{font-size:12.5px}
 }
+
+
+/* ==========================================================================
+   MOBILE REFINEMENTS — 2026-09-02. The Packages / Individual Services tabs are
+   the primary control on this page and measured 33px on a phone.
+   ========================================================================== */
+@media (max-width:900px){
+  .pswitch__tab{min-height:44px}
+}

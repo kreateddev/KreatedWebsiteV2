@@ -430,3 +430,25 @@ html,body{overflow-x:clip}
 /* the ledger is the page's main content object, so it opens on a rule the way
    every other top-level route opens its content */
 .ledgerwrap{padding-top:clamp(24px,3vw,40px)}
+
+
+/* ==========================================================================
+   MOBILE REFINEMENTS — 2026-09-02. The secondary closing CTA measured 27px on
+   a phone while the primary next to it is a 30px+ headline — the two read as
+   one big target and one afterthought. .close__go is left alone; it is already
+   comfortably large.
+   ========================================================================== */
+@media (max-width:900px){
+  .close__alt{min-height:44px;padding-top:12px;align-items:center}
+}
+
+
+/* ==========================================================================
+   MOBILE — 2026-09-02. The wordmark is the "go home" control and measured 25-38px
+   depending on the page. It is wide (123px), so the horizontal target was never
+   the problem; the vertical one was. inline-flex + min-height gives it a real
+   box without moving the mark itself, because the text stays centred in it.
+   ========================================================================== */
+@media (max-width:900px){
+  .head__mark,.foot__mark{display:inline-flex;align-items:center;min-height:44px}
+}
