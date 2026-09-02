@@ -657,11 +657,27 @@ async function modelTests() {
      audit then started a page fetch it could not afford and was killed at the
      10s function timeout; Netlify returned its own non-JSON error page and the
      browser reported a network failure. These two tests pin the arithmetic. */
-  /* ⚠ THE ARITHMETIC, PINNED. The budget must fit three full-length page
-     fetches plus the limiter, and must still sit well under the platform's 60s
-     synchronous ceiling. Both halves have been wrong before: the ceiling was
-     documented here as 10s for two phases, and the budget was sized to it. */
-  await ta('the budget fits three worst-case pages and stays clear of the ceiling', () => {
+  /* ⚠ THE ARITHMETIC, PINNED — REWRITTEN 2026-09-02.
+     This test used to assert "the budget fits three worst-case pages", against
+     a 60s ceiling. That assertion is now unsatisfiable, and it was unsatisfiable
+     for the right reason: an edge function sits in front of this endpoint and
+     gives up near TEN seconds, so three full-length page fetches can never fit
+     however the budget is sized. Measured in production: 502s at 10.33 / 10.37 /
+     10.37s, successes at 0.35 / 0.88 / 2.17 / 5.60s, nothing in between.
+
+     🚨 The history matters, because this file has now been wrong in BOTH
+     directions. It documented a 10s ceiling for two phases; that was overridden
+     to 60s on 2026-09-01, and the budget and page timeout were both raised to
+     match. The 10s was never stale — it was the edge ceiling, and raising the
+     numbers is what turned a slow site from "degrades to fewer pages" into
+     "502, and the visitor is told their own site is too slow".
+
+     So what is pinned here now is the property that actually protects the
+     visitor: THE FUNCTION MUST ALWAYS ANSWER BEFORE THE EDGE GIVES UP. Reading
+     three pages is a best case, not a guarantee — the design has always said a
+     slow site degrades rather than fails, and that only works if the function
+     lives long enough to return the degraded result. */
+  await ta('the budget always answers before the edge ceiling', () => {
     /* ⚠ READ THE REAL VALUES, do not regex the source. The first version of
        this test parsed the file, stopped matching when TOTAL_MS moved inside
        Number(env || default), produced NaN, and NaN >= x is false — so it
@@ -673,19 +689,46 @@ async function modelTests() {
     [['TOTAL_MS',total],['PAGE_RESERVE_MS',reserve],['TIMEOUT_MS',page]]
       .forEach(([k,v]) => ok(Number.isFinite(v) && v > 0, k + ' must be a real number, got ' + v));
 
-    /* ⚠ an ALLOWANCE, not a measurement. A complete three-page production
-       audit reports 401ms on the function's own clock; the 2.1s once recorded
-       here was laptop wall time, mostly TLS. Kept high on purpose so the
-       arithmetic below holds for a cold start too. */
+    /* an ALLOWANCE for a cold start, not a measurement: a complete three-page
+       production audit reports ~400ms on the function's own clock. */
     const LIMITER = 2100;
-    const CEILING = 60000;  /* Netlify synchronous limit, not configurable */
-    ok(reserve >= page, 'the reserve must cover a whole page fetch: ' + reserve + ' < ' + page);
-    const afterTwo = total - LIMITER - page * 2;
-    ok(afterTwo >= reserve, 'a third page must still fit: ' + afterTwo + 'ms left, needs ' + reserve);
-    const worst = LIMITER + page * 3;
-    ok(worst <= total, 'worst case ' + worst + 'ms must fit the ' + total + 'ms budget');
-    ok(total <= CEILING * 0.5,
-       'the budget must keep real headroom under the 60s ceiling, got ' + total + 'ms');
+    /* ⚠ THE CEILING THAT BINDS. Not the 60s synchronous function limit — the
+       edge function in front of this endpoint. Measured, see above. */
+    const EDGE_CEILING = 10000;
+    const ENCODING = 400;   /* serialising and returning the JSON body */
+
+    ok(reserve >= page,
+       'the reserve must cover a whole page fetch: ' + reserve + ' < ' + page);
+
+    /* the homepage fetch is NOT gated by the loop, so it must fit even cold —
+       otherwise a cold start could blow the budget before any gating applies */
+    ok(LIMITER + page <= total,
+       'a cold limiter plus the ungated homepage fetch must fit the budget: '
+       + (LIMITER + page) + 'ms > ' + total + 'ms');
+
+    /* the latest the function can possibly return: a gated fetch may start with
+       exactly `reserve` left and then burn its full timeout */
+    const latest = (total - reserve) + page + ENCODING;
+    ok(latest < EDGE_CEILING,
+       'the function must return before the edge gives up: latest ' + latest
+       + 'ms vs ceiling ' + EDGE_CEILING + 'ms');
+
+    /* 🚫 the regression this exists to catch: someone reads "60s ceiling"
+       somewhere and raises the budget back toward it */
+    ok(total <= EDGE_CEILING * 0.9,
+       'the budget must sit under the EDGE ceiling, not the 60s function one, got '
+       + total + 'ms');
+
+    /* quality guard: a three-page audit must still be reachable on a normal
+       site, warm or cold. Sizing for safety alone could quietly reduce every
+       audit to the homepage, which would pass every assertion above. */
+    const reachable = (limiter, perPage) => {
+      let used = limiter + perPage, n = 1;
+      while (total - used >= reserve && n < 3) { used += perPage; n++; }
+      return n;
+    };
+    ok(reachable(400, 300) === 3,  'a warm three-page audit must still fit');
+    ok(reachable(LIMITER, 300) === 3, 'a cold three-page audit must still fit');
   });
 
   await ta('time spent before the crawl comes out of the budget', async () => {

@@ -349,8 +349,17 @@
           fail('You have reached the audit limit for now. Try again later, or send the site over and get a straight answer instead.', false);
 
         } else if (res.status === 504 || res.status === 502 || res.status === 500 || res.status === 0) {
-          /* the function ran and was cut off, or crashed. Worth one retry. */
-          fail('That site took too long to read. Large or slow sites can run past the time the check has. Send it over and it can be looked at properly.', true);
+          /* ⚠ THIS USED TO BLAME THE VISITOR'S SITE — corrected 2026-09-02.
+             It read "That site took too long to read", which was wrong twice
+             over. A slow site no longer reaches this branch at all: the budget
+             in audit-core.js is now sized to answer inside the edge ceiling, so
+             a slow host degrades to a one- or two-page audit with the skipped
+             pages named. What lands here is OUR side failing — an edge timeout,
+             a cold start that ran long, a crash. Telling someone their website
+             is too slow when the fault is ours is the exact opposite of what
+             this tool is for, and it is the kind of thing they might act on.
+             🚫 Do not put site-blaming copy back in this branch. */
+          fail('Something went wrong on this end, not on your site. Give it a moment and try again — or send the address over and it will be looked at properly.', true);
 
         } else if (res.status === 404 || res.status === 405 || res.status === 501) {
           /* ⚠ THE ENDPOINT IS NOT THERE. 🚫 NOT RETRYABLE — the button would

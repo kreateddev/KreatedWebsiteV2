@@ -27,13 +27,21 @@ const https = require('https');
 const { URL } = require('url');
 
 const LIMITS = {
-  /* ⚠ 6s, raised from 4s on 2026-09-01 when the platform ceiling turned out
-     to be 60s rather than the 10s this file had assumed. Three pages at 6s is
-     18s, which fits the 22s budget in audit-core.js with the ~2s rate limiter
-     in front of it. Measured real crawls run 0.3-4s for ALL THREE pages
-     together, so this only bites a genuinely slow host — which is exactly the
-     case it was raised for. 🚫 Tied to BUDGET.PAGE_RESERVE_MS: change both. */
-  TIMEOUT_MS: 6000,
+  /* ⚠ 4s. BACK TO THE ORIGINAL VALUE — 2026-09-02.
+
+     This was 4s, was raised to 6s on 2026-09-01 "when the platform ceiling
+     turned out to be 60s rather than the 10s this file had assumed", and is now
+     4s again because THIS FILE'S ORIGINAL ASSUMPTION WAS RIGHT. 60s is the
+     synchronous FUNCTION limit, but an edge function sits in front of this
+     endpoint and gives up near ten seconds — measured, see audit-core.js. The
+     10s was never stale; it was the ceiling that actually binds, and raising
+     this to 6s is what made slow sites fail instead of degrade.
+
+     Measured real crawls run 0.3-4s for ALL THREE pages together, so 4s for a
+     SINGLE page is still generous and only bites a genuinely slow host.
+     🚫 Tied to BUDGET.PAGE_RESERVE_MS: change both, and 🚫 do not raise this
+     again on the strength of the 60s number. */
+  TIMEOUT_MS: 4000,
   MAX_BYTES: 1200000,     /* 1.2MB of HTML is far more than any real homepage */
   MAX_REDIRECTS: 3,
   ALLOWED_PORTS: new Set([80, 443]),

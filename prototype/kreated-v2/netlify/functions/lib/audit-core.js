@@ -86,6 +86,24 @@ const MAX_BODY = 4000;
      ------------------------------------
      worst case               ~20.1s    against a 22s budget and a 60s ceiling
 
+   🚨 THE 60s CEILING WAS NEVER THE REAL ONE — corrected 2026-09-02.
+   netlify/edge-functions/audit-rate-limit.js sits in front of this function and
+   calls context.next(). Measured in production: when the origin takes longer
+   than roughly ten seconds, the EDGE gives up and returns
+   502 "edge function invocation failed" — three consecutive failures at 10.33s,
+   10.37s and 10.37s, against successes at 0.35s, 0.88s, 2.17s and 5.60s.
+   Nothing landed in between, which is a hard cut rather than a crash.
+
+   That made the whole 22s budget unreachable and, worse, made the graceful
+   degradation below unreachable too: the request was killed UPSTREAM before
+   this function could return its partial result, so a slow site produced a 502
+   instead of a two-page audit. The visitor was then told THEIR site was too
+   slow, which was both wrong and the opposite of what this tool exists to do.
+
+   The budget is now sized to answer inside that window. 🚫 Do not raise
+   TOTAL_MS back toward 22s or 60s: the ceiling that binds is the edge one, and
+   it is about ten seconds.
+
    🚨 GATING IS BY TIME REMAINING, NOT TIME ELAPSED, and that is the fix that
    matters more than any number here. A fixed "no new page after Ns" threshold
    is only correct if everything before it is free. Nothing before it is free:
@@ -102,18 +120,33 @@ const MAX_BODY = 4000;
    🚫 Do not raise MAX_PAGES without redoing this arithmetic.
    ========================================================================== */
 const BUDGET = {
-  /* ⚠ 22s of a 60s platform ceiling. 🚫 Do not raise this toward 60: see the
-     paragraph above on what the difference is actually for.
+  /* ⚠ 8s, sized to the ~10s EDGE ceiling documented above — not the 60s
+     function ceiling, which this endpoint can never actually reach.
+
+     Why 8000 and not 9500: the last page fetch may start with exactly
+     PAGE_RESERVE_MS left and then burn safe-fetch's full 6s, so the function
+     can return as late as TOTAL_MS plus response encoding. 8s leaves roughly
+     two seconds of margin against the observed cut, which is what absorbs a
+     cold start or a slow Blobs region — the same headroom argument as before,
+     against the real ceiling this time.
+
+     The homepage fetch is NOT gated by the loop below, so a tight budget can
+     never produce a zero-page audit: worst case is limiter + homepage, then an
+     honest result with the other pages named as skipped.
 
      KREATED_AUDIT_BUDGET_MS exists so the page-skip gating can be proven in a
-     test without a twenty-second test, and so the budget can be tuned without
-     a deploy if a real crawl ever needs it. 🚫 Never set it in production to
-     anything above the ceiling arithmetic above. */
-  TOTAL_MS: Number(process.env.KREATED_AUDIT_BUDGET_MS || 22000),
+     test without a long test, and so the budget can be tuned without a deploy.
+     🚫 Never set it in production above ~9000. */
+  TOTAL_MS: Number(process.env.KREATED_AUDIT_BUDGET_MS || 8000),
   /* the worst case of ONE page fetch plus slack, which is what has to be left
-     on the clock before another one may start. Tracks safe-fetch's TIMEOUT_MS,
-     so 🚫 do not change one without the other. */
-  PAGE_RESERVE_MS: 6500,
+     on the clock before another one may start. Tracks safe-fetch's TIMEOUT_MS
+     (4000 + 500), so 🚫 do not change one without the other.
+
+     ⚠ At 6500 against this budget a cold start would have left 5.6s — under the
+     reserve — so EVERY cold request would have returned a one-page audit. 4500
+     keeps the three-page audit reachable warm AND cold, which is the whole
+     point of reading more than the homepage. */
+  PAGE_RESERVE_MS: 4500,
   MODEL_MS: 2500,
   MODEL_MIN_REMAINING_MS: 3000
 };
