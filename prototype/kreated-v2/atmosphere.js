@@ -71,14 +71,20 @@
        belongs at the arrival of one. */
     cross = roomTop - vh * 0.45;
 
-    /* AGGRESSIVE, not gradual. The approach used to run about 1.7 viewports;
-       it now runs 0.55, so the ground visibly moves rather than drifting. The
-       eased curve below concentrates most of that change in the last third. */
-    start = cross - vh * 0.55;
+    /* AGGRESSIVE, not gradual. The approach ran 1.7 viewports originally, then
+       0.55, and is now 0.40 — owner call, 2026-09-02: the change still read as
+       something the page was doing slowly rather than something it had done.
+       The eased curve below concentrates most of that change in the last third,
+       so shortening the run sharpens the arrival rather than making it abrupt. */
+    start = cross - vh * 0.40;
 
-    /* and the night closes in over 0.85 of a viewport after the flip rather
-       than 1.6, so Services is fully dark by the time the second row is read */
-    end = cross + vh * 0.85;
+    /* and the night closes over 0.58 of a viewport after the flip — 1.6
+       originally, then 0.85 — so Services is fully dark by the time the FIRST
+       row is read rather than the second.
+       ⚠ The two halves are deliberately unequal: the approach is shorter than
+       the close, so the ground commits quickly and then settles instead of
+       snapping. 🚫 Do not make them equal; that reads as a hard cut. */
+    end = cross + vh * 0.58;
 
     if (cross <= start) cross = start + 1;
     if (end <= cross) end = cross + 1;

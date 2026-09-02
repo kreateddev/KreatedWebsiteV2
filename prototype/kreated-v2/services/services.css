@@ -375,7 +375,21 @@ html,body{overflow-x:clip}
   .head__burger{display:flex;flex-direction:column;justify-content:center;gap:5px;
     width:44px;height:44px;margin-left:auto;padding:0;
     background:none;border:0;cursor:pointer}
-  .head__burger span{display:block;width:22px;height:1.5px;background:var(--white)}
+  /* ⚠ three lines, matching styles.css — see the note there. The X needs the
+     middle span to disappear, so it is targeted explicitly rather than by
+     first/last, which would leave it sitting across the cross. */
+    /* ⚠ WHOLE PIXELS. These were 1.5px tall, which is 4.5 device px on a 3x
+     phone: lines 1 and 3 rounded up to 5 and the middle one rounded down to
+     4, so the middle bar rendered visibly thinner than its neighbours. 2px
+     lines with a 5px gap put every edge on a whole device pixel at 1x, 2x
+     and 3x. 🚫 Do not use fractional heights or gaps here.
+     The block is 24x16 (2+5+2+5+2); the X collapses the outer bars onto the
+     middle one, so translateY must equal line-height + gap = 7px. */
+.head__burger span{display:block;width:24px;height:2px;background:var(--white);
+    transition:transform var(--t-hover,.18s),opacity var(--t-hover,.18s)}
+  .head__burger[aria-expanded=true] span:first-child{transform:translateY(7px) rotate(45deg)}
+  .head__burger[aria-expanded=true] span:nth-child(2){opacity:0}
+  .head__burger[aria-expanded=true] span:last-child{transform:translateY(-7px) rotate(-45deg)}
 
   /* ghost signatures are hidden entirely — they are an editorial luxury that
      only reads at desktop scale, and at this width they crowd the title */
@@ -451,4 +465,17 @@ html,body{overflow-x:clip}
    ========================================================================== */
 @media (max-width:900px){
   .head__mark,.foot__mark{display:inline-flex;align-items:center;min-height:44px}
+}
+
+/* ==========================================================================
+   ⚠ DELIBERATELY LAST. --head-h is declared at the top of this file as 91px
+   and 31 of the site's 35 routes load services.css, so the shorter mobile
+   header set in styles.css reached only the four routes that load THAT file
+   (home, audit, thanks, and the two dual-loaders). This block is what makes
+   the 68px header sitewide. .drawer is inset:var(--head-h) 0 auto 0, so it
+   follows this value automatically — do not hard-code the drawer's top.
+   ========================================================================== */
+@media (max-width:900px){
+  :root{--head-h:68px}
+  .head{position:static;height:var(--head-h)}
 }

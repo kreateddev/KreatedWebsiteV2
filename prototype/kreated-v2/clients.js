@@ -59,8 +59,11 @@
   items.forEach(function (li) { setWidth += li.getBoundingClientRect().width; });
   var gap = parseFloat(getComputedStyle(list).columnGap || getComputedStyle(list).gap || 0) || 0;
   setWidth += gap * items.length;
-  /* ~46px per second reads as deliberate rather than urgent */
-  var seconds = Math.max(18, Math.round(setWidth / 46));
+  /* ⚠ ~22px per second, halved on 2026-09-02. With only three marks the loop
+     comes round quickly whatever the speed, so pace is the only thing telling
+     the reader this is a standing list rather than a ticker. The floor moved
+     with it: 34s is roughly a full lap of a phone-width track. */
+  var seconds = Math.max(34, Math.round(setWidth / 22));
   list.style.setProperty('--marquee-duration', seconds + 's');
 
   list.classList.add('is-marquee');

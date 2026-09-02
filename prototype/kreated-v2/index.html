@@ -94,7 +94,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      the first pixel and keep #020C2E. Getting this wrong puts a black status
      bar above a near-white page on iOS, which reads as a rendering fault. -->
 <meta name="theme-color" content="#F4F5FA">
-<link rel="stylesheet" href="/styles.css?v=113">
+<link rel="stylesheet" href="/styles.css?v=132">
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=3">
 <link rel="stylesheet" href="/footer.css?v=6">
@@ -213,7 +213,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
     <a data-evt="cta_start_project" class="head__cta" href="/contact/">Start a Project</a>
     <button class="head__burger" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu">
-      <span></span><span></span>
+      <span></span><span></span><span></span>
     </button>
   </div>
 </header>
@@ -304,9 +304,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </span><i class="hero__caret" id="heroCaret"></i></span></span>
     </h1>
 
+    <!-- ⚠ THE THREE EMPHASISED PHRASES ARE THE THREE SERVICES, in the
+         customer's words rather than the navigation's: Web Design, Local SEO,
+         Brand Strategy. 🚫 Do not emphasise a fourth — three is the offer,
+         more is highlighter. See .hero__key in styles.css. -->
     <p class="hero__support">We make local service businesses look as good online
-      as they are on the job, with better websites, stronger Google results, and
-      sharper branding that gives customers a reason to choose you.</p>
+      as they are on the job, with <b class="hero__key">better websites</b>,
+      <b class="hero__key">stronger Google results</b>, and
+      <b class="hero__key">sharper branding</b> that gives customers a reason to
+      choose you.</p>
 
     <div class="hero__ctas">
       <a data-evt="cta_start_project" class="btn btn--solid" href="#project">Start a Project
@@ -351,7 +357,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ========================================================================== -->
 <section class="clients" aria-label="Clients">
   <div class="wrap clients__in">
-    <p class="clients__label">Clients</p>
+    <!-- ⚠ The visible "Clients" caption was removed — owner call, 2026-09-02.
+         The heading is NOT lost: <section class="clients"> above carries
+         aria-label="Clients", so the landmark keeps its accessible name.
+         🚫 Do not re-add a visible label without checking that aria-label,
+         or the section ends up announced twice. -->
 
     <!-- Static client row. Real logos, captured from each client's own live
          site and reduced to a single monotone so three different brand palettes
@@ -373,8 +383,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="clients__list">
         <li class="clients__item clients__item--llec">
           <a class="client" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">
-            <img class="client__logo" src="/assets/img/clients/llec.png" alt="Leak Locators East Coast"
-                 width="388" height="107" loading="lazy" decoding="async">
+            <img class="client__logo" src="/assets/img/clients/llec-wordmark.png" alt="Leak Locators East Coast"
+                 width="293" height="29" loading="lazy" decoding="async">
           </a>
         </li>
         <li class="clients__item clients__item--ls">
@@ -955,7 +965,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="/forms.js?v=4" defer></script>
 <!-- the client strip's emphasis cycle: one timer, no scroll listener, and it
      does not exist at all under reduced motion — see the file header -->
-<script src="/clients.js?v=2" defer></script>
+<script src="/clients.js?v=3" defer></script>
 <!-- the scroll-driven light-to-blue transition. Publishes one custom property
      and nothing else; the page is complete without it -->
 <script src="/atmosphere.js?v=10" defer></script>
