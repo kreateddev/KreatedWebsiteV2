@@ -29,29 +29,15 @@
 (function () {
   'use strict';
 
-  /* ---- the V1 emitter, restored verbatim in behaviour -------------------- */
-  if (typeof window.kreatedTrack !== 'function') {
-    window.kreatedTrack = function (name, detail) {
-      var payload = detail || {};
-      try {
-        if (window.dataLayer && typeof window.dataLayer.push === 'function') {
-          window.dataLayer.push(Object.assign({ event: name }, payload));
-        }
-        if (typeof window.plausible === 'function') {
-          window.plausible(name, { props: payload });
-        }
-        document.dispatchEvent(new CustomEvent('kreated:event', {
-          detail: { name: name, detail: payload }
-        }));
-      } catch (e) { /* analytics must never break a submission */ }
-    };
-  }
+  /* ⚠ THE EMITTER AND THE [data-evt] LISTENER MOVED TO /track.js on
+     2026-09-01. They lived here, so they only existed on the seven routes that
+     load this file, while [data-evt] is on all nineteen — twelve routes' worth
+     of header and footer CTA clicks were never tracked. track.js loads
+     everywhere and is loaded BEFORE this file. 🚫 Do not bring them back.
 
-  /* delegated [data-evt] click tracking — V1's pattern, unchanged */
-  document.addEventListener('click', function (e) {
-    var el = e.target.closest && e.target.closest('[data-evt]');
-    if (el && el.tagName !== 'FORM') window.kreatedTrack(el.getAttribute('data-evt'), {});
-  });
+     This stub only guarantees the call below never throws if track.js is
+     missing; it is not a second implementation. */
+  if (typeof window.kreatedTrack !== 'function') { window.kreatedTrack = function () {}; }
 
   /* ⚠ [data-own-submit] opts a form OUT of this file entirely. The website
      audit form is taken over by /free-website-audit/audit.js, which runs the

@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  KREATED — sitemap.xml   PREPARED 2026-09-01, NOT YET RELEASED TO SEARCH.
+  KREATED — sitemap.xml   LIVE 2026-09-01.
 
-  ⚠ Every URL below still carries a page-level noindex. This file lists the
-  routes INTENDED for indexing once that gate is lifted; it does not itself
-  index anything.
+  The 18 indexable routes. Every one returns 200 on the apex in zero hops and
+  carries a self-referencing canonical to the same URL.
 
-  APEX URLS, per the owner-stated canonical domain https://kreated.dev/, and
-  matching the <link rel="canonical"> on all 19 routes. 🚫 Netlify currently
-  301s apex -> www, so these are redirect targets until the primary domain is
-  switched to the apex. Do not paper over that here by writing www URLs.
+  APEX URLS. The Netlify primary domain is the apex, www 301s to it
+  path-preserving, and these URLs match the canonical on every page.
+  🚫 Never write a www URL here.
 
   WHAT IS DELIBERATELY ABSENT:
     /thanks/                 a 26-word post-submit confirmation. No search
-                             intent, a dead end, and owner-excluded.
+                             intent, a dead end, owner-excluded, and it now
+                             carries "noindex, follow" in its own markup.
     /.netlify/functions/*    a POST-only endpoint, not a page.
     non-canonical variants   no www, no non-slashed forms, no query strings.
 

@@ -3,10 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- PROTOTYPE SAFETY — do not remove without an explicit launch instruction.
-     docs/SEO.md types /thanks/ as noindex permanently; /free-website-audit/ is
-     noindex only while V2 is pre-launch. -->
-<meta name="robots" content="noindex, nofollow">
+
+<!-- ==========================================================================
+     GOOGLE TAG MANAGER — GTM-TH3JQWL8. Owner-supplied 2026-09-01.
+
+     🚨 GTM ONLY. THERE IS DELIBERATELY NO SECOND gtag.js SNIPPET, and this is
+     the whole point. docs/BUSINESS.md records the old site running this
+     container alongside GA4 G-ENJ4QV1FQX directly and DUPLICATE-FIRING as a
+     result: the container loads a GA4 tag, the page loads gtag as well, and
+     every pageview counts twice. GA4 reaches this site through the container
+     and through nothing else.
+     🚫 Do not add googletagmanager.com/gtag/js here. If GA4 stops reporting,
+     the fix is a tag inside the container, not a second snippet on the page.
+
+     ⚠ This must stay ABOVE /track.js. GTM defines window.dataLayer
+     synchronously; kreatedTrack pushes to it and does nothing if it is absent,
+     so loading them the other way round would drop the first events.
+     ========================================================================== -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TH3JQWL8');</script>
 <link rel="canonical" href="https://kreated.dev/free-website-audit/">
 <title>Free Website Audit | Kreated</title>
 <meta name="description" content="A free, founder-run look at your website, your Google Business Profile and your local search presence — with the specific things holding them back.">
@@ -53,6 +71,10 @@
 <link rel="stylesheet" href="/footer.css?v=5">
 </head>
 <body>
+<!-- GTM fallback for visitors without JavaScript. Paired with the head
+     snippet above; it is the documented install and is not a second container. -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TH3JQWL8"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- The atmosphere: one fixed layer behind the whole document carrying the
      blue. Fixed rather than scrolled so the light does not slide past the
      content — the room dims around the reader. Colours and strength live in
@@ -474,6 +496,10 @@
      hands `needs` to the same engine the pricing builder uses. -->
 <script src="/assets/data/offers.js?v=1" defer></script>
 <script src="/assets/data/recommend.js?v=3" defer></script>
+<!-- event emitter. Loads on every route so the [data-evt] CTAs in the
+     header and footer are tracked everywhere, not only where forms.js runs.
+     Contacts nothing until an analytics container is present. -->
+<script src="/track.js?v=1" defer></script>
 <script src="/forms.js?v=4" defer></script>
 <script src="/free-website-audit/audit.js?v=5" defer></script>
 </body>
