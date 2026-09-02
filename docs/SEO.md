@@ -31,13 +31,24 @@ re-decided for V2. Imported from `KreatedWebsiteV1` (`docs/SEO_AND_CONTENT.md`,
 | `/case-studies/` | Hub | — |
 | `/case-studies/learnsmart/` | Case study (delivered) | `BreadcrumbList` |
 | `/case-studies/rare-raleigh-restoration/` | Case study (**in progress**) | `BreadcrumbList` |
-| `/method/` | Content | `FAQPage` |
+| `/method/` | Content | `FAQPage` — ⚠ V1 only, see note below |
 | `/about/` | Trust | — |
 | `/contact/` | Conversion | — |
 | `/free-website-audit/` | Conversion | `FAQPage` |
 | `/privacy/` | Utility | — |
 | `/thanks/` | Utility · **noindex** | — |
 | `/404.html` | Utility · **noindex**, no canonical | — |
+
+> ⚠ **THIS TABLE IS V1's INVENTORY, NOT A V2 REQUIREMENT.** Read it as a record of what V1
+> shipped. Two rows in particular must not be actioned against V2: the `/case-studies/` routes
+> no longer exist (V2 uses `/work/`), and **`/method/` is listed with `FAQPage` because V1's
+> method page carried visible Q&A. V2's `/method/` has none, so it correctly has no `FAQPage`.**
+>
+> 🚫 **Do not add `FAQPage` to a page in order to satisfy this table.** The governing rule is
+> §4: schema must match visible content. Emit `FAQPage` only where corresponding Q&A content is
+> visibly present on the page, and never create schema for content that is not there. If a page
+> in this table lacks the listed schema in V2, the correct conclusion is that the page's content
+> differs — not that schema is missing.
 
 ⚠️ **Not automatically V2's route structure.** If V2 restructures case studies or changes the audit's
 route, the route map changes and redirects become mandatory. (The audit itself is retained —
@@ -62,10 +73,38 @@ already matches.)
 Verified at V1 close: 17/17 unique titles, 17/17 unique descriptions, no unintended head-term
 collision, Local SEO ≠ GBP, Web Design ≠ Website Redesign.
 
-### 🚫 Permanently rejected keywords
-`Raleigh SEO company` · `web design company Raleigh` · `branding agency Raleigh` — **all imply a
-team, which is false.**
-`Google Maps ranking Raleigh` — **invites placement promises Kreated cannot make.**
+### Category nouns — REVISED 2026-09-02 (owner decision)
+
+⚠ **The previous rule here is obsolete. Do not re-apply it.** It read:
+
+> 🚫 Permanently rejected keywords
+> `Raleigh SEO company` · `web design company Raleigh` · `branding agency Raleigh` — **all imply
+> a team, which is false.**
+
+That rule treated the category nouns **agency** and **company** as inherently false because
+Kreated is founder-led and small. The owner has revised this: Kreated **is** a real digital
+marketing / web design / SEO agency and company. Being small does not make the category noun
+untrue, and refusing the noun cost Kreated the single most load-bearing signal for entity
+disambiguation — the category — at a time when Google's AI summary was attaching the name
+"Kreated" to an unrelated fragrance business.
+
+✅ **Approved where contextually accurate:** `agency`, `company`, `marketing agency`,
+`web design company`, `SEO company`, `digital marketing company`.
+
+🚫 **Still forbidden — this half of the old rule stands and is unchanged.** Never claim
+staffing or scale that does not exist: a large team, departments, employees, specialists,
+"our designers", "our team" unless genuinely supported, or any implied headcount. The
+objection was always to *fabricated scale*, and that objection is still correct. What changed
+is that a category noun is not a headcount claim. See `docs/SERVICES.md` §"Nothing may imply a
+team" and `docs/PROOF.md`, both of which remain in force.
+
+🚫 **Do not bulk-rewrite the site into agency language.** Use the category noun only where it
+materially improves entity or category clarity — titles, metadata, schema, and the occasional
+opening line. The founder-led, one-line-of-accountability positioning is a genuine
+differentiator and stays.
+
+`Google Maps ranking Raleigh` — **still rejected. Invites placement promises Kreated cannot
+make.** Unrelated to the above; this one is about promising outcomes, not about headcount.
 
 ### 🚫 No city pages
 No Cary / Durham / Apex / Chapel Hill pages **without a real delivery basis.** V1 verified zero
@@ -98,6 +137,18 @@ surface equals the approved string.**
 
 V1 achieved 44 visible FAQs / 44 schema questions across 7 routes with zero verbatim mismatches
 (questions *and* answers).
+
+**V2 status, 2026-09-02.** `FAQPage` now emitted on 8 routes covering **69 visible Q&A pairs /
+69 schema questions**, verified with zero verbatim mismatches. No FAQ copy was written for this —
+every question and answer was already visible on the page. The rule is unchanged and still
+governs: **schema must match visible content, verbatim, in both directions.** A page with no
+visible Q&A gets no `FAQPage`.
+
+🚫 **What `FAQPage` is for here.** Semantic clarity: it marks question and answer boundaries
+explicitly rather than leaving them implied by `<details>` markup. It is **not** an AEO
+mechanism, nothing about it causes an AI system to quote the page, and FAQ rich-result
+eligibility is not expected — Google restricted those to government and health sites in 2023.
+🚫 Do not justify future schema work on promised AI or rich-result outcomes.
 
 | Route | FAQ count |
 |---|---|

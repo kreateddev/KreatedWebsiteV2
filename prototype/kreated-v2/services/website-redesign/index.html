@@ -88,59 +88,156 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      description. No price is asserted here: /pricing/ publishes ranges and
      "from" figures, and a single Offer value would misstate them. -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Kreated",
-          "item": "https://kreated.dev/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Services",
-          "item": "https://kreated.dev/services/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Website Redesign",
-          "item": "https://kreated.dev/services/website-redesign/"
-        }
-      ]
-    },
-    {
-      "@type": "Service",
-      "name": "Website Redesign",
-      "description": "Improving or replacing an existing website",
-      "serviceType": "Website Redesign",
-      "provider": {
-        "@id": "https://kreated.dev/#organization"
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Kreated",
+            "item": "https://kreated.dev/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://kreated.dev/services/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Website Redesign",
+            "item": "https://kreated.dev/services/website-redesign/"
+          }
+        ]
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Raleigh"
+      {
+        "@type": "Service",
+        "name": "Website Redesign",
+        "description": "Improving or replacing an existing website",
+        "serviceType": "Website Redesign",
+        "provider": {
+          "@id": "https://kreated.dev/#organization"
         },
-        {
-          "@type": "State",
-          "name": "North Carolina"
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Raleigh"
+          },
+          {
+            "@type": "State",
+            "name": "North Carolina"
+          },
+          {
+            "@type": "Place",
+            "name": "Worldwide"
+          }
+        ],
+        "url": "https://kreated.dev/services/website-redesign/"
+      },
+      {
+        "@type": [
+          "WebPage",
+          "FAQPage"
+        ],
+        "@id": "https://kreated.dev/services/website-redesign/#webpage",
+        "url": "https://kreated.dev/services/website-redesign/",
+        "name": "Website Redesign in Raleigh, NC | Kreated",
+        "isPartOf": {
+          "@id": "https://kreated.dev/#website"
         },
-        {
-          "@type": "Place",
-          "name": "Worldwide"
-        }
-      ],
-      "url": "https://kreated.dev/services/website-redesign/"
-    }
-  ]
-}
-</script>
+        "publisher": {
+          "@id": "https://kreated.dev/#organization"
+        },
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Will I lose the pages I already rank for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pages worth keeping keep their addresses. Where a page is merged or replaced, a redirect points the old address at the new one so existing links still resolve. What is deliberately not promised is a search outcome. No before-and-after ranking or traffic result is documented for any project here, so this page does not claim one."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you keep the copy we already have?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Where it earns its place, yes. And that is usually more of it than owners expect. Existing wording gets tidied and reorganised rather than replaced for the sake of it. What tends to change is the order, the headings and the calls to action."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do we have to rebuild everything at once?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not necessarily. If the structure is sound and only the surface has aged, the work is smaller and cheaper than a full rebuild. That is the first thing worth establishing, and it is what the Free Website Audit is for."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if our site is on a builder like Wix or Squarespace?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "That is a normal starting point. What matters is what the site has to do next, not what it was made with. The platform question is settled in scoping, in writing, before anything is rebuilt."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is a redesign cheaper than a new site?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Often, but not always. It depends on how much survives. A redesign has no package of its own: it is scoped and priced against the same Launch and Growth engagements, because the work is the same work whether the starting point is a tired site or a blank page."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I see a redesign you have actually done?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Rare Raleigh Restoration is on this page above, the real previous site and the real site that is live now, both captured, with no metric attached to either."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does a redesign take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most website projects take about 2–4 weeks, depending on scope, feedback, and how quickly we receive the content and assets needed to build. A redesign sits in the same range, and often at the shorter end when a good amount of the existing content survives."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does payment work, and who owns the result?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Standard website projects are 50% to start and 50% before launch; larger or custom projects may use milestones defined in the proposal. After final payment you own the finished website and the design and content created specifically for you. The full answer is on the Web Design page."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will my rankings drop right after launch?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A short unsettled period is normal while search engines recrawl and reassess the site. What causes lasting damage is not the redesign itself but the avoidable mistakes around it: addresses changed without redirects, pages that were already performing rewritten, internal links broken, crawling blocked at launch. Those are planned for rather than discovered afterward, and the site is watched after launch rather than handed over and forgotten. Nobody can promise positions will be identical, and this page does not."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens to my old page addresses?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every existing address is listed before anything changes and mapped to exactly one address on the new site. Redirects are set at the server rather than in the browser, and chains where one redirect points at another are avoided, because each additional hop costs something."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <!-- GTM fallback for visitors without JavaScript. Paired with the head

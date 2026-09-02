@@ -85,7 +85,7 @@ These are not re-litigated in this pass.
 
 | Constraint | Consequence for this roadmap |
 |---|---|
-| `Raleigh SEO company`, `web design company Raleigh`, `branding agency Raleigh` are **permanently rejected** — they imply a team, and Kreated is one person | No proposed page targets a "company" or "agency" head term. Copy says "designer", "practice", or names Skyler. |
+| ~~`Raleigh SEO company`, `web design company Raleigh`, `branding agency Raleigh` permanently rejected~~ **— OBSOLETE, revised 2026-09-02.** Category nouns (`agency`, `company`) are approved where accurate; see `docs/SEO.md`. Claiming staff or scale is still forbidden | No proposed page targets a "company" or "agency" head term. Copy says "designer", "practice", or names Skyler. |
 | `Google Maps ranking Raleigh` rejected — invites placement promises | Google Maps topics may be answered informationally. 🚫 No page may target a ranking-position phrase. |
 | **No city pages** without a real delivery basis | See §6. No city-page farm. |
 | `local SEO for contractors Raleigh` is already the **alternate keyword for `/services/local-seo/`** | 🚫 A `/local-seo-for-contractors/` page would cannibalize an assigned term. Deferred, see §5 class D. |
@@ -280,7 +280,7 @@ differentiator, not a copy trick. **Strongest resource opportunity on the list.*
 |---|---|
 | `web design for contractors` unmodified, national | Owned by national vertical specialists (§3b). Wrong fight. |
 | `local seo for contractors` as its own page | Already the assigned **alternate** for `/services/local-seo/`. Would cannibalize. |
-| `Raleigh SEO company`, `web design company Raleigh`, `branding agency Raleigh` | Permanently rejected in `docs/SEO.md`: imply a team that does not exist. |
+| ~~`Raleigh SEO company`, `web design company Raleigh`, `branding agency Raleigh`~~ | **No longer rejected — revised 2026-09-02.** See `docs/SEO.md`: the category noun is accurate for a founder-led agency. Fabricated staffing remains forbidden. |
 | `Google Maps ranking Raleigh`, any "rank #1" phrasing | Invites a placement promise Kreated will not make. |
 | `web design near me`, `best web designer` | Superlative and proximity intent Kreated cannot substantiate. |
 | National "SEO services", "digital marketing agency" | Wrong scale, wrong buyer, no chance. |

@@ -87,35 +87,68 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      description. No price is asserted here: /pricing/ publishes ranges and
      "from" figures, and a single Offer value would misstate them. -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Kreated",
-          "item": "https://kreated.dev/"
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Kreated",
+            "item": "https://kreated.dev/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Work",
+            "item": "https://kreated.dev/work/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Rare Raleigh Restoration",
+            "item": "https://kreated.dev/work/rare-raleigh-restoration/"
+          }
+        ]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://kreated.dev/work/rare-raleigh-restoration/#webpage",
+        "url": "https://kreated.dev/work/rare-raleigh-restoration/",
+        "name": "Rare Raleigh Restoration | Work | Kreated",
+        "isPartOf": {
+          "@id": "https://kreated.dev/#website"
         },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Work",
-          "item": "https://kreated.dev/work/"
+        "publisher": {
+          "@id": "https://kreated.dev/#organization"
         },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Rare Raleigh Restoration",
-          "item": "https://kreated.dev/work/rare-raleigh-restoration/"
+        "mainEntity": {
+          "@id": "https://kreated.dev/work/rare-raleigh-restoration/#project"
         }
-      ]
-    }
-  ]
-}
-</script>
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": "https://kreated.dev/work/rare-raleigh-restoration/#project",
+        "name": "Rare Raleigh Restoration — Website · Google Business Profile · Ongoing monthly SEO",
+        "creator": {
+          "@id": "https://kreated.dev/#organization"
+        },
+        "about": {
+          "@type": "Organization",
+          "name": "Rare Raleigh Restoration",
+          "url": "https://rareraleighrestoration.com",
+          "description": "Restoration contracting",
+          "areaServed": {
+            "@type": "Place",
+            "name": "Raleigh, NC"
+          }
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <!-- GTM fallback for visitors without JavaScript. Paired with the head
