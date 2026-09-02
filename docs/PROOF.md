@@ -144,8 +144,13 @@ matching pair is what makes the reconciliation bidirectional.
 - Quote verbatim, **in full**. Owner instruction 2026-09-02: "do not cut any of it out", so
   the cards carry each review complete and there are no elisions. 🚫 Never paraphrase,
   "tighten" or re-trim a review to fit a layout — change the layout.
-- ⚠ Original wording is preserved including its errors: the reviewer's spelling **"Skylar"**,
-  and the capitalised **"His work Is extremely professional"**. 🚫 Do not silently fix these.
+- ⚠ **One authorised correction, and only one.** The reviewer wrote **"Skylar"**; the owner
+  instructed on 2026-09-02 that the display read **"Skyler"** — it is his own name. Both the
+  homepage carousel and `/work/learnsmart/` show the corrected spelling. The original is kept
+  verbatim in the archival record below, so nothing is lost.
+- ⚠ Everything else stays exactly as written, errors included — notably the capitalised
+  **"His work Is extremely professional"**. 🚫 Do not fix that, or anything else, without the
+  owner asking for it specifically. The Skyler correction is not a precedent for tidying quotes.
 - ⚠ Gracie R.'s review contains the phrase **"I'd give them 10 stars if I could!!"**. That is
   the reviewer's own words inside a quoted testimonial, not a Kreated rating claim, and it is
   why it does not trip the §5 rating rules. 🚫 Do not lift it out as a pull quote or a badge.
@@ -178,7 +183,9 @@ Attribution as V1 published it:
 > Missy Boyd — Founder, LearnSmart Educational Consulting and Academic Coaching
 
 ### Notes on this testimonial
-- ⚠️ The review spells the founder's name **"Skylar"**. That is the reviewer's own wording. Quoting
+- ⚠️ The review spells the founder's name **"Skylar"**. ⚠ SUPERSEDED FOR DISPLAY 2026-09-02: the
+  owner authorised showing **"Skyler"** on the site. The block quote above is the untouched
+  original and must stay that way. Quoting
   exactly means keeping the misspelling. ❓ Confirm with Skyler — quote verbatim, or use `[sic]`, or
   bracket-correct. **Do not silently change it either way.**
 - ⚠️ It uses "we" about the working relationship. V1 recorded this as one of two locked exceptions
