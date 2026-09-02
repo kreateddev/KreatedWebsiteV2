@@ -302,13 +302,20 @@
        visitor typed. */
     if (window.kreatedTrack) window.kreatedTrack('website_audit_start', {});
 
-    /* ⚠ A CLIENT DEADLINE, because fetch has none. If the function is killed
-       mid-flight the browser can otherwise wait indefinitely on a request that
-       is never going to answer. 30s sits above the function's own 22s budget
-       with room to spare, so this only fires when something has genuinely
-       gone wrong rather than racing a slow but healthy audit. */
+    /* ⚠ A CLIENT DEADLINE, because fetch has none. If the request is killed
+       mid-flight the browser can otherwise wait indefinitely on something that
+       is never going to answer.
+
+       18s, reduced from 30s on 2026-09-02. The old value was sized to a 22s
+       server budget that turned out to be unreachable: an edge function in
+       front of the endpoint gives up near 10s, and the function's budget is now
+       8s to stay inside it. So every real outcome — a full audit, a degraded
+       one, or the edge's own 502 — arrives well before this fires, and 18s
+       leaves generous room for a slow connection on top. Waiting thirty seconds
+       to tell someone nothing happened is its own small failure.
+       🚫 Do not raise this back toward 30s. */
     var ctl = window.AbortController ? new AbortController() : null;
-    var giveUp = setTimeout(function () { if (ctl) ctl.abort(); }, 30000);
+    var giveUp = setTimeout(function () { if (ctl) ctl.abort(); }, 18000);
 
     fetch('/.netlify/functions/audit', {
       method: 'POST',
@@ -382,7 +389,13 @@
            what produced "the audit service could not be reached" for a request
            that had in fact been answered. */
         if (err && err.name === 'AbortError') {
-          fail('That site took too long to read. Send it over and it can be looked at properly.', true);
+          /* ⚠ ALSO USED TO BLAME THE VISITOR'S SITE — corrected 2026-09-02,
+             alongside the 5xx branch above. The deadline below is now more than
+             twice the longest answer the server can give, so reaching it means
+             the request stalled between the browser and us — not that their
+             website is slow. A slow website comes back as a one-page audit with
+             the rest named as skipped. 🚫 Do not put site-blaming copy here. */
+          fail('The connection stalled before the result came back. That is on this end, not your site — try again in a moment.', true);
         } else {
           fail('The check could not be reached. Your connection dropped, or the service is briefly unavailable.', true);
         }
