@@ -284,10 +284,17 @@
     e.preventDefault();
     if (busy) return;
 
+    /* ⚠ THIS FORM VALIDATES HERE, NOT IN THE MARKUP. It carries `novalidate`
+       and `data-own-submit`, so the browser enforces nothing and forms.js
+       skips it — `required` on an input is a semantic hint to assistive tech
+       and no more. Every field that must be filled needs its own check below.
+       🚫 Adding `required` in the HTML alone will silently do nothing here. */
     var url = (form.querySelector('[name="website"]') || {}).value || '';
     var email = (form.querySelector('[name="email"]') || {}).value || '';
+    var phone = (form.querySelector('[name="phone"]') || {}).value || '';
     if (!url.trim()) { fail('Enter the website address you would like checked.', false); return; }
     if (!email.includes('@')) { fail('Enter an email address so the result can reach you.', false); return; }
+    if (!phone.trim()) { fail('Enter a phone number so the result can be followed up.', false); return; }
 
     busy = true;
     var btn = form.querySelector('button[type="submit"]');

@@ -856,18 +856,23 @@ a{color:inherit}
    WEIGHT, which is not the same as the same height or the same width. Leak
    Locators is the densest lockup and takes the smallest box; Rare Raleigh is
    the lightest and takes the largest. */
-/* ⚠ 220px, up from 168px, because the asset is now the wordmark only. On
-   desktop --mark-w is the binding constraint (max-width), so the old cap left
-   the 10:1 wordmark just 17px tall beside 27px and 22px neighbours. Width and
-   height trade directly here — retune this WITH the max-height below. */
-.clients__item--llec  .client{--mark-w:220px}
+/* ⚠ The LLEC mark is now a GENERATED SVG, not a cropped raster: the wordmark
+   set in Manrope ExtraBold, the typeface leaklocatorseastcoast.com itself uses,
+   with the glyphs converted to outlines so the file needs no webfont. That took
+   the aspect from 10.10:1 (the cropped bitmap) to 15.32:1, because Manrope is
+   considerably wider than the original condensed lettering.
+   ⚠ It is the longest string in the row by far, so it is sized to match its
+   NEIGHBOURS' apparent mass, not their cap height — width and height trade
+   directly at a fixed aspect. Retune this WITH the max-height below, and check
+   all three rendered widths after. */
+.clients__item--llec  .client{--mark-w:250px}
 /* ⚠ 46%, and the asset is now the WORDMARK ONLY (owner call, 2026-09-02 — the
    pipe-and-dish illustration was cropped out). That took the aspect from
    3.63:1 to 10.10:1, so height no longer governs apparent size the way it does
    for the other two: at the old 62% the wordmark rendered 263px wide against
    146px and 215px for its neighbours and dominated the row.
    🚫 Do not restore 62% without re-checking the rendered WIDTH of all three. */
-.clients__item--llec  .client__logo{max-height:46%}
+.clients__item--llec  .client__logo{max-height:36%}
 .clients__item--ls    .client{--mark-w:184px}
 .clients__item--ls    .client__logo{max-height:52%}   /* was 44% — too light beside the others */
 .clients__item--rr    .client{--mark-w:204px}

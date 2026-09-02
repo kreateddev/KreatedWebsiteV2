@@ -68,15 +68,48 @@
 
   list.classList.add('is-marquee');
 
-  /* ---- stop the timer when nobody can see it --------------------------- */
+  /* ---- stop the timer when nobody can see it ---------------------------
+     ⚠ TWO REASONS, ONE CLASS — track them separately. Both of these used to
+     call classList.toggle('is-paused', ...) directly, so whichever fired last
+     won and the other reason was silently discarded.
+
+     That is the bug behind "the carousel stops after visiting a client": the
+     logo links are target="_blank", so opening one backgrounds this tab. While
+     a tab is hidden the browser throttles rendering, and it can deliver the
+     IntersectionObserver callback it computed during that time AFTER the tab is
+     visible again — carrying isIntersecting:false. That late callback re-added
+     is-paused on top of the visibilitychange handler that had just cleared it,
+     and since the strip's intersection never changes again, nothing ever fired
+     to un-pause it. The marquee stayed frozen for the rest of the visit.
+
+     🚫 Do not collapse these back into one toggle. */
+  var offscreen = false, hidden = false;
+  function sync() { list.classList.toggle('is-paused', offscreen || hidden); }
+
+  /* geometry, read synchronously — the ground truth a stale queued observer
+     callback cannot contradict */
+  function outOfView() {
+    var r = list.getBoundingClientRect();
+    return r.bottom <= 0 || r.top >= (window.innerHeight || 0);
+  }
+
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        list.classList.toggle('is-paused', !e.isIntersecting);
-      });
+      entries.forEach(function (e) { offscreen = !e.isIntersecting; });
+      sync();
     }, { threshold: 0 }).observe(list);
   }
-  document.addEventListener('visibilitychange', function () {
-    list.classList.toggle('is-paused', document.hidden);
-  });
+
+  /* ⚠ On the way back IN, re-measure instead of trusting the observer. This is
+     what makes a late callback harmless: whatever it claimed, the next resume
+     recomputes from the box itself. */
+  function resume() {
+    hidden = document.hidden;
+    if (!hidden) offscreen = outOfView();
+    sync();
+  }
+  document.addEventListener('visibilitychange', resume);
+  window.addEventListener('focus', resume);
+  /* bfcache restores skip load entirely, so pageshow is the only signal */
+  window.addEventListener('pageshow', resume);
 }());

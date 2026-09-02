@@ -94,7 +94,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      the first pixel and keep #020C2E. Getting this wrong puts a black status
      bar above a near-white page on iOS, which reads as a rendering fault. -->
 <meta name="theme-color" content="#F4F5FA">
-<link rel="stylesheet" href="/styles.css?v=132">
+<link rel="stylesheet" href="/styles.css?v=133">
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=3">
 <link rel="stylesheet" href="/footer.css?v=6">
@@ -383,8 +383,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="clients__list">
         <li class="clients__item clients__item--llec">
           <a class="client" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">
-            <img class="client__logo" src="/assets/img/clients/llec-wordmark.png" alt="Leak Locators East Coast"
-                 width="293" height="29" loading="lazy" decoding="async">
+            <img class="client__logo" src="/assets/img/clients/llec-wordmark.svg" alt="Leak Locators East Coast"
+                 width="460" height="30" loading="lazy" decoding="async">
           </a>
         </li>
         <li class="clients__item clients__item--ls">
@@ -845,8 +845,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="err" data-err-for="pe-email" aria-live="polite"></span>
           </p>
           <p class="field">
-            <label for="pe-phone">Phone <span class="opt">optional</span></label>
-            <input id="pe-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+            <label for="pe-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+            <input id="pe-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel">
             <span class="err" data-err-for="pe-phone" aria-live="polite"></span>
           </p>
           <p class="field field--wide">
@@ -965,7 +965,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="/forms.js?v=4" defer></script>
 <!-- the client strip's emphasis cycle: one timer, no scroll listener, and it
      does not exist at all under reduced motion — see the file header -->
-<script src="/clients.js?v=3" defer></script>
+<script src="/clients.js?v=4" defer></script>
 <!-- the scroll-driven light-to-blue transition. Publishes one custom property
      and nothing else; the page is complete without it -->
 <script src="/atmosphere.js?v=10" defer></script>

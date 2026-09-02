@@ -75,7 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- styles.css is loaded FIRST and only for the form: .formwrap / .kform /
      .field come from the homepage system, and the form markup here is the
      homepage's own, unchanged. Loading it keeps the two identical. -->
-<link rel="stylesheet" href="/styles.css?v=132">
+<link rel="stylesheet" href="/styles.css?v=133">
 <link rel="stylesheet" href="/services/services.css?v=22">
 <link rel="stylesheet" href="/services/leaf.css?v=13">
 <link rel="stylesheet" href="/contact/contact.css?v=4">
@@ -273,8 +273,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span class="err" data-err-for="pe-email" aria-live="polite"></span>
                   </p>
                   <p class="field">
-                    <label for="pe-phone">Phone <span class="opt">optional</span></label>
-                    <input id="pe-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+                    <label for="pe-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                    <input id="pe-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel">
                     <span class="err" data-err-for="pe-phone" aria-live="polite"></span>
                   </p>
                   <p class="field field--wide">
