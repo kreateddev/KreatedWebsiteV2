@@ -2925,11 +2925,26 @@ button,input,select,textarea{font:inherit;color:inherit}
 }
 .revs__arrow:hover{border-color:var(--cobalt-lift,#5B86FF);color:var(--cobalt-lift,#5B86FF)}
 .revs__dots{display:flex;gap:8px}
+/* ⚠ THE DOT IS 8px BUT THE TARGET IS 24px. The visible dot must stay small —
+   it is a position indicator, not a button — so the hit area is grown with a
+   transparent ::before rather than by resizing the element. Measured at 11x11
+   before this; WCAG 2.5.8 floor is 24x24.
+   ⚠ The element itself keeps its 8px box so .revs__dots' 8px gap still reads as
+   designed; the ::before overlaps its neighbours' padding, which is fine
+   because they are siblings in a row and the centre of each is unambiguous.
+   🚫 Do not "simplify" this by setting width/height to 24px — that changes the
+   visual design and the spacing. */
 .revs__dot{
+  position:relative;
   width:8px;height:8px;padding:0;border:0;border-radius:50%;cursor:pointer;
   background:color-mix(in srgb,
     rgba(20,28,60,.26), rgba(255,255,255,.34) calc(var(--k) * 100%));
   transition:background var(--t-hover,.18s ease),transform var(--t-hover,.18s ease);
+}
+.revs__dot::before{
+  content:"";position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:24px;height:24px;border-radius:50%;
 }
 .revs__dot[aria-selected=true]{background:var(--cobalt-lift,#5B86FF);transform:scale(1.35)}
 .revs__arrow:focus-visible,.revs__dot:focus-visible{
