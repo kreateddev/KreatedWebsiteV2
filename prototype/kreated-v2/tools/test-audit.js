@@ -843,6 +843,108 @@ t('audit handoff carries ids and quantities only', () => {
   eq(round.monthly.low, r.monthly.low);
 });
 
+
+/* ======================================================================
+   MARKET COVERAGE — the regression that produced a false "all clear".
+   A real client site (a contractor with six location pages, every one of
+   them the same city) came back alreadyStrong on Local visibility, which
+   pushed the overall verdict to "no piece of work here worth paying for".
+   Six pages for one city is one market, not six.
+   ====================================================================== */
+function pageWith(paths, extra) {
+  return Object.assign({
+    url: 'https://x.com/', host: 'x.com',
+    title: 'General Contractor in Cary, NC | Example',
+    bodySample: 'We are a general contractor in Cary, NC serving Cary homeowners.',
+    cityMentions: { Cary: 6 },
+    h1s: ['x'], h1Count: 1, h2s: [], h3Count: 0, wordCount: 400,
+    internalPaths: paths, internalCount: paths.length, externalCount: 0,
+    ldTypes: ['LocalBusiness'], hasLocalBusinessSchema: true,
+    tel: ['+19998887777'], email: [], forms: 1, ctas: ['Get an Estimate'],
+    viewport: true, rawTags: { ga4: true, gtm: false, meta: false, clarity: false },
+    followable: [], description: 'd', descriptionLength: 1, titleLength: 40
+  }, extra || {});
+}
+const ONE_CITY = ['/kitchen-remodeling-cary-nc', '/deck-builder-cary-nc',
+                  '/concrete-contractor-cary-nc', '/home-additions-cary-nc',
+                  '/bathroom-remodeling-cary-nc', '/whole-home-remodeling-cary-nc'];
+const MANY_CITY = ['/roofing-cary-nc', '/roofing-apex-nc', '/roofing-durham-nc',
+                   '/roofing-garner-nc', '/roofing-morrisville-nc'];
+
+t('six location pages for one city count as ONE market', function () {
+  const s = S.summarise([pageWith(ONE_CITY)]);
+  eq(s.locationPages.length, 6, 'location pages:');
+  eq(s.marketsCovered.length, 1, 'distinct markets:');
+});
+
+t('location pages across five cities count as FIVE markets', function () {
+  const s = S.summarise([pageWith(MANY_CITY)]);
+  eq(s.marketsCovered.length, 5, 'distinct markets:');
+});
+
+t('single-market concentration is recommended, not already strong', function () {
+  const f = C.classify(S.summarise([pageWith(ONE_CITY)]));
+  const loc = f.find(function (x) { return x.category === 'local'; });
+  eq(loc.status, 'recommended', 'local status:');
+  ok(/one market/i.test(loc.finding), 'finding should name the concentration');
+  ok(loc.evidence.some(function (e) { return /same market/i.test(e); }),
+     'evidence must state that every location page targets one market');
+});
+
+t('broad market coverage stays already strong — no false positive', function () {
+  const f = C.classify(S.summarise([pageWith(MANY_CITY)]));
+  const loc = f.find(function (x) { return x.category === 'local'; });
+  eq(loc.status, 'alreadyStrong', 'local status:');
+});
+
+t('two location pages in one city do NOT trigger it', function () {
+  /* 🚫 A business that genuinely works one town must never be told to invent
+     markets. The rule only fires at 3+ location pages. */
+  const f = C.classify(S.summarise([pageWith(['/roofing-cary-nc', '/decks-cary-nc'])]));
+  const loc = f.find(function (x) { return x.category === 'local'; });
+  eq(loc.status, 'alreadyStrong', 'local status:');
+});
+
+t('the single-market finding names the market when it resolves reliably', function () {
+  const s = S.summarise([pageWith(ONE_CITY)]);
+  const loc = C.classify(s).find(function (x) { return x.category === 'local'; });
+  ok(/Cary, NC/.test(loc.why), 'why should name the resolved market, got: ' + loc.why);
+  ok(/six service-location pages/.test(loc.why), 'why should spell the page count');
+  ok(/no expansion is needed/.test(loc.next), 'next must allow "no expansion" as an answer');
+});
+
+t('a multi-word city falls back to GENERIC copy rather than a wrong name', function () {
+  /* ⚠ "wake-forest-nc" groups as "forest-nc". Printing "Forest, NC" at an owner
+     would be worse than saying nothing, so the name is only used when the token
+     matches a real "City, ST" mention. 🚫 Do not name a market from the slug. */
+  const WF = ['/roofing-wake-forest-nc', '/decks-wake-forest-nc',
+              '/siding-wake-forest-nc', '/gutters-wake-forest-nc'];
+  const s = S.summarise([pageWith(WF, {
+    bodySample: 'Roofing in Wake Forest, NC for Wake Forest homes.',
+    cityMentions: { 'Wake Forest': 7 }
+  })]);
+  const loc = C.classify(s).find(function (x) { return x.category === 'local'; });
+  ok(/concentrated in one market/.test(loc.finding), 'should still fire');
+  ok(!/Forest, NC/.test(loc.why), 'must NOT print the mis-parsed name "Forest, NC"');
+  ok(/the same market/.test(loc.why), 'should use the generic wording');
+});
+
+t('the single-market finding never claims the pages compete with each other', function () {
+  /* 🚫 Cannibalisation is a claim, and nothing in public HTML evidences it.
+     Depth in one market is a legitimate strategy. */
+  const loc = C.classify(S.summarise([pageWith(ONE_CITY)]))
+    .find(function (x) { return x.category === 'local'; });
+  const all = loc.finding + ' ' + loc.why + ' ' + loc.next;
+  ok(!/compet|cannibal|against each other/i.test(all),
+     'copy must not assert cannibalisation, got: ' + all);
+});
+
+t('a concentrated site no longer returns the "nothing worth paying for" verdict', function () {
+  const s = S.summarise([pageWith(ONE_CITY)]);
+  const v = C.fitVerdict(C.classify(s), s);
+  ok(v.fit !== 'poor', 'fit was "' + v.fit + '"; a one-market site has real work available');
+});
+
 /* ====================================================================== */
 (async function () {
   await dnsTests();

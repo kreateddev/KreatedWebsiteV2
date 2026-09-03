@@ -35,6 +35,29 @@ function F(cat, status, finding, why, evidence, next) {
            finding, why, evidence: evidence.filter(Boolean), next };
 }
 
+/* ⚠ NAME THE MARKET ONLY WHEN IT RESOLVES RELIABLY. marketsCovered holds
+   GROUPING keys, not city names: "/kitchen-remodeling-cary-nc" groups as
+   "cary-nc", but a two-word city groups as "forest-nc" for Wake Forest, and
+   printing "Forest, NC" at a business owner is worse than saying nothing. The
+   key is only trusted when the same token also appears as a "City, ST" mention
+   in the page text — that is what turns a grouping key into a real name.
+   🚫 Never build a display name from the slug alone; fall back to generic. */
+function marketName(key, cityMentions) {
+  if (!key) return null;
+  const m = String(key).match(/^([a-z-]+)-([a-z]{2})$/i);
+  if (!m) return null;
+  const token = m[1].replace(/-/g, ' ');
+  const state = m[2].toUpperCase();
+  const named = Object.keys(cityMentions || {}).find(function (c) {
+    return c.toLowerCase() === token.toLowerCase();
+  });
+  return named ? named + ', ' + state : null;
+}
+
+const COUNT_WORD = ['', 'one', 'two', 'three', 'four', 'five', 'six',
+                    'seven', 'eight', 'nine', 'ten'];
+function countWord(n) { return COUNT_WORD[n] || String(n); }
+
 function classify(s) {
   const home = s.home;
   const out = [];
@@ -112,6 +135,30 @@ function classify(s) {
     if (!s.anyTel) { bad.push('no tel'); ev.push('No click-to-call phone number was found.'); }
     if (s.locationPages.length) ev.push(s.locationPages.length + ' location-style ' + (s.locationPages.length === 1 ? 'page' : 'pages') + ' found.');
 
+    /* ⚠ MARKETS COVERED, NOT PAGES COUNTED. This is the check that was missing.
+       locationPages.length was only ever added as POSITIVE evidence and never
+       tested, so six pages all ending -cary-nc read as broad local coverage and
+       the category came out alreadyStrong — which pushed the overall verdict to
+       "no piece of work here worth paying for" on a site with one market's worth
+       of local SEO. Six pages for one city is ONE market, not six.
+       🚫 Only fires at 3+ location pages, so a business that genuinely works a
+       single town is never told to invent markets it does not serve. Inventing
+       demand is the one thing this tool must not do. */
+    const markets = (s.marketsCovered || []).length;
+    if (s.locationPages.length >= 3 && markets === 1) {
+      bad.push('one market');
+      ev.push('All ' + s.locationPages.length + ' location pages target the same market, so the site has one area’s worth of local coverage however many pages carry a place name.');
+    } else if (markets > 1) {
+      ev.push(markets + ' distinct markets have a page of their own.');
+    }
+
+    /* a service business with a stated market and no location page at all */
+    if (!s.locationPages.length && s.servicePages.length && place) {
+      bad.push('no location pages');
+      ev.push('No page on the site targets any of the areas you serve.');
+    }
+
+
     /* 🚫 The Google Business Profile itself is NOT inspected. Saying anything
        about it from HTML alone would be fabricated evidence. */
     ev.push('The Google Business Profile itself was not inspected: this audit reads your public website only.');
@@ -120,6 +167,41 @@ function classify(s) {
       out.push(F(cat, 'critical', 'The site does not say where you work.',
         'Local search is the main way service businesses get found, and it starts with naming the market.', ev,
         'Local search foundations, and location pages only where the market is real.'));
+    else if (bad.includes('one market')) {
+      /* ⚠ CONDITIONAL, NOT PRESCRIPTIVE. This says "your coverage is
+         concentrated", never "you need more city pages". Public HTML cannot
+         tell us whether the business wants other markets, so the next step is
+         framed as a question for the owner and explicitly allows the answer
+         "no expansion needed".
+         🚫 Do NOT claim the same-city pages compete with each other. That is a
+         cannibalisation claim and nothing here is evidence for it — depth in
+         one market is a legitimate strategy, and an earlier draft asserted it
+         anyway. */
+      const nm = marketName((s.marketsCovered || [])[0], s.cityMentions);
+      const city = nm ? nm.split(',')[0] : null;
+      const n = countWord(s.locationPages.length);
+      out.push(F(cat, 'recommended',
+        'Your local coverage is concentrated in one market.',
+        nm
+          ? ('The site has ' + n + ' service-location pages, but they all target ' + nm +
+             '. That gives you useful depth in ' + city + ', but little dedicated search ' +
+             'coverage for other markets you may serve.')
+          : ('The site has ' + n + ' service-location pages, but they all target the same ' +
+             'market. That gives you useful depth there, but little dedicated search ' +
+             'coverage for other markets you may serve.'),
+        ev,
+        nm
+          ? ('If expanding beyond ' + city + ' is part of the business strategy, additional ' +
+             'location-specific pages could create clearer relevance for those markets. If ' +
+             city + ' is the only market you want to target, no expansion is needed.')
+          : ('If expanding beyond that market is part of the business strategy, additional ' +
+             'location-specific pages could create clearer relevance for those areas. If that ' +
+             'is the only market you want to target, no expansion is needed.')));
+    }
+    else if (bad.includes('uncovered markets') || bad.includes('no location pages'))
+      out.push(F(cat, 'recommended', 'You name markets the site has no page for.',
+        'Search engines rank pages, not intentions. A market you only mention in passing has nothing to rank, so the areas you most want work in can be the ones you are least visible for.', ev,
+        'Local search work: a page for each market you genuinely serve, and none for markets you do not.'));
     else if (bad.length)
       out.push(F(cat, 'recommended', 'The location is stated but not reinforced.',
         'Structured data and a consistent profile are what make the location legible to search engines.', ev,
