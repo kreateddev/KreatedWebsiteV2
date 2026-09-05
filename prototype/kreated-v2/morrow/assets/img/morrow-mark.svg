@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Morrow mark: a circle bisected by a horizontal line">
+  <!-- MORROW MARK. A circle bisected by a horizontal line 40% from the bottom.
+       Read twice: the sun at the horizon (morrow), and a cup seen from above
+       with the saucer edge. Single stroke weight, square caps, no fill. -->
+  <g fill="none" stroke="#231B16" stroke-width="4" stroke-linecap="butt">
+    <circle cx="50" cy="50" r="44"/>
+    <line x1="6.9" y1="58.8" x2="93.1" y2="58.8"/>
+  </g>
+</svg>

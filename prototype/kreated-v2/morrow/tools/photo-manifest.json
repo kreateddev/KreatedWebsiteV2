@@ -1,0 +1,542 @@
+[
+ {
+  "slot": "01-hero",
+  "src": "pexels-18579918.jpg",
+  "pexels_id": "18579918",
+  "ar": [
+   16,
+   9
+  ],
+  "focus": [
+   0.62,
+   0.45
+  ],
+  "widths": [
+   2400,
+   1600,
+   1000
+  ],
+  "zoom": 1.2,
+  "sat": 0.95,
+  "avif_q": 54
+ },
+ {
+  "slot": "01-hero-mobile",
+  "src": "pexels-18579918.jpg",
+  "pexels_id": "18579918",
+  "ar": [
+   4,
+   5
+  ],
+  "focus": [
+   0.62,
+   0.5
+  ],
+  "widths": [
+   1200,
+   800
+  ],
+  "zoom": 1.1,
+  "sat": 0.95
+ },
+ {
+  "slot": "02-statement",
+  "src": "pexels-38482117.jpg",
+  "pexels_id": "38482117",
+  "ar": [
+   2,
+   5
+  ],
+  "focus": [
+   0.55,
+   0.5
+  ],
+  "widths": [
+   800,
+   500
+  ]
+ },
+ {
+  "slot": "03-season-01",
+  "src": "pexels-37603082.jpg",
+  "pexels_id": "37603082",
+  "ar": [
+   3,
+   4
+  ],
+  "focus": [
+   0.5,
+   0.45
+  ],
+  "widths": [
+   1200,
+   800
+  ],
+  "sat": 0.84
+ },
+ {
+  "slot": "03-season-02",
+  "src": "pexels-27164221.jpg",
+  "pexels_id": "27164221",
+  "ar": [
+   3,
+   4
+  ],
+  "focus": [
+   0.5,
+   0.45
+  ],
+  "widths": [
+   1200,
+   800
+  ]
+ },
+ {
+  "slot": "03-season-03",
+  "src": "pexels-36954569.jpg",
+  "pexels_id": "36954569",
+  "ar": [
+   3,
+   4
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   1200,
+   800
+  ],
+  "sat": 0.86
+ },
+ {
+  "slot": "03-season-04",
+  "src": "pexels-29957631.jpg",
+  "pexels_id": "29957631",
+  "ar": [
+   3,
+   4
+  ],
+  "focus": [
+   0.5,
+   0.55
+  ],
+  "widths": [
+   1200,
+   800
+  ]
+ },
+ {
+  "slot": "04-bakery-a",
+  "src": "pexels-4828367.jpg",
+  "pexels_id": "4828367",
+  "ar": [
+   4,
+   5
+  ],
+  "focus": [
+   0.5,
+   0.4
+  ],
+  "widths": [
+   1200,
+   800
+  ]
+ },
+ {
+  "slot": "04-bakery-b",
+  "src": "pexels-14242084.jpg",
+  "pexels_id": "14242084",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.45
+  ],
+  "widths": [
+   1200,
+   800
+  ]
+ },
+ {
+  "slot": "05-sourcing",
+  "src": "pexels-37481132.jpg",
+  "pexels_id": "37481132",
+  "ar": [
+   21,
+   9
+  ],
+  "focus": [
+   0.5,
+   0.45
+  ],
+  "widths": [
+   2100,
+   1400
+  ]
+ },
+ {
+  "slot": "06-room-01",
+  "src": "pexels-4940753.jpg",
+  "pexels_id": "4940753",
+  "ar": [
+   3,
+   2
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   1800,
+   1000
+  ]
+ },
+ {
+  "slot": "06-room-02",
+  "src": "pexels-19291536.jpg",
+  "pexels_id": "19291536",
+  "ar": [
+   2,
+   3
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   1000,
+   700
+  ]
+ },
+ {
+  "slot": "06-room-03",
+  "src": "pexels-29394552.jpg",
+  "pexels_id": "29394552",
+  "ar": [
+   2,
+   3
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   1000,
+   700
+  ],
+  "sat": 0.75
+ },
+ {
+  "slot": "06-room-04",
+  "src": "pexels-17118567.jpg",
+  "pexels_id": "17118567",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.4
+  ],
+  "widths": [
+   1200,
+   800
+  ]
+ },
+ {
+  "slot": "06-room-05",
+  "src": "pexels-37293880.jpg",
+  "pexels_id": "37293880",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.35,
+   0.5
+  ],
+  "widths": [
+   1200,
+   800
+  ],
+  "sat": 0.78
+ },
+ {
+  "slot": "06-room-06",
+  "src": "pexels-7884094.jpg",
+  "pexels_id": "7884094",
+  "ar": [
+   21,
+   9
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   2100,
+   1400
+  ],
+  "sat": 0.9,
+  "overlays": [
+   {
+    "type": "mark",
+    "x": 0.232,
+    "y": 0.555,
+    "size": 0.052,
+    "color": "#231B16",
+    "opacity": 0.78,
+    "squash": 0.9,
+    "blend": "multiply"
+   }
+  ]
+ },
+ {
+  "slot": "07-exterior",
+  "src": "pexels-11077632.jpg",
+  "pexels_id": "11077632",
+  "ar": [
+   3,
+   4
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   1200,
+   800
+  ],
+  "sat": 0.9,
+  "warm": 10,
+  "overlays": [
+   {
+    "type": "mark",
+    "x": 0.275,
+    "y": 0.44,
+    "size": 0.085,
+    "color": "#F2ECE1",
+    "opacity": 0.94
+   },
+   {
+    "type": "text",
+    "text": "MORROW",
+    "x": 0.275,
+    "y": 0.505,
+    "size": 0.022,
+    "anchor": "center",
+    "tracking": 0.14,
+    "font": "InstrumentSerif-Regular.ttf",
+    "color": "#F2ECE1",
+    "opacity": 0.94
+   },
+   {
+    "type": "text",
+    "text": "MON\u2013FRI 6:30 \u2014 15:00\nSAT\u2013SUN 7:00 \u2014 15:00",
+    "x": 0.275,
+    "y": 0.545,
+    "size": 0.0105,
+    "anchor": "center",
+    "tracking": 0.06,
+    "leading": 1.7,
+    "color": "#F2ECE1",
+    "opacity": 0.9
+   }
+  ]
+ },
+ {
+  "slot": "bar-espresso",
+  "src": "pexels-7581971.jpg",
+  "pexels_id": "7581971",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-macchiato",
+  "src": "pexels-33074054.jpg",
+  "pexels_id": "33074054",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-cortado",
+  "src": "pexels-7657874.jpg",
+  "pexels_id": "7657874",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-flat-white",
+  "src": "pexels-33115310.jpg",
+  "pexels_id": "33115310",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-cappuccino",
+  "src": "pexels-13477822.jpg",
+  "pexels_id": "13477822",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.55
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-latte",
+  "src": "pexels-27164219.jpg",
+  "pexels_id": "27164219",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.45
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-batch-brew",
+  "src": "pexels-8931151.jpg",
+  "pexels_id": "8931151",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-pour-over",
+  "src": "pexels-34386686.jpg",
+  "pexels_id": "34386686",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-cold-brew",
+  "src": "pexels-7437950.jpg",
+  "pexels_id": "7437950",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-flash-chilled",
+  "src": "pexels-37486068.jpg",
+  "pexels_id": "37486068",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-iced-cortado",
+  "src": "pexels-34346015.jpg",
+  "pexels_id": "34346015",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ },
+ {
+  "slot": "bar-espresso-tonic",
+  "src": "pexels-4667180.jpg",
+  "pexels_id": "4667180",
+  "ar": [
+   1,
+   1
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "widths": [
+   480
+  ]
+ }
+]

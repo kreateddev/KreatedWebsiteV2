@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ==========================================================================
+     MORROW COFFEE CO. — HOMEPAGE
+     A fictional brand concept by Kreated. Built to the Creative Direction
+     v1.0 document, which is the locked specification for everything on this
+     page: section order, palette, type, copy, menu, motion and the mobile
+     recomposition. Do not casually reinterpret it.
+
+     Self-contained route: this folder carries its own fonts, CSS, JS and
+     image slots so the concept can be lifted onto its own domain later
+     without touching the rest of the Kreated site. It loads none of the
+     Kreated stylesheets, analytics or footer.
+
+     Photography: sourced stock (Pexels License), cropped and graded by
+     tools/build-images.py. Provenance for every image: assets/img/SOURCES.md.
+     Placeholders for any re-shot slot: assets/img/README.md.
+     ========================================================================== -->
+<script>document.documentElement.className = 'js';</script>
+
+<title>Morrow Coffee Co. — Coffee for slower mornings · Raleigh, NC</title>
+<meta name="description" content="A coffee bar and bakery in Raleigh, open from first light. Espresso, filter, pastries out by six. A fictional brand concept by Kreated.">
+<!-- Concept route, not yet released. Lift this with the case study. -->
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://kreated.dev/morrow/">
+<meta name="theme-color" content="#F2ECE1">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Morrow Coffee Co.">
+<meta property="og:title" content="Morrow Coffee Co. — Coffee for slower mornings">
+<meta property="og:description" content="A coffee bar and bakery in Raleigh, open from first light. Espresso, filter, pastries out by six.">
+<meta property="og:url" content="https://kreated.dev/morrow/">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="/morrow/assets/img/favicon.svg" type="image/svg+xml">
+
+<!-- Fonts: subset (latin), self-hosted, preloaded. Instrument Serif carries
+     every headline; Inter Tight the body; JetBrains Mono every label. -->
+<link rel="preload" href="assets/fonts/instrument-serif-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-tight-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jetbrains-mono-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- LCP image. Two preloads, one per crop; the browser fetches only the
+     matching one. Point these at the AVIF once real photography lands. -->
+<link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/photo/01-hero-2400.avif 2400w, assets/img/photo/01-hero-1600.avif 1600w, assets/img/photo/01-hero-1000.avif 1000w" imagesizes="100vw" media="(min-width: 768px)">
+<link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/photo/01-hero-mobile-1200.avif 1200w, assets/img/photo/01-hero-mobile-800.avif 800w" imagesizes="100vw" media="(max-width: 767px)">
+
+<link rel="stylesheet" href="morrow.css">
+<script src="morrow.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ======================================================================
+     NAVIGATION — fixed, transparent over the hero, Ivory + hairline after
+     80px, hides on a deliberate scroll-down past 400px, returns on scroll-up.
+     ====================================================================== -->
+<header class="nav" id="nav">
+  <a class="nav__brand wordmark" href="#top" aria-label="Morrow Coffee Co. — back to top">MORROW</a>
+  <nav class="nav__links" aria-label="Primary">
+    <a class="nav__link" href="#bar">Menu</a>
+    <a class="nav__link" href="#bakery">Bakery</a>
+    <a class="nav__link" href="#visit">Visit</a>
+    <span class="nav__hours mono" aria-label="Open 6:30 to 15:00">06:30 — 15:00</span>
+  </nav>
+  <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+</header>
+
+<!-- Mobile navigation layer. Full-screen Espresso, three serif links at
+     12vw, hours in mono at the bottom. Focus is trapped while it is open. -->
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="menu__top">
+    <span class="wordmark">MORROW</span>
+    <button class="menu__close" type="button">Close</button>
+  </div>
+  <nav class="menu__links" aria-label="Primary, mobile">
+    <a href="#bar">Menu</a>
+    <a href="#bakery">Bakery</a>
+    <a href="#visit">Visit</a>
+  </nav>
+  <div class="menu__hours mono">
+    <p>MON–FRI 6:30 — 15:00<br>SAT–SUN 7:00 — 15:00</p>
+    <p>412 E. HARGETT ST<br>RALEIGH, NC 27601</p>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ======================================================================
+     01 — HERO: FIRST LIGHT
+     Full viewport, pinned. The horizon mask opens the photograph, the
+     headline rises, the copy fades, the nav arrives last. On scroll the
+     statement section slides over it. Hero markup is written so that with no
+     script every element is simply present.
+     ====================================================================== -->
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <figure class="hero__media photo" data-slot="01-hero">
+    <picture>
+      <source media="(max-width: 767px)" type="image/avif" srcset="assets/img/photo/01-hero-mobile-1200.avif 1200w, assets/img/photo/01-hero-mobile-800.avif 800w" sizes="100vw">
+      <source media="(max-width: 767px)" type="image/webp" srcset="assets/img/photo/01-hero-mobile-1200.webp 1200w, assets/img/photo/01-hero-mobile-800.webp 800w" sizes="100vw">
+      <source media="(max-width: 767px)" srcset="assets/img/photo/01-hero-mobile-1200.jpg 1200w, assets/img/photo/01-hero-mobile-800.jpg 800w" sizes="100vw" width="1200" height="1500">
+      <source type="image/avif" srcset="assets/img/photo/01-hero-2400.avif 2400w, assets/img/photo/01-hero-1600.avif 1600w, assets/img/photo/01-hero-1000.avif 1000w" sizes="100vw">
+      <source type="image/webp" srcset="assets/img/photo/01-hero-2400.webp 2400w, assets/img/photo/01-hero-1600.webp 1600w, assets/img/photo/01-hero-1000.webp 1000w" sizes="100vw">
+      <img src="assets/img/photo/01-hero-1600.jpg" srcset="assets/img/photo/01-hero-2400.jpg 2400w, assets/img/photo/01-hero-1600.jpg 1600w, assets/img/photo/01-hero-1000.jpg 1000w" sizes="100vw" width="1600" height="900" alt="A cup of coffee on a pale table, lit by dappled early light through a window. Most of the frame is in shadow." fetchpriority="high" decoding="async">
+    </picture>
+  </figure>
+
+  <p class="hero__meta mono">RALEIGH, NC · 35.78°N<br>EST. 2026</p>
+
+  <h1 class="hero__title reveal-lines" id="hero-title">
+    <span class="line" style="--i:0"><span>COFFEE FOR</span></span>
+    <span class="line line--in" style="--i:1"><span><em>slower</em></span></span>
+    <span class="line" style="--i:2"><span>MORNINGS.</span></span>
+  </h1>
+
+  <div class="hero__aside">
+    <p class="label mono">01 / FIRST LIGHT</p>
+    <p class="hero__copy">A coffee bar and bakery in Raleigh, open from first light. Espresso, filter, pastries out by six.</p>
+    <a class="cta" href="#bar">SEE THE MENU <span class="arrow">→</span></a>
+    <a class="quiet mono" href="#visit">412 E. HARGETT ST</a>
+  </div>
+</section>
+
+<!-- ======================================================================
+     02 — THE STATEMENT
+     Espresso. The manifesto in ~30 words, bottom-left; one narrow photograph
+     of light on plaster at the far right. Most of the viewport is empty on
+     purpose.
+     ====================================================================== -->
+<section class="statement" id="idea" aria-labelledby="statement-title">
+  <p class="index mono">02 / THE IDEA</p>
+
+  <figure class="statement__photo photo" data-slot="02-statement" data-parallax="0.08">
+    <picture>
+      <source type="image/avif" srcset="assets/img/photo/02-statement-800.avif 800w, assets/img/photo/02-statement-500.avif 500w" sizes="(min-width: 768px) 25vw, 100vw">
+      <source type="image/webp" srcset="assets/img/photo/02-statement-800.webp 800w, assets/img/photo/02-statement-500.webp 500w" sizes="(min-width: 768px) 25vw, 100vw">
+      <img src="assets/img/photo/02-statement-800.jpg" srcset="assets/img/photo/02-statement-800.jpg 800w, assets/img/photo/02-statement-500.jpg 500w" sizes="(min-width: 768px) 25vw, 100vw" width="800" height="2000" alt="Late-morning light and the shadow of a window frame across a warm plaster wall." loading="lazy" decoding="async">
+    </picture>
+  </figure>
+
+  <h2 class="statement__title reveal-lines" id="statement-title">
+    <span class="line" style="--i:0"><span>THE DAY</span></span>
+    <span class="line" style="--i:1"><span>CAN WAIT</span></span>
+    <span class="line" style="--i:2"><span><em>an</em> HOUR.</span></span>
+  </h2>
+
+  <p class="statement__body rise">Most mornings get skipped — coffee in the car, breakfast at the desk. Morrow was built for the hour before that. Good coffee, bread that came out of the oven at six, and a room that gets the first light in the neighborhood.</p>
+</section>
+
+<!-- ======================================================================
+     03 — THE BAR
+     Ivory. Sticky intro left, editorial menu right. Pure typography; the
+     only image is the small one that follows the cursor on desktop.
+     ====================================================================== -->
+<section class="bar" id="bar" aria-labelledby="bar-title">
+  <div class="bar__intro">
+    <p class="index mono">03 / THE BAR</p>
+    <h2 class="title" id="bar-title">THE BAR</h2>
+    <p>Two espressos on the grinders, one filter that changes every few weeks, and cold coffee we actually think about. We'll tell you what's in the hopper if you ask.</p>
+    <p class="bar__now mono"><span class="label">NOW ON ESPRESSO —</span><br>Guatemala, Huehuetenango — washed, dark cherry, cocoa.</p>
+  </div>
+
+  <div class="bar__menu">
+    <div class="bar__group">
+      <h3 class="label mono">ESPRESSO</h3>
+      <ul class="rows">
+        <li class="row" data-img="assets/img/photo/bar-espresso-480.jpg"><span class="row__name">Espresso</span><span class="row__desc">Double, always.</span><span class="row__price mono">3.75</span></li>
+        <li class="row" data-img="assets/img/photo/bar-macchiato-480.jpg"><span class="row__name">Macchiato</span><span class="row__desc">Espresso, a spoon of foam.</span><span class="row__price mono">4.25</span></li>
+        <li class="row" data-img="assets/img/photo/bar-cortado-480.jpg"><span class="row__name">Cortado</span><span class="row__desc">Equal parts. The house drink.</span><span class="row__price mono">4.75</span></li>
+        <li class="row" data-img="assets/img/photo/bar-flat-white-480.jpg"><span class="row__name">Flat White</span><span class="row__desc">Two shots, velvet milk.</span><span class="row__price mono">5.25</span></li>
+        <li class="row" data-img="assets/img/photo/bar-cappuccino-480.jpg"><span class="row__name">Cappuccino</span><span class="row__desc">The dry kind.</span><span class="row__price mono">5.00</span></li>
+        <li class="row" data-img="assets/img/photo/bar-latte-480.jpg"><span class="row__name">Latte</span><span class="row__desc">Ask for it small.</span><span class="row__price mono">5.50</span></li>
+      </ul>
+    </div>
+    <div class="bar__group">
+      <h3 class="label mono">FILTER</h3>
+      <ul class="rows">
+        <li class="row" data-img="assets/img/photo/bar-batch-brew-480.jpg"><span class="row__name">Batch Brew</span><span class="row__desc">Whatever's on the counter. Refills are a dollar.</span><span class="row__price mono">3.50</span></li>
+        <li class="row" data-img="assets/img/photo/bar-pour-over-480.jpg"><span class="row__name">Pour-over</span><span class="row__desc">Single origin, 4 minutes. Rotates.</span><span class="row__price mono">6.00</span></li>
+      </ul>
+    </div>
+    <div class="bar__group">
+      <h3 class="label mono">COLD</h3>
+      <ul class="rows">
+        <li class="row" data-img="assets/img/photo/bar-cold-brew-480.jpg"><span class="row__name">Cold Brew</span><span class="row__desc">18-hour, on tap.</span><span class="row__price mono">5.00</span></li>
+        <li class="row" data-img="assets/img/photo/bar-flash-chilled-480.jpg"><span class="row__name">Flash-Chilled</span><span class="row__desc">Brewed hot, chilled over ice. Brighter than cold brew.</span><span class="row__price mono">5.50</span></li>
+        <li class="row" data-img="assets/img/photo/bar-iced-cortado-480.jpg"><span class="row__name">Iced Cortado</span><span class="row__desc">Yes, it works.</span><span class="row__price mono">5.25</span></li>
+        <li class="row" data-img="assets/img/photo/bar-espresso-tonic-480.jpg"><span class="row__name">Espresso Tonic</span><span class="row__desc">Double shot, tonic, orange peel.</span><span class="row__price mono">6.25</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- desktop only: the 240px image that follows the cursor over a row -->
+  <div class="bar__cursor" aria-hidden="true"><img alt="" width="240" height="240" decoding="async"></div>
+</section>
+
+<!-- ======================================================================
+     04 — THIS SEASON
+     Olive — the only coloured section. Four drinks on a horizontal strip:
+     drag with inertia on desktop, native swipe with peek on mobile.
+     ====================================================================== -->
+<section class="season" id="season" aria-labelledby="season-title">
+  <header class="season__head">
+    <p class="index mono">04 / THIS SEASON <span class="season__dates">SEPT — NOV</span></p>
+    <h2 class="title" id="season-title">THIS SEASON</h2>
+    <p>Four drinks for the part of the year when mornings get cold before the afternoons do.</p>
+  </header>
+
+  <div class="season__strip" tabindex="0" role="region" aria-label="Seasonal drinks. Scroll horizontally.">
+    <ul class="season__list">
+      <li class="season__item">
+        <figure class="season__photo photo mask" data-slot="03-season-01">
+          <picture>
+      <source type="image/avif" srcset="assets/img/photo/03-season-01-1200.avif 1200w, assets/img/photo/03-season-01-800.avif 800w" sizes="(min-width: 768px) 26vw, 85vw">
+      <source type="image/webp" srcset="assets/img/photo/03-season-01-1200.webp 1200w, assets/img/photo/03-season-01-800.webp 800w" sizes="(min-width: 768px) 26vw, 85vw">
+      <img src="assets/img/photo/03-season-01-1200.jpg" srcset="assets/img/photo/03-season-01-1200.jpg 1200w, assets/img/photo/03-season-01-800.jpg 800w" sizes="(min-width: 768px) 26vw, 85vw" width="1200" height="1600" alt="Iced coffee with milk in a tall glass on a woven mat, in hard side light." loading="lazy" decoding="async" draggable="false">
+    </picture>
+        </figure>
+        <p class="season__tag mono">THIS ONE'S NEW</p>
+        <h3 class="season__name">Sorghum Cold Brew</h3>
+        <p class="season__note">Cold brew, NC sorghum syrup, a little cream. Not sweet, exactly.</p>
+        <p class="season__price mono">6.00</p>
+      </li>
+      <li class="season__item">
+        <figure class="season__photo photo mask" data-slot="03-season-02">
+          <picture>
+      <source type="image/avif" srcset="assets/img/photo/03-season-02-1200.avif 1200w, assets/img/photo/03-season-02-800.avif 800w" sizes="(min-width: 768px) 26vw, 85vw">
+      <source type="image/webp" srcset="assets/img/photo/03-season-02-1200.webp 1200w, assets/img/photo/03-season-02-800.webp 800w" sizes="(min-width: 768px) 26vw, 85vw">
+      <img src="assets/img/photo/03-season-02-1200.jpg" srcset="assets/img/photo/03-season-02-1200.jpg 1200w, assets/img/photo/03-season-02-800.jpg 800w" sizes="(min-width: 768px) 26vw, 85vw" width="1200" height="1600" alt="A latte in a matte ceramic tumbler on a wooden sill, dappled sunlight behind it." loading="lazy" decoding="async" draggable="false">
+    </picture>
+        </figure>
+        <h3 class="season__name">Brown Butter Latte</h3>
+        <p class="season__note">Browned butter syrup made here. Tastes like the edge of a cookie.</p>
+        <p class="season__price mono">6.50</p>
+      </li>
+      <li class="season__item">
+        <figure class="season__photo photo mask" data-slot="03-season-03">
+          <picture>
+      <source type="image/avif" srcset="assets/img/photo/03-season-03-1200.avif 1200w, assets/img/photo/03-season-03-800.avif 800w" sizes="(min-width: 768px) 26vw, 85vw">
+      <source type="image/webp" srcset="assets/img/photo/03-season-03-1200.webp 1200w, assets/img/photo/03-season-03-800.webp 800w" sizes="(min-width: 768px) 26vw, 85vw">
+      <img src="assets/img/photo/03-season-03-1200.jpg" srcset="assets/img/photo/03-season-03-1200.jpg 1200w, assets/img/photo/03-season-03-800.jpg 800w" sizes="(min-width: 768px) 26vw, 85vw" width="1200" height="1600" alt="A grey stoneware cup of foamed coffee on an oak table in low sun." loading="lazy" decoding="async" draggable="false">
+    </picture>
+        </figure>
+        <h3 class="season__name">Fig Leaf Cortado</h3>
+        <p class="season__note">Fig-leaf-infused milk. Green, faintly coconut.</p>
+        <p class="season__price mono">5.75</p>
+      </li>
+      <li class="season__item">
+        <figure class="season__photo photo mask" data-slot="03-season-04">
+          <picture>
+      <source type="image/avif" srcset="assets/img/photo/03-season-04-1200.avif 1200w, assets/img/photo/03-season-04-800.avif 800w" sizes="(min-width: 768px) 26vw, 85vw">
+      <source type="image/webp" srcset="assets/img/photo/03-season-04-1200.webp 1200w, assets/img/photo/03-season-04-800.webp 800w" sizes="(min-width: 768px) 26vw, 85vw">
+      <img src="assets/img/photo/03-season-04-1200.jpg" srcset="assets/img/photo/03-season-04-1200.jpg 1200w, assets/img/photo/03-season-04-800.jpg 800w" sizes="(min-width: 768px) 26vw, 85vw" width="1200" height="1600" alt="A cup of dark tea on a saucer in near darkness, a cane chair catching the last light." loading="lazy" decoding="async" draggable="false">
+    </picture>
+        </figure>
+        <h3 class="season__name">Black Cardamom Chai</h3>
+        <p class="season__note">House-spiced, no syrup, oat by default.</p>
+        <p class="season__price mono">5.75</p>
+      </li>
+    </ul>
+  </div>
+
+  <p class="season__counter mono" aria-live="polite"><span class="season__current">01</span> / 04</p>
+</section>
+
+<!-- ======================================================================
+     05 — BAKERY: OUT BY SIX
+     Ivory. Two mismatched photographs; the statement runs across them and
+     overlaps the top of the first. On mobile the overlap is dropped and the
+     headline sits between the two.
+     ====================================================================== -->
+<section class="bakery" id="bakery" aria-labelledby="bakery-title">
+  <p class="index mono">05 / OUT BY SIX</p>
+
+  <div class="bakery__grid">
+    <h2 class="bakery__title reveal-lines" id="bakery-title">
+      <span class="line" style="--i:0"><span>OUT BY <em>six.</em></span></span>
+      <span class="line" style="--i:1"><span>GONE BY <em>ten.</em></span></span>
+    </h2>
+
+    <figure class="bakery__a photo mask" data-slot="04-bakery-a" data-parallax="-0.10">
+      <picture>
+      <source type="image/avif" srcset="assets/img/photo/04-bakery-a-1200.avif 1200w, assets/img/photo/04-bakery-a-800.avif 800w" sizes="(min-width: 768px) 50vw, 100vw">
+      <source type="image/webp" srcset="assets/img/photo/04-bakery-a-1200.webp 1200w, assets/img/photo/04-bakery-a-800.webp 800w" sizes="(min-width: 768px) 50vw, 100vw">
+      <img src="assets/img/photo/04-bakery-a-1200.jpg" srcset="assets/img/photo/04-bakery-a-1200.jpg 1200w, assets/img/photo/04-bakery-a-800.jpg 800w" sizes="(min-width: 768px) 50vw, 100vw" width="1200" height="1500" alt="A hand holding a croissant up against a plaster wall in morning sun." loading="lazy" decoding="async">
+    </picture>
+    </figure>
+
+    <figure class="bakery__b photo mask" data-slot="04-bakery-b" data-parallax="0.05">
+      <picture>
+      <source type="image/avif" srcset="assets/img/photo/04-bakery-b-1200.avif 1200w, assets/img/photo/04-bakery-b-800.avif 800w" sizes="(min-width: 768px) 42vw, 100vw">
+      <source type="image/webp" srcset="assets/img/photo/04-bakery-b-1200.webp 1200w, assets/img/photo/04-bakery-b-800.webp 800w" sizes="(min-width: 768px) 42vw, 100vw">
+      <img src="assets/img/photo/04-bakery-b-1200.jpg" srcset="assets/img/photo/04-bakery-b-1200.jpg 1200w, assets/img/photo/04-bakery-b-800.jpg 800w" sizes="(min-width: 768px) 42vw, 100vw" width="1200" height="1200" alt="A baker's hands scoring a round loaf beside bannetons, under warm working light." loading="lazy" decoding="async">
+    </picture>
+    </figure>
+
+    <p class="bakery__body rise">Croissants, morning buns, a seeded sourdough, and one thing that changes with the market. Baked here, starting at 4am. We don't hold anything back for the afternoon — when it's gone, it's gone.</p>
+  </div>
+</section>
+
+<!-- ======================================================================
+     06 — WHERE IT'S FROM
+     Espresso. A typographic sourcing table and one wide material photograph.
+     This section is meant to feel still.
+     ====================================================================== -->
+<section class="sourcing" id="sourcing" aria-labelledby="sourcing-title">
+  <div class="sourcing__head">
+    <p class="index mono">06 / WHERE IT'S FROM</p>
+    <h2 class="title" id="sourcing-title">WHERE IT'S FROM</h2>
+    <p>We buy from two importers who can tell us the name of the farm, and one roaster in Durham who tells us when we're wrong. That's the whole supply chain. Milk is from Homeland Creamery in Julian. Sorghum is from the mountains.</p>
+  </div>
+
+  <table class="sourcing__table" data-stagger>
+    <thead>
+      <tr class="rise"><th scope="col" class="mono">ORIGIN</th><th scope="col" class="mono">PRODUCER</th><th scope="col" class="mono">WHAT IT TASTES LIKE</th></tr>
+    </thead>
+    <tbody>
+      <tr class="rise"><th scope="row">GUATEMALA</th><td>Finca El Injerto</td><td>cherry, cocoa</td></tr>
+      <tr class="rise"><th scope="row">ETHIOPIA</th><td>Kayon Mountain</td><td>apricot, jasmine</td></tr>
+      <tr class="rise"><th scope="row">COLOMBIA</th><td>Huila co-op</td><td>caramel, red apple</td></tr>
+    </tbody>
+  </table>
+
+  <figure class="sourcing__photo photo" data-slot="05-sourcing" data-zoom>
+    <picture>
+      <source type="image/avif" srcset="assets/img/photo/05-sourcing-2100.avif 2100w, assets/img/photo/05-sourcing-1400.avif 1400w" sizes="100vw">
+      <source type="image/webp" srcset="assets/img/photo/05-sourcing-2100.webp 2100w, assets/img/photo/05-sourcing-1400.webp 1400w" sizes="100vw">
+      <img src="assets/img/photo/05-sourcing-2100.jpg" srcset="assets/img/photo/05-sourcing-2100.jpg 2100w, assets/img/photo/05-sourcing-1400.jpg 1400w" sizes="100vw" width="2100" height="900" alt="Green coffee visible through the sight glass of a steel roasting drum." loading="lazy" decoding="async">
+    </picture>
+  </figure>
+  <p class="sourcing__note mono">TWO IMPORTERS · ONE ROASTER, DURHAM · MILK FROM HOMELAND CREAMERY, JULIAN</p>
+</section>
+
+<!-- ======================================================================
+     07 — THE ROOM
+     Ivory. Five interior photographs in an irregular grid with one
+     oversized statement. Each image opens a minimal lightbox on desktop.
+     ====================================================================== -->
+<section class="room" id="room" aria-labelledby="room-title">
+  <div class="room__head">
+    <p class="index mono">07 / THE ROOM</p>
+    <h2 class="title" id="room-title">THE ROOM</h2>
+    <p>Long windows, east-facing. Oak, plaster, brushed steel. Thirty-two seats and one long table for people who work better around other people.</p>
+  </div>
+
+  <div class="room__gallery">
+    <figure class="g g--1 rise" data-slot="06-room-01">
+      <button class="g__btn" type="button" aria-label="Open image: the long table, 7:10am">
+        <span class="photo"><picture>
+      <source type="image/avif" srcset="assets/img/photo/06-room-01-1800.avif 1800w, assets/img/photo/06-room-01-1000.avif 1000w" sizes="(min-width: 768px) 66vw, 100vw">
+      <source type="image/webp" srcset="assets/img/photo/06-room-01-1800.webp 1800w, assets/img/photo/06-room-01-1000.webp 1000w" sizes="(min-width: 768px) 66vw, 100vw">
+      <img src="assets/img/photo/06-room-01-1800.jpg" srcset="assets/img/photo/06-room-01-1800.jpg 1800w, assets/img/photo/06-room-01-1000.jpg 1000w" sizes="(min-width: 768px) 66vw, 100vw" width="1800" height="1200" alt="Long pale wooden tables and benches in a white room with tall windows." loading="lazy" decoding="async">
+    </picture></span>
+      </button>
+      <figcaption class="mono">LONG TABLE, 7:10AM</figcaption>
+    </figure>
+
+    <figure class="g g--2 rise" data-slot="06-room-02">
+      <button class="g__btn" type="button" aria-label="Open image: the east window, 7:40am">
+        <span class="photo"><picture>
+      <source type="image/avif" srcset="assets/img/photo/06-room-02-1000.avif 1000w, assets/img/photo/06-room-02-700.avif 700w" sizes="(min-width: 768px) 25vw, 80vw">
+      <source type="image/webp" srcset="assets/img/photo/06-room-02-1000.webp 1000w, assets/img/photo/06-room-02-700.webp 700w" sizes="(min-width: 768px) 25vw, 80vw">
+      <img src="assets/img/photo/06-room-02-1000.jpg" srcset="assets/img/photo/06-room-02-1000.jpg 1000w, assets/img/photo/06-room-02-700.jpg 700w" sizes="(min-width: 768px) 25vw, 80vw" width="1000" height="1500" alt="A cream table and chair beside a window in a dark room, a band of light across the tabletop." loading="lazy" decoding="async">
+    </picture></span>
+      </button>
+      <figcaption class="mono">EAST WINDOW, 7:40AM</figcaption>
+    </figure>
+
+    <p class="room__statement reveal-lines">
+      <span class="line" style="--i:0"><span>MOST OF THIS</span></span>
+      <span class="line" style="--i:1"><span>IS WORTH</span></span>
+      <span class="line" style="--i:2"><span><em>sitting</em> FOR.</span></span>
+    </p>
+
+    <figure class="g g--3 rise" data-slot="06-room-03">
+      <button class="g__btn" type="button" aria-label="Open image: the bar, 8:05am">
+        <span class="photo"><picture>
+      <source type="image/avif" srcset="assets/img/photo/06-room-03-1000.avif 1000w, assets/img/photo/06-room-03-700.avif 700w" sizes="(min-width: 768px) 33vw, 100vw">
+      <source type="image/webp" srcset="assets/img/photo/06-room-03-1000.webp 1000w, assets/img/photo/06-room-03-700.webp 700w" sizes="(min-width: 768px) 33vw, 100vw">
+      <img src="assets/img/photo/06-room-03-1000.jpg" srcset="assets/img/photo/06-room-03-1000.jpg 1000w, assets/img/photo/06-room-03-700.jpg 700w" sizes="(min-width: 768px) 33vw, 100vw" width="1000" height="1500" alt="A café counter seen from the seating, hard sunlight through full-height glazing." loading="lazy" decoding="async">
+    </picture></span>
+      </button>
+      <figcaption class="mono">THE BAR, 8:05AM</figcaption>
+    </figure>
+
+    <figure class="g g--4 rise" data-slot="06-room-04">
+      <button class="g__btn" type="button" aria-label="Open image: the oak stair, 8:20am">
+        <span class="photo"><picture>
+      <source type="image/avif" srcset="assets/img/photo/06-room-04-1200.avif 1200w, assets/img/photo/06-room-04-800.avif 800w" sizes="(min-width: 768px) 33vw, 80vw">
+      <source type="image/webp" srcset="assets/img/photo/06-room-04-1200.webp 1200w, assets/img/photo/06-room-04-800.webp 800w" sizes="(min-width: 768px) 33vw, 80vw">
+      <img src="assets/img/photo/06-room-04-1200.jpg" srcset="assets/img/photo/06-room-04-1200.jpg 1200w, assets/img/photo/06-room-04-800.jpg 800w" sizes="(min-width: 768px) 33vw, 80vw" width="1200" height="1200" alt="A wooden stair edge against a plaster wall, striped with light from a window." loading="lazy" decoding="async">
+    </picture></span>
+      </button>
+      <figcaption class="mono">OAK STAIR, 8:20AM</figcaption>
+    </figure>
+
+    <figure class="g g--5 rise" data-slot="06-room-05">
+      <button class="g__btn" type="button" aria-label="Open image: the terrazzo floor, 8:50am">
+        <span class="photo"><picture>
+      <source type="image/avif" srcset="assets/img/photo/06-room-05-1200.avif 1200w, assets/img/photo/06-room-05-800.avif 800w" sizes="(min-width: 768px) 33vw, 80vw">
+      <source type="image/webp" srcset="assets/img/photo/06-room-05-1200.webp 1200w, assets/img/photo/06-room-05-800.webp 800w" sizes="(min-width: 768px) 33vw, 80vw">
+      <img src="assets/img/photo/06-room-05-1200.jpg" srcset="assets/img/photo/06-room-05-1200.jpg 1200w, assets/img/photo/06-room-05-800.jpg 800w" sizes="(min-width: 768px) 33vw, 80vw" width="1200" height="1200" alt="Terrazzo steps striped with the shadow of a railing in warm sun." loading="lazy" decoding="async">
+    </picture></span>
+      </button>
+      <figcaption class="mono">TERRAZZO, 8:50AM</figcaption>
+    </figure>
+
+    <!-- the one brand object: a plain takeaway cup with the mark. Full width,
+         so the section lands on something quiet and specific before Visit. -->
+    <figure class="g g--6 rise" data-slot="06-room-06">
+      <button class="g__btn" type="button" aria-label="Open image: the takeaway cup, 6:52am">
+        <span class="photo" style="--pos: 22% 50%"><picture>
+      <source type="image/avif" srcset="assets/img/photo/06-room-06-2100.avif 2100w, assets/img/photo/06-room-06-1400.avif 1400w" sizes="100vw">
+      <source type="image/webp" srcset="assets/img/photo/06-room-06-2100.webp 2100w, assets/img/photo/06-room-06-1400.webp 1400w" sizes="100vw">
+      <img src="assets/img/photo/06-room-06-2100.jpg" srcset="assets/img/photo/06-room-06-2100.jpg 2100w, assets/img/photo/06-room-06-1400.jpg 1400w" sizes="100vw" width="2100" height="900" alt="A kraft takeaway cup printed with the Morrow mark, on a white counter in hard morning light, the wall behind it in shadow." loading="lazy" decoding="async">
+    </picture></span>
+      </button>
+      <figcaption class="mono">TO GO, 6:52AM</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- The lightbox. Native <dialog>: modal, focus-contained, ESC closes. -->
+<dialog class="lightbox" id="lightbox" aria-label="Gallery">
+  <button class="lightbox__close mono" type="button" data-lb="close">CLOSE <span aria-hidden="true">×</span></button>
+  <figure class="lightbox__figure">
+    <img class="lightbox__img" alt="" decoding="async">
+    <figcaption class="lightbox__caption mono"></figcaption>
+  </figure>
+  <p class="lightbox__counter mono" aria-live="polite"></p>
+  <button class="lightbox__nav lightbox__nav--prev mono" type="button" data-lb="prev" aria-label="Previous image">←</button>
+  <button class="lightbox__nav lightbox__nav--next mono" type="button" data-lb="next" aria-label="Next image">→</button>
+</dialog>
+
+<!-- ======================================================================
+     08 — VISIT
+     Bone. Address, hours and directions on the left; the exterior at first
+     light on the right. The current day highlights in Clay from the client
+     clock; if we are open, OPEN NOW.
+     ====================================================================== -->
+<section class="visit" id="visit" aria-labelledby="visit-title">
+  <figure class="visit__photo photo mask" data-slot="07-exterior">
+    <picture>
+      <source type="image/avif" srcset="assets/img/photo/07-exterior-1200.avif 1200w, assets/img/photo/07-exterior-800.avif 800w" sizes="(min-width: 768px) 50vw, 100vw">
+      <source type="image/webp" srcset="assets/img/photo/07-exterior-1200.webp 1200w, assets/img/photo/07-exterior-800.webp 800w" sizes="(min-width: 768px) 50vw, 100vw">
+      <img src="assets/img/photo/07-exterior-1200.jpg" srcset="assets/img/photo/07-exterior-1200.jpg 1200w, assets/img/photo/07-exterior-800.jpg 800w" sizes="(min-width: 768px) 50vw, 100vw" width="1200" height="1600" alt="A café storefront: oak-framed glazing and door set into a white plaster wall, the Morrow mark and hours on the door glass." loading="lazy" decoding="async">
+    </picture>
+  </figure>
+
+  <div class="visit__content">
+    <p class="index mono">08 / VISIT</p>
+    <h2 class="title" id="visit-title">VISIT</h2>
+
+    <p class="visit__address">412 E. Hargett Street<br>Raleigh, NC 27601</p>
+
+    <div class="hours mono" id="hours">
+      <p class="hours__status" id="hours-status" aria-live="polite"></p>
+      <table class="hours__table">
+        <tbody>
+          <tr class="hours__row" data-days="1,2,3,4,5" data-open="06:30" data-close="15:00"><th scope="row">MON–FRI</th><td>6:30 — 15:00</td></tr>
+          <tr class="hours__row" data-days="6,0" data-open="07:00" data-close="15:00"><th scope="row">SAT–SUN</th><td>7:00 — 15:00</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="visit__note">Also: we're open on Sundays. We're not open late. Both on purpose.</p>
+
+    <a class="cta cta--draw" href="https://www.google.com/maps/dir/?api=1&amp;destination=412+E+Hargett+St%2C+Raleigh%2C+NC+27601" target="_blank" rel="noopener">GET DIRECTIONS <span class="arrow">→</span></a>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================================================================
+     09 — FOOTER: UNTIL MORROW
+     Espresso. Columns, the mark, then the largest type on the page, cropped
+     by the bottom edge and revealed the way the hero was.
+     ====================================================================== -->
+<footer class="footer" id="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <svg class="mark" viewBox="0 0 100 100" width="56" height="56" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="butt">
+          <circle cx="50" cy="50" r="44"/>
+          <line x1="6.9" y1="58.8" x2="93.1" y2="58.8"/>
+        </g>
+      </svg>
+      <p class="lockup"><span class="wordmark">MORROW</span><span class="lockup__sub mono">COFFEE CO.</span></p>
+      <p class="footer__line mono">Morrow Coffee Co. · Raleigh, North Carolina</p>
+    </div>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h3 class="label mono">MENU</h3>
+        <a href="#bar">Espresso</a>
+        <a href="#bar">Filter</a>
+        <a href="#bar">Cold</a>
+        <a href="#season">This Season</a>
+        <a href="#bakery">Bakery</a>
+      </div>
+      <div class="footer__col">
+        <h3 class="label mono">VISIT</h3>
+        <p>412 E. Hargett Street<br>Raleigh, NC 27601</p>
+        <p class="mono">MON–FRI 6:30 — 15:00<br>SAT–SUN 7:00 — 15:00</p>
+      </div>
+      <div class="footer__col">
+        <h3 class="label mono">INSTAGRAM</h3>
+        <p>@morrowcoffee</p>
+      </div>
+      <div class="footer__col">
+        <h3 class="label mono">EMAIL</h3>
+        <a class="copy" href="mailto:hello@morrowcoffee.co" data-copy="hello@morrowcoffee.co"><span class="copy__text">hello@morrowcoffee.co</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__bottom mono">
+    <p>© 2026 Morrow Coffee Co. · A concept by Kreated.</p>
+    <p>A fictional brand concept by Kreated. Not a real café — yet.</p>
+    <a href="#top">BACK TO TOP ↑</a>
+  </div>
+
+  <p class="footer__statement reveal-lines" aria-label="Until morrow.">
+    <span class="line" style="--i:0"><span>UNTIL</span></span>
+    <span class="line" style="--i:1"><span><em>morrow.</em></span></span>
+  </p>
+</footer>
+
+<!-- desktop-only cursor label: VIEW over gallery images, DRAG over the strip -->
+<div class="cursor-label mono" aria-hidden="true"></div>
+
+</body>
+</html>
