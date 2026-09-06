@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="day-start">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -79,8 +79,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="/services/leaf.css?v=13">
 <link rel="stylesheet" href="aeo.css?v=3">
 <!-- last, so it is the single definition of the footer on every route -->
-<link rel="stylesheet" href="/theme.css?v=3">
-<link rel="stylesheet" href="/footer.css?v=8">
+<link rel="stylesheet" href="/theme.css?v=18">
+<link rel="stylesheet" href="/footer.css?v=11">
 
 <!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
      🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
@@ -123,18 +123,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "@id": "https://kreated.dev/#organization"
         },
         "areaServed": [
-          {
-            "@type": "City",
-            "name": "Raleigh"
-          },
-          {
-            "@type": "State",
-            "name": "North Carolina"
-          },
-          {
-            "@type": "Place",
-            "name": "Worldwide"
-          }
+          { "@type": "City", "name": "Wilmington" },
+          { "@type": "City", "name": "Leland" },
+          { "@type": "City", "name": "Wrightsville Beach" },
+          { "@type": "City", "name": "Carolina Beach" },
+          { "@type": "City", "name": "Southport" },
+          { "@type": "City", "name": "Hampstead" },
+          { "@type": "City", "name": "Surf City" },
+          { "@type": "City", "name": "Jacksonville" },
+          { "@type": "City", "name": "Raleigh" },
+          { "@type": "City", "name": "Cary" },
+          { "@type": "City", "name": "Durham" },
+          { "@type": "City", "name": "Chapel Hill" },
+          { "@type": "City", "name": "Wake Forest" },
+          { "@type": "State", "name": "North Carolina" },
+          { "@type": "Place", "name": "Worldwide" }
         ],
         "url": "https://kreated.dev/services/answer-engine-optimization/"
       },
@@ -255,6 +258,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          and on the homepage itself. That ambiguity is what this replaces. -->
     <nav class="head__nav" aria-label="Primary">
       <a href="/services/">Services</a>
+      <a href="/web-design-for-contractors/">Contractors</a>
       <a href="/work/">Work</a>
       <a href="/pricing/">Pricing</a>
       <a href="/about/">About</a>
@@ -271,6 +275,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="drawer" id="drawer" hidden>
   <nav aria-label="Mobile">
     <a href="/services/">Services</a>
+    <a href="/web-design-for-contractors/">Contractors</a>
     <a href="/work/">Work</a>
     <a href="/pricing/">Pricing</a>
     <a href="/about/">About</a>
@@ -320,6 +325,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="btn btn--quiet" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
       </p>
     </div>
+  </div>
+</section>
+
+<!-- ⚠ TRUSTED BY — client evidence above the fold, 2026-09-06. BX carries this
+     on every service and market page; a visitor arriving here from search
+     previously saw no client names until the closing CTA.
+     ✅ RIGHTS APPROVED — DECISION 023, Skyler, 2026-09-06. The three client
+     wordmarks are cleared for display on Kreated's own marketing site.
+     🚫 This clearance is the WORDMARKS ONLY. Client photography (DECISION 014 —
+     the Rare Raleigh job sets, the LLEC pool photos) is a different asset class,
+     is not on the site, and remains unconfirmed. Do not read one as the other.
+     🚫 Do not add a fourth "client" here that is not one. Morrow is a concept
+     and does not belong in a trusted-by row. -->
+<section class="tby" aria-label="Clients">
+  <div class="wrap">
+    <p class="tby__lab">Trusted by</p>
+    <ul class="tby__list">
+      <li class="tby__item tby__item--llec"><a class="tby__link" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">
+        <img src="/assets/img/clients/llec-wordmark.svg" alt="Leak Locators East Coast" width="460" height="30" loading="lazy" decoding="async"></a></li>
+      <li class="tby__item tby__item--rr"><a class="tby__link" href="https://rareraleighrestoration.com" target="_blank" rel="noopener">
+        <img src="/assets/img/clients/rare-raleigh.png" alt="Rare Raleigh Restoration" width="256" height="27" loading="lazy" decoding="async"></a></li>
+      <li class="tby__item tby__item--ls"><a class="tby__link" href="https://learnsmart.dev" target="_blank" rel="noopener">
+        <img src="/assets/img/clients/learnsmart.png" alt="LearnSmart Educational Consulting" width="375" height="56" loading="lazy" decoding="async"></a></li>
+    </ul>
   </div>
 </section>
 
@@ -464,7 +493,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         established they are.</p>
     </div>
     <div class="prose">
-      <p><b>Established.</b> These are documented by Google or follow directly from
+      <p><b class="lin">Established.</b> These are documented by Google or follow directly from
         how the systems work.</p>
       <ul class="plist" role="list">
         <li>A page has to be crawlable, indexed and eligible for a snippet before it
@@ -480,7 +509,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           service</a>.</li>
       </ul>
 
-      <p><b>Emerging.</b> These are supported by current measurement rather than by
+      <p><b class="lin">Emerging.</b> These are supported by current measurement rather than by
         documentation, and the picture is still moving.</p>
       <ul class="plist" role="list">
         <li>Answers placed directly under the question they answer appear to be
@@ -537,11 +566,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         already exists.</p>
     </div>
     <div class="prose">
-      <p><b>The audit finds the problems. The foundation fixes them.</b> They are
+      <p><b class="lin">The audit finds the problems. The foundation fixes them.</b> They are
         sold separately so the first one can be bought without committing to the
         second.</p>
 
-      <p><b>AEO Audit.</b> A review of whether the business can currently be read
+      <p><b class="lin">AEO Audit.</b> A review of whether the business can currently be read
         correctly: crawling, indexing and snippet eligibility; whether the important
         facts exist as text; how clearly the business, its services and its service
         area are defined; whether the site, the Google profile and other listings
@@ -549,7 +578,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         baseline of whatever citation measurement is available. The deliverable is a
         prioritized list of what to fix and in what order.</p>
 
-      <p><b>AEO Foundation.</b> The audit implemented. Key pages restructured so the
+      <p><b class="lin">AEO Foundation.</b> The audit implemented. Key pages restructured so the
         answer comes first and the explanation follows, a question and answer layer
         built from questions buyers actually ask, the business and its services
         defined explicitly, the service area stated rather than implied, internal
@@ -557,7 +586,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cleaned up across surfaces, and structured data added where it reflects
         something genuinely on the page.</p>
 
-      <p><b>Ongoing work sits inside
+      <p><b class="lin">Ongoing work sits inside
         <a class="ilink" href="/services/local-seo/">Local Growth</a>.</b> Keeping
         answers current, adding them as new questions appear and holding the facts
         consistent is the same monthly work the local search program already does.
@@ -767,14 +796,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="lgrid__note">Against the services next to it.</p>
     </div>
     <div class="prose">
-      <p><b><a class="ilink" href="/services/local-seo/">Local SEO</a></b> competes
+      <p><b class="lin"><a class="ilink" href="/services/local-seo/">Local SEO</a></b> competes
         for visibility in a place. This competes for being understood correctly.
         They share prerequisites and they are usually done in that order.</p>
-      <p><b><a class="ilink" href="/services/google-business-profile/">Google
+      <p><b class="lin"><a class="ilink" href="/services/google-business-profile/">Google
         Business Profile</a></b> is one of the surfaces this work checks against.
         Google names a complete profile as helping visibility in AI answers, so for
         a local business the profile is part of the same job.</p>
-      <p><b><a class="ilink" href="/services/web-design/">Web Design</a></b> and
+      <p><b class="lin"><a class="ilink" href="/services/web-design/">Web Design</a></b> and
         <b><a class="ilink" href="/services/website-redesign/">Website
         Redesign</a></b> build the structure this depends on. A new site launches
         with it. An older site often needs it added.</p>
@@ -802,7 +831,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="foot__brand">
       <a class="foot__mark" href="/" aria-label="Kreated — home">KREATED</a>
       <!-- approved V1 positioning line, reusable verbatim -->
-      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+      <p class="foot__line">Based in Wilmington. Built for businesses anywhere.</p>
     </div>
 
     <div class="foot__cols">
@@ -810,7 +839,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2>Contact</h2>
         <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
         <p><a href="tel:+19198058217">(919) 805-8217</a></p>
-        <p>Raleigh, North Carolina</p>
+        <p>Wilmington, North Carolina</p>
         <p class="foot__social"><a class="foot__ig" href="https://www.instagram.com/kreated.dev/"
              target="_blank" rel="noopener me"><svg class="foot__igmark" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg><span>@kreated.dev</span></a></p>
       </div>

@@ -55,18 +55,53 @@ route, the route map changes and redirects become mandatory. (The audit itself i
 DECISION 010 — publicly named `Free Website Audit`, which the existing `/free-website-audit/` route
 already matches.)
 
-## 2. Keyword ownership — V1's approved map
+## 2. Keyword ownership — the approved map
+
+> ### 🔁 MARKET CHANGED — WILMINGTON IS PRIMARY, 2026-09-06
+> **Skyler has moved to Wilmington, NC, and the Google Business Profile is already
+> updated to match.** The map below is the V1 map with the city swapped: Wilmington
+> takes the primary slot, Raleigh moves to the alternate. Nothing else about the
+> strategy changed — the head terms, the route ownership and the rejections are the
+> same decisions, pointed at a different city.
+>
+> ⚠ **Raleigh is retained as a real secondary market, not dropped.** Kreated has a
+> founding history and live client work there — Rare Raleigh Restoration is a Raleigh
+> contractor and LearnSmart serves Raleigh · Durham · Chapel Hill. Schema `areaServed`
+> lists Wilmington first and Raleigh second on every route.
+>
+> 🚫 **The rejections in §2 carry over to the new city verbatim.** `Wilmington SEO
+> company`, `web design company Wilmington` and `branding agency Wilmington` are
+> rejected for exactly the reason their Raleigh equivalents were — the reason was the
+> phrasing, never the city. Same for `Google Maps ranking Wilmington`.
+>
+> 🚫 **No Wilmington location pages were created and none is approved.** The
+> do-not-build list in this document still stands; changing the home market does not
+> make city pages buildable.
+
+| Route | Primary keyword | Alternate |
+|---|---|---|
+| `/` | `Wilmington web design and local SEO` | `Raleigh web design and local SEO` |
+| `/services/` | **None — branded/navigational** | `Kreated services` |
+| `/services/web-design/` | `Wilmington web design` | `custom web design Wilmington NC` |
+| `/services/website-redesign/` | `website redesign Wilmington` | `website redesign without losing SEO` |
+| `/services/local-seo/` | `local SEO Wilmington NC` | `local SEO for contractors Wilmington` |
+| `/services/google-business-profile/` | `Google Business Profile optimization Wilmington` | `Google Business Profile management` |
+| `/services/brand-strategy/` | `brand strategy Wilmington` | `brand positioning for small business` |
+| `/web-design-for-contractors/` | `web design for contractors` | `contractor website design Wilmington NC` |
+| `/about/` | **None** | — |
+
+<details><summary>The superseded Raleigh-primary map, kept for the record</summary>
 
 | Route | Primary keyword | Alternate |
 |---|---|---|
 | `/` | `Raleigh web design and local SEO` | `Raleigh web design and SEO` |
-| `/services/` | **None — branded/navigational** | `Kreated services` |
 | `/services/web-design/` | `Raleigh web design` | `custom web design Raleigh NC` |
 | `/services/website-redesign/` | `website redesign Raleigh` | `website redesign without losing SEO` |
 | `/services/local-seo/` | `local SEO Raleigh NC` | `local SEO for contractors Raleigh` |
 | `/services/google-business-profile/` | `Google Business Profile optimization Raleigh` | `Google Business Profile management` |
 | `/services/brand-strategy/` | `brand strategy Raleigh` | `brand positioning for small business` |
-| `/about/` | **None** | — |
+
+</details>
 
 🚫 **Never assign a competing commercial head term to `/services/` or `/about/`.**
 

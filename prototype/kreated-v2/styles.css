@@ -250,13 +250,18 @@ a{color:inherit}
   letter-spacing:.22em;margin-right:-.22em;   /* cancel trailing tracking */
   text-decoration:none;
 }
-/* ⚠ NAV REBALANCED FOR FOUR ITEMS, 2026-09-01. The nav dropped from five items
-   to four when Method and Contact moved to the footer. Two things needed
-   adjusting so it reads as a deliberate four rather than a five with gaps: the
-   items sit slightly wider apart, and the CTA is pushed off by a larger margin
-   than the inter-item gap. Before, both were 34px, so "Start a Project" read as
-   a fifth link rather than as the page's action. */
-.head__nav{display:flex;gap:clamp(26px,2.6vw,38px);margin-left:auto}
+/* ⚠ BACK TO FIVE ITEMS, 2026-09-04 — "Contractors" was added with the
+   specialisation. The 2026-09-01 note below tuned the spacing for FOUR:
+     "The nav dropped from five items to four when Method and Contact moved to
+      the footer. Two things needed adjusting so it reads as a deliberate four
+      rather than a five with gaps: the items sit slightly wider apart, and the
+      CTA is pushed off by a larger margin than the inter-item gap."
+   The wider inter-item gap was the four-item fix, so with five it goes back
+   down. The larger CTA margin STAYS — that one is about "Start a Project"
+   reading as the page's action rather than another link, and is independent of
+   how many items there are. 🚫 Do not re-widen the gap without also removing an
+   item, or the row runs into the CTA at ~1100px. */
+.head__nav{display:flex;gap:clamp(20px,2.1vw,30px);margin-left:auto}
 .head__cta{margin-left:clamp(18px,1.6vw,24px)}
 .head__nav a{
   font:500 15px/1 'General Sans',system-ui;text-decoration:none;
@@ -2969,4 +2974,68 @@ button,input,select,textarea{font:inherit;color:inherit}
 @media (max-width:900px){
   .revs{margin:34px 0 26px}
   .rev{width:86vw;border-radius:14px}
+}
+
+/* ==========================================================================
+   WHO THIS IS BUILT FOR — the specialisation hierarchy, 2026-09-04.
+   ⚠ Built from existing tokens only: .sec-head/.h2--peak/.lead do the heading,
+   and the columns borrow the ink and cobalt already in use. 🚫 No new colour,
+   no new type scale — this is a positioning change, not a redesign.
+   ⚠ The two columns are deliberately CLOSE in weight. The primary one gets a
+   cobalt rule and a slightly stronger label; that is the whole difference. If
+   the second column ever reads as a leftover, the positioning has gone too far
+   and a non-contractor visitor will exclude themselves.
+   ⚠ This sits inside .room (night ground), so ink comes from the k-aware
+   scale rather than hard-coded light values.
+   ========================================================================== */
+.fit{padding:clamp(10px,2vw,26px) 0 clamp(30px,4vw,54px)}
+.fit__grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(18px,2.4vw,34px);margin-top:clamp(22px,2.6vw,36px);
+}
+.fit__col{
+  padding-left:clamp(16px,1.6vw,22px);
+  border-left:1px solid color-mix(in srgb,
+    rgba(20,28,60,.16), rgba(255,255,255,.20) calc(var(--k) * 100%));
+}
+/* the only visual difference between the tiers */
+.fit__col--primary{
+  border-left-color:color-mix(in srgb, var(--cobalt,#0A47F0),
+                    var(--cobalt-lift,#5B86FF) calc(var(--k) * 100%));
+  border-left-width:2px;
+}
+.fit__label{
+  margin:0 0 10px;font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.20em;text-transform:uppercase;color:var(--ink-3);
+}
+/* ⚠ Follows --k. In practice this block only ever renders on the night ground
+   — it sits ~950px down and --k flips at ~440 — but cobalt-lift measures
+   3.06:1 against the DAY ground, which is a real failure the moment the scroll
+   maths change. Day cobalt is dark enough for light, lift is light enough for
+   navy; the mix picks whichever is current. */
+.fit__col--primary .fit__label{
+  color:color-mix(in srgb, var(--cobalt,#0A47F0),
+                  var(--cobalt-lift,#5B86FF) calc(var(--k) * 100%));
+}
+.fit__h{
+  margin:0 0 10px;font:500 clamp(19px,1.9vw,25px)/1.2 'General Sans',system-ui;
+  letter-spacing:-.01em;color:var(--ink-1);
+}
+.fit__body{margin:0 0 14px;font-size:15.5px;line-height:1.6;color:var(--ink-2);max-width:46ch}
+.fit__link{
+  display:inline-flex;align-items:center;gap:8px;
+  font:600 14.5px/1 'General Sans',system-ui;color:var(--ink-1);
+  text-decoration:none;border-bottom:0;padding-bottom:0;
+  transition:color var(--t-hover,.18s ease);
+}
+.fit__link i{font-style:normal;font-size:13px;opacity:.7}
+.fit__link:hover{color:color-mix(in srgb, var(--cobalt,#0A47F0),
+                  var(--cobalt-lift,#5B86FF) calc(var(--k) * 100%))}
+.fit__link:focus-visible{outline:2px solid var(--cobalt-lift,#5B86FF);outline-offset:4px}
+
+@media (max-width:900px){
+  .fit__grid{grid-template-columns:1fr;gap:22px}
+  .fit__body{max-width:none}
+}
+
 }

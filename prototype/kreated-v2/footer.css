@@ -138,3 +138,64 @@
   white-space:nowrap}
 .foot__igmark{flex:none;opacity:.85;transition:opacity var(--t-hover,.18s ease)}
 .foot__ig:hover .foot__igmark{opacity:1}
+
+/* ==========================================================================
+   THE FOOTER IN DAY TERRITORY — 2026-09-06
+   The rule above keeps .foot transparent so the page ground runs through it,
+   and that is right on the sixteen routes that end at night: the footer is the
+   bottom of one continuous room.
+
+   /work/ is the first route that ENDS in day, and there the same rule produced
+   a footer on #F4F5FA — the only pale footer on the site, and the one place a
+   comparing buyer checks that a company is real. bx.studio, which this page is
+   modelled on, paints its footer #020C2E on a #F3F3F3 page for exactly this
+   reason: the light page is the work, the dark block is the company.
+
+   ⚠ This does NOT undo the 🚫 above. That rule exists because the footer used
+   to sit a step DARKER than a navy page and split it with a seam. Here there
+   is no seam to make — the arrival gradient means the navy is reached over
+   140px rather than butted on, which is the same behaviour the note describes
+   wanting. Night territory is untouched: the selector needs .day-start.
+
+   ⚠ THE INKS COME BACK WITH IT. Re-declaring the four journey variables on
+   .foot puts the whole subtree back in night, so every k-aware token inside it
+   — --ink-1..4, --stroke, --accent, --cta-fill — resolves the way it does on
+   the other sixteen routes. The three legacy literals are restored alongside
+   them or the day remap in theme.css would leave dark text on the navy.
+   🚫 Do not style the footer's children individually to fix this. There are
+   forty of them and they are already correct; it is the context that moved.
+   ========================================================================== */
+:root.day-start .foot{
+  /* ⚠ REDECLARING --k HERE IS NOT ENOUGH, and the first version of this block
+     got it wrong. --ink-1..4 are declared on :root as color-mix() expressions
+     containing var(--k). A custom property resolves its own var() references
+     against the element it is DECLARED on — :root — and the resolved colour is
+     what inherits down. Setting --k on .foot therefore changes nothing that was
+     already computed upstream: the footer kept day ink on navy and the wordmark
+     rendered #141414 on #020C2E.
+
+     Each token the footer actually reads is restored to its night value here,
+     expressed as the --bx-* endpoint it resolves to at p2=1 rather than as a
+     literal, so a change to the palette still reaches this block.
+     🚫 Do not add tokens to this list speculatively. It is exactly the set
+     `grep -oE "var\(--[a-z0-9-]+" footer.css` returns; anything else is dead
+     weight that will drift out of step with the file above it. */
+  --k:1;
+  --ink-1:var(--bx-ink-night);   /* #FFFFFF */
+  --ink-2:var(--bx-sec-night);   /* #D1D1D1 */
+  --ink-3:#B9BFD4;               /* the night end of --ink-3, theme.css */
+  --ink-4:#A9B0B7;               /* the night end of --ink-4, theme.css */
+  --white:#FFFFFF;
+  --warm:#EDE8DE;
+  --gray:#888FA3;
+  color:var(--ink-1);
+  /* ⚠ SOLID, not a fade. The first version arrived over 140px and the wordmark
+     — which sits about 110px into the footer — was rendered white on a band
+     that was still three-quarters paper, so it vanished. Rather than tune the
+     stop against the position of one element, the edge is hard: which is also
+     what the reference does, #F3F3F3 meeting #020C2E with nothing between.
+     A hard edge between a light page and a dark footer is structure. The seam
+     the note above forbids was between navy and a DARKER navy, which is a
+     mistake; this is not the same thing. */
+  background:var(--bx-night);
+}

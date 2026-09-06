@@ -241,6 +241,65 @@
   --p:0; --p1:0; --p2:0; --k:0;
 }
 
+/* ---- THE THREE LEGACY LITERALS, RE-POINTED FOR DAY -----------------------
+   services.css predates the k-aware ink ladder and still declares three fixed
+   colours for text: --white (#FFFFFF), --warm (#EDE8DE) and --gray (#888FA3).
+   Fourteen /services/ routes read them and every one of those routes is night,
+   so the literals are correct there and MUST NOT be changed at :root — doing
+   so would re-tone all fourteen pages for the sake of two.
+
+   Instead they are re-pointed only inside day territory, at the same three
+   voices the rest of the system already uses. A page that opens in day gets
+   dark ink from the identical `color:var(--white)` declaration that gives a
+   night page white ink, so not one rule in services.css or leaf.css had to be
+   touched.
+
+   ⚠ Only `var(--white)` moves. The four places that write a literal `#fff` —
+   the skip link, .head__cta, the mobile drawer CTA and .btn--cobalt — are ink
+   sitting ON cobalt, not on the ground, and they stay white in both rooms.
+   That distinction is why this works as a token swap at all.
+   🚫 Do not add --cobalt here. It is a fill, not a voice, and #0A47F0 carries
+   white text on either ground. */
+:root.day-start{
+  --white:var(--ink-1);   /* #141414 in day */
+  --warm: var(--ink-2);   /* #4F4F4F     */
+  --gray: var(--ink-3);   /* #5E5E5E     */
+}
+
+/* ⚠ The reduced-motion rule below the atmosphere sets .atmos{opacity:1} on the
+   assumption that a still page is a night page. A statically-day route breaks
+   that assumption: full-strength blue field over #F4F5FA paper. Day territory
+   keeps the daylight opacity whether or not the reader has asked for stillness.
+   The selector needs the same specificity as the media-query rule to win, and
+   it has one more class than that rule does. */
+@media (prefers-reduced-motion: reduce){
+  :root.day-start .atmos{opacity:.20}
+}
+
+/* ---- THREE HARDCODED rgba() LITERALS, GIVEN A DAY VALUE ------------------
+   services.css and leaf.css each carry a few colours written as literal rgba()
+   rather than as tokens, from before the ink ladder existed. Three of them are
+   text on the page ground, so they invert with the room and these two routes
+   are the first light pages to read them:
+
+     .row__no   rgba(237,232,222,.52)  ->  1.12:1 on paper  (the ledger numeral)
+     .meta      rgba(136,143,163,.90)  ->  2.97:1           (the ledger's instruction)
+     .prov      rgba(136,143,163,.92)  ->  2.97:1           (provenance under a claim)
+
+   ⚠ THE NIGHT VALUES ARE NOT TOUCHED. .row__no in particular carries a ruling
+   — Skyler, 2026-08-28 contrast pass: it is a decorative glyph, leave it
+   unchanged. That ruling was made about the dark ground and still holds there,
+   so this is scoped to day rather than rewritten in place. Each day value is
+   the same construction the night value uses — the room's own ink at the same
+   alpha — so the numeral stays exactly as quiet relative to its ground as it
+   was, and .meta and .prov land on --ink-3, which is where every other line of
+   their kind on the site already sits.
+   🚫 Do not "simplify" these by editing services.css/leaf.css directly. That
+   changes fourteen night routes to fix two day ones. */
+:root.day-start .row__no{color:color-mix(in srgb, var(--ink-1) 52%, transparent)}
+:root.day-start .meta,
+:root.day-start .prov{color:var(--ink-3)}
+
 /* ⚠ THE GROUND IS PAINTED ONCE, ON THE DOCUMENT.
    Not on body, and not per-section. Painting it on html means the colour also
    fills the overscroll area at both ends of the document, so a rubber-band
@@ -292,4 +351,474 @@ body{background:transparent;color:var(--ink-1)}
      movement. Nothing here needs to change; this block exists so the next
      person does not go looking for the missing branch. */
   .atmos{opacity:1}
+}
+
+/* ==========================================================================
+   CLIENT INDEX — lives HERE, in theme.css, because it appears on BOTH the
+   homepage and /work/, and those two load completely different stylesheets:
+   index.html gets styles.css, /work/ gets services.css + leaf.css + work.css.
+   theme.css and footer.css are the only two either page shares.
+   🚫 Do not move these rules into styles.css or work.css — whichever page did
+   not load that file would render the index unstyled. This has already caught
+   three separate changes in this codebase.
+   ========================================================================== */
+/* ==========================================================================
+   CLIENT INDEX — scannable rows with a hover preview, 2026-09-05.
+   ⚠ CSS-ONLY. The preview shows on :hover and :focus-within with no script at
+   all. 🚫 Do not add JS to follow the cursor — it buys very little and costs a
+   listener on every row plus a keyboard path that has to be rebuilt by hand.
+   ⚠ THE PREVIEW IS PURELY DECORATIVE. It is aria-hidden, pointer-events:none
+   and absent on touch and on reduced motion. Every row is complete without it:
+   the client, the industry and the destination are all in the link itself.
+   🚫 Never move information INTO the preview — it would become unreachable for
+   touch and keyboard users.
+   ⚠ Sits on the night ground; ink comes from the k-aware scale.
+   ========================================================================== */
+.cidx{margin:clamp(26px,3.4vw,48px) 0 clamp(34px,4.5vw,64px)}
+.cidx__head{
+  display:grid;grid-template-columns:1fr auto;gap:16px;
+  padding:0 clamp(2px,.6vw,10px) 14px;
+  border-bottom:1px solid color-mix(in srgb,
+    rgba(20,28,60,.18), rgba(255,255,255,.20) calc(var(--k) * 100%));
+  font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.20em;text-transform:uppercase;color:var(--ink-3);
+}
+.cidx__list{list-style:none;margin:0;padding:0}
+.cidx__row{position:relative}
+
+/* ⚠ NO LOGO COLUMN, and that is deliberate. The four marks run from a 15:1
+   wordmark to a 1:1 monogram; in a compact row they rendered at 5px, 8px, 11px
+   and 46px tall — unreadable at one end and oversized at the other. The
+   homepage marquee only manages it with per-client --mark-w and max-height
+   tuning, which is not worth carrying here. The client NAME is the identifier,
+   the tag carries the category, and the hover preview shows the actual brand.
+   🚫 Do not add logos back without per-row sizing; a half-scaled logo column
+   reads as a bug, not as branding. */
+.cidx__link{
+  display:grid;grid-template-columns:auto 1fr auto auto;
+  align-items:center;gap:clamp(16px,2vw,30px);
+  padding:clamp(16px,1.7vw,22px) clamp(2px,.6vw,10px);
+  border:0;border-bottom:1px solid color-mix(in srgb,
+    rgba(20,28,60,.12), rgba(255,255,255,.13) calc(var(--k) * 100%));
+  border-radius:0;margin:0;
+  text-decoration:none;
+  transition:border-color var(--t-hover,.18s ease);
+}
+.cidx__list li:last-child .cidx__link{border-bottom:0}
+.cidx__link:hover{
+  border-bottom-color:color-mix(in srgb,
+    rgba(20,28,60,.34), rgba(255,255,255,.38) calc(var(--k) * 100%));
+}
+.cidx__link:focus-visible{
+  border-color:color-mix(in srgb,
+    rgba(20,28,60,.30), rgba(255,255,255,.34) calc(var(--k) * 100%));
+  background:color-mix(in srgb,
+    rgba(20,28,60,.03), rgba(255,255,255,.045) calc(var(--k) * 100%));
+}
+.cidx__link:focus-visible{outline:2px solid var(--cobalt-lift,#5B86FF);outline-offset:3px}
+
+.cidx__name{
+  font:500 clamp(16px,1.5vw,20px)/1.25 'General Sans',system-ui;
+  letter-spacing:-.01em;color:var(--ink-1);
+}
+/* ⚠ QUIET TEXT, NOT A PILL. This was an uppercase monospace pill with a
+   border, which read as a SaaS dashboard rather than as Kreated. The industry
+   is a quiet fact sitting beside the name — it earns no chrome.
+   🚫 Do not put the pill, the border or the monospace back. */
+.cidx__tag{
+  justify-self:end;white-space:nowrap;
+  font:400 14.5px/1 'General Sans',system-ui;
+  letter-spacing:.01em;color:var(--ink-3);
+}
+.cidx__go{
+  font-size:15px;color:var(--ink-3);
+  transition:transform var(--t-hover,.18s ease),color var(--t-hover,.18s ease);
+}
+.cidx__link:hover .cidx__go{transform:translateX(3px);color:var(--cobalt-lift,#5B86FF)}
+
+/* ---- the mark tile ----------------------------------------------------
+   ⚠ A FIXED SQUARE, and the mark is contained inside it — that is the whole
+   trick the reference uses, and it is why its column looks even. An earlier
+   attempt put the FULL wordmarks in a flat cell and they rendered at 5px and
+   8px tall; a square tile with object-fit does the work instead.
+   ⚠ WHITE MARKS, NO FILTER. The client marks are already white-on-transparent
+   and the tile is a raised navy surface, so they sit on it as drawn.
+   🚫 Do not add brightness(0) here: flattening the marks destroyed the internal
+   detail of the ones that have any.
+   ⚠ LEAK LOCATORS HAS NO SEPARABLE MARK — its dish overlaps the wordmark and
+   every crop of it reads as a white blob. That row uses a typographic tile with
+   the client's own initials instead. It is an index device, NOT a logo, and
+   🚫 must never be presented as their brand mark. If they supply a real mark,
+   swap it in and delete .cidx__mono. */
+.cidx__tile{
+  width:52px;height:52px;flex:none;
+  display:grid;place-items:center;overflow:hidden;
+  border-radius:11px;
+  background:color-mix(in srgb,
+    rgba(20,28,60,.05), rgba(255,255,255,.06) calc(var(--k) * 100%));
+  border:0;
+}
+.cidx__tile img{
+  /* ⚠ NO FILTER. Every tile is now the client's own favicon — full colour, as
+     they designed it. An earlier version flattened marks with brightness(0),
+     which turned Leak Locators' red dartboard into a featureless white disc.
+     🚫 Do not reintroduce a filter here. */
+  max-width:72%;max-height:72%;width:auto;height:auto;object-fit:contain;
+}
+
+/* ---- the preview ------------------------------------------------------ */
+/* ⚠ ABOVE THE ROW, NOT ACROSS IT. Centred on the row the preview sat straight
+   over that row's own industry tag — you lost the field you were comparing at
+   the exact moment you asked to see more. It now floats clear of the hovered
+   row entirely; covering NEIGHBOURING rows is fine and is how the reference
+   behaves. The first row flips below, since above would be off-screen.
+   🚫 Do not re-centre this vertically on the row. */
+.cidx__prev{
+  position:absolute;z-index:5;pointer-events:none;
+  bottom:calc(100% - 4px);right:clamp(16px,4vw,64px);transform:scale(.96);
+  width:min(400px,32vw);margin:0;
+  border-radius:12px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 22px 60px rgba(2,12,46,.45);
+  opacity:0;visibility:hidden;
+  transition:opacity .22s ease,transform .22s ease,visibility 0s linear .22s;
+}
+.cidx__prev img{display:block;width:100%;height:auto}
+.cidx__row:hover .cidx__prev,
+.cidx__row:focus-within .cidx__prev{
+  opacity:1;visibility:visible;transform:scale(1);
+  transition:opacity .22s ease,transform .22s ease;
+}
+/* the first row has nothing above it to float over */
+.cidx__row:first-child .cidx__prev{bottom:auto;top:calc(100% - 4px)}
+
+/* ⚠ .sr-only lives in styles.css, which /work/ does NOT load — it loads
+   services.css + leaf.css + work.css. Without this the index's heading rendered
+   as visible text. 🚫 Do not assume a global utility class exists on this page. */
+.cidx .sr-only{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
+  white-space:nowrap;border:0;
+}
+
+/* ⚠ No hover on touch, and the preview would sit under a thumb anyway. */
+@media (hover:none),(pointer:coarse){ .cidx__prev{display:none} }
+@media (prefers-reduced-motion:reduce){
+  .cidx__prev{transition:opacity .01s linear;transform:none}
+  .cidx__row:hover .cidx__prev,.cidx__row:focus-within .cidx__prev{transform:none}
+  .cidx__link:hover .cidx__go{transform:none}
+}
+@media (max-width:900px){
+  .cidx__head{display:none}
+  .cidx__link{grid-template-columns:auto 1fr auto;gap:12px;padding:12px 14px}
+  .cidx__tag{grid-column:2/-1;justify-self:start;margin-top:8px;font-size:10.5px}
+  .cidx__go{grid-row:1;grid-column:3}
+  .cidx__tile{width:44px;height:44px;border-radius:10px}
+  .cidx__prev{display:none}
+}
+
+/* the concept flag, shared by both places the index appears */
+.cidx__flag{
+  display:inline-block;vertical-align:middle;margin-left:10px;
+  padding:4px 8px;border-radius:5px;
+  font:600 10px/1 'General Sans',system-ui;letter-spacing:.14em;
+  text-transform:uppercase;white-space:nowrap;color:var(--ink-3);
+  border:1px solid color-mix(in srgb,
+    rgba(20,28,60,.22), rgba(255,255,255,.26) calc(var(--k) * 100%));
+}
+
+/* ⚠ VISIBLE on the homepage, hidden on /work/. On the homepage the index is a
+   standalone section and needs its own label; on /work/ it already sits under
+   "Every business we've launched" and a second heading would just repeat it.
+   🚫 Do not delete the element on /work/ — it is the section's accessible name. */
+.cidx__h{
+  margin:0 0 clamp(16px,1.8vw,24px);
+  font:600 11px/1 'General Sans',system-ui;
+  letter-spacing:.20em;text-transform:uppercase;color:var(--ink-3);
+}
+
+/* ⚠ The column captions are redundant where the section is already headed
+   "Clients" — the homepage would read CLIENTS / CLIENT / INDUSTRY. On /work/
+   the captions stay, because the heading there is "Every business we've
+   launched" and the columns still need naming. */
+.cidx--home .cidx__head{display:none}
+.cidx--home .cidx__list li:first-child .cidx__link{padding-top:0}
+
+/* ==========================================================================
+   TRUSTED BY — the compact client strip for leaf pages, 2026-09-06.
+   BX carries a `section-trusted-by` logo row high on every service page and
+   every market page, not only the homepage. A visitor arriving on a service
+   page from search currently sees no client evidence above the fold.
+
+   ⚠ THIS IS A NEW COMPONENT, NOT THE HOMEPAGE STRIP MOVED. The audit called
+   reusing `.clients` the cheapest item on the list and that was wrong: its CSS
+   is 26 rules scattered from line 740 to line 2056 of styles.css, including
+   `.is-marquee` variants left over from a carousel that was removed in August
+   and a late `@media` override. Extracting that safely is a bigger and riskier
+   job than writing the fifteen lines below, and the homepage would still need
+   every one of those rules afterwards. The homepage strip is untouched.
+
+   ⚠ THE THREE MARKS ARE DIFFERENT SHAPES and cannot share one size. The widths
+   below are the homepage's own `--mark-w` values scaled to this smaller row,
+   kept in the same proportion to each other so the marks stay optically equal.
+   🚫 Do not replace them with a single width — the LearnSmart mark is nearly
+   square and the LLEC mark is a 15:1 rail; equal widths make one shout.
+
+   ✅ RIGHTS APPROVED — DECISION 023, Skyler, 2026-09-06. The three client
+   wordmarks are cleared for display on Kreated's own marketing site.
+   🚫 WORDMARKS ONLY. Client photography (DECISION 014) is a separate asset
+   class, is not on the site, and its rights are still unconfirmed.
+   ========================================================================== */
+.tby{padding:clamp(26px,3vw,40px) 0;border-bottom:1px solid var(--stroke)}
+.tby__lab{
+  margin:0 0 clamp(14px,1.6vw,20px);
+  font:600 11px/1 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.tby__list{
+  list-style:none;margin:0;padding:0;
+  display:flex;align-items:center;gap:clamp(26px,4.5vw,64px);flex-wrap:wrap;
+}
+.tby__item{display:flex;align-items:center}
+.tby__item img{
+  width:var(--w);height:auto;
+  /* the one-ink treatment the site already uses: flatten to a single value,
+     then invert with the room. In day territory --k is 0, so the marks are
+     black on paper; at night invert(1) makes them white. */
+  filter:brightness(0) invert(var(--k));
+  opacity:.72;transition:opacity .2s ease;
+}
+.tby__link:hover img,.tby__link:focus-visible img{opacity:1}
+.tby__link:focus-visible{outline:2px solid var(--stroke-focus);outline-offset:6px;border-radius:3px}
+.tby__item--llec{--w:172px}
+.tby__item--ls{--w:126px}
+.tby__item--rr{--w:140px}
+@media (max-width:760px){
+  .tby__list{gap:24px 30px}
+  .tby__item--llec{--w:132px}
+  .tby__item--ls{--w:98px}
+  .tby__item--rr{--w:108px}
+}
+
+/* ---- DAY VALUES FOR THE TWO BUILT-OUT SERVICE PAGES ----------------------
+   /services/web-design/ and /services/answer-engine-optimization/ carry
+   page-specific components written before day territory existed, and a sweep
+   of all 35 routes flagged exactly these on paper:
+
+     .spec__rl .spec__sl .spec__cap  rgba(136,143,163,.90)  ->  2.97:1
+     .spec__live                     rgba(237,232,222,.85)  ->  1.12:1
+     .aeo__ans                       #fff                   ->  1.00:1
+
+   ⚠ ONLY THE SPEC RAIL AND THE ANSWER CHIP. groundwork.css sets a literal text
+   colour in nineteen rules, and the other fourteen are INSIDE the device mockup
+   — .gw__apptitle, .gw__step, .gwchrome__url and the rest sit on the mockup's
+   own dark chrome, not on the page ground, so they are correct as they are and
+   are deliberately absent from this block.
+   🚫 Do not "finish the job" by adding the .gw__* rules here. That would put
+   dark text on the mockup's dark surface and break a component that currently
+   renders correctly in both rooms.
+
+   .aeo__ans keeps its cobalt-tinted panel; only the ink moves, because at 14%
+   that panel is nearly the paper colour in day and white-on-it is invisible. */
+:root.day-start .spec__rl,
+:root.day-start .spec__sl,
+:root.day-start .spec__cap{color:var(--ink-3)}
+:root.day-start .spec__live{color:var(--ink-2)}
+:root.day-start .aeo__ans{color:var(--ink-1)}
+/* the two the first pass missed, found by naming the elements rather than
+   guessing at the rule: the rail labels are bare <span> inside .spec__rails,
+   and the price qualifier is a bare <i> inside .price__item — neither has a
+   class of its own, so neither matched a selector above. */
+:root.day-start .spec__rails > span,
+:root.day-start .price__item i{color:var(--ink-3)}
+
+/* ---- THE PRICING LEDGER LABEL ------------------------------------------
+   The pricing page's main section had no label of its own, which the eyebrow
+   sweep found; this names it.
+
+   ⚠ A "Start here" eyebrow was briefly added above the closing CTA on 26 pages
+   here, copying bx.studio's `GET STARTED`. It was REMOVED on owner instruction,
+   2026-09-06: above a heading that already reads "Start a Project" it said the
+   same thing twice, which BX's does not — theirs sits above a sentence, not
+   above an imperative. 🚫 Do not re-add it.
+
+   The one thing kept from that pass is the tracking below: .final__h tracks at
+   -.03em and .close__go was at -.02em, which at 56px is a visible difference in
+   colour between the homepage close and every other one. */
+.close__go{letter-spacing:-.03em}
+
+.invest__lab{
+  margin:0 0 clamp(18px,2vw,28px);
+  font:600 11px/1 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+
+/* ==========================================================================
+   THE BLUE — accent and the hover glow, 2026-09-06.
+   Owner: "The white pages need some color, make some of the words glow with
+   the Kreated blue, and when you hover over important words / clickable links,
+   it glows blue as well."
+
+   ⚠ THE COLOUR COMES FROM --accent, WHICH IS K-AWARE. In day it resolves to
+   #2148D8, which measures AA on the paper ground; at night it becomes #5B86FF,
+   the identity blue. So these rules are correct on Home and About after the
+   inversion as well as on the 34 paper routes, and nothing here needs a second
+   value written by hand.
+   🚫 Do not hardcode #2148D8 in this block. The two routes that still travel
+   would then carry a day accent on a night ground at 2.3:1.
+
+   ⚠ GLOW IS A SHADOW, NEVER A COLOUR CHANGE ON ITS OWN. The glyph keeps a solid
+   --accent fill and the halo sits behind it, so measured contrast is unchanged
+   by the effect — a glow built by lightening the text would have quietly failed
+   the sweep while looking fine to me.
+   ========================================================================== */
+:root{
+  /* one halo, defined once. 34% is the point where it reads as light coming
+     off the word rather than as a blur or a printing error. */
+  --glow: 0 0 18px color-mix(in srgb, transparent, var(--accent) 34%);
+  --glow-soft: 0 0 12px color-mix(in srgb, transparent, var(--accent) 24%);
+}
+
+/* ---- 1. THE WORDS THAT CARRY EMPHASIS ----------------------------------
+   Selective, not everything bold. The serif <em> inside a heading is already
+   the site's designed emphasis point and was rendering in plain ink on the
+   light pages; the hero keys are the three words the homepage is built around.
+   🚫 Do not extend this to .prose b. That bold is a whole lead SENTENCE, and
+   a blue sentence is a banner, not an emphasis. */
+.h2 em,.sec__h em,.foot__h em,.hero__line em,.wkall__head em{
+  color:var(--accent);text-shadow:var(--glow-soft);
+}
+.hero__key{color:var(--accent);text-shadow:var(--glow-soft)}
+
+/* The heading <em> needs its serif treatment here too. styles.css carries it
+   for the homepage, but the 34 leaf routes never load that file, so an <em> in
+   a leaf heading was rendering as plain italic sans. */
+.sec__h em,.wkall__head em{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:italic;font-weight:500;font-size:1.14em;letter-spacing:-.01em;
+}
+
+/* ---- 1b. THE BOLD LEAD-IN, WHICH IS THE REAL COLOUR ON A PROSE PAGE -----
+   A service page's body is two different kinds of bold and they must not look
+   the same:
+
+     <p><b>Whole sentence stating what the service is.</b></p>        the LEAD
+     <p><b class="lin">The Google Business Profile.</b> Then the detail…</p>
+                                                                   a LEAD-IN
+
+   The lead is a paragraph wearing bold; colouring it blue makes a banner. A
+   lead-in is a label naming the thing the paragraph describes — three or four
+   words — and that is exactly the "some of the words" this was asked for.
+
+   ⚠ THE CLASS IS NOT LAZINESS, IT IS THE ONLY WAY. The first attempt used
+   `p > b:first-child:not(:only-child)` and silently matched almost nothing:
+   :only-child counts ELEMENT children, and `<p><b>Label.</b> trailing text</p>`
+   has exactly one element child, so every lead-in was excluded along with every
+   lead. A trailing text node is invisible to a selector. The distinction is
+   semantic anyway — label versus sentence — so it is marked in the markup.
+   🚫 Do not "simplify" this back to a structural selector. */
+.prose b.lin,.cs__col b.lin,.excl b.lin,.who b.lin,.steps b.lin,.lgrid b.lin{
+  color:var(--accent);text-shadow:var(--glow-soft);
+}
+/* ---- 2. EVERY CLICKABLE THING, ON HOVER AND ON FOCUS -------------------
+   ⚠ :focus-visible carries the identical treatment. A hover-only glow is a
+   state a keyboard user never sees, and these are the same controls. */
+.ilink,.tlink,.faqs__a a,.prose a,.cs__col a,.close__alt,.next a,
+.cs__link,.close__go,.head__nav a,.cidx__name,.foot__cols a,.revs__all,
+.faqs summary,.crumb a,.tby__link,.cs__live{
+  transition:color .22s ease, text-shadow .22s ease;
+}
+.ilink:hover,.ilink:focus-visible,
+.tlink:hover,.tlink:focus-visible,
+.faqs__a a:hover,.faqs__a a:focus-visible,
+.prose a:hover,.prose a:focus-visible,
+.cs__col a:hover,.cs__col a:focus-visible,
+.close__alt:hover,.close__alt:focus-visible,
+.next a:hover,.next a:focus-visible,
+.close__go:hover,.close__go:focus-visible,
+.head__nav a:hover,.head__nav a:focus-visible,
+.foot__cols a:hover,.foot__cols a:focus-visible,
+.revs__all:hover,.revs__all:focus-visible,
+.crumb a:hover,.crumb a:focus-visible,
+.cs__live:hover,.cs__live:focus-visible{
+  color:var(--accent);text-shadow:var(--glow);
+}
+/* the card title and the client-index row are hovered from the whole card or
+   row, not from the text itself, so they hang off the parent's :hover */
+.cs:hover .cs__link,.cs__link:focus-visible{color:var(--accent);text-shadow:var(--glow)}
+.cidx__link:hover .cidx__name,.cidx__link:focus-visible .cidx__name{
+  color:var(--accent);text-shadow:var(--glow);
+}
+/* a FAQ question is a control; it should answer to the pointer like one */
+.faqs summary:hover,.faqs summary:focus-visible{color:var(--accent);text-shadow:var(--glow-soft)}
+/* the trusted-by marks are one-ink images, so their "glow" is a drop-shadow */
+.tby__link:hover img,.tby__link:focus-visible img{
+  filter:brightness(0) invert(var(--k))
+         drop-shadow(0 0 10px color-mix(in srgb, transparent, var(--accent) 45%));
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ilink,.tlink,.faqs__a a,.prose a,.cs__col a,.close__alt,.next a,
+  .cs__link,.close__go,.head__nav a,.cidx__name,.foot__cols a,.revs__all,
+  .faqs summary,.crumb a,.tby__link,.cs__live{transition:none}
+}
+
+/* ---- 2b. EVERYTHING ELSE THAT IS CLICKABLE -----------------------------
+   The first pass covered prose links, nav, cards and the closing CTA, and
+   missed the row components — which is what a reader on /services/ hovers
+   first. Enumerating every <a>, <summary> and <button> inside <main> found
+   these still inert.
+
+   ⚠ FILLED BUTTONS ARE DELIBERATELY EXCLUDED FROM THE TEXT GLOW and given a
+   halo around the button instead. .btn--cobalt is white text on cobalt; a blue
+   text-shadow behind white text on a blue fill is invisible at best and muddy
+   at worst. The glow belongs outside the shape, not behind the glyph.
+   🚫 Do not add .btn--cobalt, .btn--solid or .head__cta to the text-shadow
+   list. They already invert on hover; this only adds the halo.
+
+   ⚠ Row components glow on the NAME, not on the whole row. .row__a and
+   .svc__row contain a number, a name and an arrow; lighting all three makes
+   the row look selected rather than hovered. */
+.row__a .row__name,.svc__row .svc__t,.svc__row .svc__n,
+.fit__link,.hero__proof,.svc__more,.rev__case,.offer__cta,.offer__see,
+.btn--quiet,.btn--ghost,.btn--line,.pswitch__tab,.g__btn,
+.prose summary,.faqs summary,details > summary{
+  transition:color .22s ease, text-shadow .22s ease;
+}
+.row__a:hover .row__name,.row__a:focus-visible .row__name,
+.svc__row:hover .svc__t,.svc__row:focus-visible .svc__t,
+.fit__link:hover,.fit__link:focus-visible,
+.hero__proof:hover,.hero__proof:focus-visible,
+.svc__more:hover,.svc__more:focus-visible,
+.rev__case:hover,.rev__case:focus-visible,
+.offer__see:hover,.offer__see:focus-visible,
+.btn--quiet:hover,.btn--quiet:focus-visible,
+.btn--ghost:hover,.btn--ghost:focus-visible,
+.btn--line:hover,.btn--line:focus-visible,
+.pswitch__tab:hover,.pswitch__tab:focus-visible,
+.g__btn:hover,.g__btn:focus-visible,
+details > summary:hover,details > summary:focus-visible,
+main a:not([class]):hover,main a:not([class]):focus-visible{
+  color:var(--accent);text-shadow:var(--glow-soft);
+}
+/* the filled controls: a halo around the shape, no text-shadow */
+.btn--cobalt:hover,.btn--cobalt:focus-visible,
+.btn--solid:hover,.btn--solid:focus-visible,
+.head__cta:hover,.head__cta:focus-visible,
+.offer__cta:hover,.offer__cta:focus-visible,
+.close__go:hover .btn,.tby__link:focus-visible{
+  box-shadow:0 0 0 1px color-mix(in srgb, transparent, var(--accent) 30%),
+             0 6px 26px color-mix(in srgb, transparent, var(--accent) 38%);
+}
+.btn--cobalt,.btn--solid,.head__cta,.offer__cta{transition:box-shadow .22s ease, background-color .2s ease}
+/* the client marks on the homepage strip, same treatment as the trusted-by row */
+.client:hover .client__logo,.client:focus-visible .client__logo{
+  filter:brightness(0) invert(var(--k))
+         drop-shadow(0 0 10px color-mix(in srgb, transparent, var(--accent) 45%));
+}
+@media (prefers-reduced-motion:reduce){
+  .row__a .row__name,.svc__row .svc__t,.fit__link,.hero__proof,.svc__more,
+  .rev__case,.offer__cta,.offer__see,.btn--quiet,.btn--ghost,.btn--line,
+  .pswitch__tab,.g__btn,details > summary,
+  .btn--cobalt,.btn--solid,.head__cta{transition:none}
 }

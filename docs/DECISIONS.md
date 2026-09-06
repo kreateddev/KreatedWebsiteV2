@@ -401,3 +401,62 @@ exists for any Kreated client.
 **IMPLEMENTATION STATUS** Live in the build: homepage Work bands, `/work/`, both case pages
 (facts, lead sentence and "What Kreated delivered" lists) and `/services/local-seo/`.
 Documentation updated in the same pass so no file still contradicts the site.
+
+## 023 — Client wordmarks: rights approved for display
+
+**DATE** 2026-09-06
+**PHASE** Contractor specialization pass
+**DECISION** The three client **wordmarks** — Leak Locators East Coast, Rare Raleigh Restoration
+and LearnSmart Educational Consulting — are **approved for display** on Kreated's own marketing
+site. They appear in the homepage client row, the client index on the homepage and `/work/`, the
+case cards on `/work/`, and the `.tby` trusted-by strip added to eight service and vertical pages
+on 2026-09-06.
+**APPROVED BY SKYLER** yes — explicit confirmation, 2026-09-06, in response to the flag raised
+when the strip went from one page to eight.
+**WHAT IT REPLACES** The `⚠ RIGHTS TO CONFIRM` comment carried in `index.html` and in each `.tby`
+block, which said the rights were unconfirmed and flagged rather than assumed.
+
+> ### 🚫 THIS DOES NOT TOUCH DECISION 014
+> DECISION 014 covers client **photography** — the Rare Raleigh job sets, the LLEC pool photos and
+> the unsorted `More Photos` set. That is a different asset class, it is **not** on the site, and
+> its rights remain **unconfirmed and a hard blocker before public use**. `ASSETS.md` §6 stands
+> unchanged. Approving the wordmarks says nothing about the photography, and the two must not be
+> collapsed into one clearance.
+
+**IMPLEMENTATION STATUS** The ten `RIGHTS TO CONFIRM` comments covering the wordmarks are updated
+to record this decision. `ASSETS.md` §6, `PROJECTS.md` §2/§3 and DECISION 014 are untouched.
+
+## 024 — Home market moves to Wilmington; Raleigh becomes secondary
+
+**DATE** 2026-09-06
+**PHASE** Contractor specialization pass
+**DECISION** Skyler has moved to **Wilmington, NC**. Wilmington is the primary market;
+**Raleigh is retained as a real secondary market**, not dropped. The Google Business Profile was
+already updated to Wilmington before this change, so the site is being brought into line with the
+GBP rather than the other way round.
+**APPROVED BY SKYLER** yes — stated directly, 2026-09-06, including confirmation that the move is
+complete and the GBP already reflects it.
+
+**WHAT CHANGED**
+- Schema `PostalAddress.addressLocality` → `Wilmington` on every route.
+- Schema `areaServed` now lists Wilmington first, Raleigh second, then North Carolina and Worldwide.
+- The global footer: "Based in Raleigh" → "Based in Wilmington", and the address line under the
+  phone number, on all 35 routes.
+- 9 page titles and 8 meta descriptions.
+- `SEO.md` §2 keyword map: the same strategy pointed at a new city, Raleigh moved to alternate.
+
+**🚫 WHAT DELIBERATELY DID NOT CHANGE**
+- **`Started 2025, in Raleigh`** on `/about/`. Kreated *was* founded in Raleigh. That is a
+  historical fact and changing it would be a false one.
+- **Every client fact.** Rare Raleigh Restoration is a Raleigh contractor and is named for the
+  city; LearnSmart's market is `Raleigh · Durham · Chapel Hill`. Client markets are the clients',
+  not Kreated's, and none was touched.
+- **`/morrow/`**, a fictional concept set in Raleigh under a locked creative direction.
+
+**⚠ OPEN — NOT RESOLVED BY THIS DECISION**
+1. **The phone number is `(919) 805-8217`, a Raleigh area code.** It is still the correct number
+   and was left alone, but a 919 number on a Wilmington business is a weak local signal and an
+   inconsistency a careful buyer may notice. Needs an owner decision, not a code change.
+2. **Ranking history.** The site launched for search 2026-09-01 against Raleigh terms. Re-pointing
+   the head terms at a new city resets that work; it is the right call given the move, but it
+   should be understood as a restart rather than a continuation.

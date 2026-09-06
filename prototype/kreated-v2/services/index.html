@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="day-start">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,8 +72,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- the hub now uses the shared leaf hero/crumb/close components -->
 <link rel="stylesheet" href="/services/leaf.css?v=13">
 <!-- last, so it is the single definition of the footer on every route -->
-<link rel="stylesheet" href="/theme.css?v=3">
-<link rel="stylesheet" href="/footer.css?v=8">
+<link rel="stylesheet" href="/theme.css?v=18">
+<link rel="stylesheet" href="/footer.css?v=11">
 
 <!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
      🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
@@ -150,6 +150,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          and on the homepage itself. That ambiguity is what this replaces. -->
     <nav class="head__nav" aria-label="Primary">
       <a href="/services/">Services</a>
+      <a href="/web-design-for-contractors/">Contractors</a>
       <a href="/work/">Work</a>
       <a href="/pricing/">Pricing</a>
       <a href="/about/">About</a>
@@ -166,6 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="drawer" id="drawer" hidden>
   <nav aria-label="Mobile">
     <a href="/services/">Services</a>
+    <a href="/web-design-for-contractors/">Contractors</a>
     <a href="/work/">Work</a>
     <a href="/pricing/">Pricing</a>
     <a href="/about/">About</a>
@@ -231,6 +233,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="shero__note"><!-- owner sentence goes here --></p>
       </aside>
     </div>
+  </div>
+</section>
+
+<!-- ⚠ TRUSTED BY — client evidence above the fold, 2026-09-06. BX carries this
+     on every service and market page; a visitor arriving here from search
+     previously saw no client names until the closing CTA.
+     ✅ RIGHTS APPROVED — DECISION 023, Skyler, 2026-09-06. The three client
+     wordmarks are cleared for display on Kreated's own marketing site.
+     🚫 This clearance is the WORDMARKS ONLY. Client photography (DECISION 014 —
+     the Rare Raleigh job sets, the LLEC pool photos) is a different asset class,
+     is not on the site, and remains unconfirmed. Do not read one as the other.
+     🚫 Do not add a fourth "client" here that is not one. Morrow is a concept
+     and does not belong in a trusted-by row. -->
+<section class="tby" aria-label="Clients">
+  <div class="wrap">
+    <p class="tby__lab">Trusted by</p>
+    <ul class="tby__list">
+      <li class="tby__item tby__item--llec"><a class="tby__link" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">
+        <img src="/assets/img/clients/llec-wordmark.svg" alt="Leak Locators East Coast" width="460" height="30" loading="lazy" decoding="async"></a></li>
+      <li class="tby__item tby__item--rr"><a class="tby__link" href="https://rareraleighrestoration.com" target="_blank" rel="noopener">
+        <img src="/assets/img/clients/rare-raleigh.png" alt="Rare Raleigh Restoration" width="256" height="27" loading="lazy" decoding="async"></a></li>
+      <li class="tby__item tby__item--ls"><a class="tby__link" href="https://learnsmart.dev" target="_blank" rel="noopener">
+        <img src="/assets/img/clients/learnsmart.png" alt="LearnSmart Educational Consulting" width="375" height="56" loading="lazy" decoding="async"></a></li>
+    </ul>
   </div>
 </section>
 
@@ -407,24 +433,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         each.</p>
     </div>
     <div class="prose">
-      <p><b>Web Design or Website Redesign.</b> A redesign keeps what already works:
+      <p><b class="lin">Web Design or Website Redesign.</b> A redesign keeps what already works:
         the pages earning attention, the content that is already correct, the
         addresses those pages live at. Choose web design when there is nothing worth
         keeping, or nothing there at all.</p>
 
-      <p><b>Local SEO or Google Business Profile.</b> The profile is the business
+      <p><b class="lin">Local SEO or Google Business Profile.</b> The profile is the business
         listing itself, in maps and local results. Local SEO is the wider system
         around it, most of which lives on the website. The profile is one surface
         inside that system, and it is priced on its own because it can be worth
         doing alone.</p>
 
-      <p><b>Local SEO or Answer Engine Optimization.</b> Local search competes for a
+      <p><b class="lin">Local SEO or Answer Engine Optimization.</b> Local search competes for a
         position when someone nearby is looking. Answer engine work is about being
         understood and described correctly when a search engine or an AI assistant
         summarizes the business. They share the same prerequisites, and local search
         usually comes first.</p>
 
-      <p><b>Brand Strategy or marketing.</b> Brand strategy decides who the business
+      <p><b class="lin">Brand Strategy or marketing.</b> Brand strategy decides who the business
         is for and what it claims. Marketing puts that claim in front of people.
         Businesses that describe a marketing problem often have a strategy problem,
         because nothing has decided what is being said or to whom.</p>
@@ -456,7 +482,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="foot__brand">
       <a class="foot__mark" href="/" aria-label="Kreated — home">KREATED</a>
       <!-- approved V1 positioning line, reusable verbatim -->
-      <p class="foot__line">Based in Raleigh. Built for businesses anywhere.</p>
+      <p class="foot__line">Based in Wilmington. Built for businesses anywhere.</p>
     </div>
 
     <div class="foot__cols">
@@ -464,7 +490,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2>Contact</h2>
         <p><a href="mailto:contact@kreated.dev">contact@kreated.dev</a></p>
         <p><a href="tel:+19198058217">(919) 805-8217</a></p>
-        <p>Raleigh, North Carolina</p>
+        <p>Wilmington, North Carolina</p>
         <p class="foot__social"><a class="foot__ig" href="https://www.instagram.com/kreated.dev/"
              target="_blank" rel="noopener me"><svg class="foot__igmark" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg><span>@kreated.dev</span></a></p>
       </div>

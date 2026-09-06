@@ -120,3 +120,203 @@
 
 /* nothing on this route animates, so there is nothing for reduced motion to
    switch off beyond the shared hover transitions leaf.css already handles */
+
+/* ==========================================================================
+   CONCEPT FLAG — self-initiated work on the index, 2026-09-04.
+   ⚠ LIVES HERE, NOT IN styles.css. /work/ loads services.css + leaf.css +
+   work.css and NOT styles.css, so a rule written there never reaches this
+   page. 🚫 Do not move it back.
+   ⚠ DELIBERATELY QUIET. Owner instruction: present, not in huge letters. The
+   tag sits beside the project name; the Status field carries the full sentence
+   for anyone reading on. 🚫 Do not scale it up "for transparency" — the honesty
+   is in the words being accurate, not large. 🚫 Do not remove it either:
+   concept work shown without the label is a fabricated client.
+   ========================================================================== */
+.wk__flag{
+  display:inline-block;vertical-align:middle;
+  margin-left:10px;padding:4px 8px;border-radius:5px;
+  font:600 10px/1 'General Sans',system-ui;letter-spacing:.14em;
+  text-transform:uppercase;white-space:nowrap;
+  color:var(--ink-3);
+  border:1px solid color-mix(in srgb,
+    rgba(20,28,60,.22), rgba(255,255,255,.26) calc(var(--k) * 100%));
+}
+@media (max-width:900px){
+  .wk__flag{margin-left:8px;padding:3px 7px;font-size:9.5px}
+}
+
+/* ==========================================================================
+   "EVERY BUSINESS WE'VE LAUNCHED" — the break between the featured cases and
+   the full client index, 2026-09-05. Mirrors the reference page's shape: work
+   first, then a heading that changes register, then the list.
+   ⚠ Built from the existing .h2 / .lead / .btn--cobalt components. 🚫 No new
+   type scale or colour — this is a structural change, not a redesign.
+   ⚠ .cidx itself is styled in theme.css, NOT here: it renders on the homepage
+   too and the two pages share almost no stylesheets.
+   ========================================================================== */
+.wkall{margin:clamp(48px,6vw,90px) 0 clamp(20px,2.4vw,32px)}
+.wkall__head{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(20px,3vw,54px);align-items:end;
+  padding-bottom:clamp(20px,2.4vw,32px);
+}
+.wkall__aside{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(16px,1.8vw,24px)}
+.wkall__aside .lead{margin:0;max-width:46ch}
+.wkall__cta{align-self:flex-start}
+
+@media (max-width:900px){
+  .wkall{margin:36px 0 16px}
+  .wkall__head{grid-template-columns:1fr;gap:18px;align-items:start}
+  .wkall__aside .lead{max-width:none}
+}
+
+/* ⚠ The index carries a visible "Clients" label on the HOMEPAGE, where it is a
+   standalone section. Here it already sits under "Every business we've
+   launched", so a second heading just repeats it. Hidden, not deleted — it is
+   the section's accessible name. */
+.cidx__h{
+  position:absolute;width:1px;height:1px;margin:-1px;padding:0;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
+  white-space:nowrap;border:0;
+}
+
+/* ==========================================================================
+   CASE CARDS — measured off bx.studio/work (.mini-cs_item), 2026-09-06.
+   Their anatomy, verbatim: a 14px-radius screenshot with the client's mark and
+   name laid straight on it, then a WHITE panel underneath carrying two pill
+   badges, a "Live site" link that is invisible until hover, and the project
+   line in navy.
+
+   What was copied and what was not:
+     • copied — 2-up grid at gap 20, radius 14 on both blocks, panel padding 20,
+       badge 12px uppercase (blue-tinted for the industry, grey for the
+       discipline), title 20/28 in --bx-night, live link #3467e5-equivalent.
+     • NOT copied — their overlay puts white type straight on the photograph
+       with nothing behind it. Every BX thumbnail is a dark screenshot so it
+       works for them. Ours are not: the LearnSmart shot is cream and the
+       Morrow shot is mid-tone. A scrim at the foot of the image carries the
+       contrast instead of a visible pill, so the LOOK is theirs and the
+       legibility holds on a light screenshot. 🚫 Do not delete .cs__media::after
+       and expect the overlay to survive — it is the only thing under that type.
+
+   ⚠ ONE TAB STOP PER CARD. The media anchor is aria-hidden + tabindex="-1";
+   the title link is the real one. The live link is a SECOND stop and is
+   revealed on :focus-within as well as :hover — BX reveals theirs on hover
+   only, which puts a keyboard user on an invisible control.
+   ⚠ Day territory. /work/ carries <html class="day-start">, so --surface is
+   #FFFFFF and --stroke is #E7E7E7 here. The rules stay k-aware anyway, because
+   nothing stops this page being handed the journey later.
+   ========================================================================== */
+.cs__grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;margin:clamp(28px,3.4vw,56px) 0 clamp(16px,2vw,28px);
+}
+.cs{display:flex;flex-direction:column;min-width:0}
+
+.cs__media{
+  position:relative;display:block;overflow:hidden;
+  border-radius:14px;aspect-ratio:16/10;background:var(--surface);
+}
+.cs__media img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+  transition:transform .55s cubic-bezier(.2,.7,.3,1);
+}
+/* the scrim — see the note above. Sits between the shot and the overlay. */
+.cs__media::after{
+  content:"";position:absolute;inset:auto 0 0;height:46%;pointer-events:none;
+  background:linear-gradient(to top,
+    rgba(4,10,30,.80) 0%, rgba(4,10,30,.52) 38%, rgba(4,10,30,0) 100%);
+}
+.cs:hover .cs__media img{transform:scale(1.035)}
+@media (prefers-reduced-motion:reduce){ .cs:hover .cs__media img{transform:none} }
+
+/* mark + client name, laid on the shot at BX's 20/20 inset */
+.cs__id{
+  position:absolute;left:20px;bottom:20px;right:20px;z-index:1;
+  display:flex;align-items:center;gap:14px;
+}
+.cs__icon{
+  width:44px;height:44px;flex:none;border-radius:9px;overflow:hidden;
+  display:grid;place-items:center;background:#fff;
+}
+.cs__icon img{max-width:78%;max-height:78%;object-fit:contain}
+.cs__client{
+  font:300 24px/1.4 'General Sans',system-ui;color:#fff;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+/* the white panel */
+.cs__body{
+  padding:20px;border-radius:14px;background:var(--surface);
+  border:1px solid var(--stroke);margin-top:10px;
+  display:flex;flex-direction:column;gap:16px;flex:1;
+}
+.cs__top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:37px}
+.cs__badges{display:flex;flex-wrap:wrap;gap:6px}
+.cs__badge{
+  padding:8px 10px;border-radius:56px;white-space:nowrap;
+  font:400 12px/1 'General Sans',system-ui;text-transform:uppercase;
+  color:var(--ink-2);
+  background:color-mix(in srgb, transparent, var(--bx-acc-day) 8%);
+  border:1px solid color-mix(in srgb, transparent, var(--bx-acc-day) 55%);
+}
+/* the discipline reads quieter than the industry — BX's is-category */
+.cs__badge--cat{
+  color:var(--ink-2);
+  background:color-mix(in srgb, var(--surface), var(--ink-1) 3%);
+  border-color:var(--stroke);
+}
+/* ⚠ the concept flag is a THIRD tone, dashed, so it cannot be mistaken for a
+   discipline. It is the only thing on the card that says Morrow is not a client. */
+.cs__flag{
+  padding:8px 10px;border-radius:56px;white-space:nowrap;
+  font:500 12px/1 'General Sans',system-ui;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--ink-3);
+  border:1px dashed var(--stroke-hi);
+}
+
+.cs__live{
+  display:inline-flex;align-items:center;gap:4px;white-space:nowrap;
+  font:400 16px/1 'General Sans',system-ui;color:var(--accent);
+  text-decoration:none;border-bottom:0;
+  opacity:0;transition:opacity .25s ease;
+}
+.cs__live i{font-style:normal;font-size:13px}
+.cs:hover .cs__live,
+.cs:focus-within .cs__live{opacity:1}
+.cs__live:hover{text-decoration:underline;text-underline-offset:3px}
+/* Morrow has no live site, so this is a statement rather than a control and it
+   is always visible — a fact that only appears on hover is a fact nobody reads. */
+.cs__live--none{opacity:1;color:var(--ink-3);font-style:italic;font-size:14.5px}
+
+.cs__title{margin:0}
+.cs__link{
+  font:400 20px/1.4 'General Sans',system-ui;color:var(--bx-night);
+  text-decoration:none;border-bottom:0;text-wrap:pretty;
+  transition:color .2s ease;
+}
+.cs:hover .cs__link{color:var(--accent)}
+.cs__link:focus-visible{outline:2px solid var(--stroke-focus);outline-offset:4px;border-radius:3px}
+
+@media (max-width:900px){
+  .cs__grid{grid-template-columns:1fr;gap:20px}
+  .cs__id{left:14px;bottom:14px;right:14px;gap:11px}
+  .cs__icon{width:36px;height:36px;border-radius:8px}
+  .cs__client{font-size:19px}
+  .cs__body{padding:16px;gap:12px}
+  .cs__link{font-size:18px}
+
+  /* ⚠ THE HOVER-REVEALED LINK IS ALWAYS VISIBLE HERE. There is no hover on a
+     touch screen, so at these widths the reference's opacity:0 leaves a control
+     that can be tapped but never seen — and, because opacity still occupies
+     layout, a ~60px hole between the badges and the title where the invisible
+     link had wrapped onto its own row.
+     Both problems have the same fix: show it. The row also stops being a
+     space-between pair, because at 390 the two badges already fill the width
+     and the link belongs under them rather than squeezed beside them. */
+  .cs__top{
+    flex-direction:column;align-items:flex-start;
+    gap:10px;min-height:0;
+  }
+  .cs__live{opacity:1;font-size:15px}
+}

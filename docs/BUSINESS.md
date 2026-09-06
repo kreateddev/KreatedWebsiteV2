@@ -162,14 +162,25 @@ actually involves — swapping a Netlify site vs. replacing a legacy site vs. a 
 
 ## 8. Open owner-controlled blockers carried over from V1
 
+> ### ⚠ THIS SECTION WAS STALE — CORRECTED 2026-09-06
+> Items 2 and 3 below described a pre-launch world and were left standing after it
+> stopped being true, which made the whole list unreliable to read. Verified against
+> the live site and DNS on 2026-09-06; each item now carries its checked state.
+
 These are Skyler-only and are **not solved by V2**:
 
-1. **Mail** — add SPF and DMARC, then prove delivery with a real sent message and form submission.
-2. **Production indexing cutover** — V1's `netlify.toml` carries a global `X-Robots-Tag: noindex,
-   nofollow` with no context conditions.
-3. **Domain cutover** — `kreated.dev` currently serves a different site.
-4. **Analytics ownership** — confirm ownership of `GTM-TH3JQWL8` / `G-ENJ4QV1FQX`, then decide
-   fresh property vs. reuse.
+1. **Mail — STILL OPEN, and worse than recorded.** ❌ Checked 2026-09-06: `kreated.dev` has
+   **no SPF record, no DMARC record and no published DKIM key**, while MX points at Google
+   Workspace (`smtp.google.com`). Mail from the domain is therefore unauthenticated and the
+   domain is spoofable. This is a live deliverability problem, not a launch checkbox.
+2. **Production indexing cutover — ✅ RESOLVED.** The live site returns no `X-Robots-Tag`
+   header and is indexable; `robots.txt` records the search launch as 2026-09-01 and
+   `sitemap.xml` returns 200. The global `noindex` this item described is gone.
+3. **Domain cutover — ✅ RESOLVED.** `kreated.dev` serves this site. The apex returns 200,
+   `www` 301s to it path-preserving, and the canonical is `https://kreated.dev/`.
+4. **Analytics ownership — UNVERIFIED.** `GTM-TH3JQWL8` / `G-ENJ4QV1FQX` fire on every route
+   and are measured, but ownership of the containers has not been confirmed in this repo.
+   Unchanged from the original note.
 
 ## 9. Needs Skyler confirmation
 

@@ -384,4 +384,8 @@ Nothing blocking. Two judgement calls:
    honest without one; the copy is simply plainer. Every failure mode is
    tested — no key, 500, timeout, malformed, and a hostile response that tries
    to change a status — and all of them return the same findings and needs.
-2. **Confirm 8 audits per IP per hour** is the right public limit.
+2. **Confirm the per-IP hourly cap.** ⚠ CORRECTED 2026-09-06: this line said **8**, and so
+   did a comment in `audit-core.js`. Both were wrong. Both limiters fall back to **4**
+   (`rate-limit.js` and `audit-rate-limit.js`), no env var is set in production, so the live
+   public limit is **4 per IP per hour**. To make it 8, set `KREATED_AUDIT_MAX_PER_HOUR=8` in
+   Netlify — one variable, read by both layers so they stay in agreement.

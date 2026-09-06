@@ -28,7 +28,9 @@
      KREATED_AUDIT_MODEL_URL   optional. Defaults to the OpenAI Responses API,
                                https://api.openai.com/v1/responses
      KREATED_AUDIT_MODEL_NAME  optional. Defaults to gpt-5.6-luna.
-     KREATED_AUDIT_MAX_PER_HOUR optional. Defaults to 8 per IP. Read by both
+     KREATED_AUDIT_MAX_PER_HOUR optional. Defaults to 4 per IP — CORRECTED
+     2026-09-06, this comment said 8 while both limiters fall back to 4
+     (rate-limit.js and audit-rate-limit.js). The code was right. Read by both
                                 the shared limiter here and the edge limiter.
      KREATED_AUDIT_STATE_DIR    optional, LOCAL ONLY. Points the rate-limit
                                 store at a directory so the limiter can be
