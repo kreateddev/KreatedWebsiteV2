@@ -76,7 +76,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
        about.css     this page only -->
 <link rel="stylesheet" href="/services/services.css?v=22">
 <link rel="stylesheet" href="/services/leaf.css?v=13">
-<link rel="stylesheet" href="/about/about.css?v=5">
+<link rel="stylesheet" href="/about/about.css?v=6">
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=11">
@@ -225,20 +225,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <h1 class="shero__h ab__h">One person,<span>in Wilmington.</span></h1>
 
-    <div class="shero__foot">
-      <p class="shero__fact">The person who diagnoses the problem is the person who
-        builds the fix. One line of accountability from the first conversation to
-        launch. Nothing is lost in a handover, and you always know who is
-        responsible for the work.</p>
+    <!-- ⚠ THE LEDE IS TWO COLUMNS, 2026-09-07. The claim on the left and the
+         facts that support it on the right, rather than the facts as a thin
+         strip underneath. This fills the right half of the hero, which had been
+         empty since the "IN SKYLER'S WORDS" aside was removed — roughly 40% of
+         the opening screen was blank and the composition leaned hard left.
+         🚫 Nothing new was written for this. Every value below already existed
+         in the four-across strip; only where they sit changed. -->
+    <div class="ab__lede">
+      <div class="shero__foot">
+        <p class="shero__fact">The person who diagnoses the problem is the person who
+          builds the fix. One line of accountability from the first conversation to
+          launch. Nothing is lost in a handover, and you always know who is
+          responsible for the work.</p>
+      </div>
 
+      <dl class="ab__facts">
+        <div><dt>Started</dt><dd>2025, in Raleigh</dd></div>
+        <div><dt>Founded by</dt><dd>Skyler Reyes</dd></div>
+        <div><dt>Structure</dt><dd>Led directly by the founder</dd></div>
+        <div><dt>Works with</dt><dd>Wilmington and Raleigh, North Carolina &mdash; and worldwide</dd></div>
+      </dl>
     </div>
-
-    <dl class="ab__facts">
-      <div><dt>Started</dt><dd>2025, in Raleigh</dd></div>
-      <div><dt>Founded by</dt><dd>Skyler Reyes</dd></div>
-      <div><dt>Structure</dt><dd>Led directly by the founder</dd></div>
-      <div><dt>Works with</dt><dd>Wilmington and Raleigh, North Carolina &mdash; and worldwide</dd></div>
-    </dl>
   </div>
 </section>
 

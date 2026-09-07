@@ -8,17 +8,37 @@
 .ab__hero{padding-bottom:clamp(28px,3.2vw,44px)}
 /* hero weight now comes from .shero__h in leaf.css — see the note there */
 .ab__h span{display:block;color:var(--ink-4)}
-.ab__facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:clamp(18px,2.4vw,36px);
-  margin:clamp(34px,4vw,56px) 0 0;padding-top:clamp(20px,2.4vw,28px)}
+/* ---- THE HERO LEDE — claim left, facts right, 2026-09-07 -----------------
+   The facts used to run four-across in a strip under the paragraph, and the
+   right half of the hero was empty from the breadcrumb down. Pairing them puts
+   the concrete details beside the claim they support instead of below it, and
+   the whitespace becomes margin rather than a gap where something was removed.
+
+   ⚠ The right column is deliberately the NARROWER of the two. The paragraph is
+   the argument and should hold the wider measure; the facts are four short
+   label/value pairs and read better tight. A 50/50 split left the paragraph at
+   an awkward measure and stretched "Works with" across a line and a half.
+   🚫 Do not centre this or let the facts column grow past the paragraph — the
+   hero reads left to right and the claim comes first. */
+.ab__lede{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);
+  gap:clamp(30px,4.4vw,74px);align-items:start;
+  margin:clamp(26px,3vw,40px) 0 0;
+}
+.ab__facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(18px,2.2vw,30px);
+  margin:0;padding-top:clamp(4px,0.6vw,8px)}
 .ab__facts dt{font:600 10.5px/1.5 'General Sans',system-ui;letter-spacing:.2em;
   text-transform:uppercase;color:var(--gray)}
 .ab__facts dd{margin:8px 0 0;font-size:clamp(14.5px,1.15vw,16px);line-height:1.45;
   color:var(--ink-1)}
-@media (max-width:1000px){
-  .ab__facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 28px}
+@media (max-width:900px){
+  /* the two columns stack; the facts stay two-across because at this width they
+     are the only thing on the line and a single column makes a tall ladder */
+  .ab__lede{grid-template-columns:1fr;gap:clamp(24px,4vw,34px)}
+  .ab__facts{gap:20px 28px;padding-top:0}
 }
-@media (max-width:640px){ .ab__facts{grid-template-columns:1fr;gap:16px} }
+@media (max-width:560px){ .ab__facts{grid-template-columns:1fr;gap:16px} }
 
 /* ==========================================================================
    THE THREE CLAIMS — 2026-09-06.
