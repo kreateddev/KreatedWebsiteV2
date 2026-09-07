@@ -366,8 +366,15 @@ are all the site has.
 ```
 
 **LIFTED 2026-09-01.** The line above was removed. `_redirects` now carries no
-active rule, and `/free-website-audit/` becomes publicly reachable on the next
-deploy. `noindex` still applies, as on all 19 routes.
+active rule, and `/free-website-audit/` is publicly reachable.
+
+> ⚠ **CORRECTED 2026-09-07.** This paragraph used to end "`noindex` still
+> applies, as on all 19 routes". Both halves are now wrong and were checked
+> rather than assumed: the site has **36 routes, 34 of them indexable**, and the
+> only two carrying `noindex, follow` are `/morrow/` (a concept) and `/thanks/`
+> (a confirmation). `/free-website-audit/` carries no robots meta at all and is
+> entry 8 of 34 in `sitemap.xml` — it is indexed, and it is the most-linked
+> route on the site with 43 in-content inbound links.
 
 Everything the gate was waiting for is done: shared rate limiting, a three-page
 scored crawl, an enforced time budget, and every SSRF control re-tested after

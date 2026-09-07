@@ -76,9 +76,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="/services/services.css?v=22">
 <link rel="stylesheet" href="/services/leaf.css?v=13">
 <link rel="stylesheet" href="/services/web-design/web-design.css?v=9">
-<link rel="stylesheet" href="/services/web-design/groundwork.css?v=10">
 <!-- last, so it is the single definition of the footer on every route -->
-<link rel="stylesheet" href="/theme.css?v=18">
+<link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=11">
 
 <!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
@@ -434,308 +433,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <!-- ==========================================================================
-     2 · THE GROUNDWORK SPECIMEN — the leaf's primary visual module.
+     THE SPECIMEN — Morrow Coffee Co., 2026-09-06.
+     Replaces "Groundwork", a 257-line mockup of a fictional AI-systems company
+     rendered as a desktop and a phone. Owner call: show Morrow instead. It is
+     a complete build with real photography and a finished identity rather than
+     a rendered impression of one, and it can be opened and read.
 
-     ⚠ READ THIS BEFORE CHANGING ANYTHING BELOW.
-
-     WHAT IT IS: "Groundwork" is an ORIGINAL, KREATED-OWNED demonstration
-     website for a FICTIONAL AI-systems company. It is built here as real HTML
-     and CSS — not a drawing, not a screenshot, not an image. It exists to show
-     design and build skill.
-
-     🚫 IT IS NOT A CLIENT. It must never be presented, captioned, linked or
-     listed as one. The label above the object ships VERBATIM and is visible in
-     every state and at every width:
-        KREATED DESIGN SPECIMEN — AN ORIGINAL DEMONSTRATION, NOT A CLIENT
-
-     🚫 NEVER ADD to the specimen: testimonials, customer logos, counts,
-     "trusted by", percentages, case studies, or any outcome claim. The whole
-     point is that it demonstrates craft without borrowing credibility.
-
-     🚫 `919-000-0000` IS DELIBERATELY A NON-NUMBER. Never replace it with a
-     real one. `groundwork.example` is a reserved-for-documentation domain and
-     is NEVER linked. Nothing inside the specimen is an <a> or a <button>:
-     every control is a <span>, so none of it is focusable or clickable.
-
-     ACCESSIBILITY: the rendered specimen is `aria-hidden` and carries a
-     visually-hidden text alternative instead — the same treatment a screenshot
-     gets. Exposing a second website's navigation inside Kreated's own page
-     would be actively misleading to a screen reader.
-
-     THE STRUCTURE STRIP lives to the LEFT of the page, never on it. Hard rule
-     from the brief: if any annotation, panel or decorative object overlaps the
-     H1, a CTA, the product UI or body copy, the implementation is wrong. The
-     strip is `aria-hidden` and `pointer-events:none`.
-
-     GEOMETRY is reproduced from wd-specimen-presentation.svg (1440x1000
-     canvas). The mock's content spans x100 -> x1290 = 1190px, so every
-     horizontal value in groundwork.css is a percentage of that span mapped
-     onto this page's 1200px column:
-        strip rail   x100  -> left 0        lane 16.81%
-        page render  x300  -> left 16.81%   width 78.66%   (scale 0.755)
-        phone        x1066 -> left 81.18%   width 18.82%   (right edge 100%)
-     ⚠ `wd-landing-clean.svg` was not supplied. It is not needed: the same
-     presentation SVG contains the full finished page at 0.755 scale, and the
-     handoff specifies every token, measure and string. Both were used.
+     ⚠ MORROW IS A CONCEPT AND SAYS SO TWICE — in the eyebrow and in the body.
+     PROOF.md governs this: it is a self-initiated brand, never a client, and
+     nothing here may imply an engagement. The label is the same size as the
+     rest of the type, not a disclaimer in the corner.
+     🚫 Do not move Morrow into the trusted-by strip, the client index or any
+     row of clients. Those are for businesses that hired Kreated.
      ========================================================================== -->
 <section class="spec">
   <div class="wrap">
-    <h2 class="spec__label">Kreated design specimen, an original demonstration, not a client</h2>
-
+    <p class="eyebrow">A Kreated concept &mdash; not a client project</p>
     <figure class="spec__fig">
-      <p class="sr-only">Groundwork, an original Kreated design specimen and not a client
-        project: a landing page for a fictional company that sells AI systems to service
-        businesses. It is shown twice, as a desktop render and as a phone render of the
-        same page. The headline reads &ldquo;AI systems that handle the work behind your
-        business.&rdquo; Beside the renders, a narrow rail marks the page&rsquo;s underlying
-        structure, its twelve-column grid, its spacing steps of 96, 24 and 88, the
-        boundary of its headline, one component outline, and its breakpoints at 1200, 768
-        and 390 pixels.</p>
-
-      <div class="spec__stage" aria-hidden="true">
-
-        <div class="spec__rail">
-          <p class="spec__rl">Structure</p>
-          <span class="spec__spine"></span>
-
-          <div class="spec__sig spec__sig--grid">
-            <span class="spec__grid"><i></i><i></i><i></i><i></i><i></i></span>
-            <p class="spec__sl">12-col grid</p>
-          </div>
-
-          <div class="spec__sig spec__sig--space">
-            <span class="spec__dim"><b></b><em>96</em></span>
-            <span class="spec__dim"><b></b><em>24</em></span>
-            <span class="spec__dim"><b></b><em>88</em></span>
-            <p class="spec__sl">Spacing</p>
-          </div>
-
-          <div class="spec__sig">
-            <span class="spec__dash"></span>
-            <p class="spec__sl">H1 boundary</p>
-          </div>
-
-          <div class="spec__sig">
-            <span class="spec__comp"></span>
-            <p class="spec__sl">Component</p>
-          </div>
-
-          <div class="spec__sig">
-            <span class="spec__bp"></span>
-            <p class="spec__sl">Breakpoints</p>
-            <p class="spec__bpv">1200 / 768 / 390</p>
-          </div>
-        </div>
-
-        <div class="spec__page">
-          <div class="spec__screen">
-            <div class="gwchrome">
-              <span class="gwchrome__dots"><i></i><i></i><i></i></span>
-              <span class="gwchrome__url">groundwork.example</span>
-            </div>
-            <div class="gw" data-view="desktop">
-              <div class="gw__hd">
-                <p class="gw__brand"><span class="gw__glyph" aria-hidden="true"></span>Groundwork</p>
-                <p class="gw__nav"><span>Home</span><span>Systems</span><span>How it works</span><span>Pricing</span><span>Contact</span></p>
-                <p class="gw__tel"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2,4 a2,2 0 0 1 2,-2 l2.5,0 l1.5,3.5 l-1.8,1.6 a9,9 0 0 0 4.4,4.4 l1.6,-1.8 l3.5,1.5 l0,2.5 a2,2 0 0 1 -2,2 a13,13 0 0 1 -11.7,-11.7 z" fill="currentColor"/></svg>919-000-0000</p>
-                <p class="gw__cta">Build My System</p>
-                <p class="gw__burger" aria-hidden="true">&#9776;</p>
-              </div>
-
-              <div class="gw__hero">
-                <div class="gw__lede">
-                  <p class="gw__kick"><span class="gw__kick-l">For service businesses, agencies &amp; small teams</span><span class="gw__kick-s">For service businesses</span></p>
-                  <p class="gw__h1"><span>AI systems that handle</span><span>the work behind</span><span>your business.</span></p>
-                  <p class="gw__h1 gw__h1--s"><span>AI systems that</span><span>handle the work</span><span>behind your</span><span>business.</span></p>
-                  <p class="gw__sup">Groundwork connects intake, follow-up, proposals, and your CRM. Then automates the repetitive steps between.</p>
-                  <p class="gw__acts"><span class="gw__pill">Build My System</span><span class="gw__slink">See How It Works <i aria-hidden="true">&#8594;</i></span></p>
-                </div>
-
-                <div class="gw__app">
-                  <div class="gw__apphd">
-                    <span class="gw__apptitle"><span class="gw__sq" aria-hidden="true"></span>Groundwork, Today</span>
-                    <span class="gw__appmeta">M. Alvarez &middot; Kitchen remodel &middot; Cary, NC</span>
-                  </div>
-
-                  <div class="gw__steps">
-                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Lead received</span>
-                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Qualified</span>
-                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Actions prepared</span>
-                    <span class="gw__step is-now"><span class="gw__ring" aria-hidden="true"></span>Owner approves</span>
-                  </div>
-
-                  <div class="gw__body">
-                    <div class="gw__col">
-                      <p class="gw__lab">Qualification</p>
-                      <p class="gw__fk">Service</p><p class="gw__fv">Kitchen remodel</p>
-                      <p class="gw__fk">Fit</p><p class="gw__fv">In service area</p>
-                      <p class="gw__fk">Urgency</p><p class="gw__fv">Call this week</p>
-                      <p class="gw__chip">Good fit</p>
-                    </div>
-
-                    <div class="gw__col gw__col--r">
-                      <p class="gw__lab gw__lab--m">Owner approves</p>
-                      <p class="gw__lab gw__lab--d">Prepared for you</p>
-                      <p class="gw__mv">Kitchen remodel</p>
-                      <p class="gw__mm">Cary, NC &middot; call this week</p>
-                      <p class="gw__did"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="gw__did-l">CRM updated, new opportunity</span><span class="gw__did-s">CRM updated</span></p>
-                      <p class="gw__did"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Follow-up drafted</p>
-                      <p class="gw__did gw__did--d"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Estimate task assigned</p>
-                      <div class="gw__ready">
-                        <span class="gw__readytxt"><b>Follow-up ready</b><i>for M. Alvarez</i></span>
-                        <span class="gw__send">Send</span>
-                      </div>
-                      <p class="gw__foot">Nothing sends itself. You approve.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <p class="gw__mready"><span>1 ready, Send follow-up</span><i aria-hidden="true">&#8594;</i></p>
-                <p class="gw__homebar" aria-hidden="true"></p>
-              </div>
-
-              <div class="gw__value">
-                <p class="gw__h2">One system. Fewer manual steps.</p>
-                <div class="gw__cards">
-                  <div class="gw__card">
-                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="1" y="1" width="15" height="15" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="2.4" fill="currentColor"/></svg></span>
-                    <p class="gw__ct">Capture</p>
-                    <p class="gw__cd">every inquiry lands in one place</p>
-                  </div>
-                  <div class="gw__card">
-                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 26 16"><path d="M1,8 h22 m-7,-7 l7,7 l-7,7" fill="none" stroke="currentColor" stroke-width="2.3"/></svg></span>
-                    <p class="gw__ct">Automate</p>
-                    <p class="gw__cd">qualification, follow-up &amp; routing run themselves</p>
-                  </div>
-                  <div class="gw__card">
-                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 16 14"><path d="M1,6.2 l4.2,4.2 l8.4,-9.4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
-                    <p class="gw__ct">Approve</p>
-                    <p class="gw__cd">you make the calls, the system does the typing</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="gw__band">
-                <div class="gw__bandin">
-                  <div>
-                    <p class="gw__bh">Put the busywork on the system.</p>
-                    <p class="gw__bs">Built around the way your business already works.</p>
-                  </div>
-                  <p class="gw__bacts"><span class="gw__bpill">Build My System</span><span class="gw__blink">See How It Works</span></p>
-                </div>
-              </div>
-              <div class="gw__rule" aria-hidden="true"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="spec__phone">
-          <div class="spec__phscreen">
-            <span class="spec__notch"></span>
-            <div class="gw" data-view="mobile">
-              <div class="gw__hd">
-                <p class="gw__brand"><span class="gw__glyph" aria-hidden="true"></span>Groundwork</p>
-                <p class="gw__nav"><span>Home</span><span>Systems</span><span>How it works</span><span>Pricing</span><span>Contact</span></p>
-                <p class="gw__tel"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2,4 a2,2 0 0 1 2,-2 l2.5,0 l1.5,3.5 l-1.8,1.6 a9,9 0 0 0 4.4,4.4 l1.6,-1.8 l3.5,1.5 l0,2.5 a2,2 0 0 1 -2,2 a13,13 0 0 1 -11.7,-11.7 z" fill="currentColor"/></svg>919-000-0000</p>
-                <p class="gw__cta">Build My System</p>
-                <p class="gw__burger" aria-hidden="true">&#9776;</p>
-              </div>
-
-              <div class="gw__hero">
-                <div class="gw__lede">
-                  <p class="gw__kick"><span class="gw__kick-l">For service businesses, agencies &amp; small teams</span><span class="gw__kick-s">For service businesses</span></p>
-                  <p class="gw__h1"><span>AI systems that handle</span><span>the work behind</span><span>your business.</span></p>
-                  <p class="gw__h1 gw__h1--s"><span>AI systems that</span><span>handle the work</span><span>behind your</span><span>business.</span></p>
-                  <p class="gw__sup">Groundwork connects intake, follow-up, proposals, and your CRM. Then automates the repetitive steps between.</p>
-                  <p class="gw__acts"><span class="gw__pill">Build My System</span><span class="gw__slink">See How It Works <i aria-hidden="true">&#8594;</i></span></p>
-                </div>
-
-                <div class="gw__app">
-                  <div class="gw__apphd">
-                    <span class="gw__apptitle"><span class="gw__sq" aria-hidden="true"></span>Groundwork, Today</span>
-                    <span class="gw__appmeta">M. Alvarez &middot; Kitchen remodel &middot; Cary, NC</span>
-                  </div>
-
-                  <div class="gw__steps">
-                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Lead received</span>
-                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Qualified</span>
-                    <span class="gw__step is-done"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Actions prepared</span>
-                    <span class="gw__step is-now"><span class="gw__ring" aria-hidden="true"></span>Owner approves</span>
-                  </div>
-
-                  <div class="gw__body">
-                    <div class="gw__col">
-                      <p class="gw__lab">Qualification</p>
-                      <p class="gw__fk">Service</p><p class="gw__fv">Kitchen remodel</p>
-                      <p class="gw__fk">Fit</p><p class="gw__fv">In service area</p>
-                      <p class="gw__fk">Urgency</p><p class="gw__fv">Call this week</p>
-                      <p class="gw__chip">Good fit</p>
-                    </div>
-
-                    <div class="gw__col gw__col--r">
-                      <p class="gw__lab gw__lab--m">Owner approves</p>
-                      <p class="gw__lab gw__lab--d">Prepared for you</p>
-                      <p class="gw__mv">Kitchen remodel</p>
-                      <p class="gw__mm">Cary, NC &middot; call this week</p>
-                      <p class="gw__did"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="gw__did-l">CRM updated, new opportunity</span><span class="gw__did-s">CRM updated</span></p>
-                      <p class="gw__did"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Follow-up drafted</p>
-                      <p class="gw__did gw__did--d"><svg class="gw__tick" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2,7.2 l3.2,3.2 l6.4,-7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Estimate task assigned</p>
-                      <div class="gw__ready">
-                        <span class="gw__readytxt"><b>Follow-up ready</b><i>for M. Alvarez</i></span>
-                        <span class="gw__send">Send</span>
-                      </div>
-                      <p class="gw__foot">Nothing sends itself. You approve.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <p class="gw__mready"><span>1 ready, Send follow-up</span><i aria-hidden="true">&#8594;</i></p>
-                <p class="gw__homebar" aria-hidden="true"></p>
-              </div>
-
-              <div class="gw__value">
-                <p class="gw__h2">One system. Fewer manual steps.</p>
-                <div class="gw__cards">
-                  <div class="gw__card">
-                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="1" y="1" width="15" height="15" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="2.4" fill="currentColor"/></svg></span>
-                    <p class="gw__ct">Capture</p>
-                    <p class="gw__cd">every inquiry lands in one place</p>
-                  </div>
-                  <div class="gw__card">
-                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 26 16"><path d="M1,8 h22 m-7,-7 l7,7 l-7,7" fill="none" stroke="currentColor" stroke-width="2.3"/></svg></span>
-                    <p class="gw__ct">Automate</p>
-                    <p class="gw__cd">qualification, follow-up &amp; routing run themselves</p>
-                  </div>
-                  <div class="gw__card">
-                    <span class="gw__ic" aria-hidden="true"><svg viewBox="0 0 16 14"><path d="M1,6.2 l4.2,4.2 l8.4,-9.4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></span>
-                    <p class="gw__ct">Approve</p>
-                    <p class="gw__cd">you make the calls, the system does the typing</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="gw__band">
-                <div class="gw__bandin">
-                  <div>
-                    <p class="gw__bh">Put the busywork on the system.</p>
-                    <p class="gw__bs">Built around the way your business already works.</p>
-                  </div>
-                  <p class="gw__bacts"><span class="gw__bpill">Build My System</span><span class="gw__blink">See How It Works</span></p>
-                </div>
-              </div>
-              <div class="gw__rule" aria-hidden="true"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <figcaption>
-        <p class="spec__rails"><span>Design</span><span>Responsive</span><span class="spec__live"><i></i>Live</span></p>
-        <p class="spec__cap">The finished site carries the story; the structure sits beside it, never on it.</p>
+      <a class="spec__shot" href="/morrow/">
+        <img src="/assets/img/proof/morrow-desktop.jpg"
+             alt="Morrow Coffee Co., a self-initiated Kreated brand concept"
+             width="1600" height="1000" loading="lazy" decoding="async">
+      </a>
+      <figcaption class="spec__cap">
+        <b class="lin">Morrow Coffee Co.</b> A coffee bar and bakery, built from
+        the name outward: identity, art direction, photography and a finished
+        site. It is self-initiated work rather than a client engagement, and it
+        is here to show the standard of the design and build &mdash; not to
+        imply a client.
+        <a class="ilink" href="/morrow/">Open the concept</a>
       </figcaption>
     </figure>
   </div>
 </section>
+
 
 <!-- ==========================================================================
      3 · WHAT KREATED ACTUALLY HANDLES
@@ -1020,6 +751,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      answered in full below — timeline, ownership and payment terms. The
      approved wording and its qualifications are recorded above section 4.
      ========================================================================== -->
+<!-- ⚠ CLIENT PREVIEWS — gated on confirmed scope. Each client below has this
+     page's service named in its engagement scope in docs/PROJECTS.md. That is
+     the only reason it is on this page.
+     🚫 Do not add a client whose scope does not name this service, and 🚫 do
+     not add Morrow: it is a concept, not a client. /services/answer-engine-
+     optimization/ deliberately has NO block here, because no engagement
+     included AEO. An empty slot is correct where the evidence is empty. -->
+<section class="sec">
+  <div class="wrap lgrid">
+    <div>
+      <h2 class="sec__h">Who this was <em>built for</em></h2>
+      <p class="lgrid__note">Every one of these began as a website build.</p>
+    </div>
+    <div>
+      <div class="cprev cprev--two">
+      <article class="cprev__item">
+        <a class="cprev__shot" href="/work/rare-raleigh-restoration/" tabindex="-1" aria-hidden="true">
+          <img src="/assets/img/proof/rr-desktop.jpg" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+        </a>
+        <div class="cprev__body">
+          <h3 class="cprev__name">Rare Raleigh Restoration</h3>
+          <p class="cprev__scope">Website &middot; Google Business Profile &middot; Ongoing monthly SEO</p>
+          <a class="cprev__go" href="/work/rare-raleigh-restoration/">Read the case study <i aria-hidden="true">&#8594;</i></a>
+        </div>
+      </article>
+      <article class="cprev__item">
+        <a class="cprev__shot" href="/work/leak-locators-east-coast/" tabindex="-1" aria-hidden="true">
+          <img src="/assets/img/proof/llec-desktop.jpg" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+        </a>
+        <div class="cprev__body">
+          <h3 class="cprev__name">Leak Locators East Coast</h3>
+          <p class="cprev__scope">Website &middot; Google Business Profile &middot; Technical SEO &middot; Ongoing monthly SEO</p>
+          <a class="cprev__go" href="/work/leak-locators-east-coast/">Read the case study <i aria-hidden="true">&#8594;</i></a>
+        </div>
+      </article>
+      <article class="cprev__item">
+        <a class="cprev__shot" href="/work/learnsmart/" tabindex="-1" aria-hidden="true">
+          <img src="/assets/img/proof/learnsmart-desktop.jpg" alt="" width="1600" height="1000" loading="lazy" decoding="async">
+        </a>
+        <div class="cprev__body">
+          <h3 class="cprev__name">LearnSmart</h3>
+          <p class="cprev__scope">Brand identity &middot; Website &middot; Local SEO &middot; Analytics</p>
+          <a class="cprev__go" href="/work/learnsmart/">Read the case study <i aria-hidden="true">&#8594;</i></a>
+        </div>
+      </article>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="sec faqs__sec">
   <div class="wrap lgrid">
     <div><h2 class="sec__h">Questions</h2></div>
@@ -1239,7 +1020,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 
 <script src="/services/services.js?v=4" defer></script>
-<script src="/services/web-design/groundwork.js?v=1" defer></script>
 <!-- event emitter. Loads on every route so the [data-evt] CTAs in the
      header and footer are tracked everywhere, not only where forms.js runs.
      Contacts nothing until an analytics container is present. -->

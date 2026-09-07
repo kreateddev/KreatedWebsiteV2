@@ -741,20 +741,19 @@ body{background:transparent;color:var(--ink-1)}
 .revs__all:hover,.revs__all:focus-visible,
 .crumb a:hover,.crumb a:focus-visible,
 .cs__live:hover,.cs__live:focus-visible{
-  color:var(--accent);text-shadow:var(--glow);
+  color:var(--accent);
 }
 /* the card title and the client-index row are hovered from the whole card or
    row, not from the text itself, so they hang off the parent's :hover */
-.cs:hover .cs__link,.cs__link:focus-visible{color:var(--accent);text-shadow:var(--glow)}
+.cs:hover .cs__link,.cs__link:focus-visible{color:var(--accent)}
 .cidx__link:hover .cidx__name,.cidx__link:focus-visible .cidx__name{
-  color:var(--accent);text-shadow:var(--glow);
+  color:var(--accent);
 }
 /* a FAQ question is a control; it should answer to the pointer like one */
-.faqs summary:hover,.faqs summary:focus-visible{color:var(--accent);text-shadow:var(--glow-soft)}
+.faqs summary:hover,.faqs summary:focus-visible{color:var(--accent)}
 /* the trusted-by marks are one-ink images, so their "glow" is a drop-shadow */
 .tby__link:hover img,.tby__link:focus-visible img{
-  filter:brightness(0) invert(var(--k))
-         drop-shadow(0 0 10px color-mix(in srgb, transparent, var(--accent) 45%));
+  filter:brightness(0) invert(var(--k));opacity:1;
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -776,16 +775,21 @@ body{background:transparent;color:var(--ink-1)}
    🚫 Do not add .btn--cobalt, .btn--solid or .head__cta to the text-shadow
    list. They already invert on hover; this only adds the halo.
 
-   ⚠ Row components glow on the NAME, not on the whole row. .row__a and
-   .svc__row contain a number, a name and an arrow; lighting all three makes
-   the row look selected rather than hovered. */
-.row__a .row__name,.svc__row .svc__t,.svc__row .svc__n,
+   ⚠ Row components glow on the NAME, not on the whole row. .svc__row contains
+   a number, a name and an arrow; lighting all three makes the row look selected
+   rather than hovered.
+   🚫 .row__a — the /services/ ledger — is deliberately NOT here. It was, and it
+   was wrong: hovering a collapsed row opens it, so the glow flashed for about a
+   tenth of a second and then the name faded to opacity 0 as the panel expanded.
+   A highlight you only see while it is disappearing is a stutter, not feedback.
+   Reverted on owner instruction 2026-09-06; the ledger keeps its own quiet
+   hover from services.css and the expanded title carries the emphasis. */
+.svc__row .svc__t,.svc__row .svc__n,
 .fit__link,.hero__proof,.svc__more,.rev__case,.offer__cta,.offer__see,
 .btn--quiet,.btn--ghost,.btn--line,.pswitch__tab,.g__btn,
 .prose summary,.faqs summary,details > summary{
   transition:color .22s ease, text-shadow .22s ease;
 }
-.row__a:hover .row__name,.row__a:focus-visible .row__name,
 .svc__row:hover .svc__t,.svc__row:focus-visible .svc__t,
 .fit__link:hover,.fit__link:focus-visible,
 .hero__proof:hover,.hero__proof:focus-visible,
@@ -799,26 +803,342 @@ body{background:transparent;color:var(--ink-1)}
 .g__btn:hover,.g__btn:focus-visible,
 details > summary:hover,details > summary:focus-visible,
 main a:not([class]):hover,main a:not([class]):focus-visible{
-  color:var(--accent);text-shadow:var(--glow-soft);
+  color:var(--accent);
 }
-/* the filled controls: a halo around the shape, no text-shadow */
-.btn--cobalt:hover,.btn--cobalt:focus-visible,
-.btn--solid:hover,.btn--solid:focus-visible,
-.head__cta:hover,.head__cta:focus-visible,
-.offer__cta:hover,.offer__cta:focus-visible,
-.close__go:hover .btn,.tby__link:focus-visible{
-  box-shadow:0 0 0 1px color-mix(in srgb, transparent, var(--accent) 30%),
-             0 6px 26px color-mix(in srgb, transparent, var(--accent) 38%);
-}
+/* the filled controls */
 .btn--cobalt,.btn--solid,.head__cta,.offer__cta{transition:box-shadow .22s ease, background-color .2s ease}
 /* the client marks on the homepage strip, same treatment as the trusted-by row */
 .client:hover .client__logo,.client:focus-visible .client__logo{
-  filter:brightness(0) invert(var(--k))
-         drop-shadow(0 0 10px color-mix(in srgb, transparent, var(--accent) 45%));
+  filter:brightness(0) invert(var(--k));opacity:1;
 }
 @media (prefers-reduced-motion:reduce){
-  .row__a .row__name,.svc__row .svc__t,.fit__link,.hero__proof,.svc__more,
+  .svc__row .svc__t,.fit__link,.hero__proof,.svc__more,
   .rev__case,.offer__cta,.offer__see,.btn--quiet,.btn--ghost,.btn--line,
   .pswitch__tab,.g__btn,details > summary,
   .btn--cobalt,.btn--solid,.head__cta{transition:none}
 }
+
+/* ---- THE PRICING ROOM, MADE UNIFORM ------------------------------------
+   styles.css gives .invest an edge-to-edge warm-paper room (#F2F0EA) — "the
+   same paper stock the audit sheet and scope document are printed on". That
+   was a deliberate tonal break when the rest of the page was navy: warm paper
+   against a dark room reads as a considered shift.
+
+   Now that the whole route is cool paper (#F4F5FA), the warm room stops being
+   a break and becomes a mismatched off-white band two thirds of the way down
+   the page. Owner call, 2026-09-06: the page should be one ground.
+
+   ⚠ Only --room moves. --ink-on-room is #020C2E, the site's own navy, which is
+   correct and high-contrast on the cool paper and is read by a dozen rules in
+   pricing.css. --room-deep is untouched because nothing consumes it.
+   🚫 Do not delete the room tokens from styles.css. The homepage sets
+   --room:transparent for its own section and the same block is shared. */
+/* ⚠ --room IS ALSO AN INK, WHICH IS WHY THIS IS NOT `transparent`. The first
+   version of this rule set --room:transparent to let the page ground through,
+   and that worked for the background — but styles.css also has
+   `.offer__cta--dark{background:var(--ink-on-room); color:var(--room)}`: a navy
+   button whose LABEL is the room colour, so the type matches the paper it sits
+   on. Transparent made "Start a Project" invisible on fourteen buttons.
+   Aliasing --room to the page ground gives both: the section paints the same
+   colour as the page, and the button label is still paper on navy. */
+:root.day-start .invest{--room:var(--ground)}
+
+/* ---- THE EXPANDED SERVICE TITLE ----------------------------------------
+   Owner, 2026-09-06: "only have the name turn blue+glow when it expands", and
+   then "for all the services". Both halves of that instruction matter — the
+   hover glow on the collapsed row was reverted above, and this is where the
+   emphasis actually goes.
+
+   .row__title lives inside .row__panel, which only opens on .row.is-on, so
+   styling the element directly reaches all six services and needs no is-on
+   qualifier. It took --white, which the day remap turns into dark ink; the
+   accent replaces it in both rooms because --accent is k-aware.
+
+   ⚠ The halo is wider and weaker than --glow. That token was tuned for 14-20px
+   body links; at the 40-96px display scale these titles run, the same 18px blur
+   sits inside the letterforms and reads as a print registration error rather
+   than as light. Scaling the blur with the type and dropping the alpha keeps it
+   reading as a glow at every size in the clamp.
+   🚫 Do not reuse --glow here, and do not add this to .row__name — that is the
+   collapsed label, and lighting it is the stutter that was just removed. */
+.row__title{
+  /* ⚠ A DEEPER BLUE THAN THE REST OF THE ACCENT, owner call 2026-09-06. At
+     40-96px the plain accent is a lot of saturated blue at once and reads
+     closer to a link than to a title. Mixing a third of the way toward the
+     night navy keeps the same hue and drops the value, which is what "darker"
+     wants — a deeper ink, not a duller one.
+     ⚠ Written on --k so it is still correct if this page is ever given the
+     journey: in day it resolves to the deeper mix, at night it falls back to
+     the plain accent, because mixing toward navy ON navy would sink it into
+     the ground. /services/ is a paper route today, so only the first half is
+     ever painted — the second half is there so the rule cannot rot.
+     🚫 NO GLOW HERE, AND IT CANNOT BE ADDED BACK. A text-shadow was tried and
+     produced a soft haze that ended in a hard vertical line down the left of
+     the title. The shadow itself was fine — the cause is .row__inner, which
+     carries overflow:hidden so the expanding panel can animate its height. A
+     52px halo spreads well past the glyphs, hits that clip and is cut off
+     square, so a glow reads as a grey rectangle with a visible edge.
+     Anything blurred inside this panel will do the same thing. The colour
+     carries the emphasis on its own. */
+  color:color-mix(in srgb,
+    color-mix(in srgb, var(--accent), var(--bx-night) 34%),
+    var(--accent) calc(var(--k) * 100%));
+}
+
+/* ==========================================================================
+   THE GLISTEN — one sweep of light, left to right, 2026-09-06.
+   Replaces the hover glow everywhere. Owner: "when you hover, it should just
+   glisten one time from left to right."
+
+   HOW IT WORKS. The text is painted by a gradient instead of a flat fill:
+   currentColor across almost the whole width, with one narrow lighter band in
+   it. background-clip:text clips that gradient to the glyphs, and a keyframe
+   slides the gradient once so the band travels across the word. One pass per
+   hover, because a CSS animation restarts every time the state is entered —
+   that is what makes it glisten rather than pulse.
+
+   ⚠ THE COLOUR IS NOT LOST, WHICH IS THE WHOLE TRICK. `color` is still set and
+   still computes to --accent, so every contrast measurement and every tool that
+   reads the cascade sees the real value; -webkit-text-fill-color only changes
+   what is PAINTED, and what is painted is currentColor everywhere except the
+   moving band. Text never becomes lighter than its declared colour for more
+   than the width of that band.
+   🚫 Do not "simplify" this by setting color:transparent. That is the version
+   that looks identical and reports 1:1 to every checker.
+
+   ⚠ THE @supports GUARD IS LOad-BEARING. -webkit-text-fill-color:transparent
+   is honoured by browsers that do NOT support background-clip:text, and the
+   result there is invisible text. The guard means such a browser gets a plain
+   colour change and nothing else, which is a fine hover state.
+
+   ⚠ Filled buttons are NOT in this list. Their label is white on cobalt, so a
+   lighter band inside white type is invisible; they sweep a sheen across the
+   BUTTON instead — see .btn--cobalt below.
+   ========================================================================== */
+@keyframes k-glisten{
+  /* 100% -> 0% slides the oversized gradient rightward across the element, so
+     the light band travels LEFT TO RIGHT. Verified rather than reasoned: frames
+     captured at 0.18s and 0.26s put the band at "art a" then at "ject" of
+     "Start a Project", and it has left the word by 0.34s.
+     ⚠ TIMING IS linear ON PURPOSE. The first version used an ease that
+     front-loads the travel, and because the band only occupies the middle third
+     of the gradient it crossed the whole word in about 0.16s of a 0.62s
+     animation — a flick rather than a glisten. At a constant rate the sweep
+     reads as one continuous movement. */
+  from{background-position:100% 0}
+  to  {background-position:0% 0}
+}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .ilink:hover,.ilink:focus-visible,
+  .tlink:hover,.tlink:focus-visible,
+  .faqs__a a:hover,.faqs__a a:focus-visible,
+  .prose a:hover,.prose a:focus-visible,
+  .cs__col a:hover,.cs__col a:focus-visible,
+  .close__alt:hover,.close__alt:focus-visible,
+  .next a:hover,.next a:focus-visible,
+  .close__go:hover,.close__go:focus-visible,
+  .head__nav a:hover,.head__nav a:focus-visible,
+  .foot__cols a:hover,.foot__cols a:focus-visible,
+  .revs__all:hover,.revs__all:focus-visible,
+  .crumb a:hover,.crumb a:focus-visible,
+  .cs__live:hover,.cs__live:focus-visible,
+  .cs:hover .cs__link,.cs__link:focus-visible,
+  .cidx__link:hover .cidx__name,.cidx__link:focus-visible .cidx__name,
+  .faqs summary:hover,.faqs summary:focus-visible,
+  .svc__row:hover .svc__t,.svc__row:focus-visible .svc__t,
+  .fit__link:hover,.fit__link:focus-visible,
+  .hero__proof:hover,.hero__proof:focus-visible,
+  .svc__more:hover,.svc__more:focus-visible,
+  .rev__case:hover,.rev__case:focus-visible,
+  .offer__see:hover,.offer__see:focus-visible,
+  .btn--quiet:hover,.btn--quiet:focus-visible,
+  .btn--ghost:hover,.btn--ghost:focus-visible,
+  .btn--line:hover,.btn--line:focus-visible,
+  .pswitch__tab:hover,.pswitch__tab:focus-visible,
+  .g__btn:hover,.g__btn:focus-visible,
+  details > summary:hover,details > summary:focus-visible,
+  main a:not([class]):hover,main a:not([class]):focus-visible{
+    background-image:linear-gradient(100deg,
+      currentColor 0%, currentColor 42%,
+      color-mix(in srgb, currentColor, #FFFFFF 62%) 50%,
+      currentColor 58%, currentColor 100%);
+    background-size:300% 100%;
+    background-repeat:no-repeat;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:k-glisten .72s linear 1;
+  }
+}
+
+/* The filled controls sweep a sheen across the button, not through the label.
+   ⚠ .btn--cobalt already uses ::before for its own hover fill, so this hangs
+   off ::after, and the button needs a stacking context or the sheen paints
+   over the text. */
+.btn--cobalt,.btn--solid,.head__cta,.offer__cta:not(.offer__cta--text){
+  position:relative;overflow:hidden;isolation:isolate;
+}
+.btn--cobalt::after,.btn--solid::after,.head__cta::after,
+.offer__cta:not(.offer__cta--text)::after{
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;
+  background:linear-gradient(100deg,
+    transparent 0%, transparent 38%,
+    rgba(255,255,255,.34) 50%,
+    transparent 62%, transparent 100%);
+  background-size:300% 100%;background-repeat:no-repeat;
+}
+.btn--cobalt:hover::after,.btn--cobalt:focus-visible::after,
+.btn--solid:hover::after,.btn--solid:focus-visible::after,
+.head__cta:hover::after,.head__cta:focus-visible::after,
+.offer__cta:not(.offer__cta--text):hover::after,
+.offer__cta:not(.offer__cta--text):focus-visible::after{
+  opacity:1;animation:k-glisten .72s linear 1;
+}
+
+/* 🚫 A sweep is motion. Under reduced motion the hover is a colour change and
+   nothing moves — the gradient paint is switched off entirely rather than just
+   having its animation removed, because a static gradient would leave a light
+   band frozen across the middle of the word. */
+@media (prefers-reduced-motion:reduce){
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    .ilink:hover,.tlink:hover,.faqs__a a:hover,.prose a:hover,.cs__col a:hover,
+    .close__alt:hover,.next a:hover,.close__go:hover,.head__nav a:hover,
+    .foot__cols a:hover,.revs__all:hover,.crumb a:hover,.cs__live:hover,
+    .cs:hover .cs__link,.cidx__link:hover .cidx__name,.faqs summary:hover,
+    .svc__row:hover .svc__t,.fit__link:hover,.hero__proof:hover,.svc__more:hover,
+    .rev__case:hover,.offer__see:hover,.btn--quiet:hover,.btn--ghost:hover,
+    .btn--line:hover,.pswitch__tab:hover,.g__btn:hover,details > summary:hover,
+    main a:not([class]):hover{
+      background-image:none;-webkit-text-fill-color:currentColor;animation:none;
+    }
+  }
+  .btn--cobalt::after,.btn--solid::after,.head__cta::after,
+  .offer__cta:not(.offer__cta--text)::after{display:none}
+}
+
+/* ---- ONE MASTHEAD, EVERY ROUTE ----------------------------------------
+   Owner, 2026-09-06: "the header changes size when going from home to a
+   different page. It needs to stay the same throughout the entire site."
+
+   It did, and the cause was inheritance rather than anything written about the
+   header. .head__mark sets a font-family, weight, size and tracking in both
+   stylesheets — but never a line-height, so it inherited one:
+
+     styles.css     body line-height 1.55  ->  mark box 32.55px tall
+     services.css   body line-height unset ->  mark box 25px    ("normal")
+
+   The header is a flex row with align-items:center, so a 7.5px difference in
+   the tallest item moved everything: the wordmark sat 3.8px higher and the nav
+   5px lower on the four routes that load styles.css than on the thirty-one that
+   load services.css. Everything the eye actually measures a header by — height,
+   type size, padding, the mark's left edge — was already identical at every
+   width from 390 to 1920. This was the whole difference.
+
+   ⚠ Declared here, in the shared file, because the fault is that the two page
+   systems each supplied their own value. Fixing it in one of them would leave
+   the same class of bug in the other.
+   🚫 Do not set this on body. The mark is the only thing in the header that
+   inherits a line-height it should not. */
+.head__mark{line-height:1}
+
+/* The same divergence, twice more. The nav was spaced and padded differently
+   by the two systems, which moved the links horizontally AND vertically:
+
+     gap              styles.css clamp(20px,2.1vw,30px)  services.css clamp(26px,2.6vw,38px)
+     a padding-block  styles.css none                    services.css 5px
+
+   The 5px is why the nav sat 5px lower on thirty-one routes than on four. Both
+   are settled on the services.css values because those are what 31 of the 35
+   routes already render and what the header was last tuned against.
+   ⚠ The homepage's tighter gap was itself a fix once — a fifth nav item was
+   added and the four-item spacing no longer fit, so the gap was pulled in and
+   checked at 1024/1200/1440. The nav markup is identical on every route, so the
+   wider value has been re-checked at those widths here rather than assumed. */
+.head__nav{gap:clamp(26px,2.6vw,38px)}
+.head__nav a{padding-block:5px}
+
+/* And the pill. styles.css padded it 0 18px, services.css 0 22px, so the
+   "Start a Project" button was 133.3px wide on the homepage and 141.3px
+   everywhere else — which also pushed the whole nav 8px right, since the nav is
+   margin-left:auto and sits against the button. Settled on 22px, the value 31
+   of the 35 routes already use.
+   ⚠ This is the last of four separate divergences between the two page systems
+   in one 91px bar: the mark's inherited line-height, the nav gap, the nav
+   link's padding-block, and this. Each was small; together they moved every
+   element in the header. 🚫 If a fifth appears, fix it here rather than in
+   either page system, or the pair drifts apart again. */
+.head__cta{
+  padding:0 22px;
+  /* ⚠ AND THE FILL — the fifth divergence. styles.css painted this with
+     var(--cta-fill)/var(--cta-ink), services.css with var(--cobalt) and a
+     literal #fff, so the same pill was #2148D8 on the homepage and #0A47F0 on
+     the other thirty-one routes.
+     Settled on the k-aware pair rather than on the majority literal, because
+     --cta-fill is the token that INVERTS: cobalt with white type in day, a
+     white pill with navy type at night. /#/ and /about/ still travel, and with
+     a fixed --cobalt the masthead button would stay mid-blue on the night
+     ground instead of becoming the loudest thing on the page, which is what
+     the token was built for. The 31 static-day routes move from #0A47F0 to
+     #2148D8 — the deeper blue, consistent with the service titles. */
+  background:var(--cta-fill);
+  color:var(--cta-ink);
+}
+
+/* ==========================================================================
+   THE SPECIMEN + THE CLIENT PREVIEW, 2026-09-06.
+   Two related blocks. .spec shows one piece of work large; .cprev shows the
+   clients whose engagement actually included the service the page is about.
+
+   ⚠ THE DIFFERENCE BETWEEN THEM IS EVIDENCE CLASS, AND IT IS THE POINT.
+   .spec carries Morrow, which is self-initiated and says so. .cprev carries
+   real engagements and links to their project records. They are styled apart
+   on purpose — the specimen is a single wide plate, the previews are a row of
+   records — so the two never read as one list of clients.
+   🚫 Never put a concept in .cprev, and never drop the concept label from
+   .spec. PROOF.md §9 is the authority for what may appear where.
+   ========================================================================== */
+.spec{padding:clamp(30px,4vw,58px) 0}
+.spec__fig{margin:clamp(16px,2vw,26px) 0 0}
+.spec__shot{
+  display:block;overflow:hidden;border-radius:14px;
+  border:1px solid var(--stroke);background:var(--surface);
+}
+.spec__shot img{width:100%;height:auto;display:block;transition:transform .55s cubic-bezier(.2,.7,.3,1)}
+.spec__shot:hover img{transform:scale(1.02)}
+.spec__shot:focus-visible{outline:2px solid var(--stroke-focus);outline-offset:4px}
+.spec__cap{
+  margin:clamp(14px,1.6vw,20px) 0 0;max-width:74ch;
+  font-size:clamp(15px,1.2vw,16.5px);line-height:1.6;color:var(--ink-2);
+}
+@media (prefers-reduced-motion:reduce){ .spec__shot:hover img{transform:none} }
+
+/* ---- the client preview -------------------------------------------------
+   ⚠ One row per client, and the SCOPE LINE IS NOT DECORATION. It is the
+   engagement's confirmed scope from PROJECTS.md, which is also what justifies
+   the client appearing on this particular service page at all. If a scope does
+   not name the service, the client does not belong here.
+   ⚠ Sized deliberately smaller than the case cards on /work/: this is a
+   pointer to the record, not the record. */
+.cprev{display:grid;gap:clamp(16px,2vw,26px);margin:clamp(18px,2.2vw,30px) 0 0}
+.cprev--two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cprev__item{display:flex;flex-direction:column;min-width:0}
+.cprev__shot{
+  display:block;overflow:hidden;border-radius:12px;aspect-ratio:16/10;
+  border:1px solid var(--stroke);background:var(--surface);
+}
+.cprev__shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+  transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.cprev__item:hover .cprev__shot img{transform:scale(1.03)}
+.cprev__body{padding:clamp(12px,1.3vw,16px) 2px 0}
+.cprev__name{margin:0;font:500 clamp(16px,1.4vw,19px)/1.3 'General Sans',system-ui;color:var(--ink-1)}
+.cprev__scope{
+  margin:6px 0 0;font:400 13px/1.5 'General Sans',system-ui;color:var(--ink-3);
+}
+.cprev__go{
+  display:inline-flex;align-items:center;gap:7px;margin-top:clamp(10px,1.1vw,14px);
+  font:500 14.5px/1 'General Sans',system-ui;color:var(--accent);
+  text-decoration:none;border-bottom:0;
+}
+.cprev__go i{font-style:normal;font-size:12px}
+@media (prefers-reduced-motion:reduce){ .cprev__item:hover .cprev__shot img{transform:none} }
+@media (max-width:800px){ .cprev--two{grid-template-columns:1fr} }

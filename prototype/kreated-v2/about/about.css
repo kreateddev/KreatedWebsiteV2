@@ -19,3 +19,41 @@
   .ab__facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 28px}
 }
 @media (max-width:640px){ .ab__facts{grid-template-columns:1fr;gap:16px} }
+
+/* ==========================================================================
+   THE THREE CLAIMS — 2026-09-06.
+   The page was nine near-identical blocks: a small left label and a column of
+   paragraphs, repeated. Nothing carried more weight than anything else, so the
+   argument had no shape and the eye had nowhere to land.
+
+   Three sentences in the body ARE the page's argument — that a website should
+   do more than look good, that marketing is what puts people in front of it,
+   and that clients are partners rather than transactions. They were already
+   marked <b> and rendered like every other bold. Here they become the thing
+   the section is built around.
+
+   ⚠ This is a scale-and-space change, not a colour one. The claim keeps ink
+   rather than taking the accent: three blue paragraphs on one page is a banner,
+   which is the same trap the .lin rule in theme.css exists to avoid. The
+   emphasis comes from size, measure and the rule above it.
+   🚫 Do not add a fourth. Three is what the copy actually contains, and a
+   device that appears everywhere stops being one.
+   ========================================================================== */
+.ab__claim{
+  margin:clamp(26px,3vw,40px) 0 clamp(18px,2vw,26px);
+  padding-top:clamp(20px,2.2vw,28px);
+  border-top:1px solid var(--stroke);
+  max-width:30ch;
+}
+.ab__claim b{
+  font-weight:500;
+  font-size:clamp(20px,1.9vw,26px);
+  line-height:1.28;
+  letter-spacing:-.016em;
+  color:var(--ink-1);
+}
+
+/* the heading accent, so the eight sections read as a sequence rather than a
+   stack. The <em> is one word per heading and takes the site's serif italic —
+   the same device /services/ uses for "in order". */
+.sec__h em{color:var(--accent);text-shadow:var(--glow-soft)}

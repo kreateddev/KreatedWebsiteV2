@@ -224,7 +224,19 @@ a{color:inherit}
      pinned over, which is why there is no edge along its bottom at any
      scroll position. 🚫 Do not give it a fixed fill or a blur. */
   background:var(--ground);
-  border-bottom:1px solid transparent;
+  /* ⚠ SUPERSEDED 2026-09-06, owner instruction: "the header needs to stay the
+     same throughout the entire site". This was `transparent`, and the note in
+     .head.is-fixed below called that a deliberate difference — the homepage was
+     the one route whose masthead opened over artwork with no hairline under it.
+     The cost was that the header LOOKED different between routes: with no rule
+     under it the masthead merges into the hero and reads as a taller band, and
+     the line appears the moment you navigate anywhere else. Measured, the two
+     headers were otherwise pixel-identical at every width from 390 to 1920 —
+     same 91px height, same 21px mark, same positions. This border was the only
+     difference, so it is the only thing that had to change.
+     🚫 Do not restore `transparent` without also removing the hairline from the
+     other 34 routes; one of the two has to give and this is the one. */
+  border-bottom:1px solid color-mix(in srgb, var(--ink-1) 8%, transparent);
   transition:border-color var(--t-hover);
 }
 .head.is-fixed{
@@ -3038,4 +3050,9 @@ button,input,select,textarea{font:inherit;color:inherit}
   .fit__body{max-width:none}
 }
 
-}
+/* ⚠ A STRAY "}" STOOD HERE. The @media block above closes on its own line;
+   this extra brace closed nothing and had been in the file since before
+   2026-09-06. Browsers ignore an unmatched trailing brace, so nothing
+   rendered wrong — but any rule appended after it would have landed
+   outside every context, and a minifier is entitled to reject the file.
+   Removed 2026-09-07; styles.css now balances at depth 0. */
