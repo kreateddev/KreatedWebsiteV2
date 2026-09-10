@@ -251,7 +251,19 @@
   var NEED_CATEGORIES = {
     website:  ['pkg.web.onepage','pkg.web.launch','pkg.web.growth','pkg.web.leader'],
     pages:    ['svc.page.standard','svc.page.service','svc.page.location','svc.page.landing'],
-    localSeo: ['svc.search.gbp','pkg.local.presence','pkg.local.growth','pkg.local.expansion'],
+    /* ⚠ svc.search.gbp IS DELIBERATELY ABSENT. classify.js states in every
+       local finding that "the Google Business Profile itself was not inspected:
+       this audit reads your public website only" — and the audit was then
+       recommending Google Business Profile Optimization, a one-time audit and
+       correction OF THAT PROFILE, as the cheapest rung here. It sold a fix for
+       the one artefact it had just said it never looked at.
+       The three programmes below are evidenced by what the audit CAN see:
+       location naming, LocalBusiness schema, click-to-call and location pages.
+       🚫 Do not put svc.search.gbp back unless the audit starts reading the
+       profile. The offer itself is fine and still sells on /pricing/ and in the
+       package builder — it just cannot be RECOMMENDED from website-only
+       evidence. */
+    localSeo: ['pkg.local.presence','pkg.local.growth','pkg.local.expansion'],
     aeo:      ['pkg.aeo.audit','pkg.aeo.foundation'],
     brand:    ['pkg.brand.refresh','pkg.brand.identity','pkg.brand.full'],
     content:  ['svc.copy.full','svc.prod.photo'],

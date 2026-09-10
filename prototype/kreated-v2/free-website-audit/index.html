@@ -278,23 +278,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="err" data-err-for="aw-name" aria-live="polite"></span>
           </p>
           <p class="field">
-            <label for="aw-business">Business name <span class="req" aria-hidden="true">*</span></label>
-            <input id="aw-business" name="business" type="text" required autocomplete="organization">
+            <label for="aw-business">Business name <span class="opt">(optional)</span></label>
+            <input id="aw-business" name="business" type="text" autocomplete="organization">
             <span class="err" data-err-for="aw-business" aria-live="polite"></span>
           </p>
           <p class="field">
-            <label for="aw-email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input id="aw-email" name="email" type="email" required autocomplete="email" inputmode="email">
+            <label for="aw-email">Email <span class="opt">(optional)</span></label>
+            <input id="aw-email" name="email" type="email" autocomplete="email" inputmode="email">
             <span class="err" data-err-for="aw-email" aria-live="polite"></span>
           </p>
           <p class="field">
-            <label for="aw-phone">Phone <span class="req" aria-hidden="true">*</span></label>
-            <input id="aw-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel">
+            <label for="aw-phone">Phone <span class="opt">(optional)</span></label>
+            <input id="aw-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
             <span class="err" data-err-for="aw-phone" aria-live="polite"></span>
           </p>
           <p class="field field--wide">
-            <label for="aw-issue">What would you most like improved? <span class="req" aria-hidden="true">*</span></label>
-            <textarea id="aw-issue" name="issue" rows="3" required></textarea>
+            <label for="aw-issue">What would you most like improved? <span class="opt">(optional)</span></label>
+            <textarea id="aw-issue" name="issue" rows="3"></textarea>
             <span class="err" data-err-for="aw-issue" aria-live="polite"></span>
           </p>
         </div>
@@ -604,13 +604,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="/motion.js?v=34"></script>
 <!-- offers -> recommend -> audit. The audit client computes no prices: it
      hands `needs` to the same engine the pricing builder uses. -->
-<script src="/assets/data/offers.js?v=1" defer></script>
+<script src="/assets/data/offers.js?v=2" defer></script>
 <script src="/assets/data/recommend.js?v=3" defer></script>
 <!-- event emitter. Loads on every route so the [data-evt] CTAs in the
      header and footer are tracked everywhere, not only where forms.js runs.
      Contacts nothing until an analytics container is present. -->
 <script src="/track.js?v=1" defer></script>
 <script src="/forms.js?v=4" defer></script>
-<script src="/free-website-audit/audit.js?v=8" defer></script>
+<script src="/free-website-audit/audit.js?v=9" defer></script>
 </body>
 </html>

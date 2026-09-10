@@ -289,12 +289,23 @@
        skips it — `required` on an input is a semantic hint to assistive tech
        and no more. Every field that must be filled needs its own check below.
        🚫 Adding `required` in the HTML alone will silently do nothing here. */
+    /* ⚠ UNGATED, owner instruction 2026-09-09. The audit used to demand a
+       website, a name, a business, an email AND a phone number before it would
+       run — five fields to see a free report, which is what made the best asset
+       in the business behave like a contact form with extra steps.
+       Now: the website, because it is the thing being audited and there is
+       nothing to check without it, and a name, because a report addressed to
+       nobody reads like a machine wrote it. Everything else is optional.
+       🚫 The backend agrees with this — lib/audit-core.js no longer rejects a
+       missing email either. Change one and you must change the other, or the
+       form submits and the function 400s. */
     var url = (form.querySelector('[name="website"]') || {}).value || '';
+    var name = (form.querySelector('[name="name"]') || {}).value || '';
     var email = (form.querySelector('[name="email"]') || {}).value || '';
     var phone = (form.querySelector('[name="phone"]') || {}).value || '';
     if (!url.trim()) { fail('Enter the website address you would like checked.', false); return; }
-    if (!email.includes('@')) { fail('Enter an email address so the result can reach you.', false); return; }
-    if (!phone.trim()) { fail('Enter a phone number so the result can be followed up.', false); return; }
+    if (!name.trim()) { fail('Enter your name so the report can be addressed to you.', false); return; }
+    if (email.trim() && !email.includes('@')) { fail('That email address does not look right.', false); return; }
 
     busy = true;
     var btn = form.querySelector('button[type="submit"]');

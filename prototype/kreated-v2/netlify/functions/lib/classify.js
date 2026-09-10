@@ -152,10 +152,34 @@ function classify(s) {
       ev.push(markets + ' distinct markets have a page of their own.');
     }
 
-    /* a service business with a stated market and no location page at all */
-    if (!s.locationPages.length && s.servicePages.length && place) {
+    /* ⚠ ONLY WHEN THE SITE NAMES MORE THAN ONE MARKET. This branch used to fire
+       on `!locationPages.length && servicePages.length && place`, which is true
+       of every single-market business — including kreated.dev, which has no
+       location pages ON PURPOSE. It produced "You name markets the site has no
+       page for" from evidence that one place was named, and then a priced
+       recommendation to build them.
+
+       That is precisely what the guard four lines above forbids: "a business
+       that genuinely works a single town is never told to invent markets it
+       does not serve. Inventing demand is the one thing this tool must not do."
+       The rule was applied to the 'one market' branch and missed here.
+
+       It is also advice Kreated publicly argues against — /web-design-for-
+       contractors/ says "not a page for every town within an hour", and
+       /services/local-seo/ refuses to build a location page without genuine
+       local relevance. The tool was contradicting the agency selling it.
+
+       cityMentions holds every distinct "City, ST" found in the copy. Two or
+       more named, none of them covered by a page, is a real gap. One named is a
+       single-market business and is correct as it stands.
+       🚫 Do not relax this back to `place`. `place` is the FIRST match in the
+       text — it is true of every local site alive. */
+    const namedCities = Object.keys(s.cityMentions || {}).length;
+    if (!s.locationPages.length && s.servicePages.length && namedCities >= 2) {
       bad.push('no location pages');
-      ev.push('No page on the site targets any of the areas you serve.');
+      ev.push('The site names ' + namedCities + ' markets in its copy, and no page targets any of them.');
+    } else if (!s.locationPages.length && namedCities <= 1) {
+      ev.push('No location pages, and the copy names a single market — which is what a single-market business should look like.');
     }
 
 

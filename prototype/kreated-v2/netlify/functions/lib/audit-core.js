@@ -365,7 +365,15 @@ exports.handler = async function (event) {
 
   const url = String(body.url || '').trim();
   if (!url) return reply(400, { error: 'Enter the website address you would like checked.', field: 'url' });
-  if (!String(body.email || '').includes('@')) return reply(400, { error: 'Enter an email address so the result can reach you.', field: 'email' });
+  /* ⚠ EMAIL IS OPTIONAL, owner instruction 2026-09-09. This used to reject any
+     request without one. The result renders in the page rather than being
+     emailed, so an address was never needed to DELIVER the audit — only to
+     capture the lead, and gating a free tool on lead capture is what kept its
+     volume down. If one is supplied it still has to look like an address.
+     🚫 The front end must agree: free-website-audit/audit.js validates the same
+     way. A stricter check here than there means a form that submits and 400s. */
+  const em = String(body.email || '').trim();
+  if (em && !em.includes('@')) return reply(400, { error: 'That email address does not look right.', field: 'email' });
 
   const ip = (event.headers['x-nf-client-connection-ip'] ||
               (event.headers['x-forwarded-for'] || '').split(',')[0] || 'unknown').trim();
