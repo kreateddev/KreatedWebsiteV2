@@ -384,6 +384,18 @@ to the report.
 - The read endpoint is **not** behind the audit rate limiter; opening a link runs no crawl.
 - Disclosed on `/privacy/` under "Saved audit reports".
 
+### The contractor landing page (added 2026-09-10)
+
+`/contractor-website-audit/` is the landing page for trade ads and audit-led outreach. It is
+built from `/free-website-audit/` with the **same form (`website-audit`), the same `#auditApp` and
+the same `audit.js`**, so the audit runs on the page itself. Only the copy differs: a contractor
+headline, the engine's real six categories in trades language, a section pointing every other
+business to `/free-website-audit/`, and four
+questions whose FAQPage data matches the visible text. After a run the address bar keeps the
+current path (`location.pathname + '?r=<id>'`); the shareable link always uses
+`/free-website-audit/?r=<id>`, which is also the only form the intake email will include.
+🚫 One page for all trades (DECISION 027). Do not add a near-copy per trade.
+
 ## 9. The `_redirects` gate
 
 ```

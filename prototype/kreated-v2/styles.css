@@ -1388,8 +1388,12 @@ a{color:inherit}
   font-size:clamp(16px,1.2vw,18px);line-height:1.55;color:var(--ink-3);
 }
 .final__ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:16px}
+/* ⚠ border:0 — a <button class="btn btn--cobalt"> (the form submits) otherwise
+   keeps the browser's 2px OUTSET border, which drew a grey-and-black second
+   outline around the blue pill. An <a> never had one, so only buttons showed it. */
 .btn--cobalt{
   height:56px;background:var(--cobalt);color:#fff;position:relative;overflow:hidden;
+  border:0;
 }
 .btn--cobalt::before{
   content:'';position:absolute;left:0;right:0;top:0;height:1px;
@@ -1403,9 +1407,13 @@ a{color:inherit}
 .btn--ghost:hover,.btn--ghost:focus-visible{
   border-color:var(--accent);background:color-mix(in srgb, var(--ink-1) 5%, transparent);
 }
-.btn--cobalt:focus-visible,.btn--ghost:focus-visible{
-  outline:2px solid var(--cobalt-lift);outline-offset:3px;
-}
+/* ⚠ ONE LINE, AND IT IS BLUE (owner request 2026-09-11). Focus used to add a
+   light-blue ring 3px outside the element's own border, which read as two
+   outlines. Now the element's own edge turns blue and thickens; nothing is
+   drawn outside it. The solid pill has no edge to thicken, so it gets a single
+   blue ring hugging it instead. Still a visible focus state either way. */
+.btn--ghost:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.btn--cobalt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* ==========================================================================
    10 · FOOTER — utility, one step darker
@@ -2157,9 +2165,10 @@ main:focus{outline:none}
 .field select option{background:var(--navy);color:#fff}
 .field input::placeholder,.field textarea::placeholder{color:var(--ink-4)}
 .field input:hover,.field select:hover,.field textarea:hover{border-color:color-mix(in srgb, var(--ink-1) 30%, transparent)}
+/* one blue line on focus, not a border plus a ring outside it (2026-09-11) */
 .field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{
-  outline:2px solid var(--cobalt-lift);outline-offset:2px;
-  border-color:var(--accent);background:color-mix(in srgb, var(--ink-1) 6%, transparent)}
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);
+  background:color-mix(in srgb, var(--ink-1) 6%, transparent)}
 /* error state — colour is never the only signal: the message text carries it */
 .field.is-bad input,.field.is-bad select,.field.is-bad textarea{border-color:#FF8A8A}
 .err{display:none;font:500 12.5px/1.4 'General Sans',system-ui;color:#FFB4B4}

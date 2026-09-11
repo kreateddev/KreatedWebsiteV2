@@ -512,3 +512,24 @@ chosen directly ($79/mo, "Yes, include it"), 2026-09-10.
    `http://localhost:3000`; no client login has been verified in production.
 2. **Build client accounts for the CRM** (per-client pipelines with their own RLS). Until then a
    CRM customer cannot be onboarded as described.
+
+## 027 — Target contractors in general and other businesses, never a single trade
+
+**DATE** 2026-09-10
+**PHASE** Growth plan, steps 4-5
+**DECISION** Kreated targets **contractors as a whole, plus businesses of every other kind**. No
+page, headline or landing section is aimed at a single trade. The two trade pages built in step 4
+(`/web-design-for-contractors/remodelers/` and `/pool-service/`) are **removed** and 301-redirect
+to `/web-design-for-contractors/`.
+**APPROVED BY SKYLER** yes — "Pool service and leak detection shouldn't be a main targeter,
+neither should 'remodelers', it should stick to contractors and other businesses", 2026-09-10.
+
+**WHAT STAYS**
+- The client facts. Leak Locators East Coast is still a pool leak detection company and Rare
+  Raleigh Restoration a remodeling contractor on their case studies and in the client lists; that
+  describes the client, it does not target the trade.
+- The Rare Raleigh correction (urgent restoration → remodeling), which is about accuracy.
+- `/contractor-website-audit/`, which targets contractors generally and points everyone else to
+  `/free-website-audit/`.
+
+**🚫** Do not add per-trade pages, per-trade landing pages or trade-specific headlines.

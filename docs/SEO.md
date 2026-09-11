@@ -88,8 +88,7 @@ already matches.)
 | `/services/google-business-profile/` | `Google Business Profile optimization Wilmington` | `Google Business Profile management` |
 | `/services/brand-strategy/` | `brand strategy Wilmington` | `brand positioning for small business` |
 | `/web-design-for-contractors/` | `web design for contractors` | `contractor website design Wilmington NC` |
-| `/web-design-for-contractors/remodelers/` | `remodeling contractor website design` | `website for remodelers`, `home remodeling website` |
-| `/web-design-for-contractors/pool-service/` | `pool service website design` | `pool leak detection marketing`, `website for pool companies` |
+| `/contractor-website-audit/` | `free website audit for contractors` | `contractor website grader`, `contractor website checker` |
 | `/about/` | **None** | — |
 
 <details><summary>The superseded Raleigh-primary map, kept for the record</summary>

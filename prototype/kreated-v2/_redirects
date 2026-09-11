@@ -33,3 +33,11 @@
 # ==========================================================================
 # Everything below is ordinary hygiene, not a gate.
 # ==========================================================================
+
+# ⚠ PER-TRADE PAGES REMOVED 2026-09-10 (DECISION 027). They were live for a few
+# hours; the redirect keeps any crawled or shared link landing somewhere real.
+# 🚫 Do not recreate a page aimed at a single trade.
+/web-design-for-contractors/remodelers    /web-design-for-contractors/  301
+/web-design-for-contractors/remodelers/   /web-design-for-contractors/  301
+/web-design-for-contractors/pool-service  /web-design-for-contractors/  301
+/web-design-for-contractors/pool-service/ /web-design-for-contractors/  301

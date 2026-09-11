@@ -299,7 +299,10 @@
       /* the address bar becomes the link, so a reload or a bookmark returns to
          this report instead of an empty form */
       if (report && report.id && window.history && history.replaceState) {
-        try { history.replaceState(null, '', '/free-website-audit/?r=' + encodeURIComponent(report.id)); } catch (e) {}
+        /* the CURRENT path, not /free-website-audit/: the same script runs on
+           /contractor-website-audit/, and a reload should stay on the page the
+           visitor chose. The shared link itself always uses reportUrl(). */
+        try { history.replaceState(null, '', location.pathname + '?r=' + encodeURIComponent(report.id)); } catch (e) {}
       }
     }
 
