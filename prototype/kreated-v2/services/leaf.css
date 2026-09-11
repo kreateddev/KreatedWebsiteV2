@@ -218,7 +218,11 @@
    Promoted here 2026-08-30 once a third leaf needed it; the rules are the ones
    Website Redesign and Local SEO already carried, unchanged.
    -------------------------------------------------------------------------- */
-.ilink{color:var(--white);border-bottom:1px solid var(--cobalt);
+/* ⚠ text-decoration:none HERE, not only in services.css's `a` reset. The audit
+   pages load styles.css instead, which keeps the browser underline, so every
+   link there drew TWO lines: a dark underline and this blue border. One line,
+   and it is the blue one (owner request 2026-09-11). */
+.ilink{color:var(--white);border-bottom:1px solid var(--cobalt);text-decoration:none;
   padding-bottom:1px;padding-block:4px}
 .ilink:hover{border-bottom-color:var(--accent)}
 .ilink:focus-visible{outline:2px solid var(--cobalt-lift);outline-offset:3px;border-radius:2px}
@@ -425,7 +429,7 @@
    is only 22px tall, which is under the 24px target minimum. WCAG 2.5.8 exempts
    inline targets, but four pixels of vertical padding clears it outright and
    changes no layout. */
-.faqs .faqs__a a{color:var(--white);border-bottom:1px solid var(--cobalt);
+.faqs .faqs__a a{color:var(--white);border-bottom:1px solid var(--cobalt);text-decoration:none;
   padding-bottom:1px;padding-block:4px}
 .faqs .faqs__a a:hover{border-bottom-color:var(--accent)}
 
