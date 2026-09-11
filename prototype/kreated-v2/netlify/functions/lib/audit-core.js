@@ -42,7 +42,7 @@
 'use strict';
 
 const { safeFetch, AuditError } = require('./safe-fetch.js');
-const { extract, summarise }    = require('./signals.js');
+const { extract, summarise, isTrade } = require('./signals.js');
 const { classify, fitVerdict }  = require('./classify.js');
 const { pick, MAX_PAGES }       = require('./pick-pages.js');
 const rateLimit                 = require('./rate-limit.js');
@@ -453,6 +453,9 @@ exports.handler = async function (event) {
       findings: polished.findings,
       needs: toNeeds(polished.findings),
       fit,
+      /* whether the site names a trade in its own title or H1 — used only to
+         MENTION Contractor Growth beside the plan (recommend.js `program`) */
+      trade: isTrade(summary.home).trade,
       meta: {
         modelUsed: polished.modelUsed,
         modelNote: polished.modelError || null,

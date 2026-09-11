@@ -635,3 +635,11 @@
   .aud__share-b.btn{width:100%}
 }
 .aud__saved{margin:14px 0 0;max-width:58ch;font-size:14px;line-height:1.6;color:var(--ink-3)}
+
+/* ---- the trades programme, beside the plan -------------------------------
+   Quiet on purpose: a hairline and a label, not a second plan. It sits after
+   the totals so it can never be read as one of the priced lines. */
+.aud__prog{margin:clamp(18px,2vw,24px) 0 0;padding:14px 0 0;border-top:1px solid var(--stroke)}
+.aud__prog-l{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent)}
+.aud__prog-t{margin:0;max-width:62ch;font-size:14.5px;line-height:1.6;color:var(--ink-2)}

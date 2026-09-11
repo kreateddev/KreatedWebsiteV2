@@ -122,11 +122,20 @@
     var poor = fit && fit.fit !== 'good'
       ? '<p class="aud__poor">' + esc(fit.reason) + '</p>' : '';
 
+    /* ⚠ BESIDE the plan, not in it: no line, no total. See recommend.js. */
+    var program = rec.program
+      ? '<div class="aud__prog"><p class="aud__prog-l">For trades</p>' +
+          '<p class="aud__prog-t">' + esc(rec.program.why) + ' ' +
+          '<a class="ilink" href="/pricing/#offContractor">' + esc(rec.program.offer.name) + '</a> is ' +
+          Rec.money(rec.program.offer.price) + ' a month, with Local Growth, Site Care+ and the CRM ' +
+          'included. It is not in the totals above.</p></div>'
+      : '';
+
     return '<section class="aud__plan">' +
       '<h3 class="aud__h3">Recommended for your business</h3>' +
       poor +
       '<p class="aud__why">' + why + '</p>' +
-      '<ul class="aud__lines">' + lines + '</ul>' + totals +
+      '<ul class="aud__lines">' + lines + '</ul>' + totals + program +
       '<p class="aud__terms">Starting estimates, not a quote. Every project is scoped and priced ' +
       'in writing, and you approve the number before any work starts.</p>' +
       '<div class="aud__ctas">' +
@@ -222,7 +231,10 @@
   function render(data, opts) {
     opts = opts || {};
     var report = opts.shared ? opts.report : data.report;
-    var rec = Rec.recommendFromNeeds(data.needs);
+    /* the trades programme is MENTIONED when the site names a trade, or when
+       the visitor chose the contractor audit. It never enters the plan lines. */
+    var onContractorPage = /^\/contractor-website-audit\//.test(location.pathname);
+    var rec = Rec.recommendFromNeeds(data.needs, { trade: !!data.trade || onContractorPage });
 
     var groups = ORDER.map(function (g) {
       var items = data.findings.filter(function (f) { return f.status === g.k; });

@@ -97,6 +97,7 @@ function pick(r) {
     findings:       Array.isArray(r.findings) ? r.findings : [],
     needs:          r.needs && typeof r.needs === 'object' ? r.needs : {},
     fit:            r.fit || null,
+    trade:          !!r.trade,
     meta: r.meta ? {
       modelUsed:    !!r.meta.modelUsed,
       inspected:    r.meta.inspected,

@@ -218,7 +218,38 @@
       price:279, exclusive:'care-tier', rung:2,
       what:'Everything in Site Care, plus a larger edit allowance, priority turnaround and ongoing improvements.',
       does:'Keeps up with a site whose content genuinely moves.',
-      fit:'You run promotions, add services, or change pricing and availability regularly.' }
+      fit:'You run promotions, add services, or change pricing and availability regularly.' },
+
+    /* ================= FOR TRADES — the programme (DECISION 025) ========
+       $2,000/mo, three-month initial term. Assembled from documented tiers:
+       Local Growth + Site Care+ + the review system + KreatedOS CRM, plus
+       missed-call text-back. `covers` marks each of those as included, so a
+       buyer who also ticks Local Growth or Site Care+ is told it is already
+       inside the programme and is not charged twice.
+       ⚠ recommendOnly is NOT set: it is a real, published offer and the
+       builder lists it. The AUDIT does not put it in a plan — see
+       recommend.js `program`: it is mentioned beside the plan for trades,
+       because the lowest-rung rule forbids replacing a $500 rung with it. */
+    { id:'pkg.program.contractor', name:'Contractor Growth', group:'program', kind:'monthly',
+      price:2000, term:'Three-month initial commitment, month-to-month after.',
+      covers:{ 'pkg.local.presence':'full', 'pkg.local.growth':'full',
+               'pkg.care.base':'full', 'pkg.care.plus':'full',
+               'svc.crm.kreatedos':'full',
+               'svc.search.gbp':{ level:'ongoing', note:'ongoing profile management' } },
+      what:'Everything in Local Growth and Site Care+, KreatedOS CRM, a review system, missed-call text-back and a monthly call.',
+      does:'Runs the whole lead system in one place, so a lead is not lost between the search result and the phone.',
+      fit:'You run a trades or field-service business with a site worth keeping, and leads are going missing somewhere nobody has time to find.' },
+
+    /* ================= SOFTWARE (DECISION 026) ==========================
+       $79/mo. Early access: the features exist in KreatedOS today, client
+       accounts are new. 🚫 Never recommended by the audit — nothing on a
+       public website is evidence that a business needs a CRM. */
+    { id:'svc.crm.kreatedos', name:'KreatedOS CRM', group:'software', kind:'monthly',
+      price:79,
+      note:'Early access: Kreated runs its own sales on KreatedOS today, and client accounts are new, so yours is set up with you.',
+      what:'Every lead in one pipeline, calls, notes and emails logged against it, a daily call-back list and quotes tracked.',
+      does:'Stops leads being lost between the first call and the quote, because something is keeping track of who is waiting.',
+      fit:'Your leads live in a text thread, a notebook and memory.' }
   ];
 
   /* ---- how the builder groups them ------------------------------------- */
@@ -229,7 +260,9 @@
     { id:'production', label:'Content and tracking',  hint:'The inputs a site needs to be worth visiting and worth measuring.' },
     { id:'brand',      label:'Brand',                 hint:'Pick one tier. Priced separately from the website on purpose.' },
     { id:'local',      label:'Ongoing search',        hint:'Pick one rung. Monthly, not part of a project total.' },
-    { id:'care',       label:'Ongoing support',       hint:'Pick one. Optional on every engagement.' }
+    { id:'care',       label:'Ongoing support',       hint:'Pick one. Optional on every engagement.' },
+    { id:'program',    label:'For trades',            hint:'One programme for the whole lead system. Monthly, and it already includes Local Growth and Site Care+.' },
+    { id:'software',   label:'Software',              hint:'Monthly. Included in Contractor Growth.' }
   ];
 
   /* ---- exclusivity groups ----------------------------------------------

@@ -183,3 +183,10 @@ content from limited material.
 3. **Does AEO Audit credit against AEO Foundation?** `/pricing/` says it does
    within the same engagement. That is an arithmetic rule the matcher will need
    and it is not in the Reference.
+
+## E. Added 2026-09-11
+
+Two owner-approved offers joined `assets/data/offers.js`, the tests' locked catalogue, and
+`/pricing/`: **Contractor Growth** `$2,000/mo` (DECISION 025, three-month initial term) and
+**KreatedOS CRM** `$79/mo` (DECISION 026, early access). Both are monthly and never summed into a
+one-time total. See `OFFER-MAP.md` §1 and §3.

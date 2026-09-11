@@ -84,7 +84,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" href="/styles.css?v=150">
 <link rel="stylesheet" href="/services/services.css?v=22">
 <link rel="stylesheet" href="/services/leaf.css?v=14">
-<link rel="stylesheet" href="/pricing/pricing.css?v=16">
+<link rel="stylesheet" href="/pricing/pricing.css?v=20">
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=11">
@@ -195,10 +195,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
     <h1 class="shero__h"><span>Where the work</span><span><em class="pr__amp">starts</em></span></h1>
     <div class="shero__foot">
-      <p class="shero__fact">Two ways to buy: a package, or the individual services
-        you already know you need. Every figure below is real, every engagement is
-        scoped and priced in writing before it begins, and you approve the number
-        before any work starts.</p>
+      <p class="shero__fact">Two ways to buy: a package, or a package you build
+        yourself from the individual services. Every figure below is real, every
+        engagement is scoped and priced in writing before it begins, and you approve
+        the number before any work starts.</p>
       <!-- ⚠ ONE contextual link to the cost resource, added 2026-09-01.
            docs/SEO-ROADMAP.md §9: /pricing/ keeps every commercial price term
            and the table; the resource only explains what moves a number.
@@ -209,6 +209,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         a small business website actually costs</a> explains the four things that
         move the number.</p>
     </div>
+      <!-- ⚠ ADDED 2026-09-11. The builder sat 5,000px down the second tab; these
+           put both ways to buy one click from the top. The hashes are handled by
+           pricing.js, which opens the tab that contains the target. -->
+      <p class="pr__ways">
+        <a class="btn btn--cobalt" href="#panelPackages" data-tab="tabPackages">See the packages <i aria-hidden="true">&#8595;</i></a>
+        <a class="btn btn--ghost" href="#panelIndividual" data-tab="tabIndividual">Build your own <i aria-hidden="true">&#8595;</i></a>
+      </p>
   </div>
 </section>
 
@@ -294,13 +301,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </button>
         <button class="pswitch__tab" id="tabIndividual" type="button" role="tab"
                 aria-selected="false" aria-controls="panelIndividual" tabindex="-1">
-          <span class="pswitch__name">Individual Services</span>
-          <span class="pswitch__sub">You already know what you need</span>
+          <span class="pswitch__name">Build Your Package</span>
+          <span class="pswitch__sub">Pick exactly what you need</span>
         </button>
       </div>
     </div>
 
     <div class="ppanel" id="panelPackages" role="tabpanel" aria-labelledby="tabPackages" tabindex="-1">
+
+      <!-- ⚠ JUMP LINKS, 2026-09-11. The Packages tab runs to ~9,000px; these let a
+           reader go straight to the group they came for. Sticky on wide screens,
+           a scrolling row on phones. Order mirrors the groups below. -->
+      <nav class="pjump" aria-label="Jump to a group of packages">
+        <a href="#grpTrades">For trades</a>
+        <a href="#grpOngoing">Ongoing search</a>
+        <a href="#grpWebsites">Websites</a>
+        <a href="#grpBrand">Brand</a>
+        <a href="#grpSearch">Search &amp; AEO</a>
+        <a href="#grpSupport">Site support</a>
+        <a href="#grpSoftware">Software</a>
+        <a href="#grpChoose">Which package</a>
+        <a href="#grpTerms">Terms</a>
+      </nav>
 
       <!-- ======================================================================
            CONTRACTOR GROWTH PROGRAM — $2,000/mo, approved by Skyler 2026-09-10
@@ -318,7 +340,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               2026-09-10 (DECISION 025).
            🚫 No website build inside the fee. A build is scoped separately.
            ====================================================================== -->
-      <h2 class="pgroup">For Trades<span>Recurring</span></h2>
+      <h2 id="grpTrades" class="pgroup">For Trades<span>Recurring</span></h2>
       <div class="offers">
       <article class="offer offer--rec" id="offContractor">
         <div class="offer__id">
@@ -380,82 +402,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <!-- ======================================================================
-           KREATEDOS CRM — $79/mo, approved by Skyler 2026-09-10 (DECISION 026).
-           Also included in Contractor Growth.
-
-           ⚠ EVERY FEATURE BELOW EXISTS IN KREATEDOS TODAY, in the CRM Kreated
-           runs its own sales on: the stage pipeline (new -> won/lost), table and
-           board views, lead source, the activity timeline (call / note / email /
-           stage change), the Today queue (overdue first), follow-ups scheduled
-           from a call's outcome, and proposals tied to a lead.
-           ⚠ WHAT DOES NOT EXIST YET: client accounts. Those tables are admin-only
-           and single-tenant. That is why the card says early access and says
-           so again in its terms.
-           🚫 Do not drop "early access" until a client can log in to their own
-              pipeline. 🚫 Do not add scheduling, dispatch, invoicing or a
-              phone system to this list; KreatedOS does none of them for leads.
-           ====================================================================== -->
-      <h2 class="pgroup">Software<span>Recurring</span></h2>
-      <div class="offers">
-      <article class="offer" id="offCrm">
-        <div class="offer__id">
-          <p class="offer__common">New &middot; early access</p>
-          <p class="offer__no">Software</p>
-          <h3 class="offer__name">KreatedOS CRM</h3>
-          <p class="offer__stage cc">For a business whose leads live in a text thread, a notebook
-            and memory, and who wants one list that says who to call back today.</p>
-        </div>
-        <p class="offer__scope cc">Every lead in one pipeline &middot; Calls, notes and emails logged
-          &middot; A daily call-back list &middot; Quotes tracked</p>
-        <div class="offer__go">
-          <p class="offer__price"> <span>$79/mo</span></p>
-          <p class="offer__term">Recurring</p>
-          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
-          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xCrm">See what's included <i>&#8594;</i></button>
-        </div>
-        <div class="offer__x" id="xCrm">
-          <div class="x__inner">
-            <div>
-              <h4 class="x__h">What's included</h4>
-              <ul class="x__list cc">
-                <li><b>Every lead in one place</b>, from first call to won or lost, as a
-                  list or a board</li>
-                <li><b>Where each lead came from</b>: a referral, the Google profile, the
-                  website, social</li>
-                <li><b>A timeline on every lead</b>: calls, notes, emails and every change
-                  of stage</li>
-                <li><b>A daily list of who to call back</b>, overdue first</li>
-                <li><b>The next follow-up scheduled for you</b> from how the last call
-                  went</li>
-                <li><b>Quotes tracked</b> against the lead they belong to</li>
-                <li><b>Set up and maintained by Kreated</b></li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Who it is for</h4>
-              <p class="x__p cc">A trades or service business losing work between the first
-                call and the quote, because nothing is keeping track of who is waiting on
-                an answer.</p>
-              <h4 class="x__h">What it is not</h4>
-              <ul class="x__list cc">
-                <li><b>Not scheduling, dispatch or invoicing.</b> It tracks leads, not
-                  jobs.</li>
-                <li><b>Not a phone system.</b> Missed-call text-back is part of
-                  Contractor Growth.</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Terms</h4>
-              <p class="x__note">Recurring, billed monthly in advance. Included in Contractor
-                Growth. Early access: Kreated runs its own sales on KreatedOS today, and
-                client accounts are new, so yours is set up with you.</p>
-            </div>
-          </div>
-        </div>
-      </article>
-      </div>
-
-      <!-- ======================================================================
            ONGOING GROWTH — the complete recurring ladder, published 2026-09-01
            by owner decision. Local Presence and Market Expansion were documented
            in Reference §39-46 and had never been public; only the middle rung
@@ -476,7 +422,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            🚫 Do not give them a three-month term to make the ladder symmetrical.
            If they should have one, that is an owner decision, not a tidy-up.
            ====================================================================== -->
-      <h2 class="pgroup">Ongoing Growth<span>Recurring</span></h2>
+      <h2 id="grpOngoing" class="pgroup">Ongoing Growth<span>Recurring</span></h2>
       <div class="offers">
       <article class="offer" id="offLocalPresence">
         <div class="offer__id">
@@ -612,7 +558,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </article>
       </div>
 
-      <h2 class="pgroup">Websites<span>One time</span></h2>
+      <h2 id="grpWebsites" class="pgroup">Websites<span>One time</span></h2>
     <div class="offers">
       <!-- ======================================================================
            ONE PAGE WEBSITE — added 2026-09-01.
@@ -766,13 +712,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <ul class="x__ongoing">
                 <li><b>Site Care</b> from <span>$149/mo</span></li>
               </ul>
-              <p class="x__note">Summarized under "After launch" below.</p>
+              <p class="x__note">Both are under <a class="ilink" href="#grpSupport">Site support</a>, below.</p>
             </div>
           </div>
         </div>
       </article>
 
-      <article class="offer offer--rec is-open" id="offGrowth">
+      <!-- ⚠ NOT OPEN BY DEFAULT since 2026-09-11: opened, it added ~900px of
+           scrolling before the next group. It keeps its "Most common" label. -->
+      <article class="offer offer--rec" id="offGrowth">
         <div class="offer__id">
           <p class="offer__common">Most common engagement</p>
           <p class="offer__no">No. 03</p>
@@ -846,7 +794,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   Growth sites step into</li>
                 <li><b>Site Care</b> from <span>$149/mo</span></li>
               </ul>
-              <p class="x__note">Summarized under "After launch" below.</p>
+              <p class="x__note">Both are under <a class="ilink" href="#grpSupport">Site support</a>, below.</p>
             </div>
           </div>
         </div>
@@ -945,7 +893,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            System" and that name is now retired everywhere.
            🚫 Do not reintroduce "Full Brand System". One product, one name.
            ====================================================================== -->
-      <h2 class="pgroup">Brand<span>One time</span></h2>
+      <h2 id="grpBrand" class="pgroup">Brand<span>One time</span></h2>
       <div class="offers">
       <article class="offer" id="offBrandRefresh">
         <div class="offer__id">
@@ -1070,8 +1018,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
       </article>
-      </div>
-
       <!-- ======================================================================
            COMBINED — added 2026-09-01, owner decision.
            ⚠ Brand + Website was already a public Kreated offer on
@@ -1091,9 +1037,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
            Placed AFTER Brand rather than after Websites so the reader has met
            both halves before being offered the pair.
+           ⚠ FOLDED INTO THE BRAND GROUP 2026-09-11: a one-card group with its
+           own heading was a heading's worth of scrolling for one offer.
            ====================================================================== -->
-      <h2 class="pgroup">Combined<span>One time</span></h2>
-      <div class="offers">
       <article class="offer" id="offBrandWebsite">
         <div class="offer__id">
           <p class="offer__no">No. 01</p>
@@ -1139,6 +1085,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </article>
       </div>
 
+
       <!-- ======================================================================
            SEARCH & VISIBILITY.
            ⚠ Local Growth appeared on /method/, /services/local-seo/ and
@@ -1148,7 +1095,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            stated here because it is stated on all three of those pages and a
            catalog that omits the term is not a catalog.
            ====================================================================== -->
-      <h2 class="pgroup">Search &amp; Visibility<span>One time</span></h2>
+      <h2 id="grpSearch" class="pgroup">Search &amp; Visibility<span>One time</span></h2>
       <div class="offers">
       <article class="offer" id="offAeoAudit">
         <div class="offer__id">
@@ -1234,7 +1181,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </article>
       </div>
 
-      <h2 class="pgroup">Site Support<span>Recurring</span></h2>
+      <h2 id="grpSupport" class="pgroup">Site Support<span>Recurring</span></h2>
       <div class="offers">
       <article class="offer" id="offSiteCare">
         <div class="offer__id">
@@ -1320,6 +1267,82 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </article>
       </div>
 
+      <!-- ======================================================================
+           KREATEDOS CRM — $79/mo, approved by Skyler 2026-09-10 (DECISION 026).
+           Also included in Contractor Growth.
+
+           ⚠ EVERY FEATURE BELOW EXISTS IN KREATEDOS TODAY, in the CRM Kreated
+           runs its own sales on: the stage pipeline (new -> won/lost), table and
+           board views, lead source, the activity timeline (call / note / email /
+           stage change), the Today queue (overdue first), follow-ups scheduled
+           from a call's outcome, and proposals tied to a lead.
+           ⚠ WHAT DOES NOT EXIST YET: client accounts. Those tables are admin-only
+           and single-tenant. That is why the card says early access and says
+           so again in its terms.
+           🚫 Do not drop "early access" until a client can log in to their own
+              pipeline. 🚫 Do not add scheduling, dispatch, invoicing or a
+              phone system to this list; KreatedOS does none of them for leads.
+           ====================================================================== -->
+      <h2 id="grpSoftware" class="pgroup">Software<span>Recurring</span></h2>
+      <div class="offers">
+      <article class="offer" id="offCrm">
+        <div class="offer__id">
+          <p class="offer__common">New &middot; early access</p>
+          <p class="offer__no">Software</p>
+          <h3 class="offer__name">KreatedOS CRM</h3>
+          <p class="offer__stage cc">For a business whose leads live in a text thread, a notebook
+            and memory, and who wants one list that says who to call back today.</p>
+        </div>
+        <p class="offer__scope cc">Every lead in one pipeline &middot; Calls, notes and emails logged
+          &middot; A daily call-back list &middot; Quotes tracked</p>
+        <div class="offer__go">
+          <p class="offer__price"> <span>$79/mo</span></p>
+          <p class="offer__term">Recurring</p>
+          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
+          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xCrm">See what's included <i>&#8594;</i></button>
+        </div>
+        <div class="offer__x" id="xCrm">
+          <div class="x__inner">
+            <div>
+              <h4 class="x__h">What's included</h4>
+              <ul class="x__list cc">
+                <li><b>Every lead in one place</b>, from first call to won or lost, as a
+                  list or a board</li>
+                <li><b>Where each lead came from</b>: a referral, the Google profile, the
+                  website, social</li>
+                <li><b>A timeline on every lead</b>: calls, notes, emails and every change
+                  of stage</li>
+                <li><b>A daily list of who to call back</b>, overdue first</li>
+                <li><b>The next follow-up scheduled for you</b> from how the last call
+                  went</li>
+                <li><b>Quotes tracked</b> against the lead they belong to</li>
+                <li><b>Set up and maintained by Kreated</b></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Who it is for</h4>
+              <p class="x__p cc">A trades or service business losing work between the first
+                call and the quote, because nothing is keeping track of who is waiting on
+                an answer.</p>
+              <h4 class="x__h">What it is not</h4>
+              <ul class="x__list cc">
+                <li><b>Not scheduling, dispatch or invoicing.</b> It tracks leads, not
+                  jobs.</li>
+                <li><b>Not a phone system.</b> Missed-call text-back is part of
+                  Contractor Growth.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Terms</h4>
+              <p class="x__note">Recurring, billed monthly in advance. Included in Contractor
+                Growth. Early access: Kreated runs its own sales on KreatedOS today, and
+                client accounts are new, so yours is set up with you.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+
     <!-- ======================================================================
          HOW TO CHOOSE — added 2026-09-01.
          The page listed four figures and left the reader to work out which one
@@ -1329,7 +1352,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          new claim, no new number.
          ====================================================================== -->
     <div class="choose">
-      <h2 class="pgroup pgroup--quiet">Which website package is you</h2>
+      <h2 id="grpChoose" class="pgroup pgroup--quiet">Which website package is you</h2>
       <ol class="choose__list cc">
         <li><b>You have no website.</b> People search your name, find a profile on
           someone else's platform, and decide from that. Start at
@@ -1399,7 +1422,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          🚫 Do not reinstate it. Every price it held has exactly one home now.
          ====================================================================== -->
     <div class="terms">
-      <h2 class="pgroup pgroup--quiet">Terms</h2>
+      <h2 id="grpTerms" class="pgroup pgroup--quiet">Terms</h2>
       <ul class="terms__list cc">
         <li><b>Website projects</b> are paid 50% to start and 50% before launch.
           Larger or custom projects may run on milestones defined in the proposal
@@ -1449,6 +1472,80 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          publication. The category is named below with no figure on it.
          ====================================================================== -->
     <div class="ppanel" id="panelIndividual" role="tabpanel" aria-labelledby="tabIndividual" tabindex="-1">
+
+      <!-- ======================================================================
+           BUILD YOUR PACKAGE — the configurator, 2026-09-01.
+           ⚠ PROGRESSIVE ENHANCEMENT. What ships in this markup is the working
+           no-script state: two real links. builder.js hides it and reveals the
+           configurator only once it has proven it can run. 🚫 Do not author the
+           configurator here and hide it with CSS — without script a keyboard
+           user would tab through a dead form.
+
+           🚫 NO PRICES IN THIS FILE. Every figure the builder shows comes from
+           /assets/data/offers.js, which is generated from docs/OFFER-MAP.md and
+           asserted against the locked catalogue by tools/test-engine.js.
+           ====================================================================== -->
+      <div class="byp" id="byp">
+        <!-- ⚠ VISUALLY HIDDEN since 2026-09-11: the tab directly above now carries
+             the same words, so a second visible "Build Your Package" read as a
+             stutter. Kept for screen readers and as the aria target (#bypH). -->
+        <h2 class="pgroup pgroup--quiet sr-only" id="bypH">Build Your Package</h2>
+        <p class="byp__lead cc">Tick what the business needs, one-off projects and monthly
+          work alike, and the estimate builds beside it as you go. If a package would cover
+          it better, you will be told so rather than sold the longer list.</p>
+
+        <div class="byp__nojs">
+          <div class="byp__ctas">
+            <a class="btn btn--pill" data-evt="cta_build_package" href="/contact/?intent=build">Build This Project <span class="btn__arrow" aria-hidden="true">&#8599;</span></a>
+            <a class="btn btn--ghost" href="#panelPackages" data-tab="tabPackages">Start with a Package</a>
+          </div>
+          <p class="byp__note cc">The interactive builder needs JavaScript. Without it this
+            goes to a short form and a written scope, which is where it would have sent you
+            anyway.</p>
+        </div>
+
+        <div class="byp__app" hidden>
+          <div class="byp__layout">
+            <div class="byp__picker"></div>
+
+            <aside class="byp__summary" aria-labelledby="bypSumH">
+              <div class="byp__sumin">
+                <h3 class="byp__sumh" id="bypSumH" tabindex="-1">Your project</h3>
+                <div class="byp__sumbody"></div>
+                <div class="byp__verdict" hidden></div>
+                <a class="btn btn--pill byp__go" data-evt="cta_build_package"
+                   href="/contact/?intent=build">Build This Project
+                   <span class="btn__arrow" aria-hidden="true">&#8599;</span></a>
+                <p class="byp__terms cc">These are starting estimates, not a quote. Every
+                  project is scoped and priced in writing, and you approve the number before
+                  any work starts. Complex scope can move the figure.</p>
+              </div>
+            </aside>
+          </div>
+
+          <!-- ⚠ ONE short sentence, debounced 700ms. Announcing the whole
+               summary on every quantity keystroke makes the page unusable
+               with a screen reader. -->
+          <p class="byp__status sr-only" role="status" aria-live="polite"></p>
+
+          <!-- the mobile bar: the running total must never be three screens away -->
+          <div class="byp__bar" hidden>
+            <span class="byp__barcount">Nothing selected yet</span>
+            <a class="byp__barlink" href="#bypSumH">View project</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ⚠ THE PRICE LIST, COLLAPSED, 2026-09-11. These eight are the same eight
+           the builder above offers (offers.js), so open they were ~3,600px of
+           repetition above the tool that uses them. Kept, not deleted: without
+           JavaScript the builder is replaced by two links, and this list is the
+           only place these prices are readable. <details> needs no script.
+           🚫 Do not remove it, and 🚫 do not add a price here that is not in
+           offers.js. -->
+      <details class="plist">
+        <summary class="plist__sum">Every individual service, one by one
+          <span>8 services &middot; one time</span></summary>
 
       <h2 class="pgroup">Website &amp; Content<span>One time</span></h2>
       <div class="isvcs">
@@ -1590,68 +1687,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             change.</p>
         </article>
       </div>
-
-      <!-- ======================================================================
-           BUILD YOUR PACKAGE — the configurator, 2026-09-01.
-           ⚠ PROGRESSIVE ENHANCEMENT. What ships in this markup is the working
-           no-script state: two real links. builder.js hides it and reveals the
-           configurator only once it has proven it can run. 🚫 Do not author the
-           configurator here and hide it with CSS — without script a keyboard
-           user would tab through a dead form.
-
-           🚫 NO PRICES IN THIS FILE. Every figure the builder shows comes from
-           /assets/data/offers.js, which is generated from docs/OFFER-MAP.md and
-           asserted against the locked catalogue by tools/test-engine.js.
-           ====================================================================== -->
-      <div class="byp" id="byp">
-        <h2 class="pgroup pgroup--quiet" id="bypH">Build Your Package</h2>
-        <p class="byp__lead cc">Most engagements here are ongoing: the search, the profile
-          and the site improved every month against what the numbers actually say. One-off
-          projects are listed underneath. Either way the estimate builds as you go, and if a
-          smaller package is the better answer you will be told so rather than sold the
-          longer list.</p>
-
-        <div class="byp__nojs">
-          <div class="byp__ctas">
-            <a class="btn btn--pill" data-evt="cta_build_package" href="/contact/?intent=build">Build This Project <span class="btn__arrow" aria-hidden="true">&#8599;</span></a>
-            <a class="btn btn--ghost" href="#panelPackages" data-tab="tabPackages">Start with a Package</a>
-          </div>
-          <p class="byp__note cc">The interactive builder needs JavaScript. Without it this
-            goes to a short form and a written scope, which is where it would have sent you
-            anyway.</p>
-        </div>
-
-        <div class="byp__app" hidden>
-          <div class="byp__layout">
-            <div class="byp__picker"></div>
-
-            <aside class="byp__summary" aria-labelledby="bypSumH">
-              <div class="byp__sumin">
-                <h3 class="byp__sumh" id="bypSumH" tabindex="-1">Your project</h3>
-                <div class="byp__sumbody"></div>
-                <div class="byp__verdict" hidden></div>
-                <a class="btn btn--pill byp__go" data-evt="cta_build_package"
-                   href="/contact/?intent=build">Build This Project
-                   <span class="btn__arrow" aria-hidden="true">&#8599;</span></a>
-                <p class="byp__terms cc">These are starting estimates, not a quote. Every
-                  project is scoped and priced in writing, and you approve the number before
-                  any work starts. Complex scope can move the figure.</p>
-              </div>
-            </aside>
-          </div>
-
-          <!-- ⚠ ONE short sentence, debounced 700ms. Announcing the whole
-               summary on every quantity keystroke makes the page unusable
-               with a screen reader. -->
-          <p class="byp__status sr-only" role="status" aria-live="polite"></p>
-
-          <!-- the mobile bar: the running total must never be three screens away -->
-          <div class="byp__bar" hidden>
-            <span class="byp__barcount">Nothing selected yet</span>
-            <a class="byp__barlink" href="#bypSumH">View project</a>
-          </div>
-        </div>
-      </div>
+      </details>
     </div><!-- /#panelIndividual -->
   </div>
 </section>
@@ -1734,8 +1770,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ⚠ ORDER MATTERS: offers -> recommend -> builder. recommend.js reads
      window.KreatedOffers at definition time, and builder.js reads both.
      All three are `defer`, so they execute in document order. -->
-<script src="/assets/data/offers.js?v=2" defer></script>
-<script src="/assets/data/recommend.js?v=3" defer></script>
+<script src="/assets/data/offers.js?v=3" defer></script>
+<script src="/assets/data/recommend.js?v=5" defer></script>
 <script src="/pricing/pricing.js?v=2" defer></script>
 <script src="/pricing/builder.js?v=2" defer></script>
 <!-- event emitter. Loads on every route so the [data-evt] CTAs in the

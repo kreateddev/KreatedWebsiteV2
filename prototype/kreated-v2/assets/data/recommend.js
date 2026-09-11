@@ -317,16 +317,35 @@
       return selection[id] && isPackage(id) && Offers.get(id);
     });
   }
+  /* ⚠ A PACKAGE ANOTHER CHOSEN PACKAGE INCLUDES CAN NEVER HEADLINE, 2026-09-11.
+     With Contractor Growth and Local Growth both ticked, the tier order found
+     Local Growth first and the summary read "Local Growth is your engagement"
+     over a $2,000 programme that contains it. Anything fully covered by
+     another selection is skipped, so the containing package headlines. */
+  function coveredBySelection(selection) {
+    var covered = {};
+    Object.keys(selection || {}).forEach(function (id) {
+      var o = Offers.get(id);
+      if (!selection[id] || !o || !o.covers) return;
+      Object.keys(o.covers).forEach(function (t) {
+        var r = o.covers[t], level = (typeof r === 'string') ? r : r.level;
+        if (level === 'full' || level === 'ongoing') covered[t] = true;
+      });
+    });
+    return covered;
+  }
   function primaryPackage(selection) {
+    var covered = coveredBySelection(selection);
     for (var i = 0; i < PRIMARY_ORDER.length; i++) {
       var found = Object.keys(selection || {}).filter(function (id) {
-        var o = Offers.get(id); return o && o.exclusive === PRIMARY_ORDER[i] && selection[id];
+        var o = Offers.get(id);
+        return o && o.exclusive === PRIMARY_ORDER[i] && selection[id] && !covered[id];
       })[0];
       if (found) return Offers.get(found);
     }
     /* no tier chosen: the dearest package present is what headlines the project */
     var pkgs = Object.keys(selection || {}).filter(function (id) {
-      return selection[id] && isPackage(id) && Offers.get(id);
+      return selection[id] && isPackage(id) && Offers.get(id) && !covered[id];
     }).map(Offers.get).sort(function (a, b) { return b.price - a.price; });
     return pkgs[0] || null;
   }
@@ -391,6 +410,27 @@
     var result = evaluate(selection);
     result.needs = needs;
     result.nothingRecommendedFor = skipped;   /* rendered as "already strong" */
+
+    /* ---- the trades programme, MENTIONED, never selected ----------------
+       ⚠ Contractor Growth is $2,000/mo against a $500 lowest rung, so putting
+       it in the plan would break the lowest-rung rule above. It is returned
+       beside the plan instead, and only when BOTH are true:
+         · opts.trade — the site names a trade in its own title or heading
+           (signals.isTrade), or the visitor is on /contractor-website-audit/;
+         · the audit found real work on the site, its pages or its local
+           visibility (critical or recommended — never optional, never
+           alreadyStrong). A trades site the audit is happy with gets nothing.
+       🚫 Never add it to `selection`, `lines` or either total. */
+    var PROGRAM_NEEDS = ['website', 'pages', 'localSeo'];
+    var hasWork = PROGRAM_NEEDS.some(function (c) {
+      return needs && (needs[c] === 'critical' || needs[c] === 'recommended');
+    });
+    var prog = Offers.get('pkg.program.contractor');
+    result.program = (opts.trade && hasWork && prog) ? {
+      offer: prog,
+      why: 'For a trades business, ' + prog.name + ' runs this work and the rest of the lead ' +
+           'system together: local search, the site, reviews, missed-call text-back and a CRM.'
+    } : null;
     return result;
   }
 

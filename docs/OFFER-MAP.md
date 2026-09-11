@@ -37,6 +37,8 @@ surfaced by either tool.
 | `pkg.local.expansion` | Market Expansion | 1500 | **recurring**, from, no initial term | **Recurring** |
 | `pkg.care.base` | Site Care | 149 | **recurring**, no initial term | **Recurring** |
 | `pkg.care.plus` | Site Care+ | 279 | **recurring**, no initial term | **Recurring** |
+| `pkg.program.contractor` | Contractor Growth | 2000 | **recurring**, 3-month initial (DECISION 025) | **Recurring — For trades** |
+| `svc.crm.kreatedos` | KreatedOS CRM | 79 | **recurring**, early access (DECISION 026) | **Software** |
 | `svc.page.standard` | Additional Standard Page | 250 | one-time, from | **Individual Services** |
 | `svc.page.service` | Dedicated Service Page | 450 | one-time, from | **Individual Services** |
 | `svc.page.location` | Location Page | 550 | one-time, from | **Individual Services** |
@@ -102,6 +104,16 @@ a service; §3 turns services into a recommended package.
 ---
 
 ## 3. What each package already covers
+
+**Contractor Growth (added 2026-09-11)** covers, as `full`: `pkg.local.presence`, `pkg.local.growth`,
+`pkg.care.base`, `pkg.care.plus`, `svc.crm.kreatedos`; and `svc.search.gbp` as `ongoing`. A buyer who
+ticks any of those beside it is told it is included and is not charged twice, and the programme
+headlines the project. **The audit never puts it in a plan** (the lowest-rung rule): it is returned
+as `program`, a mention beside the plan, only when the site names a trade in its own title or H1
+(`signals.isTrade`) or the visitor is on `/contractor-website-audit/`, and the audit found critical
+or recommended work in `website`, `pages` or `localSeo`. **The CRM is never recommended by the
+audit**; nothing on a public website is evidence that a business needs one.
+
 
 This is the table that stops both tools recommending something the buyer is
 already paying for. `full` means the package includes it; `partial` means it

@@ -526,3 +526,84 @@
 @media (max-width:900px){
   .pswitch__tab{min-height:44px}
 }
+
+/* ==========================================================================
+   REORGANIZED 2026-09-11 — owner: "the package builder is very low" and "a lot
+   of scrolling to see everything". Four moves, all below.
+   ========================================================================== */
+
+/* 1. the two ways to buy, one click from the top */
+.pr__ways{display:flex;flex-wrap:wrap;gap:12px;margin:clamp(20px,2.4vw,28px) 0 0}
+@media (max-width:520px){ .pr__ways .btn{flex:1 1 100%;justify-content:center} }
+
+/* 2. jump links on the Packages tab. Sticky under the header on wide screens
+   so the reader can change group without scrolling back up. */
+.pjump{display:flex;flex-wrap:wrap;gap:8px 10px;margin:0 0 clamp(8px,1vw,14px);
+  padding:12px 0;background:var(--room, #F4F5FA);border-bottom:1px solid var(--line-room)}
+.pjump a{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;
+  border:1px solid rgba(2,12,46,.16);border-radius:999px;
+  font:500 13.5px/1 'General Sans',system-ui;color:var(--ink-on-room);text-decoration:none;
+  transition:border-color var(--t-hover),color var(--t-hover)}
+.pjump a:hover,.pjump a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+@media (min-width:900px){
+  .pjump{position:sticky;top:var(--head-h,91px);z-index:5}
+}
+@media (max-width:899px){
+  /* one scrolling row rather than four wrapped lines of chips */
+  .pjump{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .pjump::-webkit-scrollbar{display:none}
+  .pjump a{flex:none}
+}
+/* a jumped-to heading lands below the header AND the sticky row, not under them */
+.ppanel .pgroup[id]{scroll-margin-top:calc(var(--head-h,91px) + 76px)}
+@media (max-width:899px){ .ppanel .pgroup[id]{scroll-margin-top:calc(var(--head-h,91px) + 18px)} }
+
+/* 3. the static price list under the builder, collapsed */
+.plist{margin:clamp(40px,4.6vw,64px) 0 0;border-top:1px solid var(--line-room)}
+.plist__sum{display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  padding:18px 0;cursor:pointer;list-style:none;
+  font:600 clamp(15px,1.35vw,19px)/1.2 'General Sans',system-ui;color:var(--ink-on-room)}
+.plist__sum::-webkit-details-marker{display:none}
+.plist__sum span{flex:none;font:600 10.5px/1 'General Sans',system-ui;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(2,12,46,.60)}
+.plist__sum::after{content:'+';flex:none;margin-left:12px;font-weight:400;font-size:22px;
+  line-height:1;color:var(--accent)}
+.plist[open] > .plist__sum::after{content:'\2212'}
+.plist__sum:hover,.plist__sum:focus-visible{color:var(--accent);outline:none}
+.plist > .pgroup:first-of-type{margin-top:8px}
+
+/* 4. builder rows: name, price and one line. "What it can do", "Good fit if"
+   and any term appear once the row is picked, which is when they matter; the
+   one-line summary is enough to choose by. This took the builder from about
+   6,100px to a fraction of it.
+   ⚠ Hidden with display:none only because they are repeated in full on the
+   Packages tab and in the price list below — nothing is withheld. */
+.bo__does,.bo__fit,.bo__caveat{display:none}
+.bo.is-on .bo__does,.bo.is-on .bo__fit,.bo.is-on .bo__caveat{display:block}
+.bo{padding:11px 0 12px}
+.bo__detail{margin-top:4px}
+/* two columns of options per group on wide screens: the rows are now short
+   enough to sit side by side, which halves the picker's height. The legend is
+   the fieldset's rendered legend, so it is not a grid item and spans on its own;
+   the "Clear …" link is told to span. align-items:start so picking a row (which
+   reveals its detail) does not stretch its neighbour. */
+@media (min-width:1100px){
+  .bg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:30px;align-items:start}
+  .bg > .bg__clear{grid-column:1 / -1}
+}
+/* 5. tighter package cards, on this page only (styles.css is shared with the
+   homepage). Same three columns and the same hierarchy; less air. Each card
+   was ~330px, most of it padding around a 56px name. */
+.ppanel .offer{padding:clamp(20px,2.2vw,32px) clamp(16px,1.6vw,28px)}
+.ppanel .offer--ml{padding-top:clamp(20px,2.2vw,32px)}
+.ppanel .offer__name{font-size:clamp(28px,2.7vw,42px);margin-bottom:8px}
+.ppanel .offer__no{margin-bottom:4px;font-size:17px}
+.ppanel .offer__scope{padding-top:clamp(14px,1.4vw,22px)}
+.ppanel .offer__go{padding-top:clamp(12px,1.3vw,20px);gap:10px}
+.pr__ways{margin-top:clamp(26px,3vw,36px)}
+/* the collapsed "what's included" panel is a grid row of zero height, but it
+   still earned a full row gap: an empty band under every closed card. Above
+   900px the three columns only need the column gap; .x__inner already carries
+   its own margin when the panel opens. Below 900px the columns stack and need
+   the row gap, so this does not apply there. */
+@media (min-width:901px){ .ppanel .offer{row-gap:0} }

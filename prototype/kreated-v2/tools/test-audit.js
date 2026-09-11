@@ -946,6 +946,29 @@ t('a concentrated site no longer returns the "nothing worth paying for" verdict'
 });
 
 /* ======================================================================
+   TRADE DETECTION — signals.isTrade, 2026-09-11
+   Only ever used to MENTION Contractor Growth beside the plan.
+   ====================================================================== */
+t('a business naming its own trade in its title or H1 is a trade', function () {
+  ok(S.isTrade({ title:'Residential Contractor in Cary, NC | Rare Raleigh Restoration', h1s:[] }).trade);
+  ok(S.isTrade({ title:'Pool Leak Detection Wilmington NC | Leak Locators', h1s:[] }).trade);
+  ok(S.isTrade({ title:'Smith & Sons', h1s:['Roofing and gutters across the Cape Fear'] }).trade, 'H1 counts');
+});
+
+t('an agency writing "for contractors" is NOT a trade', function () {
+  /* the exact kreated.dev title: the rule that flagged it is the reason this exists */
+  ok(!S.isTrade({ title:'Websites & Local SEO for Contractors, Wilmington NC | Kreated', h1s:['Your business is better than your website.'] }).trade);
+  ok(!S.isTrade({ title:'Web Design for Roofers | Some Agency', h1s:[] }).trade);
+});
+
+t('other businesses are not trades, and body text is never read', function () {
+  ok(!S.isTrade({ title:'Smile Dental | Family Dentist in Wilmington', h1s:['Your smile, cared for'] }).trade);
+  ok(!S.isTrade({ title:'Learn Smart Educational Consulting', h1s:['Helping students build habits'],
+                  bodySample:'Our clients include roofing contractors and a pool leak detection company.' }).trade,
+     'client names in the body must not make an agency or a tutor a trade');
+});
+
+/* ======================================================================
    SAVED REPORTS — lib/report-store.js + lib/report-core.js
    Run against the FILE backend in a throwaway directory. @netlify/blobs is
    installed but has no credentials here, so getStore() throws and the store
@@ -975,6 +998,7 @@ async function reportTests() {
       const rec = await RS.load(saved.id);
       ok(rec && rec.report.site.host === 'example.com', 'round trip lost the report');
       eq(rec.report.needs, { web: 'critical' });
+      ok(rec.report.trade === false, 'trade must be saved as a boolean');
     });
 
     await ta('a saved report holds nothing from the form and nothing about the caller', async () => {

@@ -1,6 +1,8 @@
 /* ==========================================================================
    KREATED V2 — THE PRICING SWITCHER
-   /pricing/ only. Two states: Packages (default) and Individual Services.
+   /pricing/ only. Two states: Packages (default) and Individual Services
+   (the second tab is labelled "Build Your Package" since 2026-09-11, and
+   opens on the builder; the id stays panelIndividual so every link holds).
 
    ⚠ PROGRESSIVE ENHANCEMENT, NOT A TOGGLE ON A HIDDEN THING.
    Without this file the page is one long document with both panels open and

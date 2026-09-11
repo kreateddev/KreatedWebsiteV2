@@ -226,4 +226,35 @@ function summarise(pages) {
   };
 }
 
-module.exports = { extract, summarise, text };
+/* ---- is this a trades business? ------------------------------------------
+   Used for ONE thing: whether the audit mentions Contractor Growth beside the
+   plan (recommend.js `program`). It never changes a finding or a price.
+
+   ⚠ TITLE AND H1 ONLY, never the body. A business names its own trade where it
+   introduces itself ("Residential Contractor in Cary", "Pool Leak Detection
+   Wilmington NC"). Body text is full of other people's trades: kreated.dev's
+   own homepage lists a remodeling client and a pool leak detection client, and
+   a body rule flagged the agency as a contractor.
+   ⚠ "for <trade>" does not count. "Websites & Local SEO for Contractors" is an
+   agency describing its customers, not a contractor describing itself.
+   A false negative costs one optional sentence; a false positive pitches a
+   trades programme to a dentist. Err toward negative.
+   🚫 Do not add generic words (repair, window, painting on its own, service). */
+const TRADE = /\b(contractors?|roofing|roofers?|plumbing|plumbers?|hvac|heating|air conditioning|electricians?|electrical|remodel(?:ing|ers?)?|renovations?|landscap(?:ing|ers?)|lawn care|hardscap(?:ing|es?)|pressure washing|power washing|house painting|painting contractors?|pool (?:service|repair|leak)|leak detection|concrete|paving|fenc(?:e|ing)|gutters?|siding|handyman|pest control|water damage|restoration|garage doors?|flooring|decks?|septic|excavation|masonry|drywall|insulation|tree service|junk removal|chimney|construction|home improvement|builders?)\b/gi;
+
+function isTrade(home) {
+  if (!home) return { trade: false, term: null };
+  const places = [home.title || ''].concat(home.h1s || []);
+  for (const t of places) {
+    TRADE.lastIndex = 0;
+    let m;
+    while ((m = TRADE.exec(t))) {
+      const before = t.slice(Math.max(0, m.index - 8), m.index).toLowerCase();
+      if (/\bfor\s+(?:the\s+)?$/.test(before)) continue;   /* "for contractors" */
+      return { trade: true, term: m[1].toLowerCase() };
+    }
+  }
+  return { trade: false, term: null };
+}
+
+module.exports = { extract, summarise, text, isTrade };

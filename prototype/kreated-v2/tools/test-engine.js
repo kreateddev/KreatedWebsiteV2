@@ -52,7 +52,10 @@ const LOCKED = {
   'svc.search.gbp':       ['one-time', 450,  null],
   'svc.track.analytics':  ['one-time', 400,  null],
   'svc.prod.photo':       ['one-time', 350,  null],
-  'svc.copy.full':        ['one-time', 275,  null]
+  'svc.copy.full':        ['one-time', 275,  null],
+  /* DECISION 025 and 026, owner-approved 2026-09-10 */
+  'pkg.program.contractor':['monthly', 2000, null],
+  'svc.crm.kreatedos':    ['monthly',  79,   null]
 };
 
 t('every locked offer exists with the locked price and kind', () => {
@@ -332,6 +335,57 @@ t('the audit result has the same shape as a builder result', () => {
   const audit = R.recommendFromNeeds({ website:'critical' });
   const build = R.evaluate({ 'pkg.web.launch': 1 });
   eq(Object.keys(build).filter(k => !(k in audit)), [], 'audit result missing keys:');
+});
+
+/* ======================================================================
+   6. CONTRACTOR GROWTH AND THE CRM (DECISIONS 025, 026) — 2026-09-11
+   ====================================================================== */
+t('Contractor Growth includes Local Growth, Site Care+ and the CRM: none charged twice', () => {
+  const r = R.evaluate({ 'pkg.program.contractor':1, 'pkg.local.growth':1, 'pkg.care.plus':1, 'svc.crm.kreatedos':1 });
+  eq(r.monthly.low, 2000, 'only the programme is charged:');
+  ['pkg.local.growth','pkg.care.plus','svc.crm.kreatedos'].forEach(id => {
+    const l = r.lines.find(x => x.id === id);
+    ok(l.included && l.included.by === 'pkg.program.contractor', id + ' should be included in the programme');
+    ok(/Included in Contractor Growth/.test(r.guidance[id].text), 'the buyer is told: ' + r.guidance[id].text);
+  });
+});
+
+t('the programme headlines the project, not a tier it already includes', () => {
+  const r = R.evaluate({ 'pkg.program.contractor':1, 'pkg.local.growth':1 });
+  eq(r.primary && r.primary.id, 'pkg.program.contractor');
+  const w = R.evaluate({ 'pkg.web.launch':1, 'pkg.local.growth':1 });
+  eq(w.primary && w.primary.id, 'pkg.web.launch', 'unrelated tiers keep their order:');
+});
+
+t('the CRM on its own is $79 a month and never touches the one-time total', () => {
+  const r = R.evaluate({ 'svc.crm.kreatedos':1, 'pkg.web.launch':1 });
+  eq([r.monthly.low, r.oneTime.low], [79, 1750]);
+});
+
+t('the audit never puts Contractor Growth or the CRM in the plan itself', () => {
+  const needs = { website:'critical', pages:'recommended', localSeo:'critical', brand:'critical', aeo:'recommended', tracking:'critical' };
+  const r = R.recommendFromNeeds(needs, { trade:true });
+  const ids = r.lines.map(l => l.id);
+  ok(ids.indexOf('pkg.program.contractor') === -1 && ids.indexOf('svc.crm.kreatedos') === -1, 'in the plan: ' + ids);
+});
+
+t('a trades site with real work gets the programme MENTIONED beside the plan', () => {
+  const r = R.recommendFromNeeds({ localSeo:'recommended' }, { trade:true });
+  ok(r.program && r.program.offer.id === 'pkg.program.contractor', 'expected a programme mention');
+  const lowest = R.recommendFromNeeds({ localSeo:'recommended' });
+  eq([r.monthly.low, r.lines.map(l => l.id)], [lowest.monthly.low, lowest.lines.map(l => l.id)],
+     'the mention must not change the plan or its totals:');
+});
+
+t('no mention for a business that is not a trade', () => {
+  eq(R.recommendFromNeeds({ localSeo:'critical', website:'critical' }).program, null);
+});
+
+t('no mention for a trades site the audit is happy with, or with only optional work', () => {
+  eq(R.recommendFromNeeds({ website:'alreadyStrong', localSeo:'alreadyStrong', pages:'alreadyStrong' }, { trade:true }).program, null);
+  eq(R.recommendFromNeeds({ localSeo:'optional' }, { trade:true }).program, null);
+  eq(R.recommendFromNeeds({ brand:'critical', tracking:'critical' }, { trade:true }).program, null,
+     'brand or tracking work alone is not what the programme answers:');
 });
 
 /* ====================================================================== */
