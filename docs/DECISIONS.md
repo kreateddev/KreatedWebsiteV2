@@ -486,3 +486,29 @@ an instant enquiry reply, from the 2026-09-09 growth plan the approval was given
 - **Leak Locators East Coast** — a family business (owner J.R. Reyes). Disclosed on its case study.
 - **Rare Raleigh Restoration** — a **regular client**, no family or ownership tie. No related-party
   disclosure is needed or should be added.
+
+## 026 — Client portal included everywhere; KreatedOS CRM sold at $79/mo
+
+**DATE** 2026-09-10
+**PHASE** Growth plan, step 2
+**DECISION**
+1. **Every engagement includes a KreatedOS client-portal login** (project phases, tasks,
+   deliverables, messages, invoices). Stated on `/about/`, `/services/` and the `/pricing/` terms.
+   Not priced separately.
+2. **KreatedOS CRM is a product at $79/mo**, and is **included in Contractor Growth**.
+**APPROVED BY SKYLER** yes — "Client portal should be mentioned as included with every service"
+and "CRM for clients should be added as a product they can buy", 2026-09-10; price and inclusion
+chosen directly ($79/mo, "Yes, include it"), 2026-09-10.
+
+**TRUTH BOUNDARY**
+- The CRM card lists only features that exist in KreatedOS today (stage pipeline, table/board,
+  lead source, activity timeline, Today queue, follow-ups from call outcome, proposals per lead).
+- **Client accounts do not exist yet.** The CRM tables are admin-only and single-tenant, so the
+  card is labelled **early access** and says so again in its terms. 🚫 Remove the label only once
+  a client can log in to their own pipeline.
+
+**🚫 BEFORE THE FIRST SALE — not code on this site**
+1. **Deploy the portal to a real address.** `NEXT_PUBLIC_SITE_URL` in KreatedOS is still
+   `http://localhost:3000`; no client login has been verified in production.
+2. **Build client accounts for the CRM** (per-client pipelines with their own RLS). Until then a
+   CRM customer cannot be onboarded as described.
