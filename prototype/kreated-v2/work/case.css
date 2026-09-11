@@ -166,3 +166,39 @@
   .cs__pair{padding-bottom:0}
   .cs__counts{gap:20px 34px}
 }
+
+/* --------------------------------------------------------------------------
+   THE RECORD — dated entries, 2026-09-11 (growth plan step 7).
+   One entry per thing that was checked, on the date it was checked, with where
+   it was checked. The format the LLEC observation started, repeated.
+   ⚠ An entry is a FACT OBSERVED ON A DATE: a count, a change, a reading. Never
+   an interpretation, never an outcome the numbers do not show.
+   🚫 No entry without its date and its source line. 🚫 Never edit an old
+   entry to match today; add a new one, so the record shows the change.
+   -------------------------------------------------------------------------- */
+.cs__log{list-style:none;margin:clamp(22px,2.6vw,32px) 0 0;padding:0;max-width:62ch;
+  border-left:1px solid var(--cobalt)}
+.cs__log li{position:relative;padding:0 0 clamp(18px,2vw,24px) 22px}
+.cs__log li:last-child{padding-bottom:0}
+.cs__log li::before{content:'';position:absolute;left:-4px;top:4px;width:7px;height:7px;
+  border-radius:50%;background:var(--cobalt)}
+.cs__log time{display:block;margin:0 0 6px;
+  font:600 10.5px/1.4 'General Sans',system-ui;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent)}
+.cs__log p{margin:0 0 4px!important;font-size:clamp(15px,1.2vw,17px)!important;
+  line-height:1.55!important;color:var(--ink-1)}
+.cs__log .cs__logsrc{margin:0!important;font-size:13px!important;color:var(--gray)!important}
+
+/* a small dated table inside a record entry — figures copied from their source */
+.cs__tblwrap{overflow-x:auto;margin:12px 0 10px;max-width:440px}
+.cs__tbl{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.cs__tbl th,.cs__tbl td{padding:7px 0;border-bottom:1px solid rgba(2,12,46,.08);text-align:right;
+  font-weight:400;color:var(--ink-1)}
+.cs__tbl th[scope="row"],.cs__tbl thead th:first-child{text-align:left}
+.cs__tbl thead th{font:600 10.5px/1.4 'General Sans',system-ui;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gray)}
+.cs__tbl td{padding-left:18px}
+/* the caption is for screen readers; .sr-only lives in styles.css, which the
+   case studies do not load, so it is hidden here */
+.cs__tbl caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
