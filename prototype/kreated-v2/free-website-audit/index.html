@@ -253,6 +253,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             
             data-own-submit novalidate>
         <input type="hidden" name="form-name" value="website-audit">
+        <!-- ⚠ THE AUDIT CONTEXT FIELDS MUST BE IN THE MARKUP. Netlify registers a
+             form's fields when it parses the deployed HTML and drops any field it
+             did not see there. audit.js used to CREATE these with JavaScript at
+             submit time, so Netlify never knew them and every submission arrived
+             without them. audit.js now fills these existing inputs.
+             🚫 Do not remove one without removing it from postLead() too, and
+             add any new context field HERE as well as in the script. -->
+        <input type="hidden" name="audit-site" value="">
+        <input type="hidden" name="audit-findings" value="">
+        <input type="hidden" name="audit-critical" value="">
+        <input type="hidden" name="audit-recommended-ids" value="">
+        <input type="hidden" name="audit-one-time" value="">
+        <input type="hidden" name="audit-monthly" value="">
+        <input type="hidden" name="audit-fit" value="">
+        <input type="hidden" name="audit-report" value="">
         <p class="hp" aria-hidden="true">
           <label>Company website<input type="text" name="company-website" tabindex="-1" autocomplete="off"></label>
         </p>
@@ -611,6 +626,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      Contacts nothing until an analytics container is present. -->
 <script src="/track.js?v=1" defer></script>
 <script src="/forms.js?v=4" defer></script>
-<script src="/free-website-audit/audit.js?v=10" defer></script>
+<script src="/free-website-audit/audit.js?v=11" defer></script>
 </body>
 </html>

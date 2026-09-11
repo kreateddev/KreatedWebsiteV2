@@ -82,6 +82,28 @@ five-phrase list was **not** expanded by this exception — it is a style, not a
   Delivery stays unproven until V2 is connected to Netlify, both forms are detected, and a live test
   submission arrives in the intended inbox.
 
+## 3b. What happens after a form is sent (added 2026-09-10)
+
+`netlify/functions/submission-created.js` runs on every submission Netlify has verified as not
+spam. The file name is the subscription: rename it and it stops running. Logic is in
+`netlify/functions/lib/lead-intake.js`, tests in `tools/test-intake.js` (17).
+
+| Step | What it does | Turned on by (Netlify env vars) |
+|---|---|---|
+| Automatic reply | Emails the person through Resend: the project form gets a confirmation that repeats what they sent; the audit gets its saved-report link | `RESEND_API_KEY` (+ optional `KREATED_MAIL_FROM`, `KREATED_MAIL_REPLY_TO`) |
+| Lead in KreatedOS | `crm_leads` row (source `website`, stage `new`; `hot` for a project enquiry, `warm` for an audit), a `created` activity, and a follow-up due now so it tops the Today queue. The same business writing in again gets a note on its existing lead and a new follow-up | `KREATEDOS_SUPABASE_URL` + `KREATEDOS_SUPABASE_SERVICE_ROLE_KEY` |
+
+- **Both are off until their keys exist**, and each works without the other. Netlify's own email
+  notification to Skyler is unchanged.
+- **The reply is capped**: one per address per form per 12 hours, 150 a day in total, held in
+  Netlify Blobs under a hash of the address. With no store the reply is not sent: an uncapped
+  sender on a public form is an open relay.
+- **No response-time promise** in either email; the audit email never says a person reviewed it.
+- **The audit form's context fields are now in the markup.** They used to be created by script at
+  submit time, and Netlify drops any field it did not see when it parsed the deployed HTML.
+- The live KreatedOS schema was checked read-only on 2026-09-10: every table and column written
+  exists. No test row was written to the production CRM.
+
 ## 4. Contact routes
 
 | Channel | Value |

@@ -327,6 +327,9 @@
     hidden('audit-one-time', rec.oneTime.low ? Rec.money(rec.oneTime.low) : 'none');
     hidden('audit-monthly', rec.monthly.low ? Rec.money(rec.monthly.low) + '/mo' : 'none');
     hidden('audit-fit', (data.fit && data.fit.fit) || 'good');
+    /* the saved report's link, so the automatic email can carry it
+       (netlify/functions/lib/lead-intake.js). Empty when nothing was saved. */
+    hidden('audit-report', data.report && data.report.id ? reportUrl(data.report.id) : '');
 
     var body = new URLSearchParams(new FormData(form)).toString();
     fetch('/', { method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded' }, body: body })
