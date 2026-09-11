@@ -1804,10 +1804,16 @@ a{color:inherit}
 
 /* the inline expansion: the room simply grows. Full row width, ruled off
    from the collapsed line above it, columns tracking the row's own grid. */
-.offer__x{grid-column:1 / -1;overflow:hidden;max-height:0;opacity:0;
-  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .3s ease}
-.offer.is-open .offer__x{max-height:960px;opacity:1;
-  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .4s ease .12s}
+/* ⚠ Animates grid-template-rows 0fr -> 1fr, NOT max-height. The old 960px cap
+   cut eight panels in half on a phone (Growth was 1,856px tall at 390 wide):
+   any fixed cap is a guess about the longest copy at the narrowest width.
+   ⚠ minmax(0,…), not a bare 0fr: a bare 0fr has an AUTO minimum, which counts
+   .x__inner's margin, padding and border, so every closed card kept 51-73px. */
+.offer__x{grid-column:1 / -1;display:grid;grid-template-rows:minmax(0,0fr);overflow:hidden;opacity:0;
+  transition:grid-template-rows .55s cubic-bezier(.4,0,.2,1),opacity .3s ease}
+.offer.is-open .offer__x{grid-template-rows:minmax(0,1fr);opacity:1;
+  transition:grid-template-rows .55s cubic-bezier(.4,0,.2,1),opacity .4s ease .12s}
+.offer__x > .x__inner{min-height:0}
 .x__inner{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,2.8fr);
   gap:clamp(18px,2.2vw,40px);
   margin-top:clamp(26px,2.6vw,40px);padding-top:clamp(24px,2.4vw,36px);

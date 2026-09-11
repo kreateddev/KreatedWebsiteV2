@@ -359,6 +359,31 @@ are all the site has.
 ⚠ A page that fails to fetch is **not** counted as analysed and is reported in
 `pagesSkipped`, never in `pagesRead`.
 
+## 8c. Saved reports and share links (added 2026-09-10)
+
+Every completed audit is saved under a random 16-character id and the result shows a link,
+`/free-website-audit/?r=<id>`. The address bar is rewritten to the same link, so a reload returns
+to the report.
+
+| Piece | File |
+|---|---|
+| Store (Blobs `kreated-audit-reports`, strong reads; `$KREATED_AUDIT_STATE_DIR/reports/` locally) | `netlify/functions/lib/report-store.js` |
+| Read endpoint `GET /.netlify/functions/audit-report?id=` | `netlify/functions/lib/report-core.js` + v2 adapter `audit-report.js` |
+| Share block, saved-report view | `free-website-audit/audit.js` (`shareHtml`, the `?r=` loader) |
+
+- **Only the report is stored, never the form.** An allowlist (`pick()`), not a copy with
+  deletions. Name, email, phone, business, issue, caller IP and rate-limit internals never reach
+  the record, and a test reads the raw file to prove it.
+- **180 days**, enforced on read; an expired record is deleted the first time it is requested.
+- **No in-memory fallback.** With no durable store, `save()` returns null and the page shows no
+  link, because a link saved in one instance's memory 404s everywhere else.
+- **Inside the budget.** Saving only starts with `BUDGET.SAVE_MS` (1s) left and is raced against
+  it, so it always finishes by `TOTAL_MS` and the edge arithmetic in §8 is untouched.
+- **One 404 for every failure** (malformed, unknown, expired), so ids cannot be probed.
+- **Opening a saved report fires no analytics event and posts no lead.** The taxonomy is closed.
+- The read endpoint is **not** behind the audit rate limiter; opening a link runs no crawl.
+- Disclosed on `/privacy/` under "Saved audit reports".
+
 ## 9. The `_redirects` gate
 
 ```

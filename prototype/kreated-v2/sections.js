@@ -75,7 +75,7 @@
      file that no-ops on the routes it does not apply to is cheaper and safer
      than two that can drift.
      One engagement open at a time; re-click collapses. Expansion is
-     max-height animated in CSS (.offer__x); this only toggles state.
+     grid-template-rows animated in CSS (.offer__x); this only toggles state.
      ====================================================================== */
   (function offers() {
     var list = Array.prototype.slice.call(document.querySelectorAll('.offer'));

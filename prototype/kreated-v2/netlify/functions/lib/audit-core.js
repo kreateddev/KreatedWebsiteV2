@@ -1,6 +1,6 @@
 /* ==========================================================================
    KREATED — FREE WEBSITE AUDIT, SERVER SIDE
-   POST { url, business, email, phone? } -> { findings, fit, needs, meta }
+   POST { url, business, email, phone? } -> { findings, fit, needs, meta, report }
 
    THE PIPELINE
      1. validate the request           (shape, size, honeypot, rate limit)
@@ -8,7 +8,8 @@
      3. extract signals                (lib/signals.js — facts only)
      4. classify deterministically     (lib/classify.js — statuses)
      5. optionally rewrite the prose   (OpenAI, if a key is configured)
-     6. return needs                   (the client maps them to offers)
+     6. save the report                (lib/report-store.js — a shareable link)
+     7. return needs                   (the client maps them to offers)
 
    ⚠ THE MODEL NEVER DECIDES ANYTHING PRICEABLE. It receives findings that are
    already classified and rewrites the sentences. It is never sent a price, a
@@ -45,6 +46,7 @@ const { extract, summarise }    = require('./signals.js');
 const { classify, fitVerdict }  = require('./classify.js');
 const { pick, MAX_PAGES }       = require('./pick-pages.js');
 const rateLimit                 = require('./rate-limit.js');
+const reports                   = require('./report-store.js');
 
 const MAX_BODY = 4000;
 
@@ -150,7 +152,13 @@ const BUDGET = {
      point of reading more than the homepage. */
   PAGE_RESERVE_MS: 4500,
   MODEL_MS: 2500,
-  MODEL_MIN_REMAINING_MS: 3000
+  MODEL_MIN_REMAINING_MS: 3000,
+  /* ⚠ SAVING THE REPORT (lib/report-store.js) MAY NOT EXTEND THE CALL. It
+     only starts with at least SAVE_MS left and is raced against SAVE_MS, so it
+     always finishes inside TOTAL_MS and the edge arithmetic above is untouched.
+     When there is not time, the audit returns without a link: a report with
+     no link costs one feature, an overrun costs the whole audit. */
+  SAVE_MS: 1000
 };
 
 /* ⚠ The in-process Map that used to live here is gone. It limited one warm
@@ -436,7 +444,7 @@ exports.handler = async function (event) {
       ? await polish(findings, { host: summary.home.host })
       : { findings, modelUsed: false, modelError: 'skipped to stay inside the time budget' };
 
-    return reply(200, {
+    const payload = {
       ok: true,
       site: { url: first.finalUrl, host: summary.home.host },
       pagesInspected: pages.map(p => p.url),
@@ -453,7 +461,21 @@ exports.handler = async function (event) {
         inspected: 'public website HTML only',
         notInspected: ['analytics', 'Search Console', 'the Google Business Profile', 'any private business data']
       }
-    });
+    };
+
+    /* 6 — a link to this report, if there is time and somewhere durable to
+       keep it. Never the form fields: see the header of report-store.js. */
+    payload.report = null;
+    if (remaining() >= BUDGET.SAVE_MS) {
+      let timer;
+      payload.report = await Promise.race([
+        reports.save(payload).catch(() => null),
+        new Promise(r => { timer = setTimeout(() => r(null), BUDGET.SAVE_MS); })
+      ]);
+      clearTimeout(timer);
+    }
+    payload.meta.elapsedMs = Date.now() - startedAt;
+    return reply(200, payload);
   } catch (e) {
     if (e instanceof AuditError || e.expose)
       return reply(400, { error: e.message, code: e.code });

@@ -613,3 +613,25 @@
   .aud__lines li{flex-direction:column;gap:2px}
   .aud__lines li span:last-child{color:var(--ink-3)}
 }
+
+/* ---- the report link -----------------------------------------------------
+   Sits inside the result head, under the summary: the moment someone has read
+   the verdict is the moment they want to send it on. Quiet on purpose — a
+   hairline field and a ghost button, not a second call to action competing
+   with the plan below. */
+.aud__share{margin:clamp(18px,2vw,24px) 0 0;max-width:640px}
+.aud__share-l{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-3)}
+.aud__share-row{display:flex;gap:10px;align-items:stretch}
+.aud__share-u{flex:1 1 auto;min-width:0;height:48px;padding:0 14px;
+  border:1px solid var(--stroke-hi);border-radius:10px;background:var(--surface);
+  font:500 14px/1 'General Sans',system-ui,sans-serif;color:var(--ink-1);
+  text-overflow:ellipsis}
+.aud__share-u:focus-visible{outline:2px solid var(--stroke-focus);outline-offset:2px}
+.aud__share-b.btn{height:48px;flex:0 0 auto;padding:0 20px}
+.aud__share-n{margin:10px 0 0;font-size:13px;line-height:1.55;color:var(--ink-4)}
+@media (max-width:520px){
+  .aud__share-row{flex-direction:column}
+  .aud__share-b.btn{width:100%}
+}
+.aud__saved{margin:14px 0 0;max-width:58ch;font-size:14px;line-height:1.6;color:var(--ink-3)}

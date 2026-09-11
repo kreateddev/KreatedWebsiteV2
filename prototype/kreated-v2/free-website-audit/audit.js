@@ -146,9 +146,15 @@
      chain, so any exception in it landed in .catch() and told the visitor the
      service could not be reached. A rendering bug is not a network problem and
      must not be reported as one. */
-  function show(data) {
+  function show(data, opts) {
+    opts = opts || {};
     try {
-      render(data);
+      render(data, opts);
+      /* 🚫 A SAVED REPORT BEING OPENED IS NOT AN AUDIT COMPLETING. The taxonomy
+         is closed (seven events) and has no event for it, so it fires nothing:
+         counting it as website_audit_complete would inflate the one number
+         this tool is judged by. */
+      if (opts.shared) return;
       /* ⚠ ANALYTICS — COMPLETE. Deliberately AFTER render() returns: if render
          throws, the visitor sees the failure message and this must not claim a
          completed audit. kreatedTrackOnce guards against a re-render pushing a
@@ -169,7 +175,53 @@
     }
   }
 
-  function render(data) {
+  /* ---- the report link --------------------------------------------------
+     ⚠ The saved record never holds the form fields (see report-store.js), so
+     the link is safe to forward: it shows exactly what anyone would get by
+     auditing the same public site. */
+  function reportUrl(id) { return location.origin + '/free-website-audit/?r=' + encodeURIComponent(id); }
+  function fmtDate(iso) {
+    var d = new Date(iso);
+    return isNaN(d) ? '' : d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  }
+  function shareHtml(report) {
+    if (!report || !report.id) return '';
+    var u = reportUrl(report.id);
+    return '<div class="aud__share">' +
+      '<p class="aud__share-l" id="auditShareL">A link to this report</p>' +
+      '<div class="aud__share-row">' +
+        '<input class="aud__share-u" id="auditShareUrl" type="text" readonly value="' + esc(u) + '" aria-labelledby="auditShareL">' +
+        '<button class="btn btn--ghost aud__share-b" type="button" id="auditShareCopy">Copy link</button>' +
+      '</div>' +
+      '<p class="aud__share-n">Anyone with the link can open it. It is kept until ' +
+        esc(fmtDate(report.expires)) + ', then deleted. It holds the findings only, ' +
+        'nothing you typed into the form.</p>' +
+    '</div>';
+  }
+  function wireShare() {
+    var btn = document.getElementById('auditShareCopy');
+    var inp = document.getElementById('auditShareUrl');
+    if (!btn || !inp) return;
+    inp.addEventListener('focus', function () { inp.select(); });
+    btn.addEventListener('click', function () {
+      function done(ok) {
+        btn.textContent = ok ? 'Copied' : 'Select and copy';
+        live.textContent = ok ? 'Link copied.' : 'Copy the link from the box.';
+        setTimeout(function () { btn.textContent = 'Copy link'; }, 2200);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(inp.value).then(function () { done(true); }, function () { inp.select(); done(false); });
+      } else {
+        inp.select();
+        var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+        done(ok);
+      }
+    });
+  }
+
+  function render(data, opts) {
+    opts = opts || {};
+    var report = opts.shared ? opts.report : data.report;
     var rec = Rec.recommendFromNeeds(data.needs);
 
     var groups = ORDER.map(function (g) {
@@ -193,8 +245,15 @@
       '<div class="aud__head">' +
         '<h2 class="aud__h2" id="auditResultH" tabindex="-1">What the audit found</h2>' +
         '<p class="aud__site">' + esc(data.site.host) + ' &middot; ' +
-          data.pagesInspected.length + ' ' + (data.pagesInspected.length === 1 ? 'page' : 'pages') + ' read</p>' +
+          data.pagesInspected.length + ' ' + (data.pagesInspected.length === 1 ? 'page' : 'pages') + ' read' +
+          /* ⚠ ALWAYS DATED. A report is an observation of one day, and a
+             forwarded link can be opened months later. */
+          (report && report.created ? ' &middot; checked ' + esc(fmtDate(report.created)) : '') + '</p>' +
         '<p class="aud__summary">' + esc(summary) + '</p>' +
+        (opts.shared
+          ? '<p class="aud__saved">This is a saved report, as the site was on the day it was checked. ' +
+            '<a class="ilink" href="/free-website-audit/">Check a site now</a>.</p>'
+          : shareHtml(report)) +
       '</div>' + groups + planHtml(rec, data.fit) +
       '<p class="aud__scope">This audit read your public website only. It did not see your ' +
         'analytics, Search Console, Google Business Profile or any private business data, ' +
@@ -235,8 +294,19 @@
     if (b) b.addEventListener('click', stashAndTrack('package_builder'));
     if (c) c.addEventListener('click', stashAndTrack('contact'));
 
-    /* ---- lead capture: the original Netlify form, plus context ---------- */
-    postLead(data, rec, selection);
+    if (!opts.shared) {
+      wireShare();
+      /* the address bar becomes the link, so a reload or a bookmark returns to
+         this report instead of an empty form */
+      if (report && report.id && window.history && history.replaceState) {
+        try { history.replaceState(null, '', '/free-website-audit/?r=' + encodeURIComponent(report.id)); } catch (e) {}
+      }
+    }
+
+    /* ---- lead capture: the original Netlify form, plus context ----------
+       🚫 Never for a saved report. The person opening a link did not fill the
+       form; posting it would file an empty lead under someone else's audit. */
+    if (!opts.shared) postLead(data, rec, selection);
   }
 
   function hidden(name, value) {
@@ -263,11 +333,11 @@
       .catch(function () { /* the audit is already on screen; a failed lead post must not disturb it */ });
   }
 
-  function fail(message, retryable) {
+  function fail(message, retryable, title) {
     stopAnalyzing();
     result.hidden = false;
     result.innerHTML = '<div class="aud__fail" role="alert">' +
-      '<h2 class="aud__h2" id="auditResultH" tabindex="-1">The audit could not run</h2>' +
+      '<h2 class="aud__h2" id="auditResultH" tabindex="-1">' + esc(title || 'The audit could not run') + '</h2>' +
       '<p>' + esc(message) + '</p>' +
       (retryable ? '<p><button type="button" class="btn btn--ghost" id="auditRetry">Try again</button></p>' : '') +
       '<p class="aud__failalt">You can also <a class="ilink" href="/contact/">tell Skyler what is going on</a> ' +
@@ -424,4 +494,28 @@
         if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Run the audit'; }
       });
   });
+
+  /* ---- a saved report: /free-website-audit/?r=<id> -----------------------
+     ⚠ fail(..., false) throughout. Its retry button resubmits the FORM, which
+     is empty here and would audit nothing. */
+  var rid = null;
+  try { rid = new URLSearchParams(location.search).get('r'); } catch (e) {}
+  if (rid) {
+    live.textContent = 'Loading the saved report.';
+    fetch('/.netlify/functions/audit-report?id=' + encodeURIComponent(rid), { headers: { 'Accept': 'application/json' } })
+      .then(function (r) {
+        return r.text().then(function (t) { var b = null; try { b = JSON.parse(t); } catch (e) {} return { status: r.status, body: b }; });
+      })
+      .then(function (res) {
+        if (res.body && res.body.ok && res.body.report) {
+          show(res.body.report, { shared: true,
+            report: { id: res.body.id, created: res.body.created, expires: res.body.expires } });
+        } else {
+          fail((res.body && res.body.error) || 'This report could not be loaded.', false, 'This report could not be opened');
+        }
+      })
+      .catch(function () {
+        fail('This report could not be loaded. Check your connection and reload the page.', false, 'This report could not be opened');
+      });
+  }
 }());

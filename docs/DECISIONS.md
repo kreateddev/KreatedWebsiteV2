@@ -460,3 +460,29 @@ complete and the GBP already reflects it.
 2. **Ranking history.** The site launched for search 2026-09-01 against Raleigh terms. Re-pointing
    the head terms at a new city resets that work; it is the right call given the move, but it
    should be understood as a restart rather than a continuation.
+
+## 025 — Contractor Growth program at $2,000/mo; client relationships stated
+
+**DATE** 2026-09-10
+**PHASE** Growth plan, step 1
+**DECISION** A recurring **Contractor Growth** program is published at **$2,000/mo** as the
+headline offer for trades and field-service businesses. The existing recurring ladder (Local
+Presence $500, Local Growth $900, Market Expansion from $1,500) stays in place as the downsell.
+**APPROVED BY SKYLER** yes — answered "Yes" directly to "Do you approve a $2,000/mo program?",
+2026-09-10.
+
+**SCOPE** Assembled from documented tiers: everything in Local Growth, everything in Site Care+,
+and the Local Presence review system. The **only new deliverable** is missed-call text-back plus
+an instant enquiry reply, from the 2026-09-09 growth plan the approval was given against.
+
+**🚫 NOT DECIDED — do not fill in**
+1. ~~**Initial term.**~~ **RESOLVED 2026-09-10:** three-month initial commitment, month-to-month
+   after, the same as Local Growth. Skyler answered "Yes" directly. Now on the card.
+2. **Website build.** Not included in the fee. A build is scoped separately first.
+3. **The text-back tooling.** Kreated must be able to deliver it before the first sale; the
+   tool and who carries its monthly cost are not recorded here.
+
+**CLIENT RELATIONSHIPS** stated by Skyler 2026-09-10:
+- **Leak Locators East Coast** — a family business (owner J.R. Reyes). Disclosed on its case study.
+- **Rare Raleigh Restoration** — a **regular client**, no family or ownership tie. No related-party
+  disclosure is needed or should be added.

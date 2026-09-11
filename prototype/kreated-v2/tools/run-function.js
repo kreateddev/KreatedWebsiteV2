@@ -15,8 +15,9 @@ process.stdin.on('end', async () => {
        require, so run the CommonJS core directly — same handler, same
        event shape, which is the whole point of keeping the core separate. */
     const name = process.argv[2];
-    const fn = name === 'audit'
-      ? require('../netlify/functions/lib/audit-core.js')
+    const CORES = { 'audit': 'audit-core', 'audit-report': 'report-core' };
+    const fn = CORES[name]
+      ? require('../netlify/functions/lib/' + CORES[name] + '.js')
       : require('../netlify/functions/' + name + '.js');
     const res = await fn.handler(event, {});
     process.stdout.write(JSON.stringify(res));

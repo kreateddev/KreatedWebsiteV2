@@ -945,11 +945,117 @@ t('a concentrated site no longer returns the "nothing worth paying for" verdict'
   ok(v.fit !== 'poor', 'fit was "' + v.fit + '"; a one-market site has real work available');
 });
 
+/* ======================================================================
+   SAVED REPORTS — lib/report-store.js + lib/report-core.js
+   Run against the FILE backend in a throwaway directory. @netlify/blobs is
+   installed but has no credentials here, so getStore() throws and the store
+   falls through to the file backend exactly as it does under serve.py.
+   ====================================================================== */
+async function reportTests() {
+  const os = require('os'), fs = require('fs');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'kreated-reports-'));
+  const prev = process.env.KREATED_AUDIT_STATE_DIR;
+  process.env.KREATED_AUDIT_STATE_DIR = dir;
+  const RS = require('../netlify/functions/lib/report-store.js');
+  const RC = require('../netlify/functions/lib/report-core.js');
+  const sample = {
+    ok: true, site: { url: 'https://example.com/', host: 'example.com' },
+    pagesInspected: ['https://example.com/'], pagesRead: [], pagesSkipped: [],
+    findings: [{ category: 'website', status: 'critical', label: 'Website', finding: 'x', need: 'web' }],
+    needs: { web: 'critical' }, fit: { fit: 'good' },
+    meta: { modelUsed: false, rateLimit: { backend: 'file' }, elapsedMs: 900,
+            inspected: 'public website HTML only', notInspected: ['analytics'] },
+    /* ⚠ fields that must NEVER reach a shareable record */
+    name: 'Pat Example', email: 'pat@example.com', phone: '555', business: 'Example Co', issue: 'secret'
+  };
+  try {
+    await ta('a report saves and loads back by its id', async () => {
+      const saved = await RS.save(sample);
+      ok(saved && RS.validId(saved.id), 'expected a valid id, got ' + JSON.stringify(saved));
+      const rec = await RS.load(saved.id);
+      ok(rec && rec.report.site.host === 'example.com', 'round trip lost the report');
+      eq(rec.report.needs, { web: 'critical' });
+    });
+
+    await ta('a saved report holds nothing from the form and nothing about the caller', async () => {
+      const saved = await RS.save(sample);
+      const raw = fs.readFileSync(path.join(dir, 'reports', saved.id + '.json'), 'utf8');
+      ['Pat Example', 'pat@example.com', 'Example Co', 'secret', 'rateLimit', 'elapsedMs']
+        .forEach(k => ok(raw.indexOf(k) === -1, 'the saved record contains "' + k + '"'));
+    });
+
+    await ta('ids are unguessable and malformed ids are refused before any read', async () => {
+      const a = await RS.save(sample), b = await RS.save(sample);
+      ok(a.id !== b.id, 'two saves produced the same id');
+      ok(a.id.length === 16, 'id should be 16 characters, got ' + a.id.length);
+      for (const bad of ['', 'short', '../../etc/passwd', 'a'.repeat(17), 'abc/def/ghi/jklm'])
+        ok(await RS.load(bad) === null, 'load accepted "' + bad + '"');
+    });
+
+    await ta('an expired report is refused and deleted on first read', async () => {
+      const t0 = Date.parse('2026-01-01T00:00:00Z');
+      const saved = await RS.save(sample, t0);
+      const later = t0 + (RS.TTL_DAYS + 1) * 864e5;
+      ok(await RS.load(saved.id, later) === null, 'an expired report was served');
+      ok(!fs.existsSync(path.join(dir, 'reports', saved.id + '.json')), 'and it should be gone');
+    });
+
+    await ta('the endpoint answers 200 for a real id and one identical 404 for every failure', async () => {
+      const saved = await RS.save(sample);
+      const good = await RC.handler({ httpMethod: 'GET', queryStringParameters: { id: saved.id } });
+      ok(good.statusCode === 200, 'expected 200, got ' + good.statusCode);
+      const body = JSON.parse(good.body);
+      ok(body.ok && body.report && body.created && body.expires, 'missing fields: ' + good.body);
+      ok(/noindex/.test(good.headers['X-Robots-Tag'] || ''), 'a report must never be indexed');
+      const a = await RC.handler({ httpMethod: 'GET', queryStringParameters: { id: 'AAAAAAAAAAAAAAAA' } });
+      const b = await RC.handler({ httpMethod: 'GET', queryStringParameters: { id: '<script>' } });
+      ok(a.statusCode === 404 && b.statusCode === 404, 'expected 404s, got ' + a.statusCode + '/' + b.statusCode);
+      ok(a.body === b.body, 'unknown and malformed ids must be indistinguishable');
+      const p = await RC.handler({ httpMethod: 'POST', queryStringParameters: { id: saved.id } });
+      ok(p.statusCode === 405, 'POST should be refused');
+    });
+
+    await ta('with no durable store there is no link, rather than a broken one', async () => {
+      delete process.env.KREATED_AUDIT_STATE_DIR;
+      ok(await RS.save(sample) === null, 'save must return null with nowhere durable to keep it');
+      process.env.KREATED_AUDIT_STATE_DIR = dir;
+    });
+
+    await ta('saving can never push the audit past its budget', async () => {
+      const { BUDGET } = require('../netlify/functions/lib/audit-core.js');
+      ok(Number.isFinite(BUDGET.SAVE_MS) && BUDGET.SAVE_MS > 0, 'SAVE_MS must be a real number');
+      /* the save only starts with SAVE_MS left and is raced against SAVE_MS,
+         so it ends by TOTAL_MS — which the edge test above already bounds */
+      ok(BUDGET.SAVE_MS < BUDGET.TOTAL_MS - BUDGET.PAGE_RESERVE_MS,
+         'the save window must be smaller than the time left after the last page can start');
+    });
+
+    await ta('a live audit returns a report link, and the link opens the same findings', async () => {
+      delete require.cache[require.resolve('../netlify/functions/lib/audit-core.js')];
+      const core = require('../netlify/functions/lib/audit-core.js');
+      const res = await core.handler({ httpMethod: 'POST',
+        headers: { 'x-forwarded-for': 'report-' + Math.random() },
+        body: JSON.stringify({ url: 'https://example.com', name: 'Pat Example', email: 'pat@example.com' }) });
+      const r = JSON.parse(res.body);
+      ok(r.ok, 'audit failed: ' + res.body);
+      ok(r.report && RS.validId(r.report.id), 'no report link in the response: ' + JSON.stringify(r.report));
+      const back = JSON.parse((await RC.handler({ httpMethod: 'GET', queryStringParameters: { id: r.report.id } })).body);
+      eq(back.report.findings.map(f => f.status), r.findings.map(f => f.status));
+      ok(JSON.stringify(back).indexOf('Pat Example') === -1, 'the form name leaked into the saved report');
+    });
+  } finally {
+    if (prev === undefined) delete process.env.KREATED_AUDIT_STATE_DIR;
+    else process.env.KREATED_AUDIT_STATE_DIR = prev;
+    try { fs.rmSync(dir, { recursive: true, force: true }); } catch (e) {}
+  }
+}
+
 /* ====================================================================== */
 (async function () {
   await dnsTests();
   await rlTests();
   await modelTests();
+  await reportTests();
   console.log('\nKREATED — free website audit\n');
   results.forEach(([s, n]) => console.log('  ' + (s === 'ok' ? '✓' : '✗') + ' ' + n));
   console.log('\n  ' + pass + ' passed, ' + fail + ' failed\n');

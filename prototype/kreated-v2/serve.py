@@ -12,16 +12,28 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     # ⚠ LOCAL DEV ONLY. Netlify serves /.netlify/functions/* in production;
     # this shim runs the same handler through node so the audit can be tested
     # end to end without the Netlify CLI. 🚫 Not a production code path.
+    def do_GET(self):
+        # the saved-report endpoint is a GET; everything else is a static file
+        if self.path.startswith('/.netlify/functions/'):
+            return self._function('GET')
+        return super().do_GET()
+
     def do_POST(self):
         if not self.path.startswith('/.netlify/functions/'):
             self.send_error(404); return
-        name = self.path.rsplit('/', 1)[-1].split('?')[0]
+        return self._function('POST')
+
+    def _function(self, method):
+        from urllib.parse import urlsplit, parse_qsl
+        parts = urlsplit(self.path)
+        name = parts.path.rsplit('/', 1)[-1]
         length = int(self.headers.get('Content-Length') or 0)
-        body = self.rfile.read(length).decode('utf-8', 'replace')
+        body = self.rfile.read(length).decode('utf-8', 'replace') if method == 'POST' else ''
         event = {
-            'httpMethod': 'POST',
+            'httpMethod': method,
             'path': self.path,
             'headers': {k.lower(): v for k, v in self.headers.items()},
+            'queryStringParameters': dict(parse_qsl(parts.query)),
             'body': body,
         }
         try:

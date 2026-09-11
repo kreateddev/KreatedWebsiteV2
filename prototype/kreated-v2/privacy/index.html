@@ -75,7 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
        privacy.css   only what this page uses and no other page does -->
 <link rel="stylesheet" href="/services/services.css?v=22">
 <link rel="stylesheet" href="/services/leaf.css?v=13">
-<link rel="stylesheet" href="privacy.css?v=1">
+<link rel="stylesheet" href="privacy.css?v=2">
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=11">
@@ -229,11 +229,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <section class="pv__b">
         <h2>What the site loads</h2>
-        <p>Nothing from anyone else. Every font, image and script on this site is
-          served from this domain. There is no analytics tag, no content-delivery
-          network, no embedded map, no video player, no chat widget and no social
-          button. Opening a page here contacts no other company.</p>
-        <p>The site sets no cookies and stores nothing in your browser.</p>
+        <p>The fonts, images and the site's own scripts are served from this domain.
+          Two outside services also load, through Google Tag Manager, to measure
+          how the site is used:</p>
+        <ul class="pv__u">
+          <li><b>Google Analytics</b>, which counts visits and the handful of
+            events listed below.</li>
+          <li><b>Microsoft Clarity</b>, which records how pages are used (clicks,
+            scrolling and mouse movement) so confusing pages can be found and
+            fixed.</li>
+        </ul>
+        <p>Both set cookies: <code>_ga</code> and <code>_ga_ENJ4QV1FQX</code> for
+          Google Analytics, <code>_clck</code> and <code>_clsk</code> for Clarity.
+          There is no embedded map, video player, chat widget or social button.</p>
+        <p>The package builder and the audit also keep your selections in your
+          browser's session storage, so they carry over to the contact form. That
+          is cleared when you close the tab.</p>
       </section>
 
       <section class="pv__b">
@@ -251,8 +262,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               describe.</dd>
           </div>
         </dl>
-        <p>Only the name and email are required. Everything else is optional and
-          the form works without it.</p>
+        <p>On the project form only the name and email are required. On the audit
+          only the website and your name are. Everything else is optional and
+          both forms work without it.</p>
+      </section>
+
+      <section class="pv__b">
+        <h2>Saved audit reports</h2>
+        <p>Every completed audit is saved so it has a link you can send to someone.
+          The saved report holds what the audit found about the website: the
+          address, the pages read and the findings. It never holds your name,
+          email, phone, business name or anything you typed into the form.</p>
+        <p>Anyone with the link can open the report. Links are long and random, and
+          reports are not listed or indexed anywhere. Each one is deleted after
+          180 days. To have one deleted sooner, send the link to
+          <a class="ilink" href="mailto:contact@kreated.dev">contact@kreated.dev</a>.</p>
       </section>
 
       <section class="pv__b">
@@ -266,12 +290,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <section class="pv__b">
         <h2>What is measured</h2>
-        <p>Today, nothing. The site contains the wiring for analytics but no
-          analytics service is connected, so no measurement is recorded.</p>
-        <p>If one is connected later, the events it records carry the name of the
-          form and two yes/no flags, whether a website and a phone number were
-          filled in. They never carry your name, your email, your phone number,
-          your website address or anything you wrote.</p>
+        <p>Google Analytics records page visits and seven named events: a form
+          sent, an audit started and finished, the package builder started and
+          finished, a hand-off from a tool to the contact form, and a click on a
+          main button. The form event carries the name of the form, which page it
+          was sent from, and two yes/no flags: whether a website and a phone
+          number were filled in.</p>
+        <p>None of these events carry your name, your email, your phone number or
+          anything you wrote.</p>
       </section>
 
       <section class="pv__b">
@@ -282,15 +308,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <section class="pv__b pv__b--open">
         <h2>Still being settled</h2>
-        <p>Two things are not decided yet, and this page will say so until they
-          are rather than guess:</p>
-        <ul class="pv__u">
-          <li>How long inquiry emails are kept.</li>
-          <li>Whether an analytics service will be connected at launch, and which.</li>
-        </ul>
+        <p>One thing is not decided yet, and this page will say so until it is
+          rather than guess: how long inquiry emails are kept.</p>
       </section>
 
-      <p class="pv__rev">Last reviewed 30 August 2026. Kreated &middot; Wilmington, North Carolina.</p>
+      <p class="pv__rev">Last reviewed 10 September 2026. Kreated &middot; Wilmington, North Carolina.</p>
     </div>
   </div>
 </section>
