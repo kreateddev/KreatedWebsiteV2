@@ -48,17 +48,24 @@ academic coach with a real practice and no website at all.
 - Google Business Profile → *"Any business that gets found on Maps before it gets found on Google."*
 - Brand strategy → *"Businesses that are better than they look."*
 
-### Buying behaviour observed in a real engagement
+### Buying behaviour — CORRECTED 2026-09-10
 
-From the Rare Raleigh Restoration case study — **restoration/urgent home services specifically**:
+🔁 **This section used to describe Rare Raleigh Restoration as an urgent, restoration/emergency
+home-services purchase** ("urgent, local, high-trust"; "compares a small number of options
+quickly"). That was wrong about the client. Rare Raleigh's own live site (checked 2026-09-10)
+describes **remodeling and residential contracting in Cary and Southern Wake County**: additions,
+kitchens, bathrooms, whole-home remodels, decks, concrete, with **no emergency or 24/7 service**.
+Skyler approved the correction on 2026-09-10 and the case study was rewritten to match.
 
-- Urgent, local, high-trust purchase
-- Search happens **on a phone**
-- Buyer compares **a small number of options quickly**
-- Buyer calls **whoever looks most capable of handling the situation**
+What the site now says about a remodeling buyer is **general to the trade, not measured on this
+engagement**, and the case study says so:
 
-⚠️ This is documented for restoration contracting. It is **not** established for academic coaching,
-pool leak detection, or any other vertical.
+- A planned, high-trust purchase, decided over weeks
+- Compares more than one contractor
+- Chooses mostly on finished work they can see
+
+⚠️ No buyer behaviour is established *from measurement* for any client. 🚫 Do not describe Rare
+Raleigh's customers as urgent or emergency buyers.
 
 ### Demonstrated client verticals (actual, not assumed)
 
@@ -66,7 +73,7 @@ pool leak detection, or any other vertical.
 |---|---|
 | LearnSmart Educational Consulting | Academic coaching / educational consulting |
 | Leak Locators East Coast | Pool leak detection (Wilmington NC / coastal NC) |
-| Rare Raleigh Restoration | Restoration contracting / home services |
+| Rare Raleigh Restoration | Remodeling & residential contracting (Cary / Southern Wake County, NC) |
 
 ### Geography
 
