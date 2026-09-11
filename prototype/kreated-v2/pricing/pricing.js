@@ -100,16 +100,31 @@
     }
     return -1;
   }
+  /* ⚠ ONLY SWITCH WHEN THE TARGET IS HIDDEN — fixed 2026-09-11. The jump
+     links on the Packages tab (#grpSearch, #grpBrand…) change the hash, and
+     this used to call select() for every one of them even though their panel
+     was already showing. select() scrolls back to the switcher whenever the
+     switcher is above the viewport (right for a tab change, wrong here), so
+     the second jump threw the reader back to the top of the page.
+     Now: a target in the visible panel is left to the browser's own anchor
+     scroll. A target in a hidden panel opens that panel and is then scrolled
+     to itself, not to the switcher. */
   function fromHash() {
     var h = (window.location.hash || '').replace('#', '');
     if (!h) return;
     var i = byId(h);
-    if (i >= 0) { select(i, false); return; }
+    if (i >= 0) { if (panels[i].hidden) select(i, false); return; }
     /* a hash pointing at something INSIDE a panel should open that panel */
     var el = document.getElementById(h);
     if (!el) return;
     for (var p = 0; p < panels.length; p++) {
-      if (panels[p].contains(el)) { select(p, false); break; }
+      if (panels[p].contains(el)) {
+        if (panels[p].hidden) {
+          select(p, false);
+          el.scrollIntoView({ block: 'start', behavior: 'auto' });
+        }
+        break;
+      }
     }
   }
 
