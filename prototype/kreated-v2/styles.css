@@ -2931,6 +2931,13 @@ button,input,select,textarea{font:inherit;color:inherit}
 .rev__text p{margin:0 0 13px;font:400 clamp(15.5px,1.15vw,16.5px)/1.68
   'General Sans',system-ui;color:var(--ink-1);text-wrap:pretty}
 .rev__text p:last-child{margin-bottom:0}
+/* ⚠ A LINK INSIDE A REVIEW, 2026-09-13. The homepage does not load leaf.css,
+   where .ilink gets its underline, so a client name linked to its case study
+   rendered as plain white text: a link nobody could see. The review's words
+   stay verbatim; only the name is linked, and it needs a visible underline. */
+.rev__text .ilink{color:inherit;text-decoration:none;border-bottom:1px solid var(--accent);
+  padding-bottom:1px}
+.rev__text .ilink:hover,.rev__text .ilink:focus-visible{border-bottom-color:currentColor}
 .rev__by{margin-top:auto;font:600 14.5px/1.5 'General Sans',system-ui;color:var(--ink-1)}
 .rev__role,.rev__src{display:block;font-weight:400;color:var(--ink-3)}
 .rev__role{font-size:14px}

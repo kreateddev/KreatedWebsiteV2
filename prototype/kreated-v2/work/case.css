@@ -36,7 +36,10 @@
   padding:6px 13px;border-radius:999px;
   background:rgba(7,7,7,.72);backdrop-filter:blur(6px);
   font:600 10px/1 'General Sans',system-ui;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ink-1)}
+  /* ⚠ #fff, NOT var(--ink-1), fixed 2026-09-13. The pill is always dark, but
+     --ink-1 resolves to near-black on the white /work/ pages, so every caption
+     rendered #141414 on a 72%-black pill and could not be read. */
+  text-transform:uppercase;color:#fff}
 
 /* Rare Raleigh — before recessed, after forward, phone breaking the corner */
 .cs__ba{margin:0}
