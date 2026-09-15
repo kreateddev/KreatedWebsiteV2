@@ -222,7 +222,9 @@ Confirmed **MISSING** and required before Step 8 can complete:
 - **Refreshed LLEC capture** — priority, homepage Work candidate
 - **Current Rare Raleigh project media** — priority, homepage Work candidate
 - Confirmed **rights** for any client photography used publicly
-- An OG/social image in the V2 visual language
+- ~~An OG/social image in the V2 visual language~~ **Done 2026-09-14:** `assets/img/og-card-v2.jpg`,
+  1200x630, set in the site's own Cormorant Garamond and General Sans, location Wilmington (DECISION 024).
+  Every non-capture route declares it at its real size.
 
 Explicitly **not** on the critical path for the homepage: a fresh LearnSmart capture (case study
 only), and founder photography (no commitment to use it).

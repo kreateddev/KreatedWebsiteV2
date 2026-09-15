@@ -115,6 +115,7 @@ link every route from everywhere and would flatten the signal.
 | `/services/google-business-profile/` | GBP optimization | Commercial | Raleigh | Money | 12 |
 | `/services/brand-strategy/` | Brand strategy + identity | Commercial | Raleigh | Money | **4** |
 | `/services/answer-engine-optimization/` | AEO | Commercial, emerging | Worldwide | Money | **3** |
+| `/services/social-media-management/` | Social media management (added 2026-09-14, DECISION 028) | Commercial | Wilmington | Money | 6 at launch: `/`, `/services/`, web design, Google Business Profile, local SEO, contractors |
 | `/pricing/` | Prices and packages | Commercial investigation | None | Decision | 8 |
 | `/free-website-audit/` | Free site audit | Tool / diagnostic | None | Diagnostic entry | 21 |
 | `/work/` | Proof index | Navigational | Raleigh | Trust | 16 |

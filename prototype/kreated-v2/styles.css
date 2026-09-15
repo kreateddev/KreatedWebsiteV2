@@ -2485,6 +2485,17 @@ main:focus{outline:none}
   .room .svc__index{grid-template-columns:1fr;row-gap:0}
   .room .svc__index .svc__d{max-width:44ch}
 }
+/* ⚠ AN ODD LAST ROW, added 2026-09-14 with service 07 (DECISION 028), and
+   centered at Skyler's request the same day. Seven services leave the last
+   one alone in the left column. It takes its own row instead, one column wide
+   and centered beneath the pair above, laid out exactly like every other cell.
+   The width is one column: half the grid less half the column gap, which is
+   the SAME clamp as column-gap above. 🚫 Change that clamp, change it here.
+   Two columns only: at 720 and below it is a list and nothing is centered. */
+@media (min-width:721px){
+  .room .svc__index .svc__item:last-child:nth-child(odd){grid-column:1 / -1;justify-self:center;
+    width:calc((100% - clamp(30px,4.4vw,88px)) / 2)}
+}
 .room .svc__index{list-style:none;margin:0;padding:0}
 .room .svc__item{}
 .room .svc__row{

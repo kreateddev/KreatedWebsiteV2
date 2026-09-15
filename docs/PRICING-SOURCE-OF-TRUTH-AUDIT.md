@@ -190,3 +190,12 @@ Two owner-approved offers joined `assets/data/offers.js`, the tests' locked cata
 `/pricing/`: **Contractor Growth** `$2,000/mo` (DECISION 025, three-month initial term) and
 **KreatedOS CRM** `$79/mo` (DECISION 026, early access). Both are monthly and never summed into a
 one-time total. See `OFFER-MAP.md` §1 and §3.
+
+---
+
+## Addendum 2026-09-14 — Social media (DECISION 028)
+
+Two owner-approved monthly prices added: **Social Management $900/mo** and **Social Production
+$1,800/mo**, both on a three-month initial commitment. They appear in exactly three places, which
+must agree: `offers.js` (the builder), `tools/test-engine.js` (LOCKED), and the two no-script cards
+in the Social Media group on `/pricing/`. The service page and its FAQ restate the same two figures.

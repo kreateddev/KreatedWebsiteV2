@@ -39,6 +39,8 @@ surfaced by either tool.
 | `pkg.care.plus` | Site Care+ | 279 | **recurring**, no initial term | **Recurring** |
 | `pkg.program.contractor` | Contractor Growth | 2000 | **recurring**, 3-month initial (DECISION 025) | **Recurring — For trades** |
 | `svc.crm.kreatedos` | KreatedOS CRM | 79 | **recurring**, early access (DECISION 026) | **Software** |
+| `pkg.social.manage` | Social Management | 900 | **recurring**, 3-month initial (DECISION 028) | **Recurring — Social media** |
+| `pkg.social.produce` | Social Production | 1800 | **recurring**, 3-month initial (DECISION 028) | **Recurring — Social media** |
 | `svc.page.standard` | Additional Standard Page | 250 | one-time, from | **Individual Services** |
 | `svc.page.service` | Dedicated Service Page | 450 | one-time, from | **Individual Services** |
 | `svc.page.location` | Location Page | 550 | one-time, from | **Individual Services** |
@@ -104,6 +106,10 @@ a service; §3 turns services into a recommended package.
 ---
 
 ## 3. What each package already covers
+
+**Social media (added 2026-09-14, DECISION 028)** is one option at a time (`social-tier`) and covers
+nothing else in the catalogue; nothing else covers it. **The audit never recommends it**: it is not in
+`needCategories`, because a public website is not evidence of a social media need.
 
 **Contractor Growth (added 2026-09-11)** covers, as `full`: `pkg.local.presence`, `pkg.local.growth`,
 `pkg.care.base`, `pkg.care.plus`, `svc.crm.kreatedos`; and `svc.search.gbp` as `ongoing`. A buyer who

@@ -1,0 +1,8 @@
+/* ==========================================================================
+   KREATED V2 — /services/social-media-management/ · PAGE-SPECIFIC OVERRIDES
+   The leaf system lives in ../leaf.css. This file holds only what this page
+   uses and no other leaf does: the hero title at the hub's 07 weight.
+   Added 2026-09-14 with DECISION 028.
+   ========================================================================== */
+.sm__h{font-weight:600;letter-spacing:-.022em}
+.sm__h span{display:block}

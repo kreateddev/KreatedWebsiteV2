@@ -55,7 +55,10 @@ const LOCKED = {
   'svc.copy.full':        ['one-time', 275,  null],
   /* DECISION 025 and 026, owner-approved 2026-09-10 */
   'pkg.program.contractor':['monthly', 2000, null],
-  'svc.crm.kreatedos':    ['monthly',  79,   null]
+  'svc.crm.kreatedos':    ['monthly',  79,   null],
+  /* DECISION 028, owner-approved 2026-09-14 */
+  'pkg.social.manage':    ['monthly',  900,  null],
+  'pkg.social.produce':   ['monthly',  1800, null]
 };
 
 t('every locked offer exists with the locked price and kind', () => {
@@ -69,6 +72,16 @@ t('every locked offer exists with the locked price and kind', () => {
 t('offers.js contains no offer outside the locked catalogue', () => {
   const extra = Offers.offers.map(o => o.id).filter(id => !LOCKED[id]);
   eq(extra, [], 'unlocked offers present:');
+});
+
+t('social media: one option at a time, and never recommended by the audit', () => {
+  eq([Offers.get('pkg.social.manage').exclusive, Offers.get('pkg.social.produce').exclusive],
+     ['social-tier', 'social-tier']);
+  const recommendable = Object.keys(Offers.needCategories).reduce((a, k) => a.concat(Offers.needCategories[k]), []);
+  ok(recommendable.indexOf('pkg.social.manage') === -1 && recommendable.indexOf('pkg.social.produce') === -1,
+     'a website audit has no evidence for social media');
+  const r = R.evaluate({ 'pkg.social.manage': 1, 'pkg.web.launch': 1 });
+  eq([r.oneTime.low, r.monthly.low], [1750, 900], 'monthly social never merges into the project total:');
 });
 
 t('Google Ads appears nowhere in the offer data', () => {

@@ -100,3 +100,16 @@ because there was no shared template. V2's build model is undecided, but the rul
 
 🚫 **A service is not added, renamed or removed without explicit Skyler approval logged in
 [`DECISIONS.md`](DECISIONS.md).**
+
+## 8. Services added after the canonical five
+
+⚠ §1 is the V1 set. The live site lists seven, in this order:
+
+| # | Service | Route | Added |
+|---|---|---|---|
+| 06 | **Answer Engine Optimization** | `/services/answer-engine-optimization/` | 2026-09-01 |
+| 07 | **Social Media Management** | `/services/social-media-management/` | 2026-09-14, DECISION 028 |
+
+**Boundary:** Social Media Management is organic posting on the business's own Facebook, Instagram
+and short-video accounts. It is not Google Business Profile posting (that belongs to the profile and
+the local programmes) and not paid social advertising. 🚫 No follower, reach or engagement promise.

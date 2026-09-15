@@ -207,6 +207,27 @@
       does:'Pushes visibility across more services and more markets rather than holding one.',
       fit:'You compete across several services or cities and organic visibility is a growth channel, not hygiene.' },
 
+    /* ================= SOCIAL MEDIA — one option at a time (DECISION 028) ==
+       Owner-approved 2026-09-14: $900/mo when the client films and Kreated
+       edits and posts, $1,800/mo when Kreated also plans and films. Both: 12
+       posts and 4 short videos a month on Facebook, Instagram and TikTok or
+       YouTube Shorts, three-month initial commitment.
+       🚫 NOT in needCategories. A public website is not evidence that a
+       business needs social media, so the audit never recommends it.
+       🚫 No reporting, community management, shoot-day count or travel terms
+       are written here: none was decided. See DECISION 028 open items. */
+    { id:'pkg.social.manage', name:'Social Management', group:'social', kind:'monthly',
+      price:900, exclusive:'social-tier', rung:1, term:'Three-month initial commitment, month-to-month after.',
+      what:'Twelve posts and four short videos a month on Facebook, Instagram and TikTok or YouTube Shorts, edited from the photos and footage you send, captioned, scheduled and posted.',
+      does:'Keeps the business visibly active where customers look it up, without anyone in the business editing, writing or posting.',
+      fit:'You or your crew already take photos and video on the job, and nobody has time to turn them into posts.' },
+
+    { id:'pkg.social.produce', name:'Social Production', group:'social', kind:'monthly',
+      price:1800, exclusive:'social-tier', rung:2, term:'Three-month initial commitment, month-to-month after.',
+      what:'Everything in Social Management, plus the content planned and made by Kreated: content ideas, photography and video.',
+      does:'Takes the whole job off the business. You do the work; Kreated turns it into content and posts it.',
+      fit:'Nobody in the business will film consistently, or the work deserves better pictures than a phone in a hurry.' },
+
     /* ================= SITE SUPPORT — one at a time ===================== */
     { id:'pkg.care.base', name:'Site Care', group:'care', kind:'monthly',
       price:149, exclusive:'care-tier', rung:1,
@@ -260,6 +281,7 @@
     { id:'production', label:'Content and tracking',  hint:'The inputs a site needs to be worth visiting and worth measuring.' },
     { id:'brand',      label:'Brand',                 hint:'Pick one tier. Priced separately from the website on purpose.' },
     { id:'local',      label:'Ongoing search',        hint:'Pick one rung. Monthly, not part of a project total.' },
+    { id:'social',     label:'Social media',          hint:'Pick one. Monthly: you film and Kreated edits and posts, or Kreated films too.' },
     { id:'care',       label:'Ongoing support',       hint:'Pick one. Optional on every engagement.' },
     { id:'program',    label:'For trades',            hint:'One programme for the whole lead system. Monthly, and it already includes Local Growth and Site Care+.' },
     { id:'software',   label:'Software',              hint:'Monthly. Included in Contractor Growth.' }
@@ -274,6 +296,7 @@
     'website-base':'website engagement',
     'brand-tier'  :'brand tier',
     'local-tier'  :'ongoing search programme',
+    'social-tier' :'social media option',
     'care-tier'   :'support plan'
   };
 

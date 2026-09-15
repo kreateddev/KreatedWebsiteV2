@@ -39,14 +39,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      address, which is a trust signal in exactly the moment Kreated is being
      passed between two people.
 
-     og:image policy — reuse only, nothing generated:
+     og:image policy:
        · Pages that show a REAL client capture use that capture (1600x1000,
          close enough to 1.91:1 for a large card).
-       · Every other route uses the Kreated mark, with card type `summary`,
-         which is the correct card for a square brand image.
-     ⚠ REMAINING ITEM: no purpose-made 1200x630 social asset exists. When one
-     does, point the mark-based routes at it and switch them to
-     summary_large_image. 🚫 Do not invent one to close this gap. -->
+       · Every other route uses the Kreated share card, og-card-v2.jpg, with
+         card type summary_large_image.
+     ⚠ THE DECLARED SIZE MUST BE THE REAL SIZE, fixed 2026-09-14. These tags
+     said 180x180 (left over from when the image was the square mark) while
+     serving the 1200x630 card, and chat apps sized the preview from the tags,
+     so the card was squashed into a square. The card also still said Raleigh.
+     🚫 Change the image, change width, height and alt with it. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kreated">
 <meta property="og:locale" content="en_US">
@@ -73,7 +75,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
        services.css  tokens, header, drawer, footer, skip link
        leaf.css      the shared leaf system — hero, crumb, plate, close
        case.css      the shared case-study family for /work/<project>/ -->
-<link rel="stylesheet" href="/services/services.css?v=22">
+<link rel="stylesheet" href="/services/services.css?v=23">
 <link rel="stylesheet" href="/services/leaf.css?v=14">
 <link rel="stylesheet" href="/work/case.css?v=8">
 
@@ -493,6 +495,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p><a href="/services/google-business-profile/">Google Business Profile</a></p>
         <p><a href="/services/brand-strategy/">Brand Strategy &amp; Identity</a></p>
         <p><a href="/services/answer-engine-optimization/">Answer Engine Optimization</a></p>
+        <p><a href="/services/social-media-management/">Social Media Management</a></p>
       </div>
       <div>
         <h2>Start</h2>

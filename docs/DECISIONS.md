@@ -533,3 +533,49 @@ neither should 'remodelers', it should stick to contractors and other businesses
   `/free-website-audit/`.
 
 **🚫** Do not add per-trade pages, per-trade landing pages or trade-specific headlines.
+
+## 028 — Social Media Management added as service 07, in two options
+
+**DATE** 2026-09-14
+**PHASE** Post-plan
+**DECISION** Kreated adds **Social Media Management** as its seventh service, at
+`/services/social-media-management/`, sold in two monthly options:
+
+| Option | Price | Who makes the content |
+|---|---|---|
+| **Social Management** (`pkg.social.manage`) | **$900/mo** | The client films and photographs; Kreated edits, captions, schedules and posts |
+| **Social Production** (`pkg.social.produce`) | **$1,800/mo** | Kreated also plans the content and does the photography and video |
+
+Both options: **Facebook, Instagram, and TikTok or YouTube Shorts**; **12 posts and 4 short videos a
+month**; **three-month initial commitment, month-to-month after**. One option at a time
+(`social-tier`).
+**APPROVED BY SKYLER** yes — "Social media management is a service I want to add to Kreated",
+2026-09-14. Price, content model, platforms, volume and term were each chosen directly the same day:
+one plan at $900/mo; "provide both options, client films kreated edits and posts, or kreated creates
+everything and films but costs a good amount more"; $1,800/mo for that option; Facebook, Instagram,
+TikTok or YouTube Shorts; 12 posts and 4 videos; three months then monthly.
+**WHAT IT REPLACES** The exclusion "Not Google Ads, social media management, or ongoing content
+production" on `/services/web-design/` (Reference §16 listed it as out of scope for Launch). The page
+now points to the new service instead.
+
+**WHERE IT LIVES** offers.js + test-engine.js (locked catalogue), `/pricing/` (Social Media group,
+jump link, Terms), the services hub (row 07), the homepage (row 07, schema, FAQ), every footer, the
+contact and homepage forms, sitemap, and "seven services" wherever the site counted them.
+
+**🚫 THE AUDIT NEVER RECOMMENDS IT.** It is not in `needCategories`: nothing on a public website is
+evidence that a business needs social media. Asserted in test-engine.js.
+
+**🚫 NO CLIENT PREVIEWS ON THE PAGE.** No engagement in `docs/PROJECTS.md` names social media in its
+scope. The 2026-09-04 owner plans have Skyler editing and posting for Leak Locators East Coast and
+Rare Raleigh Restoration, but that is not recorded as engagement scope. Add a "Who this was built for"
+block only once Skyler confirms it, and 🚫 never with follower or engagement numbers unless they are
+recorded with a date.
+
+**⚠ OPEN — NOT DECIDED, SO NOT WRITTEN ANYWHERE**
+1. **Social Production shoot terms:** shoot days per month, and travel outside Wilmington.
+2. **Reporting:** whether either option includes a monthly report.
+3. **Comments and messages:** whether Kreated replies on the accounts.
+4. **TikTok *or* YouTube Shorts:** whether the client picks one, or both are covered.
+5. **Photo and video rights** made under Social Production (DECISION 014 covers client photography
+   only).
+

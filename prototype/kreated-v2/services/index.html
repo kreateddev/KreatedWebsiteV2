@@ -38,29 +38,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      address, which is a trust signal in exactly the moment Kreated is being
      passed between two people.
 
-     og:image policy — reuse only, nothing generated:
+     og:image policy:
        · Pages that show a REAL client capture use that capture (1600x1000,
          close enough to 1.91:1 for a large card).
-       · Every other route uses the Kreated mark, with card type `summary`,
-         which is the correct card for a square brand image.
-     ⚠ REMAINING ITEM: no purpose-made 1200x630 social asset exists. When one
-     does, point the mark-based routes at it and switch them to
-     summary_large_image. 🚫 Do not invent one to close this gap. -->
+       · Every other route uses the Kreated share card, og-card-v2.jpg, with
+         card type summary_large_image.
+     ⚠ THE DECLARED SIZE MUST BE THE REAL SIZE, fixed 2026-09-14. These tags
+     said 180x180 (left over from when the image was the square mark) while
+     serving the 1200x630 card, and chat apps sized the preview from the tags,
+     so the card was squashed into a square. The card also still said Raleigh.
+     🚫 Change the image, change width, height and alt with it. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kreated">
 <meta property="og:locale" content="en_US">
 <meta property="og:url" content="https://kreated.dev/services/">
 <meta property="og:title" content="Services | Web Design, SEO &amp; Branding | Kreated">
 <meta property="og:description" content="Web Design &amp; Development, Website Redesign, Local SEO, Google Business Profile, and Brand Strategy &amp; Identity.">
-<meta property="og:image" content="https://kreated.dev/assets/img/og-card.jpg">
-<meta property="og:image:width" content="180">
-<meta property="og:image:height" content="180">
-<meta property="og:image:alt" content="The Kreated mark">
+<meta property="og:image" content="https://kreated.dev/assets/img/og-card-v2.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kreated: web design, local SEO and branding for local service businesses, Wilmington, North Carolina">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Services | Web Design, SEO &amp; Branding | Kreated">
 <meta name="twitter:description" content="Web Design &amp; Development, Website Redesign, Local SEO, Google Business Profile, and Brand Strategy &amp; Identity.">
-<meta name="twitter:image" content="https://kreated.dev/assets/img/og-card.jpg">
+<meta name="twitter:image" content="https://kreated.dev/assets/img/og-card-v2.jpg">
 
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
@@ -68,7 +70,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <meta name="theme-color" content="#020C2E">
 
-<link rel="stylesheet" href="/services/services.css?v=22">
+<link rel="stylesheet" href="/services/services.css?v=23">
 <!-- the hub now uses the shared leaf hero/crumb/close components -->
 <link rel="stylesheet" href="/services/leaf.css?v=14">
 <!-- last, so it is the single definition of the footer on every route -->
@@ -202,7 +204,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span aria-current="page">SERVICES</span>
     </nav>
 
-    <h1 class="shero__h sv__h">The six,<span><em class="sv__amp">in</em> order</span></h1>
+    <h1 class="shero__h sv__h">The seven,<span><em class="sv__amp">in</em> order</span></h1>
 
     <div class="shero__foot">
       <!-- ⚠ COMPREHENSION, not decoration. The ledger opens one row at a time, so
@@ -212,7 +214,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            DECISION 013 leaves V2 positioning unresolved and the hidden slot
            beside it is where that belongs. -->
       <p class="shero__fact">Websites, redesigns, local search, the Google Business
-        Profile, brand, and answer engine work. Each row below opens that
+        Profile, brand, answer engine work and social media. Each row below opens that
         service&rsquo;s page.</p>
 
       <!-- ⏸ DEFERRED — NOT REQUIRED FOR LAUNCH (owner decision 2026-09-01).
@@ -408,6 +410,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </span>
         </a>
       </li>
+
+      <!-- ⚠ SERVICE 07, added 2026-09-14 (DECISION 028). -->
+      <li class="row" data-svc="07">
+        <a class="row__a" href="/services/social-media-management/">
+          <span class="row__head">
+            <span class="row__no">No. 07</span>
+            <span class="row__name">Social Media Management</span>
+            <span class="row__arrow" aria-hidden="true">&#8594;</span>
+          </span>
+          <span class="row__panel">
+            <span class="row__inner">
+              <span class="row__title t--07"><span>Social Media</span><span>Management</span></span>
+              <span class="triad">
+                <span class="triad__fact">Facebook, Instagram and short video, edited from your footage or filmed by Kreated.</span>
+                <span class="triad__join" aria-hidden="true"></span>
+                <span class="triad__go">Explore <i aria-hidden="true">&#8594;</i></span>
+              </span>
+            </span>
+          </span>
+        </a>
+      </li>
     </ul>
 
     <p class="meta" id="ledgerMeta">HOVER TO PREVIEW &middot; EXPLORE TO OPEN</p>
@@ -429,7 +452,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap lgrid">
     <div>
       <h2 class="sec__h">Which one you need</h2>
-      <p class="lgrid__note">Four pairs that get confused, settled in a sentence
+      <p class="lgrid__note">Five pairs that get confused, settled in a sentence
         each.</p>
     </div>
     <div class="prose">
@@ -454,6 +477,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         is for and what it claims. Marketing puts that claim in front of people.
         Businesses that describe a marketing problem often have a strategy problem,
         because nothing has decided what is being said or to whom.</p>
+
+      <!-- ⚠ ADDED 2026-09-14 with service 07 (DECISION 028). The boundary is
+             docs/SERVICES.md §8: profile posts belong to the profile, social media
+             management is the business's own accounts. -->
+      <p><b class="lin">Google Business Profile or social media.</b> The profile is the
+        listing Google shows beside the search results, and its posts belong to it.
+        <a class="ilink" href="/services/social-media-management/">Social media
+        management</a> is the business&rsquo;s own Facebook, Instagram and short-video
+        accounts. A customer often sees both before calling, which is why neither
+        should look abandoned.</p>
 
       <!-- ⚠ CLIENT PORTAL, owner decision 2026-09-10: "included with every service".
              The features named are the ones KreatedOS's client side has today
@@ -521,6 +554,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p><a href="/services/google-business-profile/">Google Business Profile</a></p>
         <p><a href="/services/brand-strategy/">Brand Strategy &amp; Identity</a></p>
         <p><a href="/services/answer-engine-optimization/">Answer Engine Optimization</a></p>
+        <p><a href="/services/social-media-management/">Social Media Management</a></p>
       </div>
       <div>
         <h2>Start</h2>

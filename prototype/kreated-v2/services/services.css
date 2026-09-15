@@ -291,6 +291,10 @@ html,body{overflow-x:clip}
    that it has been oversold. It should not shout. */
 .t--06{font-size:clamp(30px,4.6vw,66px);font-weight:520;letter-spacing:-.018em}
 .t--06 span{display:block}
+/* ⚠ 07, added 2026-09-14 (DECISION 028). Two words a line like 06, set a
+   little heavier: this service is about being seen, and it should not whisper. */
+.t--07{font-size:clamp(34px,5.6vw,80px);font-weight:600;letter-spacing:-.022em}
+.t--07 span{display:block}
 .t--05 span{display:block}
 .t--05 .amp{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
   font-size:.98em;font-weight:500;color:var(--warm)}
@@ -413,6 +417,7 @@ html,body{overflow-x:clip}
   .t--02,.t--03{font-size:clamp(34px,11vw,48px)}
   .t--04{font-size:clamp(30px,9.2vw,44px)}
   .t--06{font-size:clamp(26px,7.4vw,38px)}
+  .t--07{font-size:clamp(28px,8.4vw,42px)}
   .t--03{letter-spacing:.05em}
   .t--03 .dot{top:-28px}
   .triad__fact{font-size:15px}

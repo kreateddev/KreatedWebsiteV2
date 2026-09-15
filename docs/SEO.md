@@ -28,6 +28,7 @@ re-decided for V2. Imported from `KreatedWebsiteV1` (`docs/SEO_AND_CONTENT.md`,
 | `/services/local-seo/` | Service leaf | `Service`, `BreadcrumbList`, `FAQPage` |
 | `/services/google-business-profile/` | Service leaf | `Service`, `BreadcrumbList`, `FAQPage` |
 | `/services/brand-strategy/` | Service leaf | `Service`, `BreadcrumbList`, `FAQPage` |
+| `/services/social-media-management/` | Service leaf (V2, 2026-09-14) | `Service`, `BreadcrumbList`, `FAQPage` |
 | `/case-studies/` | Hub | — |
 | `/case-studies/learnsmart/` | Case study (delivered) | `BreadcrumbList` |
 | `/case-studies/rare-raleigh-restoration/` | Case study (**in progress**) | `BreadcrumbList` |
@@ -87,6 +88,7 @@ already matches.)
 | `/services/local-seo/` | `local SEO Wilmington NC` | `local SEO for contractors Wilmington` |
 | `/services/google-business-profile/` | `Google Business Profile optimization Wilmington` | `Google Business Profile management` |
 | `/services/brand-strategy/` | `brand strategy Wilmington` | `brand positioning for small business` |
+| `/services/social-media-management/` | `social media management Wilmington NC` | `social media management for contractors` |
 | `/web-design-for-contractors/` | `web design for contractors` | `contractor website design Wilmington NC` |
 | `/contractor-website-audit/` | `free website audit for contractors` | `contractor website grader`, `contractor website checker` |
 | `/about/` | **None** | — |
