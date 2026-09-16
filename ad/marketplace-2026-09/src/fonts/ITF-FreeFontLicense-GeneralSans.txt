@@ -1,0 +1,13 @@
+GENERAL SANS — LICENCE NOTE
+
+General Sans is published by the Indian Type Foundry (ITF) via Fontshare
+(https://www.fontshare.com/fonts/general-sans) under the ITF Free Font Licence,
+which permits personal and commercial use.
+
+The .woff2 in this directory was downloaded from Fontshare's own CDN
+(cdn.fontshare.com) via their public CSS API. It is the variable face covering
+weights 200-700.
+
+Before any production launch, re-read the current licence text at
+https://www.fontshare.com/licenses/itf-ffl and confirm it still covers the
+intended use. This prototype does not constitute licence clearance.

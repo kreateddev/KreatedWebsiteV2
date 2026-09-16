@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kreated — Marketplace ad, concept 3 (campaign)</title>
+<!-- ==========================================================================
+     CONCEPT 3 — THE CAMPAIGN POSTER
+     The argument: symmetry reads as budget. A centred masthead, a centred
+     statement and three windows fanned from a single pivot is the shape of a
+     product campaign, and it is the shape that survives being shrunk hardest,
+     because the eye only has to find the middle.
+
+     The fan is a real fan: all three windows rotate about ONE origin well
+     below the frame, so the tilt of the outer two is the same arc rather than
+     two arbitrary angles. 🚫 Do not tilt them independently — the eye reads
+     the inconsistency even at thumbnail size and it is what separates a
+     showcase from a collage.
+     ========================================================================== -->
+<link rel="stylesheet" href="kit.css">
+<style>
+  /* one light source, low and central, behind the fan */
+  .c3-glow{
+    position:absolute;left:-60px;top:250px;width:1200px;height:900px;
+    background:radial-gradient(46% 42% at 50% 56%,
+      rgba(10,71,240,.42) 0%, rgba(10,71,240,.15) 46%, rgba(10,71,240,0) 74%);
+  }
+
+  /* ---- masthead ---------------------------------------------------------- */
+  .c3-head{
+    position:absolute;left:64px;right:64px;top:58px;
+    display:flex;align-items:center;gap:30px;
+  }
+  .c3-head .rule{flex:1}
+  .c3-head .mark{font-size:26px;color:var(--white)}
+
+  /* ---- the statement ----------------------------------------------------- */
+  .c3-say{position:absolute;left:64px;right:64px;top:146px;text-align:center}
+  .c3-say .headline{font-size:86px;color:var(--white)}
+  .c3-say .headline em{color:var(--cobalt-lift)}
+  .c3-sub{
+    position:absolute;left:64px;right:64px;top:330px;text-align:center;
+    font-size:25px;font-weight:400;letter-spacing:-.004em;color:#BFC8E2;
+  }
+
+  /* ---- the fan -----------------------------------------------------------
+     Each window rotates about its OWN centre, and the spread is done with
+     left/top. An earlier version pivoted all three about a shared origin far
+     below the frame, which is geometrically the purer fan and threw both
+     outer windows most of the way off the canvas — a 6.5deg rotation about a
+     point 3.2 heights down is a 128px sideways translation. 🚫 Do not put the
+     shared origin back without re-deriving the left values.
+
+     The outer two are covered on opposite sides, so the assignment is not
+     interchangeable: Rare Raleigh is on the LEFT because what survives there
+     is its left edge — logo, "Construction Built to Last", both CTAs. Morrow
+     is on the RIGHT because its right edge is the cup and the serif, which is
+     the most recognisable half of any of the three shots even with the
+     headline covered. 🚫 Do not swap them. */
+  .c3-fan{position:absolute;left:0;top:398px;width:1080px;height:520px}
+  .c3-fan .win{position:absolute}
+  .c3-fan .win--l{width:480px;left:-20px;top:106px;z-index:1;transform:rotate(-5.5deg)}
+  .c3-fan .win--c{width:520px;left:280px;top:22px;z-index:3}
+  .c3-fan .win--r{width:480px;left:600px;top:106px;z-index:2;transform:rotate(5.5deg)}
+  .c3-fan .win--l .win__shot,.c3-fan .win--r .win__shot{filter:brightness(.88)}
+
+  /* a floor, not a shadow: one soft ellipse under the fan so the three
+     windows share a ground plane instead of floating independently */
+  .c3-floor{
+    position:absolute;left:120px;top:770px;width:840px;height:190px;
+    background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.50) 0%,rgba(0,0,0,0) 70%);
+  }
+
+  /* ---- the foot ---------------------------------------------------------- */
+  .c3-foot{position:absolute;left:64px;right:64px;bottom:62px}
+  .c3-foot .rule{margin-bottom:34px}
+  .c3-foot__row{display:flex;align-items:center;justify-content:space-between}
+  .c3-price{display:flex;align-items:baseline;gap:14px}
+  .c3-price__k{font-size:13px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--silver)}
+  .c3-price__v{font-size:52px;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--white)}
+</style>
+</head>
+<body>
+<div class="canvas canvas--1x1">
+
+  <div class="c3-glow"></div>
+
+  <div class="c3-head">
+    <div class="rule"></div>
+    <div class="mark">KREATED</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="c3-say">
+    <h1 class="headline">Your website should<br>bring you <em>customers.</em></h1>
+  </div>
+  <p class="c3-sub">Web design and local SEO, built for growth.</p>
+
+  <div class="c3-floor"></div>
+
+  <div class="c3-fan">
+    <div class="win win--l">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">rareraleighrestoration.com</span></div>
+      <img class="win__shot" src="shots/rare-raleigh.jpg" alt="">
+    </div>
+    <div class="win win--r">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">morrow.coffee</span></div>
+      <img class="win__shot" src="shots/morrow.jpg" alt="">
+    </div>
+    <div class="win win--c">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">leaklocatorseastcoast.com</span></div>
+      <img class="win__shot" src="shots/llec.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="c3-foot">
+    <div class="rule"></div>
+    <div class="c3-foot__row">
+      <div class="c3-price">
+        <div class="c3-price__k">Starting at</div>
+        <div class="c3-price__v">$700</div>
+      </div>
+      <div class="cta">Message us about your business <span class="cta__arrow">→</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

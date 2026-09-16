@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kreated — Marketplace ad, concept 2 (screen field)</title>
+<!-- ==========================================================================
+     CONCEPT 2 — DIGITAL / THE SCREENS DOMINATE
+     The argument: the proof IS the ad. Give the three websites two thirds of
+     the canvas, put them in real perspective so they read as objects rather
+     than screenshots, and let the copy be a compressed slab at the top and a
+     single control bar at the foot.
+
+     The field is one 3D scene, not three separately skewed images: a shared
+     perspective origin with each window on its own Z plane, so the vanishing
+     lines actually agree. Faking it with independent 2D skews is what makes
+     "device mockup" graphics look wrong without anyone being able to say why.
+     ========================================================================== -->
+<link rel="stylesheet" href="kit.css">
+<style>
+  /* the cobalt is the only light source in the scene; it sits behind the
+     screens so the glow reads as spill from them, not as a gradient
+     background. 🚫 Never let it become a corner-to-corner wash. */
+  .c2-glow{
+    position:absolute;left:-120px;top:230px;width:1400px;height:900px;
+    background:radial-gradient(50% 46% at 44% 50%,
+      rgba(10,71,240,.46) 0%, rgba(10,71,240,.17) 44%, rgba(10,71,240,0) 72%);
+  }
+
+  .c2-top{
+    position:absolute;left:64px;right:64px;top:56px;z-index:6;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .c2-top .mark{font-size:25px;color:var(--white)}
+  .c2-top .eyebrow{font-size:12px;letter-spacing:.24em;color:var(--silver)}
+
+  /* Two lines, not three. At thumbnail size a third line of 82px caps is the
+     line that stops being read, and the sentence survives the break cleanly
+     at "should". 🚫 z-index is load-bearing: the field's top veil sits at 4
+     and would otherwise erase the second line. */
+  .c2-say{position:absolute;left:64px;top:126px;width:990px;z-index:6}
+  .c2-say h1{
+    font-size:77px;font-weight:700;line-height:.92;
+    letter-spacing:-.036em;text-transform:uppercase;color:var(--white);
+  }
+  .c2-say h1 b{color:var(--cobalt-lift);font-weight:700}
+
+  /* ---- the screen field --------------------------------------------------
+     One room, three planes. The stack recedes UP AND LEFT, so the nearest
+     window — the only one shown whole — is the lower right, and each window
+     behind it is covered on its right side only. That ordering is not
+     arbitrary: all three sites carry their logo and headline in the left
+     half of the hero, so the covered side is always the emptier one.
+     🚫 Do not deepen rotateY past ~24deg. Past that the body copy inside the
+     shots stops resolving and the windows start to read as texture. */
+  .c2-field{
+    position:absolute;left:0;top:286px;width:1080px;height:700px;
+    perspective:2200px;perspective-origin:46% 46%;
+  }
+  .c2-field .win{
+    position:absolute;width:560px;transform-style:preserve-3d;
+    box-shadow:0 26px 60px rgba(0,0,0,.55),0 80px 170px rgba(0,0,0,.55);
+  }
+  .c2-field .win--a{left:-46px;top:0;z-index:1;
+    transform:rotateY(-22deg) rotateX(3deg) translateZ(-290px)}
+  .c2-field .win--b{left:196px;top:150px;z-index:2;
+    transform:rotateY(-22deg) rotateX(3deg) translateZ(-105px)}
+  .c2-field .win--c{left:438px;top:300px;z-index:3;
+    transform:rotateY(-22deg) rotateX(3deg) translateZ(80px)}
+  /* the two deeper in the room lose a little light — enough to read as
+     distance, not enough to stop them being recognisable projects */
+  .c2-field .win--a .win__shot{filter:brightness(.82)}
+  .c2-field .win--b .win__shot{filter:brightness(.91)}
+
+  /* the field fades into the ground at its top edge instead of being cut by
+     it — a hard crop across a receding plane reads as a mistake */
+  .c2-veil{
+    position:absolute;left:0;top:282px;width:1080px;height:150px;z-index:4;
+    background:linear-gradient(180deg,var(--navy) 4%,rgba(2,12,46,0) 100%);
+  }
+
+  /* ---- the control bar --------------------------------------------------- */
+  .c2-bar{
+    position:absolute;left:0;right:0;bottom:0;height:210px;z-index:5;
+    background:linear-gradient(180deg,rgba(2,12,46,0) 0%,rgba(2,12,46,.88) 40%,var(--navy) 74%);
+  }
+  .c2-bar__in{
+    position:absolute;left:64px;right:64px;bottom:56px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .c2-price{display:flex;align-items:baseline;gap:14px}
+  .c2-price__k{font-size:13px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--silver)}
+  .c2-price__v{font-size:54px;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--white)}
+</style>
+</head>
+<body>
+<div class="canvas canvas--1x1">
+
+  <div class="c2-glow"></div>
+
+  <div class="c2-top">
+    <div class="mark">KREATED</div>
+    <div class="eyebrow">Web design · Local SEO · Google growth</div>
+  </div>
+
+  <div class="c2-say">
+    <h1>Your website should<br>bring you <b>customers.</b></h1>
+  </div>
+
+  <div class="c2-field">
+    <div class="win win--a">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">morrow.coffee</span></div>
+      <img class="win__shot" src="shots/morrow.jpg" alt="">
+    </div>
+    <div class="win win--b">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">rareraleighrestoration.com</span></div>
+      <img class="win__shot" src="shots/rare-raleigh.jpg" alt="">
+    </div>
+    <div class="win win--c">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">leaklocatorseastcoast.com</span></div>
+      <img class="win__shot" src="shots/llec.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="c2-veil"></div>
+
+  <div class="c2-bar">
+    <div class="c2-bar__in">
+      <div class="cta">Message us about your business <span class="cta__arrow">→</span></div>
+      <div class="c2-price">
+        <div class="c2-price__k">Starting at</div>
+        <div class="c2-price__v">$700</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

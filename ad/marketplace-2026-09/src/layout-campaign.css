@@ -1,0 +1,93 @@
+/* ==========================================================================
+   KREATED — MARKETPLACE AD · THE CAMPAIGN LAYOUT
+   The selected direction (concept 3). Shared by both crops; each crop file
+   then overrides only the vertical positions and the fan's scale.
+
+   WHY THIS ONE WON, recorded so it is not re-litigated:
+   all three concepts were rendered and then resampled to 172px, the size a
+   Marketplace tile actually occupies. At that size concept 1's serif price
+   and its wordmark both vanished into the paper and the three sites read as
+   one grey band; concept 2 held the headline and the price but the
+   perspective stack collapsed into a single pile that no longer read as
+   three separate businesses. This one kept all five priorities legible —
+   headline, three distinct websites, wordmark, price, CTA — because the
+   composition is symmetrical and the eye only has to find the middle.
+   ========================================================================== */
+
+/* ---- ground -------------------------------------------------------------
+   One light source, low and central, behind the fan, so the cobalt reads as
+   spill off the screens. 🚫 Never a corner-to-corner gradient wash — that is
+   the generic-agency look the brief rules out. */
+.ad-glow{
+  position:absolute;left:-60px;width:1200px;
+  background:radial-gradient(46% 42% at 50% 56%,
+    rgba(10,71,240,.42) 0%, rgba(10,71,240,.15) 46%, rgba(10,71,240,0) 74%);
+}
+
+/* ---- masthead -----------------------------------------------------------
+   Centred, with a hairline running out to both margins.
+
+   ⚠ TWO DEVIATIONS FROM THE SITE'S WORDMARK, both forced by tile size and
+   both deliberate. The site sets .head__mark at Cormorant 300 / .22em, which
+   is correct on a 1440px screen and disappears completely when the creative
+   is resampled to the 120-172px a Marketplace tile actually occupies — it
+   was the one priority of the five that failed the thumbnail check.
+     - weight 400, not 300. A 300 serif at this scale has no stem left.
+     - tracking .18em, not .22em. Wide tracking destroys word-shape first;
+       .18em is the value the site itself already drops to at <=560px, so
+       this is the existing small-size rule, not a new one.
+   The trailing-tracking cancel in .mark still applies, so the optical right
+   edge stays correct and the mark stays centred.
+   🚫 Do not take the weight back to 300 "to match the site". Re-render at
+   120px first. */
+.ad-head{position:absolute;left:64px;right:64px;display:flex;align-items:center;gap:32px}
+.ad-head .rule{flex:1}
+.ad-mark{font-size:38px;font-weight:400;letter-spacing:.18em;margin-right:-.18em;color:var(--white)}
+
+/* ---- the statement ------------------------------------------------------ */
+.ad-say{position:absolute;left:56px;right:56px;text-align:center}
+.ad-headline{color:var(--white)}
+/* The serif accent is set in --cobalt-lift, not --cobalt. The base cobalt is
+   2.83:1 on the navy ground and an italic serif is the thinnest shape in the
+   whole ad; at thumbnail size it greys out. The lift measures 5.62:1.
+   🚫 Do not "correct" this back to the identity blue. */
+.ad-headline em{color:var(--cobalt-lift)}
+.ad-sub{position:absolute;left:56px;right:56px;text-align:center;
+  font-weight:400;letter-spacing:-.004em;color:#C6CFE8}
+
+/* ---- the fan ------------------------------------------------------------
+   Each window rotates about its own centre and the spread is done with
+   left/top. An earlier version pivoted all three about one origin far below
+   the frame — geometrically the purer fan, and it threw both outer windows
+   most of the way off the canvas, because a 6.5deg rotation about a point
+   3.2 heights down is a 128px sideways translation.
+   🚫 Do not reinstate a shared transform-origin without re-deriving `left`.
+
+   The outer two are covered on opposite sides, so which site sits in which
+   slot is a real decision — see the note on `projects` in ad.config.js. */
+.ad-fan{position:absolute;left:0;width:1080px}
+.ad-fan .win{position:absolute}
+.ad-fan .is-left  {width:480px;left:-20px;top:106px;z-index:1;transform:rotate(-5.5deg)}
+.ad-fan .is-centre{width:520px;left:280px;top:22px; z-index:3}
+.ad-fan .is-right {width:480px;left:600px;top:106px;z-index:2;transform:rotate(5.5deg)}
+/* the flanks step back by one stop of light — enough to build hierarchy,
+   not enough to stop them being recognisable projects at tile size */
+.ad-fan .is-left .win__shot,.ad-fan .is-right .win__shot{filter:brightness(.90)}
+
+/* a floor, not a shadow: one soft ellipse so the three windows share a
+   ground plane instead of floating independently */
+.ad-floor{position:absolute;left:120px;width:840px;height:190px;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.52) 0%,rgba(0,0,0,0) 70%)}
+
+/* ---- the foot ----------------------------------------------------------- */
+.ad-services{position:absolute;left:56px;right:56px;text-align:center;
+  font-size:14px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:#8E99BE}
+
+.ad-foot{position:absolute;left:64px;right:64px}
+.ad-foot .rule{margin-bottom:34px}
+.ad-foot__row{display:flex;align-items:center;justify-content:space-between}
+.ad-price{display:flex;align-items:baseline;gap:14px}
+.ad-price__k{font-size:13px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--silver)}
+.ad-price__v{font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--white)}

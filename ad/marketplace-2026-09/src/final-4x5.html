@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kreated — Facebook Marketplace creative, 1080x1350</title>
+<!-- ==========================================================================
+     THE 4:5 CREATIVE — 1080x1350
+     The extra 270px is NOT spent on more copy. It buys three things, in this
+     order: a larger statement, a fan scaled up 8% so the websites dominate
+     further, and real air above the foot. 🚫 Do not add a line of copy here
+     that the 1:1 does not carry — the two have to read as one ad.
+     ========================================================================== -->
+<link rel="stylesheet" href="kit.css">
+<link rel="stylesheet" href="layout-campaign.css">
+<style>
+  .ad-glow{top:400px;height:1020px}
+  .ad-head{top:80px}
+  .ad-say{top:214px}
+  .ad-headline{font-size:96px}
+  .ad-sub{top:428px;font-size:27px}
+  /* ⚠ THE FAN IS NOT SCALED UP HERE, AND THAT IS DELIBERATE.
+     Both crops are 1080 wide, so the fan's widths and offsets are already
+     tuned to the only horizontal budget either of them has. A first pass
+     scaled it 1.08 for this crop; the spread scaled with it and pushed Rare
+     Raleigh's logo off the left edge and a further slice of Morrow off the
+     right — the two things the fan exists to show. The extra 270px of this
+     crop buys a larger statement and real air, not bigger screens.
+     🚫 Do not reintroduce a transform on .ad-fan. */
+  .ad-fan{top:556px;height:520px}
+  .ad-floor{top:930px;width:920px;left:80px;height:210px}
+  .ad-services{top:1086px;font-size:15px}
+  .ad-foot{bottom:86px}
+  .ad-price__v{font-size:56px}
+</style>
+</head>
+<body>
+<div class="canvas canvas--4x5">
+  <div class="ad-glow"></div>
+
+  <div class="ad-head">
+    <div class="rule"></div>
+    <div class="mark ad-mark"></div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="ad-say"><h1 class="headline ad-headline"></h1></div>
+  <p class="ad-sub"></p>
+
+  <div class="ad-floor"></div>
+  <div class="ad-fan"></div>
+
+  <p class="ad-services"></p>
+
+  <div class="ad-foot">
+    <div class="rule"></div>
+    <div class="ad-foot__row">
+      <div class="ad-price">
+        <div class="ad-price__k"></div>
+        <div class="ad-price__v"></div>
+      </div>
+      <div class="cta"><span class="ad-cta__t"></span><span class="cta__arrow">&#8594;</span></div>
+    </div>
+  </div>
+</div>
+<script src="ad.config.js"></script>
+<script src="ad.js"></script>
+</body>
+</html>

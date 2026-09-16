@@ -1,0 +1,146 @@
+/* ==========================================================================
+   KREATED — MARKETPLACE AD KIT
+   The shared brand layer for every concept and every final crop in this
+   folder. Nothing here is invented: the palette, the two typefaces and the
+   wordmark mechanics are lifted verbatim from the live site
+   (prototype/kreated-v2/styles.css and theme.css) so the ad and the site are
+   provably the same brand.
+
+   🚫 This folder is ad production only. It imports copies of the fonts and
+   the shipped proof captures; it does not touch the site.
+   ========================================================================== */
+
+@font-face{
+  font-family:'General Sans';font-style:normal;font-weight:200 700;
+  src:url(fonts/general-sans-var.woff2) format('woff2');
+}
+@font-face{
+  font-family:'Cormorant Garamond';font-style:normal;font-weight:300 700;
+  src:url(fonts/cormorant-garamond-latin.woff2) format('woff2');
+}
+
+:root{
+  /* ---- palette, verbatim from styles.css :root ------------------------- */
+  --navy:#020C2E;        /* the ground */
+  --navy-2:#0A1740;      /* panel lift */
+  --paper:#F4F5FA;
+  --white:#FFFFFF;
+  --silver:#A6AEC7;
+  --cobalt:#0A47F0;      /* the identity blue — 2.83:1 on navy, never small text there */
+  --cobalt-lift:#5B86FF; /* the blue when it has to be legible on navy (5.62:1) */
+
+  /* ---- the canvas ------------------------------------------------------
+     Every concept is authored in one square unit and scaled by the renderer,
+     so a length written here is the same optical size in the 1:1 and the 4:5.
+     🚫 Do not use vw/vh anywhere in a concept — the renderer changes the
+     viewport between crops and vw units would silently resize the type. */
+  --W:1080px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;background:var(--navy)}
+body{
+  font-family:'General Sans',system-ui,sans-serif;
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+}
+img{display:block;max-width:100%}
+
+/* The frame every concept renders into. The renderer screenshots THIS box,
+   not the viewport, so the crop is exact regardless of scrollbars. */
+.canvas{position:relative;overflow:hidden;background:var(--navy)}
+.canvas--1x1{width:1080px;height:1080px}
+.canvas--4x5{width:1080px;height:1350px}
+
+/* ==========================================================================
+   THE WORDMARK
+   Cormorant Garamond 300, uppercase, .22em tracking with the trailing
+   tracking cancelled so the optical right edge is correct. Identical
+   mechanics to .head__mark in styles.css:261.
+   🚫 Never set the wordmark in the sans. 🚫 Never lowercase it.
+   ========================================================================== */
+.mark{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-weight:300;
+  letter-spacing:.22em;
+  margin-right:-.22em;
+  line-height:1;
+  white-space:nowrap;
+}
+
+/* ==========================================================================
+   THE BROWSER WINDOW
+   One component, used by all three concepts. It has to read as "a real
+   website" in half a second at thumbnail size, which means:
+     - a 6px radius, not a 20px one. Big radii are what make a screenshot
+       look like a Canva card rather than a browser.
+     - a hairline stroke light enough to separate the shot from the ground
+       without drawing a box around it.
+     - one shadow that is mostly a long soft drop, not a glow.
+     - a chrome bar that is 3 dots and a domain. No back button, no tab, no
+       fake favicon — the moment the chrome gets detailed it starts competing
+       with the website inside it.
+   ========================================================================== */
+.win{
+  position:relative;
+  border-radius:7px;
+  overflow:hidden;
+  background:var(--navy-2);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.28),
+    0 18px 38px rgba(0,0,0,.42),
+    0 54px 110px rgba(0,0,0,.50);
+  /* the hairline is drawn INSIDE via an inset ring so it survives the 3D
+     transforms in concept 2 — an outline would not scale with the element. */
+}
+.win::after{
+  content:'';position:absolute;inset:0;border-radius:7px;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);
+}
+.win__bar{
+  display:flex;align-items:center;gap:7px;
+  height:28px;padding:0 11px;
+  background:#0E1636;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.win__dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.20)}
+.win__url{
+  margin-left:7px;
+  font-size:10px;font-weight:400;letter-spacing:.055em;
+  color:rgba(255,255,255,.46);
+  white-space:nowrap;
+}
+.win__shot{display:block;width:100%;height:auto}
+
+/* ==========================================================================
+   SHARED TYPE ROLES
+   ========================================================================== */
+.eyebrow{
+  font-size:15px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--silver);
+}
+.headline{
+  font-weight:700;letter-spacing:-.028em;line-height:.92;
+}
+.headline em{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-style:italic;font-weight:400;
+  letter-spacing:-.008em;
+  /* the serif accent runs 1.22x the sans, as .h2 em does on the site */
+  font-size:1.14em;
+}
+.support{font-size:27px;font-weight:400;letter-spacing:-.008em;color:#C9D0E4}
+
+/* The CTA. A filled cobalt pill is the loudest object Kreated owns; at
+   thumbnail size it is also the only thing that survives as a shape. */
+.cta{
+  display:inline-flex;align-items:center;gap:14px;
+  height:62px;padding:0 34px;border-radius:999px;
+  background:var(--cobalt);color:var(--white);
+  font-size:19px;font-weight:600;letter-spacing:.02em;
+  white-space:nowrap;
+}
+.cta__arrow{font-size:19px;line-height:1}
+
+.rule{height:1px;background:rgba(255,255,255,.14);width:100%}
