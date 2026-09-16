@@ -8,7 +8,7 @@ shipped proof captures were *copied in*; `prototype/` and `docs/` are unmodified
 
 ## 1. Output
 
-A four-slide Marketplace carousel. The files are numbered, so a directory
+A five-slide Marketplace carousel. The files are numbered, so a directory
 listing is already the posting order.
 
 | File | Size | Use |
@@ -17,6 +17,7 @@ listing is already the posting order.
 | `out/kreated-marketplace-02-web-design.jpg` | 1080 × 1080 | Slide 2 — website design & redesign. Rare Raleigh, before and after. |
 | `out/kreated-marketplace-03-local-seo.jpg` | 1080 × 1080 | Slide 3 — local SEO. Leak Locators, desktop and phone. |
 | `out/kreated-marketplace-04-social.jpg` | 1080 × 1080 | Slide 4 — social media. Morrow's site and its profile. |
+| `out/kreated-marketplace-05-mobile.jpg` | 1080 × 1080 | Slide 5 — mobile-first designs. All three builds on a phone. |
 | `out/kreated-marketplace-01-cover-4x5.jpg` | 1080 × 1350 | Alternate cover crop for feed placements. Not part of the carousel. |
 | `out/*.png` | same | Lossless masters, for re-crops or print. |
 
@@ -25,7 +26,7 @@ the whole composition is tuned against that tile, not against the full-size
 render.
 
 **The carousel structure is deliberate: the cover opens with the offer, slides
-2–4 prove it, and each interior slide states one checkable fact rather than a
+2–5 prove it, and each interior slide states one checkable fact rather than a
 promise.** The CTA and the price sit on the cover and in the listing text; the
 interior slides do not repeat them, because a carousel that asks four times
 reads as a pitch rather than as work.
@@ -46,6 +47,7 @@ re-typeset any of it.
 | **Leak Locators** hero, phone | `prototype/kreated-v2/assets/img/proof/llec-desktop-v2.jpg`, `llec-mobile-v2.jpg` |
 | **Leak Locators** service areas | Rendered from the site's own source — `kreateddev/LLEC` at `4b293f1`, `npm install && next build && next start`, shot at 1600 × 1000 / 2× DPR, scrolled to the register. See below. |
 | **Rare Raleigh** after | `prototype/kreated-v2/assets/img/proof/rr-desktop-v2.jpg` |
+| **Mobile captures** (slide 5) | Leak Locators and Rare Raleigh from `…/proof/llec-mobile-v2.jpg` and `rr-mobile-v2.jpg`; Morrow captured to match, from the build in this repo. All three are 390 × 812 logical at 2× DPR. |
 | **Rare Raleigh** before | `prototype/kreated-v2/assets/img/proof/rr-before.jpg`, cropped from the top to 16:10. The previous site was approved for public display on 2026-08-30. |
 
 ### The service-area capture, and why it is not a URL screenshot
@@ -210,6 +212,29 @@ real Morrow photography, centre-cropped to square; three are designed type tiles
 which is the part that reads as *planned content* rather than as the website's
 photos posted again.
 
+**Slide 5 — mobile-first designs.** The same three builds, on the screen most
+of their visitors use. Morrow was captured in a real mobile context — mobile
+emulation, touch, an iPhone UA — so its own mobile recomposition ran rather than
+a narrow desktop layout.
+
+⚠ **All three captures are the same frame: 390 × 812 logical at 2× DPR.** 🚫 Do
+not swap in a capture at a different frame. Three phones at three scales is the
+one thing that would make this slide look assembled, and it is invisible until
+they are side by side.
+
+The row is **flat and the three phones are the same size.** Every other slide in
+the set stacks, overlaps or fans its proof; this one does not, because the
+argument here is that all three got the same treatment. An arc, or a hero phone
+in the middle, would say one of them mattered more.
+
+The fact line — *"Built for the phone first. Not shrunk to fit."* — is a
+statement about how the work is done, not a metric, and both client captures
+happen to show it: their call and estimate actions stay pinned at the foot of
+the phone instead of folding into a menu. That is a design decision recorded in
+`work/rare-raleigh-restoration`, not a claim invented for an ad. 🚫 Do not
+replace it with a share-of-mobile-traffic statistic; nothing in this repo
+measures that for these businesses.
+
 ### Copy on the graphic
 
 > KREATED
@@ -272,7 +297,7 @@ python3 thumbnail-check.py             # the acceptance test — look at the out
 ```
 
 `thumbnail-check.py` writes one sheet per slide at 120/172/240px, plus
-`carousel--thumbnail-check.png`: all four slides side by side at tile size. That
+`carousel--thumbnail-check.png`: all five slides side by side at tile size. That
 last one is the check the individual sheets cannot make — whether the set reads
 as **one** campaign while each slide still says a different thing at a glance.
 
@@ -281,13 +306,13 @@ screenshot, drop a **1600 × 1000** desktop hero into `src/shots/` and point
 `shot` at it; any other aspect ratio will change the window heights and the fan
 geometry is tuned for 16:10.
 
-⚠ **`ad.config.js` drives the cover only.** Slides 2–4 are hand-laid: each one
+⚠ **`ad.config.js` drives the cover only.** Slides 2–5 are hand-laid: each one
 has a different kind of proof in it — two windows, a window and a phone, a phone
 running live HTML — and a config abstraction over three layouts that share
 nothing but a masthead would be more code guarding less. Their copy lives in
 their own files, and the three anchors they hold in common (masthead y, proof
 band top, foot rule) are stated at the top of `layout-slide.css`. 🚫 Do not move
-an anchor in one slide only.
+an anchor in one slide only — there are four files carrying them now.
 
 `render.py` renders at 2× and resamples with Lanczos — Chromium's 1× rasteriser
 leaves the hairline window strokes visibly soft at this size. 🚫 If an edge looks
@@ -302,13 +327,14 @@ src/kit.css             the brand layer — palette, fonts, wordmark, browser wi
 src/layout-campaign.css the selected composition, shared by both crops
 src/final-1x1.html      cover, vertical positions for 1:1 only
 src/final-4x5.html      cover, vertical positions for 4:5 only
-src/layout-slide.css    the interior-slide layout, shared by slides 02-04
+src/layout-slide.css    the interior-slide layout, shared by slides 02-05
 src/slide-2-web-design.html   \
-src/slide-3-local-seo.html     > one file per interior slide
-src/slide-4-social.html       /
+src/slide-3-local-seo.html     |  one file per interior slide
+src/slide-4-social.html        |
+src/slide-5-mobile.html       /
 src/concept-{1,2,3}.html the concept round, kept as the record of what was tried
 src/fonts/              General Sans + Cormorant Garamond, copied from the site
-src/shots/              the three hero captures
+src/shots/              hero, mobile and service-area captures; the Morrow feed tiles
 render.py               HTML → PNG + JPG
 thumbnail-check.py      the acceptance test
 ```

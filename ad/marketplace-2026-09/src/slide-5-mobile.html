@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kreated — Marketplace carousel, slide 05: mobile-first designs</title>
+<!-- ==========================================================================
+     SLIDE 05 — MOBILE-FIRST DESIGNS
+     The same three builds as the cover, on the screen most of their visitors
+     actually use.
+
+     ALL THREE CAPTURES ARE THE SAME FRAME: 390x812 logical at 2x DPR, which
+     is 780x1624. The two client shots are the ones the Kreated site already
+     ships; Morrow was captured to match, from the build in this repo, with a
+     real mobile context (is_mobile, touch, iPhone UA) so its own mobile
+     recomposition ran rather than a narrow desktop layout.
+     🚫 Do not swap in a capture at a different frame. Three phones at three
+     scales is the single thing that would make this slide look assembled, and
+     it is invisible until you put them side by side.
+
+     The row is FLAT and the three phones are the SAME SIZE. Every other slide
+     in this set stacks, overlaps or fans its proof; this one does not, because
+     the argument here is that all three got the same treatment. An arc or a
+     hero phone in the middle would say one of them mattered more.
+     🚫 No notch. Each screen starts at the page, not at a status bar, so the
+     pill lands on top of a logo and reads as damage.
+
+     What the two client captures happen to show, and the reason the fact line
+     can say what it says: both keep their call and estimate actions pinned at
+     the foot of the phone instead of folding them into a menu. That is a
+     design decision recorded in work/rare-raleigh-restoration, not a claim
+     invented for an ad.
+     ========================================================================== -->
+<link rel="stylesheet" href="kit.css">
+<link rel="stylesheet" href="layout-slide.css">
+<style>
+  .sl-say{top:152px}
+  .sl-title{font-size:82px}
+  .sl-fact{top:344px}
+
+  /* 244 wide -> 234 of screen -> 487 of image at the capture's own ratio,
+     +10 of bezel = 497 tall. 🚫 If the phone width changes, recompute the
+     height from 1624/780 or the screen gets a black band at its foot. */
+  .sl-fone{position:absolute;width:244px;height:497px;top:8px}
+  .sl-fone .phone__shot{width:234px}
+  .sl-fone .phone__notch{display:none}
+  .sl-fone--a{left:88px}
+  .sl-fone--b{left:418px}
+  .sl-fone--c{left:748px}
+
+  .sl-floor{top:400px;left:60px;width:960px;height:210px}
+</style>
+</head>
+<body>
+<div class="canvas canvas--1x1">
+
+  <div class="sl-glow"></div>
+
+  <div class="sl-head">
+    <div class="rule"></div><div class="mark sl-mark">KREATED</div><div class="rule"></div>
+  </div>
+
+  <div class="sl-say">
+    <h1 class="sl-title">MOBILE-FIRST<br><em>DESIGNS.</em></h1>
+  </div>
+  <p class="sl-fact">Built for the phone first. Not shrunk to fit.</p>
+
+  <div class="sl-proof">
+    <div class="sl-floor"></div>
+
+    <div class="phone sl-fone sl-fone--a">
+      <div class="phone__screen"><img class="phone__shot" src="shots/llec-mobile.jpg" alt=""></div>
+    </div>
+    <div class="phone sl-fone sl-fone--b">
+      <div class="phone__screen"><img class="phone__shot" src="shots/rare-raleigh-mobile.jpg" alt=""></div>
+    </div>
+    <div class="phone sl-fone sl-fone--c">
+      <div class="phone__screen"><img class="phone__shot" src="shots/morrow-mobile.jpg" alt=""></div>
+    </div>
+  </div>
+
+  <div class="sl-foot">
+    <div class="rule"></div>
+    <div class="sl-foot__row">
+      <div class="sl-who">Leak Locators &middot; Rare Raleigh &middot; Morrow (concept)</div>
+      <div class="sl-num"><b>05</b> / 05</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -35,6 +35,7 @@ MANIFEST = {
     "kreated-marketplace-02-web-design":("slide-2-web-design.html", ".canvas"),
     "kreated-marketplace-03-local-seo": ("slide-3-local-seo.html",  ".canvas"),
     "kreated-marketplace-04-social":    ("slide-4-social.html",     ".canvas"),
+    "kreated-marketplace-05-mobile":    ("slide-5-mobile.html",     ".canvas"),
     "concept-1":     ("concept-1.html",     ".canvas"),
     "concept-2":     ("concept-2.html",     ".canvas"),
     "concept-3":     ("concept-3.html",     ".canvas"),

@@ -44,7 +44,7 @@ def sheet(name, widths):
     print(f"  {os.path.basename(path)}  {out.size[0]}x{out.size[1]}")
 
 
-def carousel(names, width=210):
+def carousel(names, width=178):
     """The four slides as a strip, at the size a Marketplace tile occupies.
     This is the check the individual sheets cannot make: whether the set reads
     as ONE campaign — same masthead, same ground, same type — while each slide
@@ -69,7 +69,8 @@ def contact(names, width=172, name="concepts--thumbnail-check"):
 SLIDES = ["kreated-marketplace-01-cover",
           "kreated-marketplace-02-web-design",
           "kreated-marketplace-03-local-seo",
-          "kreated-marketplace-04-social"]
+          "kreated-marketplace-04-social",
+          "kreated-marketplace-05-mobile"]
 
 if __name__ == "__main__":
     contact(["concept-1", "concept-2", "concept-3"])
