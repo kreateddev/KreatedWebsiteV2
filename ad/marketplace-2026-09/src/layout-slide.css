@@ -1,0 +1,61 @@
+/* ==========================================================================
+   KREATED — MARKETPLACE AD · THE INTERIOR SLIDE
+   Slides 02-04 of the carousel. The cover (layout-campaign.css) opens with
+   the offer; these three prove it; slide 04 closes with the offer again.
+
+   THREE THINGS ARE IDENTICAL ON EVERY INTERIOR SLIDE and that is what makes
+   the set read as one carousel rather than three separate posts:
+     - the masthead, at the same y as the cover's
+     - the top of the proof band, at y 440
+     - the foot rule, at the same y
+   Everything between those anchors floats per slide, because the titles are
+   different lengths and a shared grid would either clip the long one or
+   strand the short ones.
+   🚫 Do not move the three anchors in one file only.
+   ========================================================================== */
+
+.sl-glow{
+  position:absolute;left:-60px;top:330px;width:1200px;height:820px;
+  background:radial-gradient(46% 44% at 50% 54%,
+    rgba(10,71,240,.38) 0%, rgba(10,71,240,.13) 46%, rgba(10,71,240,0) 74%);
+}
+
+/* masthead — same rule, same weight, same y as the cover */
+.sl-head{position:absolute;left:64px;right:64px;top:58px;
+  display:flex;align-items:center;gap:32px}
+.sl-head .rule{flex:1}
+.sl-mark{font-size:38px;font-weight:400;letter-spacing:.18em;margin-right:-.18em;
+  color:var(--white)}
+
+/* ---- title and fact ----------------------------------------------------- */
+.sl-say{position:absolute;left:56px;right:56px;text-align:center}
+.sl-title{color:var(--white);font-weight:700;letter-spacing:-.034em;line-height:.90}
+.sl-title em{
+  font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:400;
+  font-size:1.14em;letter-spacing:-.008em;color:var(--cobalt-lift);
+}
+/* One line, and it is a fact rather than a promise — every interior slide
+   states something that can be checked against the live site or the case
+   study. 🚫 Nothing here may be a performance claim; see the README. */
+.sl-fact{position:absolute;left:56px;right:56px;text-align:center;
+  font-size:27px;font-weight:500;letter-spacing:.01em;color:#DEE4F5}
+
+/* ---- the proof band ----------------------------------------------------- */
+.sl-proof{position:absolute;left:0;top:440px;width:1080px;height:520px}
+.sl-floor{position:absolute;left:120px;width:840px;height:180px;
+  background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.50) 0%,rgba(0,0,0,0) 70%)}
+
+/* A caption sitting directly above a screen — "BEFORE", "AFTER", "CONCEPT".
+   Tracked caps at label size so it never competes with the screen under it. */
+.sl-tag{position:absolute;font-size:14px;font-weight:600;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--silver);white-space:nowrap}
+.sl-tag--now{color:var(--cobalt-lift)}
+
+/* ---- the foot ----------------------------------------------------------- */
+.sl-foot{position:absolute;left:64px;right:64px;bottom:62px}
+.sl-foot .rule{margin-bottom:26px}
+.sl-foot__row{display:flex;align-items:baseline;justify-content:space-between}
+.sl-who{font-size:15px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--silver)}
+.sl-num{font-size:15px;font-weight:600;letter-spacing:.16em;color:#6E7AA4}
+.sl-num b{color:var(--white);font-weight:600}

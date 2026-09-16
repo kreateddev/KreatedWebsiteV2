@@ -8,14 +8,27 @@ shipped proof captures were *copied in*; `prototype/` and `docs/` are unmodified
 
 ## 1. Output
 
+A four-slide Marketplace carousel. The files are numbered, so a directory
+listing is already the posting order.
+
 | File | Size | Use |
 |---|---|---|
-| `out/kreated-marketplace-1x1.jpg` | 1080 × 1080 | **Primary.** First image on the listing — this is the thumbnail. |
-| `out/kreated-marketplace-4x5.jpg` | 1080 × 1350 | Alternate crop for feed placements. |
+| `out/kreated-marketplace-01-cover.jpg` | 1080 × 1080 | **Slide 1 — the cover.** First image on the listing, so it is the thumbnail. |
+| `out/kreated-marketplace-02-web-design.jpg` | 1080 × 1080 | Slide 2 — website design & redesign. Rare Raleigh, before and after. |
+| `out/kreated-marketplace-03-local-seo.jpg` | 1080 × 1080 | Slide 3 — local SEO. Leak Locators, desktop and phone. |
+| `out/kreated-marketplace-04-social.jpg` | 1080 × 1080 | Slide 4 — social media. Morrow's site and its profile. |
+| `out/kreated-marketplace-01-cover-4x5.jpg` | 1080 × 1350 | Alternate cover crop for feed placements. Not part of the carousel. |
 | `out/*.png` | same | Lossless masters, for re-crops or print. |
 
-Post the 1:1 **first**. Marketplace builds the tile from the first image, and the
-whole composition is tuned against that tile, not against the full-size render.
+Post the cover **first**. Marketplace builds the tile from the first image, and
+the whole composition is tuned against that tile, not against the full-size
+render.
+
+**The carousel structure is deliberate: the cover opens with the offer, slides
+2–4 prove it, and each interior slide states one checkable fact rather than a
+promise.** The CTA and the price sit on the cover and in the listing text; the
+interior slides do not repeat them, because a carousel that asks four times
+reads as a pitch rather than as work.
 
 Editable source is `src/`. See §5.
 
@@ -120,16 +133,65 @@ websites, the Kreated name, the price, the CTA.
   chroma in the ad is real client photography, which is the rule the site runs
   on too.
 
+### What each interior slide does, and what it may not say
+
+**Slide 2 — website design & redesign.** Rare Raleigh Restoration, before and
+after. Both frames are real captures of the same business's site; the previous
+site was approved for public display on 2026-08-30, which is the only reason it
+can be shown at all. The `before` is cropped from the top to 16:10 so both
+frames are the same shape — a comparison between two different crops is an
+argument about framing. 🚫 The two windows are the **same width**. Making the
+after bigger to flatter it is the first thing a sceptical buyer notices.
+
+**Slide 3 — local SEO.** ⚠ **The service-area page is not shown, and it should
+be.** The slide was specified as "LLEC hero and the locations page". No capture
+of a location page exists anywhere in this repository, and the live site could
+not be re-shot — the egress note in §2 applies to this too. The service-area
+work is carried as the counted fact instead: *two sites, 28 service-area pages*,
+from the dated record in `work/leak-locators-east-coast`. A ready slot,
+`.sl-loc`, is written into `src/slide-3-local-seo.html`, commented out, with the
+geometry change needed to fit three windows. 🚫 Do not fill the gap by mocking
+up a location page — it would be a picture of a client's site that the client
+does not have.
+
+🚫 **Nothing on slide 3 may be a performance claim.** The case study explicitly
+forbids crediting any change in the search figures to any piece of work, because
+the measurement window spans the old site, the rebuild, and the two-state split.
+A page count is a count of pages. The six months of Search Console data in the
+case study stays in the case study.
+
+**Slide 4 — social media.** The Morrow homepage as built, plus a social profile
+designed in the same brand system. Morrow is Kreated's own self-initiated brand
+concept — that is how `/work/` labels it, and the same words are on the foot of
+the slide — so designing its profile is brand work on Kreated's own property,
+not a picture of a client's account.
+
+Two rules hold that slide honest, and both are commented at the markup:
+
+- 🚫 **No follower or following counts.** A number beside "followers" on a mock
+  is indistinguishable from a result, and a result is exactly what this cannot
+  claim. "9 posts" is true of the grid underneath it and is the only figure on
+  the slide. Do not add the other two back to make the header look finished.
+- 🚫 **No Instagram wordmark or glyph.** The layout is the reference; the marks
+  are somebody else's property and the slide does not need them.
+
+The profile is built in **Morrow's** system, not Kreated's — Instrument Serif,
+Inter Tight, JetBrains Mono, ivory/bone/espresso, and Clay used exactly once in
+the frame, which is that brand's own stated rule. Six of the nine grid tiles are
+real Morrow photography, centre-cropped to square; three are designed type tiles,
+which is the part that reads as *planned content* rather than as the website's
+photos posted again.
+
 ### Copy on the graphic
 
 > KREATED
 > **WE BUILD BUSINESSES *ONLINE.***
 > Websites • SEO • Social
-> WEBSITE PROJECTS FROM **$700**  ·  Message us about your business →
+> PROJECTS STARTING AT **$750**  ·  Message us about your business →
 
-Five elements, four rows. That is the whole of it. Everything else — locality,
-scope, what $700 buys, the fact that SEO and Social are ongoing rather than
-one-time — belongs in the listing text, where it costs nothing and is read by
+Five elements, four rows, on the cover. That is the whole of it. Everything
+else — locality, scope, what $750 buys, the fact that SEO and Social are ongoing
+rather than one-time — belongs in the listing text, where it costs nothing and is read by
 people who have already stopped scrolling.
 
 Three notes on how the copy is set:
@@ -160,7 +222,7 @@ Edit **`src/ad.config.js`** and nothing else:
 headline: 'WE BUILD BUSINESSES\n{ONLINE.}',        // \n breaks, {…} = serif accent
 sub:      'Websites • SEO • Social',
 services: '',                                      // a second row under the fan
-price:    { label: 'Website projects from', value: '$700' },
+price:    { label: 'Projects starting at', value: '$750' },
 cta:      'Message us about your business',
 projects: [ { slot: 'left'|'centre'|'right', url, shot } ],
 ```
@@ -181,10 +243,23 @@ python3 render.py kreated-marketplace-1x1   # or just one
 python3 thumbnail-check.py             # the acceptance test — look at the output
 ```
 
+`thumbnail-check.py` writes one sheet per slide at 120/172/240px, plus
+`carousel--thumbnail-check.png`: all four slides side by side at tile size. That
+last one is the check the individual sheets cannot make — whether the set reads
+as **one** campaign while each slide still says a different thing at a glance.
+
 Both crops read that one config, so they cannot drift apart. To swap a
 screenshot, drop a **1600 × 1000** desktop hero into `src/shots/` and point
 `shot` at it; any other aspect ratio will change the window heights and the fan
 geometry is tuned for 16:10.
+
+⚠ **`ad.config.js` drives the cover only.** Slides 2–4 are hand-laid: each one
+has a different kind of proof in it — two windows, a window and a phone, a phone
+running live HTML — and a config abstraction over three layouts that share
+nothing but a masthead would be more code guarding less. Their copy lives in
+their own files, and the three anchors they hold in common (masthead y, proof
+band top, foot rule) are stated at the top of `layout-slide.css`. 🚫 Do not move
+an anchor in one slide only.
 
 `render.py` renders at 2× and resamples with Lanczos — Chromium's 1× rasteriser
 leaves the hairline window strokes visibly soft at this size. 🚫 If an edge looks
@@ -197,8 +272,12 @@ src/ad.config.js        copy, price, CTA, which site in which slot   ← edit th
 src/ad.js               template renderer; reads the config
 src/kit.css             the brand layer — palette, fonts, wordmark, browser window
 src/layout-campaign.css the selected composition, shared by both crops
-src/final-1x1.html      vertical positions for 1:1 only
-src/final-4x5.html      vertical positions for 4:5 only
+src/final-1x1.html      cover, vertical positions for 1:1 only
+src/final-4x5.html      cover, vertical positions for 4:5 only
+src/layout-slide.css    the interior-slide layout, shared by slides 02-04
+src/slide-2-web-design.html   \
+src/slide-3-local-seo.html     > one file per interior slide
+src/slide-4-social.html       /
 src/concept-{1,2,3}.html the concept round, kept as the record of what was tried
 src/fonts/              General Sans + Cormorant Garamond, copied from the site
 src/shots/              the three hero captures
@@ -213,23 +292,37 @@ moves, move this with it.
 
 ---
 
-## 6. Open item for Skyler
+## 6. Pricing — previously flagged, now resolved
 
-**"Website projects from $700" is not in the current offer map.** `docs/OFFER-MAP.md` lists
-`700–1200` as the *old full-site range*, marked **Deprecated — 🚫 never quote**.
-The cheapest published website package is `pkg.web.onepage` at **750**, and the
-cheapest published page of any kind is `svc.page.standard` at **250**. So $700
-sits below every sanctioned website entry point and above the individual-page
-one. The figure was specified for this ad, so it is what the creative says — but
-it disagrees with the pricing source of truth, and a Marketplace enquiry that
-arrives quoting $700 lands against a scope that no longer exists at that number.
+An earlier revision of this creative read "starting at $700", and that number
+was **not** in the offer map: `docs/OFFER-MAP.md` carries `700–1200` only as the
+*old full-site range*, marked **Deprecated — 🚫 never quote**.
 
-The new wording makes this sharper, not softer: "website **projects** from $700"
-is a claim about the cheapest *project*, and the cheapest project Kreated
-publishes is 750. The ad also now sells Social, which has no one-time price at
-all — `pkg.social.manage` is 900/month with a three-month initial term — so a
-reader can reasonably take $700 as an entry point to all three of Websites, SEO
-and Social when it is an entry point to none of them. Either the offer map gets a sanctioned Marketplace entry point, or the ad reads
-**website projects from $750** and matches One Page Website. One line in
-`ad.config.js` either way. Worth deciding before the listing goes up, because
-the first enquiry will quote whichever number is on the graphic.
+**$750 resolves it.** `pkg.web.onepage` (One Page Website) is published at 750
+one-time, and it is the cheapest website package Kreated sells. "Projects
+starting at $750" is therefore a true statement about the cheapest project, and
+it points at a package that actually exists to be sold.
+
+Two things to keep an eye on, neither of them blocking:
+
+- **"Projects" is doing load-bearing work in that sentence.** Two individual
+  services sit below 750 — `svc.page.standard` at 250 and `svc.page.service` at
+  450 — but those are pages added to an engagement, not projects anyone buys on
+  their own. The word "projects" is what keeps the claim correct. 🚫 Do not
+  shorten it to "from $750" on a future edit without re-checking that.
+- **The carousel sells SEO and Social, and neither has a one-time price.**
+  `pkg.local.presence` is 500/month and `pkg.social.manage` is 900/month with a
+  three-month initial term. The cover's price line is about website projects and
+  says so; the listing text should carry the recurring services' shape, because
+  the graphic has no room to and a reader who assumes $750 covers all three will
+  be disappointed on the first call.
+
+---
+
+## 7. Known gap
+
+**Slide 3 is missing the service-area page it was specified to show**, and the
+two live client sites could not be re-captured. Both are the same cause — the
+egress policy documented in §2 — and both are one session with those hosts
+allowed away from being fixed. The slot for the capture is already written into
+`src/slide-3-local-seo.html`. See §4 for what the slide does instead.

@@ -38,7 +38,7 @@ window.AD = {
 
   /* `label` is small tracked caps, `value` is the display figure. They share
      a baseline, so the whole phrase reads as one line. */
-  price: { label: 'Website projects from', value: '$700' },
+  price: { label: 'Projects starting at', value: '$750' },
 
   /* The sanctioned alternative is 'Build your online presence'. */
   cta: 'Message us about your business',

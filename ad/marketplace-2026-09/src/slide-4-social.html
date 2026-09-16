@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kreated — Marketplace carousel, slide 04: social media</title>
+<!-- ==========================================================================
+     SLIDE 04 — SOCIAL MEDIA
+     The Morrow homepage as built, and a social profile designed in the same
+     brand system, so the slide's argument is legible without reading a word:
+     one identity, two surfaces.
+
+     ⚠ WHY A MOCK IS HONEST HERE, AND WHERE THE LINE IS.
+     Morrow Coffee Co. is Kreated's own self-initiated brand concept — that is
+     how the site labels it on /work/ and on the concept route itself, and the
+     same words are on the foot of this slide. There is no real Morrow and no
+     real account, so designing its profile is brand work on Kreated's own
+     property, not a picture of a client's page.
+     🚫 THERE ARE NO FOLLOWER OR FOLLOWING COUNTS, deliberately. A number
+     beside "followers" on a mock is indistinguishable from a result, and a
+     result is exactly what this cannot claim. "9 posts" is true of the grid
+     underneath it and is the only figure on the slide. Do not add the other
+     two back to make the header look more finished.
+     🚫 And no Instagram wordmark or glyph. The layout is the reference; the
+     marks are somebody else's property and the slide does not need them.
+
+     The profile is built in MORROW's system, not Kreated's — Instrument
+     Serif, Inter Tight, JetBrains Mono, ivory/bone/espresso, and Clay used
+     exactly once in the frame, per that brand's own rule. Photography is the
+     real Morrow set, centre-cropped to square; provenance is in
+     prototype/kreated-v2/morrow/assets/img/SOURCES.md.
+     ========================================================================== -->
+<link rel="stylesheet" href="kit.css">
+<link rel="stylesheet" href="layout-slide.css">
+<style>
+  /* ---- Morrow's typefaces, for the profile only ------------------------- */
+  @font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;
+    src:url(fonts/instrument-serif-latin.woff2) format('woff2')}
+  @font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;
+    src:url(fonts/instrument-serif-italic-latin.woff2) format('woff2')}
+  @font-face{font-family:'Inter Tight';font-style:normal;font-weight:300 700;
+    src:url(fonts/inter-tight-var-latin.woff2) format('woff2')}
+  @font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:300 700;
+    src:url(fonts/jetbrains-mono-var-latin.woff2) format('woff2')}
+
+  /* ---- Morrow's palette, verbatim from morrow/CREATIVE-DIRECTION.md ------ */
+  .mw{--ivory:#F2ECE1;--bone:#E7DFCF;--espresso:#231B16;--roast:#5C4F45;
+      --ash:#B8AFA1;--clay:#B3623F}
+
+  .sl-say{top:196px}
+  .sl-title{font-size:96px}
+  .sl-fact{top:330px}
+
+  .sl-site{position:absolute;width:560px;left:494px;top:92px;z-index:1}
+  .sl-site .win__shot{filter:brightness(.92)}
+  .sl-ph{position:absolute;width:285px;height:507px;left:76px;top:2px;z-index:2}
+  .sl-tag--concept{left:508px;top:62px}
+  .sl-floor{top:420px;left:60px;width:840px}
+
+  /* ======================================================================
+     THE PROFILE — authored at the phone's real width (275px), so every size
+     below is a phone-scale size, not a scaled-down desktop one.
+     ====================================================================== */
+  .mw{position:absolute;inset:0;background:var(--ivory);color:var(--espresso);
+      font-family:'Inter Tight',system-ui,sans-serif;overflow:hidden}
+
+  .mw-bar{display:flex;align-items:center;justify-content:space-between;
+    padding:7px 11px 5px;font-size:11px;font-weight:600;letter-spacing:-.01em}
+  .mw-bar i{font-style:normal;color:var(--roast);font-size:12px;letter-spacing:.12em}
+
+  .mw-top{display:flex;align-items:center;gap:14px;padding:4px 11px 0}
+  .mw-av{width:62px;height:62px;border-radius:50%;overflow:hidden;flex:none;
+    box-shadow:0 0 0 1px rgba(35,27,22,.16)}
+  .mw-av img{width:100%;height:100%;display:block}
+  .mw-meta{min-width:0}
+  .mw-posts{font-size:12px;font-weight:600}
+  .mw-posts span{font-weight:400;color:var(--roast)}
+  .mw-cat{margin-top:3px;font-family:'JetBrains Mono',monospace;font-size:8px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--roast)}
+
+  .mw-id{padding:9px 11px 0}
+  .mw-name{font-family:'Instrument Serif',Georgia,serif;font-size:19px;line-height:1.05}
+  .mw-bio{margin-top:4px;font-size:10px;line-height:1.42;color:var(--roast)}
+  .mw-bio b{color:var(--espresso);font-weight:500}
+  /* Clay, once in this frame. It is on the link because that is the one place
+     the brand's own spec names. 🚫 If a second Clay object is added anywhere
+     on this phone, take this one out. */
+  .mw-link{margin-top:3px;font-size:10px;font-weight:500;color:var(--clay)}
+
+  .mw-btns{display:flex;gap:6px;padding:9px 11px 0}
+  .mw-btn{flex:1;height:26px;border-radius:5px;display:flex;align-items:center;
+    justify-content:center;font-size:10px;font-weight:600}
+  .mw-btn--a{background:var(--espresso);color:var(--ivory)}
+  .mw-btn--b{background:var(--bone);color:var(--espresso)}
+
+  .mw-hl{display:flex;gap:13px;padding:11px 11px 10px}
+  .mw-hl div{text-align:center}
+  .mw-hl span{display:block;width:44px;height:44px;border-radius:50%;
+    background:var(--bone);box-shadow:0 0 0 1px rgba(35,27,22,.10)}
+  .mw-hl em{display:block;margin-top:4px;font-style:normal;
+    font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--roast)}
+
+  .mw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:0 0 0}
+  .mw-grid img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+
+  /* the three designed tiles — this is the part that says "planned content"
+     rather than "we reposted the website photos" */
+  .mw-t{aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:9px;overflow:hidden}
+  .mw-t--serif{background:var(--espresso);color:var(--ivory)}
+  .mw-t--serif p{font-family:'Instrument Serif',Georgia,serif;font-size:13px;
+    line-height:1.08;margin:0}
+  .mw-t--clay{background:var(--clay);color:var(--ivory);justify-content:space-between}
+  .mw-t--clay b{font-family:'JetBrains Mono',monospace;font-size:7px;font-weight:400;
+    letter-spacing:.16em;opacity:.85}
+  .mw-t--clay p{font-family:'Instrument Serif',Georgia,serif;font-size:15px;
+    line-height:1.05;margin:0}
+  .mw-t--mono{background:var(--bone);color:var(--espresso)}
+  .mw-t--mono p{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;
+    letter-spacing:.1em;line-height:1.45;margin:0}
+
+  /* ---- foot ------------------------------------------------------------- */
+</style>
+</head>
+<body>
+<div class="canvas canvas--1x1">
+
+  <div class="sl-glow"></div>
+
+  <div class="sl-head">
+    <div class="rule"></div><div class="mark sl-mark">KREATED</div><div class="rule"></div>
+  </div>
+
+  <div class="sl-say">
+    <h1 class="sl-title">SOCIAL <em>MEDIA.</em></h1>
+  </div>
+  <p class="sl-fact">One brand. The site, the profile, the feed.</p>
+
+  <div class="sl-proof">
+    <div class="sl-floor"></div>
+
+    <div class="sl-tag sl-tag--concept">Self-initiated concept</div>
+    <div class="win sl-site">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">morrow.coffee</span></div>
+      <img class="win__shot" src="shots/morrow.jpg" alt="">
+    </div>
+
+    <div class="phone sl-ph">
+      <div class="phone__screen">
+        <div class="mw">
+
+          <div class="mw-bar"><span>morrow.coffee</span><i>&#8943;</i></div>
+
+          <div class="mw-top">
+            <span class="mw-av"><img src="shots/morrow-icon.svg" alt=""></span>
+            <div class="mw-meta">
+              <div class="mw-posts">9 <span>posts</span></div>
+              <div class="mw-cat">Coffee bar &amp; bakery</div>
+              <div class="mw-cat">Raleigh, NC</div>
+            </div>
+          </div>
+
+          <div class="mw-id">
+            <div class="mw-name">Morrow Coffee Co.</div>
+            <div class="mw-bio">
+              <b>The first hour, taken seriously.</b><br>
+              Espresso, filter, pastries out by six.<br>
+              412 E. Hargett St &middot; 6:30&ndash;15:00
+            </div>
+            <div class="mw-link">morrow.coffee</div>
+          </div>
+
+          <div class="mw-btns">
+            <div class="mw-btn mw-btn--a">Follow</div>
+            <div class="mw-btn mw-btn--b">Message</div>
+          </div>
+
+          <div class="mw-hl">
+            <div><span></span><em>Menu</em></div>
+            <div><span></span><em>Bakery</em></div>
+            <div><span></span><em>Visit</em></div>
+            <div><span></span><em>Hours</em></div>
+          </div>
+
+          <div class="mw-grid">
+            <img src="shots/morrow-feed/01-hero.jpg" alt="">
+            <div class="mw-t mw-t--serif"><p>The first hour, taken seriously.</p></div>
+            <img src="shots/morrow-feed/bar-cortado.jpg" alt="">
+
+            <img src="shots/morrow-feed/04-bakery-a.jpg" alt="">
+            <img src="shots/morrow-feed/06-room-01.jpg" alt="">
+            <div class="mw-t mw-t--clay"><b>SEASONAL</b><p>Now pouring</p></div>
+
+            <div class="mw-t mw-t--mono"><p>PASTRIES<br>OUT BY<br>SIX.</p></div>
+            <img src="shots/morrow-feed/03-season-02.jpg" alt="">
+            <img src="shots/morrow-feed/06-room-04.jpg" alt="">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sl-foot">
+    <div class="rule"></div>
+    <div class="sl-foot__row">
+      <div class="sl-who">Morrow Coffee Co. — a self-initiated Kreated concept</div>
+      <div class="sl-num"><b>04</b> / 04</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

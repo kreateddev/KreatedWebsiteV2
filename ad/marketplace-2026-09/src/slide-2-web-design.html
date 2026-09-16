@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kreated — Marketplace carousel, slide 02: web design &amp; redesign</title>
+<!-- ==========================================================================
+     SLIDE 02 — WEBSITE DESIGN & REDESIGN
+     Rare Raleigh Restoration, before and after. Both frames are real captures
+     of the same business's website. The previous site was approved for public
+     display on 2026-08-30 (see work/rare-raleigh-restoration), which is why
+     it can be shown at all.
+
+     The two windows overlap, with the AFTER in front and to the right, so the
+     slide is read left-to-right and back-to-front in the same movement. They
+     are the SAME WIDTH. 🚫 Do not make the after larger to flatter it — a
+     before/after where the two frames are different sizes is an argument
+     about scale, not about the work, and it is the first thing a sceptical
+     buyer notices.
+     ========================================================================== -->
+<link rel="stylesheet" href="kit.css">
+<link rel="stylesheet" href="layout-slide.css">
+<style>
+  .sl-say{top:152px}
+  .sl-title{font-size:82px}
+  .sl-fact{top:344px}
+
+  .sl-win{position:absolute;width:568px}
+  .sl-win--was{left:22px;top:62px;z-index:1}
+  .sl-win--now{left:490px;top:22px;z-index:2}
+  /* the old site steps back one stop of light — it is evidence, not the offer */
+  .sl-win--was .win__shot{filter:brightness(.82) saturate(.86)}
+
+  .sl-tag--was{left:36px;top:26px}
+  .sl-tag--now{left:504px;top:-14px}
+
+  .sl-floor{top:430px}
+</style>
+</head>
+<body>
+<div class="canvas canvas--1x1">
+
+  <div class="sl-glow"></div>
+
+  <div class="sl-head">
+    <div class="rule"></div><div class="mark sl-mark">KREATED</div><div class="rule"></div>
+  </div>
+
+  <div class="sl-say">
+    <h1 class="sl-title">WEBSITE DESIGN<br>&amp; <em>REDESIGN.</em></h1>
+  </div>
+  <p class="sl-fact">Same business. Real before, real after.</p>
+
+  <div class="sl-proof">
+    <div class="sl-floor"></div>
+
+    <div class="sl-tag sl-tag--was">Before</div>
+    <div class="win sl-win sl-win--was">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">rareraleighrestoration.com</span></div>
+      <img class="win__shot" src="shots/rare-raleigh-before.jpg" alt="">
+    </div>
+
+    <div class="sl-tag sl-tag--now">After — built by Kreated</div>
+    <div class="win sl-win sl-win--now">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">rareraleighrestoration.com</span></div>
+      <img class="win__shot" src="shots/rare-raleigh.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="sl-foot">
+    <div class="rule"></div>
+    <div class="sl-foot__row">
+      <div class="sl-who">Rare Raleigh Restoration — Cary, NC</div>
+      <div class="sl-num"><b>02</b> / 04</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

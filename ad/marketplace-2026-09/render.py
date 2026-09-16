@@ -27,12 +27,17 @@ SCALE  = 2          # supersample factor
 PORT   = 8912
 
 # name -> (source file, canvas selector)
+# Output name -> (source file, canvas selector). The four carousel slides are
+# numbered so a directory listing is already the posting order.
 MANIFEST = {
+    "kreated-marketplace-01-cover":     ("final-1x1.html",          ".canvas"),
+    "kreated-marketplace-01-cover-4x5": ("final-4x5.html",          ".canvas"),
+    "kreated-marketplace-02-web-design":("slide-2-web-design.html", ".canvas"),
+    "kreated-marketplace-03-local-seo": ("slide-3-local-seo.html",  ".canvas"),
+    "kreated-marketplace-04-social":    ("slide-4-social.html",     ".canvas"),
     "concept-1":     ("concept-1.html",     ".canvas"),
     "concept-2":     ("concept-2.html",     ".canvas"),
     "concept-3":     ("concept-3.html",     ".canvas"),
-    "kreated-marketplace-1x1":  ("final-1x1.html", ".canvas"),
-    "kreated-marketplace-4x5":  ("final-4x5.html", ".canvas"),
 }
 
 

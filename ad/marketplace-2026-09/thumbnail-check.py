@@ -44,7 +44,15 @@ def sheet(name, widths):
     print(f"  {os.path.basename(path)}  {out.size[0]}x{out.size[1]}")
 
 
-def contact(names, width=172):
+def carousel(names, width=210):
+    """The four slides as a strip, at the size a Marketplace tile occupies.
+    This is the check the individual sheets cannot make: whether the set reads
+    as ONE campaign — same masthead, same ground, same type — while each slide
+    still says a different thing at a glance."""
+    return contact(names, width, "carousel--thumbnail-check")
+
+
+def contact(names, width=172, name="concepts--thumbnail-check"):
     ims = [Image.open(os.path.join(OUT, f"{n}.png")).convert("RGB")
              .resize((width, width), Image.LANCZOS) for n in names]
     W = len(ims) * width + PAD * (len(ims) + 1)
@@ -53,12 +61,19 @@ def contact(names, width=172):
     for i, im in enumerate(ims):
         out.paste(im, (PAD + i * (width + PAD), PAD))
     out = out.resize((W * 3, H * 3), Image.NEAREST)
-    path = os.path.join(OUT, "concepts--thumbnail-check.png")
+    path = os.path.join(OUT, f"{name}.png")
     out.save(path)
     print(f"  {os.path.basename(path)}  {out.size[0]}x{out.size[1]}")
 
 
+SLIDES = ["kreated-marketplace-01-cover",
+          "kreated-marketplace-02-web-design",
+          "kreated-marketplace-03-local-seo",
+          "kreated-marketplace-04-social"]
+
 if __name__ == "__main__":
     contact(["concept-1", "concept-2", "concept-3"])
-    sheet("kreated-marketplace-1x1", SIZES)
-    sheet("kreated-marketplace-4x5", SIZES)
+    carousel(SLIDES)
+    for n in SLIDES:
+        sheet(n, SIZES)
+    sheet("kreated-marketplace-01-cover-4x5", SIZES)

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kreated — Marketplace carousel, slide 03: local SEO</title>
+<!-- ==========================================================================
+     SLIDE 03 — LOCAL SEO
+     Leak Locators East Coast, desktop and phone. Both are real captures from
+     the live site, retaken on 2026-09-11 when the visual overhaul shipped.
+
+     ⚠ THE SERVICE-AREA PAGE IS NOT SHOWN, AND IT SHOULD BE. The slide was
+     specified as "LLEC hero and the locations page". No capture of a location
+     page exists anywhere in this repository, and the live site could not be
+     re-shot — this session's egress policy answers 403 to CONNECT for
+     leaklocatorseastcoast.com. So the service-area work is carried as the
+     counted fact instead of a screenshot: two sites, 28 service-area pages,
+     from the dated record in work/leak-locators-east-coast.
+     🚫 Do not fill the gap by mocking up a location page. It would be a
+     picture of a client's site that the client does not have.
+     When a capture exists, drop it in as `.sl-loc` — the slot is written
+     below, commented out, with geometry that already clears the phone.
+
+     🚫 NOTHING ON THIS SLIDE MAY BE A PERFORMANCE CLAIM. The case study
+     forbids crediting any change in the search figures to any piece of work,
+     because the measurement window spans the old site, the rebuild and a
+     two-state split. A page count is a count of pages. Keep it that way.
+     ========================================================================== -->
+<link rel="stylesheet" href="kit.css">
+<link rel="stylesheet" href="layout-slide.css">
+<style>
+  .sl-say{top:196px}
+  .sl-title{font-size:96px}
+  .sl-fact{top:330px}
+
+  /* the desktop runs off the right edge; the phone sits in front of it at the
+     left, on the same margin the foot text uses. The pair reads as one site
+     at two widths, which is the whole of what local SEO has to land on. */
+  .sl-desk{position:absolute;width:780px;left:310px;top:4px;z-index:1}
+  .sl-phone{position:absolute;width:250px;height:510px;left:80px;top:0;z-index:2}
+  .sl-phone .phone__shot{width:240px}
+  /* 🚫 No notch on this one. The capture starts at the page, not at a status
+     bar, so the pill lands on top of the client's logo and reads as damage. */
+  .sl-phone .phone__notch{display:none}
+
+  .sl-floor{top:414px;left:60px;width:820px}
+</style>
+</head>
+<body>
+<div class="canvas canvas--1x1">
+
+  <div class="sl-glow"></div>
+
+  <div class="sl-head">
+    <div class="rule"></div><div class="mark sl-mark">KREATED</div><div class="rule"></div>
+  </div>
+
+  <div class="sl-say">
+    <h1 class="sl-title">LOCAL <em>SEO.</em></h1>
+  </div>
+  <p class="sl-fact">Two sites. 28 service-area pages.</p>
+
+  <div class="sl-proof">
+    <div class="sl-floor"></div>
+
+    <div class="win sl-desk">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">leaklocatorseastcoast.com</span></div>
+      <img class="win__shot" src="shots/llec.jpg" alt="">
+    </div>
+
+    <!-- ⚠ THE SERVICE-AREA PAGE GOES HERE. Uncomment, point it at the capture,
+         and drop .sl-desk to width 660 / left 400 so the three do not collide.
+    <div class="win sl-loc">
+      <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
+        <span class="win__url">leaklocatorseastcoast.com/service-areas</span></div>
+      <img class="win__shot" src="shots/llec-service-areas.jpg" alt="">
+    </div>
+    -->
+
+    <div class="phone sl-phone">
+      <div class="phone__notch"></div>
+      <div class="phone__screen">
+        <img class="phone__shot" src="shots/llec-mobile.jpg" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="sl-foot">
+    <div class="rule"></div>
+    <div class="sl-foot__row">
+      <div class="sl-who">Leak Locators East Coast — Wilmington, NC</div>
+      <div class="sl-num"><b>03</b> / 04</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

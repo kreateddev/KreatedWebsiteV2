@@ -144,3 +144,35 @@ img{display:block;max-width:100%}
 .cta__arrow{font-size:19px;line-height:1}
 
 .rule{height:1px;background:rgba(255,255,255,.14);width:100%}
+
+/* ==========================================================================
+   THE PHONE
+   Used by slide 3 (a real mobile capture) and slide 4 (a live HTML mock).
+   It is a frame with a content well, not an image wrapper, so both cases use
+   the same object. Proportion is 9:16 — a real device shape, and short enough
+   to sit inside a slide's proof band without fighting the foot.
+   🚫 No home button, no status bar, no carrier name. Every extra piece of
+   device furniture is one more thing competing with the screen at tile size.
+   ========================================================================== */
+.phone{
+  position:relative;border-radius:34px;background:#0B1230;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.30),
+    0 22px 46px rgba(0,0,0,.44),
+    0 62px 124px rgba(0,0,0,.52);
+}
+.phone::after{
+  content:'';position:absolute;inset:0;border-radius:34px;pointer-events:none;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+}
+.phone__screen{
+  position:absolute;inset:5px;border-radius:29px;overflow:hidden;background:#000;
+}
+.phone__shot{display:block;width:100%;height:auto}
+/* the one piece of device furniture kept, because without it the frame reads
+   as a rounded rectangle rather than a phone */
+.phone__notch{
+  position:absolute;left:50%;top:11px;transform:translateX(-50%);
+  width:76px;height:7px;border-radius:999px;background:rgba(255,255,255,.16);
+  z-index:3;
+}
