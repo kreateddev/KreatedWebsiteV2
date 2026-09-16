@@ -103,3 +103,16 @@
 .ad-price__k{font-size:14px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
   color:var(--silver)}
 .ad-price__v{font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--white)}
+
+/* The slide counter. It sits ABOVE the foot rule on the cover, not inside the
+   foot row, because that row is already carrying the price and the CTA and a
+   third object squeezed between them reads as clutter. It lands on the same
+   right margin as the interior slides' counter, so across the set the number
+   is always in the same corner.
+   ⚠ THE COUNTER IS HARD-CODED IN FIVE FILES: final-1x1.html and
+   slide-2 … slide-5. Change the number of slides and all five move together,
+   or the set ships out of order. 🚫 The 4:5 alternate deliberately has none —
+   it is a standalone cover, not slide 1 of anything. */
+.ad-num{position:absolute;right:64px;text-align:right;
+  font-size:15px;font-weight:600;letter-spacing:.16em;color:#6E7AA4}
+.ad-num b{color:var(--white);font-weight:600}

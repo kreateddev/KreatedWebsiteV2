@@ -25,6 +25,11 @@ Post the cover **first**. Marketplace builds the tile from the first image, and
 the whole composition is tuned against that tile, not against the full-size
 render.
 
+⚠ **The slide counter is hard-coded in five files** — `src/final-1x1.html` and
+`src/slide-2` … `src/slide-5`. Change the number of slides and all five move
+together, or the set ships out of order. The 4:5 alternate deliberately carries
+no counter: it is a standalone cover, not slide 1 of anything.
+
 **The carousel structure is deliberate: the cover opens with the offer, slides
 2–5 prove it, and each interior slide states one checkable fact rather than a
 promise.** The CTA and the price sit on the cover and in the listing text; the
