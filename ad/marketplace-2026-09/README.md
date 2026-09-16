@@ -52,6 +52,13 @@ not disagree. `capture` mechanics: `--force-color-profile=srgb`, reduced motion,
 All three were built and rendered in full, then judged at tile size.
 Contact sheet: `out/concepts--thumbnail-check.png`.
 
+⚠ **The three concept renders carry the earlier headline** ("Your website should
+bring you customers"). The round was decided on *composition* — where the proof
+sits, how the type stacks, what survives a 172px tile — and the copy changed
+after the direction was chosen. They are left as the record of that comparison
+rather than re-rendered, so what is in `out/concept-*.png` is exactly what the
+decision below was made on. Only the two finals carry the shipping copy.
+
 **Concept 1 — editorial / quiet luxury** (`src/concept-1.html`)
 Paper ground, navy ink, enormous negative space, the portfolio as a shelf
 bleeding off the bottom edge. The argument was that in a feed of loud ads the
@@ -115,13 +122,33 @@ websites, the Kreated name, the price, the CTA.
 
 ### Copy on the graphic
 
-> KREATED · Your website should bring you *customers.* · Web design and local
-> SEO, built for growth. · Website design · Local SEO · Google growth ·
-> Starting at $700 · Message us about your business →
+> KREATED
+> **WE BUILD BUSINESSES *ONLINE.***
+> Websites • SEO • Social
+> WEBSITE PROJECTS FROM **$700**  ·  Message us about your business →
 
-That is the whole of it. Everything else — locality, scope, what $700 buys —
-belongs in the listing text, where it costs nothing and is read by people who
-have already stopped scrolling.
+Five elements, four rows. That is the whole of it. Everything else — locality,
+scope, what $700 buys, the fact that SEO and Social are ongoing rather than
+one-time — belongs in the listing text, where it costs nothing and is read by
+people who have already stopped scrolling.
+
+Three notes on how the copy is set:
+
+- **"ONLINE." takes the serif accent and its own line.** In caps, Cormorant
+  italic is the most distinctive shape Kreated owns, and dropping it onto a
+  second line turns the last word into the payoff rather than the tail of a
+  sentence. It also solves a measure problem: "WE BUILD BUSINESSES" alone sets
+  to 936px against a 968px measure, so the line was never going to take a
+  fourth word at a readable size.
+- **"Websites • SEO • Social" is the supporting line, not quiet footer
+  furniture.** It sits directly under the statement at 28px/500, which is a
+  weight and a shade brighter than a caption, because it is one of the three
+  things the ad has to land rather than a gloss on the headline.
+- **The services row under the fan was removed.** It used to read "Website
+  design · Local SEO · Google growth", which now says the same thing as the
+  supporting line. A Marketplace creative cannot afford to say anything twice
+  in one frame. `services` in the config is `''`; set it to a string to bring
+  the row back.
 
 ---
 
@@ -130,13 +157,20 @@ have already stopped scrolling.
 Edit **`src/ad.config.js`** and nothing else:
 
 ```js
-headline: 'Your website should\nbring you {customers.}',   // \n breaks, {…} = serif accent
-sub:      'Web design and local SEO, built for growth.',
-services: 'Website design · Local SEO · Google growth',     // '' removes the row
-price:    { label: 'Starting at', value: '$700' },
+headline: 'WE BUILD BUSINESSES\n{ONLINE.}',        // \n breaks, {…} = serif accent
+sub:      'Websites • SEO • Social',
+services: '',                                      // a second row under the fan
+price:    { label: 'Website projects from', value: '$700' },
 cta:      'Message us about your business',
 projects: [ { slot: 'left'|'centre'|'right', url, shot } ],
 ```
+
+⚠ **The headline is stored in caps, not uppercased by CSS** — what is typed is
+what renders. `.ad-headline` in `layout-campaign.css` carries tracking and
+leading tuned for caps; a sentence-case rewrite wants both loosened a step. And
+the measure is 968px in *both* crops, because both are 1080 wide, so 86px is the
+ceiling for a 19-character line either way. A longer first line needs a smaller
+size, not a bigger canvas.
 
 Then:
 
@@ -181,14 +215,21 @@ moves, move this with it.
 
 ## 6. Open item for Skyler
 
-**"Starting at $700" is not in the current offer map.** `docs/OFFER-MAP.md` lists
+**"Website projects from $700" is not in the current offer map.** `docs/OFFER-MAP.md` lists
 `700–1200` as the *old full-site range*, marked **Deprecated — 🚫 never quote**.
 The cheapest published website package is `pkg.web.onepage` at **750**, and the
 cheapest published page of any kind is `svc.page.standard` at **250**. So $700
 sits below every sanctioned website entry point and above the individual-page
 one. The figure was specified for this ad, so it is what the creative says — but
 it disagrees with the pricing source of truth, and a Marketplace enquiry that
-arrives quoting $700 lands against a scope that no longer exists at that
-number. Either the offer map gets a sanctioned Marketplace entry point, or the ad reads
-**Starting at $750** and matches One Page Website. One line in `ad.config.js`
-either way.
+arrives quoting $700 lands against a scope that no longer exists at that number.
+
+The new wording makes this sharper, not softer: "website **projects** from $700"
+is a claim about the cheapest *project*, and the cheapest project Kreated
+publishes is 750. The ad also now sells Social, which has no one-time price at
+all — `pkg.social.manage` is 900/month with a three-month initial term — so a
+reader can reasonably take $700 as an entry point to all three of Websites, SEO
+and Social when it is an entry point to none of them. Either the offer map gets a sanctioned Marketplace entry point, or the ad reads
+**website projects from $750** and matches One Page Website. One line in
+`ad.config.js` either way. Worth deciding before the listing goes up, because
+the first enquiry will quote whichever number is on the graphic.

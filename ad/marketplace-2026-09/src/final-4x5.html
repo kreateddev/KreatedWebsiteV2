@@ -14,10 +14,14 @@
 <link rel="stylesheet" href="layout-campaign.css">
 <style>
   .ad-glow{top:400px;height:1020px}
-  .ad-head{top:80px}
-  .ad-say{top:214px}
-  .ad-headline{font-size:96px}
-  .ad-sub{top:428px;font-size:27px}
+  .ad-head{top:88px}
+  .ad-say{top:230px}
+  /* ⚠ 86px in BOTH crops, same as the 1:1, and for the same reason the fan is
+     not scaled here: "WE BUILD BUSINESSES" sets to 936px at 86px and the
+     measure is 968px in either crop, because both are 1080 wide. There is no
+     headroom to spend. The extra 270px of this crop is vertical only. */
+  .ad-headline{font-size:86px}
+  .ad-sub{top:408px;font-size:30px}
   /* ⚠ THE FAN IS NOT SCALED UP HERE, AND THAT IS DELIBERATE.
      Both crops are 1080 wide, so the fan's widths and offsets are already
      tuned to the only horizontal budget either of them has. A first pass
@@ -26,10 +30,13 @@
      right — the two things the fan exists to show. The extra 270px of this
      crop buys a larger statement and real air, not bigger screens.
      🚫 Do not reintroduce a transform on .ad-fan. */
-  .ad-fan{top:556px;height:520px}
-  .ad-floor{top:930px;width:920px;left:80px;height:210px}
-  .ad-services{top:1086px;font-size:15px}
-  .ad-foot{bottom:86px}
+  /* The fan sits at the optical centre of the space between the supporting
+     line and the foot rule — 131px of air above it and 131px below. 🚫 Do not
+     nudge this without recomputing both, the emptiness shows immediately in
+     this taller crop. */
+  .ad-fan{top:580px;height:520px}
+  .ad-floor{top:964px;width:920px;left:80px;height:210px}
+  .ad-foot{bottom:92px}
   .ad-price__v{font-size:56px}
 </style>
 </head>

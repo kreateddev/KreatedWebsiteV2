@@ -18,18 +18,27 @@ window.AD = {
 
   /* The statement. \n is a hard line break. {braces} set that run in
      Cormorant Garamond italic — the Kreated serif accent.
-     ⚠ ONE accent per headline. Two is a template. */
-  headline: 'Your website should\nbring you {customers.}',
+     ⚠ ONE accent per headline. Two is a template.
+     ⚠ This headline is set in CAPS in the source, not by a CSS transform, so
+     what is typed here is what renders. .ad-headline's tracking is tuned for
+     it; a sentence-case rewrite wants that value loosened a step. */
+  headline: 'WE BUILD BUSINESSES\n{ONLINE.}',
 
-  /* One supporting line. Keep it to a single line at this width — it wraps
-     to two around 46 characters and the second line is dead weight in a
-     scroll. */
-  sub: 'Web design and local SEO, built for growth.',
+  /* One supporting line, and it is doing real work now rather than
+     elaborating the headline — it is the whole service list. Keep it to
+     three items; a fourth pushes it past the headline's measure and it stops
+     reading as a single beat. */
+  sub: 'Websites • SEO • Social',
 
-  /* The three services, as quiet furniture. Set to '' to remove the row. */
-  services: 'Website design · Local SEO · Google growth',
+  /* A second quiet row beneath the fan. Empty because `sub` now names the
+     services — running both would say the same thing twice in one frame,
+     which is the one thing a Marketplace creative cannot afford. Set it to a
+     string to bring the row back. */
+  services: '',
 
-  price: { label: 'Starting at', value: '$700' },
+  /* `label` is small tracked caps, `value` is the display figure. They share
+     a baseline, so the whole phrase reads as one line. */
+  price: { label: 'Website projects from', value: '$700' },
 
   /* The sanctioned alternative is 'Build your online presence'. */
   cta: 'Message us about your business',

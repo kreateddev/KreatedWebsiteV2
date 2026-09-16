@@ -44,16 +44,24 @@
 .ad-head .rule{flex:1}
 .ad-mark{font-size:38px;font-weight:400;letter-spacing:.18em;margin-right:-.18em;color:var(--white)}
 
-/* ---- the statement ------------------------------------------------------ */
+/* ---- the statement ------------------------------------------------------
+   The headline arrives from ad.config.js already in caps. Caps at this weight
+   want a step more negative tracking than the sentence-case value in kit.css,
+   and they have no descenders, so the leading closes up too.
+   🚫 If the headline is ever rewritten in sentence case, loosen both back. */
 .ad-say{position:absolute;left:56px;right:56px;text-align:center}
-.ad-headline{color:var(--white)}
+.ad-headline{color:var(--white);letter-spacing:-.034em;line-height:.90}
 /* The serif accent is set in --cobalt-lift, not --cobalt. The base cobalt is
    2.83:1 on the navy ground and an italic serif is the thinnest shape in the
    whole ad; at thumbnail size it greys out. The lift measures 5.62:1.
    🚫 Do not "correct" this back to the identity blue. */
 .ad-headline em{color:var(--cobalt-lift)}
+
+/* The supporting line is no longer a gloss on the headline — it is the
+   service list, and it is one of the three things the ad has to land. So it
+   is set a weight up and a shade brighter than a caption would be. */
 .ad-sub{position:absolute;left:56px;right:56px;text-align:center;
-  font-weight:400;letter-spacing:-.004em;color:#C6CFE8}
+  font-weight:500;letter-spacing:.01em;color:#DEE4F5}
 
 /* ---- the fan ------------------------------------------------------------
    Each window rotates about its own centre and the spread is done with
@@ -88,6 +96,10 @@
 .ad-foot .rule{margin-bottom:34px}
 .ad-foot__row{display:flex;align-items:center;justify-content:space-between}
 .ad-price{display:flex;align-items:baseline;gap:14px}
-.ad-price__k{font-size:13px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+/* ⚠ .18em, not the .22em a Kreated label normally carries. The phrase here is
+   "Website projects from", twice the length of a "Starting at", and at .22em
+   it both crowds the CTA and stays a grey smear a size longer than it needs
+   to. 🚫 Shorter label, looser tracking — keep the two in step. */
+.ad-price__k{font-size:14px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
   color:var(--silver)}
 .ad-price__v{font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--white)}
