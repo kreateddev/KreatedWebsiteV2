@@ -579,3 +579,27 @@ recorded with a date.
 5. **Photo and video rights** made under Social Production (DECISION 014 covers client photography
    only).
 
+## 029 — Structured-data service area narrowed to the Wilmington area
+
+**DATE** 2026-09-16
+**PHASE** SEO pass
+**DECISION** `areaServed` on the homepage and every service page lists **only the eight Wilmington-area
+cities** (Wilmington, Leland, Wrightsville Beach, Carolina Beach, Southport, Hampstead, Surf City,
+Jacksonville). Raleigh, Cary, Durham, Chapel Hill, Wake Forest, "North Carolina" and "Worldwide" are
+removed, and the organization description says "working with clients in Wilmington and the surrounding
+area" instead of "Wilmington, Raleigh and anywhere else".
+**APPROVED BY SKYLER** yes — "areaServed works against the Wilmington focus … Trim it to the Wilmington
+area", 2026-09-16, as part of "Fix all of these".
+**WHAT IT REPLACES** The structured-data half of DECISION 024 ("Raleigh second, then North Carolina and
+Worldwide"). **PARTLY SUPERSEDES 024.**
+
+**🚫 WHAT DID NOT CHANGE**
+- Client facts and client schema on `/work/` (their `areaServed` is the client's market).
+- "Started 2025, in Raleigh" on `/about/`, and the visible "Built for businesses anywhere" footer line.
+  Kreated still takes work outside Wilmington; the schema simply stops diluting the local signal.
+
+**SAME PASS, 2026-09-16** (not decisions, recorded here so they are findable): article bylines and
+`Article` schema on the 14 resources (author Skyler Reyes; dates from git history), one sentence in the
+homepage H1, footer column labels as `<p>`, per-page share cards in `/assets/img/og/`, www to apex in one
+redirect, AEO and Social Media Management titles in the "in Wilmington, NC" pattern.
+

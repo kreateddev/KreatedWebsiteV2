@@ -361,6 +361,8 @@
   font-size:16px;line-height:1.65;color:var(--ink-3);text-wrap:pretty;
 }
 .ax__ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+/* the contractor-audit pointer under the buttons (2026-09-16) */
+.ax__ctas + .ax__closep{margin-top:clamp(22px,2.4vw,30px)}
 .ax__meta{
   margin:clamp(22px,2.4vw,30px) 0 0;
   font-size:14px;color:var(--ink-4);

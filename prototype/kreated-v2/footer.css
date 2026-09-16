@@ -72,7 +72,9 @@
 
 .foot__cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
   gap:clamp(24px,4vw,64px);max-width:1080px}
-.foot__cols h2{margin:0 0 14px;font:600 12px/1 'General Sans',system-ui;
+/* column labels are <p>, not <h2>, since 2026-09-16: four footer h2s on every page
+   made them part of each page's outline. Two classes beat `.foot__cols p` below. */
+.foot__cols .foot__colh{margin:0 0 14px;font:600 12px/1 'General Sans',system-ui;
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4)}
 .foot__cols p{margin:0 0 9px;font-size:14.5px;line-height:1.5;
   color:var(--ink-2)}

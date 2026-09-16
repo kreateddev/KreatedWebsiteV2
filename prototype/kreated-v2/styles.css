@@ -3074,6 +3074,8 @@ button,input,select,textarea{font:inherit;color:inherit}
   transition:color var(--t-hover,.18s ease);
 }
 .fit__link i{font-style:normal;font-size:13px;opacity:.7}
+.fit__link--next{margin-left:clamp(18px,2vw,28px)}
+@media (max-width:720px){.fit__link--next{margin:14px 0 0}}
 .fit__link:hover{color:color-mix(in srgb, var(--cobalt,#0A47F0),
                   var(--cobalt-lift,#5B86FF) calc(var(--k) * 100%))}
 .fit__link:focus-visible{outline:2px solid var(--cobalt-lift,#5B86FF);outline-offset:4px}

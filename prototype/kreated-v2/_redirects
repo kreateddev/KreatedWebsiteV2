@@ -34,6 +34,12 @@
 # Everything below is ordinary hygiene, not a gate.
 # ==========================================================================
 
+# ⚠ WWW IN ONE HOP, 2026-09-16. http://www went http://www -> https://www -> apex,
+# two redirects. These send both www schemes straight to the apex. The `!` forces
+# the rule even though a file exists at the path.
+http://www.kreated.dev/*   https://kreated.dev/:splat  301!
+https://www.kreated.dev/*  https://kreated.dev/:splat  301!
+
 # ⚠ PER-TRADE PAGES REMOVED 2026-09-10 (DECISION 027). They were live for a few
 # hours; the redirect keeps any crawled or shared link landing somewhere real.
 # 🚫 Do not recreate a page aimed at a single trade.
