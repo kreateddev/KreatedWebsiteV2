@@ -39,19 +39,39 @@ Editable source is `src/`. See §5.
 The creative shows real current work. It does not recreate, restyle or
 re-typeset any of it.
 
-| Project | Source of the hero capture |
+| Asset | Source |
 |---|---|
-| **Morrow** | Captured fresh from the current build in this repo, `prototype/kreated-v2/morrow/`, served locally and shot in Chromium at 1600 × 1000 CSS px / 2× DPR, then resampled to 1600 × 1000. |
-| **Leak Locators East Coast** | `prototype/kreated-v2/assets/img/proof/llec-desktop-v2.jpg` |
-| **Rare Raleigh Restoration** | `prototype/kreated-v2/assets/img/proof/rr-desktop-v2.jpg` |
+| **Morrow** hero | Captured fresh from the current build in this repo, `prototype/kreated-v2/morrow/`, served locally and shot in Chromium at 1600 × 1000 CSS px / 2× DPR. |
+| **Morrow** feed tiles | Nine squares centre-cropped from the real Morrow photography set. Provenance for every frame: `prototype/kreated-v2/morrow/assets/img/SOURCES.md`. |
+| **Leak Locators** hero, phone | `prototype/kreated-v2/assets/img/proof/llec-desktop-v2.jpg`, `llec-mobile-v2.jpg` |
+| **Leak Locators** service areas | Rendered from the site's own source — `kreateddev/LLEC` at `4b293f1`, `npm install && next build && next start`, shot at 1600 × 1000 / 2× DPR, scrolled to the register. See below. |
+| **Rare Raleigh** after | `prototype/kreated-v2/assets/img/proof/rr-desktop-v2.jpg` |
+| **Rare Raleigh** before | `prototype/kreated-v2/assets/img/proof/rr-before.jpg`, cropped from the top to 16:10. The previous site was approved for public display on 2026-08-30. |
 
-⚠ **The two live sites could not be re-shot in this session.** The container's
-egress policy refused `CONNECT` to `leaklocatorseastcoast.com:443` and
+### The service-area capture, and why it is not a URL screenshot
+
+The slide-3 register could not be screenshotted from the live site — see the
+egress note below — so the page was rendered from the repository that **is** the
+live site. `kreateddev/LLEC` is a Next.js app whose `HeroLx` component carries
+the line *"Find the leak before it costs you more."*, the same words in the live
+capture the Kreated site ships, so what it builds is the current design rather
+than a reconstruction of it. The homepage was rendered from the same build and
+compared against `llec-desktop-v2.jpg`: same design, which is what validates the
+committed captures as current.
+
+⚠ **The root-level `.html` files in that repo are the LEGACY static build**, not
+what production serves — its own `_redirects` header says so, and its homepage
+still reads "Wilmington's Pool Leak…". 🚫 Do not capture from them.
+
+⚠ **Neither live site could be reached in this session.** The container's egress
+policy refuses `CONNECT` to `leaklocatorseastcoast.com:443` and
 `rareraleighrestoration.com:443` with a 403, so neither could be loaded at all.
-The captures used instead are the ones the Kreated site itself ships on the
-homepage, `/work/` and four service routes — they are the current post-overhaul
-designs, committed in `f669c8b` (Rare Raleigh) and `2685256` (Leak Locators),
-which are the two most recent commits that touched either capture.
+The hero captures used instead are the ones the Kreated site itself ships on the
+homepage, `/work/` and four service routes — the current post-overhaul designs,
+committed in `f669c8b` (Rare Raleigh) and `2685256` (Leak Locators). Where a
+capture was needed that does not exist anywhere, the site was built from its own
+source instead, as above. 🚫 The remaining route is a mock-up, and a mock-up of a
+client's page is not an option here.
 
 🚫 If either site is redesigned, **re-shoot rather than edit these files**, and
 re-shoot the site's own proof captures in the same pass so the ad and the site do
@@ -143,22 +163,30 @@ frames are the same shape — a comparison between two different crops is an
 argument about framing. 🚫 The two windows are the **same width**. Making the
 after bigger to flatter it is the first thing a sceptical buyer notices.
 
-**Slide 3 — local SEO.** ⚠ **The service-area page is not shown, and it should
-be.** The slide was specified as "LLEC hero and the locations page". No capture
-of a location page exists anywhere in this repository, and the live site could
-not be re-shot — the egress note in §2 applies to this too. The service-area
-work is carried as the counted fact instead: *two sites, 28 service-area pages*,
-from the dated record in `work/leak-locators-east-coast`. A ready slot,
-`.sl-loc`, is written into `src/slide-3-local-seo.html`, commented out, with the
-geometry change needed to fit three windows. 🚫 Do not fill the gap by mocking
-up a location page — it would be a picture of a client's site that the client
-does not have.
+**Slide 3 — local SEO.** The homepage and the service-area register, both real
+captures of the live design; §2 covers how the register one was taken. The frame
+is scrolled to y=800 rather than to the top, because that route's own hero is an
+ink panel with no photograph and looks like any other hero at slide scale — the
+register underneath it is the thing that says "local SEO" without a word of
+explanation. The whole register is in frame: fourteen coastal towns, each with
+its county, nothing cropped out of the list.
+
+The two windows use slide 2's widths and offsets exactly. Two slides that both
+put two browser windows on a navy ground should agree, or the carousel looks
+assembled rather than designed; the light window being in *front* here and
+*behind* on slide 2 is enough to stop them reading as the same picture.
 
 🚫 **Nothing on slide 3 may be a performance claim.** The case study explicitly
 forbids crediting any change in the search figures to any piece of work, because
 the measurement window spans the old site, the rebuild, and the two-state split.
 A page count is a count of pages. The six months of Search Console data in the
 case study stays in the case study.
+
+🚫 **And do not count the towns in the screenshot and put that number on the
+slide.** The register lists *coverage*; an area only becomes a page when it
+clears the substance bar in that repo's `lib/areas.ts`. "Two sites, 28
+service-area pages" comes from the dated record in
+`work/leak-locators-east-coast`, not from the image.
 
 **Slide 4 — social media.** The Morrow homepage as built, plus a social profile
 designed in the same brand system. Morrow is Kreated's own self-initiated brand
@@ -319,10 +347,27 @@ Two things to keep an eye on, neither of them blocking:
 
 ---
 
-## 7. Known gap
+## 7. Known gaps
 
-**Slide 3 is missing the service-area page it was specified to show**, and the
-two live client sites could not be re-captured. Both are the same cause — the
-egress policy documented in §2 — and both are one session with those hosts
-allowed away from being fixed. The slot for the capture is already written into
-`src/slide-3-local-seo.html`. See §4 for what the slide does instead.
+**Closed.** Slide 3 was previously missing the service-area page it was
+specified to show. It is now in the slide, rendered from the site's own source —
+§2 has the method and §4 has the framing decision.
+
+**Open, and minor.** The two live client sites still cannot be reached directly
+from this environment, so the Rare Raleigh captures remain the ones the Kreated
+site ships rather than fresh shots. That is a provenance preference, not a
+correctness problem: the LLEC homepage rendered from source matched its
+committed capture exactly, which is good evidence the Rare Raleigh ones are
+current too. A session with those hosts allowed would settle it. `kreateddev/rare-raleigh-restoration`
+is also available to build from if a specific interior page is ever needed.
+
+**Re-rendering the service-area capture.** Nothing in this folder depends on the
+LLEC repository at render time — `src/shots/llec-service-areas.jpg` is committed
+here. To retake it after a site change:
+
+```bash
+git clone --depth 1 https://github.com/kreateddev/LLEC /home/user/llec
+cd /home/user/llec && npm install && npx next build && npx next start -p 8901
+# then screenshot http://127.0.0.1:8901/service-areas at 1600x1000, 2x DPR,
+# scrolled to y=800, and resample to 1600x1000
+```

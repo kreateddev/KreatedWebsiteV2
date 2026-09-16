@@ -5,25 +5,35 @@
 <title>Kreated — Marketplace carousel, slide 03: local SEO</title>
 <!-- ==========================================================================
      SLIDE 03 — LOCAL SEO
-     Leak Locators East Coast, desktop and phone. Both are real captures from
-     the live site, retaken on 2026-09-11 when the visual overhaul shipped.
+     The homepage and the service-area register, both real captures of the
+     live design.
 
-     ⚠ THE SERVICE-AREA PAGE IS NOT SHOWN, AND IT SHOULD BE. The slide was
-     specified as "LLEC hero and the locations page". No capture of a location
-     page exists anywhere in this repository, and the live site could not be
-     re-shot — this session's egress policy answers 403 to CONNECT for
-     leaklocatorseastcoast.com. So the service-area work is carried as the
-     counted fact instead of a screenshot: two sites, 28 service-area pages,
-     from the dated record in work/leak-locators-east-coast.
-     🚫 Do not fill the gap by mocking up a location page. It would be a
-     picture of a client's site that the client does not have.
-     When a capture exists, drop it in as `.sl-loc` — the slot is written
-     below, commented out, with geometry that already clears the phone.
+     HOW THE SERVICE-AREA CAPTURE WAS TAKEN, because it is not a viewport shot
+     of a URL and the difference matters. The live site is refused by this
+     session's egress policy, so the page was rendered from its own source:
+     kreateddev/LLEC at 4b293f1, `npm install && next build && next start`,
+     then screenshotted at 1600x1000 / 2x DPR. That repository IS the live
+     site — its HeroLx component carries "Find the leak before it costs you
+     more.", the same words in the live capture the Kreated site ships — so
+     this is the current design, not a reconstruction of it.
+     ⚠ The root-level .html files in that repo are the LEGACY build and are
+     NOT what production serves. 🚫 Do not capture from them.
+
+     The frame is scrolled to y=800 rather than to the top. The route's own
+     hero is an ink panel with no photograph, which looks like any other hero
+     at slide scale; the register underneath it is the thing that says "local
+     SEO" without a word of explanation. The whole register is in frame —
+     fourteen coastal towns, each with its county. Nothing is cropped out of
+     the list.
 
      🚫 NOTHING ON THIS SLIDE MAY BE A PERFORMANCE CLAIM. The case study
      forbids crediting any change in the search figures to any piece of work,
      because the measurement window spans the old site, the rebuild and a
-     two-state split. A page count is a count of pages. Keep it that way.
+     two-state split. A page count is a count of pages.
+     🚫 And do not count the towns in the screenshot and put that number on
+     the slide. The register lists coverage; an area only becomes a page when
+     it clears the substance bar in that repo's lib/areas.ts. The counted
+     figure in the fact line comes from the dated record, not from the image.
      ========================================================================== -->
 <link rel="stylesheet" href="kit.css">
 <link rel="stylesheet" href="layout-slide.css">
@@ -32,17 +42,20 @@
   .sl-title{font-size:96px}
   .sl-fact{top:330px}
 
-  /* the desktop runs off the right edge; the phone sits in front of it at the
-     left, on the same margin the foot text uses. The pair reads as one site
-     at two widths, which is the whole of what local SEO has to land on. */
-  .sl-desk{position:absolute;width:780px;left:310px;top:4px;z-index:1}
-  .sl-phone{position:absolute;width:250px;height:510px;left:80px;top:0;z-index:2}
-  .sl-phone .phone__shot{width:240px}
-  /* 🚫 No notch on this one. The capture starts at the page, not at a status
-     bar, so the pill lands on top of the client's logo and reads as damage. */
-  .sl-phone .phone__notch{display:none}
+  /* Same widths and offsets as slide 02, deliberately: two slides that both
+     put two browser windows on a navy ground should agree, or the carousel
+     looks assembled rather than designed. The light window is in FRONT here
+     and behind on slide 02, which is enough to stop them reading as the same
+     picture. */
+  .sl-win{position:absolute;width:568px}
+  .sl-win--home{left:22px;top:62px;z-index:1}
+  .sl-win--loc{left:490px;top:22px;z-index:2}
+  .sl-win--home .win__shot{filter:brightness(.86)}
 
-  .sl-floor{top:414px;left:60px;width:820px}
+  .sl-tag--home{left:36px;top:26px}
+  .sl-tag--loc{left:504px;top:-14px}
+
+  .sl-floor{top:430px;left:60px;width:840px}
 </style>
 </head>
 <body>
@@ -62,26 +75,18 @@
   <div class="sl-proof">
     <div class="sl-floor"></div>
 
-    <div class="win sl-desk">
+    <div class="sl-tag sl-tag--home">The homepage</div>
+    <div class="win sl-win sl-win--home">
       <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
         <span class="win__url">leaklocatorseastcoast.com</span></div>
       <img class="win__shot" src="shots/llec.jpg" alt="">
     </div>
 
-    <!-- ⚠ THE SERVICE-AREA PAGE GOES HERE. Uncomment, point it at the capture,
-         and drop .sl-desk to width 660 / left 400 so the three do not collide.
-    <div class="win sl-loc">
+    <div class="sl-tag sl-tag--now sl-tag--loc">Service areas</div>
+    <div class="win sl-win sl-win--loc">
       <div class="win__bar"><i class="win__dot"></i><i class="win__dot"></i><i class="win__dot"></i>
         <span class="win__url">leaklocatorseastcoast.com/service-areas</span></div>
       <img class="win__shot" src="shots/llec-service-areas.jpg" alt="">
-    </div>
-    -->
-
-    <div class="phone sl-phone">
-      <div class="phone__notch"></div>
-      <div class="phone__screen">
-        <img class="phone__shot" src="shots/llec-mobile.jpg" alt="">
-      </div>
     </div>
   </div>
 
