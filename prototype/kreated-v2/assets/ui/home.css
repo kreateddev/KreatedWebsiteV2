@@ -1,0 +1,67 @@
+/* Homepage in the pilot system, 2026-09-19. Tokens only: from Services down the page is night. */
+/* hero: the same light headline as every other page; the typed word is the cobalt accent */
+.hero .hm-chip{position:relative;z-index:2;margin-bottom:22px}
+.hero__h1{font-family:'General Sans',system-ui;font-weight:400;letter-spacing:-.03em;line-height:1.02}
+.hero__h1 em{font-family:inherit;font-style:normal;font-weight:inherit;font-size:1em;letter-spacing:inherit}
+.hero__ctas{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+/* section heads replace the old peak headings */
+.fit .bx-head,.svc .bx-head,.faq .bx-head,.revs .bx-head{text-align:center}
+.faq__grid{display:block}
+.faq__list{max-width:780px;margin-inline:auto}
+/* services: same two columns and centered seventh, lighter titles, no numerals (it is a set, not a sequence) */
+.room .svc__n{display:none}
+.room .svc__index .svc__row{padding-inline:0}
+.svc__t{font-family:'General Sans',system-ui;font-weight:500;font-size:clamp(22px,2vw,28px);letter-spacing:-.015em}
+.svc__row::before{display:none}
+.svc__row:hover .svc__t,.svc__row:focus-visible .svc__t{color:var(--accent)}
+/* pricing: build + retainer as one conversation, like the pricing page */
+.hm-combo{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;max-width:760px;margin:0 auto}
+.hm-combo > div:not(.hm-combo__plus){padding:26px;border-radius:20px;text-align:center;background:var(--pv-card);border:1px solid var(--stroke)}
+.hm-combo h3{margin:4px 0 8px;font-family:'General Sans',system-ui;font-weight:500;font-size:22px;color:var(--ink-1)}
+.hm-combo__k{margin:0;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hm-combo__p{margin:0;font-size:28px;font-weight:400;color:var(--ink-1)}
+.hm-combo__p small{font-size:15px;color:var(--ink-3)}
+.hm-combo__plus{font-size:28px;color:var(--ink-3)}
+.hm-center{justify-content:center}
+/* close: the light headline */
+.final__h{font-family:'General Sans',system-ui;font-weight:400;letter-spacing:-.03em}
+.final__h em{font-family:inherit;font-style:normal;font-weight:inherit;font-size:1em;color:var(--accent)}
+.final__ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+@media (max-width:720px){
+  .hero__in{text-align:center}
+  .hero__h1{margin-inline:auto}
+  .hero__ctas{justify-content:center}
+  .hm-combo{grid-template-columns:1fr}
+  .room .svc__index .svc__row{text-align:center}
+  .room .svc__index .svc__d{margin-inline:auto}
+}
+/* the row was a numeral + body grid; with the numeral gone the body takes the full cell */
+.room .svc__index .svc__row{display:block}
+.room .svc__index .svc__d{display:block;margin-top:8px}
+.room .svc__more,.proof .wk__all,.proof > .wrap > a.ilink:last-child{display:table;margin-inline:auto}
+.room .svc__index .svc__row{padding-block:clamp(20px,2.2vw,30px)}
+html body .room .svc__index .svc__t{font-family:'General Sans',system-ui;font-weight:500;font-size:clamp(22px,2vw,28px);letter-spacing:-.015em;line-height:1.2}
+@media (max-width:720px){.hero__live{left:0;right:0;text-align:center}}
+/* v5 · services as buttons: a centered set of cards, four then three, each one a clear link */
+.room .svc__grid{display:block}
+html body .room .svc__index{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;max-width:1180px;margin:0 auto}
+html body .room .svc__index .svc__item{flex:0 1 calc((100% - 48px) / 4);width:auto;grid-column:auto;justify-self:auto;border:0}
+html body .room .svc__index .svc__item:last-child:nth-child(odd){width:auto;grid-column:auto}
+html body .room .svc__index .svc__row{display:flex;flex-direction:column;align-items:center;height:100%;text-align:center;
+  padding:28px 22px 24px;border-radius:20px;background:var(--pv-card);border:1px solid var(--stroke);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+html body .room .svc__index .svc__row:hover,html body .room .svc__index .svc__row:focus-visible{transform:translateY(-3px);
+  border-color:var(--accent);box-shadow:0 14px 34px color-mix(in srgb,var(--accent) 18%,transparent)}
+html body .room .svc__index .svc__body{display:flex;flex-direction:column;align-items:center;flex:1}
+html body .room .svc__index .svc__t{font-size:clamp(19px,1.5vw,22px);transform:none}
+html body .room .svc__index .svc__d{max-width:30ch;margin:10px auto 18px;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+html body .room .svc__index .svc__body::after{content:'View service \2192';margin-top:auto;font-size:13.5px;font-weight:600;color:var(--accent)}
+@media (max-width:1100px){html body .room .svc__index .svc__item{flex-basis:calc((100% - 32px) / 3)}}
+@media (max-width:760px){html body .room .svc__index .svc__item{flex-basis:calc((100% - 16px) / 2)}}
+@media (max-width:520px){html body .room .svc__index .svc__item{flex-basis:100%}}
+.revs .bx-head + .revs__track{margin-top:0}
+/* v6 · reviews: a continuous carousel, edge to edge, fading at both sides */
+.revs.is-auto .revs__track{overflow-x:hidden;scroll-snap-type:none;scroll-behavior:auto;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.revs.is-auto .rev{scroll-snap-align:none;width:min(460px,82vw)}

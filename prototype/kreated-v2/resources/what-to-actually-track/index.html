@@ -66,6 +66,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=12">
+<link rel="stylesheet" href="/assets/ui/system.css?v=24">
+<link rel="stylesheet" href="/assets/ui/article.css?v=2">
 
 <!-- STRUCTURED DATA. 🚫 Only visible facts: the breadcrumb mirrors the crumb
      rendered at the top of this page. No rating, review, author, date or
@@ -131,7 +133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "@id": "https://kreated.dev/#organization"
         },
         "datePublished": "2026-09-02",
-        "dateModified": "2026-09-11",
+        "dateModified": "2026-09-09",
         "image": "https://kreated.dev/assets/img/og/resources-what-to-actually-track.jpg",
         "inLanguage": "en-US"
       }
@@ -139,7 +141,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   </script>
 </head>
-<body>
+<body class="pg-art">
 <!-- GTM fallback for visitors without JavaScript. Paired with the head
      snippet above; it is the documented install and is not a second container. -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TH3JQWL8"
@@ -214,7 +216,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      Primary funnel is /contact/ (per owner) rather than a service page: the
      reader with this question is mid-engagement, not shopping for a service.
      ========================================================================== -->
-<section class="shero">
+<section class="pg-hero shero">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/resources/">RESOURCES</a>
@@ -235,36 +237,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            words change, and change dateModified in the JSON-LD with it. -->
       <p class="byline">By <a class="ilink" href="/about/">Skyler Reyes</a>, founder of Kreated
         <span aria-hidden="true">&middot;</span> Published <time datetime="2026-09-02">September 2, 2026</time>
-        <span aria-hidden="true">&middot;</span> Updated <time datetime="2026-09-11">September 11, 2026</time></p>
+        <span aria-hidden="true">&middot;</span> Updated <time datetime="2026-09-09">September 9, 2026</time></p>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
+    <header class="bx-head"><h2 class="bx-h">The four</h2><p class="bx-sub">In the order they matter.</p></header>
     <div>
-      <h2 class="sec__h">The four</h2>
-      <p class="lgrid__note">In the order they matter.</p>
-    </div>
-    <div>
-      <ul class="who" role="list">
-        <li><b>1. Inquiries per month</b>
+      <ul class="who who--num" role="list">
+        <li><i class="art-n" aria-hidden="true">1</i><b>Inquiries per month</b>
           <span>Calls, forms and messages from people who want to buy something.
             One number, counted the same way every month. Not visits, not
             impressions. If this is flat while everything else rises, nothing that
             matters has changed.</span></li>
-        <li><b>2. How many became customers</b>
+        <li><i class="art-n" aria-hidden="true">2</i><b>How many became customers</b>
           <span>Of those inquiries, how many turned into paid work. This is the
             number that decides whether the answer is more marketing or better
             follow-up, and it is the one almost nobody writes down. Fifteen
             inquiries and two jobs is a quoting or response problem, and no amount
             of additional traffic fixes it.</span></li>
-        <li><b>3. What the work was worth</b>
+        <li><i class="art-n" aria-hidden="true">3</i><b>What the work was worth</b>
           <span>Average job value, roughly. Twelve inquiries a month is a
             different business at four hundred dollars a job than at nine
             thousand, and the difference decides what marketing is worth
             doing.</span></li>
-        <li><b>4. Where they came from, approximately</b>
+        <li><i class="art-n" aria-hidden="true">4</i><b>Where they came from, approximately</b>
           <span>Roughly: found on Google, referral, repeat customer, saw the van or the sign.
             &ldquo;Approximately&rdquo; is doing real work in that sentence — see
             below. Even a rough split tells you which channel is carrying the
@@ -275,12 +274,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What cannot be measured cleanly</h2>
-      <p class="lgrid__note">Anyone claiming otherwise is selling something.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">What cannot be measured cleanly</h2><p class="bx-sub">Anyone claiming otherwise is selling something.</p></header>
     <div class="prose">
       <p>A customer hears about you from a neighbor. Three weeks later they search
         your name, look at two other businesses, see your van in the
@@ -298,12 +294,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What is not worth your attention</h2>
-      <p class="lgrid__note">Real numbers, wrong audience.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">What is not worth your attention</h2><p class="bx-sub">Real numbers, wrong audience.</p></header>
     <div>
       <ul class="excl" role="list">
         <li><b class="lin">Traffic on its own.</b> Sessions rise for reasons that have nothing
@@ -328,12 +321,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">How to track it without a system</h2>
-      <p class="lgrid__note">A spreadsheet is genuinely enough.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">How to track it without a system</h2><p class="bx-sub">A spreadsheet is genuinely enough.</p></header>
     <div class="prose">
       <p>One row per inquiry: date, how they found you, what they wanted, whether
         it became a job, and what it was worth. Filled in as they come, it takes a
@@ -356,12 +346,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Why this page exists</h2>
-      <p class="lgrid__note">It is also how Kreated reports.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">Why this page exists</h2><p class="bx-sub">It is also how Kreated reports.</p></header>
     <div class="prose">
       <p>A business that tracks these four can tell whether the work it is paying
         for is doing anything, which is the only real protection against paying

@@ -1,0 +1,87 @@
+/* PILOT pricing revamp (2026-09-19). Three starting points, one usual path, every price one click away. */
+
+.pr-hero .prov{max-width:60ch;margin:22px 0 0;font-size:14.5px;color:var(--ink-3)}
+.pr-hero .hx-h em{font-style:normal;color:#0A47F0}
+
+.pr-paths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:1100px;margin:0 auto}
+.pr-path{display:flex;flex-direction:column;gap:10px;padding:28px;border-radius:20px;text-decoration:none;color:inherit;
+  background:var(--pv-card);border:1px solid color-mix(in srgb,var(--ink-1) 9%,transparent);
+  box-shadow:0 16px 36px rgba(11,22,64,.06);transition:border-color .2s ease,transform .2s ease}
+.pr-path:hover,.pr-path:focus-visible{border-color:#0A47F0;outline:none}
+.pr-path:focus-visible{box-shadow:0 0 0 3px rgba(10,71,240,.35)}
+.pr-path__need{margin:0;font:600 12px/1.3 'General Sans',system-ui;letter-spacing:.14em;text-transform:uppercase;color:#0A47F0}
+.pr-path h3{margin:0;font-size:26px;font-weight:500;letter-spacing:-.02em;color:var(--ink-1)}
+.pr-path__why{margin:0;font-size:15px;line-height:1.55;color:var(--ink-2)}
+.pr-path__more{margin:auto 0 0;padding-top:14px;border-top:1px solid color-mix(in srgb,var(--ink-1) 8%,transparent);font:600 14.5px/1 'General Sans',system-ui;color:var(--ink-1)}
+.pr-path__more i{font-style:normal;color:#0A47F0}
+.pr-also{max-width:70ch;margin:22px auto 0;text-align:center;font-size:15px;color:var(--ink-2)}
+
+.pr-combo{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:18px;align-items:center;max-width:900px;margin:0 auto}
+.pr-combo > div:not(.pr-combo__plus){padding:26px;border-radius:18px;background:var(--pv-card);
+  border:1px solid color-mix(in srgb,var(--ink-1) 9%,transparent)}
+.pr-combo h3{margin:4px 0 6px;font-size:22px;font-weight:500;color:var(--ink-1)}
+.pr-combo p{margin:6px 0 0;font-size:15px;line-height:1.55;color:var(--ink-2)}
+.pr-combo__k{margin:0!important;font:600 11px/1 'General Sans',system-ui!important;letter-spacing:.16em;text-transform:uppercase;color:#0A47F0!important}
+.pr-combo__plus{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#0A47F0;color:#fff;font:500 24px/1 'General Sans',system-ui}
+
+/* the price list: one line per group, the cards inside */
+.pr-listh{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px;margin:0 0 18px;
+  font:400 clamp(30px,3.4vw,44px)/1.1 'General Sans',system-ui;letter-spacing:-.03em;color:var(--ink-on-room,var(--ink-1))}
+.pr-listh span{font-size:15px;letter-spacing:0;color:var(--ink-3)}
+.pgrp{border-top:1px solid color-mix(in srgb,var(--ink-1) 12%,transparent)}
+.pgrp:last-of-type{border-bottom:1px solid color-mix(in srgb,var(--ink-1) 12%,transparent)}
+.pgrp > summary{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) auto 40px;gap:18px;align-items:center;
+  padding:22px 4px;cursor:pointer;list-style:none}
+.pgrp > summary::-webkit-details-marker{display:none}
+.pgrp > summary:hover .pgrp__h,.pgrp > summary:focus-visible .pgrp__h{color:#0A47F0}
+.pgrp > summary:focus-visible{outline:2px solid #0A47F0;outline-offset:2px;border-radius:6px}
+.pgrp .pgrp__h{margin:0!important;padding:0!important;border:0!important;font-size:clamp(20px,1.8vw,24px)!important}
+.pgrp__line{font-size:15px;color:var(--ink-2)}
+.pgrp__rng{font:600 16px/1.2 'General Sans',system-ui;color:var(--ink-1);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pgrp__tog{position:relative;width:34px;height:34px;border-radius:50%;border:1px solid color-mix(in srgb,var(--ink-1) 16%,transparent)}
+.pgrp__tog::before,.pgrp__tog::after{content:'';position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:#0A47F0;transform:translate(-50%,-50%)}
+.pgrp__tog::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .2s ease}
+.pgrp[open] .pgrp__tog::after{transform:translate(-50%,-50%) rotate(0deg)}
+.pgrp > .offers{padding-bottom:26px}
+.pgrp--help > summary{grid-template-columns:minmax(0,1fr) 40px}
+.pgrp--help > :not(summary){padding-bottom:22px}
+.invest .terms{margin-top:clamp(30px,4vw,52px)}
+
+@media (max-width:900px){
+  .pr-paths{grid-template-columns:1fr}
+  .pr-combo{grid-template-columns:1fr}
+  .pr-combo__plus{margin:0 auto}
+  .pgrp > summary{grid-template-columns:minmax(0,1fr) auto;gap:6px 14px}
+  .pgrp__line{grid-column:1;grid-row:2}
+  .pgrp__rng{grid-column:1;grid-row:3}
+  .pgrp__tog{grid-column:2;grid-row:1 / span 3}
+}
+@media (max-width:720px){
+  .pr-path{text-align:center;align-items:center}
+  .pr-path .bx-plan__tag{align-self:center}
+  .pr-combo > div{text-align:center}
+  .pr-listh{justify-content:center;text-align:center}
+  .pgrp > summary{text-align:left}
+}
+/* the pricing hero glow used to end in a deliberate hard cut; the site rule is now
+   gradient-only between sections, so it fades out instead */
+.pr-hero::before{-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)}
+@media (max-width:720px){ .invest .terms .pgroup{text-align:center} }
+
+/* v2 · same hero as every other page: left, under the breadcrumb, accent on its own line (owner, 2026-09-19) */
+.pr-hero .hx-h em{display:block}
+.pr-hero .hx-sub{margin-left:0}
+.pr-hero .hx-btns{justify-content:flex-start}
+@media (max-width:720px){.pr-hero .wrap{text-align:center}.pr-hero .crumb{justify-content:center}
+  .pr-hero .hx-sub,.pr-hero .prov{margin-inline:auto}.pr-hero .hx-btns{justify-content:center}}
+html body .pr-hero{padding-top:60px}
+html body .pr-hero .wrap{padding-top:0}
+.pr-hero .crumb{text-transform:uppercase;letter-spacing:3px}
+.pr-hero .hx-h{font-size:clamp(46px,7vw,100.8px);letter-spacing:-.045em;line-height:.98}
+/* bundle, 2026-09-19 */
+.bo__deal{display:inline-block;margin:10px 0 0;padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:600;
+  color:var(--accent,#0A47F0);background:color-mix(in srgb,var(--accent,#0A47F0) 9%,transparent);border:1px solid color-mix(in srgb,var(--accent,#0A47F0) 30%,transparent)}
+.bs__line--free .bs__amt{color:#0E8A4B;font-weight:600}
+.bs__nudge{margin:10px 0 0;padding:10px 12px;border-radius:12px;font-size:13.5px;font-weight:500;color:var(--accent,#0A47F0);
+  background:color-mix(in srgb,var(--accent,#0A47F0) 8%,transparent)}
+.pr-deal{display:block;width:fit-content;margin:6px auto 18px}

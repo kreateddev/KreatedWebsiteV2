@@ -66,6 +66,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=12">
+<link rel="stylesheet" href="/assets/ui/system.css?v=24">
+<link rel="stylesheet" href="/assets/ui/article.css?v=2">
 
 <!-- STRUCTURED DATA. 🚫 Only visible facts: the breadcrumb mirrors the crumb
      rendered at the top of this page. No rating, review, author, date or
@@ -131,7 +133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "@id": "https://kreated.dev/#organization"
         },
         "datePublished": "2026-09-01",
-        "dateModified": "2026-09-11",
+        "dateModified": "2026-09-09",
         "image": "https://kreated.dev/assets/img/og/resources-why-your-website-isnt-getting-leads.jpg",
         "inLanguage": "en-US"
       }
@@ -139,7 +141,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   </script>
 </head>
-<body>
+<body class="pg-art">
 <!-- GTM fallback for visitors without JavaScript. Paired with the head
      snippet above; it is the documented install and is not a second container. -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TH3JQWL8"
@@ -210,7 +212,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      Measurement). The audit paragraph below now says it covers most of this
      ground, which is true, rather than "the same six areas", which was not.
      ========================================================================== -->
-<section class="shero">
+<section class="pg-hero shero">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/resources/">RESOURCES</a>
@@ -230,18 +232,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            words change, and change dateModified in the JSON-LD with it. -->
       <p class="byline">By <a class="ilink" href="/about/">Skyler Reyes</a>, founder of Kreated
         <span aria-hidden="true">&middot;</span> Published <time datetime="2026-09-01">September 1, 2026</time>
-        <span aria-hidden="true">&middot;</span> Updated <time datetime="2026-09-11">September 11, 2026</time></p>
+        <span aria-hidden="true">&middot;</span> Updated <time datetime="2026-09-09">September 9, 2026</time></p>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l ans-sec">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">The short answer</h2>
-      <p class="lgrid__note">Before the detail.</p>
-    </div>
-    <div class="prose">
+    <div class="ans"><svg class="ans__mark" viewBox="0 0 48 48" aria-hidden="true"><g transform="translate(4,4) scale(0.1120) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></svg><p class="kx-chip">The short answer</p><div class="prose">
       <p><b>A website that gets visitors and produces no calls is failing at one of
         six things: what it says, how someone contacts you, how it behaves on a
         phone, whether a stranger trusts it, whether the right people find it at
@@ -249,19 +247,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p>They are not equally likely, and they are not equally expensive to fix.
         The mistake that costs owners the most money is assuming it is the first
         thing they can see, which is usually the design.</p>
-    </div>
-  </div>
+    </div></div></div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
+    <header class="bx-head"><h2 class="bx-h">The six, and how each one fails</h2><p class="bx-sub">In roughly the order they cost work.</p></header>
     <div>
-      <h2 class="sec__h">The six, and how each one fails</h2>
-      <p class="lgrid__note">In roughly the order they cost work.</p>
-    </div>
-    <div>
-      <ul class="who" role="list">
-        <li><b>1. Clarity, what the business actually does</b>
+      <ul class="who who--num" role="list">
+        <li><i class="art-n" aria-hidden="true">1</i><b>Clarity: what the business actually does</b>
           <span>A visitor decides in a few seconds whether they are in the right
             place. A landscaper whose homepage says &ldquo;transforming outdoor
             spaces&rdquo; and never says the words retaining wall, drainage or
@@ -269,26 +263,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             promises &ldquo;comprehensive care&rdquo; and never says emergency
             appointments or implants. Most visitors will not work it out. This is the
             most common failure and the cheapest to fix, because it is words.</span></li>
-        <li><b>2. The path to contacting you</b>
+        <li><i class="art-n" aria-hidden="true">2</i><b>The path to contacting you</b>
           <span>Count the taps between landing and reaching you. If the number is
             in an image, if the form asks for a budget range before a name, if the
             only option is email when the job is urgent, the visit ends. A
             plumbing emergency at 9pm does not fill in a contact form.</span></li>
-        <li><b>3. How it behaves on a phone</b>
+        <li><i class="art-n" aria-hidden="true">3</i><b>How it behaves on a phone</b>
           <span>Most local service traffic is mobile. Text that needs pinching, a
             menu that will not close, a button under a sticky bar. This one is easy
             to miss because owners check their own site on a laptop.</span></li>
-        <li><b>4. Whether a stranger trusts you</b>
+        <li><i class="art-n" aria-hidden="true">4</i><b>Whether a stranger trusts you</b>
           <span>Referrals arrive already trusting you. Search traffic does not. No
             photographs of your own work, no reviews, no named person, no license or insurance detail where the trade expects it, no
             credentials where a practice or a firm should show them, and a careful
             buyer keeps looking.</span></li>
-        <li><b>5. Whether the right people find it</b>
+        <li><i class="art-n" aria-hidden="true">5</i><b>Whether the right people find it</b>
           <span>The site may be fine and simply invisible for the searches that
             matter. One page covering nine services, no page naming the towns you
             cover, or a Google listing that disagrees with the site. This is the
             failure that looks like a website problem and is not.</span></li>
-        <li><b>6. Technical friction</b>
+        <li><i class="art-n" aria-hidden="true">6</i><b>Technical friction</b>
           <span>Slow loading, pages that cannot be read properly by search
             engines, a contact form that has been quietly failing for months.
             Rarer than owners fear, but genuinely fatal when present.</span></li>
@@ -297,12 +291,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Why owners usually guess wrong</h2>
-      <p class="lgrid__note">The visible problem is not usually the expensive one.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">Why owners usually guess wrong</h2><p class="bx-sub">The visible problem is not usually the expensive one.</p></header>
     <div class="prose">
       <p>Design is the only one of the six you can see without checking anything.
         So when the phone is quiet, the site looking dated is the explanation that
@@ -316,18 +307,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         expense, which is the single most common way local businesses waste money
         on a website.</p>
       <p>The distinction is worth being sure about before spending, and it is not
-        something you can settle by looking at your own site. You already know what
-        it means.</p>
+        something you can settle by looking at your own site. </p>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">How to find out which one is yours</h2>
-      <p class="lgrid__note">Without guessing, and without a call.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">How to find out which one is yours</h2><p class="bx-sub">Without guessing, and without a call.</p></header>
     <div class="prose">
       <p>The <a class="ilink" href="/free-website-audit/">Free Website Audit</a>
         reads your site and reports across six areas that cover most of the ground
@@ -345,12 +332,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">If it turns out to be visibility</h2>
-      <p class="lgrid__note">Two different fixes, often confused.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">If it turns out to be visibility</h2><p class="bx-sub">Two different fixes, often confused.</p></header>
     <div class="prose">
       <p>Being hard to find splits into two pieces of work.
         <a class="ilink" href="/services/google-business-profile/">Google Business

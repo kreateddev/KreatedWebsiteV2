@@ -84,6 +84,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=12">
+<link rel="stylesheet" href="/assets/ui/tby.css?v=1">
+<link rel="stylesheet" href="/assets/ui/system.css?v=24">
 
 <!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
      🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
@@ -205,7 +207,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "name": "How long does a redesign take?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Most website projects take about 2–4 weeks, depending on scope, feedback, and how quickly we receive the content and assets needed to build. A redesign sits in the same range, and often at the shorter end when a good amount of the existing content survives."
+              "text": "Most website projects take about 1–2 weeks, depending on scope, feedback, and how quickly the content and assets arrive. A redesign sits in the same range, and often at the shorter end when a good amount of the existing content survives."
             }
           },
           {
@@ -307,30 +309,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      The service line is the homepage's approved Services 02 description,
      verbatim. No second explanatory paragraph.
      ========================================================================== -->
-<section class="shero">
+<!-- PILOT: hero pattern chosen 2026-09-17 (Local SEO option C) -->
+<section class="shero hx-final">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/services/">SERVICES</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">WEBSITE REDESIGN</span>
     </nav>
-
-    <h1 class="shero__h wr__h"><span class="wr__held">Website</span> <span>Redesign</span></h1>
-
-    <div class="shero__foot">
-      <p class="shero__fact">Your current site improved or replaced, keeping what
-        already works for you.</p>
-    </div>
-
-      <!-- 🚫 CLOSING LINE — RETIRED 2026-09-02, owner decision. The slot and its
-       markup are gone from every page, including the one on /about/ that had a
-       real sentence in it. Do not reintroduce it: this is not a deferred slot
-       waiting on copy any more, it is a removed component. The .close__row
-       below is the conversion element and stays. -->
-
-    <div class="close__row">
-      <a class="close__go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
-      <a class="close__alt" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    <div class="hx-split hx-split--scene">
+      <div>
+        <h1 class="hx-h hx-h--left">Website Redesign</h1>
+        <p class="hx-sub hx-sub--left">Your current site improved or replaced, keeping what already works for you.</p>
+        <div class="hx-btns">
+          <a class="hx-btn hx-btn--go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+          <a class="hx-btn" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+        </div>
+      </div>
+      <div class="hx-scene"><svg viewBox="0 0 200 150" class="scene" aria-hidden="true"><defs><filter id="sh" x="-30%" y="-40%" width="160%" height="220%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0B1640" flood-opacity=".12"/></filter></defs><g filter="url(#sh)"><rect x="14" y="26" width="80" height="100" rx="9" fill="#FFFFFF"/></g><rect x="22" y="40" width="40" height="6" rx="3" fill="#C9CEDC"/><rect x="22" y="52" width="64" height="3" rx="1.5" fill="#C9CEDC"/><rect x="22" y="58" width="50" height="3" rx="1.5" fill="#C9CEDC"/><rect x="22" y="64" width="58" height="3" rx="1.5" fill="#C9CEDC"/><rect x="22" y="72" width="64" height="26" rx="3" fill="#E6E8EF"/><rect x="22" y="104" width="30" height="3" rx="1.5" fill="#C9CEDC"/><rect x="58" y="104" width="28" height="3" rx="1.5" fill="#C9CEDC"/><rect x="22" y="112" width="54" height="3" rx="1.5" fill="#C9CEDC"/><g filter="url(#sh)"><rect x="96" y="16" width="92" height="112" rx="10" fill="#FFFFFF"/></g><rect x="96" y="16" width="92" height="16" rx="10" fill="#EEF2FF"/><rect x="96" y="26" width="92" height="6" rx="0" fill="#EEF2FF"/><circle cx="106" cy="24" r="2.4" fill="#C9CEDC"/><circle cx="114" cy="24" r="2.4" fill="#C9CEDC"/><circle cx="122" cy="24" r="2.4" fill="#C9CEDC"/><rect x="106" y="40" width="50" height="7" rx="3.5" fill="#0B1640"/><rect x="106" y="52" width="70" height="4" rx="2.0" fill="#C9CEDC"/><rect x="106" y="62" width="32" height="11" rx="5.5" fill="#0A47F0"/><rect x="106" y="82" width="72" height="34" rx="6" fill="#DCE4FF"/><g filter="url(#sh)"><circle cx="95" cy="76" r="13" fill="#0A47F0"/></g><path d="M89,76 h11 m-4,-4.5 l4.5,4.5 -4.5,4.5" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>
   </div>
 </section>
@@ -345,9 +341,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      is not on the site, and remains unconfirmed. Do not read one as the other.
      🚫 Do not add a fourth "client" here that is not one. Morrow is a concept
      and does not belong in a trusted-by row. -->
-<section class="tby" aria-label="Clients">
+<section class="tby" aria-label="Recent work">
   <div class="wrap">
-    <p class="tby__lab">Trusted by</p>
+    <p class="tby__lab">Recent work</p>
     <ul class="tby__list">
       <li class="tby__item tby__item--llec"><a class="tby__link" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">
         <img src="/assets/img/clients/llec-wordmark.svg" alt="Leak Locators East Coast" width="460" height="30" loading="lazy" decoding="async"></a></li>
@@ -369,12 +365,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      with their date attached.
      ========================================================================== -->
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What it is</h2>
-      <p class="lgrid__note">Before any of the detail.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">What it is</p><h2 class="bx-h">Keep what works, <em>rebuild what doesn&rsquo;t</em></h2></header>
     <div class="prose">
       <p><b>A redesign improves or replaces a website that already exists,
         keeping what is already working for you and rebuilding what is not.</b></p>
@@ -388,13 +381,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">What carries over</p><h2 class="bx-h">Kept, moved, <em>or rebuilt</em></h2><p class="bx-sub">The starting point is the site you have, not a blank page.</p></header><ul class="bx-deliv" role="list"><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M9,24 H27 L36,33 V51 Q36,56 31,56 H9 Q4,56 4,51 V29 Q4,24 9,24Z" fill="#D5DFFF"/><rect x="10" y="32" width="14" height="3" rx="1.5" fill="#7F9CFF"/><rect x="10" y="39" width="20" height="3" rx="1.5" fill="#7F9CFF"/><path d="M31,6 H51 L60,15 V35 Q60,40 55,40 H31 Q26,40 26,35 V11 Q26,6 31,6Z" fill="#0A47F0"/><rect x="32" y="14" width="14" height="3" rx="1.5" fill="#FFFFFF"/><rect x="32" y="21" width="22" height="3" rx="1.5" fill="#FFFFFF" opacity=".7"/><rect x="32" y="29" width="16" height="5" rx="2.5" fill="#FFFFFF"/><path d="M12,18 C12,9 18,6 24,6" stroke="#7F9CFF" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M20,1 L26,6 L20,11" stroke="#7F9CFF" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>What already works, kept</b><span>The pages earning attention, the content that is already correct, the addresses those pages live at.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M10,6 H53 L58,11 V16 Q58,20 54,20 H10 Q6,20 6,16 V10 Q6,6 10,6Z" fill="#0A47F0"/><circle cx="15" cy="13" r="3.5" fill="#FFFFFF"/><rect x="24" y="11" width="26" height="4" rx="2" fill="#FFFFFF"/><path d="M10,24 H53 L58,29 V34 Q58,38 54,38 H10 Q6,38 6,34 V28 Q6,24 10,24Z" fill="#D5DFFF"/><circle cx="15" cy="31" r="3.5" fill="#7F9CFF"/><rect x="24" y="29" width="20" height="4" rx="2" fill="#7F9CFF"/><path d="M10,42 H53 L58,47 V52 Q58,56 54,56 H10 Q6,56 6,52 V46 Q6,42 10,42Z" fill="#D5DFFF"/><circle cx="15" cy="49" r="3.5" fill="#7F9CFF"/><rect x="24" y="47" width="14" height="4" rx="2" fill="#7F9CFF"/></svg><div><b>Addresses kept, redirects set</b><span>Where a page is merged or replaced, a redirect points the old address at the new one.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M23,14 H49 L58,23 V53 Q58,58 53,58 H23 Q18,58 18,53 V19 Q18,14 23,14Z" fill="#D5DFFF"/><path d="M11,6 H37 L46,15 V45 Q46,50 41,50 H11 Q6,50 6,45 V11 Q6,6 11,6Z" fill="#0A47F0"/><rect x="12" y="14" width="16" height="12" rx="3" fill="#FFFFFF"/><rect x="12" y="32" width="26" height="3" rx="1.5" fill="#FFFFFF" opacity=".7"/><rect x="12" y="39" width="18" height="3" rx="1.5" fill="#FFFFFF" opacity=".7"/><circle cx="52" cy="50" r="7" fill="#7F9CFF"/></svg><div><b>Content edited, not rewritten</b><span>Where words genuinely have to be made rather than migrated, that is scoped and priced on its own.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M21,18 H49 L58,27 V51 Q58,56 53,56 H21 Q16,56 16,51 V23 Q16,18 21,18Z" fill="#D5DFFF"/><path d="M11,8 H39 L48,17 V41 Q48,46 43,46 H11 Q6,46 6,41 V13 Q6,8 11,8Z" fill="#0A47F0"/><rect x="12" y="16" width="14" height="3" rx="1.5" fill="#FFFFFF"/><rect x="12" y="23" width="24" height="3" rx="1.5" fill="#FFFFFF" opacity=".7"/><rect x="12" y="31" width="12" height="9" rx="2.5" fill="#FFFFFF"/><rect x="27" y="31" width="15" height="9" rx="2.5" fill="#7F9CFF"/><circle cx="52" cy="50" r="7" fill="#7F9CFF"/><circle cx="52" cy="50" r="2.6" fill="#FFFFFF"/></svg><div><b>A new design and build</b><span>Designed and built by the same person, responsive from the start.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><rect x="6" y="34" width="12" height="24" rx="3" fill="#D5DFFF"/><rect x="24" y="22" width="12" height="36" rx="3" fill="#7F9CFF"/><path d="M45,8 H50 L56,14 V55 Q56,58 53,58 H45 Q42,58 42,55 V11 Q42,8 45,8Z" fill="#0A47F0"/></svg><div><b>Measurement wired in</b><span>Form submissions and phone taps recorded as conversions before launch.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><rect x="4" y="18" width="46" height="26" rx="13" fill="#D5DFFF"/><rect x="12" y="28" width="18" height="5" rx="2.5" fill="#7F9CFF"/><circle cx="42" cy="30" r="11" fill="none" stroke="#0A47F0" stroke-width="6"/><path d="M50,38 L59,47" stroke="#0A47F0" stroke-width="7" stroke-linecap="round"/></svg><div><b>A careful launch</b><span>The avoidable mistakes planned out: changed addresses, broken internal links, crawling blocked at launch.</span></div></li></ul><p class="bx-note">Where the brand itself is the problem, that is a separate piece of work with its own scope: <a class="ilink" href="/services/brand-strategy/">brand strategy and identity</a>, which can run alongside a build or on its own.</p>
+  </div>
+</section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">How it runs</p><h2 class="bx-h">The same shape as <em>any build here</em></h2><p class="bx-sub">Scope first, in writing: what the site has to do, which pages exist, and what it costs.</p></header><div class="bx-when"><p>Typical timeline: 1&ndash;2 weeks <small>often at the shorter end when much of the content survives</small></p></div><ol class="bx-steps" style="--n:6" role="list"><li><i class="bx-ph">Decide</i><b>Scope, in writing, first</b><span>What the site has to do, which pages exist and what each one is for.</span></li><li><i class="bx-ph">Build</i><b>Structure before surface</b><span>The page map and the path to contacting you, settled before any design.</span></li><li><i class="bx-ph">Build</i><b>Design and build together</b><span>Designed and built by the same person, so what is drawn is what ships.</span></li><li><i class="bx-ph">Build</i><b>Copy worked through with you</b><span>Your wording tidied, with headlines and calls to action written for you.</span></li><li><i class="bx-ph">Verify</i><b>Measurement wired in</b><span>Form submissions and phone taps recorded as conversions before launch.</span></li><li><i class="bx-ph">Verify</i><b>QA, then launch</b><span>Checked across real screen sizes and browsers, search-ready from day one.</span></li></ol><p class="bx-note">Each step sits inside one of the five in <a class="ilink" href="/method/">the Method</a>.</p><p class="bx-note"><a class="ilink" href="/method/">The steps, and where you sign off</a>. Figures are on the <a class="ilink" href="/pricing/">pricing page</a>, with what moves the number in either direction.</p>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">Compared</p><h2 class="bx-h">Redesign, <em>or start over</em></h2></header><div class="bx-cmp"><div class="pv-tablewrap"><table class="pv-table"><thead><tr><th scope="col"></th><th scope="col">Start over</th><th scope="col">Redesign</th></tr></thead><tbody><tr><th scope="row">Starting point</th><td>A blank page</td><td>The site you already have</td></tr><tr><th scope="row">What is kept</th><td>Nothing by default</td><td>Pages earning attention, correct content, existing addresses, the recognition in your mark</td></tr><tr><th scope="row">Best when</th><td>There is nothing worth keeping, or nothing there at all</td><td>The bones are sound and the surface is tired</td></tr></tbody></table></div><p class="pv-table__note" style="text-align:center">No site yet? That is <a class="ilink" href="/services/web-design/">web design and development</a>.</p></div>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <div class="bx-cta"><div class="hx-btns"><a class="hx-btn hx-btn--go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a><a class="hx-btn" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a></div><p>Every project is scoped and priced in writing before it begins.</p></div>
+  </div>
+</section>
+
+
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">When a redesign is the right call</h2>
-      <p class="lgrid__note">And when it is not.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">When a redesign is <em>the right call</em></h2><p class="bx-sub">And when it is not.</p></header>
     <div class="prose">
       <p><b class="lin">The site no longer matches the business.</b> Something that was fine
         to launch with and now argues against the quality of the work it is supposed
@@ -402,6 +416,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p><b class="lin">It cannot carry what you need to add.</b> Service pages, a location
         page, a proper contact path, or the structure that search work depends on.
         If the site cannot hold those, adding them is the more expensive route.</p>
+      <details class="more" open><summary>Read more</summary>
       <p><b class="lin">It is not findable and the reasons are structural.</b> Sometimes
         visibility is a content and profile problem on a sound site, in which case
         <a class="ilink" href="/services/local-seo/">local SEO</a> is the cheaper
@@ -411,53 +426,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p><b class="lin">Not because it looks dated to you.</b> A site that is working is
         allowed to be plain. If nothing is broken and nothing is missing, a redesign
         is a discretionary purchase and will be described as one.</p>
-    </div>
+    </details></div>
   </div>
 </section>
 
-<section class="sec">
-  <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What carries over</h2>
-      <p class="lgrid__note">Recognition is an asset, not a starting point to discard.</p>
-    </div>
-    <div class="prose">
-      <p>A redesign that throws away everything spends the recognition you have
-        already paid for. Where the mark, the name and the way people already
-        identify you are working, they carry over. Where the brand itself is the
-        problem, that is a separate piece of work with its own scope &mdash; see
-        <a class="ilink" href="/services/brand-strategy/">brand strategy and
-        identity</a>, which can run alongside a build or entirely on its own.</p>
-      <p>Content usually carries over too, edited rather than rewritten. Where the
-        words genuinely have to be made rather than migrated, that is scoped and
-        priced as its own item rather than absorbed silently.</p>
-    </div>
-  </div>
-</section>
 
-<section class="sec">
-  <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">How the engagement runs</h2>
-      <p class="lgrid__note">The same shape as any build here.</p>
-    </div>
-    <div class="prose">
-      <p>Scope first, in writing: what the site has to do, which pages exist,
-        what each one is for, and what it costs. Structure decided late is the
-        expensive kind, so it is settled before design starts. <a class="ilink" href="/method/">The five steps, and where you sign off</a>.</p>
-      <p>Websites typically take two to four weeks depending on scope, feedback and
-        how quickly content and assets arrive. Payment is 50% to start and 50%
-        before launch. After the final payment the finished site and the design and
-        content created for the project are yours, and you can keep working on it
-        with or without Kreated.</p>
-      <p>Every site launches search ready and structured so its information can be
-        read correctly by people and by the systems that summarize businesses. That
-        is a build standard, not an add-on.</p>
-      <p>Figures are published on the <a class="ilink" href="/pricing/">pricing
-        page</a>, along with what moves the number in either direction.</p>
-    </div>
-  </div>
-</section>
+
+
 
 <!-- ⚠ THESE ARE THE PAGE'S OWN SCHEMA QUESTIONS, RENDERED. Before 2026-09-06
      this page declared FAQPage structured data carrying these eight-to-ten
@@ -478,12 +453,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      not add Morrow: it is a concept, not a client. /services/answer-engine-
      optimization/ deliberately has NO block here, because no engagement
      included AEO. An empty slot is correct where the evidence is empty. -->
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Who this was <em>built for</em></h2>
-      <p class="lgrid__note">A site that existed and was rebuilt.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Built in</p><h2 class="bx-h">Who this was <em>built for</em></h2><p class="bx-sub">A site that existed and was rebuilt.</p></header>
     <div>
       <div class="cprev">
       <article class="cprev__item">
@@ -501,20 +473,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec faqs__sec">
+
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">Before and after</p><h2 class="bx-h">Rare Raleigh, <em>rebuilt</em></h2><p class="bx-sub">The same business, before the redesign and after it.</p></header><div class="bx-ba"><figure><img src="/assets/img/proof/rr-before.jpg" alt="The Rare Raleigh Restoration website before the redesign" loading="lazy"><figcaption>Before</figcaption></figure><figure><img src="/assets/img/proof/rr-desktop-v2.jpg" alt="The Rare Raleigh Restoration website after the redesign" width="1600" height="1000" loading="lazy"><figcaption>After</figcaption></figure></div><figure class="bx-review"><blockquote><p>&ldquo;They listened to exactly what we wanted, offered helpful suggestions, and created a website that represents our company perfectly.&rdquo;</p></blockquote><figcaption><b>Keely B.</b><span>CFO, Rare Raleigh Restoration</span><small>Published Google review</small></figcaption><details><summary>Read the full review</summary><p>We had an excellent experience working with Kreated on our company’s new website. Before making a decision, we researched and compared several other website designers, and Kreated offered the best combination of quality and affordability. Communication was excellent throughout the entire process, and they were responsive, professional, and easy to work with. They listened to exactly what we wanted, offered helpful suggestions, and created a website that represents our company perfectly. We couldn’t be happier with the finished product and highly recommend Kreated to any business looking for a professional, modern, and affordable website!</p></details></figure>
+  </div>
+</section>
+<section class="sec faqs__sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div><h2 class="sec__h">Questions</h2></div>
+    <header class="bx-head"><p class="kx-chip">Questions</p><h2 class="bx-h">Redesigns, <em>answered</em></h2></header>
     <div class="faqs">
       <details>
         <summary>Will I lose the pages I already rank for?</summary>
         <div class="faqs__a">
-          <p>Pages worth keeping keep their addresses. Where a page is merged or replaced, a redirect points the old address at the new one so existing links still resolve. What is deliberately not promised is a search outcome. No before-and-after ranking or traffic result is documented for any project here, so this page does not claim one.</p>
+          <p>Pages worth keeping keep their addresses. Where a page is merged or replaced, a redirect points the old address at the new one so existing links still resolve. What is deliberately not promised is a search outcome. No project here claims a ranking or traffic result caused by a redesign, so this page does not claim one.</p>
         </div>
       </details>
       <details>
         <summary>Can you keep the copy we already have?</summary>
         <div class="faqs__a">
-          <p>Where it earns its place, yes. And that is usually more of it than owners expect. Existing wording gets tidied and reorganised rather than replaced for the sake of it. What tends to change is the order, the headings and the calls to action.</p>
+          <p>Where it earns its place, yes. And that is usually more of it than owners expect. Existing wording gets tidied and reorganized rather than replaced for the sake of it. What tends to change is the order, the headings and the calls to action.</p>
         </div>
       </details>
       <details>
@@ -544,7 +522,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <details>
         <summary>How long does a redesign take?</summary>
         <div class="faqs__a">
-          <p>Most website projects take about 2&ndash;4 weeks, depending on scope, feedback, and how quickly we receive the content and assets needed to build. A redesign sits in the same range, and often at the shorter end when a good amount of the existing content survives.</p>
+          <p>Most website projects take about 1&ndash;2 weeks, depending on scope, feedback, and how quickly the content and assets arrive. A redesign sits in the same range, and often at the shorter end when a good amount of the existing content survives.</p>
         </div>
       </details>
       <details>
@@ -569,26 +547,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Where to go next</h2>
-      <p class="lgrid__note">Depending on what you already have.</p>
-    </div>
-    <div class="prose">
-      <p>If you want to know where the current site actually stands before
-        deciding anything, the <a class="ilink" href="/free-website-audit/">free
-        website audit</a> reports what it can genuinely check.</p>
-      <p>If there is no site at all, start at <a class="ilink"
-        href="/services/web-design/">web design and development</a> &mdash; and if
-        you are weighing that against doing it yourself,
-        <a class="ilink" href="/resources/custom-website-vs-website-builder/">a
-        website builder against a custom build</a> sets out the real trade-off.</p>
-      <p><a class="ilink" href="/work/rare-raleigh-restoration/">Rare Raleigh
-        Restoration</a> is a contractor site rebuilt to be found and believed
-        &mdash; the project record says what was delivered and what can be
-        checked.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Where to go next</p><h2 class="bx-h">Depending on what you <em>already have</em></h2></header>
+    <nav class="bx-next" aria-label="Where to go next"><a href="/free-website-audit/">Free website audit <i aria-hidden="true">&#8594;</i></a><a href="/services/web-design/">Web design and development <i aria-hidden="true">&#8594;</i></a><a href="/resources/custom-website-vs-website-builder/">A website builder against a custom build <i aria-hidden="true">&#8594;</i></a><a href="/work/rare-raleigh-restoration/">Rare Raleigh Restoration <i aria-hidden="true">&#8594;</i></a></nav>
   </div>
 </section>
 
@@ -665,5 +627,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      header and footer are tracked everywhere, not only where forms.js runs.
      Contacts nothing until an analytics container is present. -->
 <script src="/track.js?v=1" defer></script>
+<script id="xn-close">
+if(matchMedia('(max-width:720px)').matches){document.querySelectorAll('details.xn,details.more').forEach(function(d){d.removeAttribute('open')})}
+</script>
 </body>
 </html>

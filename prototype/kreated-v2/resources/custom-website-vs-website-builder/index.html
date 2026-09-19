@@ -66,6 +66,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=12">
+<link rel="stylesheet" href="/assets/ui/system.css?v=24">
+<link rel="stylesheet" href="/assets/ui/article.css?v=2">
 
 <!-- STRUCTURED DATA. 🚫 Only visible facts: the breadcrumb mirrors the crumb
      rendered at the top of this page. No rating, review, author, date or
@@ -131,7 +133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "@id": "https://kreated.dev/#organization"
         },
         "datePublished": "2026-09-02",
-        "dateModified": "2026-09-11",
+        "dateModified": "2026-09-09",
         "image": "https://kreated.dev/assets/img/og/resources-custom-website-vs-website-builder.jpg",
         "inLanguage": "en-US"
       }
@@ -139,7 +141,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   </script>
 </head>
-<body>
+<body class="pg-art">
 <!-- GTM fallback for visitors without JavaScript. Paired with the head
      snippet above; it is the documented install and is not a second container. -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TH3JQWL8"
@@ -208,7 +210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      targets the three-way "builder vs custom, for a local service business"
      framing instead. 🚫 Do not retitle it toward the platform comparison.
      ========================================================================== -->
-<section class="shero">
+<section class="pg-hero shero">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/resources/">RESOURCES</a>
@@ -229,18 +231,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            words change, and change dateModified in the JSON-LD with it. -->
       <p class="byline">By <a class="ilink" href="/about/">Skyler Reyes</a>, founder of Kreated
         <span aria-hidden="true">&middot;</span> Published <time datetime="2026-09-02">September 2, 2026</time>
-        <span aria-hidden="true">&middot;</span> Updated <time datetime="2026-09-11">September 11, 2026</time></p>
+        <span aria-hidden="true">&middot;</span> Updated <time datetime="2026-09-09">September 9, 2026</time></p>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l ans-sec">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">The short answer</h2>
-      <p class="lgrid__note">Three approaches, three different jobs.</p>
-    </div>
-    <div class="prose">
+    <div class="ans"><svg class="ans__mark" viewBox="0 0 48 48" aria-hidden="true"><g transform="translate(4,4) scale(0.1120) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></svg><p class="kx-chip">The short answer</p><div class="prose">
       <p><b>Build it yourself on a platform when the site mainly has to prove you
         exist and let someone call. Have someone implement a template when it
         needs to look considered but the structure is simple. Commission a custom
@@ -249,16 +247,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p>These are not quality tiers. They are different amounts of work for
         different jobs, and paying for the third when you needed the first is a
         common and avoidable mistake.</p>
-    </div>
-  </div>
+    </div></div></div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">When a builder is genuinely the right call</h2>
-      <p class="lgrid__note">Said by someone who sells the alternative.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">When a builder is genuinely the right call</h2><p class="bx-sub">Said by someone who sells the alternative.</p></header>
     <div>
       <ul class="who" role="list">
         <li><b>Almost all your work comes by referral</b>
@@ -282,12 +276,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Where a builder runs out</h2>
-      <p class="lgrid__note">Not quality. Structure.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">Where a builder runs out</h2><p class="bx-sub">Not quality. Structure.</p></header>
     <div class="prose">
       <p>The limit is rarely how it looks. Modern templates look fine, and a
         well-set-up platform site can be faster than a badly built custom one.</p>
@@ -305,12 +296,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What decides it</h2>
-      <p class="lgrid__note">Six questions, in the order that matters.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">What decides it</h2><p class="bx-sub">Six questions, in the order that matters.</p></header>
     <div>
       <ul class="excl" role="list">
         <li><b class="lin">How many things do you want to be found for?</b> One, a builder is
@@ -334,12 +322,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What Kreated does, and what it does not</h2>
-      <p class="lgrid__note">Stated so the recommendation above is checkable.</p>
-    </div>
+    <header class="bx-head"><h2 class="bx-h">What Kreated does, and what it does not</h2><p class="bx-sub">Stated so the recommendation above is checkable.</p></header>
     <div class="prose">
       <p>Kreated builds the custom option, so treat the section above as a
         designer arguing against their own sale where it is true. It is true. A

@@ -85,6 +85,7 @@
               '<p class="bo__what">' + esc(o.what) + '</p>' +
               '<p class="bo__does"><b>What it can do:</b> ' + esc(o.does) + '</p>' +
               '<p class="bo__fit"><b>Good fit if:</b> ' + esc(o.fit) + '</p>' +
+              (o.bundle ? '<p class="bo__deal">Bundle: buy ' + o.bundle.buy + ', get ' + o.bundle.free + ' free</p>' : '') +
               (o.note ? '<p class="bo__caveat">' + esc(o.note) + '</p>' : '') +
               (o.term ? '<p class="bo__caveat">' + esc(o.term) + '</p>' : '') +
             '</div>' +
@@ -139,7 +140,16 @@
              (l.floored ? '<span class="bs__note">Project minimum applies</span>' : '') +
              '</li>';
     });
+    (r.bundles || []).forEach(function (b) {
+      out += '<li class="bs__line bs__line--free">' +
+             '<span class="bs__nm">' + esc(b.name) + ' <i>+' + b.freeUnits + ' free</i></span>' +
+             '<span class="bs__amt">Free</span>' +
+             '<span class="bs__note">Bundle: ' + esc(b.rule) + ', a ' + Rec.money(b.value) + ' value</span></li>';
+    });
     out += '</ul>';
+    (r.nudges || []).forEach(function (n) {
+      out += '<p class="bs__nudge">Add one more ' + esc(n.name) + ' and one more comes free.</p>';
+    });
 
     /* ⚠ one-time and monthly are two totals, always. Never one number. */
     if (r.oneTime.low > 0) {

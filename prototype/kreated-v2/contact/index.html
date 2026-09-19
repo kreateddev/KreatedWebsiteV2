@@ -85,6 +85,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=12">
+<link rel="stylesheet" href="/assets/ui/system.css?v=24">
 
 <!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
      🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
@@ -198,14 +199,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
      ⚠ APPROVED FACTS, Skyler 2026-08-30, surfaced here because they are the
      two things a buyer wants to know before writing anything:
-        · Most website projects take about 2–4 weeks, depending on scope,
+        · Most website projects take about 1–2 weeks (updated by Skyler 2026-09-19; was 2–4), depending on scope,
           feedback, and how quickly content and assets arrive. NOT a guarantee.
         · 50% to start · 50% before launch.
      🚫 Nothing else. The brief is explicit that the contact page must not be
      buried in terms, and a phone-first strategy has not been approved — the
      number is in the footer, where it already lives.
      ========================================================================== -->
-<section class="shero ct__hero">
+<section class="pg-hero shero ct__hero">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/">KREATED</a>
@@ -223,19 +224,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec ct__paths">
+<section class="sec ct__paths bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Before you write</h2>
-      <p class="lgrid__note">The two questions that come up first, answered
-        here so they do not have to be asked.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Before you write</p><h2 class="bx-h">Two questions, <em>answered first</em></h2><p class="bx-sub">The two questions that come up first, answered here so they do not have to be asked.</p></header>
     <div>
       <dl class="ct__facts">
         <div>
           <dt>Typical website timeline</dt>
-          <dd>About 2&ndash;4 weeks, depending on scope, feedback, and how quickly
-            we receive the content and assets needed to build.</dd>
+          <dd>About 1&ndash;2 weeks, depending on scope, feedback, and how quickly the content and assets arrive.</dd>
         </div>
         <div>
           <dt>Payment</dt>
@@ -255,8 +251,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ct__col">
       <p class="ct__label">Option one</p>
       <h2 class="ct__h2">Start a project</h2>
-      <p class="ct__lead">For a website, a redesign, local search, the Google
-        Business Profile, or brand work, or some combination, which is the
+      <p class="ct__lead">For a website, a redesign, local search, the Google Business Profile, brand work, answer engine work or social media, or some combination, which is the
         usual case. Tell Skyler what the business does and what is going wrong.</p>
         <div class="formwrap" id="project">
       <!-- ⚠ EMPTY AND `hidden` IN THE MARKUP. The handoff script fills it only
@@ -308,6 +303,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       <option>Local SEO</option>
                       <option>Google Business Profile</option>
                       <option>Brand Strategy &amp; Identity</option>
+              <option>Answer Engine Optimization</option>
                       <option>Social Media Management</option>
                       <option>More than one of these</option>
                       <option>Not sure yet</option>

@@ -1,0 +1,19 @@
+/* PILOT: the client strip, quieter. "Recent work", smaller marks, less space.
+   Sits on every service page; the label promises less than "Trusted by". */
+.tby{padding:clamp(16px,1.8vw,22px) 0;border-bottom:1px solid color-mix(in srgb,var(--ink-1) 6%,transparent)}
+.tby__lab{font-size:10px!important;letter-spacing:.2em!important;color:var(--ink-4)!important;margin-bottom:10px!important}
+.tby__list{gap:18px 26px!important}
+.tby__item--llec{--w:118px}
+.tby__item--ls{--w:88px}
+.tby__item--rr{--w:96px}
+.tby__item img{opacity:.55}
+@media (max-width:760px){
+  .tby{padding:14px 0}
+  .tby__lab{text-align:center}
+  .tby__list{justify-content:center;gap:14px 20px!important}
+  .tby__item--llec{--w:96px}.tby__item--ls{--w:72px}.tby__item--rr{--w:78px}
+}
+/* centred at every width (Skyler, 2026-09-18) */
+.tby .wrap{text-align:center}
+.tby__lab{text-align:center}
+.tby__list{justify-content:center}

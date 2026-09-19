@@ -91,6 +91,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=12">
+<link rel="stylesheet" href="/assets/ui/tby.css?v=1">
+<link rel="stylesheet" href="/assets/ui/system.css?v=24">
 
 <!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
      🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
@@ -212,7 +214,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "name": "Can I see brand work you have delivered?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "LearnSmart Educational Consulting is the engagement with brand identity in its recorded scope, delivered and live, alongside the website, local SEO and analytics. The specimen above this section is Kreated’s own identity, shown because it is the one brand whose every decision is on record here."
+              "text": "LearnSmart Educational Consulting is the engagement with brand identity in its recorded scope, delivered and live, alongside the website, local SEO and analytics. "
             }
           },
           {
@@ -306,29 +308,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      exist — no team, no departments, no "our designers".
      Nothing on this page may claim a team or use "we" as a stand-in for staff.
      ========================================================================== -->
-<section class="shero">
+<!-- PILOT: hero pattern chosen 2026-09-17 (Local SEO option C) -->
+<section class="shero hx-final">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/services/">SERVICES</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">BRAND STRATEGY &amp; IDENTITY</span>
     </nav>
-
-    <h1 class="shero__h bs__h"><span>Brand Strategy</span><span><em class="amp">&amp;</em> Identity</span></h1>
-
-    <div class="shero__foot">
-      <p class="shero__fact">Brand strategy, positioning, identity.</p>
-    </div>
-
-      <!-- 🚫 CLOSING LINE — RETIRED 2026-09-02, owner decision. The slot and its
-       markup are gone from every page, including the one on /about/ that had a
-       real sentence in it. Do not reintroduce it: this is not a deferred slot
-       waiting on copy any more, it is a removed component. The .close__row
-       below is the conversion element and stays. -->
-
-    <div class="close__row">
-      <a class="close__go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
-      <a class="close__alt" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    <div class="hx-split hx-split--scene">
+      <div>
+        <h1 class="hx-h hx-h--left">Brand Strategy <em class="amp">&amp;</em> Identity</h1>
+        <p class="hx-sub hx-sub--left">Brand strategy, positioning, identity.</p>
+        <div class="hx-btns">
+          <a class="hx-btn hx-btn--go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+          <a class="hx-btn" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+        </div>
+      </div>
+      <div class="hx-scene"><svg viewBox="0 0 200 150" class="scene" aria-hidden="true"><defs><filter id="sh" x="-30%" y="-40%" width="160%" height="220%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0B1640" flood-opacity=".12"/></filter></defs><g filter="url(#sh)"><rect x="12" y="60" width="78" height="44" rx="6" fill="#FFFFFF"/><path d="M92,72 H112 L124,86 V104 H92Z" fill="#FFFFFF"/></g><path d="M98,76 H110 L118,86 H98Z" fill="#DCE4FF"/><circle cx="32" cy="106" r="9" fill="#0B1640"/><circle cx="32" cy="106" r="3.5" fill="#FFFFFF"/><circle cx="108" cy="106" r="9" fill="#0B1640"/><circle cx="108" cy="106" r="3.5" fill="#FFFFFF"/><circle cx="34" cy="80" r="9" fill="#0A47F0"/><path d="M34,72 l7,8 -7,8 -7,-8z" fill="#FFFFFF"/><rect x="48" y="76" width="32" height="5" rx="2.5" fill="#0B1640"/><rect x="48" y="85" width="22" height="3" rx="1.5" fill="#C9CEDC"/><g filter="url(#sh)" transform="rotate(-6 150 50)"><rect x="122" y="26" width="64" height="40" rx="6" fill="#FFFFFF"/></g><g transform="rotate(-6 150 50)"><circle cx="138" cy="46" r="8" fill="#0A47F0"/><path d="M138,39 l6,7 -6,7 -6,-7z" fill="#FFFFFF"/><rect x="151" y="41" width="26" height="4" rx="2" fill="#0B1640"/><rect x="151" y="49" width="18" height="3" rx="1.5" fill="#C9CEDC"/></g><g filter="url(#sh)"><rect x="134" y="84" width="54" height="40" rx="8" fill="#FFFFFF"/></g><circle cx="150" cy="104" r="9" fill="#0A47F0"/><path d="M150,96 l7,8 -7,8 -7,-8z" fill="#FFFFFF"/><rect x="164" y="100" width="18" height="3" rx="1.5" fill="#C9CEDC"/><rect x="164" y="107" width="12" height="3" rx="1.5" fill="#C9CEDC"/><rect x="158" y="124" width="4" height="18" fill="#C9CEDC"/></svg></div>
     </div>
   </div>
 </section>
@@ -343,9 +340,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      is not on the site, and remains unconfirmed. Do not read one as the other.
      🚫 Do not add a fourth "client" here that is not one. Morrow is a concept
      and does not belong in a trusted-by row. -->
-<section class="tby" aria-label="Clients">
+<section class="tby" aria-label="Recent work">
   <div class="wrap">
-    <p class="tby__lab">Trusted by</p>
+    <p class="tby__lab">Recent work</p>
     <ul class="tby__list">
       <li class="tby__item tby__item--llec"><a class="tby__link" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">
         <img src="/assets/img/clients/llec-wordmark.svg" alt="Leak Locators East Coast" width="460" height="30" loading="lazy" decoding="async"></a></li>
@@ -367,15 +364,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      with their date attached.
      ========================================================================== -->
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What it is</h2>
-      <p class="lgrid__note">Before any of the detail.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">What it is</p><h2 class="bx-h">What the business is, and <em>who it is for</em></h2></header>
     <div class="prose">
       <p><b>Brand strategy is deciding what the business is, who it is for and
-        what it says. Identity is the mark, the type, the colour and the rules that
+        what it says. Identity is the mark, the type, the color and the rules that
         carry that decision everywhere the business appears.</b></p>
       <p>For a contractor or a local business the identity is not a logo on a
         website. It is a truck, a yard sign, a quote document, a shirt, an invoice
@@ -384,50 +378,60 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
-
-<section class="sec">
-  <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Three levels, and the honest difference</h2>
-      <p class="lgrid__note">What each one is actually for.</p>
-    </div>
-    <div class="prose">
-      <p><b class="lin">A refresh.</b> The existing mark cleaned up or redrawn, keeping what
-        people already recognize. This is for a business that is already known
-        locally under its current mark: the recognition is an asset, and starting
-        over would spend it rather than build on it. It is not a new identity, and
-        if the mark should not stay recognizably itself, this is the wrong rung.</p>
-      <p><b class="lin">A new identity.</b> A logo system rather than a single lockup &mdash;
-        the versions you actually need for a sign, a truck, an invoice and a screen.
-        This is for a business changing what it is called, what it sells, or how
-        seriously it wants to be taken. It is also the right starting point when the
-        current mark is something made quickly years ago and tolerated since.</p>
-      <p><b class="lin">A full identity system.</b> Everything in a new identity, plus the
-        market and competitor research that stops the result being a matter of
-        taste. This suits a business with several services, several audiences, or
-        plans to hire people who will need to represent it.</p>
-      <p>Figures for all three are on the <a class="ilink"
-        href="/pricing/">pricing page</a>, with what each includes.</p>
-    </div>
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">The test</p><h2 class="bx-h">One mark, <em>everywhere it appears</em></h2><p class="bx-sub">A sign, a truck, an invoice and a screen should agree.</p></header><figure class="kx-fig" style="max-width:1000px;margin:0 auto"><div class="kx-scroll"><svg viewBox="0 0 1000 420" class="kx-diagram kx-diagram--h" role="img" aria-label="Before: the truck, invoice, website and sign each carry a different mark. After: all four carry the same mark"><defs>
+ <filter id="kxshh3308" x="-20%" y="-40%" width="140%" height="190%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0B1640" flood-opacity=".10"/></filter>
+ <linearGradient id="kxlineh3308" x1="0" x2="1"><stop offset="0" stop-color="#0A47F0" stop-opacity=".15"/><stop offset=".5" stop-color="#0A47F0" stop-opacity=".45"/><stop offset="1" stop-color="#0A47F0" stop-opacity=".15"/></linearGradient>
+ <radialGradient id="kxglowh3308"><stop offset="0" stop-color="#6E8FFF" stop-opacity=".35"/><stop offset="1" stop-color="#6E8FFF" stop-opacity="0"/></radialGradient>
+</defs><rect x="180" y="20" width="160" height="28" rx="6" fill="#fff" stroke="#DCE2F0"/><text x="260.0" y="39" text-anchor="middle" font-family="General Sans, system-ui" font-size="11.5" font-weight="600" letter-spacing="1.6" fill="#5E6480">FOUR VERSIONS</text><g filter="url(#kxshh3308)"><rect x="30" y="70" width="205" height="150" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="46" y="86" width="58" height="58" viewBox="0 0 64 64"><rect x="4" y="18" width="36" height="26" rx="4" fill="#D5DFFF"/><path d="M43,26 H53 L60,33 V41 Q60,44 57,44 H43 Q40,44 40,41 V29 Q40,26 43,26Z" fill="#0A47F0"/><circle cx="16" cy="48" r="7" fill="#0A47F0"/><circle cx="16" cy="48" r="2.5" fill="#FFFFFF"/><circle cx="48" cy="48" r="7" fill="#0A47F0"/><circle cx="48" cy="48" r="2.5" fill="#FFFFFF"/></svg><g transform="translate(193,90)"><circle cx="11" cy="11" r="11" fill="#7F9CFF"/></g><text x="48" y="200" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Truck</text><g filter="url(#kxshh3308)"><rect x="255" y="70" width="205" height="150" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="271" y="86" width="58" height="58" viewBox="0 0 64 64"><path d="M17,4 H42 L52,14 V55 Q52,60 47,60 H17 Q12,60 12,55 V9 Q12,4 17,4Z" fill="#D5DFFF"/><rect x="19" y="14" width="14" height="14" rx="3" fill="#0A47F0"/><rect x="19" y="40" width="26" height="4" rx="2" fill="#7F9CFF"/><rect x="19" y="48" width="16" height="4" rx="2" fill="#7F9CFF"/></svg><g transform="translate(418,90)"><rect x="0" y="3" width="24" height="16" rx="2" fill="#0B1640" opacity=".55"/></g><text x="273" y="200" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Invoice</text><g filter="url(#kxshh3308)"><rect x="30" y="240" width="205" height="150" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="46" y="256" width="58" height="58" viewBox="0 0 64 64"><path d="M9,8 H50 L60,18 V41 Q60,46 55,46 H9 Q4,46 4,41 V13 Q4,8 9,8Z" fill="#D5DFFF"/><rect x="12" y="16" width="20" height="12" rx="3" fill="#0A47F0"/><rect x="12" y="33" width="30" height="4" rx="2" fill="#7F9CFF"/><rect x="26" y="46" width="12" height="8" rx="1" fill="#7F9CFF"/><rect x="18" y="54" width="28" height="4" rx="2" fill="#7F9CFF"/></svg><g transform="translate(193,260)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#9DB2FF"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="48" y="370" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Website</text><g filter="url(#kxshh3308)"><rect x="255" y="240" width="205" height="150" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="271" y="256" width="58" height="58" viewBox="0 0 64 64"><path d="M9,8 H50 L60,18 V35 Q60,40 55,40 H9 Q4,40 4,35 V13 Q4,8 9,8Z" fill="#D5DFFF"/><rect x="12" y="18" width="22" height="12" rx="3" fill="#0A47F0"/><rect x="14" y="40" width="5" height="20" rx="2" fill="#7F9CFF"/><rect x="45" y="40" width="5" height="20" rx="2" fill="#7F9CFF"/></svg><g transform="translate(418,260)"><path d="M0,22 L12,0 L24,22z" fill="#0A47F0"/></g><text x="273" y="370" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Sign</text><rect x="680" y="20" width="160" height="28" rx="6" fill="#fff" stroke="#DCE2F0"/><text x="760.0" y="39" text-anchor="middle" font-family="General Sans, system-ui" font-size="11.5" font-weight="600" letter-spacing="1.6" fill="#5E6480">ONE IDENTITY</text><g filter="url(#kxshh3308)"><rect x="530" y="70" width="205" height="150" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="546" y="86" width="58" height="58" viewBox="0 0 64 64"><rect x="4" y="18" width="36" height="26" rx="4" fill="#D5DFFF"/><path d="M43,26 H53 L60,33 V41 Q60,44 57,44 H43 Q40,44 40,41 V29 Q40,26 43,26Z" fill="#0A47F0"/><circle cx="16" cy="48" r="7" fill="#0A47F0"/><circle cx="16" cy="48" r="2.5" fill="#FFFFFF"/><circle cx="48" cy="48" r="7" fill="#0A47F0"/><circle cx="48" cy="48" r="2.5" fill="#FFFFFF"/></svg><g transform="translate(693,90)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="548" y="200" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Truck</text><circle cx="709" cy="194" r="10" fill="#0A47F0"/><path d="M704,194 l3.5,3.5 7,-7" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g filter="url(#kxshh3308)"><rect x="755" y="70" width="205" height="150" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="771" y="86" width="58" height="58" viewBox="0 0 64 64"><path d="M17,4 H42 L52,14 V55 Q52,60 47,60 H17 Q12,60 12,55 V9 Q12,4 17,4Z" fill="#D5DFFF"/><rect x="19" y="14" width="14" height="14" rx="3" fill="#0A47F0"/><rect x="19" y="40" width="26" height="4" rx="2" fill="#7F9CFF"/><rect x="19" y="48" width="16" height="4" rx="2" fill="#7F9CFF"/></svg><g transform="translate(918,90)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="773" y="200" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Invoice</text><circle cx="934" cy="194" r="10" fill="#0A47F0"/><path d="M929,194 l3.5,3.5 7,-7" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g filter="url(#kxshh3308)"><rect x="530" y="240" width="205" height="150" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="546" y="256" width="58" height="58" viewBox="0 0 64 64"><path d="M9,8 H50 L60,18 V41 Q60,46 55,46 H9 Q4,46 4,41 V13 Q4,8 9,8Z" fill="#D5DFFF"/><rect x="12" y="16" width="20" height="12" rx="3" fill="#0A47F0"/><rect x="12" y="33" width="30" height="4" rx="2" fill="#7F9CFF"/><rect x="26" y="46" width="12" height="8" rx="1" fill="#7F9CFF"/><rect x="18" y="54" width="28" height="4" rx="2" fill="#7F9CFF"/></svg><g transform="translate(693,260)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="548" y="370" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Website</text><circle cx="709" cy="364" r="10" fill="#0A47F0"/><path d="M704,364 l3.5,3.5 7,-7" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g filter="url(#kxshh3308)"><rect x="755" y="240" width="205" height="150" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="771" y="256" width="58" height="58" viewBox="0 0 64 64"><path d="M9,8 H50 L60,18 V35 Q60,40 55,40 H9 Q4,40 4,35 V13 Q4,8 9,8Z" fill="#D5DFFF"/><rect x="12" y="18" width="22" height="12" rx="3" fill="#0A47F0"/><rect x="14" y="40" width="5" height="20" rx="2" fill="#7F9CFF"/><rect x="45" y="40" width="5" height="20" rx="2" fill="#7F9CFF"/></svg><g transform="translate(918,260)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="773" y="370" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Sign</text><circle cx="934" cy="364" r="10" fill="#0A47F0"/><path d="M929,364 l3.5,3.5 7,-7" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M478,210 h28 m-10,-10 l10,10 -10,10" stroke="#0A47F0" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 0 360 724" class="kx-diagram kx-diagram--v" role="img" aria-label="Before: the truck, invoice, website and sign each carry a different mark. After: all four carry the same mark"><defs>
+ <filter id="kxshv3308" x="-20%" y="-40%" width="140%" height="190%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0B1640" flood-opacity=".10"/></filter>
+ <linearGradient id="kxlinev3308" x1="0" x2="1"><stop offset="0" stop-color="#0A47F0" stop-opacity=".15"/><stop offset=".5" stop-color="#0A47F0" stop-opacity=".45"/><stop offset="1" stop-color="#0A47F0" stop-opacity=".15"/></linearGradient>
+ <radialGradient id="kxglowv3308"><stop offset="0" stop-color="#6E8FFF" stop-opacity=".35"/><stop offset="1" stop-color="#6E8FFF" stop-opacity="0"/></radialGradient>
+</defs><rect x="100" y="0" width="160" height="28" rx="6" fill="#fff" stroke="#DCE2F0"/><text x="180.0" y="19" text-anchor="middle" font-family="General Sans, system-ui" font-size="11.5" font-weight="600" letter-spacing="1.6" fill="#5E6480">FOUR VERSIONS</text><g filter="url(#kxshv3308)"><rect x="8" y="44" width="168" height="138" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="24" y="60" width="58" height="58" viewBox="0 0 64 64"><rect x="4" y="18" width="36" height="26" rx="4" fill="#D5DFFF"/><path d="M43,26 H53 L60,33 V41 Q60,44 57,44 H43 Q40,44 40,41 V29 Q40,26 43,26Z" fill="#0A47F0"/><circle cx="16" cy="48" r="7" fill="#0A47F0"/><circle cx="16" cy="48" r="2.5" fill="#FFFFFF"/><circle cx="48" cy="48" r="7" fill="#0A47F0"/><circle cx="48" cy="48" r="2.5" fill="#FFFFFF"/></svg><g transform="translate(134,64)"><circle cx="11" cy="11" r="11" fill="#7F9CFF"/></g><text x="26" y="162" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Truck</text><g filter="url(#kxshv3308)"><rect x="184" y="44" width="168" height="138" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="200" y="60" width="58" height="58" viewBox="0 0 64 64"><path d="M17,4 H42 L52,14 V55 Q52,60 47,60 H17 Q12,60 12,55 V9 Q12,4 17,4Z" fill="#D5DFFF"/><rect x="19" y="14" width="14" height="14" rx="3" fill="#0A47F0"/><rect x="19" y="40" width="26" height="4" rx="2" fill="#7F9CFF"/><rect x="19" y="48" width="16" height="4" rx="2" fill="#7F9CFF"/></svg><g transform="translate(310,64)"><rect x="0" y="3" width="24" height="16" rx="2" fill="#0B1640" opacity=".55"/></g><text x="202" y="162" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Invoice</text><g filter="url(#kxshv3308)"><rect x="8" y="194" width="168" height="138" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="24" y="210" width="58" height="58" viewBox="0 0 64 64"><path d="M9,8 H50 L60,18 V41 Q60,46 55,46 H9 Q4,46 4,41 V13 Q4,8 9,8Z" fill="#D5DFFF"/><rect x="12" y="16" width="20" height="12" rx="3" fill="#0A47F0"/><rect x="12" y="33" width="30" height="4" rx="2" fill="#7F9CFF"/><rect x="26" y="46" width="12" height="8" rx="1" fill="#7F9CFF"/><rect x="18" y="54" width="28" height="4" rx="2" fill="#7F9CFF"/></svg><g transform="translate(134,214)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#9DB2FF"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="26" y="312" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Website</text><g filter="url(#kxshv3308)"><rect x="184" y="194" width="168" height="138" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="200" y="210" width="58" height="58" viewBox="0 0 64 64"><path d="M9,8 H50 L60,18 V35 Q60,40 55,40 H9 Q4,40 4,35 V13 Q4,8 9,8Z" fill="#D5DFFF"/><rect x="12" y="18" width="22" height="12" rx="3" fill="#0A47F0"/><rect x="14" y="40" width="5" height="20" rx="2" fill="#7F9CFF"/><rect x="45" y="40" width="5" height="20" rx="2" fill="#7F9CFF"/></svg><g transform="translate(310,214)"><path d="M0,22 L12,0 L24,22z" fill="#0A47F0"/></g><text x="202" y="312" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Sign</text><rect x="100" y="380" width="160" height="28" rx="6" fill="#fff" stroke="#DCE2F0"/><text x="180.0" y="399" text-anchor="middle" font-family="General Sans, system-ui" font-size="11.5" font-weight="600" letter-spacing="1.6" fill="#5E6480">ONE IDENTITY</text><g filter="url(#kxshv3308)"><rect x="8" y="424" width="168" height="138" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="24" y="440" width="58" height="58" viewBox="0 0 64 64"><rect x="4" y="18" width="36" height="26" rx="4" fill="#D5DFFF"/><path d="M43,26 H53 L60,33 V41 Q60,44 57,44 H43 Q40,44 40,41 V29 Q40,26 43,26Z" fill="#0A47F0"/><circle cx="16" cy="48" r="7" fill="#0A47F0"/><circle cx="16" cy="48" r="2.5" fill="#FFFFFF"/><circle cx="48" cy="48" r="7" fill="#0A47F0"/><circle cx="48" cy="48" r="2.5" fill="#FFFFFF"/></svg><g transform="translate(134,444)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="26" y="542" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Truck</text><circle cx="150" cy="536" r="10" fill="#0A47F0"/><path d="M145,536 l3.5,3.5 7,-7" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g filter="url(#kxshv3308)"><rect x="184" y="424" width="168" height="138" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="200" y="440" width="58" height="58" viewBox="0 0 64 64"><path d="M17,4 H42 L52,14 V55 Q52,60 47,60 H17 Q12,60 12,55 V9 Q12,4 17,4Z" fill="#D5DFFF"/><rect x="19" y="14" width="14" height="14" rx="3" fill="#0A47F0"/><rect x="19" y="40" width="26" height="4" rx="2" fill="#7F9CFF"/><rect x="19" y="48" width="16" height="4" rx="2" fill="#7F9CFF"/></svg><g transform="translate(310,444)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="202" y="542" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Invoice</text><circle cx="326" cy="536" r="10" fill="#0A47F0"/><path d="M321,536 l3.5,3.5 7,-7" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g filter="url(#kxshv3308)"><rect x="8" y="574" width="168" height="138" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="24" y="590" width="58" height="58" viewBox="0 0 64 64"><path d="M9,8 H50 L60,18 V41 Q60,46 55,46 H9 Q4,46 4,41 V13 Q4,8 9,8Z" fill="#D5DFFF"/><rect x="12" y="16" width="20" height="12" rx="3" fill="#0A47F0"/><rect x="12" y="33" width="30" height="4" rx="2" fill="#7F9CFF"/><rect x="26" y="46" width="12" height="8" rx="1" fill="#7F9CFF"/><rect x="18" y="54" width="28" height="4" rx="2" fill="#7F9CFF"/></svg><g transform="translate(134,594)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="26" y="692" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Website</text><circle cx="150" cy="686" r="10" fill="#0A47F0"/><path d="M145,686 l3.5,3.5 7,-7" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><g filter="url(#kxshv3308)"><rect x="184" y="574" width="168" height="138" rx="16" fill="#fff" stroke="#E3E7F2"/></g><svg x="200" y="590" width="58" height="58" viewBox="0 0 64 64"><path d="M9,8 H50 L60,18 V35 Q60,40 55,40 H9 Q4,40 4,35 V13 Q4,8 9,8Z" fill="#D5DFFF"/><rect x="12" y="18" width="22" height="12" rx="3" fill="#0A47F0"/><rect x="14" y="40" width="5" height="20" rx="2" fill="#7F9CFF"/><rect x="45" y="40" width="5" height="20" rx="2" fill="#7F9CFF"/></svg><g transform="translate(310,594)"><g transform="translate(0,0) scale(0.0616) translate(-134.6,-125.6)" fill="#0A47F0"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g></g><text x="202" y="692" font-family="General Sans, system-ui" font-size="17" font-weight="500" fill="#0B1640">Sign</text><circle cx="326" cy="686" r="10" fill="#0A47F0"/><path d="M321,686 l3.5,3.5 7,-7" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M180,340 v26 m-10,-10 l10,10 10,-10" stroke="#0A47F0" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></figure>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">How it runs</p><h2 class="bx-h">Decided first, <em>then drawn</em></h2><p class="bx-sub">Strategy decides what the business is, who it is for and what it says. Identity carries that everywhere.</p></header><div class="bx-when"><p>Typical timeline: 2&ndash;4 weeks <small>depending on the level</small></p></div><ol class="bx-steps" style="--n:4" role="list"><li><i class="bx-ph">Understand &middot; Decide</i><b>Decide</b><span>What the business is, who it is for and what it says.</span></li><li><i class="bx-ph">Build</i><b>The mark</b><span>Cleaned up, redrawn or made, depending on the level.</span></li><li><i class="bx-ph">Build</i><b>Type and color</b><span>Settled, so every surface is built from one set of decisions.</span></li><li><i class="bx-ph">Build</i><b>Assets and guide</b><span>Exported in the formats printers ask for, with usage guidance.</span></li></ol><p class="bx-note">Each step sits inside one of the five in <a class="ilink" href="/method/">the Method</a>.</p>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><h2 class="bx-h">Three levels, <em>and the honest difference</em></h2><p class="bx-sub">Priced separately from the website on purpose.</p></header><div class="bx-plans "><article class="bx-plan"><p class="bx-plan__shape">Keep the recognition</p><h3>Brand Refresh</h3><p class="bx-plan__price">from $750<small></small></p><p class="bx-plan__what">The existing mark cleaned up or redrawn, keeping what people already recognize.</p><ul class="bx-plan__inc" role="list"><li>The mark cleaned up or redrawn</li><li>Typography and color settled</li><li>A short usage guide</li></ul></article><article class="bx-plan bx-plan--mid"><p class="bx-plan__shape">A real system</p><h3>Brand Identity</h3><p class="bx-plan__price">from $1,500<small></small></p><p class="bx-plan__what">A logo system, typography, color, a messaging foundation and the essential assets.</p><ul class="bx-plan__inc" role="list"><li>A logo system, not a single lockup</li><li>Typography and color systems</li><li>A messaging foundation</li></ul></article><article class="bx-plan"><p class="bx-plan__shape">Research first</p><h3>Full Identity System</h3><p class="bx-plan__price">from $2,500<small></small></p><p class="bx-plan__what">Everything in Brand Identity, plus research and positioning, an extended system and fuller guidance.</p><ul class="bx-plan__inc" role="list"><li>Research and positioning</li><li>An extended system</li><li>Fuller guidance</li></ul></article></div><p class="bx-swipe" aria-hidden="true">Swipe to compare &#8594;</p><p class="bx-note">Changing the look and the website together? <a class="ilink" href="/pricing/">Brand + Website</a> runs them as one project.</p>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <div class="bx-cta"><div class="hx-btns"><a class="hx-btn hx-btn--go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a><a class="hx-btn" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a></div><p>Every project is scoped and priced in writing before it begins.</p></div>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">Compared</p><h2 class="bx-h">Refresh, <em>or rebrand</em></h2></header><div class="bx-cmp"><div class="pv-tablewrap"><table class="pv-table"><thead><tr><th scope="col"></th><th scope="col">Refresh</th><th scope="col">New identity</th></tr></thead><tbody><tr><th scope="row">Best when</th><td>You are known locally under your current mark</td><td>The business has changed and the identity has not</td></tr><tr><th scope="row">What changes</th><td>The mark is cleaned up; type and color settled</td><td>The mark, the system and the messaging are made</td></tr><tr><th scope="row">Not a reason</th><td>Being bored of it</td><td>A quiet phone, which is usually visibility or conversion</td></tr></tbody></table></div><p class="pv-table__note" style="text-align:center"><a class="ilink" href="/resources/when-to-rebrand/">When a rebrand is worth doing</a> sets out the one test that settles it.</p></div>
+  </div>
+</section>
+
+
+
+
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What this is not</h2>
-      <p class="lgrid__note">Stated plainly, because it matters.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">What this is not</p><h2 class="bx-h">Stated <em>plainly</em></h2></header>
     <div class="prose">
-      <p><b class="lin">Not a rebrand campaign.</b> Announcing a new identity &mdash; the
+      <details class="xn xn--p" open><summary><b>Not a rebrand campaign.</b></summary><span>Announcing a new identity &mdash; the
         launch, the messaging around it, the sequencing &mdash; is a separate
-        decision and a separate piece of work.</p>
-      <p><b class="lin">Not a logo in isolation.</b> A single image with no system behind it
+        decision and a separate piece of work.</span></details>
+      <details class="xn xn--p" open><summary><b>Not a logo in isolation.</b></summary><span>A single image with no system behind it
         produces the situation this work exists to fix: a mark that works in one
-        place and is quietly redrawn by whoever needs it somewhere else.</p>
-      <p><b class="lin">Not required before a website.</b> Brand work can run alongside a build
+        place and is quietly redrawn by whoever needs it somewhere else.</span></details>
+      <details class="xn xn--p" open><summary><b>Not required before a website.</b></summary><span>Brand work can run alongside a build
         or entirely on its own. Where the two run together they are quoted together
-        but priced as two things, so you can see what you are buying.</p>
+        but priced as two things, so you can see what you are buying.</span></details>
     </div>
   </div>
 </section>
@@ -451,12 +455,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      not add Morrow: it is a concept, not a client. /services/answer-engine-
      optimization/ deliberately has NO block here, because no engagement
      included AEO. An empty slot is correct where the evidence is empty. -->
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Who this was <em>built for</em></h2>
-      <p class="lgrid__note">Built from the name outward, with no site to start from.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Built in</p><h2 class="bx-h">Who this was <em>built for</em></h2><p class="bx-sub">Built from the name outward, with no site to start from.</p></header>
     <div>
       <div class="cprev">
       <article class="cprev__item">
@@ -474,20 +475,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec faqs__sec">
+
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">Clients</p><h2 class="bx-h">In their <em>own words</em></h2><p class="bx-sub">Missy founded LearnSmart; the brand, the site and the words were made rather than migrated.</p></header><figure class="bx-review"><blockquote><p>&ldquo;We worked closely together deciding on how I wanted things worded, color schemes and pictures.&rdquo;</p></blockquote><figcaption><b>Missy B.</b><span>Founder, LearnSmart Educational Consulting and Academic Coaching</span><small>Published Google review</small></figcaption><details><summary>Read the full review</summary><p>Absolutely a wonderful experience from start to finish. Skyler helped me make my idea come to life! He worked with me every step of the way, and asked my input at every turn. We worked closely together deciding on how I wanted things worded, color schemes and pictures. He listened to my preferences and changed things as soon as I asked. He was very timely in his response, never letting more than a couple of hours pass without a response, any day of the week. His work Is extremely professional and he is very knowledgeable. From start to finish, it only took two weeks to fully develop my site and have it up and running. I could not be happier with how my new website and branding/logo turned out. I would recommend him over and over again!</p></details></figure>
+  </div>
+</section>
+<section class="sec faqs__sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div><h2 class="sec__h">Questions</h2></div>
+    <header class="bx-head"><p class="kx-chip">Questions</p><h2 class="bx-h">Branding, <em>answered</em></h2></header>
     <div class="faqs">
       <details>
         <summary>Do I need branding, or just a logo?</summary>
         <div class="faqs__a">
-          <p>If you need one file for one purpose, you need a logo. If the same business has to look like itself on a website, an estimate, a van and a sign, you need the decisions around the logo too, the type, the color, and the rules for using them. A Brand Refresh from $750 is the smaller version of that.</p>
+          <p>If you need one file for one purpose, you need a logo. If the same business has to look like itself on a website, an estimate, a van and a sign, you need the decisions around the logo too: the type, the color, and the rules for using them. A Brand Refresh from $750 is the smaller version of that.</p>
         </div>
       </details>
       <details>
         <summary>Can I get branding and a website together?</summary>
         <div class="faqs__a">
-          <p>Yes, and it is usually the cheaper order of operations. Brand + Website typically runs $3,950&ndash;$5,950+ depending on brand scope, website package and copy needs. Doing the identity first means the site is built from settled decisions rather than provisional ones.</p>
+          <p>Yes, and it is usually the better order of operations. Brand + Website typically runs $3,950&ndash;$5,950+ depending on brand scope, website package and copy needs. Doing the identity first means the site is built from settled decisions rather than provisional ones.</p>
         </div>
       </details>
       <details>
@@ -505,19 +512,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <details>
         <summary>How is this priced, and how is it paid?</summary>
         <div class="faqs__a">
-          <p>Brand Refresh from $750, Brand Identity from $1,500, Full Identity System from $2,500+, and Brand + Website typically $3,950&ndash;$5,950+. Where branding runs alongside a website project, the standard terms apply: 50% to start and 50% before launch, with larger or custom engagements using milestones defined in the proposal. Everything is scoped and priced in writing first.</p>
+          <p>Brand Refresh from $750, Brand Identity from $1,500, Full Identity System from $2,500, and Brand + Website typically $3,950&ndash;$5,950+. Where branding runs alongside a website project, the standard terms apply: 50% to start and 50% before launch, with larger or custom engagements using milestones defined in the proposal. Everything is scoped and priced in writing first.</p>
         </div>
       </details>
       <details>
         <summary>Do I own the finished identity, and do I get the source files?</summary>
         <div class="faqs__a">
-          <p>After final payment you own the finished work and the design and content created specifically for you. Ask, and you get the project files that go with it, the vector logo files, the working files, and the exports you need to hand to a printer or a sign maker. Two things cannot come with them, and no studio can hand them over: commercial typefaces and stock imagery are licensed to a named party, so those licences are bought in your name rather than transferred. And Kreated keeps its own reusable internal systems, tooling and components. Nothing specific to your business.</p>
+          <p>After final payment you own the finished work and the design and content created specifically for you. Ask, and you get the project files that go with it: the vector logo files, the working files, and the exports you need to hand to a printer or a sign maker. Two things cannot come with them, and no studio can hand them over: commercial typefaces and stock imagery are licensed to a named party, so those licenses are bought in your name rather than transferred. And Kreated keeps its own reusable internal systems, tooling and components. Nothing specific to your business.</p>
         </div>
       </details>
       <details>
         <summary>Can I see brand work you have delivered?</summary>
         <div class="faqs__a">
-          <p><a class="ilink" href="/work/learnsmart/">LearnSmart Educational Consulting</a> is the engagement with brand identity in its recorded scope, delivered and live, alongside the website, local SEO and analytics. The specimen above this section is Kreated&rsquo;s own identity, shown because it is the one brand whose every decision is on record here.</p>
+          <p><a class="ilink" href="/work/learnsmart/">LearnSmart Educational Consulting</a> is the engagement with brand identity in its recorded scope, delivered and live, alongside the website, local SEO and analytics. </p>
         </div>
       </details>
       <details>
@@ -536,20 +543,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What this has looked like</h2>
-      <p class="lgrid__note">Two projects, one of them a concept.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Where to go next</p><h2 class="bx-h">Before <em>deciding</em></h2></header>
     <div class="prose">
-      <p><a class="ilink" href="/work/learnsmart/">LearnSmart</a> is a practice
-        that had no website and no mark at all: the brand, the structure and the
-        words were made rather than migrated.</p>
       <p>For contractors specifically, the
         <a class="ilink" href="/resources/contractor-website-checklist/">contractor
-        website checklist</a> covers what the mark has to survive before it ever
-        reaches a screen.</p>
+        website checklist</a> covers whether the site presents one consistent identity.</p>
+      <details class="more" open><summary>Read more</summary>
       <p>Before deciding between a refresh and a new identity,
         <a class="ilink" href="/resources/when-to-rebrand/">when a rebrand is worth
         doing</a> sets out the one test that settles it, and the situations where a
@@ -558,7 +559,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         concept rather than a client project, and is marked as one wherever it
         appears. It is there to show the standard of the creative work, not to imply
         a client.</p>
-    </div>
+    </details></div>
   </div>
 </section>
 
@@ -635,5 +636,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      header and footer are tracked everywhere, not only where forms.js runs.
      Contacts nothing until an analytics container is present. -->
 <script src="/track.js?v=1" defer></script>
+<script id="xn-close">
+/* PILOT: on phones, "what this is not" explanations start closed; the claims stay visible. */
+if(matchMedia('(max-width:720px)').matches){document.querySelectorAll('details.xn,details.more').forEach(function(d){d.removeAttribute('open')})}
+</script>
 </body>
 </html>

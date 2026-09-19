@@ -144,3 +144,25 @@
   select(0, false);
   fromHash();
 }());
+
+/* PILOT 2026-09-19: price groups are <details>. A link to a group (or to anything
+   inside one) opens it first, so /pricing/#grpSocial from a service page lands on
+   the open group rather than on a closed row. */
+(function () {
+  'use strict';
+  function openFor(id) {
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    var d = el.closest ? el.closest('details.pgrp') : null;
+    if (d && !d.open) { d.open = true; }
+    if (d) { el.scrollIntoView({ block: 'start', behavior: 'auto' }); }
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    openFor(a.getAttribute('href').slice(1));
+  });
+  window.addEventListener('hashchange', function () { openFor(location.hash.slice(1)); });
+  openFor(location.hash.slice(1));
+}());

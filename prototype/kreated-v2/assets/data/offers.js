@@ -84,26 +84,30 @@
       fit:'You serve several cities or many services and already spend money to win work.' },
 
     /* ================= INDIVIDUAL WEBSITE WORK ========================== */
+    /* ⚠ BUNDLE, owner decision 2026-09-19: every four paid pages of one type add
+       a fifth of that type free. Counted on BILLABLE units only, so pages a
+       package already includes never earn a free one. The engine shows it as
+       its own visible line, the same way it shows a credit. */
     { id:'svc.page.standard', name:'Additional Standard Page', group:'pages', kind:'one-time',
-      price:250, from:true, qty:true, unit:'page',
+      price:250, from:true, qty:true, unit:'page', bundle:{ buy:4, free:1 },
       what:'One more page built on the patterns your site already uses, with content you provide.',
       does:'Gives something that currently has nowhere to live a proper home: a policy, a second location’s hours, a team page, a piece of work worth showing.',
       fit:'You have somewhere obvious the information should go, and you already have the words.' },
 
     { id:'svc.page.service', name:'Dedicated Service Page', group:'pages', kind:'one-time',
-      price:450, from:true, qty:true, unit:'page',
+      price:450, from:true, qty:true, unit:'page', bundle:{ buy:4, free:1 },
       what:'A page built around one service, researched, written and linked into the rest of the site.',
       does:'Lets one service be found and compared on its own terms instead of being a line on a list.',
       fit:'You sell something distinct enough that people search for it by name, and it is currently buried inside a general services page.' },
 
     { id:'svc.page.location', name:'Location Page', group:'pages', kind:'one-time',
-      price:550, from:true, qty:true, unit:'page',
+      price:550, from:true, qty:true, unit:'page', bundle:{ buy:4, free:1 },
       what:'A dedicated page for a legitimate additional market you actually serve.',
       does:'Gives search engines and buyers one clear page about that area and the services you genuinely provide there.',
       fit:'You serve a real additional market and have enough that is specifically true about it to fill a page nobody would call thin.' },
 
     { id:'svc.page.landing', name:'Conversion Landing Page', group:'pages', kind:'one-time',
-      price:850, from:true, qty:true, unit:'page',
+      price:850, from:true, qty:true, unit:'page', bundle:{ buy:4, free:1 },
       what:'A single page built around one campaign, offer, service or audience, with the structure and measurement that implies.',
       does:'Gives a campaign somewhere to land that is about the campaign, rather than sending paid traffic to a homepage that has to serve everyone.',
       fit:'You are running or about to run something specific: an ad campaign, a seasonal offer, one high-value service.' },

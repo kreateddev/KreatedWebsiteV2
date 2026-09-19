@@ -88,6 +88,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=12">
+<link rel="stylesheet" href="/assets/ui/tby.css?v=1">
+<link rel="stylesheet" href="/assets/ui/system.css?v=24">
 
 <!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
      🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
@@ -269,24 +271,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      1 · SERVICE HERO
      The fact line is the services hub's 07 description, verbatim.
      ========================================================================== -->
-<section class="shero">
+<!-- PILOT: hero pattern chosen 2026-09-17 (Local SEO option C) -->
+<section class="shero hx-final">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/services/">SERVICES</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">SOCIAL MEDIA MANAGEMENT</span>
     </nav>
-
-    <h1 class="shero__h sm__h"><span>Social Media</span><span>Management</span></h1>
-
-    <div class="shero__foot">
-      <p class="shero__fact">Facebook, Instagram and short video, edited from your
-        footage or filmed by Kreated.</p>
-    </div>
-
-    <div class="close__row">
-      <a class="close__go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
-      <a class="close__alt" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    <div class="hx-split hx-split--scene">
+      <div>
+        <h1 class="hx-h hx-h--left">Social Media Management</h1>
+        <p class="hx-sub hx-sub--left">Facebook, Instagram and short video, edited from your footage or filmed by Kreated.</p>
+        <div class="hx-btns">
+          <a class="hx-btn hx-btn--go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+          <a class="hx-btn" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+        </div>
+      </div>
+      <div class="hx-scene"><svg viewBox="0 0 200 150" class="scene" aria-hidden="true"><defs><filter id="sh" x="-30%" y="-40%" width="160%" height="220%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0B1640" flood-opacity=".12"/></filter></defs><g transform="rotate(8 150 80)"><g filter="url(#sh)"><rect x="120" y="30" width="60" height="104" rx="12" fill="#FFFFFF"/></g><rect x="126" y="44" width="48" height="40" rx="5" fill="#DCE4FF"/><rect x="126" y="90" width="40" height="3" rx="1.5" fill="#C9CEDC"/></g><g filter="url(#sh)"><rect x="44" y="8" width="82" height="136" rx="14" fill="#0B1640"/></g><rect x="49" y="16" width="72" height="120" rx="9" fill="#FFFFFF"/><circle cx="59" cy="26" r="5" fill="#0A47F0"/><rect x="68" y="24" width="34" height="4" rx="2.0" fill="#0B1640"/><rect x="53" y="36" width="64" height="56" rx="5" fill="#DCE4FF"/><path d="M53,92 V74 l14,-12 12,10 10,-8 28,22 v6z" fill="#7F9CFF"/><circle cx="102" cy="50" r="6" fill="#FFB547"/><path d="M58,104 c0,-4 5,-5 6,-1 c1,-4 6,-3 6,1 c0,4 -6,8 -6,8 s-6,-4 -6,-8z" fill="#FF5A6E"/><circle cx="84" cy="106" r="5" fill="none" stroke="#0B1640" stroke-width="1.8"/><rect x="56" y="118" width="56" height="4" rx="2.0" fill="#0B1640"/><rect x="56" y="126" width="40" height="3" rx="1.5" fill="#C9CEDC"/></svg></div>
     </div>
   </div>
 </section>
@@ -301,9 +303,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      is not on the site, and remains unconfirmed. Do not read one as the other.
      🚫 Do not add a fourth "client" here that is not one. Morrow is a concept
      and does not belong in a trusted-by row. -->
-<section class="tby" aria-label="Clients">
+<section class="tby" aria-label="Recent work">
   <div class="wrap">
-    <p class="tby__lab">Trusted by</p>
+    <p class="tby__lab">Recent work</p>
     <ul class="tby__list">
       <li class="tby__item tby__item--llec"><a class="tby__link" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">
         <img src="/assets/img/clients/llec-wordmark.svg" alt="Leak Locators East Coast" width="460" height="30" loading="lazy" decoding="async"></a></li>
@@ -325,12 +327,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      where the evidence is empty.
      ========================================================================== -->
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What it is</h2>
-      <p class="lgrid__note">Before any of the detail.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">What it is</p><h2 class="bx-h">Accounts that <em>don&rsquo;t go quiet</em></h2></header>
     <div class="prose">
       <p><b>Social media management is the work of keeping a business&rsquo;s
         Facebook, Instagram and short-video accounts active with posts worth
@@ -345,38 +344,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
-
-<section class="sec">
-  <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What the work covers</h2>
-      <p class="lgrid__note">Two ways to work, one monthly output.</p>
-    </div>
-    <div class="prose">
-      <p><b class="lin">Social Management, $900/month.</b> You and your crew take
-        the photos and clips on the job and send them over. Kreated does everything
-        after that: the editing, the captions, the scheduling and the posting.</p>
-      <p><b class="lin">Social Production, $1,800/month.</b> Everything in Social
-        Management, plus the content planned and made by Kreated: the ideas, the
-        photography and the video.</p>
-      <p><b class="lin">The monthly output.</b> Twelve posts and four short videos a
-        month in both options, across Facebook, Instagram, and TikTok or YouTube
-        Shorts.</p>
-      <p><b class="lin">Editing and captions.</b> Photos and footage edited into
-        posts and short videos, with a caption written for every one.</p>
-      <p><b class="lin">Scheduling and posting.</b> Posts go out on a schedule
-        rather than whenever somebody remembers, so the accounts do not go
-        quiet.</p>
-    </div>
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">The monthly output</p><h2 class="bx-h">Twelve posts, <em>four videos</em></h2><p class="bx-sub">Across Facebook, Instagram, and TikTok or YouTube Shorts.</p></header><div class="bx-month" role="img" aria-label="An example month: twelve posts and four short videos"><div class="bx-month__grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="bx-month__vids"><i class="v"></i><i class="v"></i><i class="v"></i><i class="v"></i></div><div class="bx-month__key"><span>12 posts</span><span>4 short videos</span></div></div><p class="bx-cap">An example month, the same output in both options. Illustrative layout, not a client account.</p>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">Two options</p><h2 class="bx-h">You film, <em>or Kreated films</em></h2><p class="bx-sub">The difference is who makes the photos and footage, not how much is posted.</p></header><div class="bx-plans bx-plans--2"><article class="bx-plan"><p class="bx-plan__shape">You film</p><h3>Social Management</h3><p class="bx-plan__price">$900<small>/mo</small></p><p class="bx-plan__what">You send the photos and footage; Kreated does everything after that.</p><ul class="bx-plan__inc" role="list"><li>Your footage edited into posts and videos</li><li>A caption for every post</li><li>Scheduled and posted</li></ul></article><article class="bx-plan"><p class="bx-plan__shape">Kreated films</p><h3>Social Production</h3><p class="bx-plan__price">$1,800<small>/mo</small></p><p class="bx-plan__what">Everything in Social Management, plus the content planned and made by Kreated.</p><ul class="bx-plan__inc" role="list"><li>Content ideas and planning</li><li>Photography and video by Kreated</li><li>The same twelve posts and four videos</li></ul></article></div><p class="bx-swipe" aria-hidden="true">Swipe to compare &#8594;</p><p class="bx-note">Both run on a three-month initial commitment, then month to month. Details on the <a class="ilink" href="/pricing/#grpSocial">pricing page</a>.</p>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">How it runs</p><h2 class="bx-h">Set up once, <em>then every month</em></h2></header><div class="bx-when"><p>Set-up: 2&ndash;4 days <small>then ongoing, depending on scope</small></p></div><ol class="bx-steps" style="--n:4" role="list"><li><i class="bx-ph">Decide</i><b>Set-up</b><span>Accounts, access and the plan for the month.</span></li><li><i class="bx-ph">Build</i><b>Footage</b><span>Sent in by you, or filmed by Kreated.</span></li><li><i class="bx-ph">Build</i><b>Edit and caption</b><span>Posts and short videos, with a caption for each.</span></li><li><i class="bx-ph">Improve</i><b>Schedule and post</b><span>On a schedule, so the accounts do not go quiet.</span></li></ol><p class="bx-note">Each step sits inside one of the five in <a class="ilink" href="/method/">the Method</a>.</p>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <div class="bx-cta"><div class="hx-btns"><a class="hx-btn hx-btn--go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a><a class="hx-btn" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a></div><p>Every project is scoped and priced in writing before it begins.</p></div>
+  </div>
+</section>
+
+
+
+
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Who it&rsquo;s for</h2>
-      <p class="lgrid__note">And what it will not do.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Who it&rsquo;s for</p><h2 class="bx-h">Who each option <em>is for</em></h2><p class="bx-sub">And what it will not do.</p></header>
     <div class="prose">
       <p><b class="lin">Social Management</b> suits a business that already takes photos
         and video on the job and has nobody with time to turn them into posts.
@@ -386,22 +383,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p><b class="lin">It is not a follower guarantee.</b> What a platform shows, and who
         follows, likes or calls, is not in anyone&rsquo;s control. Posting
         consistently, with content worth looking at, is.</p>
+      <details class="more" open><summary>Read more</summary>
       <p><b class="lin">It is not paid advertising.</b> Both options are organic posting on
         the business&rsquo;s own accounts. Nothing here buys reach.</p>
       <p><b class="lin">It is not a substitute for a website.</b> A post sends someone
         looking; the <a class="ilink" href="/services/web-design/">website</a> and the
         <a class="ilink" href="/services/google-business-profile/">Google Business
         Profile</a> are usually where they decide.</p>
-    </div>
+    </details></div>
   </div>
 </section>
 
 <!-- ⚠ THESE ARE THE PAGE'S OWN SCHEMA QUESTIONS, RENDERED. 🚫 Do not edit a
      question or an answer here without making the identical edit in the
      JSON-LD above. -->
-<section class="sec faqs__sec">
+<section class="sec faqs__sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div><h2 class="sec__h">Questions</h2></div>
+    <header class="bx-head"><p class="kx-chip">Questions</p><h2 class="bx-h">Social media, <em>answered</em></h2></header>
     <div class="faqs">
       <details>
         <summary>Do I have to film anything?</summary>
@@ -443,23 +441,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Where to go next</h2>
-      <p class="lgrid__note">Depending on what you already have.</p>
-    </div>
-    <div class="prose">
-      <p>Both options, with everything included and the terms, are on
-        <a class="ilink" href="/pricing/#grpSocial">Pricing</a>.</p>
-      <p>If the posts will be sending people to a website that undersells the
-        work, that is <a class="ilink" href="/services/web-design/">a build</a> or
-        <a class="ilink" href="/services/website-redesign/">a redesign</a>.</p>
-      <p>If the wider question is being found at all, start at
-        <a class="ilink" href="/services/local-seo/">local SEO</a>.</p>
-      <p>The <a class="ilink" href="/free-website-audit/">free website audit</a>
-        reports what it can check about the site itself.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Where to go next</p><h2 class="bx-h">Depending on what you <em>already have</em></h2></header>
+    <nav class="bx-next" aria-label="Where to go next"><a href="/pricing/#grpSocial">Pricing <i aria-hidden="true">&#8594;</i></a><a href="/services/web-design/">A build <i aria-hidden="true">&#8594;</i></a><a href="/services/website-redesign/">A redesign <i aria-hidden="true">&#8594;</i></a><a href="/services/local-seo/">Local SEO <i aria-hidden="true">&#8594;</i></a><a href="/free-website-audit/">Free website audit <i aria-hidden="true">&#8594;</i></a></nav>
   </div>
 </section>
 
@@ -536,5 +521,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      header and footer are tracked everywhere, not only where forms.js runs.
      Contacts nothing until an analytics container is present. -->
 <script src="/track.js?v=1" defer></script>
+<script id="xn-close">
+if(matchMedia('(max-width:720px)').matches){document.querySelectorAll('details.xn,details.more').forEach(function(d){d.removeAttribute('open')})}
+</script>
 </body>
 </html>

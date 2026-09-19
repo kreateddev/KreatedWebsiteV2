@@ -85,6 +85,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=12">
+<link rel="stylesheet" href="/assets/ui/tby.css?v=1">
+<link rel="stylesheet" href="/assets/ui/system.css?v=24">
 
 <!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
      🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
@@ -158,7 +160,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "name": "I don’t have a profile yet. Can you set one up?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "If you do not have a profile yet, we help you create, claim, and verify it first. Then we complete the profile using the steps below."
+              "text": "If you do not have a profile yet, Kreated helps you create, claim and verify it first, then completes the profile using the steps below."
             }
           },
           {
@@ -174,7 +176,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "name": "Is this ongoing management?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No, and this is worth being exact about. A Growth project includes a one-time audit and optimization of an existing profile. It is not monthly management, and monthly management is not included in Growth. Continuing profile work, posts, ongoing updates, review monitoring. Belongs inside the broader recurring local engagement rather than being bought as a profile retainer on its own."
+              "text": "No, and this is worth being exact about. A Growth project includes a one-time audit and optimization of an existing profile. It is not monthly management, and monthly management is not included in Growth. Continuing profile work (posts, ongoing updates, review monitoring) is part of Local Presence at $500/month or Local Growth at $900/month."
             }
           },
           {
@@ -198,7 +200,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             "name": "Can I buy profile management on its own, monthly?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Not as a standalone product. There is no separate monthly Google Business Profile package, and rather than invent a price for one, the honest answer is that ongoing profile work sits inside the wider local program, Local Growth at $900/month, on a three-month initial commitment and month-to-month after that. The one-time audit and optimization is built into a Growth website project at $2,950. Every engagement is scoped and priced in writing before it begins."
+              "text": "Yes. Local Presence, at $500/month, is the monthly option for keeping the profile accurate: profile management, reviews, citations and monitoring. Local Growth, at $900/month on a three-month initial commitment and month-to-month after that, includes it alongside the wider search work. The one-time fix is Profile Optimization from $450, and it is also built into a Growth website project from $2,950. Every engagement is scoped and priced in writing before it begins."
             }
           },
           {
@@ -286,30 +288,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      forward — 04 is the quietest state in the ledger (weight 560 against the
      other rows' 640-660), because a profile is a record, not a statement.
      ========================================================================== -->
-<section class="shero">
+<!-- PILOT: hero pattern chosen 2026-09-17 (Local SEO option C) -->
+<section class="shero hx-final">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/services/">SERVICES</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">GOOGLE BUSINESS PROFILE</span>
     </nav>
-
-    <h1 class="shero__h gb__h"><span>Google Business</span><span>Profile</span></h1>
-
-    <div class="shero__foot">
-      <p class="shero__fact">Profile creation, claiming, verification guidance,
-        and optimization.</p>
-    </div>
-
-      <!-- 🚫 CLOSING LINE — RETIRED 2026-09-02, owner decision. The slot and its
-       markup are gone from every page, including the one on /about/ that had a
-       real sentence in it. Do not reintroduce it: this is not a deferred slot
-       waiting on copy any more, it is a removed component. The .close__row
-       below is the conversion element and stays. -->
-
-    <div class="close__row">
-      <a class="close__go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
-      <a class="close__alt" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+    <div class="hx-split hx-split--scene">
+      <div>
+        <h1 class="hx-h hx-h--left">Google Business Profile</h1>
+        <p class="hx-sub hx-sub--left">Profile creation, claiming, verification guidance, and optimization.</p>
+        <div class="hx-btns">
+          <a class="hx-btn hx-btn--go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a>
+          <a class="hx-btn" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a>
+        </div>
+      </div>
+      <div class="hx-scene"><svg viewBox="0 0 200 150" class="scene" aria-hidden="true"><defs><filter id="sh" x="-30%" y="-40%" width="160%" height="220%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0B1640" flood-opacity=".12"/></filter></defs><g filter="url(#sh)"><rect x="40" y="10" width="120" height="132" rx="12" fill="#FFFFFF"/></g><rect x="40" y="10" width="120" height="40" rx="12" fill="#DCE4FF"/><rect x="40" y="38" width="120" height="12" rx="0" fill="#DCE4FF"/><path d="M48,50 l20,-22 14,14 10,-10 20,18z" fill="#7F9CFF"/><rect x="50" y="58" width="66" height="7" rx="3.5" fill="#0B1640"/><polygon points="54.0,69.6 55.2,72.4 58.2,72.6 55.9,74.6 56.6,77.6 54.0,76.0 51.4,77.6 52.1,74.6 49.8,72.6 52.8,72.4" fill="#FFB547"/><polygon points="65.0,69.6 66.2,72.4 69.2,72.6 66.9,74.6 67.6,77.6 65.0,76.0 62.4,77.6 63.1,74.6 60.8,72.6 63.8,72.4" fill="#FFB547"/><polygon points="76.0,69.6 77.2,72.4 80.2,72.6 77.9,74.6 78.6,77.6 76.0,76.0 73.4,77.6 74.1,74.6 71.8,72.6 74.8,72.4" fill="#FFB547"/><polygon points="87.0,69.6 88.2,72.4 91.2,72.6 88.9,74.6 89.6,77.6 87.0,76.0 84.4,77.6 85.1,74.6 82.8,72.6 85.8,72.4" fill="#FFB547"/><polygon points="98.0,69.6 99.2,72.4 102.2,72.6 99.9,74.6 100.6,77.6 98.0,76.0 95.4,77.6 96.1,74.6 93.8,72.6 96.8,72.4" fill="#FFB547"/><rect x="50" y="84" width="54" height="3.5" rx="1.75" fill="#C9CEDC"/><rect x="50" y="92" width="80" height="3.5" rx="1.75" fill="#EEF2FF"/><rect x="50" y="106" width="48" height="16" rx="8" fill="#0A47F0"/><text x="74" y="117" text-anchor="middle" font-family="General Sans, system-ui" font-size="8" font-weight="600" fill="#FFFFFF">Call</text><rect x="102" y="106" width="48" height="16" rx="8" fill="#FFFFFF" stroke="#0A47F0" stroke-width="1.4"/><text x="126" y="117" text-anchor="middle" font-family="General Sans, system-ui" font-size="8" font-weight="600" fill="#0A47F0">Directions</text></svg></div>
     </div>
   </div>
 </section>
@@ -324,9 +320,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      is not on the site, and remains unconfirmed. Do not read one as the other.
      🚫 Do not add a fourth "client" here that is not one. Morrow is a concept
      and does not belong in a trusted-by row. -->
-<section class="tby" aria-label="Clients">
+<section class="tby" aria-label="Recent work">
   <div class="wrap">
-    <p class="tby__lab">Trusted by</p>
+    <p class="tby__lab">Recent work</p>
     <ul class="tby__list">
       <li class="tby__item tby__item--llec"><a class="tby__link" href="https://leaklocatorseastcoast.com" target="_blank" rel="noopener">
         <img src="/assets/img/clients/llec-wordmark.svg" alt="Leak Locators East Coast" width="460" height="30" loading="lazy" decoding="async"></a></li>
@@ -348,12 +344,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      with their date attached.
      ========================================================================== -->
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What it is</h2>
-      <p class="lgrid__note">Before any of the detail.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">What it is</p><h2 class="bx-h">The panel buyers see <em>before your website</em></h2></header>
     <div class="prose">
       <p><b>The Google Business Profile is the panel that appears beside or above
         the search results when somebody looks up your business or a service you
@@ -367,53 +360,59 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
-
-<section class="sec">
-  <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">What the work covers</h2>
-      <p class="lgrid__note">The parts, named.</p>
-    </div>
-    <div class="prose">
-      <p><b class="lin">Creation, claiming and verification.</b> Setting the profile up where
-        there is not one, claiming it where it exists but is not yours to edit, and
-        guidance through Google&rsquo;s verification process. Verification is
-        Google&rsquo;s procedure and its timing is theirs, not Kreated&rsquo;s.</p>
-      <p><b class="lin">Optimization.</b> A one-time audit and correction of the profile:
-        categories, services, description, service area, hours, photos and the
-        details that are quietly wrong. Inherited and half-finished profiles are the
-        normal case rather than the exception.</p>
-      <p><b class="lin">Ongoing management, where it belongs.</b> Categories and services kept
-        refined, and posts where they are genuinely worth making. This is not sold
-        as a standalone subscription &mdash; ongoing profile work sits inside
-        <a class="ilink" href="/services/local-seo/">local search engagements</a>,
-        alongside everything else that has to move together.</p>
-    </div>
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">What gets fixed</p><h2 class="bx-h">Every part of the <em>listing</em></h2></header><div class="kx-annot" style="max-width:1000px;margin:0 auto"><figure class="kx-annot__shot kx-annot__shot--svg"><svg viewBox="0 0 200 150" class="scene" aria-hidden="true"><defs><filter id="sh" x="-30%" y="-40%" width="160%" height="220%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0B1640" flood-opacity=".12"/></filter></defs><g filter="url(#sh)"><rect x="40" y="10" width="120" height="132" rx="12" fill="#FFFFFF"/></g><rect x="40" y="10" width="120" height="40" rx="12" fill="#DCE4FF"/><rect x="40" y="38" width="120" height="12" rx="0" fill="#DCE4FF"/><path d="M48,50 l20,-22 14,14 10,-10 20,18z" fill="#7F9CFF"/><rect x="50" y="58" width="66" height="7" rx="3.5" fill="#0B1640"/><polygon points="54.0,69.6 55.2,72.4 58.2,72.6 55.9,74.6 56.6,77.6 54.0,76.0 51.4,77.6 52.1,74.6 49.8,72.6 52.8,72.4" fill="#FFB547"/><polygon points="65.0,69.6 66.2,72.4 69.2,72.6 66.9,74.6 67.6,77.6 65.0,76.0 62.4,77.6 63.1,74.6 60.8,72.6 63.8,72.4" fill="#FFB547"/><polygon points="76.0,69.6 77.2,72.4 80.2,72.6 77.9,74.6 78.6,77.6 76.0,76.0 73.4,77.6 74.1,74.6 71.8,72.6 74.8,72.4" fill="#FFB547"/><polygon points="87.0,69.6 88.2,72.4 91.2,72.6 88.9,74.6 89.6,77.6 87.0,76.0 84.4,77.6 85.1,74.6 82.8,72.6 85.8,72.4" fill="#FFB547"/><polygon points="98.0,69.6 99.2,72.4 102.2,72.6 99.9,74.6 100.6,77.6 98.0,76.0 95.4,77.6 96.1,74.6 93.8,72.6 96.8,72.4" fill="#FFB547"/><rect x="50" y="84" width="54" height="3.5" rx="1.75" fill="#C9CEDC"/><rect x="50" y="92" width="80" height="3.5" rx="1.75" fill="#EEF2FF"/><rect x="50" y="106" width="48" height="16" rx="8" fill="#0A47F0"/><text x="74" y="117" text-anchor="middle" font-family="General Sans, system-ui" font-size="8" font-weight="600" fill="#FFFFFF">Call</text><rect x="102" y="106" width="48" height="16" rx="8" fill="#FFFFFF" stroke="#0A47F0" stroke-width="1.4"/><text x="126" y="117" text-anchor="middle" font-family="General Sans, system-ui" font-size="8" font-weight="600" fill="#0A47F0">Directions</text></svg><span class="kx-marker" style="left:50%;top:15%">1</span><span class="kx-marker" style="left:17%;top:40%">2</span><span class="kx-marker" style="left:83%;top:60%">3</span><span class="kx-marker" style="left:83%;top:78%">4</span></figure><ol class="kx-annot__list"><li><span class="kx-marker">1</span><div><b>Photos</b><span>Current work, in place of missing or outdated images.</span></div></li><li><span class="kx-marker">2</span><div><b>Name, category and reviews</b><span>The primary category is the strongest signal a profile owner controls.</span></div></li><li><span class="kx-marker">3</span><div><b>Services, hours and description</b><span>The details that are quietly wrong, put right.</span></div></li><li><span class="kx-marker">4</span><div><b>Call and directions</b><span>What most buyers do from here, often before visiting the website.</span></div></li></ol></div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">What you get</p><h2 class="bx-h">Created, claimed, <em>corrected</em></h2></header><ul class="bx-deliv" role="list"><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M19,16 H49 L58,25 V51 Q58,56 53,56 H19 Q14,56 14,51 V21 Q14,16 19,16Z" fill="#D5DFFF"/><path d="M11,8 H41 L50,17 V43 Q50,48 45,48 H11 Q6,48 6,43 V13 Q6,8 11,8Z" fill="#0A47F0"/><rect x="6" y="8" width="44" height="12" rx="5" fill="#0633B5"/><g transform="translate(12,11) scale(0.0224) translate(-134.6,-125.6)" fill="#FFFFFF"><path d="M465.33,450.75l-142.53-123.63,1.06,15.68,7.85,140.34h-61.41s5.2-95.45,5.2-95.45c.53-13.64,2.38-26.04,6.34-39.01,4.67-15.3,7.55-30.71,7.43-46.75-.21-26.93-12.73-47.45-14.18-73.97l-2.53-53.65-2.36-56.98h58.62s-.85,28.18-.85,28.18l-4.63,104.45-.53,15.89,120.57-96.56,22.13-16.88.11,79.58-46.42,32.08-52.53,35.58,98.91,69.23-.24,81.87Z"/><path d="M206.34,390.2l-71.61,61.09-.07-81.36,100.13-69.93-100.18-68.64.32-78.3,112.64,90.32c19.08,13.57,29.48,35.02,28.37,58.62-.79,16.57-6.42,33.54-19.17,44.57l-50.43,43.62Z"/></g><rect x="12" y="27" width="20" height="4" rx="2" fill="#FFFFFF"/><rect x="12" y="35" width="28" height="3" rx="1.5" fill="#FFFFFF" opacity=".6"/><circle cx="14" cy="43" r="2.3" fill="#7F9CFF"/><circle cx="21" cy="43" r="2.3" fill="#7F9CFF"/><circle cx="28" cy="43" r="2.3" fill="#7F9CFF"/><circle cx="35" cy="43" r="2.3" fill="#7F9CFF"/><circle cx="53" cy="50" r="7" fill="#7F9CFF"/><path d="M50,50 l2.2,2.2 4.2,-4.4" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div><b>Creation and claiming</b><span>Set up where there is not one, claimed where it exists but is not yours to edit.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M44,6 a16,16 0 0 1 14,14" stroke="#7F9CFF" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M42,15 a8,8 0 0 1 7,7" stroke="#7F9CFF" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M14,8 h9 l5,12 -6,5 c3,8 9,14 17,17 l5,-6 12,5 v9 c0,4 -3,7 -7,7 C27,57 7,37 7,15 c0,-4 3,-7 7,-7z" fill="#0A47F0"/></svg><div><b>Verification guidance</b><span>Guidance through Google’s process. The procedure and its timing are Google’s.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M10,6 H53 L58,11 V16 Q58,20 54,20 H10 Q6,20 6,16 V10 Q6,6 10,6Z" fill="#0A47F0"/><circle cx="15" cy="13" r="3.5" fill="#FFFFFF"/><rect x="24" y="11" width="26" height="4" rx="2" fill="#FFFFFF"/><path d="M10,24 H53 L58,29 V34 Q58,38 54,38 H10 Q6,38 6,34 V28 Q6,24 10,24Z" fill="#D5DFFF"/><circle cx="15" cy="31" r="3.5" fill="#7F9CFF"/><rect x="24" y="29" width="20" height="4" rx="2" fill="#7F9CFF"/><path d="M10,42 H53 L58,47 V52 Q58,56 54,56 H10 Q6,56 6,52 V46 Q6,42 10,42Z" fill="#D5DFFF"/><circle cx="15" cy="49" r="3.5" fill="#7F9CFF"/><rect x="24" y="47" width="14" height="4" rx="2" fill="#7F9CFF"/></svg><div><b>Categories and services</b><span>The primary category, secondary categories and services refined.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M23,14 H49 L58,23 V53 Q58,58 53,58 H23 Q18,58 18,53 V19 Q18,14 23,14Z" fill="#D5DFFF"/><path d="M11,6 H37 L46,15 V45 Q46,50 41,50 H11 Q6,50 6,45 V11 Q6,6 11,6Z" fill="#0A47F0"/><rect x="12" y="14" width="16" height="12" rx="3" fill="#FFFFFF"/><rect x="12" y="32" width="26" height="3" rx="1.5" fill="#FFFFFF" opacity=".7"/><rect x="12" y="39" width="18" height="3" rx="1.5" fill="#FFFFFF" opacity=".7"/><circle cx="52" cy="50" r="7" fill="#7F9CFF"/></svg><div><b>Description, area and hours</b><span>The details that are quietly wrong, put right.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M9,8 H50 L60,18 V41 Q60,46 55,46 H9 Q4,46 4,41 V13 Q4,8 9,8Z" fill="#D5DFFF"/><rect x="12" y="16" width="20" height="12" rx="3" fill="#0A47F0"/><rect x="12" y="33" width="30" height="4" rx="2" fill="#7F9CFF"/><rect x="26" y="46" width="12" height="8" rx="1" fill="#7F9CFF"/><rect x="18" y="54" width="28" height="4" rx="2" fill="#7F9CFF"/></svg><div><b>Photos</b><span>Checked and corrected as part of the audit.</span></div></li><li><svg class="kx-icon" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><rect x="4" y="18" width="46" height="26" rx="13" fill="#D5DFFF"/><rect x="12" y="28" width="18" height="5" rx="2.5" fill="#7F9CFF"/><circle cx="42" cy="30" r="11" fill="none" stroke="#0A47F0" stroke-width="6"/><path d="M50,38 L59,47" stroke="#0A47F0" stroke-width="7" stroke-linecap="round"/></svg><div><b>A way to ask for reviews</b><span>A repeatable way to ask at the point a customer is most likely to say yes.</span></div></li></ul>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">How it runs</p><h2 class="bx-h">A few days, <em>not a program</em></h2></header><div class="bx-when"><p>Typical timeline: 2&ndash;4 days <small>verification timing is Google’s, not Kreated’s</small></p></div><ol class="bx-steps" style="--n:4" role="list"><li><i class="bx-ph">Understand</i><b>Access</b><span>Create, claim or verify the profile, with guidance through Google’s steps.</span></li><li><i class="bx-ph">Understand</i><b>Audit</b><span>What is missing, inconsistent or quietly wrong.</span></li><li><i class="bx-ph">Build</i><b>Correct</b><span>Categories, services, description, area, hours and photos.</span></li><li><i class="bx-ph">Build</i><b>Reviews</b><span>A repeatable way to ask, and help answering the ones that arrive.</span></li></ol><p class="bx-note">Each step sits inside one of the five in <a class="ilink" href="/method/">the Method</a>.</p>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">Two ways to buy it</p><h2 class="bx-h">One-time, <em>or kept current</em></h2></header><div class="bx-plans bx-plans--2"><article class="bx-plan"><p class="bx-plan__shape">One time</p><h3>Profile Optimization</h3><p class="bx-plan__price">from $450<small></small></p><p class="bx-plan__what">A one-time audit and correction of the profile.</p><ul class="bx-plan__inc" role="list"><li>Categories, services and description</li><li>Service area, hours and photos</li><li>No monthly commitment</li></ul></article><article class="bx-plan"><p class="bx-plan__shape">Monthly</p><h3>Local Presence</h3><p class="bx-plan__price">$500<small>/mo</small></p><p class="bx-plan__what">For a business that needs its local foundation kept accurate and healthy.</p><ul class="bx-plan__inc" role="list"><li>Profile management and posts worth making</li><li>A review strategy, and help answering</li><li>Citations, monitoring and monthly reporting</li></ul></article></div><p class="bx-swipe" aria-hidden="true">Swipe to compare &#8594;</p><p class="bx-note">Ongoing profile work also sits inside <a class="ilink" href="/services/local-seo/">local SEO</a> engagements.</p>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-l">
+  <div class="wrap">
+    <div class="bx-cta"><div class="hx-btns"><a class="hx-btn hx-btn--go" data-evt="cta_start_project" href="/#project">Start a Project <i aria-hidden="true">&#8594;</i></a><a class="hx-btn" data-evt="cta_website_audit" href="/free-website-audit/">Free Website Audit <i aria-hidden="true">&#8594;</i></a></div><p>Every project is scoped and priced in writing before it begins.</p></div>
+  </div>
+</section>
+
+
+
+
+<section class="sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Who it&rsquo;s for</h2>
-      <p class="lgrid__note">And what it will not do.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Who it&rsquo;s for</p><h2 class="bx-h">For a profile that was <em>never finished</em></h2><p class="bx-sub">And what it will not do.</p></header>
     <div class="prose">
       <p>A business with a profile that was set up quickly, inherited from
         somebody who has left, or never finished &mdash; and that wants it correct
-        without committing to a monthly programme. The one-time correction is
+        without committing to a monthly program. The one-time correction is
         deliberately one time. Buying it does not commit you to anything ongoing.</p>
       <p><b class="lin">It is not a ranking guarantee.</b> A complete, accurate profile is a
         prerequisite for local visibility, not a purchase of it. What position you
         hold depends on competition, proximity and a great deal Google does not
         publish.</p>
+      <details class="more" open><summary>Read more</summary>
       <p><b class="lin">It is not review generation.</b> Reviews are earned from customers.
         Nothing here manufactures them, and any service that offers to should be
         treated as a liability rather than a supplier.</p>
       <p><b class="lin">It is not a substitute for a website.</b> A profile pointing at a site
         that does not explain the business is a limited asset. The two are worked on
         together for that reason.</p>
-    </div>
+    </details></div>
   </div>
 </section>
 
@@ -436,12 +435,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      not add Morrow: it is a concept, not a client. /services/answer-engine-
      optimization/ deliberately has NO block here, because no engagement
      included AEO. An empty slot is correct where the evidence is empty. -->
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Who this was <em>built for</em></h2>
-      <p class="lgrid__note">The profile was part of both engagements.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Built in</p><h2 class="bx-h">Who this was <em>built for</em></h2><p class="bx-sub">The profile was part of both engagements.</p></header>
     <div>
       <div class="cprev cprev--two">
       <article class="cprev__item">
@@ -469,14 +465,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec faqs__sec">
+
+<section class="sec bx-sec bx-glow-r">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">Clients</p><h2 class="bx-h">In their <em>own words</em></h2><p class="bx-sub">J.R. runs Leak Locators East Coast, where the profile was part of the engagement.</p></header><figure class="bx-review"><blockquote><p>&ldquo;They rebuilt our website for Leak Locators East Coast and have helped us improve our SEO, Google Business Profile, and overall presence online.&rdquo;</p></blockquote><figcaption><b>J.R.</b><span>CEO, Leak Locators East Coast</span><small>Published Google review</small></figcaption><details><summary>Read the full review</summary><p>We’ve had a great experience working with Kreated. They rebuilt our website for Leak Locators East Coast and have helped us improve our SEO, Google Business Profile, and overall presence online.</p><p>It did take about a month before we started seeing a noticeable increase, but since then we’ve definitely seen more leads and actual jobs coming in through Google. That was the biggest thing for us. A better looking website is great, but seeing it actually start bringing in more business is what made the difference.</p><p>The website is much more professional, easy to use, and does a much better job explaining what we do and the areas we serve. Skyler is very responsive and continues to make improvements instead of just finishing the site and moving on.</p><p>We’re very happy with the results so far and would definitely recommend Kreated to any local business looking for a better website, stronger SEO, and more leads!!</p></details></figure>
+  </div>
+</section>
+<section class="sec faqs__sec bx-sec bx-glow-r">
   <div class="wrap lgrid">
-    <div><h2 class="sec__h">Questions</h2></div>
+    <header class="bx-head"><p class="kx-chip">Questions</p><h2 class="bx-h">The profile, <em>answered</em></h2></header>
     <div class="faqs">
       <details>
         <summary>I don&rsquo;t have a profile yet. Can you set one up?</summary>
         <div class="faqs__a">
-          <p>If you do not have a profile yet, we help you create, claim, and verify it first. Then we complete the profile using the steps below.</p>
+          <p>If you do not have a profile yet, Kreated helps you create, claim and verify it first, then completes the profile using the steps below.</p>
         </div>
       </details>
       <details>
@@ -488,7 +490,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <details>
         <summary>Is this ongoing management?</summary>
         <div class="faqs__a">
-          <p>No, and this is worth being exact about. A Growth project includes a one-time audit and optimization of an existing profile. It is not monthly management, and monthly management is not included in Growth. Continuing profile work, posts, ongoing updates, review monitoring. Belongs inside the broader recurring local engagement rather than being bought as a profile retainer on its own.</p>
+          <p>No, and this is worth being exact about. A Growth project includes a one-time audit and optimization of an existing profile. It is not monthly management, and monthly management is not included in Growth. Continuing profile work (posts, ongoing updates, review monitoring) is part of Local Presence at $500/month or Local Growth at $900/month.</p>
         </div>
       </details>
       <details>
@@ -506,7 +508,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <details>
         <summary>Can I buy profile management on its own, monthly?</summary>
         <div class="faqs__a">
-          <p>Not as a standalone product. There is no separate monthly Google Business Profile package, and rather than invent a price for one, the honest answer is that ongoing profile work sits inside the wider local program, Local Growth at $900/month, on a three-month initial commitment and month-to-month after that. The one-time audit and optimization is built into a Growth website project at $2,950. Every engagement is scoped and priced in writing before it begins.</p>
+          <p>Yes. Local Presence, at $500/month, is the monthly option for keeping the profile accurate: profile management, reviews, citations and monitoring. Local Growth, at $900/month on a three-month initial commitment and month-to-month after that, includes it alongside the wider search work. The one-time fix is Profile Optimization from $450, and it is also built into a Growth website project from $2,950. Every engagement is scoped and priced in writing before it begins.</p>
         </div>
       </details>
       <details>
@@ -525,29 +527,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec bx-sec bx-glow-l">
   <div class="wrap lgrid">
-    <div>
-      <h2 class="sec__h">Where to go next</h2>
-      <p class="lgrid__note">Depending on what you already have.</p>
-    </div>
-    <div class="prose">
-      <p>If the profile is only part of the problem and the wider question is
-        being found at all, start at <a class="ilink"
-        href="/services/local-seo/">local SEO</a>.</p>
-      <p>If the website behind the profile is the weaker half, that is
-        <a class="ilink" href="/services/web-design/">a build</a> or
-        <a class="ilink" href="/services/website-redesign/">a redesign</a>.</p>
-      <p>If the profile is in order and it is the Facebook and Instagram accounts
-        that have gone quiet, that is
-        <a class="ilink" href="/services/social-media-management/">social media
-        management</a>, a separate monthly service.</p>
-      <p>The <a class="ilink" href="/free-website-audit/">free website audit</a>
-        reports what it can check about the site itself.</p>
-      <p>The <a class="ilink" href="/resources/">resources library</a> covers the
-        questions around this in more depth, without a sales conversation
-        attached.</p>
-    </div>
+    <header class="bx-head"><p class="kx-chip">Where to go next</p><h2 class="bx-h">Depending on what you <em>already have</em></h2></header>
+    <nav class="bx-next" aria-label="Where to go next"><a href="/services/local-seo/">Local SEO <i aria-hidden="true">&#8594;</i></a><a href="/services/web-design/">A build <i aria-hidden="true">&#8594;</i></a><a href="/services/website-redesign/">A redesign <i aria-hidden="true">&#8594;</i></a><a href="/services/social-media-management/">Social media management <i aria-hidden="true">&#8594;</i></a><a href="/free-website-audit/">Free website audit <i aria-hidden="true">&#8594;</i></a><a href="/resources/">Resources library <i aria-hidden="true">&#8594;</i></a></nav>
   </div>
 </section>
 
@@ -624,5 +607,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      header and footer are tracked everywhere, not only where forms.js runs.
      Contacts nothing until an analytics container is present. -->
 <script src="/track.js?v=1" defer></script>
+<script id="xn-close">
+if(matchMedia('(max-width:720px)').matches){document.querySelectorAll('details.xn,details.more').forEach(function(d){d.removeAttribute('open')})}
+</script>
 </body>
 </html>

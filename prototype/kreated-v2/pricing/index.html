@@ -91,6 +91,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- last, so it is the single definition of the footer on every route -->
 <link rel="stylesheet" href="/theme.css?v=30">
 <link rel="stylesheet" href="/footer.css?v=12">
+<link rel="stylesheet" href="/assets/ui/system.css?v=24">
+<link rel="stylesheet" href="/assets/ui/pricing-page.css?v=28">
 
 <!-- STRUCTURED DATA — prepared 2026-09-01, not yet released to search.
      🚫 Only visible facts. The breadcrumb mirrors the crumb rendered at the top
@@ -189,36 +191,58 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main id="top" tabindex="-1">
 
-<section class="shero">
+<!-- PILOT: pricing revamp 2026-09-19. One promise, three starting points, everything else one click away. -->
+<section class="pg-hero shero hx-final pr-hero">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb">
       <a href="/">Kreated</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">Pricing</span>
     </nav>
-    <h1 class="shero__h"><span>Where the work</span><span><em class="pr__amp">starts</em></span></h1>
-    <div class="shero__foot">
-      <p class="shero__fact">Two ways to buy: a package, or a package you build
-        yourself from the individual services. Every figure below is real, every
-        engagement is scoped and priced in writing before it begins, and you approve
-        the number before any work starts.</p>
-      <!-- ⚠ ONE contextual link to the cost resource, added 2026-09-01.
-           docs/SEO-ROADMAP.md §9: /pricing/ keeps every commercial price term
-           and the table; the resource only explains what moves a number.
-           🚫 Do not add more resource links to this page — §12 of the batch
-           brief is explicit that service pages should not become link lists. -->
-      <p class="prov">Comparing quotes and wondering why they differ so much?
+    <h1 class="hx-h"><span>Where the work</span> <em>starts</em></h1>
+    <p class="hx-sub">Every project is scoped and priced in writing, and you approve the number before any work starts.</p>
+    <div class="hx-btns">
+      <a class="hx-btn hx-btn--go" href="#start">Find your starting point <i aria-hidden="true">&#8595;</i></a>
+      <a class="hx-btn" href="#panelIndividual" data-tab="tabIndividual">Build your own <i aria-hidden="true">&#8594;</i></a>
+    </div>
+    <p class="prov">Comparing quotes and wondering why they differ so much?
         <a class="ilink" href="/resources/what-a-small-business-website-costs/">What
         a small business website actually costs</a> explains the four things that
         move the number.</p>
+  </div>
+</section>
+
+
+<section class="sec bx-sec bx-glow-r pr-start" id="start">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">Start here</p><h2 class="bx-h">What do you <em>need first?</em></h2>
+      <p class="bx-sub">Pick the closest. Each one opens its full set of options below.</p></header>
+    <div class="pr-paths">
+      <a class="pr-path" href="#grpWebsites"><p class="bx-plan__tag">Most common</p><p class="pr-path__need">A website that wins the job</p><h3>Growth</h3><p class="bx-plan__price">from $2,950<small></small></p><p class="pr-path__why">The work is already good and the website is the thing underselling it.</p><p class="pr-path__more">Four sizes, from $750 <i aria-hidden="true">&#8594;</i></p></a>
+      <a class="pr-path" href="#grpOngoing"><p class="pr-path__need">To be found, every month</p><h3>Local Growth</h3><p class="bx-plan__price">$900<small>/mo</small></p><p class="pr-path__why">Your foundations are built and the work now needs tending continuously.</p><p class="pr-path__more">Three levels, $500 to $1,500+ <i aria-hidden="true">&#8594;</i></p></a>
+      <a class="pr-path" href="#grpTrades"><p class="pr-path__need">The whole lead system, for trades</p><h3>Contractor Growth</h3><p class="bx-plan__price">$2,000<small>/mo</small></p><p class="pr-path__why">Leads are going missing somewhere nobody has time to find.</p><p class="pr-path__more">What it includes <i aria-hidden="true">&#8594;</i></p></a>
     </div>
-      <!-- ⚠ ADDED 2026-09-11. The builder sat 5,000px down the second tab; these
-           put both ways to buy one click from the top. The hashes are handled by
-           pricing.js, which opens the tab that contains the target. -->
-      <p class="pr__ways">
-        <a class="btn btn--cobalt" href="#panelPackages" data-tab="tabPackages">See the packages <i aria-hidden="true">&#8595;</i></a>
-        <a class="btn btn--ghost" href="#panelIndividual" data-tab="tabIndividual">Build your own <i aria-hidden="true">&#8595;</i></a>
-      </p>
+    <p class="pr-also">Also priced below: <a class="ilink" href="#grpBrand">brand</a>, <a class="ilink" href="#grpSocial">social media</a>,
+      <a class="ilink" href="#grpSearch">answer engine optimization</a>, <a class="ilink" href="#grpSupport">site care</a> and the
+      <a class="ilink" href="#grpSoftware">KreatedOS CRM</a>. What each one is: <a class="ilink" href="/services/">the seven services</a>.</p>
+  </div>
+</section>
+
+<section class="sec bx-sec bx-glow-l pr-usual">
+  <div class="wrap">
+    <header class="bx-head"><p class="kx-chip">How most clients start</p><h2 class="bx-h">A website first, <em>then keep it found</em></h2>
+      <p class="bx-sub">Local Growth is the program most Growth sites step into. One conversation covers both.</p></header>
+    <div class="pr-combo">
+      <div><p class="pr-combo__k">Once</p><h3>Growth website</h3><p class="bx-plan__price">from $2,950</p>
+        <p>Researched, written and built to be found: keyword mapping, conversion copy and a Google Business Profile audit.</p></div>
+      <div class="pr-combo__plus" aria-hidden="true">+</div>
+      <div><p class="pr-combo__k">Monthly</p><h3>Local Growth</h3><p class="bx-plan__price">$900<small>/mo</small></p>
+        <p>Continuous local search work, the profile kept fed, and reporting tied to calls and forms.</p></div>
+    </div>
+    <p class="bx-note">Moving up later is an expansion rather than a rebuild, and nothing is paid for twice.</p>
+    <figure class="bx-review"><blockquote><p>&ldquo;I chose the growth offer and care plan and the pricing moving forward was very transparent and upfront.&rdquo;</p></blockquote>
+      <figcaption><b>Gracie R.</b><span>Clothing brand owner</span><small>Published Google review</small></figcaption>
+      <details><summary>Read the full review</summary><p>I own a clothing brand with a large following and the website I had live was very awfully built (by me lol) and I was losing customers due to this. I chose the growth offer and care plan and the pricing moving forward was very transparent and upfront. Skyler had my new website and google business page live within a week and I couldn’t be more happy with how it turned out! I was asked for my opinion throughout the build of the website and I felt like my requests were always added/removed. Also, I have no clue how all the SEO stuff works so thankfully the care plan option is provided. I’d give them 10 stars if I could!!</p></details></figure>
   </div>
 </section>
 
@@ -311,356 +335,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="ppanel" id="panelPackages" role="tabpanel" aria-labelledby="tabPackages" tabindex="-1">
-
-      <!-- ⚠ JUMP LINKS, 2026-09-11. The Packages tab runs to ~9,000px; these let a
-           reader go straight to the group they came for. Sticky on wide screens,
-           a scrolling row on phones. Order mirrors the groups below. -->
-      <nav class="pjump" aria-label="Jump to a group of packages">
-        <a href="#grpTrades">For trades</a>
-        <a href="#grpOngoing">Ongoing search</a>
-        <a href="#grpSocial">Social media</a>
-        <a href="#grpWebsites">Websites</a>
-        <a href="#grpBrand">Brand</a>
-        <a href="#grpSearch">Search &amp; AEO</a>
-        <a href="#grpSupport">Site support</a>
-        <a href="#grpSoftware">Software</a>
-        <a href="#grpChoose">Which package</a>
-        <a href="#grpTerms">Terms</a>
-      </nav>
-
-      <!-- ======================================================================
-           CONTRACTOR GROWTH PROGRAM — $2,000/mo, approved by Skyler 2026-09-10
-           (DECISION 025). The headline for trades and field-service businesses;
-           the ladder below is the downsell.
-
-           ⚠ SCOPE IS ASSEMBLED FROM DOCUMENTED TIERS, not invented: Local Growth
-           (above ⟶ Reference §43) + Site Care+ (Reference §59) + the review
-           system from Local Presence. The ONLY new deliverable is the fast-
-           response line (missed-call text-back and instant enquiry reply),
-           which is what the owner approved on 2026-09-10. KreatedOS CRM is
-           included, owner decision 2026-09-10 (DECISION 026).
-           🚫 No "Most common engagement" label. Nobody has bought it yet.
-           ⚠ Three-month initial term, the same as Local Growth — owner decision
-              2026-09-10 (DECISION 025).
-           🚫 No website build inside the fee. A build is scoped separately.
-           ====================================================================== -->
-      <h2 id="grpTrades" class="pgroup">For Trades<span>Recurring</span></h2>
-      <div class="offers">
-      <article class="offer offer--rec" id="offContractor">
-        <div class="offer__id">
-          <p class="offer__common">Built for trades and field service</p>
-          <p class="offer__no">Program</p>
-          <h3 class="offer__name">Contractor Growth</h3>
-          <p class="offer__stage cc">For a trades business that wants the whole lead system run by
-            one person: the site, the search results, the profile, the reviews, and the phone.</p>
-        </div>
-        <p class="offer__scope cc">Everything in Local Growth &middot; Everything in Site Care+
-          &middot; KreatedOS CRM &middot; A review system &middot; Missed-call text-back &middot; A monthly call</p>
-        <div class="offer__go">
-          <p class="offer__price"> <span>$2,000/mo</span></p>
-          <p class="offer__term">Recurring</p>
-          <a data-evt="cta_start_project" class="offer__cta" href="/contact/">Start a Project</a>
-          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xContractor">See what's included <i>&#8594;</i></button>
-        </div>
-        <div class="offer__x" id="xContractor">
-          <div class="x__inner">
-            <div>
-              <h4 class="x__h">What's included</h4>
-              <ul class="x__list cc">
-                <li><b>Everything in Local Growth</b>: continuous local search work, the
-                  Google Business Profile kept fed, content and citations</li>
-                <li><b>Everything in Site Care+</b>: hosting, SSL, monitoring, backups,
-                  a larger edit allowance and ongoing improvements to the site</li>
-                <li><b>KreatedOS CRM</b>: every lead in one pipeline, with a daily list of
-                  who to call back</li>
-                <li><b>A review system</b>: a way of asking after every finished job, and help
-                  answering the reviews that arrive</li>
-                <li><b>Missed-call text-back and an instant enquiry reply</b>, set up and
-                  kept running, so a call you could not take still gets an answer</li>
-                <li><b>Trade and service-area pages</b> added when the demand is there to
-                  justify them</li>
-                <li><b>A monthly call</b> with the numbers that matter: calls, forms and
-                  booked jobs, not impressions</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Who it is for</h4>
-              <p class="x__p cc">A contractor or field-service business with a site worth
-                keeping, where leads are being lost somewhere between the search result and
-                the phone, and nobody has time to find where.</p>
-              <h4 class="x__h">What it is not</h4>
-              <ul class="x__list cc">
-                <li><b>Not a website build.</b> If the site needs rebuilding, that is scoped
-                  separately first.</li>
-                <li><b>Not advertising.</b> Nothing here buys clicks.</li>
-                <li><b>Not a ranking guarantee.</b> No engagement on this page is.</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Terms</h4>
-              <p class="x__note">Recurring, billed monthly in advance. Three-month initial commitment, month-to-month after that.</p>
-            </div>
-          </div>
-        </div>
-      </article>
-      </div>
-
-      <!-- ======================================================================
-           ONGOING GROWTH — the complete recurring ladder, published 2026-09-01
-           by owner decision. Local Presence and Market Expansion were documented
-           in Reference §39-46 and had never been public; only the middle rung
-           was, which made the catalog knowingly incomplete.
-
-           ⚠ EVERY INCLUSION BELOW IS FROM THE DOCUMENTED SCOPE (Reference §40,
-           §43, §46 and the comparison table in §47). Nothing is invented and
-           nothing is upgraded from "Basic" to "Full" for the sake of a tidier
-           list. Where §47 says Basic / Limited / Advanced, that is what the copy
-           says too.
-
-           ⚠ COMMITMENT TERMS. Only Local Growth has a documented initial term
-           (three months, then month-to-month) and it is stated on /method/,
-           /services/local-seo/ and /services/google-business-profile/. The
-           Reference documents NO initial term for Local Presence or Market
-           Expansion — only "billed monthly in advance" (§64). So those two say
-           exactly that and nothing more.
-           🚫 Do not give them a three-month term to make the ladder symmetrical.
-           If they should have one, that is an owner decision, not a tidy-up.
-           ====================================================================== -->
-      <h2 id="grpOngoing" class="pgroup">Ongoing Growth<span>Recurring</span></h2>
-      <div class="offers">
-      <article class="offer" id="offLocalPresence">
-        <div class="offer__id">
-          <p class="offer__no">No. 01</p>
-          <h3 class="offer__name">Local Presence</h3>
-          <p class="offer__stage cc">For a business that needs its local foundation kept accurate and healthy, without an expansion program.</p>
-        </div>
-        <p class="offer__scope cc">Profile management &middot; Reviews &middot; Citations &middot; Monitoring &middot; Monthly reporting</p>
-        <div class="offer__go">
-          <p class="offer__price"> <span>$500/mo</span></p>
-          <p class="offer__term">Recurring</p>
-          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
-          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xLocalPresence">See what's included <i>&#8594;</i></button>
-        </div>
-        <div class="offer__x" id="xLocalPresence">
-          <div class="x__inner">
-            <div>
-              <h4 class="x__h">What's included</h4>
-              <ul class="x__list cc">
-                <li><b>Google Business Profile management</b>: categories and services refined, posts where they are genuinely worth making</li>
-                <li><b>Reviews</b>: a strategy for asking, and help answering the ones that arrive</li>
-                <li><b>Business information monitored</b>, with NAP consistency checked and major citation cleanup</li>
-                <li><b>Local rank tracking and Search Console monitoring</b></li>
-                <li><b>Technical SEO health monitoring</b>, plus basic optimization of existing pages and simple internal-link improvements</li>
-                <li><b>Monthly reporting and recommendations</b></li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Who it is for</h4>
-              <p class="x__p cc">A business that is already visible and wants that maintained rather than pushed. The foundation stays accurate, the profile stays fed, and nothing decays quietly.</p>
-              <h4 class="x__h">What it is not</h4>
-              <ul class="x__list cc">
-                <li><b>No program of new SEO pages.</b> New pages here are rare and limited.</li>
-                <li><b>No multi-city expansion, no high-volume blogging, no link campaigns, no digital PR.</b></li>
-                <li><b>No CRO program and no revenue attribution.</b> Lead attribution is basic.</li>
-                <li><b>Not paid advertising management.</b></li>
-              </ul>
-              <h4 class="x__h">When to move up</h4>
-              <p class="x__p cc">When you want new pages and researched opportunities rather than maintenance, Local Growth is the next rung. Reference scope puts full existing-page SEO, ongoing keyword research and CRO there rather than here.</p>
-            </div>
-            <div>
-              <h4 class="x__h">Terms</h4>
-              <p class="x__note">Recurring, billed monthly in advance. No initial term is documented for this tier.</p>
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="offer" id="offLocalGrowth">
-        <div class="offer__id">
-          <p class="offer__no">No. 02</p>
-          <h3 class="offer__name">Local Growth</h3>
-          <p class="offer__stage cc">For a business whose foundations are built and who now needs someone tending the local search work continuously.</p>
-        </div>
-        <p class="offer__scope cc">Ongoing local search &middot; Profile management &middot; Content and citations &middot; Reporting</p>
-        <div class="offer__go">
-          <p class="offer__price"> <span>$900/mo</span></p>
-          <p class="offer__term">Recurring</p>
-          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
-          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xLocalGrowth">See what's included <i>&#8594;</i></button>
-        </div>
-        <div class="offer__x" id="xLocalGrowth">
-          <div class="x__inner">
-            <div>
-              <h4 class="x__h">What's included</h4>
-              <ul class="x__list cc">
-                <li><b>Continuous local search work</b>, rather than a project that ends</li>
-                <li><b>Google Business Profile kept fed</b>: posts, questions, categories, services, photos</li>
-                <li><b>Content and citation work</b> as the market and the competition move</li>
-                <li><b>Reporting you can actually read</b>, tied to calls and forms rather than to impressions</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Who it is for</h4>
-              <p class="x__p cc">A business already visible enough to be worth defending, in a market where competitors are actively working on the same thing. This is the program most Growth sites step into.</p>
-              <h4 class="x__h">What it is not</h4>
-              <ul class="x__list cc">
-                <li><b>Not advertising.</b> Nothing here buys clicks.</li>
-                <li><b>Not a website build.</b> It assumes the foundations exist.</li>
-                <li><b>Not a ranking guarantee.</b></li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Terms</h4>
-              <p class="x__note">Recurring, billed monthly in advance. Three-month initial commitment, month-to-month after that.</p>
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="offer" id="offMarketExpansion">
-        <div class="offer__id">
-          <p class="offer__no">No. 03</p>
-          <h3 class="offer__name">Market Expansion</h3>
-          <p class="offer__stage cc">For a business aggressively expanding organic visibility across more services, more markets, or both.</p>
-        </div>
-        <p class="offer__scope cc">Everything in Local Growth &middot; Broader content program &middot; Multi-market strategy &middot; Authority &amp; attribution</p>
-        <div class="offer__go">
-          <p class="offer__price">From <span>$1,500/mo</span></p>
-          <p class="offer__term">Recurring</p>
-          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
-          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xMarketExpansion">See what's included <i>&#8594;</i></button>
-        </div>
-        <div class="offer__x" id="xMarketExpansion">
-          <div class="x__inner">
-            <div>
-              <h4 class="x__h">What's included</h4>
-              <ul class="x__list cc">
-                <li><b>Everything in Local Growth</b></li>
-                <li><b>A broader content program</b>: roughly two to four strategic pages or content assets a month where justified</li>
-                <li><b>Multiple market and service-area strategy</b>, with service by location architecture and advanced internal linking</li>
-                <li><b>Deeper keyword research and competitor displacement work</b></li>
-                <li><b>Authority and link acquisition strategy</b>, local partnerships, citation expansion, and digital PR where justified</li>
-                <li><b>Deeper CRO</b>, advanced lead attribution, and revenue attribution where practical</li>
-                <li><b>AI search and GEO optimization</b>, advanced schema, and a content refresh program</li>
-                <li><b>A quarterly strategic review</b> on top of the monthly reporting</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Who it is for</h4>
-              <p class="x__p cc">A business competing across several services or several cities where organic visibility is a growth channel rather than a hygiene factor, and where two to four pieces a month can actually be justified by demand.</p>
-              <h4 class="x__h">What it is not</h4>
-              <ul class="x__list cc">
-                <li><b>Not paid advertising.</b> Nothing here buys clicks.</li>
-                <li><b>Not content for its own sake.</b> Two to four pieces a month is a ceiling that demand has to earn, not a quota.</li>
-                <li><b>Not a ranking guarantee.</b> No engagement on this page is.</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Terms</h4>
-              <p class="x__note">Recurring, billed monthly in advance. The figure is a starting point; scope sets where above it you land. No initial term is documented for this tier.</p>
-            </div>
-          </div>
-        </div>
-      </article>
-      </div>
-
-      <!-- ======================================================================
-           SOCIAL MEDIA — DECISION 028, owner-approved 2026-09-14.
-           $900/mo (client films, Kreated edits and posts) and $1,800/mo (Kreated
-           also plans and films). Both: 12 posts + 4 short videos a month on
-           Facebook, Instagram and TikTok or YouTube Shorts; three-month initial
-           commitment. Prices come from offers.js in the builder; these two cards
-           are the no-script copy and must agree with it.
-           🚫 Not decided, so not written: reporting, comment and message
-              replies, shoot days per month, travel outside Wilmington.
-           ====================================================================== -->
-      <h2 id="grpSocial" class="pgroup">Social Media<span>Recurring</span></h2>
-      <div class="offers">
-      <article class="offer" id="offSocialManage">
-        <div class="offer__id">
-          <p class="offer__no">No. 01</p>
-          <h3 class="offer__name">Social Management</h3>
-          <p class="offer__stage cc">For a business that already takes photos and video on the job, with nobody who has time to turn them into posts.</p>
-        </div>
-        <p class="offer__scope cc">12 posts and 4 short videos a month &middot; Facebook, Instagram, TikTok or YouTube Shorts &middot; You film, Kreated edits and posts</p>
-        <div class="offer__go">
-          <p class="offer__price"> <span>$900/mo</span></p>
-          <p class="offer__term">Recurring</p>
-          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
-          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xSocialManage">See what's included <i>&#8594;</i></button>
-        </div>
-        <div class="offer__x" id="xSocialManage">
-          <div class="x__inner">
-            <div>
-              <h4 class="x__h">What's included</h4>
-              <ul class="x__list cc">
-                <li><b>Facebook, Instagram, and TikTok or YouTube Shorts</b></li>
-                <li><b>Twelve posts and four short videos a month</b></li>
-                <li><b>Your photos and footage edited</b> into posts and short videos</li>
-                <li><b>A caption written for every post</b></li>
-                <li><b>Scheduled and posted</b>, so the accounts do not go quiet</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Who it is for</h4>
-              <p class="x__p cc">A business whose crew already shoots on the job. You send the photos and clips; Kreated does everything after that.</p>
-              <h4 class="x__h">What it is not</h4>
-              <ul class="x__list cc">
-                <li><b>Not filming or photography.</b> That is Social Production.</li>
-                <li><b>Not paid advertising.</b> Nothing here buys reach.</li>
-                <li><b>Not a follower or engagement guarantee.</b></li>
-              </ul>
-              <h4 class="x__h">When to move up</h4>
-              <p class="x__p cc">When nobody in the business will film consistently, Social Production adds the content ideas, the photography and the video.</p>
-            </div>
-            <div>
-              <h4 class="x__h">Terms</h4>
-              <p class="x__note">Recurring, billed monthly in advance. Three-month initial commitment, month-to-month after that.</p>
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="offer" id="offSocialProduce">
-        <div class="offer__id">
-          <p class="offer__no">No. 02</p>
-          <h3 class="offer__name">Social Production</h3>
-          <p class="offer__stage cc">For a business where nobody will film consistently, or whose work deserves better pictures than a phone in a hurry.</p>
-        </div>
-        <p class="offer__scope cc">Everything in Social Management &middot; Content ideas &middot; Photography and video by Kreated</p>
-        <div class="offer__go">
-          <p class="offer__price"> <span>$1,800/mo</span></p>
-          <p class="offer__term">Recurring</p>
-          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
-          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xSocialProduce">See what's included <i>&#8594;</i></button>
-        </div>
-        <div class="offer__x" id="xSocialProduce">
-          <div class="x__inner">
-            <div>
-              <h4 class="x__h">What's included</h4>
-              <ul class="x__list cc">
-                <li><b>Everything in Social Management</b>: the same platforms, twelve posts and four short videos a month</li>
-                <li><b>Content ideas and planning</b> by Kreated</li>
-                <li><b>Photography and video</b> made by Kreated rather than sent in by you</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Who it is for</h4>
-              <p class="x__p cc">A business that wants the whole job taken off its hands. You do the work; Kreated turns it into content and posts it.</p>
-              <h4 class="x__h">What it is not</h4>
-              <ul class="x__list cc">
-                <li><b>Not paid advertising.</b> Nothing here buys reach.</li>
-                <li><b>Not a follower or engagement guarantee.</b></li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="x__h">Terms</h4>
-              <p class="x__note">Recurring, billed monthly in advance. Three-month initial commitment, month-to-month after that.</p>
-            </div>
-          </div>
-        </div>
-      </article>
-      </div>
-
-      <h2 id="grpWebsites" class="pgroup">Websites<span>One time</span></h2>
-    <div class="offers">
+      <h2 class="pr-listh" id="prices">Every price<span>Open a group to see what each includes</span></h2>
+      <details class="pgrp">
+        <summary><h2 id="grpWebsites" class="pgroup pgrp__h">Websites<span>One time</span></h2><span class="pgrp__line">One page to a full market site</span><span class="pgrp__rng">from $750</span><span class="pgrp__tog" aria-hidden="true"></span></summary>
+        <div class="offers">
       <!-- ======================================================================
            ONE PAGE WEBSITE — added 2026-09-01.
            ⚠ THE PRICE IS AN APPROVED FACT ($750, owner-approved). The SCOPE
@@ -681,8 +359,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="offer__id">
           <p class="offer__no">No. 01</p>
           <h3 class="offer__name">One Page Website</h3>
-          <p class="offer__stage cc">For a business that has no website at all, or one
-            page of someone else's platform standing in for one.</p>
+          <p class="offer__stage cc">For a business that has no website at all, or one page on someone else's platform standing in for one.</p>
         </div>
         <p class="offer__scope cc">One page &middot; Everything above the fold that matters
           &middot; Click-to-call &middot; Inquiry form</p>
@@ -813,7 +490,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <ul class="x__ongoing">
                 <li><b>Site Care</b> from <span>$149/mo</span></li>
               </ul>
-              <p class="x__note">Both are under <a class="ilink" href="#grpSupport">Site support</a>, below.</p>
+              <p class="x__note">It is under <a class="ilink" href="#grpSupport">Site support</a>, below.</p>
             </div>
           </div>
         </div>
@@ -895,7 +572,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   Growth sites step into</li>
                 <li><b>Site Care</b> from <span>$149/mo</span></li>
               </ul>
-              <p class="x__note">Both are under <a class="ilink" href="#grpSupport">Site support</a>, below.</p>
+              <p class="x__note">Local Growth is under <a class="ilink" href="#grpOngoing">Ongoing Growth</a> and Site Care under <a class="ilink" href="#grpSupport">Site support</a>, below.</p>
             </div>
           </div>
         </div>
@@ -932,7 +609,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   jobs worth pursuing separately</li>
                 <li><b>Lead qualification in the forms</b>, with quote requests and
                   scheduling where they fit how you work</li>
-                <li><b>Integrations with what you already run</b>, CRM, scheduling,
+                <li><b>Integrations with what you already run</b>: CRM, scheduling,
                   email, call tracking, form routing</li>
                 <li><b>Campaign and call attribution</b>, with reporting that ties a lead
                   back to where it came from</li>
@@ -974,12 +651,257 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <li><b>Site Care+</b> <span>$279/mo</span></li>
               </ul>
               <p class="x__note">Brand identity is scoped and priced alongside this
-                engagement rather than folded into it, see Add-ons below.</p>
+                engagement rather than folded into it, see Brand below.</p>
             </div>
           </div>
         </div>
       </article>
     </div>
+      </details>
+
+
+      <!-- ======================================================================
+           ONGOING GROWTH — the complete recurring ladder, published 2026-09-01
+           by owner decision. Local Presence and Market Expansion were documented
+           in Reference §39-46 and had never been public; only the middle rung
+           was, which made the catalog knowingly incomplete.
+
+           ⚠ EVERY INCLUSION BELOW IS FROM THE DOCUMENTED SCOPE (Reference §40,
+           §43, §46 and the comparison table in §47). Nothing is invented and
+           nothing is upgraded from "Basic" to "Full" for the sake of a tidier
+           list. Where §47 says Basic / Limited / Advanced, that is what the copy
+           says too.
+
+           ⚠ COMMITMENT TERMS. Only Local Growth has a documented initial term
+           (three months, then month-to-month) and it is stated on /method/,
+           /services/local-seo/ and /services/google-business-profile/. The
+           Reference documents NO initial term for Local Presence or Market
+           Expansion — only "billed monthly in advance" (§64). So those two say
+           exactly that and nothing more.
+           🚫 Do not give them a three-month term to make the ladder symmetrical.
+           If they should have one, that is an owner decision, not a tidy-up.
+           ====================================================================== -->
+      
+      <details class="pgrp">
+        <summary><h2 id="grpOngoing" class="pgroup pgrp__h">Ongoing Growth<span>Recurring</span></h2><span class="pgrp__line">Kept visible, month to month</span><span class="pgrp__rng">$500&ndash;$1,500+/mo</span><span class="pgrp__tog" aria-hidden="true"></span></summary>
+        <div class="offers">
+      <article class="offer" id="offLocalPresence">
+        <div class="offer__id">
+          <p class="offer__no">No. 01</p>
+          <h3 class="offer__name">Local Presence</h3>
+          <p class="offer__stage cc">For a business that needs its local foundation kept accurate and healthy, without an expansion program.</p>
+        </div>
+        <p class="offer__scope cc">Profile management &middot; Reviews &middot; Citations &middot; Monitoring &middot; Monthly reporting</p>
+        <div class="offer__go">
+          <p class="offer__price"> <span>$500/mo</span></p>
+          <p class="offer__term">Recurring</p>
+          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
+          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xLocalPresence">See what's included <i>&#8594;</i></button>
+        </div>
+        <div class="offer__x" id="xLocalPresence">
+          <div class="x__inner">
+            <div>
+              <h4 class="x__h">What's included</h4>
+              <ul class="x__list cc">
+                <li><b>Google Business Profile management</b>: categories and services refined, posts where they are genuinely worth making</li>
+                <li><b>Reviews</b>: a strategy for asking, and help answering the ones that arrive</li>
+                <li><b>Business information monitored</b>, with NAP consistency checked and major citation cleanup</li>
+                <li><b>Local rank tracking and Search Console monitoring</b></li>
+                <li><b>Technical SEO health monitoring</b>, plus basic optimization of existing pages and simple internal-link improvements</li>
+                <li><b>Monthly reporting and recommendations</b></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Who it is for</h4>
+              <p class="x__p cc">A business that is already visible and wants that maintained rather than pushed. The foundation stays accurate, the profile stays fed, and nothing decays quietly.</p>
+              <h4 class="x__h">What it is not</h4>
+              <ul class="x__list cc">
+                <li><b>No program of new SEO pages.</b> New pages here are rare and limited.</li>
+                <li><b>No multi-city expansion, no high-volume blogging, no link campaigns, no digital PR.</b></li>
+                <li><b>No CRO program and no revenue attribution.</b> Lead attribution is basic.</li>
+                <li><b>Not paid advertising management.</b></li>
+              </ul>
+              <h4 class="x__h">When to move up</h4>
+              <p class="x__p cc">When you want new pages and researched opportunities rather than maintenance, Local Growth is the next rung. Full existing-page SEO, ongoing keyword research and conversion work are part of Local Growth.</p>
+            </div>
+            <div>
+              <h4 class="x__h">Terms</h4>
+              <p class="x__note">Recurring, billed monthly in advance. No initial term.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="offer" id="offLocalGrowth">
+        <div class="offer__id">
+          <p class="offer__no">No. 02</p>
+          <h3 class="offer__name">Local Growth</h3>
+          <p class="offer__stage cc">For a business whose foundations are built and who now needs someone tending the local search work continuously.</p>
+        </div>
+        <p class="offer__scope cc">Ongoing local search &middot; Profile management &middot; Content and citations &middot; Reporting</p>
+        <div class="offer__go">
+          <p class="offer__price"> <span>$900/mo</span></p>
+          <p class="offer__term">Recurring</p>
+          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
+          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xLocalGrowth">See what's included <i>&#8594;</i></button>
+        </div>
+        <div class="offer__x" id="xLocalGrowth">
+          <div class="x__inner">
+            <div>
+              <h4 class="x__h">What's included</h4>
+              <ul class="x__list cc">
+                <li><b>Continuous local search work</b>, rather than a project that ends</li>
+                <li><b>Google Business Profile kept fed</b>: posts, questions, categories, services, photos</li>
+                <li><b>Content and citation work</b> as the market and the competition move</li>
+                <li><b>Answers kept current</b>: the facts search engines and AI assistants read, held consistent as the business changes</li>
+                <li><b>Reporting you can actually read</b>, tied to calls and forms rather than to impressions</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Who it is for</h4>
+              <p class="x__p cc">A business already visible enough to be worth defending, in a market where competitors are actively working on the same thing. This is the program most Growth sites step into.</p>
+              <h4 class="x__h">What it is not</h4>
+              <ul class="x__list cc">
+                <li><b>Not advertising.</b> Nothing here buys clicks.</li>
+                <li><b>Not a website build.</b> It assumes the foundations exist.</li>
+                <li><b>Not a ranking guarantee.</b></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Terms</h4>
+              <p class="x__note">Recurring, billed monthly in advance. Three-month initial commitment, month-to-month after that.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="offer" id="offMarketExpansion">
+        <div class="offer__id">
+          <p class="offer__no">No. 03</p>
+          <h3 class="offer__name">Market Expansion</h3>
+          <p class="offer__stage cc">For a business aggressively expanding organic visibility across more services, more markets, or both.</p>
+        </div>
+        <p class="offer__scope cc">Everything in Local Growth &middot; Broader content program &middot; Multi-market strategy &middot; Authority &amp; attribution</p>
+        <div class="offer__go">
+          <p class="offer__price">From <span>$1,500/mo</span></p>
+          <p class="offer__term">Recurring</p>
+          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
+          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xMarketExpansion">See what's included <i>&#8594;</i></button>
+        </div>
+        <div class="offer__x" id="xMarketExpansion">
+          <div class="x__inner">
+            <div>
+              <h4 class="x__h">What's included</h4>
+              <ul class="x__list cc">
+                <li><b>Everything in Local Growth</b></li>
+                <li><b>A broader content program</b>: roughly two to four strategic pages or content assets a month where justified</li>
+                <li><b>Multiple market and service-area strategy</b>, with service by location architecture and advanced internal linking</li>
+                <li><b>Deeper keyword research and competitor displacement work</b></li>
+                <li><b>Authority and link acquisition strategy</b>, local partnerships, citation expansion, and digital PR where justified</li>
+                <li><b>Deeper CRO</b>, advanced lead attribution, and revenue attribution where practical</li>
+                <li><b>AI search and GEO optimization</b>, advanced schema, and a content refresh program</li>
+                <li><b>A quarterly strategic review</b> on top of the monthly reporting</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Who it is for</h4>
+              <p class="x__p cc">A business competing across several services or several cities where organic visibility is a growth channel rather than a hygiene factor, and where two to four pieces a month can actually be justified by demand.</p>
+              <h4 class="x__h">What it is not</h4>
+              <ul class="x__list cc">
+                <li><b>Not paid advertising.</b> Nothing here buys clicks.</li>
+                <li><b>Not content for its own sake.</b> Two to four pieces a month is a ceiling that demand has to earn, not a quota.</li>
+                <li><b>Not a ranking guarantee.</b> No engagement on this page is.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Terms</h4>
+              <p class="x__note">Recurring, billed monthly in advance. The figure is a starting point; scope sets where above it you land. No initial term is documented for this tier.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+      </details>
+
+
+      <!-- ======================================================================
+           CONTRACTOR GROWTH PROGRAM — $2,000/mo, approved by Skyler 2026-09-10
+           (DECISION 025). The headline for trades and field-service businesses;
+           the ladder below is the downsell.
+
+           ⚠ SCOPE IS ASSEMBLED FROM DOCUMENTED TIERS, not invented: Local Growth
+           (above ⟶ Reference §43) + Site Care+ (Reference §59) + the review
+           system from Local Presence. The ONLY new deliverable is the fast-
+           response line (missed-call text-back and instant inquiry reply),
+           which is what the owner approved on 2026-09-10. KreatedOS CRM is
+           included, owner decision 2026-09-10 (DECISION 026).
+           🚫 No "Most common engagement" label. Nobody has bought it yet.
+           ⚠ Three-month initial term, the same as Local Growth — owner decision
+              2026-09-10 (DECISION 025).
+           🚫 No website build inside the fee. A build is scoped separately.
+           ====================================================================== -->
+      
+      <details class="pgrp">
+        <summary><h2 id="grpTrades" class="pgroup pgrp__h">For Trades<span>Recurring</span></h2><span class="pgrp__line">The whole lead system in one program</span><span class="pgrp__rng">$2,000/mo</span><span class="pgrp__tog" aria-hidden="true"></span></summary>
+        <div class="offers">
+      <article class="offer offer--rec" id="offContractor">
+        <div class="offer__id">
+          <p class="offer__common">Built for trades and field service</p>
+          <p class="offer__no">Program</p>
+          <h3 class="offer__name">Contractor Growth</h3>
+          <p class="offer__stage cc">For a trades business that wants the whole lead system run by
+            one person: the site, the search results, the profile, the reviews, and the phone.</p>
+        </div>
+        <p class="offer__scope cc">Everything in Local Growth &middot; Everything in Site Care+
+          &middot; KreatedOS CRM &middot; A review system &middot; Missed-call text-back &middot; A monthly call</p>
+        <div class="offer__go">
+          <p class="offer__price"> <span>$2,000/mo</span></p>
+          <p class="offer__term">Recurring</p>
+          <a data-evt="cta_start_project" class="offer__cta" href="/contact/">Start a Project</a>
+          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xContractor">See what's included <i>&#8594;</i></button>
+        </div>
+        <div class="offer__x" id="xContractor">
+          <div class="x__inner">
+            <div>
+              <h4 class="x__h">What's included</h4>
+              <ul class="x__list cc">
+                <li><b>Everything in Local Growth</b>: continuous local search work, the
+                  Google Business Profile kept fed, content and citations</li>
+                <li><b>Everything in Site Care+</b>: hosting, SSL, monitoring, backups,
+                  a larger edit allowance and ongoing improvements to the site</li>
+                <li><b>KreatedOS CRM</b>: every lead in one pipeline, with a daily list of
+                  who to call back</li>
+                <li><b>A review system</b>: a way of asking after every finished job, and help
+                  answering the reviews that arrive</li>
+                <li><b>Missed-call text-back and an instant enquiry reply</b>, set up and
+                  kept running, so a call you could not take still gets an answer</li>
+                <li><b>Trade and service-area pages</b> added when the demand is there to
+                  justify them</li>
+                <li><b>A monthly call</b> with the numbers that matter: calls, forms and
+                  booked jobs, not impressions</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Who it is for</h4>
+              <p class="x__p cc">A contractor or field-service business with a site worth
+                keeping, where leads are being lost somewhere between the search result and
+                the phone, and nobody has time to find where.</p>
+              <h4 class="x__h">What it is not</h4>
+              <ul class="x__list cc">
+                <li><b>Not a website build.</b> If the site needs rebuilding, that is scoped
+                  separately first.</li>
+                <li><b>Not advertising.</b> Nothing here buys clicks.</li>
+                <li><b>Not a ranking guarantee.</b> No engagement on this page is.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Terms</h4>
+              <p class="x__note">Recurring, billed monthly in advance. Three-month initial commitment, month-to-month after that.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+      </details>
+
 
       <!-- ======================================================================
            BRAND — moved onto the catalog 2026-09-01.
@@ -994,8 +916,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            System" and that name is now retired everywhere.
            🚫 Do not reintroduce "Full Brand System". One product, one name.
            ====================================================================== -->
-      <h2 id="grpBrand" class="pgroup">Brand<span>One time</span></h2>
-      <div class="offers">
+      
+      <details class="pgrp">
+        <summary><h2 id="grpBrand" class="pgroup pgrp__h">Brand<span>One time</span></h2><span class="pgrp__line">Refresh, identity, full system, or with a website</span><span class="pgrp__rng">from $750</span><span class="pgrp__tog" aria-hidden="true"></span></summary>
+        <div class="offers">
       <article class="offer" id="offBrandRefresh">
         <div class="offer__id">
           <p class="offer__no">No. 01</p>
@@ -1143,7 +1067,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            ====================================================================== -->
       <article class="offer" id="offBrandWebsite">
         <div class="offer__id">
-          <p class="offer__no">No. 01</p>
+          <p class="offer__no">No. 04</p>
           <h3 class="offer__name">Brand + Website</h3>
           <p class="offer__stage cc">For a business rebuilding both at once, where the site and the brand should be decided together rather than one inheriting the other.</p>
         </div>
@@ -1170,7 +1094,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p class="x__p cc">A business changing what it looks like and what it says at the same time, usually because it has outgrown both. Also the right route when a website project keeps stalling on brand decisions nobody has made.</p>
               <h4 class="x__h">What it is not</h4>
               <ul class="x__list cc">
-                <li><b>Not a discount bundle.</b> The range reflects the combined scope, not a reduction for buying two things. Buying them separately costs about the same.</li>
+                <li><b>Not a discount bundle.</b> The range reflects the combined scope, not a reduction for buying two things. </li>
                 <li><b>Not a fixed price.</b> Where you land in the range depends on the brand scope, the website package, how much copy has to be written, how much research is needed and what assets are required.</li>
                 <li><b>Not ongoing work.</b> Search and care are separate and recurring.</li>
               </ul>
@@ -1185,6 +1109,109 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </article>
       </div>
+      </details>
+
+
+      <!-- ======================================================================
+           SOCIAL MEDIA — DECISION 028, owner-approved 2026-09-14.
+           $900/mo (client films, Kreated edits and posts) and $1,800/mo (Kreated
+           also plans and films). Both: 12 posts + 4 short videos a month on
+           Facebook, Instagram and TikTok or YouTube Shorts; three-month initial
+           commitment. Prices come from offers.js in the builder; these two cards
+           are the no-script copy and must agree with it.
+           🚫 Not decided, so not written: reporting, comment and message
+              replies, shoot days per month, travel outside Wilmington.
+           ====================================================================== -->
+      
+      <details class="pgrp">
+        <summary><h2 id="grpSocial" class="pgroup pgrp__h">Social Media<span>Recurring</span></h2><span class="pgrp__line">You film, or Kreated films</span><span class="pgrp__rng">$900 or $1,800/mo</span><span class="pgrp__tog" aria-hidden="true"></span></summary>
+        <div class="offers">
+      <article class="offer" id="offSocialManage">
+        <div class="offer__id">
+          <p class="offer__no">No. 01</p>
+          <h3 class="offer__name">Social Management</h3>
+          <p class="offer__stage cc">For a business that already takes photos and video on the job, with nobody who has time to turn them into posts.</p>
+        </div>
+        <p class="offer__scope cc">12 posts and 4 short videos a month &middot; Facebook, Instagram, TikTok or YouTube Shorts &middot; You film, Kreated edits and posts</p>
+        <div class="offer__go">
+          <p class="offer__price"> <span>$900/mo</span></p>
+          <p class="offer__term">Recurring</p>
+          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
+          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xSocialManage">See what's included <i>&#8594;</i></button>
+        </div>
+        <div class="offer__x" id="xSocialManage">
+          <div class="x__inner">
+            <div>
+              <h4 class="x__h">What's included</h4>
+              <ul class="x__list cc">
+                <li><b>Facebook, Instagram, and TikTok or YouTube Shorts</b></li>
+                <li><b>Twelve posts and four short videos a month</b></li>
+                <li><b>Your photos and footage edited</b> into posts and short videos</li>
+                <li><b>A caption written for every post</b></li>
+                <li><b>Scheduled and posted</b>, so the accounts do not go quiet</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Who it is for</h4>
+              <p class="x__p cc">A business whose crew already shoots on the job. You send the photos and clips; Kreated does everything after that.</p>
+              <h4 class="x__h">What it is not</h4>
+              <ul class="x__list cc">
+                <li><b>Not filming or photography.</b> That is Social Production.</li>
+                <li><b>Not paid advertising.</b> Nothing here buys reach.</li>
+                <li><b>Not a follower or engagement guarantee.</b></li>
+              </ul>
+              <h4 class="x__h">When to move up</h4>
+              <p class="x__p cc">When nobody in the business will film consistently, Social Production adds the content ideas, the photography and the video.</p>
+            </div>
+            <div>
+              <h4 class="x__h">Terms</h4>
+              <p class="x__note">Recurring, billed monthly in advance. Three-month initial commitment, month-to-month after that.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="offer" id="offSocialProduce">
+        <div class="offer__id">
+          <p class="offer__no">No. 02</p>
+          <h3 class="offer__name">Social Production</h3>
+          <p class="offer__stage cc">For a business where nobody will film consistently, or whose work deserves better pictures than a phone in a hurry.</p>
+        </div>
+        <p class="offer__scope cc">Everything in Social Management &middot; Content ideas &middot; Photography and video by Kreated</p>
+        <div class="offer__go">
+          <p class="offer__price"> <span>$1,800/mo</span></p>
+          <p class="offer__term">Recurring</p>
+          <a data-evt="cta_start_project" class="offer__cta offer__cta--dark" href="/contact/">Start a Project</a>
+          <button class="offer__see" type="button" aria-expanded="false" aria-controls="xSocialProduce">See what's included <i>&#8594;</i></button>
+        </div>
+        <div class="offer__x" id="xSocialProduce">
+          <div class="x__inner">
+            <div>
+              <h4 class="x__h">What's included</h4>
+              <ul class="x__list cc">
+                <li><b>Everything in Social Management</b>: the same platforms, twelve posts and four short videos a month</li>
+                <li><b>Content ideas and planning</b> by Kreated</li>
+                <li><b>Photography and video</b> made by Kreated rather than sent in by you</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Who it is for</h4>
+              <p class="x__p cc">A business that wants the whole job taken off its hands. You do the work; Kreated turns it into content and posts it.</p>
+              <h4 class="x__h">What it is not</h4>
+              <ul class="x__list cc">
+                <li><b>Not paid advertising.</b> Nothing here buys reach.</li>
+                <li><b>Not a follower or engagement guarantee.</b></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="x__h">Terms</h4>
+              <p class="x__note">Recurring, billed monthly in advance. Three-month initial commitment, month-to-month after that.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+      </details>
+
 
 
       <!-- ======================================================================
@@ -1196,8 +1223,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            stated here because it is stated on all three of those pages and a
            catalog that omits the term is not a catalog.
            ====================================================================== -->
-      <h2 id="grpSearch" class="pgroup">Search &amp; Visibility<span>One time</span></h2>
-      <div class="offers">
+      
+      <details class="pgrp">
+        <summary><h2 id="grpSearch" class="pgroup pgrp__h">Search &amp; Visibility<span>One time</span></h2><span class="pgrp__line">How search and AI assistants describe you</span><span class="pgrp__rng">from $750</span><span class="pgrp__tog" aria-hidden="true"></span></summary>
+        <div class="offers">
       <article class="offer" id="offAeoAudit">
         <div class="offer__id">
           <p class="offer__no">No. 01</p>
@@ -1268,7 +1297,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <p class="x__p cc">A business whose audit found real inconsistency, and whose website is otherwise sound. If the site itself is the problem, a website engagement is the cheaper route to the same place.</p>
               <h4 class="x__h">What it is not</h4>
               <ul class="x__list cc">
-                <li><b>Not a monthly program.</b> Ongoing answer engine work sits inside Local Growth where the scope overlaps.</li>
+                <li><b>Not a monthly program.</b> Ongoing answer engine work is kept current in Local Growth and worked in depth in Market Expansion.</li>
                 <li><b>Not a guarantee of citation.</b> No one can sell that honestly.</li>
                 <li><b>Not a website rebuild.</b> It works with what is there.</li>
               </ul>
@@ -1281,9 +1310,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </article>
       </div>
+      </details>
 
-      <h2 id="grpSupport" class="pgroup">Site Support<span>Recurring</span></h2>
-      <div class="offers">
+      <details class="pgrp">
+        <summary><h2 id="grpSupport" class="pgroup pgrp__h">Site Support<span>Recurring</span></h2><span class="pgrp__line">Hosting, backups and edits</span><span class="pgrp__rng">$149 or $279/mo</span><span class="pgrp__tog" aria-hidden="true"></span></summary>
+        <div class="offers">
       <article class="offer" id="offSiteCare">
         <div class="offer__id">
           <p class="offer__no">No. 01</p>
@@ -1367,6 +1398,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </article>
       </div>
+      </details>
+
 
       <!-- ======================================================================
            KREATEDOS CRM — $79/mo, approved by Skyler 2026-09-10 (DECISION 026).
@@ -1384,8 +1417,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               pipeline. 🚫 Do not add scheduling, dispatch, invoicing or a
               phone system to this list; KreatedOS does none of them for leads.
            ====================================================================== -->
-      <h2 id="grpSoftware" class="pgroup">Software<span>Recurring</span></h2>
-      <div class="offers">
+      
+      <details class="pgrp">
+        <summary><h2 id="grpSoftware" class="pgroup pgrp__h">Software<span>Recurring</span></h2><span class="pgrp__line">KreatedOS CRM, early access</span><span class="pgrp__rng">$79/mo</span><span class="pgrp__tog" aria-hidden="true"></span></summary>
+        <div class="offers">
       <article class="offer" id="offCrm">
         <div class="offer__id">
           <p class="offer__common">New &middot; early access</p>
@@ -1443,6 +1478,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </article>
       </div>
+      </details>
+
+
+      
+
+      
 
     <!-- ======================================================================
          HOW TO CHOOSE — added 2026-09-01.
@@ -1452,8 +1493,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          Every line below is a restatement of scope already on this page. No
          new claim, no new number.
          ====================================================================== -->
-    <div class="choose">
-      <h2 id="grpChoose" class="pgroup pgroup--quiet">Which website package is you</h2>
+    <details class="pgrp pgrp--help choose" id="grpChoose"><summary><h2 class="pgroup pgrp__h">Which website package fits</h2><span class="pgrp__tog" aria-hidden="true"></span></summary>
       <ol class="choose__list cc">
         <li><b>You have no website.</b> People search your name, find a profile on
           someone else's platform, and decide from that. Start at
@@ -1472,7 +1512,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="choose__note cc">If two of these describe you, the cheaper one is usually
         right. Every engagement is built on the same foundation, so moving up later is an
         expansion rather than a rebuild, and nothing is paid for twice.</p>
-    </div>
+    </details>
 
     <!-- ======================================================================
          WHAT MOVES THE PRICE — added 2026-09-01.
@@ -1483,8 +1523,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          because the multiplier is what the written scope is for.
          🚫 Do not put numbers against these lines. They are not a rate card.
          ====================================================================== -->
-    <div class="movers">
-      <h2 class="pgroup pgroup--quiet">What moves the number</h2>
+    <details class="pgrp pgrp--help movers"><summary><h2 class="pgroup pgrp__h">What moves the number</h2><span class="pgrp__tog" aria-hidden="true"></span></summary>
       <ul class="movers__list cc">
         <li><b>How many pages actually earn their place.</b> Not a page count you pick:
           the number of distinct things you sell, and the number of places you sell them,
@@ -1505,7 +1544,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
       <p class="choose__note cc">None of this is estimated on a call. It is scoped in
         writing, with the number on it, before anything starts.</p>
-    </div>
+    </details>
 
     <!-- ======================================================================
          ⚠ .invest__after WAS REMOVED HERE, 2026-09-01.
@@ -1528,7 +1567,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><b>Website projects</b> are paid 50% to start and 50% before launch.
           Larger or custom projects may run on milestones defined in the proposal
           instead.</li>
-        <li><b>Recurring services</b> are billed monthly in advance. Local Growth
+        <li><b>Recurring services</b> are billed monthly in advance. Local Growth,
           Contractor Growth, Social Management and Social Production run on a
           three-month initial commitment and month-to-month after that. Local Presence, Market Expansion, Site Care
           and Site Care+ carry no initial term.</li>
@@ -1646,14 +1685,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            offers.js. -->
       <details class="plist">
         <summary class="plist__sum">Every individual service, one by one
-          <span>8 services &middot; one time</span></summary>
+          <span>8 individual items &middot; one time</span></summary>
 
       <h2 class="pgroup">Website &amp; Content<span>One time</span></h2>
+      <p class="bo__deal pr-deal">Bundle: buy 4 pages of one type, get 1 more free. Applies to standard, service, location and landing pages.</p>
       <div class="isvcs">
       <article class="isvc" id="isvcStandardPage">
         <div class="isvc__head">
           <h3 class="isvc__name">Additional Standard Page</h3>
-          <p class="isvc__price">from $250</p>
+          <p class="isvc__price">from $250 &middot; buy 4, get 1 free</p>
         </div>
         <div class="isvc__body">
           <div><h4 class="isvc__k">What it is</h4><p class="cc">One more page built on the patterns your site already uses, with content you provide.</p></div>
@@ -1664,7 +1704,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <article class="isvc" id="isvcServicePage">
         <div class="isvc__head">
           <h3 class="isvc__name">Dedicated Service Page</h3>
-          <p class="isvc__price">from $450</p>
+          <p class="isvc__price">from $450 &middot; buy 4, get 1 free</p>
         </div>
         <div class="isvc__body">
           <div><h4 class="isvc__k">What it is</h4><p class="cc">A page built around one service, researched, written and linked into the rest of the site.</p></div>
@@ -1675,7 +1715,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <article class="isvc" id="isvcLocationPage">
         <div class="isvc__head">
           <h3 class="isvc__name">Location Page</h3>
-          <p class="isvc__price">from $550</p>
+          <p class="isvc__price">from $550 &middot; buy 4, get 1 free</p>
         </div>
         <div class="isvc__body">
           <div><h4 class="isvc__k">What it is</h4><p class="cc">A dedicated page for a legitimate additional market you actually serve.</p></div>
@@ -1687,7 +1727,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <article class="isvc" id="isvcLandingPage">
         <div class="isvc__head">
           <h3 class="isvc__name">Conversion Landing Page</h3>
-          <p class="isvc__price">from $850</p>
+          <p class="isvc__price">from $850 &middot; buy 4, get 1 free</p>
         </div>
         <div class="isvc__body">
           <div><h4 class="isvc__k">What it is</h4><p class="cc">A single page built around one campaign, offer, service or audience, with the structure and measurement that implies.</p></div>
@@ -1710,7 +1750,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div><h4 class="isvc__k">What it does for your business</h4><p class="cc">The profile is what most local buyers see before the website, and often instead of it. Getting it accurate and complete is usually the highest-return hour anyone spends on local search.</p></div>
           <div><h4 class="isvc__k">Good fit if</h4><p class="cc">You have a profile that was set up quickly, inherited, or never finished, and you want it correct without committing to a monthly program.</p></div>
         </div>
-        <p class="isvc__extra cc">One time, and deliberately not a subscription. Kreated does not sell standalone recurring profile management: ongoing local work belongs inside Local Growth, where it sits alongside everything else that has to move together. Buying this does not commit you to that.</p>
+        <p class="isvc__extra cc">One time, and deliberately not a subscription. Ongoing profile work is part of Local Presence and Local Growth, where it sits alongside everything else that has to move together, where it sits alongside everything else that has to move together. Buying this does not commit you to that.</p>
       </article>
       <article class="isvc" id="isvcTracking">
         <div class="isvc__head">
@@ -1798,7 +1838,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <div class="close__row">
       <a data-evt="cta_start_project" class="close__go" href="/contact/">Start a Project <i aria-hidden="true">&#8594;</i></a>
-      <a class="ilink close__alt" href="/services/">See the seven services <i aria-hidden="true">&#8594;</i></a>
+      <a class="ilink close__alt" data-evt="cta_website_audit" href="/free-website-audit/">Not sure yet? Free Website Audit <i aria-hidden="true">&#8594;</i></a>
     </div>
   </div>
 </section>
@@ -1872,10 +1912,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ⚠ ORDER MATTERS: offers -> recommend -> builder. recommend.js reads
      window.KreatedOffers at definition time, and builder.js reads both.
      All three are `defer`, so they execute in document order. -->
-<script src="/assets/data/offers.js?v=4" defer></script>
-<script src="/assets/data/recommend.js?v=5" defer></script>
-<script src="/pricing/pricing.js?v=3" defer></script>
-<script src="/pricing/builder.js?v=2" defer></script>
+<script src="/assets/data/offers.js?v=5" defer></script>
+<script src="/assets/data/recommend.js?v=9" defer></script>
+<script src="/pricing/pricing.js?v=4" defer></script>
+<script src="/pricing/builder.js?v=4" defer></script>
 <!-- event emitter. Loads on every route so the [data-evt] CTAs in the
      header and footer are tracked everywhere, not only where forms.js runs.
      Contacts nothing until an analytics container is present. -->

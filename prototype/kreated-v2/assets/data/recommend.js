@@ -155,6 +155,19 @@
       lines.push(l);
     });
 
+    /* bundles, owner 2026-09-19: every `buy` paid pages of one type add `free` more at no cost.
+       Nothing is subtracted; the free pages are added on top and shown as their own line. */
+    var bundles = [], nudges = [];
+    chosen.forEach(function (c) {
+      var o = c.offer, b = o.bundle, l = priced[o.id];
+      if (!b || !l || l.included) return;
+      var freeUnits = Math.floor(l.billable / b.buy) * b.free;
+      if (freeUnits) bundles.push({ id:o.id, name:o.name, freeUnits:freeUnits, value:freeUnits * o.price,
+                                    rule:'buy ' + b.buy + ', get ' + b.free + ' free' });
+      if (l.billable % b.buy === b.buy - 1) nudges.push({ id:o.id, name:o.name, free:b.free });
+    });
+    var bundleTotal = 0;
+
     /* the credit lands on the one-time side and can never take a total below 0 */
     var creditTotal = credits.reduce(function (s2, c2) { return s2 + c2.amount; }, 0);
     if (creditTotal) {
@@ -172,6 +185,9 @@
       allowances: allowances,
       credits: credits,
       creditTotal: creditTotal,
+      bundles: bundles,
+      bundleTotal: bundleTotal,
+      nudges: nudges,
       count: chosen.length
     };
   }
@@ -362,6 +378,8 @@
       allowances: priced.allowances,
       credits: priced.credits,
       creditTotal: priced.creditTotal,
+      bundles: priced.bundles,
+      nudges: priced.nudges,
       guidance: guidance(selection, priced),
       match: match,
       /* ⚠ 'individual' is the "you do not need a package" verdict and it must
