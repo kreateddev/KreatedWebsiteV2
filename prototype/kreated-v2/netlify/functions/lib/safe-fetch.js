@@ -42,7 +42,16 @@ const LIMITS = {
      🚫 Tied to BUDGET.PAGE_RESERVE_MS: change both, and 🚫 do not raise this
      again on the strength of the 60s number. */
   TIMEOUT_MS: 4000,
-  MAX_BYTES: 1200000,     /* 1.2MB of HTML is far more than any real homepage */
+  /* ⚠ RAISED to 3MB, 2026-09-20. The old cap was 1.2MB with the note "far more
+     than any real homepage", and that stopped being true: page builders ship
+     enormous single documents. Two of twenty Wilmington contractors audited on
+     this date were refused outright — camarilloconstruction.com at 1.32MB and
+     powerwashingwilmington.com at 1.41MB — so 10% of a real prospect list got
+     no audit at all. The stream is still capped and still killed the moment it
+     is exceeded, and safe-fetch's 4s timeout remains the real ceiling on how
+     much can arrive. 🚫 Do not remove the cap; it is what stops a hostile or
+     endless response. */
+  MAX_BYTES: 3000000,
   MAX_REDIRECTS: 3,
   ALLOWED_PORTS: new Set([80, 443]),
   ALLOWED_TYPES: [/^text\/html/i, /^application\/xhtml\+xml/i]
