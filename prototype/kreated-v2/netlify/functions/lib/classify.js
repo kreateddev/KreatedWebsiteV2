@@ -168,6 +168,13 @@ function classify(s) {
       out.push(F(cat, 'critical', 'The homepage has no main heading.',
         'The H1 is how a page states its subject. Without one, the strongest signal on the page is missing.', ev,
         'A heading structure that states the work and the market.'));
+    else if (bad.includes('short title'))
+      /* ⚠ nchammerconstruction.com's homepage <title> is "Contact Us". That is
+         what Google prints as the result title, and it was buried in the
+         evidence under a headline about service pages. */
+      out.push(F(cat, 'recommended', 'The homepage title says almost nothing.',
+        'The title is the line Google prints as your search result, and yours is too short to say what the business does or where it works.', ev,
+        'A title, heading and description that name the work and the market.'));
     else if (bad.includes('no service pages'))
       out.push(F(cat, 'recommended', 'Everything you do shares one page.',
         'A service with its own page can be found on its own terms, and can be sent to a customer asking about that one job.', ev,
@@ -402,7 +409,13 @@ function classify(s) {
 function fitVerdict(findings, s) {
   const critical = findings.filter(f => f.status === 'critical').length;
   const strong   = findings.filter(f => f.status === 'alreadyStrong').length;
-  if (strong >= 5 && critical === 0)
+  /* ⚠ AND NOTHING RECOMMENDED, 2026-09-20. "There is no piece of work here
+     worth paying for" used to fire on five strong categories alone, so a site
+     with a real recommended finding was told to buy nothing while the plan
+     underneath listed $1,650 of it. The verdict and the plan have to agree:
+     if the audit recommends something, it does not also say buy nothing. */
+  const recommended = findings.filter(f => f.status === 'recommended').length;
+  if (strong >= 5 && critical === 0 && recommended === 0)
     return { fit:'poor', reason:'Almost everything checked is already in good shape. There is no piece of work here worth paying for right now, and you should not be sold one.' };
   if (s.pagesFetched && s.home.wordCount > 3000 && s.pathsSeen > 40)
     return { fit:'uncertain', reason:'This is a larger site than Kreated is usually the right studio for. The findings still stand, but a bigger team may be the better implementation partner.' };

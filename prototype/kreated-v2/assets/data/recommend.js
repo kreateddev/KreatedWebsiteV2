@@ -447,7 +447,10 @@
     }
     if (d.locationPagesMissing > 0) {
       ['pkg.local.presence','pkg.local.growth','pkg.local.expansion'].forEach(function (id) { delete selection[id]; });
-      selection['svc.page.location'] = Math.min(6, d.locationPagesMissing);
+      /* ⚠ THREE AT MOST. Five named markets produced a $2,750 line on a free
+         audit, which reads as a pitch rather than a proposal. Location pages
+         earn their place one at a time, and the conversation can add more. */
+      selection['svc.page.location'] = Math.min(3, d.locationPagesMissing);
     }
     if (d.localFixOnly) {
       ['pkg.local.presence','pkg.local.growth','pkg.local.expansion'].forEach(function (id) { delete selection[id]; });

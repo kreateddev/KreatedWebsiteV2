@@ -80,8 +80,12 @@ function extract(html, baseUrl) {
 
   /* call-to-action labels, from links and buttons that look like actions */
   const ACTION = /(contact|call|quote|estimate|book|schedule|get in touch|request|start|enquir|inquir|free)/i;
+  /* ⚠ an icon's own label is not a call to action: a Font Awesome social icon
+     reports as "Facebook-f", which was quoted back to a builder as one of the
+     three CTAs found on their homepage. */
+  const ICON_LABEL = /^(facebook|twitter|instagram|linkedin|youtube|tiktok|pinterest|yelp|google)[-\s]?[a-z]?$/i;
   const ctas = [...new Set(
-    links.filter(l => l.label && ACTION.test(l.label) && l.label.length < 40).map(l => l.label)
+    links.filter(l => l.label && ACTION.test(l.label) && !ICON_LABEL.test(l.label.trim()) && l.label.length < 40).map(l => l.label)
       .concat(all(/<button[^>]*>([\s\S]*?)<\/button>/gi, clean).map(m => text(m[1])).filter(t => t && ACTION.test(t) && t.length < 40))
   )];
 
@@ -230,7 +234,7 @@ const SERVICE_NAMES = [
 const CITY_RX = /\b([A-Z][a-z]+(?:\s[A-Z][a-z]+)?),?\s*(?:NC|SC|VA|GA|NY|CA|TX|FL|North Carolina|South Carolina)\b/g;
 const NOT_A_CITY = /^(the|this|our|your|all|new|best|top|free|home|service|services|and|for|in|of|we|us)$/i;
 /* a word that can sit in front of the real town name */
-const CITY_PREFIX_JUNK = /^(roofers?|roofing|plumbers?|plumbing|hvac|electricians?|electrical|contractors?|contracting|remodeling|renovations?|construction|builders?|services?|serving|trusted|best|top|premier|local|greater|near|about|call|welcome|new|custom|coastal|southeastern|northeastern|southwestern|northwestern|eastern|western|northern|southern|central)$/i;
+const CITY_PREFIX_JUNK = /^(area|areas|region|regions|county|counties|surrounding|throughout|across|downtown|serves|serve|roofers?|roofing|plumbers?|plumbing|hvac|electricians?|electrical|contractors?|contracting|remodeling|renovations?|construction|builders?|services?|serving|trusted|best|top|premier|local|greater|near|about|call|welcome|new|custom|coastal|southeastern|northeastern|southwestern|northwestern|eastern|western|northern|southern|central)$/i;
 /* a region or a direction is not a market */
 const NOT_A_CITY_AT_ALL = /^(southeastern|northeastern|southwestern|northwestern|eastern|western|northern|southern|central|coastal|greater|triangle|piedmont|midlands|upstate|lowcountry|america|carolina|carolinas)$/i;
 
