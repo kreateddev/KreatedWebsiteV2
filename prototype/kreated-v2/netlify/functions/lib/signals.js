@@ -253,7 +253,10 @@ function cityMentions(title, body) {
     let city = m[1].trim();
     const parts = city.split(/\s+/);
     if (parts.length === 2 && CITY_PREFIX_JUNK.test(parts[0])) city = parts[1];
-    if (NOT_A_CITY.test(city) || NOT_A_CITY_AT_ALL.test(city)) continue;
+    /* ⚠ the junk list applies to a ONE-WORD capture too: "Serving NC" yielded
+       the town "Serving", which was printed back to a business as the place
+       its own site names. */
+    if (NOT_A_CITY.test(city) || NOT_A_CITY_AT_ALL.test(city) || CITY_PREFIX_JUNK.test(city)) continue;
     seen[city] = true;
   }
   /* count every bare mention too — "Raleigh" on its own is how a business
