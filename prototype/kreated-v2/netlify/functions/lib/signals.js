@@ -135,7 +135,7 @@ function extract(html, baseUrl) {
     description, descriptionLength: description ? description.length : 0,
     h1s, h1Count: h1s.length,
     h2s: h2s.slice(0, 25), h3Count: h3s.length,
-    cityMentions: cityMentions(title, body),
+    cityMentions: cityMentions(title, body, internalPaths),
     wordCount: body.split(/\s+/).filter(Boolean).length,
     bodySample: body.slice(0, 4000),
     internalPaths: internalPaths.slice(0, 60),
@@ -236,11 +236,20 @@ const NOT_A_CITY = /^(the|this|our|your|all|new|best|top|free|home|service|servi
 /* a word that can sit in front of the real town name */
 const CITY_PREFIX_JUNK = /^(area|areas|region|regions|county|counties|surrounding|throughout|across|downtown|serves|serve|roofers?|roofing|plumbers?|plumbing|hvac|electricians?|electrical|contractors?|contracting|remodeling|renovations?|construction|builders?|services?|serving|trusted|best|top|premier|local|greater|near|about|call|welcome|new|custom|coastal|southeastern|northeastern|southwestern|northwestern|eastern|western|northern|southern|central)$/i;
 /* a region or a direction is not a market */
+/* ⚠ A CHECKED LIST, 2026-09-20. Blacklisting junk words kept leaking: the
+   captures "Company Wilmington", "Rd Wilmington", "Washing Wilmington" and
+   "Battleship" all reached a document that was going to be sent to the business
+   owner, printed as places their own site names. A capture now has to BE a
+   place, or appear in one of the site's own location page slugs. Failing this
+   test undercounts markets, which is the safe direction: the tool must never
+   invent a market a business does not serve.
+   🚫 Do not go back to filtering by prefix alone. Add towns as they come up. */
+const KNOWN_PLACES = new RegExp('^(?:' + `Wilmington|Leland|Hampstead|Castle Hayne|Carolina Beach|Kure Beach|Wrightsville Beach|Surf City|Topsail Beach|North Topsail Beach|Holly Ridge|Sneads Ferry|Jacksonville|Burgaw|Rocky Point|Currie|Atkinson|Wallace|Shallotte|Southport|Oak Island|Bolivia|Supply|Calabash|Ocean Isle Beach|Sunset Beach|Holden Beach|Boiling Spring Lakes|Winnabow|Navassa|Riegelwood|Whiteville|Clinton|Warsaw|Kenansville|Beulaville|Richlands|Swansboro|Emerald Isle|Morehead City|Beaufort|New Bern|Havelock|Hubert|Maysville|Pollocksville|Elizabethtown|Bladenboro|Tabor City|Chadbourn|Delco|Lumberton|Fayetteville|Clarkton|Myrtle Beach|North Myrtle Beach|Conway|Little River|Longs|Loris|Murrells Inlet|Pawleys Island|Georgetown|Charleston|Mount Pleasant|Summerville|Florence|Raleigh|Durham|Cary|Chapel Hill|Apex|Holly Springs|Fuquay Varina|Garner|Clayton|Wake Forest|Knightdale|Wendell|Zebulon|Morrisville|Smithfield|Selma|Sanford|Pinehurst|Southern Pines|Aberdeen|Charlotte|Concord|Huntersville|Matthews|Monroe|Mooresville|Kannapolis|Gastonia|Greensboro|Winston Salem|High Point|Burlington|Greenville|Goldsboro|Wilson|Rocky Mount|Kinston|Asheville|Hickory|Statesville|Salisbury|Shelby|Lincolnton|Boone|Ogden|Porters Neck|Masonboro|Murraysville|Monkey Junction|Sea Breeze|Scotts Hill|Belville|Sandy Creek|St James|Caswell Beach|Bald Head Island|Figure Eight Island` + ')$', 'i');
 const NOT_A_CITY_AT_ALL = /^(southeastern|northeastern|southwestern|northwestern|eastern|western|northern|southern|central|coastal|greater|triangle|piedmont|midlands|upstate|lowcountry|america|carolina|carolinas)$/i;
 
-function cityMentions(title, body) {
+function cityMentions(title, body, paths) {
   const hay = (title || '') + ' ' + (body || '');
-  const seen = {};
+  const seen = {}, unknown = {};
   let m;
   CITY_RX.lastIndex = 0;
   while ((m = CITY_RX.exec(hay))) {
@@ -257,8 +266,17 @@ function cityMentions(title, body) {
        the town "Serving", which was printed back to a business as the place
        its own site names. */
     if (NOT_A_CITY.test(city) || NOT_A_CITY_AT_ALL.test(city) || CITY_PREFIX_JUNK.test(city)) continue;
+    if (!KNOWN_PLACES.test(city)) { unknown[city] = true; continue; }
     seen[city] = true;
   }
+  /* ⚠ a town the list does not know still counts when the SITE says it is one,
+     by carrying a page whose slug contains it. That is the site's own evidence,
+     not a guess. */
+  Object.keys(unknown).forEach(function (c) {
+    const slug = c.toLowerCase().replace(/\s+/g, '-');
+    if ((paths || []).some(function (p) { return String(p).toLowerCase().indexOf(slug) !== -1; })) seen[c] = true;
+  });
+
   /* count every bare mention too — "Raleigh" on its own is how a business
      actually writes about the market it serves */
   const out = {};

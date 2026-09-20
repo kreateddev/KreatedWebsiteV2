@@ -199,9 +199,14 @@ function classify(s) {
        when there is nothing cleaned to show. */
     const t = (home.title || '') + ' ' + home.bodySample;
     const named = Object.keys(s.cityMentions || {});
-    const place = named.length ? [named[0]]
-      : t.match(/\b([A-Z][a-z]+(?:\s[A-Z][a-z]+)?),?\s(?:NC|SC|VA|GA|NY|CA|TX|FL|North Carolina|South Carolina)\b/);
-    if (place) ev.push('A location appears in the page text: “' + place[0] + '”.');
+    const raw = t.match(/\b([A-Z][a-z]+(?:\s[A-Z][a-z]+)?),?\s(?:NC|SC|VA|GA|NY|CA|TX|FL|North Carolina|South Carolina)\b/);
+    const place = named.length ? [named[0]] : raw;
+    /* ⚠ only QUOTE a name that survived the place check. The raw regex hit is
+       fine as proof that a location is named, but printing it produced
+       “Battleship NC” and “Eastern North Carolina” in documents meant for the
+       business owner. */
+    if (named.length) ev.push('A location appears in the page text: “' + named[0] + '”.');
+    else if (raw) ev.push('A location is named in the homepage text.');
     else { bad.push('no place'); ev.push('No city or state was found in the homepage title or visible text.'); }
     if (!s.anyLocalSchema && s.anyOrgSchema) {
       bad.push('no schema');
