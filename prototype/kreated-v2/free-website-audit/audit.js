@@ -89,6 +89,21 @@
   }
 
   function planHtml(rec, fit) {
+    /* ⚠ NEVER CONTRADICT THE VERDICT, 2026-09-20. When the fit is poor the page
+       said, in its own words, "there is no piece of work here worth paying for
+       right now, and you should not be sold one" — and then printed a $500/mo
+       line under it and a $2,000/mo programme under that. Measured on
+       floresandfoley.com. If the audit will not stand behind a sale, the page
+       does not show one. 🚫 Do not re-add a plan to a poor-fit result. */
+    var poorFit = fit && fit.fit === 'poor';
+    if (poorFit) {
+      return '<section class="aud__plan aud__plan--none">' +
+        '<h3 class="aud__h3">Recommended for your business</h3>' +
+        '<p class="aud__none">' + esc(fit.reason) + '</p>' +
+        '<p class="aud__none">If that changes, or if you want a second opinion on something specific, ' +
+        '<a class="ilink" href="/contact/">tell Skyler what is going on</a>.</p>' +
+        '</section>';
+    }
     /* 🚫 Already Strong across the board means nothing is recommended, and the
        page says so instead of finding something to sell. */
     if (!rec || rec.verdict === 'empty') {
@@ -234,7 +249,14 @@
     /* the trades programme is MENTIONED when the site names a trade, or when
        the visitor chose the contractor audit. It never enters the plan lines. */
     var onContractorPage = /^\/contractor-website-audit\//.test(location.pathname);
-    var rec = Rec.recommendFromNeeds(data.needs, { trade: !!data.trade || onContractorPage });
+    /* ⚠ `detail` carries what the audit measured — whether the fault is the
+       title or a missing page, whether the local gap is markup or coverage,
+       whether the platform hides analytics, whether the site is too small.
+       Without it every finding bought the same product. */
+    var rec = Rec.recommendFromNeeds(data.needs, {
+      trade: !!data.trade || onContractorPage,
+      detail: data.detail || (opts.shared && opts.report && opts.report.detail) || null
+    });
 
     var groups = ORDER.map(function (g) {
       var items = data.findings.filter(function (f) { return f.status === g.k; });
@@ -246,12 +268,17 @@
 
     var crit = data.findings.filter(function (f) { return f.status === 'critical'; }).length;
     var strong = data.findings.filter(function (f) { return f.status === 'alreadyStrong'; }).length;
+    /* ⚠ SAY IT IN THE SUMMARY, not only in the fine print. A one-page read is
+       a weaker report and the reader has to know before they act on it. */
+    var thin = data.pagesInspected.length < 2
+      ? ' Only the homepage could be read, so this is a partial picture.' : '';
     var summary = crit
       ? crit + (crit === 1 ? ' thing is' : ' things are') + ' costing you enquiries right now. ' +
         (strong ? strong + ' ' + (strong === 1 ? 'area is' : 'areas are') + ' already fine.' : '')
       : strong >= 4
         ? 'This site is in good shape. There is little here worth paying to change.'
         : 'Nothing is broken. There are improvements worth making when you are ready.';
+    summary += thin;
 
     result.innerHTML =
       '<div class="aud__head">' +

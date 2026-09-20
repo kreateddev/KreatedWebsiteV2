@@ -425,6 +425,43 @@
       var pick = pool[idx];
       if (pick) selection[pick.id] = 1;
     });
+    /* ⚠ WHAT THE AUDIT ACTUALLY SAW, added 2026-09-20. `needs` carries only a
+       severity per category, so every search problem bought the same product
+       and every local gap bought the same programme. `detail` is the audit's
+       own measurements, and it decides WHICH product answers the finding:
+         onPageFix      the title, H1, description or local markup is the fault
+         servicePagesMissing  services named with no page of their own
+         localFixOnly   the local finding is schema or click-to-call, not coverage
+         rebuild        'launch' | 'growth' — the site is too small to do the job
+         trackingUnknown the platform hides analytics, so nothing may be sold
+       🚫 Never let `detail` ADD a need the findings did not raise. It may only
+       swap the product that answers a need, or remove one. */
+    var d = opts.detail || {};
+    if (d.trackingUnknown) delete selection['svc.track.analytics'];
+    if (needs && (needs.pages === 'critical' || needs.pages === 'recommended')) {
+      delete selection['svc.fix.searchlocal'];
+      delete selection['svc.page.service'];
+      if (d.onPageFix) selection['svc.fix.searchlocal'] = 1;
+      if (d.servicePagesMissing > 0) selection['svc.page.service'] = Math.min(6, d.servicePagesMissing);
+      if (!d.onPageFix && !(d.servicePagesMissing > 0)) selection['svc.fix.searchlocal'] = 1;
+    }
+    if (d.locationPagesMissing > 0) {
+      ['pkg.local.presence','pkg.local.growth','pkg.local.expansion'].forEach(function (id) { delete selection[id]; });
+      selection['svc.page.location'] = Math.min(6, d.locationPagesMissing);
+    }
+    if (d.localFixOnly) {
+      ['pkg.local.presence','pkg.local.growth','pkg.local.expansion'].forEach(function (id) { delete selection[id]; });
+      selection['svc.fix.searchlocal'] = 1;
+    }
+    if (d.rebuild && needs && needs.website && needs.website !== 'alreadyStrong') {
+      ['pkg.web.onepage','pkg.web.launch','pkg.web.growth','pkg.web.leader'].forEach(function (id) { delete selection[id]; });
+      selection[d.rebuild === 'growth' ? 'pkg.web.growth' : 'pkg.web.launch'] = 1;
+      /* ⚠ A NEW SITE SHIPS WITH ITS TITLE, HEADINGS AND LOCAL MARKUP CORRECT.
+         Charging the fixes pass beside a rebuild bills the same work twice, and
+         a buyer who spots that stops trusting the whole estimate. */
+      delete selection['svc.fix.searchlocal'];
+    }
+
     var result = evaluate(selection);
     result.needs = needs;
     result.nothingRecommendedFor = skipped;   /* rendered as "already strong" */
@@ -439,10 +476,14 @@
            visibility (critical or recommended — never optional, never
            alreadyStrong). A trades site the audit is happy with gets nothing.
        🚫 Never add it to `selection`, `lines` or either total. */
-    var PROGRAM_NEEDS = ['website', 'pages', 'localSeo'];
-    var hasWork = PROGRAM_NEEDS.some(function (c) {
-      return needs && (needs[c] === 'critical' || needs[c] === 'recommended');
-    });
+    /* ⚠ TIGHTENED 2026-09-20. This fired on any 'recommended' in three
+       categories, which meant 9 of 10 audited contractors — including two the
+       audit had just called strong everywhere — were shown a $2,000/mo
+       programme. A single recommended local note is not evidence that a
+       business needs its whole lead system run. */
+    var hasWork = needs && (
+      needs.website === 'critical' || needs.website === 'recommended' ||
+      needs.pages === 'critical' || needs.localSeo === 'critical');
     var prog = Offers.get('pkg.program.contractor');
     result.program = (opts.trade && hasWork && prog) ? {
       offer: prog,

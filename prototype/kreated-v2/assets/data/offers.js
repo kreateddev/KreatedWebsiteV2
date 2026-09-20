@@ -113,6 +113,20 @@
       fit:'You are running or about to run something specific: an ad campaign, a seasonal offer, one high-value service.' },
 
     /* ================= SEARCH / VISIBILITY ============================== */
+    /* ⚠ ADDED 2026-09-20, owner decision. Before this the audit had nowhere to
+       send its most common finding: a title, an H1, a meta description, missing
+       LocalBusiness markup or no click-to-call. Every one of those became
+       either a $450 service page the business did not need or a $500/mo
+       programme it did not need either. Ten Wilmington contractor audits
+       produced nine plans and seven of them were the wrong product.
+       $450 matches Profile Optimization, which is the same size of job on the
+       other surface. 🚫 It is a fix, not a programme: no monthly, no retainer. */
+    { id:'svc.fix.searchlocal', name:'Search & Local Fixes', group:'search', kind:'one-time',
+      price:450, from:true,
+      what:'A one-time pass over what search engines and AI assistants read first: the homepage title, the H1, the meta description, LocalBusiness structured data and a click-to-call number.',
+      does:'Makes the site state what the business does and where it works, in the places that are read before anybody sees the design.',
+      fit:'The site itself is sound, but its title, headings or local details are missing, duplicated or wrong.' },
+
     { id:'svc.search.gbp', name:'Google Business Profile Optimization', group:'search', kind:'one-time',
       price:450, from:true,
       what:'A one-time audit and correction of the profile: categories, services, description, service area, hours and the details that are quietly wrong.',
@@ -310,7 +324,11 @@
      needs to know a price or an offer id. */
   var NEED_CATEGORIES = {
     website:  ['pkg.web.onepage','pkg.web.launch','pkg.web.growth','pkg.web.leader'],
-    pages:    ['svc.page.standard','svc.page.service','svc.page.location','svc.page.landing'],
+    /* ⚠ ORDER IS THE LADDER: rung 0 is what a "recommended" need buys, rung 1
+       what a "critical" need buys. The fixes pass leads because the commonest
+       search finding is a title or a heading, not a missing page. The audit
+       overrides both when it knows which it is (recommend.js `detail`). */
+    pages:    ['svc.fix.searchlocal','svc.page.service','svc.page.location','svc.page.landing'],
     /* ⚠ svc.search.gbp IS DELIBERATELY ABSENT. classify.js states in every
        local finding that "the Google Business Profile itself was not inspected:
        this audit reads your public website only" — and the audit was then

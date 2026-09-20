@@ -27,7 +27,19 @@ const CATEGORIES = [
   { id:'tracking', need:'tracking', label:'Measurement' }
 ];
 
-const GENERIC_TITLE = /^(home|welcome|untitled|index|home page|my site|website)\b/i;
+/* ⚠ REWRITTEN 2026-09-20. This used to be the whole test, and `^home\b`
+   matched "Home Renovations | Wilmington, NC" and "Home Construction &
+   Renovation Company | Delaney's" — two titles that name the work AND the town.
+   Both businesses were told "that title does not say what the business does or
+   where it works", and both got a false critical off it.
+   A title is only generic when it opens with a placeholder word AND names
+   neither a trade nor a place. 🚫 Do not test the opening word on its own. */
+const GENERIC_START = /^(home|welcome|untitled|index|home page|my site|website|page)\b/i;
+function titleIsGeneric(title, s) {
+  if (!title) return true;
+  if (!GENERIC_START.test(title)) return false;
+  return !(s.titleNamesTrade || s.titleNamesPlace);
+}
 
 /* every finding carries the evidence that produced it */
 function F(cat, status, finding, why, evidence, next) {
@@ -73,6 +85,34 @@ function classify(s) {
     else ev.push('Calls to action found: ' + home.ctas.slice(0, 3).map(c => '“' + c + '”').join(', ') + '.');
     if (!s.anyForm && !s.anyTel) { bad.push('no contact'); ev.push('Neither an inquiry form nor a click-to-call number was found.'); }
 
+    /* ⚠ SIZE AND AGE, added 2026-09-20. The audit had no way to notice that a
+       site is four pages on a page builder, or that its copyright stopped three
+       years ago. Ten Wilmington contractors were audited and four of them —
+       a two-page Wix site among them — were told "the site is structurally
+       sound" and offered a $450 page. Structure is not the same as substance.
+       🚫 These are SMALL, factual signals. Do not turn this into a judgment of
+       taste: the audit cannot see a design, and must not pretend to. */
+    const small = s.pathsSeen > 2 && s.pathsSeen <= 4;
+    if (small) { bad.push('small'); ev.push('The site has ' + s.pathsSeen + ' pages linked from its own navigation.'); }
+    if (s.isBuilder) { bad.push('builder'); ev.push('It is built on ' + s.platform + ', a drag-and-drop page builder.'); }
+    /* ⚠ ONLY ON A BUILDER. Concise copy on a hand-built site is a choice, and
+       a 282-word fixture written to be strong tripped this at 350. It reads as
+       a symptom only next to a drag-and-drop platform. */
+    if (s.isBuilder && home.wordCount >= 150 && home.wordCount < 350) { bad.push('light copy'); ev.push('The homepage carries about ' + home.wordCount + ' words, which is little for a buyer comparing contractors.'); }
+    const thisYear = new Date().getFullYear();
+    if (s.copyrightYear && thisYear - s.copyrightYear >= 2) { bad.push('stale'); ev.push('The footer copyright reads ' + s.copyrightYear + '.'); }
+    /* a repeated or borrowed H1 ("Subscribe Form") is a structural tell */
+    if (home.h1Count > 1) ev.push('More than one H1 on the homepage: ' + home.h1s.slice(0, 2).map(function (h) { return '“' + h + '”'; }).join(' and ') + '.');
+
+    /* the site is not broken, but it is too small to do the job */
+    /* ⚠ A SMALL SITE IS FOUR PAGES OR FEWER. Six was the first threshold and it
+       fired on a deliberately strong six-page fixture: services, locations,
+       about, contact, pricing. Six pages is a site; four is a brochure.
+       Light copy on a hand-built site is a copy note, not a rebuild — it only
+       reads as "too little site" when it sits on a page builder. */
+    const rebuild = (bad.includes('thin') || bad.includes('shallow') || small) ||
+                    (bad.includes('light copy') && s.isBuilder);
+
     /* ⚠ CRITICAL MEANS "COSTING ENQUIRIES NOW", not "could be better". Thin
        copy was in this trigger and made a working site with a form, a phone
        number and a clear CTA come out critical purely for being concise. Only
@@ -82,6 +122,10 @@ function classify(s) {
       out.push(F(cat, 'critical', 'The site is not set up to turn a visitor into an inquiry.',
         'Someone who arrives ready to contact you has to work out how. Most will not.', ev,
         'A website engagement that puts the contact path where people look.'));
+    else if (rebuild)
+      out.push(F(cat, 'recommended', 'There is less site here than the business deserves.',
+        'A few pages on a page builder can prove you exist. Winning a comparison against two other contractors takes more than that.', ev,
+        'A new website, sized to the services you want to be found for.'));
     else if (bad.length)
       out.push(F(cat, 'recommended', 'The site works, but it is thin in places.',
         'It does the job today and would do more with a clearer structure.', ev,
@@ -98,7 +142,7 @@ function classify(s) {
     if (!home.title) { bad.push('no title'); ev.push('The homepage has no title tag.'); }
     else {
       ev.push('Homepage title: “' + home.title + '” (' + home.titleLength + ' characters).');
-      if (GENERIC_TITLE.test(home.title)) { bad.push('generic'); ev.push('That title does not say what the business does or where it works.'); }
+      if (titleIsGeneric(home.title, s)) { bad.push('generic'); ev.push('That title does not say what the business does or where it works.'); }
       if (home.titleLength < 20) bad.push('short title');
     }
     if (home.h1Count === 0) { bad.push('no h1'); ev.push('The homepage has no H1 heading.'); }
@@ -109,10 +153,25 @@ function classify(s) {
     else ev.push(s.servicePages.length + ' service ' + (s.servicePages.length === 1 ? 'page' : 'pages') + ' found: ' + s.servicePages.slice(0, 4).join(', ') + '.');
     if (home.internalCount < 5) { bad.push('few links'); ev.push('The homepage links to ' + home.internalCount + ' internal destinations.'); }
 
-    if (bad.includes('no title') || bad.includes('generic') || bad.includes('no h1') || bad.includes('no service pages'))
+    /* ⚠ THE HEADLINE HAS TO MATCH THE REASON, and "no service pages" is not a
+       critical on its own — a site can name its trade and its town perfectly
+       and still keep its services on one page. Sending "search engines cannot
+       tell what you do" to a business whose title reads "Kitchen, Bathroom &
+       Home Remodeling in Wilmington, NC" is the fastest way to lose them.
+       🚫 Do not put 'no service pages' back into the critical set. */
+    const titleBad = bad.includes('no title') || bad.includes('generic');
+    if (titleBad)
       out.push(F(cat, 'critical', 'Search engines cannot tell what you do from this page.',
-        'The title and headings are the first thing read, and yours do not name the work or the market.', ev,
-        'Search foundations and pages built around what people actually search for.'));
+        'The title is the first thing read, and yours does not name the work or the market.', ev,
+        'The title, headings and description rewritten around what people search for.'));
+    else if (bad.includes('no h1'))
+      out.push(F(cat, 'critical', 'The homepage has no main heading.',
+        'The H1 is how a page states its subject. Without one, the strongest signal on the page is missing.', ev,
+        'A heading structure that states the work and the market.'));
+    else if (bad.includes('no service pages'))
+      out.push(F(cat, 'recommended', 'Everything you do shares one page.',
+        'A service with its own page can be found on its own terms, and can be sent to a customer asking about that one job.', ev,
+        'A page for each service you want more of.'));
     else if (bad.length)
       out.push(F(cat, 'recommended', 'The basics are there but not doing much work.',
         'Small structural corrections tend to be the cheapest visibility available.', ev,
@@ -126,11 +185,21 @@ function classify(s) {
   (function () {
     const cat = CATEGORIES[2];
     const ev = [], bad = [];
+    /* ⚠ QUOTE THE CLEANED NAME, not a raw regex hit. This printed "A location
+       appears in the page text: “Roofers Wilmington NC”" — the same bad capture
+       that inflated the market count. cityMentions has already stripped the
+       trade word and the direction; use it, and only fall back to the raw match
+       when there is nothing cleaned to show. */
     const t = (home.title || '') + ' ' + home.bodySample;
-    const place = t.match(/\b([A-Z][a-z]+(?:\s[A-Z][a-z]+)?),?\s(?:NC|SC|VA|GA|NY|CA|TX|FL|North Carolina|South Carolina)\b/);
+    const named = Object.keys(s.cityMentions || {});
+    const place = named.length ? [named[0]]
+      : t.match(/\b([A-Z][a-z]+(?:\s[A-Z][a-z]+)?),?\s(?:NC|SC|VA|GA|NY|CA|TX|FL|North Carolina|South Carolina)\b/);
     if (place) ev.push('A location appears in the page text: “' + place[0] + '”.');
     else { bad.push('no place'); ev.push('No city or state was found in the homepage title or visible text.'); }
-    if (!s.anyLocalSchema) { bad.push('no schema'); ev.push('No LocalBusiness structured data was found.'); }
+    if (!s.anyLocalSchema && s.anyOrgSchema) {
+      bad.push('no schema');
+      ev.push('Only Organization structured data was found, which does not carry the address, hours or service area that LocalBusiness does.');
+    } else if (!s.anyLocalSchema) { bad.push('no schema'); ev.push('No LocalBusiness structured data was found.'); }
     else ev.push('LocalBusiness structured data is present.');
     if (!s.anyTel) { bad.push('no tel'); ev.push('No click-to-call phone number was found.'); }
     if (s.locationPages.length) ev.push(s.locationPages.length + ' location-style ' + (s.locationPages.length === 1 ? 'page' : 'pages') + ' found.');
@@ -293,15 +362,27 @@ function classify(s) {
     const cat = CATEGORIES[5];
     const ev = [], bad = [];
     const tags = home.rawTags || {};
-    if (tags.ga4 || tags.gtm) ev.push('An analytics tag was detected in the page source' + (tags.gtm ? ' (Tag Manager)' : ' (GA4)') + '.');
-    else { bad.push('no tag'); ev.push('No analytics or tag manager script was detected in the homepage source.'); }
+    const tagged = tags.ga4 || tags.gtm || tags.ua;
+    if (tagged) ev.push('An analytics tag was detected in the page source' + (tags.gtm ? ' (Tag Manager)' : tags.ua ? ' (Universal Analytics)' : ' (GA4)') + '.');
+    else if (s.analyticsMayBeHidden) {
+      /* ⚠ NOT A FINDING. On Wix, Squarespace, GoDaddy, Weebly and Duda the
+         platform's own analytics is attached in a dashboard and injected at
+         runtime, so it is invisible to an HTML read. Absence is not evidence
+         here, and 🚫 it must never be priced. */
+      bad.push('cannot tell');
+      ev.push('This site is built on ' + s.platform + ', which attaches analytics in its own dashboard rather than in the page source. Whether anything is counting cannot be seen from outside.');
+    } else { bad.push('no tag'); ev.push('No analytics or tag manager script was detected in the homepage source.'); }
     if (!s.anyForm && !s.anyTel) { bad.push('nothing to measure'); ev.push('There is no form or click-to-call for a conversion to be recorded against.'); }
     else ev.push('There ' + (s.anyForm && s.anyTel ? 'are both a form and a phone number' : s.anyForm ? 'is a form' : 'is a phone number') + ' that a conversion could be measured against.');
 
     /* 🚫 whether events are CONFIGURED cannot be seen from HTML */
     ev.push('Whether conversions are actually configured cannot be seen from outside the site.');
 
-    if (bad.includes('no tag'))
+    if (bad.includes('cannot tell'))
+      out.push(F(cat, 'optional', 'Whether anything is counting cannot be seen from here.',
+        'The platform hides it. It is worth confirming in your own dashboard, and worth fixing only if nothing is there.', ev,
+        'Check the platform\u2019s own analytics settings before buying anything.'));
+    else if (bad.includes('no tag'))
       out.push(F(cat, 'recommended', 'Nothing appears to be counting.',
         'Without measurement there is no way to tell which changes worked, so every later decision is a guess.', ev,
         'Analytics and conversion tracking configured on the site you have.'));

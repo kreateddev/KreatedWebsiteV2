@@ -1,4 +1,9 @@
-/* ==========================================================================
+/* ⚠ HEADINGS ARE GENERAL SANS, 2026-09-20. These four were the last
+   Cormorant Garamond headings on the site: the audit pages were not in the
+   redesign that shipped the day before, so "See what your website is costing
+   you." and "What the audit found" were still set in a serif nothing else
+   uses. 🚫 No serif or script faces anywhere in Kreated.
+   ========== ================================================================
    KREATED V2 — /free-website-audit/
 
    This route opens on light paper and travels into night, the same journey the
@@ -91,8 +96,8 @@
 
 .ah__h{
   margin:0 0 clamp(16px,1.8vw,24px);
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-weight:300;
+  font-family:'General Sans',system-ui,sans-serif;
+  font-weight:400;
   font-size:clamp(40px,6.2vw,84px);
   line-height:1.02;
   letter-spacing:-.015em;
@@ -246,8 +251,8 @@
 
 .ax__h{
   margin:0 0 clamp(8px,1vw,12px);
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-weight:300;
+  font-family:'General Sans',system-ui,sans-serif;
+  font-weight:400;
   font-size:clamp(28px,3.6vw,48px);
   line-height:1.08;
   letter-spacing:-.01em;
@@ -352,8 +357,8 @@
 .ax__close{max-width:760px;text-align:center}
 .ax__closeh{
   margin:0 0 clamp(14px,1.6vw,20px);
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-weight:300;font-size:clamp(28px,4vw,52px);line-height:1.06;
+  font-family:'General Sans',system-ui,sans-serif;
+  font-weight:400;font-size:clamp(28px,4vw,52px);line-height:1.06;
   letter-spacing:-.012em;color:var(--ink-1);text-wrap:balance;
 }
 .ax__closep{
@@ -447,8 +452,8 @@
 }
 .aud__h2{
   margin:0 0 10px;
-  font-family:'Cormorant Garamond',Georgia,serif;
-  font-weight:300;font-size:clamp(30px,4vw,50px);line-height:1.06;
+  font-family:'General Sans',system-ui,sans-serif;
+  font-weight:400;font-size:clamp(30px,4vw,50px);line-height:1.06;
   letter-spacing:-.012em;color:var(--ink-1);
 }
 .aud__h2:focus-visible{outline:2px solid var(--stroke-focus);outline-offset:6px}

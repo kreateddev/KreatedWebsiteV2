@@ -345,6 +345,41 @@ async function polish(findings, ctx) {
 }
 
 /* ---- needs, for the deterministic engine ------------------------------ */
+/* the measurements the plan needs in order to pick the right product */
+function planDetail(s, findings) {
+  const by = {};
+  findings.forEach(f => { by[f.category] = f; });
+  const searchEv = (by.search && by.search.evidence.join(' ')) || '';
+  const localEv  = (by.local && by.local.evidence.join(' ')) || '';
+  const website  = by.website ? by.website.status : 'alreadyStrong';
+  /* the search finding is an on-page fault when the title, the H1 or the
+     description is the thing at fault — not when pages are missing */
+  const onPageFix = /does not say what the business does|has no title tag|has no H1|H1 headings|No meta description/i.test(searchEv);
+  /* the local finding is a fix when it is markup or a phone link, and a
+     programme only when it is about market coverage */
+  const localFixOnly = by.local && by.local.status !== 'alreadyStrong' &&
+    /structured data|click-to-call/i.test(localEv) && !/markets|location pages/i.test(by.local.finding || '');
+  /* markets the copy names that no page targets: the answer is pages for the
+     real ones, not a monthly programme. 🚫 Only counted when the audit already
+     raised it — this may not invent a market the business never claimed. */
+  const uncovered = Object.keys(s.cityCoverage || {}).filter(c => !s.cityCoverage[c]).length;
+  const locationPagesMissing = by.local && /names \d+ markets/i.test(localEv) ? Math.min(6, uncovered) : 0;
+
+  return {
+    onPageFix,
+    locationPagesMissing,
+    servicePagesMissing: s.servicePagesMissing || 0,
+    localFixOnly: !!localFixOnly,
+    trackingUnknown: !!s.analyticsMayBeHidden && !(s.home.rawTags || {}).ga4 && !(s.home.rawTags || {}).gtm,
+    /* too little site to do the job: Launch, or Growth when the business names
+       services that need pages of their own (owner decision, 2026-09-20) */
+    rebuild: (website === 'critical' || website === 'recommended') &&
+             (s.pathsSeen <= 4 || s.isBuilder || s.home.wordCount < 150)
+      ? ((s.servicesNamed || []).length >= 3 ? 'growth' : 'launch')
+      : null
+  };
+}
+
 function toNeeds(findings) {
   const needs = {};
   findings.forEach(f => {
@@ -413,24 +448,34 @@ exports.handler = async function (event) {
     const readNotes = [{ url: first.finalUrl, why: 'the homepage' }];
     const skipped = [];
 
-    for (const c of chosen) {
-      /* ⚠ "is there room for the worst case of this fetch" — not "how long has
-         it been". A page that cannot finish inside the function timeout must
-         never be started: a skipped page costs one line of the report, and an
-         overrun costs the whole audit. */
+    /* ⚠ IN PARALLEL, changed 2026-09-20. These fetches used to run one after
+       the other, so the second page had to wait out the first and the third
+       usually hit the budget: patriotroofer.com and greendothvac.com were both
+       judged on their homepage alone, and every "already strong" on those
+       reports rested on one page. Run together, two subpages cost one page of
+       wall clock, and the SAME reserve rule still applies — nothing starts
+       unless the worst case of one fetch still fits.
+       🚫 This does not raise the budget. The ceiling argument above is
+       unchanged; only the ordering is. */
+    if (chosen.length) {
       if (remaining() < BUDGET.PAGE_RESERVE_MS) {
-        skipped.push({ url: c.url, why: 'the time budget was reached' });
-        continue;
-      }
-      try {
-        const p = await safeFetch(c.url);
-        pages.push(extract(p.html, p.finalUrl));
-        readNotes.push({ url: p.finalUrl, why: c.why });
-      } catch (e) {
-        /* ⚠ a failed page is NOT counted as analysed, and is never reported as
-           though it had been read. One unreachable subpage must not fail the
-           audit. */
-        skipped.push({ url: c.url, why: 'it could not be read' });
+        chosen.forEach(c => skipped.push({ url: c.url, why: 'the time budget was reached' }));
+      } else {
+        const got = await Promise.all(chosen.map(async (c) => {
+          try {
+            const p = await safeFetch(c.url);
+            return { ok: true, c, page: extract(p.html, p.finalUrl), finalUrl: p.finalUrl };
+          } catch (e) {
+            return { ok: false, c };
+          }
+        }));
+        got.forEach(g => {
+          if (g.ok) { pages.push(g.page); readNotes.push({ url: g.finalUrl, why: g.c.why }); }
+          /* ⚠ a failed page is NOT counted as analysed, and is never reported as
+             though it had been read. One unreachable subpage must not fail the
+             audit. */
+          else skipped.push({ url: g.c.url, why: 'it could not be read' });
+        });
       }
     }
 
@@ -452,6 +497,12 @@ exports.handler = async function (event) {
       pagesSkipped: skipped,
       findings: polished.findings,
       needs: toNeeds(polished.findings),
+      /* ⚠ WHICH PRODUCT ANSWERS THE FINDING, added 2026-09-20. `needs` carries
+         a severity and nothing else, so the plan used to buy the same $450 page
+         for a missing title as for a missing page, and a $500/mo programme for
+         a missing schema line. These are measurements, not advice: recommend.js
+         maps them. 🚫 Never put a price or an offer id in here. */
+      detail: planDetail(summary, polished.findings),
       fit,
       /* whether the site names a trade in its own title or H1 — used only to
          MENTION Contractor Growth beside the plan (recommend.js `program`) */

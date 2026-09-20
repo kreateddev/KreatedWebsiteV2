@@ -49,6 +49,9 @@ const LOCKED = {
   'svc.page.service':     ['one-time', 450,  null],
   'svc.page.location':    ['one-time', 550,  null],
   'svc.page.landing':     ['one-time', 850,  null],
+  /* added 2026-09-20 with the audit fix pass, owner decision: the one-time
+     answer to a title / heading / local-markup finding */
+  'svc.fix.searchlocal': ['one-time', 450, null],
   'svc.search.gbp':       ['one-time', 450,  null],
   'svc.track.analytics':  ['one-time', 400,  null],
   'svc.prod.photo':       ['one-time', 350,  null],
@@ -382,12 +385,22 @@ t('the audit never puts Contractor Growth or the CRM in the plan itself', () => 
   ok(ids.indexOf('pkg.program.contractor') === -1 && ids.indexOf('svc.crm.kreatedos') === -1, 'in the plan: ' + ids);
 });
 
+/* ⚠ REWRITTEN 2026-09-20. This used to pass { localSeo:'recommended' }, and
+   that is exactly the case the rule now refuses: ten audited Wilmington
+   contractors produced nine $2,000/mo mentions, including two sites the audit
+   had just called strong in every category. A single recommended local note is
+   not evidence that a business needs its lead system run. The mention now
+   needs a critical, or a website finding. */
 t('a trades site with real work gets the programme MENTIONED beside the plan', () => {
-  const r = R.recommendFromNeeds({ localSeo:'recommended' }, { trade:true });
+  const r = R.recommendFromNeeds({ localSeo:'critical' }, { trade:true });
   ok(r.program && r.program.offer.id === 'pkg.program.contractor', 'expected a programme mention');
-  const lowest = R.recommendFromNeeds({ localSeo:'recommended' });
+  const lowest = R.recommendFromNeeds({ localSeo:'critical' });
   eq([r.monthly.low, r.lines.map(l => l.id)], [lowest.monthly.low, lowest.lines.map(l => l.id)],
      'the mention must not change the plan or its totals:');
+});
+
+t('no mention for a trades site with only a recommended local note', () => {
+  eq(R.recommendFromNeeds({ localSeo:'recommended' }, { trade:true }).program, null);
 });
 
 t('no mention for a business that is not a trade', () => {

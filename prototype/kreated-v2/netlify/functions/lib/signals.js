@@ -93,11 +93,31 @@ function extract(html, baseUrl) {
      configured, which is invisible from outside. 🚫 Do not let a consumer of
      this field claim otherwise. */
   const rawTags = {
-    ga4: /gtag\/js\?id=G-|googletagmanager\.com\/gtag/i.test(html),
+    /* ⚠ WIDENED 2026-09-20. The old pattern only matched the script-tag form,
+       `gtag/js?id=G-`. A site that loads GA4 inline — `gtag('config','G-…')`,
+       which is what Site Kit and most page builders emit — was reported as
+       having NO analytics, and the audit then sold $400 of tracking work to a
+       business that already had it. Measured on delaneyscoastalconstruction.com
+       (G-2T1J8SDE0K, present and invisible to the old rule). */
+    ga4: /gtag\/js\?id=G-|googletagmanager\.com\/gtag|gtag\s*\(\s*['"]config['"]\s*,\s*['"]G-|['"]G-[A-Z0-9]{8,12}['"]/i.test(html),
+    ua: /google-analytics\.com\/(?:analytics|ga)\.js|['"]UA-\d{4,}-\d+['"]/i.test(html),
     gtm: /googletagmanager\.com\/gtm\.js|GTM-[A-Z0-9]{6,}/i.test(html),
     meta: /connect\.facebook\.net\/[^"']*\/fbevents\.js/i.test(html),
     clarity: /clarity\.ms\/tag/i.test(html)
   };
+
+  /* ⚠ THE PLATFORM, because on some of them absence proves nothing. Wix,
+     Squarespace, GoDaddy, Weebly and Duda attach analytics through their own
+     dashboard and inject it at runtime, so it is NOT in the HTML this audit
+     reads. On those platforms the measurement finding must say "cannot be seen
+     from outside" and must never be priced. 🚫 Do not report "nothing is
+     counting" for a platform in HIDES_ANALYTICS. */
+  const platform = (PLATFORMS.find(function (p) { return p[1].test(html); }) || [null])[0];
+
+  /* how old the page says it is: the last year in its own copyright line */
+  const years = all(/(?:©|&copy;|copyright)[^0-9]{0,12}((?:19|20)\d{2})(?:\s*[-–—]\s*((?:19|20)\d{2}))?/gi, clean)
+    .map(function (m) { return Number(m[2] || m[1]); });
+  const copyrightYear = years.length ? Math.max.apply(null, years) : null;
 
   /* the candidate pages worth following, capped hard */
   const followable = internal
@@ -118,13 +138,88 @@ function extract(html, baseUrl) {
     internalCount: internal.length,
     externalCount: links.filter(l => l.kind === 'external').length,
     ldTypes: [...new Set(ldTypes)],
-    hasLocalBusinessSchema: ldTypes.some(t => /LocalBusiness|Organization|ProfessionalService|HomeAndConstructionBusiness/i.test(t)),
+    /* ⚠ SPLIT 2026-09-20. Organization used to count as LocalBusiness, so a
+       site carrying nothing but Yoast's default Organization block was told
+       "LocalBusiness structured data is present". It is the kind of evidence a
+       buyer checks, and it was wrong. 🚫 Do not merge these two again. */
+    hasLocalBusinessSchema: ldTypes.some(t => /LocalBusiness|ProfessionalService|HomeAndConstructionBusiness|(?:Roofing|General|HVAC|Plumb|Electric|Landscap|Moving|Painting)[A-Za-z]*(?:Contractor|Business)|Plumber|Electrician|Locksmith|Dentist|Attorney/i.test(t)),
+    hasOrganizationSchema: ldTypes.some(t => /^Organization$|Corporation|LocalCorporation/i.test(t)),
+    platform, copyrightYear,
+    analyticsMayBeHidden: HIDES_ANALYTICS.indexOf(platform) !== -1,
+    isBuilder: BUILDERS.indexOf(platform) !== -1,
     tel, email, forms,
     ctas: ctas.slice(0, 12),
     viewport, rawTags,
     followable: [...new Set(followable)].slice(0, 6)
   };
 }
+
+/* the builders whose own analytics never appears in the HTML */
+const PLATFORMS = [
+  ['Wix', /static\.wixstatic\.com|wixsite\.com|wix\.com\/website-builder|X-Wix-/i],
+  ['Squarespace', /static1\.squarespace\.com|squarespace\.com\/(?:universal|static)/i],
+  ['GoDaddy', /img1\.wsimg\.com|godaddy\.com\/websites|Go Daddy Website Builder/i],
+  ['Weebly', /weebly\.com\/uploads|editmysite\.com/i],
+  ['Duda', /dudamobile\.com|dudaone|irp-cdn\.multiscreensite\.com/i],
+  ['Shopify', /cdn\.shopify\.com/i],
+  ['WordPress', /\/wp-content\/|\/wp-includes\//i]
+];
+const HIDES_ANALYTICS = ['Wix', 'Squarespace', 'GoDaddy', 'Weebly', 'Duda'];
+const BUILDERS = ['Wix', 'Squarespace', 'GoDaddy', 'Weebly', 'Duda'];
+
+/* ⚠ WHAT A SERVICE PAGE LOOKS LIKE, REWRITTEN 2026-09-20. The old rule was
+   /(service|repair|install|cleaning|detection|restoration|design|consult)/ and
+   it failed in both directions on real contractor sites:
+     · it MISSED /kitchen-remodeling, /bathroom-remodeling, /residential-roofing,
+       /siding, /gutters, /porches-and-decks — so a remodeler with four service
+       pages was told it had none, and got a false "critical".
+     · it COUNTED /service-area/wilmington-nc (a location page) and
+       /patriot-roofing-…-habitat-for-humanity (a blog post) as service pages.
+   The vocabulary is the work itself; the exclusions are the page types that
+   are never a service; and a long slug is prose, not a service name.
+   🚫 Do not add the bare word "service" back to the vocabulary. */
+const SERVICE_WORD = new RegExp('(' + [
+  'service','repair','install','replacement','cleaning','detection','restoration',
+  'remodel','renovat','addition','new-construction','custom-home','build',
+  'kitchen','bath','roof','siding','gutter','window','door','deck','patio','porch',
+  'fence','concrete','paving','driveway','masonry','drywall','flooring','insulation',
+  'hvac','heating','cooling','air-condition','furnace','heat-pump','duct',
+  'plumb','drain','water-heater','sewer','septic','electric','generator','lighting',
+  'painting','landscap','hardscap','lawn','tree','pest','excavat','chimney','garage',
+  'pool','spa','solar','waterproof','crawlspace','pressure-wash','power-wash',
+  'residential','commercial'
+].join('|') + ')', 'i');
+const NOT_A_SERVICE_PAGE = new RegExp([
+  '\\/blog','\\/news','\\/article','\\/post','\\/category','\\/tag\\/','\\/author',
+  'service-area','areas?-we-serve','\\/locations?(?:\\/|$)','near-me',
+  '\\/about','\\/contact','\\/gallery','\\/portfolio','\\/project','\\/career','\\/job',
+  '\\/team','\\/review','\\/testimonial','\\/faq','\\/privacy','\\/terms','\\/financing',
+  '\\/coupon','\\/special','\\/cart','\\/account','\\/search','\\/sitemap','\\/quote','\\/estimate'
+].join('|'), 'i');
+/* a service page is named, not narrated: "kitchen-remodeling" not a sentence */
+function slugWords(path) {
+  const last = String(path).replace(/\/+$/, '').split('/').pop() || '';
+  return last ? last.split('-').filter(Boolean).length : 0;
+}
+function isServicePath(p) {
+  return SERVICE_WORD.test(p) && !NOT_A_SERVICE_PAGE.test(p) && slugWords(p) <= 5;
+}
+
+/* the services a site SAYS it does, so the plan can size "pages you are missing"
+   instead of always recommending exactly one. Read from the title, headings and
+   nav labels only — body prose names other people's work. */
+const SERVICE_NAMES = [
+  ['kitchen', /\bkitchens?\b|kitchen remodel/i], ['bathroom', /\bbath(?:room)?s?\b/i],
+  ['whole-home remodeling', /whole[- ]home|home remodel|renovations?\b/i],
+  ['additions', /\badditions?\b/i], ['new construction', /new construction|custom homes?|new builds?/i],
+  ['roof replacement', /roof replacement|re-?roof|new roofs?/i], ['roof repair', /roof repairs?|leak repair/i],
+  ['siding', /\bsiding\b/i], ['gutters', /\bgutters?\b/i], ['windows', /\bwindows?\b/i],
+  ['doors', /\bdoors?\b/i], ['decks', /\bdecks?\b|\bporch(?:es)?\b/i], ['concrete', /\bconcrete\b|\bdriveways?\b/i],
+  ['fencing', /\bfenc(?:e|es|ing)\b/i], ['flooring', /\bfloor(?:s|ing)?\b/i],
+  ['heating', /\bheating\b|\bfurnaces?\b|heat pumps?/i], ['cooling', /air conditioning|\bac\b|\bcooling\b/i],
+  ['plumbing', /\bplumbing\b|water heaters?|drain/i], ['electrical', /\belectrical\b|generators?/i],
+  ['commercial work', /\bcommercial\b/i]
+];
 
 /* ⚠ EVERY city named, with a count — not just the first match. The local check
    used to take a single `place` match as proof the market was stated and stop
@@ -134,6 +229,10 @@ function extract(html, baseUrl) {
    🚫 Do not reduce this back to a boolean. */
 const CITY_RX = /\b([A-Z][a-z]+(?:\s[A-Z][a-z]+)?),?\s*(?:NC|SC|VA|GA|NY|CA|TX|FL|North Carolina|South Carolina)\b/g;
 const NOT_A_CITY = /^(the|this|our|your|all|new|best|top|free|home|service|services|and|for|in|of|we|us)$/i;
+/* a word that can sit in front of the real town name */
+const CITY_PREFIX_JUNK = /^(roofers?|roofing|plumbers?|plumbing|hvac|electricians?|electrical|contractors?|contracting|remodeling|renovations?|construction|builders?|services?|serving|trusted|best|top|premier|local|greater|near|about|call|welcome|new|custom|coastal|southeastern|northeastern|southwestern|northwestern|eastern|western|northern|southern|central)$/i;
+/* a region or a direction is not a market */
+const NOT_A_CITY_AT_ALL = /^(southeastern|northeastern|southwestern|northwestern|eastern|western|northern|southern|central|coastal|greater|triangle|piedmont|midlands|upstate|lowcountry|america|carolina|carolinas)$/i;
 
 function cityMentions(title, body) {
   const hay = (title || '') + ' ' + (body || '');
@@ -141,8 +240,16 @@ function cityMentions(title, body) {
   let m;
   CITY_RX.lastIndex = 0;
   while ((m = CITY_RX.exec(hay))) {
-    const city = m[1].trim();
-    if (NOT_A_CITY.test(city)) continue;
+    /* ⚠ "Roofers Wilmington NC" and "Southeastern NC" are not towns. The
+       capture allows two words so that Wake Forest survives, which also lets a
+       trade word or a direction ride in front of the real name. Strip a junk
+       first word, then reject anything that is only a region or an adjective.
+       Measured on floresandfoley.com, which was credited with 5 markets when it
+       names one: Wilmington. 🚫 Do not widen the capture again without this. */
+    let city = m[1].trim();
+    const parts = city.split(/\s+/);
+    if (parts.length === 2 && CITY_PREFIX_JUNK.test(parts[0])) city = parts[1];
+    if (NOT_A_CITY.test(city) || NOT_A_CITY_AT_ALL.test(city)) continue;
     seen[city] = true;
   }
   /* count every bare mention too — "Raleigh" on its own is how a business
@@ -196,8 +303,13 @@ function marketCount(locationPages) {
 function summarise(pages) {
   const home = pages[0];
   const paths = [...new Set(pages.flatMap(p => p.internalPaths))];
-  const servicePages  = paths.filter(p => /(service|repair|install|cleaning|detection|restoration|design|consult)/i.test(p));
   const locationPages = paths.filter(p => /(location|areas?-we-serve|service-area|near-me|\/[a-z-]+-(nc|sc|ny|ca|tx|fl)\b)/i.test(p));
+  const servicePages  = paths.filter(p => isServicePath(p) && locationPages.indexOf(p) === -1);
+  /* what the site says it does, from its own title, headings and nav labels */
+  const said = pages.map(function (p) {
+    return [p.title || ''].concat(p.h1s || [], p.h2s || [], p.ctas || []).join(' · ');
+  }).join(' · ');
+  const servicesNamed = SERVICE_NAMES.filter(function (sv) { return sv[1].test(said); }).map(function (sv) { return sv[0]; });
   const cityMentionsAll = {};
   pages.forEach(function (pg) {
     const cm = pg.cityMentions || {};
@@ -222,7 +334,23 @@ function summarise(pages) {
     anyTel: pages.some(p => p.tel.length),
     anyForm: pages.some(p => p.forms > 0),
     anySchema: pages.some(p => p.ldTypes.length),
-    anyLocalSchema: pages.some(p => p.hasLocalBusinessSchema)
+    anyLocalSchema: pages.some(p => p.hasLocalBusinessSchema),
+    anyOrgSchema: pages.some(p => p.hasOrganizationSchema),
+    platform: home.platform || null,
+    isBuilder: !!home.isBuilder,
+    analyticsMayBeHidden: !!home.analyticsMayBeHidden,
+    copyrightYear: home.copyrightYear || null,
+    servicesNamed,
+    /* services the site names that have no page of their own — the number the
+       plan sizes "service pages" from, instead of always recommending one */
+    servicePagesMissing: Math.max(0, Math.min(6, servicesNamed.length - servicePages.length)),
+    /* ⚠ the title is the evidence for "generic", so the two things that stop a
+       title being generic are measured here rather than guessed in classify */
+    titleNamesTrade: isTrade(home).trade,
+    titleNamesPlace: /\b(?:NC|SC|VA|GA|FL|North Carolina|South Carolina)\b/i.test(home.title || '') ||
+                     Object.keys(home.cityMentions || {}).some(function (c) {
+                       return new RegExp('\\b' + c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i').test(home.title || '');
+                     })
   };
 }
 

@@ -96,6 +96,17 @@ function pick(r) {
     pagesSkipped:   Array.isArray(r.pagesSkipped) ? r.pagesSkipped : [],
     findings:       Array.isArray(r.findings) ? r.findings : [],
     needs:          r.needs && typeof r.needs === 'object' ? r.needs : {},
+    /* ⚠ MEASUREMENTS ONLY, and named one by one so nothing else can ride along.
+       A shared link renders the plan from these, so without them the saved
+       report would recommend something different from the live one. */
+    detail: r.detail && typeof r.detail === 'object' ? {
+      onPageFix:           !!r.detail.onPageFix,
+      servicePagesMissing: Number(r.detail.servicePagesMissing) || 0,
+      locationPagesMissing: Number(r.detail.locationPagesMissing) || 0,
+      localFixOnly:        !!r.detail.localFixOnly,
+      trackingUnknown:     !!r.detail.trackingUnknown,
+      rebuild:             r.detail.rebuild === 'growth' || r.detail.rebuild === 'launch' ? r.detail.rebuild : null
+    } : null,
     fit:            r.fit || null,
     trade:          !!r.trade,
     meta: r.meta ? {
