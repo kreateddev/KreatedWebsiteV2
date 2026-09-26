@@ -199,3 +199,51 @@ Two owner-approved monthly prices added: **Social Management $900/mo** and **Soc
 $1,800/mo**, both on a three-month initial commitment. They appear in exactly three places, which
 must agree: `offers.js` (the builder), `tools/test-engine.js` (LOCKED), and the two no-script cards
 in the Social Media group on `/pricing/`. The service page and its FAQ restate the same two figures.
+
+---
+
+## Z. Additions, 2026-09-23 — first retail engagement (DECISION 030)
+
+The resolved sections above are unchanged. These are additions, recorded here so the
+catalog stays the one place a price lives.
+
+### New offers, published
+
+| id | Offer | Published price |
+|---|---|---|
+| `pkg.web.shop` | Online Shop | **from $3,500** one-time |
+| `pkg.social.retail` | Social Management — Retail | **$1,200/mo**, three-month initial term |
+| `svc.prod.shoot` | Photo & Video Shoot | **$600 half day / $1,200 full day**, models at cost |
+| `svc.shop.listing` | Product Listing | **$20 per product** |
+
+All four are in `offers.js`, in the locked catalogue in `tools/test-engine.js`, and on
+`/pricing/`. None is in `needCategories`, so the Free Website Audit never recommends them.
+
+### Founding rates — NOT the price
+
+The first retail client, The Quartermaster (signed 2026-09-23), bought below list in exchange
+for case-study and testimonial rights:
+
+| What | Paid | List | Difference |
+|---|---|---|---|
+| Website + Shopify shop | **$2,500** one-time | $3,500 | −$1,000 |
+| Instagram management, Oct–Dec 2026 | **$900/mo** | $1,200/mo retail | −$300/mo |
+| Google Business Profile claim + listings cleanup | **included** | $450 one-time | −$450 |
+
+🚫 The founding rate is not the price. The next retail quote starts at $3,500 and $1,200/mo.
+The rights exchanged for it must exist in writing before the case study is built.
+
+### The $900 question, resolved
+
+$900/mo was never a founding rate — it is the **published** price of `pkg.social.manage`, live
+since DECISION 028, for the scope where **the client films**. The retail engagement is a
+different scope: the product is the content and Kreated photographs new stock. So $900 stays
+truthful for contractors, $1,200 is the retail list price, and the first retail client's $900 is
+recorded above as a discount against $1,200 rather than as a second meaning for the same number.
+
+### Still not in the catalog
+
+**Paid advertising.** Meta ($750 setup + $500/mo under $2k spend, 15% above) and Grindr ($500
+setup + $400/mo under $1.5k spend), $750/mo for both, were **quoted and not started**. Nothing
+is published until a campaign runs. `/services/web-design/` still tells readers Kreated does not
+run ads; that sentence changes the same day the first campaign goes live, not before.

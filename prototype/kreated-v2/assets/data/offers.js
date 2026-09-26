@@ -83,6 +83,18 @@
       does:'Makes the site route, qualify and measure work rather than only describing the company.',
       fit:'You serve several cities or many services and already spend money to win work.' },
 
+    /* ⚠ ADDED 2026-09-23, DECISION 030, after the first retail engagement. A
+       shop is not a bigger website: it is products, templates, checkout and the
+       first listings, and it does not fit inside Launch or Growth. The first
+       one sold at $2,500 as a founding rate against this $3,500 list price;
+       that discount is recorded in PRICING-SOURCE-OF-TRUTH-AUDIT.md and 🚫 is
+       not the price. */
+    { id:'pkg.web.shop', name:'Online Shop', group:'website', kind:'one-time',
+      price:3500, from:true, exclusive:'website-base',
+      what:'A website with a Shopify shop behind it: the pages, the product templates, the checkout, and the first products photographed, written and listed.',
+      does:'Gives a business that sells things somewhere of its own to sell them, instead of a profile on someone else\u2019s platform taking a cut.',
+      fit:'You sell products in person and have nowhere online that takes an order.' },
+
     /* ================= INDIVIDUAL WEBSITE WORK ========================== */
     /* ⚠ BUNDLE, owner decision 2026-09-19: every four paid pages of one type add
        a fifth of that type free. Counted on BILLABLE units only, so pages a
@@ -155,6 +167,26 @@
       what:'Analytics and meaningful conversion events configured on a site that already exists, so the things that count as a lead are recorded as one.',
       does:'Turns “we get some traffic” into a number you can act on: how many people got in touch, and which pages did the work.',
       fit:'You have a site and no reliable idea how many inquiries it produces.' },
+
+    /* ⚠ ADDED 2026-09-23, DECISION 030. Distinct from Photography Coordination
+       above: that one finds and manages a photographer, this one is Kreated
+       shooting. Models are billed at cost and are 🚫 never marked up. */
+    /* 🚫 NOT plusThirdParty. That flag prints "plus the photographer's own fee",
+       which is true of Photography Coordination and false here — on this offer
+       Kreated is the photographer. Models are the only outside cost and they are
+       named in the note. */
+    { id:'svc.prod.shoot', name:'Photo & Video Shoot', group:'production', kind:'one-time',
+      price:600, from:true,
+      what:'A planned day of photography and video, shot by Kreated: $600 for a half day, $1,200 for a full day.',
+      does:'Real pictures of your own product or your own work change a page more than any other single input.',
+      fit:'Your current images are stock, out of date, or taken on a phone in bad light.',
+      note:'Models, where a shoot needs them, are billed at cost: $60 per hour per model.' },
+
+    { id:'svc.shop.listing', name:'Product Listing', group:'production', kind:'one-time',
+      price:20, qty:true, unit:'product',
+      what:'One product photographed, written and listed in the shop.',
+      does:'Keeps new stock appearing online the week it arrives rather than the month after.',
+      fit:'You add pieces faster than the shop gets updated.' },
 
     { id:'svc.prod.photo', name:'Photography Coordination', group:'production', kind:'one-time',
       price:350, from:true, plusThirdParty:true,
@@ -240,8 +272,21 @@
       does:'Keeps the business visibly active where customers look it up, without anyone in the business editing, writing or posting.',
       fit:'You or your crew already take photos and video on the job, and nobody has time to turn them into posts.' },
 
+    /* ⚠ ADDED 2026-09-23, DECISION 030. The retail tier exists because the first
+       retail engagement bought a different job from the contractor one: the
+       product IS the content, so new stock has to be photographed and the posts
+       point at a shop. $900 stays the published contractor price and is now
+       also the documented founding rate for the first retail client; $1,200 is
+       the list price for retail from here. 🚫 Do not discount $1,200 to $900 to
+       close a retail deal — that makes the founding rate the price. */
+    { id:'pkg.social.retail', name:'Social Management — Retail', group:'social', kind:'monthly',
+      price:1200, exclusive:'social-tier', rung:2, term:'Three-month initial commitment, month-to-month after.',
+      what:'Twelve posts and four short videos a month, the product photography for new pieces, and posts that link to the shop.',
+      does:'Keeps a shop visibly active where customers look it up, with the pieces themselves as the content.',
+      fit:'You sell products, and new stock arrives faster than anyone has time to photograph it.' },
+
     { id:'pkg.social.produce', name:'Social Production', group:'social', kind:'monthly',
-      price:1800, exclusive:'social-tier', rung:2, term:'Three-month initial commitment, month-to-month after.',
+      price:1800, exclusive:'social-tier', rung:3, term:'Three-month initial commitment, month-to-month after.',
       what:'Everything in Social Management, plus the content planned and made by Kreated: content ideas, photography and video.',
       does:'Takes the whole job off the business. You do the work; Kreated turns it into content and posts it.',
       fit:'Nobody in the business will film consistently, or the work deserves better pictures than a phone in a hurry.' },

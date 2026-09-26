@@ -603,3 +603,64 @@ Worldwide"). **PARTLY SUPERSEDES 024.**
 homepage H1, footer column labels as `<p>`, per-page share cards in `/assets/img/og/`, www to apex in one
 redirect, AEO and Social Media Management titles in the "in Wilmington, NC" pattern.
 
+## 030 — Retail and product offers published; founding rates recorded; portal claim qualified
+
+**DATE** 2026-09-23
+**PHASE** First retail client
+**DECISION**
+1. **Four offers are added to the catalog**, none of them a new lane on the site:
+
+| id | Offer | Price |
+|---|---|---|
+| `pkg.web.shop` | Online Shop (website + Shopify) | **from $3,500** one-time |
+| `pkg.social.retail` | Social Management — Retail | **$1,200/mo**, three-month initial term |
+| `svc.prod.shoot` | Photo & Video Shoot | **$600 half day / $1,200 full day** |
+| `svc.shop.listing` | Product Listing | **$20 per product** |
+
+2. **Retail does NOT become a second published lane.** The homepage already reserves "selected
+   engagements: ambitious local brands"; what was missing was products, not pages. One signed client
+   is not a lane, and DECISION 027 exists because the positioning was fragmented once already.
+3. **The portal claim is qualified** everywhere it appears (`/about/`, `/pricing/` terms,
+   `/services/`): projects run through KreatedOS, client logins are in early access, and until a
+   client's login exists they get the same record sent directly.
+**APPROVED BY SKYLER** yes — "$3500 is good / $1200 yes", 2026-09-23, choosing both published prices
+directly; the recommendation to add offers rather than build a lane was accepted in the same message.
+
+**WHY THE PORTAL CLAIM CHANGED** DECISION 026 promised a KreatedOS login with every engagement, and
+its own truth boundary records that client accounts do not exist. KreatedOS is single-tenant, so a
+client login would place their record in the same tenant as Kreated's own CRM. With a live engagement
+signed, an unqualified claim became false in practice rather than merely early.
+🚫 Restore the plain "you get a login" only when per-client accounts exist in production, and log it.
+
+**FOUNDING RATES, RECORDED SO THEY STAY DISCOUNTS** The Quartermaster (leather goods, 108 Market St,
+Wilmington; owner Michael) signed 2026-09-23: website and shop **$2,500 against $3,500**, Instagram
+management **$900/mo against $1,200/mo** for October–December 2026 then $1,200 month-to-month, and the
+Google Business Profile claim and listings cleanup **included** against a published $450. Given in
+exchange for case-study and testimonial rights.
+🚫 The next retail quote starts at list. See PRICING-SOURCE-OF-TRUTH-AUDIT.md §Z.
+
+**⚠ $900 WAS NEVER A FOUNDING RATE.** It is the published price of `pkg.social.manage` (DECISION 028)
+for the scope where the client films. The retail tier exists because the retail scope is different:
+the product is the content and Kreated photographs new stock. That is what protects $1,200.
+
+**🚫 PAID ADVERTISING IS NOT IN THE CATALOG.** Meta and Grindr ads were quoted to this client and
+nothing has run. They are published when the first campaign is live, and `/services/web-design/`
+still says Kreated does not run ads until that day.
+
+**🚫 THE AUDIT NEVER RECOMMENDS ANY OF THE FOUR.** None is in `needCategories`: nothing on a public
+website is evidence that a business needs a shop, a shoot, or a listing service.
+
+**ALSO THIS DATE** The website timeline becomes **1–4 weeks depending on scope**, site-wide
+(homepage FAQ and its schema, `/about/`, `/contact/`, `/method/`, `/services/web-design/`,
+`/services/website-redesign/`, `/web-design-for-contractors/`). It was 1–2 weeks from 2026-09-19 and
+2–4 weeks before that. A shop build does not fit a two-week promise.
+**APPROVED BY SKYLER** yes — "make the website build say 1-4 weeks depending on scope", 2026-09-23.
+
+**⚠ OPEN — FORCED BY THIS ENGAGEMENT, STILL NOT DECIDED** (carried from 028, and 🚫 not written
+anywhere until they are):
+1. **Shoot days per month** inside the retail tier, and travel outside Wilmington.
+2. **Reporting:** whether any social tier includes a monthly report.
+3. **Comments and messages:** whether Kreated replies on the accounts.
+4. **Rights to photo and video Kreated produces** (DECISION 014 covers client photography only).
+5. **Whether the GBP claim and listings cleanup being free inside a retainer is a founding-rate
+   inclusion or part of the build scope.** It is published at $450 one-time.

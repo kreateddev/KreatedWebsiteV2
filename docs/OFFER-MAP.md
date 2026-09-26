@@ -40,7 +40,11 @@ surfaced by either tool.
 | `pkg.program.contractor` | Contractor Growth | 2000 | **recurring**, 3-month initial (DECISION 025) | **Recurring — For trades** |
 | `svc.crm.kreatedos` | KreatedOS CRM | 79 | **recurring**, early access (DECISION 026) | **Software** |
 | `pkg.social.manage` | Social Management | 900 | **recurring**, 3-month initial (DECISION 028) | **Recurring — Social media** |
+| `pkg.social.retail` | Social Management — Retail | 1200 | **recurring**, 3-month initial (DECISION 030) | **Recurring — Social media** |
 | `pkg.social.produce` | Social Production | 1800 | **recurring**, 3-month initial (DECISION 028) | **Recurring — Social media** |
+| `pkg.web.shop` | Online Shop | 3500 | one-time, from (DECISION 030) | **Packages** |
+| `svc.prod.shoot` | Photo & Video Shoot | 600 | one-time, from, + third-party (DECISION 030) | **Individual Services** |
+| `svc.shop.listing` | Product Listing | 20 | one-time, per product (DECISION 030) | **Individual Services** |
 | `svc.page.standard` | Additional Standard Page | 250 | one-time, from | **Individual Services** |
 | `svc.page.service` | Dedicated Service Page | 450 | one-time, from | **Individual Services** |
 | `svc.page.location` | Location Page | 550 | one-time, from | **Individual Services** |
@@ -106,6 +110,27 @@ a service; §3 turns services into a recommended package.
 ---
 
 ## 3. What each package already covers
+
+**Retail and product work (added 2026-09-23, DECISION 030)** came from the first retail engagement,
+The Quartermaster. Four offers, and none of them a new lane: `pkg.web.shop` sits in `website-base`
+beside the four website packages, `pkg.social.retail` joins the `social-tier` exclusivity (so the
+three social options remain one-at-a-time), and the two production items are ordinary individual
+services.
+
+- **`pkg.social.retail` is the retail LIST price at $1,200.** `pkg.social.manage` stays $900 for the
+  contractor scope, where the client films. The first retail client pays $900 as a documented
+  founding rate. 🚫 Do not discount $1,200 to $900 to close a retail deal: that makes the founding
+  rate the price.
+- **`pkg.web.shop` publishes at from $3,500.** The first one sold at $2,500, a founding rate in
+  exchange for case-study and testimonial rights, recorded in PRICING-SOURCE-OF-TRUTH-AUDIT.md.
+- **`svc.prod.shoot` is Kreated shooting**, which is a different offer from `svc.prod.photo`, where
+  Kreated finds and manages a photographer. Models bill at cost, $60/hour each, and are 🚫 never
+  marked up.
+- 🚫 **None of the four are in `needCategories`.** Same rule as social: nothing on a public website
+  is evidence that a business needs a shop, a shoot or a listing service, so the audit never
+  recommends them. Asserted by the locked catalogue in test-engine.js.
+- 🚫 **Paid advertising is still not in the catalog.** Meta and Grindr ads were quoted to the first
+  retail client and nothing has run. They are added when the first campaign is live, not before.
 
 **Social media (added 2026-09-14, DECISION 028)** is one option at a time (`social-tier`) and covers
 nothing else in the catalogue; nothing else covers it. **The audit never recommends it**: it is not in

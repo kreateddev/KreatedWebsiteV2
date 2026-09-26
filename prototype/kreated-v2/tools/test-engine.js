@@ -52,6 +52,11 @@ const LOCKED = {
   /* added 2026-09-20 with the audit fix pass, owner decision: the one-time
      answer to a title / heading / local-markup finding */
   'svc.fix.searchlocal': ['one-time', 450, null],
+  /* added 2026-09-23 with the first retail engagement, DECISION 030 */
+  'pkg.social.retail':  ['monthly', 1200, null],
+  'pkg.web.shop':       ['one-time', 3500, null],
+  'svc.prod.shoot':     ['one-time', 600,  null],
+  'svc.shop.listing':   ['one-time', 20,   null],
   'svc.search.gbp':       ['one-time', 450,  null],
   'svc.track.analytics':  ['one-time', 400,  null],
   'svc.prod.photo':       ['one-time', 350,  null],
