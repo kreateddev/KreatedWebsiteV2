@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Kreated motion stage</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<style>
+  /* One moment, one format, three ways to play it.
+     ?m=face&f=feed&mode=loop   — plays and repeats
+     ?m=face&f=feed&mode=frame  — waits for window.kSet(p): the video renderer drives it
+     ?m=face&f=fill&mode=loop   — fills whatever frame it sits in (the studio grid)  */
+  @font-face{font-family:'General Sans';src:url('fonts/general-sans-var.woff2') format('woff2');font-weight:200 700;font-display:block}
+  :root{--ink:#F2F5FF;--accent:#7F9CFF}
+  html,body{margin:0;height:100%;overflow:hidden;background:#050B24}
+  body{display:grid;place-items:center}
+  .stage{position:relative;overflow:hidden;
+    background:radial-gradient(70% 60% at 50% 44%,#0C1C5C 0%,#071033 55%,#050B24 100%)}
+  .stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .cap{position:absolute;left:6%;right:6%;margin:0;text-align:center;font-family:'General Sans',system-ui,sans-serif;
+    font-weight:400;letter-spacing:-.025em;line-height:1.08;color:var(--ink);opacity:0;text-wrap:balance}
+  .cap em{font-style:normal;color:var(--accent)}
+  .wm{position:absolute;left:0;right:0;text-align:center;font:600 13px/1 'General Sans',system-ui,sans-serif;
+    letter-spacing:.34em;color:#6F7FAE;opacity:.9}
+</style>
+</head><body>
+<div class="stage" id="stage"><svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg><p class="cap" id="cap"></p><p class="wm" id="wm">KREATED</p></div>
+<script>window.onerror=function(m,s,l,c,e){window.__err=m+" @"+l+":"+c;};</script>
+<script src="kmotion.js"></script>
+<script src="kmotion-color.js"></script>
+<script src="kmotion-services.js"></script>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var id = q.get('m') || 'face', fmt = q.get('f') || 'feed', mode = q.get('mode') || 'loop';
+  var showMark = q.get('wm') !== '0';
+  var F = { feed: [1080, 1350], story: [1080, 1920], wide: [1920, 1080], square: [1080, 1080], sig: [480, 480] };
+  var stage = document.getElementById('stage'), svg = document.getElementById('svg'), cap = document.getElementById('cap'), wm = document.getElementById('wm');
+  var W, H;
+  if (fmt === 'fill') { W = innerWidth; H = innerHeight; } else { W = F[fmt][0]; H = F[fmt][1]; }
+  stage.style.width = W + 'px'; stage.style.height = H + 'px';
+  svg.setAttribute('viewBox', (-W / 2) + ' ' + (-H / 2) + ' ' + W + ' ' + H);
+  var M = KMotion.moments[id];
+  /* colour moments carry their own ground, ink and accent */
+  if (M.bg) stage.style.background = M.bg;
+  if (M.ink) cap.style.color = M.ink;
+  if (M.accent) stage.style.setProperty('--accent', M.accent);
+  if (M.wm) wm.style.color = M.wm;
+  if (M.bg && fmt !== 'fill') document.body.style.background = M.bg;
+  KMotion.defs(svg);
+  /* the art sits a little high in tall formats, so the line has room beneath it */
+  var tall = H / W > 1.1, wide = W / H > 1.4;
+  var lift = tall ? -H * .06 : (wide ? -H * .07 : -H * .05);
+  var root = KMotion.el('g', { transform: 'translate(0,' + (M.cap ? lift : 0) + ')' }, svg);
+  var u = Math.min(W, H) / 1000 * (wide ? (M.wideScale || .92) : 1) * (fmt === 'sig' ? 1.05 : 1);
+  var draw = M.build(root, u, W, H);
+  cap.innerHTML = M.line || '';
+  var cs = Math.round(Math.min(W, H) * (wide ? .058 : .056));
+  cap.style.fontSize = cs + 'px';
+  cap.style.bottom = (tall ? H * .13 : wide ? H * .11 : H * .09) + 'px';
+  wm.style.bottom = (tall ? H * .05 : H * .035) + 'px'; wm.style.fontSize = Math.round(Math.min(W, H) * .016) + 'px';
+  if (!showMark || fmt === 'sig' || !M.cap) wm.style.display = 'none';
+  function set(p) {
+    draw(p);
+    if (M.cap) { var c = KMotion.seg(p, M.cap[0], M.cap[1]); var e = KMotion.E.out(c);
+      cap.style.opacity = e; cap.style.transform = 'translateY(' + ((1 - e) * cs * .45) + 'px)'; }
+  }
+  window.kSet = set;
+  window.kInfo = { id: id, fmt: fmt, dur: M.dur, hold: M.loopOnly ? 0 : 1600, W: W, H: H, loopOnly: !!M.loopOnly };
+  if (mode === 'frame') { set(0); document.fonts.ready.then(function () { window.kReady = true; }); return; }
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (still) { set(M.loopOnly ? 0 : 1); return; }
+  /* loop: play, hold, fade out, start again */
+  var HOLD = window.kInfo.hold, FADE = M.loopOnly ? 0 : 500, T = M.dur + HOLD + FADE, t0 = performance.now();
+  var scrub = null;
+  window.kScrub = function (p) { scrub = p; if (p != null) { svg.style.opacity = 1; set(p); } };
+  (function tick(now) {
+    if (scrub == null) {
+      var t = (now - t0) % T;
+      set(Math.min(1, t / M.dur));
+      var fo = t > M.dur + HOLD ? 1 - (t - M.dur - HOLD) / FADE : 1;
+      svg.style.opacity = fo; cap.style.opacity = M.cap ? parseFloat(cap.style.opacity) * fo : 0;
+      window.kProgress = Math.min(1, t / M.dur);
+    }
+    requestAnimationFrame(tick);
+  })(t0);
+})();
+</script>
+</body></html>

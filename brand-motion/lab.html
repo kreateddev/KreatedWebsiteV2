@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Kreated Motion Studio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<style>
+  /* The studio: every moment playing at once, one opened large with a scrubber.
+     Serve this folder (launch config "brand-motion", port 8790); file:// blocks the scrubber. */
+  @font-face{font-family:'General Sans';src:url('fonts/general-sans-var.woff2') format('woff2');font-weight:200 700;font-display:swap}
+  :root{--ground:#050B24;--panel:#0A1236;--line:#1D2A5C;--ink:#F2F5FF;--soft:#9AA8D6;--accent:#7F9CFF;--cobalt:#1B3FC4}
+  *{box-sizing:border-box}
+  html{background:var(--ground)}
+  body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.5 'General Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1320px;margin:0 auto;padding:56px 32px 96px}
+  header{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:40px}
+  h1{margin:0;font-weight:500;font-size:clamp(34px,5vw,64px);letter-spacing:-.035em;line-height:1;text-wrap:balance}
+  h1 em{font-style:normal;color:var(--accent)}
+  .lede{margin:14px 0 0;color:var(--soft);max-width:58ch}
+  .fmt{display:flex;gap:6px;background:var(--panel);padding:5px;border-radius:999px;border:1px solid var(--line)}
+  .fmt button{appearance:none;border:0;background:none;color:var(--soft);font:500 13px/1 inherit;font-family:inherit;padding:9px 14px;border-radius:999px;cursor:pointer}
+  .fmt button[aria-pressed=true]{background:var(--cobalt);color:#fff}
+  .fmt button:focus-visible,.tile:focus-visible,.dl a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px 20px}
+  .tile{display:block;text-align:left;appearance:none;border:0;background:none;color:inherit;padding:0;cursor:pointer;font:inherit}
+  .frame{position:relative;aspect-ratio:var(--ar,4/5);border-radius:14px;overflow:hidden;background:#071033;border:1px solid var(--line);transition:border-color .2s,transform .3s}
+  .tile:hover .frame{border-color:#3A56B8;transform:translateY(-3px)}
+  .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none}
+  .tile h2{margin:14px 0 2px;font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .tile p{margin:0;color:var(--soft);font-size:14px;line-height:1.45}
+  /* detail */
+  dialog{border:0;padding:0;background:transparent;color:var(--ink);max-width:min(1200px,94vw);width:100%}
+  dialog::backdrop{background:rgba(3,6,20,.86);backdrop-filter:blur(6px)}
+  .detail{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
+  .big{position:relative;aspect-ratio:var(--ar,4/5);height:min(72vh,860px);max-width:100%;margin:0 auto;border-radius:12px;overflow:hidden;background:#071033}
+  .big iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .side h3{margin:4px 0 6px;font-size:28px;font-weight:500;letter-spacing:-.025em}
+  .side .line{color:var(--accent);margin:0 0 18px}
+  .side h4{margin:22px 0 8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:600}
+  .side ul{margin:0;padding-left:18px;color:#D5DCF3}
+  .side li{margin:4px 0}
+  .scrub{display:flex;gap:12px;align-items:center;margin-top:18px}
+  .scrub input{flex:1;accent-color:var(--accent)}
+  .scrub button{appearance:none;border:1px solid var(--line);background:none;color:var(--ink);border-radius:999px;padding:8px 14px;font:500 13px/1 inherit;font-family:inherit;cursor:pointer}
+  .dl{display:flex;flex-wrap:wrap;gap:8px}
+  .dl a{font-size:13px;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:#D5DCF3}
+  .dl a:hover{border-color:var(--accent)}
+  .close{position:absolute;top:14px;right:18px;appearance:none;border:0;background:none;color:var(--soft);font-size:26px;cursor:pointer}
+  footer{margin-top:56px;color:var(--soft);font-size:13px}
+  code{font-size:12.5px;background:var(--panel);border:1px solid var(--line);padding:2px 6px;border-radius:6px}
+  @media (max-width:760px){
+    .wrap{padding:36px 16px 72px}
+    header{grid-template-columns:1fr;text-align:center;justify-items:center}
+    .lede{margin-inline:auto}
+    .grid{grid-template-columns:1fr 1fr;gap:20px 12px}
+    .tile p{display:none}
+    .detail{grid-template-columns:1fr;padding:14px;gap:18px}
+    .big{height:auto;width:100%;max-height:none}
+  }
+</style>
+</head><body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Twenty-seven moments, <em>one mark.</em></h1>
+      <p class="lede">Every piece is the K doing something a customer does: searching, finding, calling, choosing. The first ten are cobalt, the next ten each own a colour, and the last seven are one per service page. Open one to scrub it frame by frame, then take the cut you need.</p>
+    </div>
+    <div class="fmt" role="group" aria-label="Format">
+      <button data-f="feed" aria-pressed="true">Feed 4:5</button>
+      <button data-f="story" aria-pressed="false">Story 9:16</button>
+      <button data-f="wide" aria-pressed="false">Wide 16:9</button>
+      <button data-f="square" aria-pressed="false">Square</button>
+    </div>
+  </header>
+  <div class="grid" id="grid"></div>
+  <footer>Render any moment yourself: <code>node render.mjs video face all</code> · <code>node render.mjs gif pulse sig</code> · <code>node render.mjs stills all feed</code></footer>
+</div>
+
+<dialog id="dlg" aria-label="Moment detail">
+  <div class="detail" style="position:relative">
+    <button class="close" id="close" aria-label="Close">×</button>
+    <div><div class="big" id="big"></div>
+      <div class="scrub"><button id="play">Pause</button><input id="range" type="range" min="0" max="1000" value="0" aria-label="Scrub"></div>
+    </div>
+    <div class="side">
+      <h3 id="dTitle"></h3><p class="line" id="dLine"></p>
+      <h4>What it says</h4><p id="dSays" style="margin:0;color:#D5DCF3"></p>
+      <h4>Where it goes</h4><ul id="dUse"></ul>
+      <h4>Exports</h4><div class="dl" id="dDl"></div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var AR = { feed: '4/5', story: '9/16', wide: '16/9', square: '1/1' };
+  var D = [
+    { id: 'face', t: 'The face', l: 'Every search ends with a person deciding.',
+      says: 'Two marks become eyes, a smile draws in, it blinks. The brand stops being a logo and becomes the customer on the other side of the screen.',
+      use: ['Homepage: the “who it’s for” section', 'Instagram Reel opener', 'Form thank-you screen', 'Email signature (square GIF)'], extra: ['square'], gif: ['square'] },
+    { id: 'pin', t: 'The pin', l: 'Found at the moment someone nearby is looking.',
+      says: 'A map of the coast draws in, other businesses dot the grid, and the K drops in as the pin. The ripples mark the moment of being found.',
+      use: ['Local SEO and Google Profile service heroes', 'Audit report cover', 'Outreach video opener'] },
+    { id: 'build', t: 'The build', l: 'Built from the name up.',
+      says: 'The mark shrinks into a browser’s logo slot and the site builds itself beneath it, block by block, until a cursor clicks the button.',
+      use: ['Web Design service page', 'Proposal deck opener', '“How it works” Reel'] },
+    { id: 'seven', t: 'The seven', l: 'Seven ways a business gets chosen.',
+      says: 'One mark sends out seven: every service Kreated sells, orbiting the same idea.',
+      use: ['Services index header', 'Deck slide: what we do', 'Carousel post cover'], gif: ['square'] },
+    { id: 'halves', t: 'The two halves', l: 'One person, start to launch.',
+      says: 'The mark’s two pieces tumble in from opposite sides and lock together with a flash. One studio, no hand-offs.',
+      use: ['About page', 'Founder intro Reel', 'Loading into a proposal'] },
+    { id: 'search', t: 'The search', l: 'Built to be found.',
+      says: '“contractor near me” types itself, results load, and the K result lights up while the others fade.',
+      use: ['Local SEO and Answer Engines pages', 'Paid ad creative (Meta)', 'Outreach message link preview'] },
+    { id: 'neon', t: 'Neon', l: 'Live. And it’s yours.',
+      says: 'The outline flickers on like a sign, then fills solid. The launch-day moment.',
+      use: ['Client launch posts and Stories', '“Now live” emails', 'Portfolio page headers'], extra: ['square'], gif: ['square'] },
+    { id: 'before', t: 'Before / after', l: 'Your business is better than your website.',
+      says: 'A pixelated, dated K is wiped clean into the real mark. The redesign in one gesture.',
+      use: ['Redesign service page', 'Before/after case posts', 'Audit report: the fix'] },
+    { id: 'call', t: 'The call', l: 'Easy to call. Easy to choose.',
+      says: 'A phone rings, the slider answers, the screen floods cobalt and the timer starts. The end of every good website.',
+      use: ['Contact page', 'Click-to-call CTA', 'Ad end card'], extra: ['square'], gif: ['square'] },
+    { id: 'pulse', t: 'Pulse', l: 'A seamless three-second loop, no words.',
+      says: 'The mark breathes and the light turns across it. Loops forever.',
+      use: ['Page loader and 404', 'Profile avatars', 'Email signature (480 GIF)', 'Presentation idle screen'], extra: ['square'], gif: ['sig', '160-email'] },
+    { id: 'open', t: 'Open late', l: 'Open, even after you close.',
+      says: 'A hanging CLOSED sign swings on its chains, flips, and lights up as a coral neon OPEN with an amber K. The website that keeps the door open.',
+      use: ['After-hours posts', 'Google Profile hours update', 'Lead-form section art'], extra: ['square'], gif: ['square'] },
+    { id: 'stars', t: 'Five stars', l: 'Earned by the work. Shown by the site.',
+      says: 'Five gold stars draw in and pop one by one, then spin together into a gold K crowned by five small stars.',
+      use: ['Review and testimonial posts', 'Reviews section header', 'Thank-you-for-the-review Story'], extra: ['square'], gif: ['square'] },
+    { id: 'lighthouse', t: 'The lighthouse', l: 'A light people can find.',
+      says: 'Dusk on the coast. The sun sinks, stars come out, and the lighthouse lamp is the K, its beam sweeping the water while a sailboat heads in.',
+      use: ['Wilmington and coastal posts', 'Local SEO page', 'Newsletter header'] },
+    { id: 'kaleido', t: 'Kaleidoscope', l: 'A seamless six-second loop, no words.',
+      says: 'Rings of the mark in every colour turn against each other around a chrome K. Pure art: it loops forever.',
+      use: ['Story and Reel backgrounds', 'Event and office screens', 'Presentation idle screen'], extra: ['square'], gif: ['sig', 'square'] },
+    { id: 'swatch', t: 'The swatch', l: 'A brand that looks like nobody else.',
+      says: 'A colour fan opens on white and the K takes each colour as the fan sweeps past, landing on ink when it closes.',
+      use: ['Brand identity service', 'Brand-reveal posts', 'Proposal “brand” slide'], extra: ['square'], gif: ['square'] },
+    { id: 'blocks', t: 'The blocks', l: 'Every piece in its place.',
+      says: 'Coloured blocks fall and stack into the K, bottom row first, then melt into one spectrum mark with a flash.',
+      use: ['Process and how-we-build posts', 'Web Design page', 'Carousel cover'] },
+    { id: 'notify', t: 'The night shift', l: 'Your website works the night shift.',
+      says: 'A phone asleep at 2:14 a.m. wakes three times: a quote request, someone asking for directions, an estimate booked.',
+      use: ['Lead-gen and forms posts', 'Pricing page support art', 'Meta ad creative'] },
+    { id: 'route', t: 'The route', l: 'From a search to your front door.',
+      says: 'A night map. The K drops in as the pin, a mint route draws itself street by street, the car arrives, and a chip reads Arrived.',
+      use: ['Google Profile service', 'Local SEO page', 'Directions and “find us” posts'] },
+    { id: 'unveil', t: 'The unveiling', l: 'Launch day feels like this.',
+      says: 'A sheet draped over the three points of the mark wiggles, gets yanked away, and confetti fires from both sides.',
+      use: ['Client launch announcements', 'Portfolio page headers', 'Celebration Stories'] },
+    { id: 'chrome', t: 'Chrome', l: 'Made to be remembered.',
+      says: 'A polished chrome K spins like a coin, settles on a reflective floor, and light slides across the metal.',
+      use: ['Brand-level posts', 'Deck covers', 'Premium tier moments'], extra: ['square'] },
+    { id: 'webdesign', t: 'Web Design', l: 'A finished site that is live and working.',
+      says: 'A pencil sketches the wireframe, colour inks in block by block, the phone version slides alongside, and a green Live pill lights up.',
+      use: ['/services/web-design/', 'Homepage service card', 'Proposal opener'] },
+    { id: 'redesign', t: 'Website Redesign', l: 'Keep what works, rebuild what doesn’t.',
+      says: 'The old site is scanned row by row. What earns its keep turns green and stays; the rest is swapped out for new rows.',
+      use: ['/services/website-redesign/', 'Homepage service card', 'Before/after posts'] },
+    { id: 'localseo', t: 'Local SEO', l: 'Four parts that move together.',
+      says: 'Four coloured gears, one per part of the service, mesh around a centre gear carrying the mark and start turning together.',
+      use: ['/services/local-seo/', 'Homepage service card', 'Monthly report cover'], extra: ['square'], gif: ['square'] },
+    { id: 'gbp', t: 'Google Business Profile', l: 'The panel buyers see before your website.',
+      says: 'A loading skeleton resolves into a full listing: photos, name, stars, hours, Call / Directions / Website and a map. Then a thumb taps Call.',
+      use: ['/services/google-business-profile/', 'Homepage service card', 'Profile-setup posts'], extra: ['square'] },
+    { id: 'aeo', t: 'Answer Engine Optimization', l: 'One version of the facts.',
+      says: 'Conflicting hours, phones and addresses get struck out; the right ones merge into one card, and an assistant answers from it.',
+      use: ['/services/answer-engine-optimization/', 'Homepage service card', 'AI-search explainer posts'] },
+    { id: 'brand', t: 'Brand Strategy & Identity', l: 'One mark, everywhere it appears.',
+      says: 'The mark stamps itself onto a business card, a polo, a van, a yard sign, an app icon and a mug.',
+      use: ['/services/brand-strategy/', 'Homepage service card', 'Brand-reveal posts'], extra: ['square'], gif: ['square'] },
+    { id: 'social', t: 'Social Media Management', l: 'Accounts that don’t go quiet.',
+      says: 'A month fills up: posts on Monday, Wednesday and Friday, a video every Thursday, twelve and four.',
+      use: ['/services/social-media-management/', 'Homepage service card', 'Onboarding deck'], extra: ['square'], gif: ['square'] }
+  ];
+  var fmt = 'feed';
+  try { fmt = localStorage.getItem('km-fmt') || 'feed'; } catch (e) {}
+  var grid = document.getElementById('grid');
+  function src(id) { return 'stage.html?m=' + id + '&f=fill&mode=loop'; }
+  function tiles() {
+    grid.innerHTML = '';
+    grid.style.setProperty('--ar', AR[fmt]);
+    grid.style.gridTemplateColumns = fmt === 'wide' ? 'repeat(auto-fill,minmax(380px,1fr))' : '';
+    D.forEach(function (d) {
+      var b = document.createElement('button'); b.className = 'tile';
+      b.innerHTML = '<div class="frame"><iframe loading="lazy" tabindex="-1" title="' + d.t + '" src="' + src(d.id) + '"></iframe></div><h2>' + d.t + '</h2><p>' + d.l + '</p>';
+      b.addEventListener('click', function () { open(d); });
+      grid.appendChild(b);
+    });
+  }
+  document.querySelectorAll('.fmt button').forEach(function (b) {
+    b.setAttribute('aria-pressed', b.dataset.f === fmt);
+    b.addEventListener('click', function () {
+      fmt = b.dataset.f; try { localStorage.setItem('km-fmt', fmt); } catch (e) {}
+      document.querySelectorAll('.fmt button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      tiles();
+    });
+  });
+  var dlg = document.getElementById('dlg'), big = document.getElementById('big'), range = document.getElementById('range'), play = document.getElementById('play');
+  var frame, paused = false, poll;
+  function open(d) {
+    big.style.setProperty('--ar', AR[fmt]);
+    big.innerHTML = '<iframe title="' + d.t + '" src="' + src(d.id) + '"></iframe>';
+    frame = big.firstChild; paused = false; play.textContent = 'Pause';
+    document.getElementById('dTitle').textContent = d.t;
+    document.getElementById('dLine').textContent = d.l;
+    document.getElementById('dSays').textContent = d.says;
+    document.getElementById('dUse').innerHTML = d.use.map(function (u) { return '<li>' + u + '</li>'; }).join('');
+    var links = ['feed', 'story', 'wide'].concat(d.extra || []).map(function (f) { return '<a href="exports/' + f + '/' + d.id + '.mp4" download>' + f + ' .mp4</a>'; });
+    (d.gif || []).forEach(function (f) { links.push('<a href="exports/gif/' + d.id + '-' + f + '.gif" download>' + f + ' .gif</a>'); });
+    links.push('<a href="exports/stills/' + d.id + '-feed-sheet.jpg" target="_blank">contact sheet</a>');
+    document.getElementById('dDl').innerHTML = links.join('');
+    dlg.showModal();
+    clearInterval(poll);
+    poll = setInterval(function () { try { if (!paused && frame.contentWindow.kProgress != null) range.value = frame.contentWindow.kProgress * 1000; } catch (e) {} }, 60);
+  }
+  range.addEventListener('input', function () {
+    paused = true; play.textContent = 'Play';
+    try { frame.contentWindow.kScrub(range.value / 1000); } catch (e) {}
+  });
+  play.addEventListener('click', function () {
+    paused = !paused; play.textContent = paused ? 'Play' : 'Pause';
+    try { frame.contentWindow.kScrub(paused ? range.value / 1000 : null); } catch (e) {}
+  });
+  function shut() { clearInterval(poll); dlg.close(); big.innerHTML = ''; }
+  document.getElementById('close').addEventListener('click', shut);
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) shut(); });
+  dlg.addEventListener('cancel', function () { clearInterval(poll); big.innerHTML = ''; });
+  tiles();
+})();
+</script>
+</body></html>

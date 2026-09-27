@@ -608,35 +608,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ========================================================================== -->
 <section class="fit bx-sec bx-glow-r" id="fit">
   <div class="wrap">
-    <header class="bx-head"><p class="kx-chip">Who it&rsquo;s for</p><h2 class="bx-h">Contractors first, <em>not only</em></h2><p class="bx-sub">The specialty is contractors and home-service companies, and the work is built around how people actually choose one. The craft travels further than that &mdash; some of the best work here is for businesses outside the trades.</p></header>
+    <header class="bx-head"><p class="kx-chip">Who it&rsquo;s for</p><h2 class="bx-h">Contractors first, <em>not only</em></h2><p class="bx-sub">Contractors and home-service companies are the specialty. Some of the best work here is for businesses outside the trades.</p></header>
 
+    <!-- ⚠ REBUILT 2026-09-26 (owner: "the picture I sent is what needs the most
+         work"). It was two prose paragraphs under centred rules: the trades and
+         the brand categories are lists, and they were being read as sentences.
+         They are chips now, which is the same information in a form that can be
+         scanned, and the two cards read as two objects rather than two rails.
+         🚫 Do not add a trade that Kreated has not worked with to balance the
+         rows, and 🚫 do not turn the chips into links: they are a description of
+         who this is for, not navigation. -->
     <div class="fit__grid">
       <article class="fit__col fit__col--primary">
         <p class="fit__label">The specialty</p>
         <h3 class="fit__h">Contractors &amp; home services</h3>
-        <p class="fit__body">Remodelers, builders, plumbing, HVAC, electrical, roofing,
-          restoration, leak detection, pool and concrete. Established companies that already do
-          the work well and want more of it coming in.</p>
-        <a class="fit__link" href="/web-design-for-contractors/">How this works for contractors
-          <i aria-hidden="true">&#8594;</i></a>
-        <!-- ⚠ 2026-09-16: /contractor-website-audit/ had two inbound links and none from
-             the homepage. Same component as the link above. -->
-        <a class="fit__link fit__link--next" href="/contractor-website-audit/" data-evt="cta_website_audit">Audit a contractor website
-          <i aria-hidden="true">&#8594;</i></a>
+        <ul class="fit__chips" role="list"><li>Remodelers</li><li>Builders</li><li>Plumbing</li><li>HVAC</li><li>Electrical</li><li>Roofing</li><li>Restoration</li><li>Leak detection</li><li>Pool</li><li>Concrete</li></ul>
+        <p class="fit__body">Established companies that already do the work well and want
+          more of it coming in.</p>
+        <div class="fit__links">
+          <a class="fit__link" href="/web-design-for-contractors/">How this works for contractors
+            <i aria-hidden="true">&#8594;</i></a>
+          <!-- ⚠ 2026-09-16: /contractor-website-audit/ had two inbound links and none from
+               the homepage. Same component as the link above. -->
+          <a class="fit__link" href="/contractor-website-audit/" data-evt="cta_website_audit">Audit a contractor website
+            <i aria-hidden="true">&#8594;</i></a>
+        </div>
       </article>
 
       <article class="fit__col">
         <p class="fit__label">Selected engagements</p>
         <h3 class="fit__h">Ambitious local brands</h3>
-        <p class="fit__body">Hospitality, coffee, retail, fashion, e-commerce and consumer
-          brands. Fewer of these and chosen deliberately, held to exactly the same standard of
-          design and build as anything else here.</p>
-        <!-- ⚠ Points at /work/, where the brand work actually lives — including
-             the Morrow concept, labelled as a concept. 🚫 Do not move concept
-             work into the homepage "Real businesses, real work" section: that
-             heading is a claim, and a concept would make it false. -->
-        <a class="fit__link" href="/work/">See the brand work
-          <i aria-hidden="true">&#8594;</i></a>
+        <ul class="fit__chips" role="list"><li>Hospitality</li><li>Coffee</li><li>Retail</li><li>Fashion</li><li>E-commerce</li><li>Consumer brands</li></ul>
+        <p class="fit__body">Fewer of these and chosen deliberately, held to exactly the same
+          standard of design and build as anything else here.</p>
+        <div class="fit__links">
+          <!-- ⚠ Points at /work/, where the brand work actually lives — including
+               the Morrow concept, labelled as a concept. 🚫 Do not move concept
+               work into the homepage "Real businesses, real work" section: that
+               heading is a claim, and a concept would make it false. -->
+          <a class="fit__link" href="/work/">See the brand work
+            <i aria-hidden="true">&#8594;</i></a>
+        </div>
       </article>
     </div>
   </div>
@@ -1178,8 +1190,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- the client strip's emphasis cycle: one timer, no scroll listener, and it
      does not exist at all under reduced motion — see the file header -->
 <script src="/clients.js?v=5" defer></script>
-<script src="/assets/ui/reviews-auto.js?v=4" defer></script>
-<script src="/assets/motion/kmotion.js?v=4" defer></script>
+<script src="/assets/ui/reviews-auto.js?v=3" defer></script>
+<script src="/assets/motion/kmotion.js?v=2" defer></script>
 <script src="/assets/motion/kplayer.js?v=2" defer></script>
 <!-- the scroll-driven light-to-blue transition. Publishes one custom property
      and nothing else; the page is complete without it -->

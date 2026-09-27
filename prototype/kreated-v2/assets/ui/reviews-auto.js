@@ -15,11 +15,14 @@
   });
   root.classList.add('is-auto');
   var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var SPEED = 38;                       /* px per second: readable, still clearly moving */
-  var paused = false, last = 0, pos = 0;
+  /* ⚠ 16px/s, slowed from 38 on 2026-09-26 (owner): a reviewer's own words are
+     the slowest thing on the page to read, and 38 moved a 160-word review out
+     of view before it could be finished. */
+  var SPEED = 16;
+  var paused = false, held = false, last = 0, pos = 0;
   function loopWidth() { return track.children[cards.length].offsetLeft - track.children[0].offsetLeft; }
   function tick(t) {
-    if (last && !paused && !(mq && mq.matches) && !document.hidden) {
+    if (last && !paused && !held && !(mq && mq.matches) && !document.hidden) {
       pos += SPEED * Math.min(t - last, 64) / 1000;
       var w = loopWidth();
       if (pos >= w) pos -= w;
@@ -28,7 +31,17 @@
     last = t;
     requestAnimationFrame(tick);
   }
-  /* only a review card pauses it; the gaps between cards and the rest of the section do not */
+  /* ⚠ HOLD TO STOP IT, added 2026-09-26 (owner): press and it stays put, let go
+     and it carries on from where it was. Pointer events cover mouse, touch and
+     pen in one path, and the listener is passive so a touch-hold never blocks
+     the page's own scrolling. 🚫 Do not preventDefault here. */
+  function hold() { held = true; }
+  function release() { held = false; }
+  track.addEventListener('pointerdown', hold, { passive: true });
+  window.addEventListener('pointerup', release, { passive: true });
+  window.addEventListener('pointercancel', release, { passive: true });
+
+  /* only a review card pauses it on hover; the gaps between cards do not */
   track.addEventListener('mouseover', function (e) { paused = !!(e.target.closest && e.target.closest('.rev')); });
   track.addEventListener('mouseleave', function () { paused = false; });
   track.addEventListener('focusin', function (e) { paused = !!e.target.closest('.rev'); });
