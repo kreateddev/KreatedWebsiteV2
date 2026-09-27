@@ -13,6 +13,9 @@
      row) is skipped and plays when it arrives. The whole group resets when
      the container leaves the screen, so scrolling away and back replays the
      set from the first card.
+   · PHONES (≤760px, Skyler 2026-09-27): no sequence. Cards stack or swipe
+     there, so each one starts by itself when you scroll (or swipe) to it,
+     once half of it is on screen, and resets when it is fully gone.
    · Wordless loops (pulse, kaleido: loopOnly) loop while on screen.
    · prefers-reduced-motion: every moment shows its final frame, still.
    · Resized: redrawn at the new size, keeping its place.
@@ -27,6 +30,9 @@
   var NS = 'http://www.w3.org/2000/svg';
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var GAP = 250;   /* ms between one card finishing and the next starting */
+  /* the one-by-one sequence is a desktop behaviour; phones play each card as it arrives */
+  var wideMQ = window.matchMedia ? matchMedia('(min-width: 761px)') : { matches: true };
+  function seq(pl) { return !!pl.group && wideMQ.matches; }
 
   /* one hidden sheet of shared defs (the mark, its gradients, its filters) for the whole page */
   var shared = document.createElementNS(NS, 'svg');
@@ -92,7 +98,7 @@
       if (pl.state !== 'playing') return;
       busy = true;
       var finished = pl.frame(now);
-      if (finished && pl.group) { pl.group.current = null; pl.group.next(now); }
+      if (finished && seq(pl)) { pl.group.current = null; pl.group.next(now); }
     });
     running = busy || players.some(function (pl) { return pl.state === 'playing'; });
     if (running) requestAnimationFrame(tick);
@@ -107,19 +113,19 @@
     entries.forEach(function (en) {
       var g = en.target.__kg; if (!g) return;
       g.vis = en.isIntersecting;
-      if (!g.vis) g.reset(); else g.next(now);
+      if (!g.vis) g.reset(); else if (wideMQ.matches) g.next(now);
     });
   }, { threshold: 0 }) : null;
   var io = hasIO ? new IntersectionObserver(function (entries) {
     var now = performance.now();
     entries.forEach(function (en) {
       var pl = en.target.__kp; if (!pl) return;
-      pl.vis = en.isIntersecting && en.intersectionRatio >= .34;
-      if (pl.group) { if (pl.vis) pl.group.next(now); return; }
+      pl.vis = en.isIntersecting && en.intersectionRatio >= (wideMQ.matches ? .34 : .5);
+      if (seq(pl)) { if (pl.vis) pl.group.next(now); return; }
       if (pl.vis) { if (pl.state === 'idle') { pl.start(now); wake(); } }
       else if (!en.isIntersecting) pl.reset();          /* fully gone: replay next time */
     });
-  }, { threshold: [0, .35] }) : null;
+  }, { threshold: [0, .35, .5] }) : null;
 
   var ro = 'ResizeObserver' in window ? new ResizeObserver(function (entries) {
     entries.forEach(function (en) {
@@ -147,7 +153,7 @@
       groups.forEach(function (g) { gio.observe(g.el); });
     } else {
       groups.forEach(function (g) { g.vis = true; });
-      players.forEach(function (pl) { pl.vis = true; if (!pl.group) pl.start(performance.now()); });
+      players.forEach(function (pl) { pl.vis = true; if (!seq(pl)) pl.start(performance.now()); });
       groups.forEach(function (g) { g.next(performance.now()); });
       wake();
     }
