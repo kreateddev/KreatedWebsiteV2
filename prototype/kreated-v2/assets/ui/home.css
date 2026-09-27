@@ -9,8 +9,10 @@
 .faq__grid{display:block}
 .faq__list{max-width:780px;margin-inline:auto}
 /* pricing: build + retainer as one conversation, like the pricing page */
-.hm-combo{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;max-width:760px;margin:0 auto}
-.hm-combo > div:not(.hm-combo__plus){padding:26px;border-radius:20px;text-align:center;background:var(--pv-card);border:1px solid var(--stroke)}
+.hm-combo{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;max-width:820px;margin:0 auto}
+.hm-combo > div:not(.hm-combo__plus){display:flex;flex-direction:column;border-radius:20px;overflow:hidden;text-align:center;background:var(--pv-card);border:1px solid var(--stroke)}
+.hm-combo__art{position:relative;display:block;height:220px;overflow:hidden;background:#071033}
+.hm-combo__in{padding:22px 26px 26px}
 .hm-combo h3{margin:4px 0 8px;font-family:'General Sans',system-ui;font-weight:500;font-size:22px;color:var(--ink-1)}
 .hm-combo__k{margin:0;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
 .hm-combo__p{margin:0;font-size:28px;font-weight:400;color:var(--ink-1)}
@@ -35,6 +37,24 @@
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
           mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .revs.is-auto .rev{scroll-snap-align:none;width:min(460px,82vw)}
+
+/* ── Who it's for as art cards, 2026-09-27 ───────────────────────────────────────
+   Two cards, same build as the service cards below: the art panel plays a
+   brand moment (kplayer.js paints its ground), the body stays on tokens because
+   this section rides the day-to-night scroll flip. */
+.fit__cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1240px;margin:0 auto}
+.fit__card{display:flex;flex-direction:column;border-radius:24px;overflow:hidden;background:var(--pv-card);border:1px solid var(--stroke)}
+.fit__card--primary{border-color:color-mix(in srgb,var(--accent) 34%,transparent)}
+.fit__art{position:relative;display:block;height:clamp(250px,25vw,330px);overflow:hidden;background:#0B1437}
+.fit__inner{display:flex;flex-direction:column;align-items:center;flex:1;text-align:center;padding:26px clamp(20px,2.4vw,34px) 28px}
+.fit__card .fit__body{margin:0 auto 18px;max-width:46ch}
+.fit__links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;margin-top:auto}
+@media (max-width:760px){
+  .fit__cards{grid-template-columns:1fr;gap:14px}
+  .fit__art{height:220px}
+  .fit__inner{padding:20px 18px 22px}
+  .fit__links{flex-direction:column;gap:12px}
+}
 
 /* ── Services as art cards, 2026-09-27 ────────────────────────────────────────
    Each card plays its service's brand moment (kplayer.js draws it into .svc__art
@@ -68,3 +88,7 @@ html body .room .svc__card .svc__d{display:block;max-width:44ch;margin:10px auto
   .svc__body{padding:20px 20px 22px}
 }
 @media (prefers-reduced-motion:reduce){.svc__card{transition:none}.svc__card:hover{transform:none}}
+
+/* the close: the face moment above the headline, where the watermark K used to sit */
+.final__face{position:relative;display:block;width:min(560px,100%);height:clamp(220px,26vw,320px);margin:0 auto 8px}
+@media (max-width:720px){.final__face{height:210px}}
